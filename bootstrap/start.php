@@ -28,7 +28,7 @@ $app->redirectIfTrailingSlash();
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('local.mantelzorg', 'localhost', '*'),
+	'local' => array('local.mantelzorg'),
 
 ));
 
