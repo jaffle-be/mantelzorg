@@ -35,7 +35,7 @@
                             <input class="form-control" type="text" name="email" id="beta-email"/>
 
                             <label for="beta-organisation"><?= Lang::get('beta.organisation') ?></label>
-                            <span class="error"><?= $errors->has('organisation') ? Lang::get('beta.error-organisation') : ''; ?></span>
+                            <span class="error"><?= $errors->first('organisation') ? Lang::get('beta.error-organisation') : ''; ?></span>
                             <input class="form-control" type="text" name="organisation" id="beta-organisation"/>
 
                             <? if(isset($success) && $success === true):?>
