@@ -2,13 +2,7 @@
 
 <div class="footer container">
 
-    <div class="login-form">
-        <form class="form-inline" action="">
-            <input class="form-control" type="text" name="email" id="" placeholder="<?= Lang::get('master.footer.email') ?>"/>
-            <input class="form-control" type="password" name="password" placeholder="<?= Lang::get('master.footer.password') ?>"/>
-            <input class="btn btn-info" type="submit" value="<?= Lang::get('master.footer.inloggen') ?>"/>
-        </form>
-    </div>
+
 
     <div class="clearfix"></div>
 
@@ -25,6 +19,15 @@
 
         <ul>
             <li><a id="log-in" href=""><?= Lang::get('master.footer.login') ?></a></li>
+            <li>
+                <div class="login-form">
+                    <form class="form-inline" action="">
+                        <input class="form-control" type="text" name="email" id="" placeholder="<?= Lang::get('master.footer.email') ?>"/>
+                        <input class="form-control" type="password" name="password" placeholder="<?= Lang::get('master.footer.password') ?>"/>
+                        <input class="btn btn-info" type="submit" value="<?= Lang::get('master.footer.inloggen') ?>"/>
+                    </form>
+                </div>
+            </li>
         </ul>
 
     </div>
