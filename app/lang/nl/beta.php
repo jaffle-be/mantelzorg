@@ -6,7 +6,7 @@ return array(
     "beta-banner" => "Sfeerfoto",
     "intro-intrested" => "Interesse in ons instrument?",
     "firstname" => "Voornaam",
-    "sirname" => "Achternaam",
+    "lastname" => "Achternaam",
     "email" => "E-mailadres",
     "organisation" => "Organisatie",
     "register" => "Meld je aan",

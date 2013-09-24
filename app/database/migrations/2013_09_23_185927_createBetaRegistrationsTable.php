@@ -16,7 +16,7 @@ class CreateBetaRegistrationsTable extends Migration {
             $table->increments('id');
             $table->string('email', 100)->unique();
             $table->string('firstname');
-            $table->string('sirname');
+            $table->string('lastname');
             $table->string('organisation', 100);
             $table->timestamps();
         });

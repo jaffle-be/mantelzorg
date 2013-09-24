@@ -10,13 +10,13 @@ class Registration extends Eloquent{
 
     protected $table = 'beta_registrations';
 
-    protected $fillable = array('firstname', 'sirname', 'email', 'organisation');
+    protected $fillable = array('firstname', 'lastname', 'email', 'organisation');
 
     use Traits\Validation;
 
     protected static $rules = array(
         'firstname' => 'required|alpha',
-        'sirname' => 'required|alpha',
+        'lastname' => 'required|alpha',
         'email' => 'required|email|unique:beta_registrations',
         'organisation' => array('required', 'firm-name' => 'regex:/^[a-zA-Z09 -\.]+$/')
     );

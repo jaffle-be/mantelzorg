@@ -27,9 +27,9 @@
                             <span class="error"><?= $errors->first('firstname'); ?></span>
                             <input class="form-control" type="text" name="firstname" id="beta-firstname"/>
 
-                            <label for="beta-sirname"><?= Lang::get('beta.sirname') ?></label>
-                            <span class="error"><?= $errors->first('sirname'); ?></span>
-                            <input class="form-control" type="text" name="sirname" id="beta-sirname"/>
+                            <label for="beta-lastname"><?= Lang::get('beta.lastname') ?></label>
+                            <span class="error"><?= $errors->first('lastname'); ?></span>
+                            <input class="form-control" type="text" name="lastname" id="beta-lastname"/>
 
 
                             <label for="beta-email"><?= Lang::get('beta.email') ?></label>

@@ -96,7 +96,7 @@ return array(
         'captcha' => 'anti-spam',
         'topic' => 'thema',
         'firstname' => 'voornaam',
-        'sirname' => 'achternaam',
+        'lastname' => 'achternaam',
         'organisation' => 'organisatie',
         'email' => 'e-mailadres'
     ),
