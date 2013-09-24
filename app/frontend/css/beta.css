@@ -26,12 +26,18 @@
 .beta-wrapper .form-wrapper {
   font-size: normal;
 }
+.beta-wrapper .form-wrapper input,
+.beta-wrapper .form-wrapper label,
+.beta-wrapper .form-wrapper .error {
+  font-size: smaller;
+}
 .beta-wrapper .form-wrapper .btn-primary {
   margin-top: 20px;
   width: 100%;
 }
 .beta-wrapper .form-wrapper span.error {
   float: right;
+  margin-top: 5px;
   color: #ff8080;
 }
 .beta-wrapper .picture {
