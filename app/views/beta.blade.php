@@ -40,7 +40,7 @@
                             <span class="error"><?= $errors->first('organisation') ? Lang::get('beta.error-organisation') : ''; ?></span>
                             <input class="form-control" type="text" name="organisation" id="beta-organisation"/>
 
-                            <? if(isset($success) && $success === true):?>
+                            <? if(Session::has('message')):?>
                                 <?= Lang::get('beta.registration-thanks'); ?>
                             <? endif; ?>
 
