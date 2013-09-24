@@ -1,18 +1,15 @@
 {
-	"name": "laravel/laravel",
-	"description": "The Laravel Framework.",
-	"keywords": ["framework", "laravel"],
-	"license": "MIT",
+	"name": "jaffle-be/mantelzorg",
 	"require": {
 		"laravel/framework": "4.0.*",
-        "jaffle-be/support":"*"
+		"jaffle-be/support":"*"
 	},
-    "repositories":[
-        {
-            "type":"vcs",
-            "url": "git@github.com:jaffle-be/support.git"
-        }
-    ],
+    	"repositories":[
+        	{
+            		"type":"vcs",
+            		"url": "git@github.com:jaffle-be/support.git"
+		}
+    	],
 	"autoload": {
 		"classmap": [
 			"app/commands",
