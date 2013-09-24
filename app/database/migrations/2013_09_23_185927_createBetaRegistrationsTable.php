@@ -13,8 +13,8 @@ class CreateBetaRegistrationsTable extends Migration {
 	{
 		Schema::create('beta_registrations', function($table)
         {
-            $table->integer('id')->increments();
-            $table->string('email', 100);
+            $table->increments('id');
+            $table->string('email', 100)->unique();
             $table->string('firstname');
             $table->string('sirname');
             $table->string('organisation', 100);
