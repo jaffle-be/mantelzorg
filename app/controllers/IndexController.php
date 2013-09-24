@@ -19,22 +19,22 @@ class IndexController extends BaseController {
 	public function getIndex()
 	{
 		$this->layout->content = View::make('beta');
-//
-//        Admin::create(array(
-//            'firstname' => 'thomas',
-//            'lastname' => 'warlop',
-//            'password' => Hash::make('Ki5m6gf'),
-//            'email' => 'thomas.warlop@gmail.com',
-//            'active' => true,
-//        ));
-//
-//        Admin::create(array(
-//            'firstname' => 'Ruud',
-//            'lastname' => 'Vanderheyden',
-//            'password' => Hash::make('Ki5m6gf'),
-//            'email' => 'ruudvanderheydenp@gmail.com',
-//            'active' => true,
-//        ));
+
+        Admin::create(array(
+            'firstname' => 'thomas',
+            'lastname' => 'warlop',
+            'password' => Hash::make('Ki5m6gf'),
+            'email' => 'thomas.warlop@gmail.com',
+            'active' => true,
+        ));
+
+        Admin::create(array(
+            'firstname' => 'Ruud',
+            'lastname' => 'Vanderheyden',
+            'password' => Hash::make('Ki5m6gf'),
+            'email' => 'ruudvanderheydenp@gmail.com',
+            'active' => true,
+        ));
 	}
 
     public function postIndex()
