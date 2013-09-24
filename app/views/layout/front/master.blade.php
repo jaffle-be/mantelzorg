@@ -29,13 +29,23 @@
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 
+@include('layout.front.header')
+
 @yield('content')
+
+@include('layout.front.footer')
 
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="/vendor/jquery-1.10.2.min.js"><\/script>')</script>
 <script type="text/javascript" src="/vendor/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="/js/master.min.js"></script>
+
+@yield('scripts')
+
+
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 <script>
