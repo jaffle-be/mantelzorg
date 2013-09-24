@@ -15,8 +15,8 @@ class Registration extends Eloquent{
     use Traits\Validation;
 
     protected static $rules = array(
-        'firstname' => 'required|alpha',
-        'lastname' => 'required|alpha',
+        'firstname' => 'required',
+        'lastname' => 'required',
         'email' => 'required|email|unique:beta_registrations',
         'organisation' => array('required', 'firm-name' => 'regex:/^[a-zA-Z09 -\.]+$/')
     );

@@ -6,8 +6,8 @@ class Admin extends Eloquent{
 
     protected $rules = array(
         'email' => 'required|email|unique:admins',
-        'firstname' => 'required|alpha',
-        'lastname' => 'required|alpha',
+        'firstname' => 'required',
+        'lastname' => 'required',
         'active' => 'boolean'
     );
 
