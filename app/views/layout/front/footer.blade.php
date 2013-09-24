@@ -33,7 +33,9 @@
     </div>
 
     <div class="pull-right">
-        <img class="logo-hogent" src="/img/logo-footer.png" alt=""/>
+        <a target="_blank" href="http://www.hogent.be">
+            <img class="logo-hogent" src="/img/logo-footer.png" alt=""/>
+        </a>
     </div>
 
 </div>
