@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    "main-header" => "Zicht op mantelzorg",
+    "main-header" => "ZICHT OP MANTELZORG",
     "sub-header" => "Gespreksleidraad voor de behoefteanalyse bij mantelzorgers van thuiswonende ouderen",
     "beta-banner" => "Sfeerfoto",
     "intro-intrested" => "Interesse in ons instrument?",

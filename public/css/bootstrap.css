@@ -2244,8 +2244,8 @@ fieldset[disabled] .btn-success.active {
 
 .btn-info {
   color: #ffffff;
-  background-color: #5bc0de;
-  border-color: #46b8da;
+  background-color: #1c2c9c;
+  border-color: #182686;
 }
 
 .btn-info:hover,
@@ -2254,8 +2254,8 @@ fieldset[disabled] .btn-success.active {
 .btn-info.active,
 .open .dropdown-toggle.btn-info {
   color: #ffffff;
-  background-color: #39b3d7;
-  border-color: #269abc;
+  background-color: #162279;
+  border-color: #0f1752;
 }
 
 .btn-info:active,
@@ -2279,8 +2279,8 @@ fieldset[disabled] .btn-info:active,
 .btn-info.disabled.active,
 .btn-info[disabled].active,
 fieldset[disabled] .btn-info.active {
-  background-color: #5bc0de;
-  border-color: #46b8da;
+  background-color: #1c2c9c;
+  border-color: #182686;
 }
 
 .btn-link {
@@ -4849,12 +4849,12 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .label-info {
-  background-color: #5bc0de;
+  background-color: #1c2c9c;
 }
 
 .label-info[href]:hover,
 .label-info[href]:focus {
-  background-color: #31b0d5;
+  background-color: #142071;
 }
 
 .label-warning {
@@ -5168,7 +5168,7 @@ a.thumbnail:focus {
 }
 
 .progress-bar-info {
-  background-color: #5bc0de;
+  background-color: #1c2c9c;
 }
 
 .progress-striped .progress-bar-info {

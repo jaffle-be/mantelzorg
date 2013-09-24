@@ -1,0 +1,74 @@
+@import '../less/variables.less';
+@import '../less/mixins.less';
+
+
+h1,h2,h3,h4,h5,h6,h7{
+  color: @green;
+  font-family: @title-font;
+  src: url('conduit_itc.ttf');
+}
+
+.header{
+
+  h1{
+    text-align: center;
+    margin-bottom: 0px;
+  }
+
+}
+
+.footer{
+
+  .login-form{
+    display: none;
+    padding-bottom:10px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid @blue;
+
+    input{
+      width: auto;
+      display: inline-block;
+      margin-left: 10px;
+    }
+
+    input:first-child{
+      width: 200px;
+      margin-left: 0px;
+    }
+
+  }
+
+}
+
+.header{
+
+
+}
+
+/**
+ *  NAVIGATIONS
+ */
+
+.footer, .header{
+
+  ul{
+    float: left;
+    margin-left: 25px;
+    padding-left: 0px;
+  }
+
+  ul:first-child{
+    margin-left: 0;
+  }
+
+  ul li{
+    color: @green;
+    float: left;
+    margin-left: 15px;
+    list-style: none;
+  }
+
+  ul li:first-child{
+    margin-left: 0px;
+  }
+}

@@ -2,10 +2,12 @@
 <link rel="stylesheet" href="/css/beta.min.css"/>
 @stop
 
+@section('title', Lang::get('beta.main-header'))
+
 @section('content')
 
 <div class="beta-wrapper">
-    <h1><?= Lang::get('beta.main-header') ?></h1>
+
     <div class="banner">
         <div class="container">
             <h3><?= Lang::get('beta.sub-header') ?></h3>
@@ -52,7 +54,6 @@
             </div>
         </div>
     </div>
-    <div class="banner-closer"></div>
 </div>
 
 @stop

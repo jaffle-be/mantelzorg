@@ -1,13 +1,5 @@
-@blue:#1C2C9C;
-@green:#51B84F;
-@light-color: #e5eed8;
-
-.mainborder{
-  border-bottom: 4px;
-  border-bottom-style: dotted;
-  border-color: @green;
-  margin: 20px 10px;
-}
+@import '../less/variables.less';
+@import '../less/mixins.less';
 
 *{
   font-family: 'Didact Gothic', sans-serif;
@@ -16,27 +8,11 @@
 }
 
 .banner{
-  background-color: @light-color;
-}
-
-.banner-closer{
-  margin-top: 20px;
-  .mainborder
-}
-
-h1,h2,h3,h4,h5,h6,h7{
-  color: @green;
-  font-family: 'conduit itc';
-  src: url('conduit_itc.ttf');
+  background-color: @white;
 }
 
 .beta-wrapper{
 
-  h1{
-    text-align: center;
-    padding-bottom: 15px;
-    .mainborder
-  }
 
   h3{
     padding-bottom: 10px;
