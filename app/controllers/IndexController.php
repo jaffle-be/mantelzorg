@@ -31,7 +31,7 @@ class IndexController extends BaseController {
         }
         else{
             $this->registration->create(Input::all());
-            return Redirect::back()->with('success', true);
+            return Redirect::back()->with('message', true);
         }
     }
 
