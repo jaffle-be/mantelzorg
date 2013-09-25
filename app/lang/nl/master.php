@@ -2,6 +2,8 @@
 
 return array(
 
+    "main-title" => "ZICHT OP MANTELZORG",
+
     "footer" => array(
         "instrument" => "Het instrument",
         "veiligheid" => "Veiligheid",
