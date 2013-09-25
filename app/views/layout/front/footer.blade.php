@@ -13,7 +13,7 @@
 <!--            <li><a href="">--><?//= Lang::get('master.footer.veiligheid') ?><!--</a></li>-->
 <!--            <li><a href="">--><?//= Lang::get('master.footer.blog') ?><!--</a></li>-->
 <!--            <li><a href="">--><?//= Lang::get('master.footer.pers') ?><!--</a></li>-->
-<!--            <li><a href="">--><?//= Lang::get('master.footer.team') ?><!--</a></li>-->
+            <li><a href="<?= URL::action('IndexController@getTeam') ?>"><?= Lang::get('master.footer.team') ?></a></li>
 <!--            <li><a href="">--><?//= Lang::get('master.footer.help') ?><!--</a></li>-->
         </ul>
 
