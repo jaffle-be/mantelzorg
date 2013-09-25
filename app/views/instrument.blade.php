@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container-small">
 
     <div>
         <h3><?= Lang::get('instrument.s1-title') ?></h3>
