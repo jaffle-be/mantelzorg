@@ -31,7 +31,9 @@
 
 @include('layout.front.header')
 
-@yield('content')
+<div class="content-wrapper">
+    @yield('content')
+</div>
 
 @include('layout.front.footer')
 
