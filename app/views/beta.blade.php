@@ -2,7 +2,6 @@
 <link rel="stylesheet" href="/css/beta.min.css"/>
 @stop
 
-@section('title', Lang::get('beta.main-header'))
 
 @section('content')
 
