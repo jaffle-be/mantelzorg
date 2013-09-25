@@ -1,7 +1,3 @@
-@section('styles')
-<link rel="stylesheet" href="/css/instrument.min.css"/>
-@stop
-
 @section('content')
 
 <div class="container-small">
