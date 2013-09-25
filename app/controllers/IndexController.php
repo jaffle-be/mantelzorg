@@ -40,4 +40,9 @@ class IndexController extends BaseController {
         $this->layout->content = View::make('instrument');
     }
 
+    public function getTeam()
+    {
+        $this->layout->content = View::make('team');
+    }
+
 }
