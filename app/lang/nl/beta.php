@@ -10,7 +10,7 @@ return array(
     "email" => "E-mailadres",
     "organisation" => "Organisatie",
     "register" => "Meld je aan",
-    "registration-thanks" => "Bedankt voor uw intresse. U zal een e-mail ontvangen wanneer het instrument beschikbaar is.",
+    "registration-thanks" => "Bedankt voor uw interesse. Wij contacteren u zodra het instrument actief is.",
     "error-organisation" => "Organisatie bevat vreemde tekens.",
 
 );
