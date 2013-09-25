@@ -8,7 +8,7 @@ return array(
     "s1-p3" => "Daarnaast verschillen ook de verwachtingen van mantelzorgers t.a.v. professionele hulp en ondersteuning. Mantelzorgers maken niet steeds tijdig gebruik van het bestaande ondersteuningsaanbod en dit aanbod is vaak onvoldoende gekend.",
 
 
-    "s2-title" => "Het verhaal van de mantelzorger:",
+    "s2-title" => "Het verhaal van de mantelzorger",
     "s2-p1" => "Het doel van het gesprek is om het eigen verhaal van de mantelzorger te horen, in zijn of haar woorden. ",
     "s2-p2" => "De rubrieken en de items in het instrument bieden een structuur om de verschillende elementen die relevant zijn voor de mantelzorger te bevragen. Via de afname heeft de hulpverlener een overzicht van de factoren die door de mantelzorger als belastend en ondersteunend worden ervaren, op verschillende domeinen. Tevens wordt met de mantelzorger besproken welke ondersteuning wenselijk is en hoe de hulpverlening beter kan aansluiten bij zijn / haar behoeften. ",
     "s2-p3" => "Belangrijk hierbij is dat de verantwoordelijkheid bij de mantelzorger blijft liggen. De grote valkuil is immers dat hulpverleners soms te vlug een antwoord geven als mensen vragen of klachten hebben. Met als gevolg dat het antwoord niet past bij hun leefsituatie of dieperliggende opvattingen.",
