@@ -11,7 +11,7 @@
 
         <address>
             <strong>Lieve De Vos</strong><br>
-            ergotherapeut & orthopedagoog - lector Opleinding Ergotherapie HoGent<br>
+            ergotherapeut & orthopedagoog - lector Opleiding Ergotherapie HoGent<br>
             lieve.devos@hogent.be<br>
         </address>
 
