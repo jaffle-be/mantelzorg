@@ -17,8 +17,12 @@ h7 {
   src: url('conduit_itc.ttf');
 }
 .header h1 {
+  font-weight: bold;
   text-align: center;
   margin-bottom: 0px;
+}
+.footer {
+  margin-bottom: 15px;
 }
 .footer .login-form {
   display: none;
@@ -33,6 +37,10 @@ h7 {
 .footer .login-form input:first-child {
   width: 200px;
   margin-left: 0px;
+}
+.footer .copyright {
+  color: black;
+  margin-right: 40px;
 }
 /**
  *  NAVIGATIONS
