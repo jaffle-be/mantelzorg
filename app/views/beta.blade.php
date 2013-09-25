@@ -2,6 +2,9 @@
 <link rel="stylesheet" href="/css/beta.min.css"/>
 @stop
 
+@section('scripts')
+<script type="text/javascript" src="/js/beta.min.js"></script>
+@stop
 
 @section('content')
 
@@ -15,7 +18,7 @@
                     <img class="img-responsive" src="/img/sfeerfoto.png" alt="beta-banner"/>
                 </div>
                 <div class="betaform col-md-6">
-                    <form action="" method="post" class="form-horizontal">
+                    <form id="beta-registration" action="" method="post" class="form-horizontal">
 
                         <p class='intro'>
                             <?= Lang::get('beta.intro-intrested') ?>
