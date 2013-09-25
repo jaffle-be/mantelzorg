@@ -12,13 +12,13 @@
         <address>
             <strong>Lieve De Vos</strong><br>
             ergotherapeut & orthopedagoog - lector Opleiding Ergotherapie HoGent<br>
-            lieve.devos@hogent.be<br>
+            <a href="mailto:lieve.devos@hogent.be">lieve.devos@hogent.be</a><br>
         </address>
 
         <address>
             <strong>Benedicte De Koker</strong><br>
             socioloog - onderzoeker HoGent<br>
-            benedicte.dekoker@hogent.be<br>
+            <a href="mailto:benedicte.dekoker@hogent.be">benedicte.dekoker@hogent.be</a><br>
         </address>
 
         <address>
