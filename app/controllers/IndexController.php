@@ -27,7 +27,7 @@ class IndexController extends BaseController {
 
         if($validator->fails())
         {
-            return Redirect::to('/')->with('errors', $validator->messages());
+            return Redirect::to('/')->with('errors', $validator->messages())->withInput();
         }
         else{
             $this->registration->create(Input::all());

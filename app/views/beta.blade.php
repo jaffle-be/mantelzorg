@@ -25,20 +25,20 @@
                         <p class="form-wrapper">
                             <label for="beta-firstname"><?= Lang::get('beta.firstname') ?></label>
                             <span class="error"><?= $errors->first('firstname'); ?></span>
-                            <input class="form-control" type="text" name="firstname" id="beta-firstname"/>
+                            <?= Form::text('firstname', null, array('class' => 'form-control')) ?>
 
                             <label for="beta-lastname"><?= Lang::get('beta.lastname') ?></label>
                             <span class="error"><?= $errors->first('lastname'); ?></span>
-                            <input class="form-control" type="text" name="lastname" id="beta-lastname"/>
+                            <?= Form::text('lastname', null, array('class' => 'form-control')) ?>
 
 
                             <label for="beta-email"><?= Lang::get('beta.email') ?></label>
                             <span class="error"><?= $errors->first('email'); ?></span>
-                            <input class="form-control" type="text" name="email" id="beta-email"/>
+                            <?= Form::text('email', null, array('class' => 'form-control')) ?>
 
                             <label for="beta-organisation"><?= Lang::get('beta.organisation') ?></label>
                             <span class="error"><?= $errors->first('organisation') ? Lang::get('beta.error-organisation') : ''; ?></span>
-                            <input class="form-control" type="text" name="organisation" id="beta-organisation"/>
+                            <?= Form::text('organisation', null, array('class' => 'form-control')) ?>
 
                             <? if(Session::has('message')):?>
                                 <?= Lang::get('beta.registration-thanks'); ?>
