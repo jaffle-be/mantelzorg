@@ -27,11 +27,11 @@ class IndexController extends BaseController {
 
         if($validator->fails())
         {
-            return Redirect::back()->with('errors', $validator->messages());
+            return Redirect::to('/')->with('errors', $validator->messages());
         }
         else{
             $this->registration->create(Input::all());
-            return Redirect::back()->with('message', true);
+            return Redirect::to('/')->with('message', true);
         }
     }
 
