@@ -16,6 +16,18 @@ h7 {
   font-family: 'conduit itc';
   src: url('conduit_itc.ttf');
 }
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a,
+h7 a {
+  color: #51b84f;
+  font-family: 'conduit itc';
+  src: url('conduit_itc.ttf');
+  text-decoration: none !important;
+}
 .container-small {
   width: 600px;
   margin-left: auto;
