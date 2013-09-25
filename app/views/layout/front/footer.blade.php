@@ -9,7 +9,7 @@
     <div class="pull-left">
 
         <ul>
-            <li><a href=""><?= Lang::get('master.footer.instrument') ?></a></li>
+            <li><a href="<?= URL::action('IndexController@getInstrument') ?>"><?= Lang::get('master.footer.instrument') ?></a></li>
 <!--            <li><a href="">--><?//= Lang::get('master.footer.veiligheid') ?><!--</a></li>-->
 <!--            <li><a href="">--><?//= Lang::get('master.footer.blog') ?><!--</a></li>-->
 <!--            <li><a href="">--><?//= Lang::get('master.footer.pers') ?><!--</a></li>-->

@@ -35,4 +35,9 @@ class IndexController extends BaseController {
         }
     }
 
+    public function getInstrument()
+    {
+        $this->layout->content = View::make('instrument');
+    }
+
 }
