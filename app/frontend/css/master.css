@@ -5,6 +5,10 @@
   border-color: #51b84f;
   margin: 20px 10px;
 }
+* {
+  font-family: 'Didact Gothic', sans-serif;
+  color: #1c2c9c;
+}
 h1,
 h2,
 h3,
@@ -49,6 +53,9 @@ h7 a {
 }
 .footer {
   margin-bottom: 15px;
+}
+.footer * {
+  font-size: 24px;
 }
 .footer .login-form {
   display: none;
