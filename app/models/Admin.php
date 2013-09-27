@@ -1,6 +1,6 @@
 <?php
 
-use Twarlop\Support\Eloquent\Traits\Validation;
+use Jaffle\Support\Eloquent\Traits\Validation;
 
 class Admin extends Eloquent{
 

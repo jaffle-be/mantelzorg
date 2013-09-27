@@ -3,7 +3,7 @@
 namespace Beta;
 
 use Eloquent;
-use Twarlop\Support\Eloquent\Traits;
+use Jaffle\Support\Eloquent\Traits;
 
 
 class Registration extends Eloquent{
