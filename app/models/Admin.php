@@ -1,7 +1,5 @@
 <?php
 
-use Jaffle\Support\Eloquent\Traits\Validation;
-
 class Admin extends Eloquent{
 
     protected $rules = array(
@@ -13,6 +11,20 @@ class Admin extends Eloquent{
 
     protected $fillable = array('email', 'firstname', 'lastname', 'password', 'active');
 
-    use Validation;
+    public function validator(array $input = array(), array $rules = array())
+    {
+        if(empty($input))
+        {
+            $input = \Input::all();
+        }
+
+        if(empty($rules))
+        {
+            $rules = static::$rules;
+        }
+
+        return \Validator::make($input, $rules);
+
+    }
 
 }

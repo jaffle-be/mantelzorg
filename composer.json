@@ -1,15 +1,8 @@
 {
 	"name": "jaffle-be/mantelzorg",
 	"require": {
-		"laravel/framework": "4.0.*",
-		"jaffle-be/support":"*"
+		"laravel/framework": "4.0.*"
 	},
-    	"repositories":[
-        	{
-            		"type":"vcs",
-            		"url": "git@github.com:jaffle-be/support.git"
-		}
-    	],
 	"autoload": {
 		"classmap": [
 			"app/commands",

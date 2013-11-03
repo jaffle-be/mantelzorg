@@ -3,8 +3,6 @@
 namespace Beta;
 
 use Eloquent;
-use Jaffle\Support\Eloquent\Traits;
-
 
 class Registration extends Eloquent{
 
@@ -12,7 +10,21 @@ class Registration extends Eloquent{
 
     protected $fillable = array('firstname', 'lastname', 'email', 'organisation');
 
-    use Traits\Validation;
+    public function validator(array $input = array(), array $rules = array())
+    {
+        if(empty($input))
+        {
+            $input = \Input::all();
+        }
+
+        if(empty($rules))
+        {
+            $rules = static::$rules;
+        }
+
+        return \Validator::make($input, $rules);
+
+    }
 
     protected static $rules = array(
         'firstname' => 'required',
