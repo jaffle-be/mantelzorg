@@ -4,6 +4,8 @@ use \Beta\Registration;
 
 class IndexController extends BaseController {
 
+    protected $layout = 'layout.front.master';
+
     /**
      * @var Beta\Registration
      */
@@ -13,8 +15,6 @@ class IndexController extends BaseController {
     {
         $this->registration = $registration;
     }
-
-	protected $layout = 'layout.front.master';
 
 	public function getIndex()
 	{
