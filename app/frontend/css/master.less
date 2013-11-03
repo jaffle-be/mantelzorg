@@ -1,16 +1,20 @@
 @import '../less/variables.less';
 @import '../less/mixins.less';
-
+@import '../less/sidebar';
+@import '../less/forms';
+@import '../less/icons';
 
 *{
   font-family: 'Didact Gothic', sans-serif;
   color : @blue;
+  text-shadow: 1px 1px 1px #DDD;
 }
 
 h1,h2,h3,h4,h5,h6,h7{
   color: @green;
   font-family: @title-font;
   src: url('conduit_itc.ttf');
+  text-shadow: 1px 1px 1px lighten(@green, 10%);
 
   a{
     color: @green;

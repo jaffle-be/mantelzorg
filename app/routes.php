@@ -11,4 +11,12 @@
 |
 */
 
+Route::controller('instellingen', 'InstellingenController');
+
+Route::controller('dash', 'DashController');
+
+Route::controller('rapport', 'RapportController');
+
+Route::controller('instrument','InstrumentController');
+
 Route::controller('', 'IndexController');

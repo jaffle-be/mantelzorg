@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdminsTable extends Migration {
+class CreateUsersTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -11,13 +11,16 @@ class CreateAdminsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('admins', function($table){
+		Schema::create('users', function($table){
             $table->increments('id');
             $table->string('email')->unique();
             $table->string('password', 60);
-            $table->string('firstname');
-            $table->string('lastname');
+            $table->string('firstname', 100);
+            $table->string('lastname', 100);
+            $table->boolean('male')->default(1);
+            $table->string('phone', 30)->nullable();
             $table->boolean('active')->default(0);
+            $table->boolean('admin')->default(0);
             $table->timestamps();
         });
 
@@ -30,7 +33,7 @@ class CreateAdminsTable extends Migration {
 	 */
 	public function down()
 	{
-        Schema::drop('admins');
+        Schema::drop('users');
 	}
 
 }

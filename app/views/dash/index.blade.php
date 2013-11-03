@@ -1,0 +1,3 @@
+@section('content')
+dash
+@stop

@@ -35,14 +35,29 @@ class IndexController extends BaseController {
         }
     }
 
-    public function getInstrument()
+    public function getHetInstrument()
     {
         $this->layout->content = View::make('instrument');
     }
 
-    public function getTeam()
+    public function getHetTeam()
     {
         $this->layout->content = View::make('team');
+    }
+
+    public function getLogin()
+    {
+        $this->layout->content = View::make('login');
+    }
+
+    public function postLogin()
+    {
+        $credentials = array(
+            'email' => Input::get('email'),
+            'password' => Input::get('password')
+        );
+
+        Auth::attempt($credentials);
     }
 
 }

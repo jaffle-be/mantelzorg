@@ -15,6 +15,7 @@
 
     <link rel="stylesheet" href="/css/bootstrap.css"/>
     <link rel="stylesheet" href="/css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="/css/glyphicons.css"/>
     <link href='http://fonts.googleapis.com/css?family=Didact+Gothic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic' rel='stylesheet' type='text/css'>
 
@@ -44,10 +45,43 @@
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 
-@include('layout.front.header')
+@include('layout.admin.header')
 
 <div class="content-wrapper">
-    @yield('content')
+
+    <div class="container">
+
+        <section id="sidebar">
+            <ul>
+                <li>
+                    <a href="<?= URL::action('DashController@getIndex') ?>">
+                        <span class="glyphicon glyphicon-dashboard"></span><?= Lang::get('sidebar.dashboard') ?>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?= URL::action('InstrumentController@getIndex') ?>">
+                        <span class="glyphicon glyphicon-list-alt"></span><?= Lang::get('sidebar.instrument') ?>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?= URL::action('RapportController@getIndex') ?>">
+                        <span class="glyphicon glyphicon-folder-close"></span><?= Lang::get('sidebar.rapport') ?>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?= URL::action('InstellingenController@getIndex') ?>">
+                        <span class="glyphicon glyphicon-wrench"></span><?= Lang::get('sidebar.instellingen') ?></a>
+                </li>
+            </ul>
+        </section>
+
+        <section id="content" class="container">
+            @yield('content')
+        </section>
+
+    </div>
+
+
 </div>
 
 @include('layout.global.footer')

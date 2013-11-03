@@ -15,7 +15,7 @@
             <h3><?= Lang::get('beta.sub-header') ?></h3>
             <div class="row">
                 <div class="picture col-md-6">
-                    <img class="img-responsive" src="/img/sfeerfoto.png" alt="beta-banner"/>
+                    <img class="img-responsive" src="/images/sfeerfoto.png" alt="beta-banner"/>
                 </div>
                 <div class="betaform col-md-6">
                     <form id="beta-registration" action="" method="post" class="form-horizontal">
