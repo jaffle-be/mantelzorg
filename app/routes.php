@@ -11,12 +11,24 @@
 |
 */
 
-Route::controller('instellingen', 'InstellingenController');
+Route::pattern('id', '\d+');
+
+Route::controller('instellingen', 'InstellingController');
 
 Route::controller('dash', 'DashController');
 
 Route::controller('rapport', 'RapportController');
 
 Route::controller('instrument','InstrumentController');
+
+Route::resource('inschrijvingen', 'InschrijvingController');
+
+Route::resource('organisations/{id}/locations', 'Organisation\\LocationController');
+
+Route::resource('organisations', 'OrganisationController');
+
+//Route::resource('locations', 'LocationController');
+
+Route::resource('hulpverleners', 'HulpverlenerController');
 
 Route::controller('', 'IndexController');

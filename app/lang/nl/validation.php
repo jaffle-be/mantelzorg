@@ -98,7 +98,14 @@ return array(
         'firstname' => 'voornaam',
         'lastname' => 'achternaam',
         'organisation' => 'organisatie',
-        'email' => 'e-mailadres'
+        'email' => 'e-mailadres',
+        'name' => 'naam',
+        'male' => 'geslacht',
+        'organisation_id' => 'organisatie',
+        'organisation_location_id' => 'locatie',
+        'street' => 'straat en huisnummer',
+        'city' => 'gemeente/stad',
+        'postal' => 'postcode',
     ),
 
 );

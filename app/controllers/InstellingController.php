@@ -1,6 +1,6 @@
 <?php
 
-class InstellingenController extends AdminController{
+class InstellingController extends AdminController{
 
     public function getIndex()
     {

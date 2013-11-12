@@ -15,7 +15,6 @@
 
     <link rel="stylesheet" href="/css/bootstrap.css"/>
     <link rel="stylesheet" href="/css/bootstrap-theme.css"/>
-    <link rel="stylesheet" href="/css/glyphicons.css"/>
     <link href='http://fonts.googleapis.com/css?family=Didact+Gothic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic' rel='stylesheet' type='text/css'>
 
@@ -55,22 +54,27 @@
             <ul>
                 <li>
                     <a href="<?= URL::action('DashController@getIndex') ?>">
-                        <span class="glyphicon glyphicon-dashboard"></span><?= Lang::get('sidebar.dashboard') ?>
+                        <span class="glyphicon glyphicon-dashboard"></span><?= Lang::get('navs.dashboard') ?>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?= URL::action('HulpverlenerController@index') ?>">
+                        <span class="glyphicons group"></span><?= Lang::get('navs.gebruikers') ?>
                     </a>
                 </li>
                 <li>
                     <a href="<?= URL::action('InstrumentController@getIndex') ?>">
-                        <span class="glyphicon glyphicon-list-alt"></span><?= Lang::get('sidebar.instrument') ?>
+                        <span class="glyphicon glyphicon-list-alt"></span><?= Lang::get('navs.instrument') ?>
                     </a>
                 </li>
                 <li>
                     <a href="<?= URL::action('RapportController@getIndex') ?>">
-                        <span class="glyphicon glyphicon-folder-close"></span><?= Lang::get('sidebar.rapport') ?>
+                        <span class="glyphicon glyphicon-folder-close"></span><?= Lang::get('navs.rapport') ?>
                     </a>
                 </li>
                 <li>
-                    <a href="<?= URL::action('InstellingenController@getIndex') ?>">
-                        <span class="glyphicon glyphicon-wrench"></span><?= Lang::get('sidebar.instellingen') ?></a>
+                    <a href="<?= URL::action('InstellingController@getIndex') ?>">
+                        <span class="glyphicon glyphicon-wrench"></span><?= Lang::get('navs.instellingen') ?></a>
                 </li>
             </ul>
         </section>
@@ -91,8 +95,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="/vendor/jquery-1.10.2.min.js"><\/script>')</script>
 <script type="text/javascript" src="/vendor/bootstrap.min.js"></script>
-
-<!--<script type="text/javascript" src="/js/master.min.js"></script>-->
+<script type="text/javascript" src="/js/master.min.js"></script>
 
 @yield('scripts')
 
