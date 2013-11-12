@@ -41,14 +41,14 @@ class HulpverlenerController extends AdminController{
 
             //create an array that has has en empty first value, then all the organisations, then a 'create new' option
             //empty has no value, organisations have their id as value, new has 'new' as value
-            $organisations = array('' => Lang::get('inschrijvingen.pick_organisation')) +
+            $organisations = array('' => Lang::get('users.pick_organisation')) +
                 $organisations->lists('name', 'id') +
-                array('new' => Lang::get('inschrijvingen.new_organisation'));
+                array('new' => Lang::get('users.new_organisation'));
 
             //prepare an array of locations
             $locations = $user->organisation->locations->lists('name', 'id');
-            $locations = array('' => Lang::get('hulpverleners.pick_location'))
-                + $locations + array('new' => Lang::get('hulpverleners.new_location'));
+            $locations = array('' => Lang::get('users.pick_location'))
+                + $locations + array('new' => Lang::get('users.new_location'));
 
             $this->layout->content = View::make('hulpverlener.edit', compact(array('user', 'organisations', 'locations')))
                 ->nest('subnav', 'layout.admin.subnavs.users', array('page' => $this->page))

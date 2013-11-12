@@ -1,3 +1,7 @@
+@section('styles')
+<link rel="stylesheet" href="/css/users.min.css"/>
+@stop
+
 @section('content')
 
 <?= $subnav ?>
@@ -8,16 +12,16 @@
 
 
             <fieldset>
-                <legend><?= Lang::get('hulpverleners.persoonlijk') ?></legend>
+                <legend><?= Lang::get('users.persoonlijk') ?></legend>
 
-                <label for="firstname"><?= Lang::get('hulpverleners.firstname') ?></label>
+                <label for="firstname"><?= Lang::get('users.firstname') ?></label>
                 <span class="errors"><?= $errors->first('firstname') ?></span>
                 <div class="input-group">
                     <?= Form::text('firstname', null, array('class' => 'form-control')) ?>
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                 </div>
 
-                <label for="lastname"><?= Lang::get('hulpverleners.lastname') ?></label>
+                <label for="lastname"><?= Lang::get('users.lastname') ?></label>
                 <span class="errors"><?= $errors->first('lastname') ?></span>
                 <div class="input-group">
                     <?= Form::text('lastname', null, array('class' => 'form-control')) ?>
@@ -29,17 +33,17 @@
                 <div class="input-group">
                     <div class="radio-inline">
                         <label>
-                            <?= Form::radio('male', 1) ?><?= Lang::get('hulpverleners.male') ?>&nbsp;<i class="glyphicons male"></i>
+                            <?= Form::radio('male', 1) ?><?= Lang::get('users.male') ?>&nbsp;<i class="glyphicons male"></i>
                         </label>
                     </div>
                     <div class="radio-inline">
                         <label>
-                            <?= Form::radio('male', 0) ?><?= Lang::get('hulpverleners.female') ?>&nbsp;<i class="glyphicons female"></i>
+                            <?= Form::radio('male', 0) ?><?= Lang::get('users.female') ?>&nbsp;<i class="glyphicons female"></i>
                         </label>
                     </div>
                 </div>
 
-                <label for="phone"><?= Lang::get('hulpverleners.phone') ?></label>
+                <label for="phone"><?= Lang::get('users.phone') ?></label>
                 <span class="errors"><?= $errors->first('phone') ?></span>
                 <div class="input-group">
                     <?= Form::text('phone', null, array('class' => 'form-control')) ?>
@@ -52,10 +56,10 @@
 
     <div class="col-md-6">
         <fieldset>
-            <legend><?= Lang::get('hulpverleners.organisatie') ?></legend>
+            <legend><?= Lang::get('users.organisatie') ?></legend>
 
             <label for="organisation">
-                <?= Lang::get('hulpverleners.organisatie') ?>
+                <?= Lang::get('users.organisatie') ?>
             </label>
             <span class="errors"><?= $errors->first('organisation_id') ?></span>
 
@@ -65,7 +69,7 @@
             )?>
 
 
-            <label for="locations"><?= Lang::get('hulpverleners.locations') ?></label>
+            <label for="locations"><?= Lang::get('users.locations') ?></label>
             <span class="errors"><?= $errors->first('organisation_location_id') ?></span>
             <?= Form::select('organisation_location_id', $locations, null, array(
                 'id' => 'location',
@@ -77,7 +81,7 @@
 
 </div>
 
-<input class="btn btn-primary" type="submit" value="<?= Lang::get('hulpverleners.save_personal') ?>"/>
+<input class="btn btn-primary" type="submit" value="<?= Lang::get('users.save') ?>"/>
 
 </form>
 
@@ -85,7 +89,7 @@
 
     <div class="col-md-6">
         <fieldset>
-            <legend><?= Lang::get('hulpverleners.beveiliging') ?></legend>
+            <legend><?= Lang::get('users.beveiliging') ?></legend>
         </fieldset>
     </div>
 

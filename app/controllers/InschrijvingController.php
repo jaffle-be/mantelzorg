@@ -47,9 +47,9 @@ class InschrijvingController extends AdminController{
 
             //create an array that has has en empty first value, then all the organisations, then a 'create new' option
             //empty has no value, organisations have their id as value, new has 'new' as value
-            $organisations = array('' => Lang::get('inschrijvingen.pick_organisation'))+
+            $organisations = array('' => Lang::get('users.pick_organisation'))+
                 $organisations->lists('name', 'id') +
-                array('new' => Lang::get('inschrijvingen.new_organisation'));
+                array('new' => Lang::get('users.new_organisation'));
 
             if(Input::old('organisation_id'))
             {
@@ -62,9 +62,9 @@ class InschrijvingController extends AdminController{
                 $locations = array();
             }
 
-            $locations = array('' => Lang::get('hulpverleners.pick_location'))
+            $locations = array('' => Lang::get('users.pick_location'))
                 + $locations
-                + array('new' => Lang::get('hulpverleners.new_location'));
+                + array('new' => Lang::get('users.new_location'));
 
             $page = 'inschrijving';
 

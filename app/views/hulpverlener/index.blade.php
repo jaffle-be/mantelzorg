@@ -9,10 +9,10 @@
     <thead>
     <tr>
         <th>&nbsp;</th>
-        <th><?= Lang::get('hulpverleners.naam') ?></th>
-        <th><?= Lang::get('hulpverleners.email') ?></th>
-        <th><?= Lang::get('hulpverleners.organisatie') ?></th>
-        <th><?= Lang::get('hulpverleners.created') ?></th>
+        <th><?= Lang::get('users.naam') ?></th>
+        <th><?= Lang::get('users.email') ?></th>
+        <th><?= Lang::get('users.organisatie') ?></th>
+        <th><?= Lang::get('users.created') ?></th>
     </tr>
     </thead>
 

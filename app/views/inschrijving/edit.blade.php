@@ -1,5 +1,5 @@
 @section('styles')
-<link rel="stylesheet" href="/css/inschrijvingen.min.css"/>
+<link rel="stylesheet" href="/css/users.min.css"/>
 @stop
 
 @section('content')
@@ -13,21 +13,21 @@
         <div class="col-md-6">
             <input name="id" type="hidden" value="<?= $inschrijving->id ?>"/>
 
-            <label for="email"><?= Lang::get('inschrijvingen.email') ?></label>
+            <label for="email"><?= Lang::get('users.email') ?></label>
             <span class="errors"><?= $errors->first('email') ?></span>
             <div class="input-group">
                 <?= Form::text('email', $inschrijving->email, array('class' => 'form-control')) ?>
                 <span class="input-group-addon">@</span>
             </div>
 
-            <label for="firstname"><?= Lang::get('inschrijvingen.firstname') ?></label>
+            <label for="firstname"><?= Lang::get('users.firstname') ?></label>
             <span class="errors"><?= $errors->first('firstname') ?></span>
             <div class="input-group">
                 <?= Form::text('firstname', $inschrijving->firstname, array('class' => 'form-control')) ?>
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
             </div>
 
-            <label for="lastname"><?= Lang::get('instellingen.lastname') ?></label>
+            <label for="lastname"><?= Lang::get('users.lastname') ?></label>
             <span class="errors"><?= $errors->first('lastname') ?></span>
             <div class="input-group">
                 <?= Form::text('lastname', $inschrijving->lastname , array('class' => 'form-control')) ?>
@@ -38,17 +38,17 @@
             <div class="input-group">
                 <div class="radio-inline">
                     <label>
-                        <?= Form::radio('male', 1) ?><?= Lang::get('inschrijvingen.male') ?>&nbsp;<i class="glyphicons male"></i>
+                        <?= Form::radio('male', 1) ?><?= Lang::get('users.male') ?>&nbsp;<i class="glyphicons male"></i>
                     </label>
                 </div>
                 <div class="radio-inline">
                     <label>
-                        <?= Form::radio('male', 0) ?><?= Lang::get('inschrijvingen.female') ?>&nbsp;<i class="glyphicons female"></i>
+                        <?= Form::radio('male', 0) ?><?= Lang::get('users.female') ?>&nbsp;<i class="glyphicons female"></i>
                     </label>
                 </div>
             </div>
 
-            <label for="phone"><?= Lang::get('inschrijvingen.phone') ?></label>
+            <label for="phone"><?= Lang::get('users.phone') ?></label>
             <span class="errors"><?= $errors->first('phone') ?></span>
             <div class="input-group">
                 <?= Form::text('phone', null, array('class' => 'form-control')) ?>
@@ -60,7 +60,7 @@
         <div class="col-md-6">
 
             <label for="organisation">
-            <?= Lang::get('inschrijvingen.organisatie') ?>
+            <?= Lang::get('users.organisatie') ?>
             </label>
             <span class="errors"><?= $errors->first('organisation_id') ?></span>
 
@@ -69,10 +69,10 @@
                 'class' => 'form-control')
             )?>
 
-            <p class="alert alert-info"><?= Lang::get('inschrijvingen.oorspronkelijke_organisatie', array('organisatie' => $inschrijving->organisation)) ?></p>
+            <p class="alert alert-info"><?= Lang::get('users.oorspronkelijke_organisatie', array('organisatie' => $inschrijving->organisation)) ?></p>
 
             <div class="holder <?= !Input::old('organisation_id') ? 'hide' : '' ?>">
-            <label for="locations"><?= Lang::get('inschrijving.locations') ?></label>
+            <label for="locations"><?= Lang::get('users.locations') ?></label>
             <span class="errors"><?= $errors->first('organisation_location_id') ?></span>
             <?= Form::select('organisation_location_id', $locations, Input::old('organisation_location_id'), array(
                 'id' => 'location',
@@ -85,7 +85,7 @@
     </div>
 
     <div class="form-actions">
-        <button class="btn btn-primary" type="submit"><?= Lang::get('inschrijvingen.create_as_helper') ?></button>
+        <button class="btn btn-primary" type="submit"><?= Lang::get('users.create_as_helper') ?></button>
     </div>
 
 </form>

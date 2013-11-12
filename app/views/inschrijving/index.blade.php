@@ -7,10 +7,10 @@
     <thead>
     <tr>
         <th>&nbsp;</th>
-        <th><?= Lang::get('inschrijvingen.naam') ?></th>
-        <th><?= Lang::get('inschrijvingen.email') ?></th>
-        <th><?= Lang::get('inschrijvingen.organisatie') ?></th>
-        <th><?= Lang::get('inschrijvingen.created') ?></th>
+        <th><?= Lang::get('users.naam') ?></th>
+        <th><?= Lang::get('users.email') ?></th>
+        <th><?= Lang::get('users.organisatie') ?></th>
+        <th><?= Lang::get('users.created_at') ?></th>
     </tr>
     </thead>
 
