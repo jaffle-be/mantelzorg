@@ -54,27 +54,27 @@
             <ul>
                 <li>
                     <a href="<?= URL::action('DashController@getIndex') ?>">
-                        <span class="glyphicon glyphicon-dashboard"></span><?= Lang::get('navs.dashboard') ?>
+                        <span class="glyphicon glyphicon-dashboard"></span><?= Lang::get('master.navs.dashboard') ?>
                     </a>
                 </li>
                 <li>
                     <a href="<?= URL::action('HulpverlenerController@index') ?>">
-                        <span class="glyphicons group"></span><?= Lang::get('navs.gebruikers') ?>
+                        <span class="glyphicons group"></span><?= Lang::get('master.navs.gebruikers') ?>
                     </a>
                 </li>
                 <li>
                     <a href="<?= URL::action('InstrumentController@getIndex') ?>">
-                        <span class="glyphicon glyphicon-list-alt"></span><?= Lang::get('navs.instrument') ?>
+                        <span class="glyphicon glyphicon-list-alt"></span><?= Lang::get('master.navs.instrument') ?>
                     </a>
                 </li>
                 <li>
                     <a href="<?= URL::action('RapportController@getIndex') ?>">
-                        <span class="glyphicon glyphicon-folder-close"></span><?= Lang::get('navs.rapport') ?>
+                        <span class="glyphicon glyphicon-folder-close"></span><?= Lang::get('master.navs.rapport') ?>
                     </a>
                 </li>
                 <li>
                     <a href="<?= URL::action('InstellingController@getIndex') ?>">
-                        <span class="glyphicon glyphicon-wrench"></span><?= Lang::get('navs.instellingen') ?></a>
+                        <span class="glyphicon glyphicon-wrench"></span><?= Lang::get('master.navs.instellingen') ?></a>
                 </li>
             </ul>
         </section>

@@ -36,8 +36,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal"><?= Lang::get('general.cancel') ?></button>
-                <button type="button" class="btn btn-primary"><?= Lang::get('general.confirm') ?></button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?= Lang::get('master.general.cancel') ?></button>
+                <button type="button" class="btn btn-primary"><?= Lang::get('master.general.confirm') ?></button>
             </div>
         </div>
     </div>
