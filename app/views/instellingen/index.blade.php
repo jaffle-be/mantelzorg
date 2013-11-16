@@ -1,3 +1,7 @@
+@section('styles')
+<link rel="stylesheet" href="/css/users.min.css"/>
+@stop
+
 @section('content')
 
 <?= $subnav ?>
