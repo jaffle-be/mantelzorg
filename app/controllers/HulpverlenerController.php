@@ -58,8 +58,6 @@ class HulpverlenerController extends AdminController{
                 array('new' => Lang::get('users.new_organisation'));
 
             /**
-             * prepare an array of locations
-             *
              * if the user had switched the organisation, you need to load
              * the locations that are linked to that organisation
              */
@@ -121,6 +119,7 @@ class HulpverlenerController extends AdminController{
             'admin', 'active'
         ), $input);
 
+        //validation rule if email was changed
         $validator->sometimes('email', 'required|email|unique:users', function($input) use ($user)
         {
             return $user->email !== $input->email;

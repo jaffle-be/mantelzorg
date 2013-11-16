@@ -17,6 +17,9 @@ return array(
     'created' => 'Sinds',
     'is_admin' => 'Gebruiker is een admin.',
     'is_active' => 'Gebruiker is actief.',
+    'new-password' => 'Nieuw wachtwoord',
+    'current-password' => 'Huidig wachtwoord',
+    'password-confirmation' => 'Bevestig wachtwoord',
 
     /**
      * organisations

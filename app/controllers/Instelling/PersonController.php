@@ -10,6 +10,8 @@ use Input;
 use Lang;
 use View;
 use Redirect;
+use Hash;
+use Session;
 
 class PersonController extends \AdminController{
 
@@ -24,7 +26,7 @@ class PersonController extends \AdminController{
     protected $organisation;
 
     /**
-     * @var
+     * @var \Organisation\Location
      */
     protected $location;
 
@@ -43,6 +45,7 @@ class PersonController extends \AdminController{
 
     public function index()
     {
+        $message = Session::has('message') ? Session::get('message') : null;
         $user = Auth::user();
 
         $organisations = $this->organisation->orderBy('name')->get();
@@ -68,7 +71,7 @@ class PersonController extends \AdminController{
 
         $locations = array('' => Lang::get('users.pick_location')) + $locations;
 
-        $this->layout->content = View::make('instellingen.index', compact(array('user', 'organisations', 'locations')))
+        $this->layout->content = View::make('instellingen.index', compact(array('user', 'organisations', 'locations', 'message')))
             ->nest('subnav', 'layout.admin.subnavs.instellingen', array('page' => $this->page));
     }
 
@@ -82,16 +85,47 @@ class PersonController extends \AdminController{
             return $user->email !== $input->email;
         });
 
+        /**
+         * If the user has entered a new password, the current-password needs to match the existing password
+         * The new password needs to be confirmed too! (second rule)
+         */
+        $validator->sometimes('current-password', 'passcheck', function($input){
+            return !empty($input->password);
+        });
+
+        $validator->sometimes(array('password'), 'required|confirmed', function($input)
+        {
+            return !empty($input->password);
+        });
+
         if($validator->fails())
         {
             return Redirect::back()->withErrors($validator->messages())->withInput();
         }
-
         else
         {
-            $user->update(Input::all());
+            $input = Input::all();
 
-            return Redirect::route('instellingen.index');
+            /**
+             * make sure to unset the password field, so the password isn't being emptied
+             * when the user did not try to change it.
+             */
+            if(!empty($input['password']))
+            {
+                /**
+                 * hash the password to insert it into the database.
+                 */
+                $input['password'] = Hash::make($input['password']);
+                $message = Lang::get('master.info.password_changed');
+            }
+            else
+            {
+                unset($input['password']);
+            }
+
+            $user->update($input);
+
+            return Redirect::route('instellingen.index')->withMessage(isset($message) ? $message : null);
         }
     }
 } 

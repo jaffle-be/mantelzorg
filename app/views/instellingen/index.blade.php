@@ -41,6 +41,7 @@
                             <?= Form::radio('male', 0) ?><?= Lang::get('users.female') ?>&nbsp;<i class="glyphicons female"></i>
                         </label>
                     </div>
+
                 </div>
 
                 <label for="phone"><?= Lang::get('users.phone') ?></label>
@@ -88,23 +89,57 @@
             <fieldset>
                 <legend><?= Lang::get('users.beveiliging') ?></legend>
 
-                <label for="email"><?= Lang::get('users.email') ?></label>
-                <span class="error"><?= $errors->first('email') ?></span>
-                <div class="input-group">
-                    <?= Form::text('email', null, array('class' => 'form-control')) ?>
-                    <span class="input-group-addon"><i class="glyphicons envelope"></i></span>
+                @if(Session::has('message'))
+                <div class="alert alert-success">
+                    {{ $message }}
                 </div>
-<? /**
-                <label for="password"><?= Lang::get('users.password') ?></label>
-                <span class="errors"><?= $errors->first('password') ?></span>
+                @endif
 
-                <div class="input-group">
-                    <input class="form-control" type="password" name="password" id="password"/>
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <div class="row">
+
+
+                    <div class="col-md-6">
+
+                        <label for="current-password"><?= Lang::get('users.current-password') ?></label>
+                        <span class="errors"><?= $errors->first('current-password') ?></span>
+                        <div class="input-group">
+                            <input class="form-control" type="password" name="current-password" id="current-password"/>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        </div>
+
+                        <label for="password"><?= Lang::get('users.new-password') ?></label>
+                        <span class="errors"><?= $errors->first('password') ?></span>
+                        <div class="input-group">
+                            <input class="form-control" type="password" name="password" id="password"/>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        </div>
+
+                        <label for="password_confirmation"><?= Lang::get('users.password-confirmation') ?></label>
+                        <span class="errors"><?= $errors->first('password_confirmation') ?></span>
+                        <div class="input-group">
+                            <input class="form-control" type="password" name="password_confirmation" id="password_confirmation"/>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label for="email"><?= Lang::get('users.email') ?></label>
+                        <span class="error"><?= $errors->first('email') ?></span>
+                        <div class="input-group">
+                            <?= Form::text('email', null, array('class' => 'form-control')) ?>
+                            <span class="input-group-addon"><i class="glyphicons envelope"></i></span>
+                        </div>
+
+                    </div>
+
                 </div>
- */ ?>
+
             </fieldset>
+
         </div>
+
     </div>
 
     <div class="form-actions">

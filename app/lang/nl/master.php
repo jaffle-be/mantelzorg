@@ -52,7 +52,8 @@ return array(
      * This is used to show the user a message when he requested a page he cannot without sufficient permissions.
      */
     "info" => array(
-        'no-right-to-section' => "U heeft geen bevoegdheid om de gevraagde pagina in te kijken."
+        'no-right-to-section' => "U heeft geen bevoegdheid om de gevraagde pagina in te kijken.",
+        'password_changed' => 'Wachtwoord succesvol veranderd.',
     )
 
 );

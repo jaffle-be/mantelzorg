@@ -65,6 +65,8 @@ return array(
     "url"            => ":attribute is geen geldige URL.",
     'captcha' => ':attribute komt niet overeen.',
 
+    "passcheck" => ":attribute is niet correct.",
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -77,6 +79,7 @@ return array(
     */
 
     'custom' => array(
+
     ),
 
     /*
@@ -106,6 +109,7 @@ return array(
         'street' => 'straat en huisnummer',
         'city' => 'gemeente/stad',
         'postal' => 'postcode',
+        'current-password' => 'huidig wachtwoord'
     ),
 
 );
