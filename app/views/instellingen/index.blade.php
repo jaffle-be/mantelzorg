@@ -26,7 +26,7 @@
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                 </div>
 
-                <div class="input-group">
+                <div>
                     <div class="radio-inline">
                         <label>
                             <?= Form::radio('male', 1) ?><?= Lang::get('users.male') ?>&nbsp;<i class="glyphicons male"></i>
