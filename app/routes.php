@@ -13,11 +13,9 @@
 
 Route::pattern('id', '\d+');
 
+Route::resource('instellingen', 'Instelling\PersonController', array('only' => array('index', 'update')));
 
-Route::resource('instellingen/mantelzorgers', 'Instelling\MantelzorgerController');
-
-Route::controller('instellingen', 'Instelling\PersonController');
-
+Route::resource('instellingen/mantelzorgers', 'Instelling\MantelzorgerController', array('only' => array('index')));
 
 Route::controller('dash', 'DashController');
 
@@ -25,12 +23,12 @@ Route::controller('rapport', 'RapportController');
 
 Route::controller('instrument','InstrumentController');
 
-Route::resource('inschrijvingen', 'InschrijvingController');
+Route::resource('inschrijvingen', 'InschrijvingController', array('only' => array('index', 'edit', 'update')));
 
-Route::resource('organisations/{id}/locations', 'Organisation\\LocationController');
+Route::resource('organisations/{id}/locations', 'Organisation\\LocationController', array('only' => array('index', 'store')));
 
-Route::resource('organisations', 'OrganisationController');
+Route::resource('organisations', 'OrganisationController', array('only' => array('store')));
 
-Route::resource('hulpverleners', 'HulpverlenerController');
+Route::resource('hulpverleners', 'HulpverlenerController', array('only' => array('index', 'edit', 'update')));
 
 Route::controller('', 'IndexController');

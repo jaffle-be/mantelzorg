@@ -41,7 +41,7 @@ class PersonController extends \AdminController{
         $this->beforeFilter('auth');
     }
 
-    public function getIndex()
+    public function index()
     {
         $user = Auth::user();
 
@@ -72,7 +72,7 @@ class PersonController extends \AdminController{
             ->nest('subnav', 'layout.admin.subnavs.instellingen', array('page' => $this->page));
     }
 
-    public function postUser()
+    public function update()
     {
         $user = Auth::user();
 
@@ -90,6 +90,8 @@ class PersonController extends \AdminController{
         else
         {
             $user->update(Input::all());
+
+            return Redirect::route('instellingen.index');
         }
     }
 } 

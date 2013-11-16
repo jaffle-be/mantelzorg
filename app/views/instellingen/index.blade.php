@@ -3,8 +3,8 @@
 <?= $subnav ?>
 
 <?= Form::model($user, array(
-    'action' => 'Instelling\PersonController@postUser',
-    'method' => 'post',
+    'action' => array('Instelling\PersonController@update', $user->id),
+    'method' => 'put',
 )) ?>
 
     <div class="row">
