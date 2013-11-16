@@ -254,20 +254,16 @@ app = {
             fill: function (locations)
             {
                 //remove all other options
-                var options = this.$location.find('option'),
-                    size = options.size(),
-                    last = options.filter(':last-child');
+                var $options = this.$location.find('option'),
+                    $new = $options.filter(':first-child[value=]');
 
-                options.each(function(i, el){
-                    if(i !== 0 && i !== size-1)
-                    {
-                        el.remove();
-                    }
-                });
+                //remove all options
+                $options.not(':last-child[value=new], :first-child[value=]').remove();
 
+                //add new options after the first option ('selecteer een ?')
                 for(var i in locations)
                 {
-                    last.before($('<option>', {
+                    $new.after($('<option>', {
                         value: locations[i].id,
                         html: locations[i].name
                     }));

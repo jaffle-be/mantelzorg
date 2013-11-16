@@ -29,6 +29,8 @@ return array(
         'gebruikers' => 'Gebruikers',
         'hulpverleners' => 'Hulpverleners',
         'inschrijvingen' => 'Inschrijvingen',
+        'personal' => 'Profiel',
+        'mantelzorgers' => 'Mantelzorgers',
     ),
 
     "general" => array(

@@ -75,7 +75,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<?= URL::action('InstellingController@getIndex') ?>">
+                    <a href="<?= URL::action('Instelling\PersonController@getIndex') ?>">
                         <span class="glyphicon glyphicon-wrench"></span><?= Lang::get('master.navs.instellingen') ?></a>
                 </li>
             </ul>

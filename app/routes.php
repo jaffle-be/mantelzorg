@@ -13,7 +13,11 @@
 
 Route::pattern('id', '\d+');
 
-Route::controller('instellingen', 'InstellingController');
+
+Route::resource('instellingen/mantelzorgers', 'Instelling\MantelzorgerController');
+
+Route::controller('instellingen', 'Instelling\PersonController');
+
 
 Route::controller('dash', 'DashController');
 
@@ -26,8 +30,6 @@ Route::resource('inschrijvingen', 'InschrijvingController');
 Route::resource('organisations/{id}/locations', 'Organisation\\LocationController');
 
 Route::resource('organisations', 'OrganisationController');
-
-//Route::resource('locations', 'LocationController');
 
 Route::resource('hulpverleners', 'HulpverlenerController');
 
