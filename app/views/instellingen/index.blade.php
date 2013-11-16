@@ -8,7 +8,7 @@
 )) ?>
 
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-6">
 
             <fieldset>
                 <legend><?= Lang::get('users.persoonlijk') ?></legend>
@@ -50,7 +50,7 @@
             
         </div>
 
-        <div class="col-md-6 col-md-offset-1">
+        <div class="col-md-6">
             <fieldset>
                 <legend><?= Lang::get('users.organisatie') ?></legend>
 
@@ -78,7 +78,9 @@
     </div>
 
     <div class="row">
-        <div class="col-md-5">
+
+        <div class="col-md-12">
+
             <fieldset>
                 <legend><?= Lang::get('users.beveiliging') ?></legend>
 
