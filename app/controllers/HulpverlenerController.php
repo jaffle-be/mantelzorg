@@ -74,19 +74,36 @@ class HulpverlenerController extends AdminController{
             return Redirect::action('HulpverlenerController@index');
         }
 
+        $input = Input::all();
+
+        if(!isset($input['active']))
+        {
+            $input['active'] = '0';
+        }
+        if(!isset($input['admin']))
+        {
+            $input['admin'] = '0';
+        }
+
         $validator = $this->user->validator(array(
             'firstname', 'lastname', 'male', 'phone',
-            'organisation_id', 'organisation_location_id'
-        ));
+            'organisation_id', 'organisation_location_id',
+            'admin', 'active'
+        ), $input);
+
+        $validator->sometimes('email', 'required|email|unique:users', function($input) use ($user)
+        {
+            return $user->email !== $input->email;
+        });
 
         if($validator->fails())
         {
-            return Redirect::back()->withErrors($validator->messages())->withInput();
+            return Redirect::back()->withErrors($validator->messages())->withInput($input);
         }
 
         else
         {
-            $user->update(Input::all());
+            $user->update($input);
 
             return Redirect::action('HulpverlenerController@index');
         }

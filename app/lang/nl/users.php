@@ -15,6 +15,8 @@ return array(
     'phone' => 'Telefoon',
     'created_at' => 'Op',
     'created' => 'Sinds',
+    'is_admin' => 'Gebruiker is een admin.',
+    'is_active' => 'Gebruiker is actief.',
 
     /**
      * organisations

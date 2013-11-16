@@ -21,6 +21,7 @@
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                 </div>
 
+
                 <label for="lastname"><?= Lang::get('users.lastname') ?></label>
                 <span class="errors"><?= $errors->first('lastname') ?></span>
                 <div class="input-group">
@@ -42,6 +43,7 @@
                         </label>
                     </div>
                 </div>
+
 
                 <label for="phone"><?= Lang::get('users.phone') ?></label>
                 <span class="errors"><?= $errors->first('phone') ?></span>
@@ -81,19 +83,58 @@
 
 </div>
 
-<input class="btn btn-primary" type="submit" value="<?= Lang::get('users.save') ?>"/>
-
-</form>
-
 <div class="row">
 
-    <div class="col-md-6">
+    <div class="col-md-12">
+
         <fieldset>
             <legend><?= Lang::get('users.beveiliging') ?></legend>
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <label for="email"><?= Lang::get('users.email') ?></label>
+                    <span class="errors"><?= $errors->first('email') ?></span>
+                    <div class="input-group">
+                        <?= Form::text('email', null, array('class' => 'form-control')) ?>
+                        <span class="input-group-addon"><i class="glyphicons envelope"></i></span>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+                    <div class="checkbox">
+                        <?= Form::checkbox('active', 1, null, array(
+                            'id' => 'active',
+                        )) ?>
+                        <label for="active"><?= Lang::get('users.is_active') ?></label>
+                    </div>
+
+                    <div class="checkbox">
+                        <?= Form::checkbox('admin', 1, null, array(
+                            'id' => 'admin',
+                        )) ?>
+                        <label for="admin"><?= Lang::get('users.is_admin') ?></label>
+                    </div>
+                </div>
+
+            </div>
+
         </fieldset>
+
+        <br/>
+
+        <input class="btn btn-primary" type="submit" value="<?= Lang::get('users.save') ?>"/>
+
     </div>
 
 </div>
+
+
+
+
+</form>
 
 
 <?= $creatorOrganisations ?>
