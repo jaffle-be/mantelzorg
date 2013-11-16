@@ -66,8 +66,8 @@
             <span class="errors"><?= $errors->first('organisation_id') ?></span>
 
             <?= Form::select('organisation_id', $organisations, null, array(
-                    'id' => 'organisation',
-                    'class' => 'form-control')
+                'id' => 'organisation',
+                'class' => 'form-control')
             )?>
 
 

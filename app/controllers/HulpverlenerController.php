@@ -1,6 +1,7 @@
 <?php
 
 use Organisation\Organisation;
+use Organisation\Location;
 
 class HulpverlenerController extends AdminController{
 
@@ -14,13 +15,20 @@ class HulpverlenerController extends AdminController{
      */
     protected $organisation;
 
-    public function __construct(User $user, Organisation $organisation)
+    /**
+     * @var Organisation\Location
+     */
+    protected $location;
+
+    public function __construct(User $user, Organisation $organisation, Location $location)
     {
         $this->page = 'hulpverlener';
 
         $this->user = $user;
 
         $this->organisation = $organisation;
+
+        $this->location = $location;
 
         $this->beforeFilter('auth.admin');
     }
@@ -41,16 +49,38 @@ class HulpverlenerController extends AdminController{
         {
             $organisations = $this->organisation->orderBy('name')->get();
 
-            //create an array that has has en empty first value, then all the organisations, then a 'create new' option
-            //empty has no value, organisations have their id as value, new has 'new' as value
+            /**
+             * create an array that has has en empty first value, then all the organisations, then a 'create new' option
+             * empty has no value, organisations have their id as value, new has 'new' as value
+             */
             $organisations = array('' => Lang::get('users.pick_organisation')) +
                 $organisations->lists('name', 'id') +
                 array('new' => Lang::get('users.new_organisation'));
 
-            //prepare an array of locations
-            $locations = $user->organisation->locations->lists('name', 'id');
+            /**
+             * prepare an array of locations
+             *
+             * if the user had switched the organisation, you need to load
+             * the locations that are linked to that organisation
+             */
+
+            if(Input::old() && $user->organisation_id !== Input::old('organisation_id'))
+            {
+                $locations = $this->location->where('organisation_id', Input::old('organisation_id'))
+                    ->orderBy('name')
+                    ->get()
+                    ->lists('name', 'id');
+            }
+            else
+            {
+                $locations = $user->organisation->locations()
+                    ->orderBy('name')
+                    ->get()
+                    ->lists('name', 'id');
+            }
             $locations = array('' => Lang::get('users.pick_location'))
                 + $locations + array('new' => Lang::get('users.new_location'));
+
 
             $this->layout->content = View::make('hulpverlener.edit', compact(array('user', 'organisations', 'locations')))
                 ->nest('subnav', 'layout.admin.subnavs.users', array('page' => $this->page))
