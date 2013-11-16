@@ -57,11 +57,13 @@
                         <span class="glyphicon glyphicon-dashboard"></span><?= Lang::get('master.navs.dashboard') ?>
                     </a>
                 </li>
+                @if($user->admin === '1')
                 <li>
                     <a href="<?= URL::action('HulpverlenerController@index') ?>">
                         <span class="glyphicons group"></span><?= Lang::get('master.navs.gebruikers') ?>
                     </a>
                 </li>
+                @endif
                 <li>
                     <a href="<?= URL::action('InstrumentController@getIndex') ?>">
                         <span class="glyphicon glyphicon-list-alt"></span><?= Lang::get('master.navs.instrument') ?>

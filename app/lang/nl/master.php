@@ -12,9 +12,9 @@ return array(
         "team" => "Team",
         "help" => "Help",
         "login" => "Log in",
+        "logout" => "Afmelden",
         "email" => "E-mailadres",
         "password" => "Paswoord",
-        "inloggen" => "Inloggen",
     ),
 
     "header" => array(
@@ -35,5 +35,22 @@ return array(
         'cancel' => 'Annuleren',
         'confirm' => 'Bevestigen',
     ),
+
+    /**
+     * These are used throughout the application. errors are used in sign in form at the time of writing.
+     */
+
+    "errors" => array(
+        'auth-email' => 'Emailadres is niet gekend.',
+        'auth-active' => 'Deze gebruiker is niet meer actief.',
+        'auth-password' => 'Paswoord was niet correct.',
+    ),
+
+    /**
+     * This is used to show the user a message when he requested a page he cannot without sufficient permissions.
+     */
+    "info" => array(
+        'no-right-to-section' => "U heeft geen bevoegdheid om de gevraagde pagina in te kijken."
+    )
 
 );

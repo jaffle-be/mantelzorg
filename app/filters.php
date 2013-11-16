@@ -35,13 +35,27 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::guest('login');
+	if (Auth::guest()) return Redirect::action('IndexController@getLogin');
+
+    $user = Auth::user();
+
+    if($user->active === '0')
+    {
+        return Redirect::action('IndexController@getLogout');
+    }
 });
 
-
-Route::filter('auth.basic', function()
+Route::filter('auth.admin', function()
 {
-	return Auth::basic();
+    if (Auth::guest()) return Redirect::action('IndexController@getLogin');
+
+    $user = Auth::user();
+
+    if($user->admin === '0')
+    {
+        return Redirect::action('DashController@getIndex')->with('message', Lang::get('master.info.no-right-to-section'));
+    }
+
 });
 
 /*

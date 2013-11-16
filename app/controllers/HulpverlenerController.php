@@ -21,6 +21,8 @@ class HulpverlenerController extends AdminController{
         $this->user = $user;
 
         $this->organisation = $organisation;
+
+        $this->beforeFilter('auth.admin');
     }
 
     public function index()

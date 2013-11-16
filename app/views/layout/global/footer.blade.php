@@ -17,8 +17,14 @@
             <!--            <li><a href="">--><?//= Lang::get('master.footer.help') ?><!--</a></li>-->
         </ul>
 
+
         <ul>
+            @if(!$user)
             <li><a id="log-in" href="<?= URL::action('IndexController@getLogin') ?>"><?= Lang::get('master.footer.login') ?></a></li>
+            @else
+            <li><a id="log-out" href="<?= URL::action('IndexController@getLogout') ?>"><?= Lang::get('master.footer.logout') ?></a></li>
+            @endif
+
         </ul>
 
     </div>

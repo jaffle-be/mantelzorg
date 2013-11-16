@@ -2,9 +2,19 @@
 
 class DashController extends AdminController{
 
-    public function getIndex()
+    function __construct()
     {
-        $this->layout->content = View::make('dash.index');
+        $this->beforeFilter('auth');
     }
 
-} 
+
+    public function getIndex()
+    {
+        $message = Session::has('message') ? Session::get('message') : null;
+
+        $error = Session::has('error') ? Session::get('error') : null;
+
+        $this->layout->content = View::make('dash.index', compact(array('message', 'error')));
+    }
+
+}

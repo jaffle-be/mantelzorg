@@ -25,6 +25,8 @@ class InschrijvingController extends AdminController{
         $this->organisation = $organisation;
 
         $this->user = $user;
+
+        $this->beforeFilter('auth.admin');
     }
 
     public function index()
@@ -47,7 +49,7 @@ class InschrijvingController extends AdminController{
 
             //create an array that has has en empty first value, then all the organisations, then a 'create new' option
             //empty has no value, organisations have their id as value, new has 'new' as value
-            $organisations = array('' => Lang::get('users.pick_organisation'))+
+            $organisations = array('' => Lang::get('users.pick_organisation')) +
                 $organisations->lists('name', 'id') +
                 array('new' => Lang::get('users.new_organisation'));
 

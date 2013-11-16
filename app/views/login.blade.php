@@ -27,12 +27,14 @@
                         <p class="form-wrapper">
 
                             <label for="email"><?= Lang::get('login.email') ?></label>
-                            <span class="error"><?= $errors->first('email') ?></span>
                             <?= Form::text('email', null, array('class' => 'form-control'))?>
 
                             <label for="password"><?= Lang::get('login.password') ?></label>
-                            <span class="error"><?= $errors->first('password') ?></span>
                             <input type="password" name="password" id="password" class="form-control"/>
+
+                        @if($error)
+                            <p class="alert alert-danger"><?= $error ?></p>
+                        @endif
 
                             <p class="form-actions text-center">
                                 <input class="btn btn-lg btn-primary" type="submit" value="<?= Lang::get('login.sign-in') ?>"/>

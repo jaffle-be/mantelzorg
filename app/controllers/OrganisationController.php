@@ -11,6 +11,8 @@ class OrganisationController extends AdminController{
     public function __construct(Organisation $organisation)
     {
         $this->organisation = $organisation;
+
+        $this->beforeFilter('auth.admin');
     }
 
     public function store()
