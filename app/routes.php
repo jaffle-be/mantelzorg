@@ -15,7 +15,7 @@ Route::pattern('id', '\d+');
 
 Route::resource('instellingen', 'Instelling\PersonController', array('only' => array('index', 'update')));
 
-Route::resource('instellingen/mantelzorgers', 'Instelling\MantelzorgerController', array('only' => array('index')));
+Route::resource('mantelzorgers', 'Instelling\MantelzorgerController', array('only' => array('index')));
 
 Route::controller('dash', 'DashController');
 
