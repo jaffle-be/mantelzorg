@@ -99,6 +99,8 @@ class InschrijvingController extends AdminController{
 
             //hash password before inserting
             $input['password'] = Hash::make($input['password']);
+            //set user active
+            $input['active'] = '1';
 
             $user = $this->user->create($input);
 
