@@ -25,7 +25,7 @@ class IndexController extends BaseController {
 
 	public function getIndex()
 	{
-		$this->layout->content = View::make('beta', array('user'));
+		$this->layout->content = View::make('beta');
 	}
 
     public function postIndex()
