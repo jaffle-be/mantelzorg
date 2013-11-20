@@ -64,9 +64,13 @@ class PersonController extends \AdminController{
                 ->get()
                 ->lists('name', 'id');
         }
-        else
+        else if($user->organisation)
         {
             $locations = $user->organisation->locations()->orderBy('name')->get()->lists('name', 'id');
+        }
+        else
+        {
+            $locations = array();
         }
 
         $locations = array('' => Lang::get('users.pick_location')) + $locations;
