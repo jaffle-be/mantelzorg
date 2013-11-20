@@ -1,5 +1,6 @@
 <?php
 use Organisation\Organisation;
+use Beta\Registration;
 
 class InschrijvingController extends AdminController{
 
@@ -18,7 +19,7 @@ class InschrijvingController extends AdminController{
      */
     protected $user;
 
-    public function __construct(\Beta\Registration $registration, Organisation $organisation, User $user)
+    public function __construct(Registration $registration, Organisation $organisation, User $user)
     {
         $this->registration = $registration;
 
@@ -103,6 +104,15 @@ class InschrijvingController extends AdminController{
             $input['active'] = '1';
 
             $user = $this->user->create($input);
+
+            if($user)
+            {
+                Mail::send('emails.initial_password', $input, function($message) use ($user){
+                    $message->from('thomas@jaffle.be','Thomas Warlop')
+                        ->to($user->email, $user->firstname . ' ' . $user->lastname)
+                        ->subject(Lang::get('emails.initial_password.subject'));
+                });
+            }
 
             $inschrijving->delete();
 
