@@ -26,7 +26,7 @@
         ?>
         </span>
         <a target="_blank" href="http://www.hogent.be">
-            <img class="logo-hogent" src="/images/logo-footer.png" alt=""/>
+            <img class="logo-hogent" src="<?= asset('/images/logo-footer.png') ?>" alt=""/>
         </a>
     </div>
 
