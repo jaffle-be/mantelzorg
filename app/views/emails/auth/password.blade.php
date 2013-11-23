@@ -9,7 +9,7 @@
 </p>
 
 <p>
-    <?= Lang::get('email.registration.information', array('password' => $password)) ?>
+    <?= Lang::get('email.registration.information', array('password' => $original)) ?>
 </p>
 
 @stop
