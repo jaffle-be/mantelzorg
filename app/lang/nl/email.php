@@ -13,7 +13,7 @@ return array(
 
         'information' => 'Uw gegenereerd wachtwoord: :password',
 
-        'closing' =>'Indien u vragen heeft of suggesties om dit instrument te verbeteren. Laat dan niet na ons te contacteren.',
+        'closing' =>'Indien u vragen heeft of suggesties om dit instrument te verbeteren, laat dan niet na ons te contacteren.',
 
         'bye' => 'Vriendelijke groeten,<br>Het team'
     )
