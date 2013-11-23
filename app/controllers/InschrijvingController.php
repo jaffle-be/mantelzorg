@@ -99,6 +99,7 @@ class InschrijvingController extends AdminController{
             $inschrijving = $this->registration->find(Input::get('id'));
 
             //hash password before inserting
+            $original = $input['password'];
             $input['password'] = Hash::make($input['password']);
             //set user active
             $input['active'] = '1';
@@ -107,7 +108,7 @@ class InschrijvingController extends AdminController{
 
             if($user)
             {
-                Mail::send('emails.auth.password', $input, function($message) use ($user){
+                Mail::send('emails.auth.password', compact(array('original')), function($message) use ($user){
                     $message->from('thomas@jaffle.be','Thomas Warlop')
                         ->to($user->email, $user->firstname . ' ' . $user->lastname)
                         ->subject(Lang::get('emails.initial_password.subject'));

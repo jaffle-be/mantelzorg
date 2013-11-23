@@ -1,6 +1,6 @@
-@section('content')
+@extends('layout.email.master')
 
-<? var_dump($password) ?>
+@section('content')
 
 <h2><?= Lang::get('email.registration.title') ?></h2>
 
@@ -9,7 +9,7 @@
 </p>
 
 <p>
-    <?= Lang::get('email.registration.information', array('password' => 'test')) ?>
+    <?= Lang::get('email.registration.information', array('password' => $password)) ?>
 </p>
 
 @stop
