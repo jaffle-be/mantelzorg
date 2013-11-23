@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'inschrijving' => array(
+    'registration' => array(
         'title' => 'Registratie bij Zicht op Mantelzorg is vervolledigd',
 
         'hello' => 'Beste :firstname,',
