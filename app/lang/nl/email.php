@@ -2,6 +2,8 @@
 
 return array(
     'registration' => array(
+        'subject' => 'Registratie Zicht op mantelzorg',
+
         'title' => 'Registratie bij Zicht op Mantelzorg is vervolledigd',
 
         'hello' => 'Beste :firstname,',
