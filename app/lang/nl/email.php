@@ -9,10 +9,12 @@ return array(
         'hello' => 'Beste :firstname,',
 
         'foreword' => 'Vanaf nu heeft u toegang tot onze applicatie. Hieronder vindt u het wachtwoord waarmee u zich kan aanmelden.
-        Wij raden u aan, wegens veiligheidsinstellingen, deze email te verwijderen alsook uw wachtwoord tijdens uw eerste sessie onder de instellingen te wijzigen.',
+        Wij raden u aan, om veiligheidsredenen, deze email te verwijderen alsook uw wachtwoord te wijzigen. Dit kan u doen in de instellingen van de applicatie.',
 
         'information' => 'Uw gegenereerd wachtwoord: :password',
 
-        'closing' =>'Indien u vragen heeft',
+        'closing' =>'Indien u vragen heeft of suggesties om dit instrument te verbeteren. Laat dan niet na ons te contacteren.',
+
+        'bye' => 'Vriendelijke groeten,<br>Het team'
     )
 );

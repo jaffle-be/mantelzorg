@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h2><?= Lang::get('email.registration.title') ?></h2>
+<h3><?= Lang::get('email.registration.title') ?></h3>
 
 <p>
     <?= Lang::get('email.registration.hello', array('firstname' => $user->firstname)) ?>
@@ -16,6 +16,10 @@
 
 <p>
     <?= Lang::get('email.registration.closing') ?>
+</p>
+
+<p>
+    <?= Lang::get('email.registration.bye') ?>
 </p>
 
 @stop
