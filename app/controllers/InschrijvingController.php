@@ -107,7 +107,7 @@ class InschrijvingController extends AdminController{
 
             if($user)
             {
-                Mail::send('emails.initial_password', $input, function($message) use ($user){
+                Mail::send('emails.auth.password', $input, function($message) use ($user){
                     $message->from('thomas@jaffle.be','Thomas Warlop')
                         ->to($user->email, $user->firstname . ' ' . $user->lastname)
                         ->subject(Lang::get('emails.initial_password.subject'));
