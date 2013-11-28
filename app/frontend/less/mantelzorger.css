@@ -1,1 +1,1 @@
-.mantelzorger{height:75px;border:1px solid #ccc;margin-top:15px}.mantelzorger .middle{margin:5px 0}
+.mantelzorger{padding:0 0 15px 0;border-bottom:1px solid #ccc}.mantelzorger:nth-child(even){background-color:#f9f9f9}.mantelzorger .header{margin-top:15px;text-shadow:none;padding-bottom:5px;line-height:26px;color:#1c2c9c}.mantelzorger .glyphicons{font-size:16px;line-height:25px;margin-right:5px;float:left;vertical-align:bottom}.mantelzorger .btn-default{top:-5px;font-size:8px}.mantelzorger:last-child{border-bottom:0}
