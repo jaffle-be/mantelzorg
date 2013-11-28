@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6 gender">
 
                 <span class="block errors"><?= $errors->first('male') ?></span>
 
