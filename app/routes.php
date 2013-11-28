@@ -23,6 +23,8 @@ Route::resource('instellingen', 'Instelling\PersonController', array('only' => a
 
 Route::resource('instellingen/{hulpverlener}/mantelzorgers/', 'Instelling\MantelzorgerController');
 
+Route::resource('instellingen/{mantelzorger}/oudere', 'Instelling\OudereController');
+
 Route::controller('dash', 'DashController');
 
 Route::controller('rapport', 'RapportController');
