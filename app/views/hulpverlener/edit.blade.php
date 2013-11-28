@@ -65,10 +65,12 @@
             </label>
             <span class="errors"><?= $errors->first('organisation_id') ?></span>
 
+            <div class="input-select">
             <?= Form::select('organisation_id', $organisations, null, array(
                 'id' => 'organisation',
                 'class' => 'form-control')
             )?>
+            </div>
 
 
             <label for="locations"><?= Lang::get('users.locations') ?></label>
