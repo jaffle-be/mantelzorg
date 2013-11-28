@@ -48,5 +48,12 @@ return array(
     'beveiliging' => 'Beveiliging',
     'create_as_helper' => 'Maak aan als hulpverlener',
     'save' => 'Gegevens bewaren',
-    'create_mantelzorger' => 'Maak nieuwe mantelzorger aan'
+    'create_mantelzorger' => 'Maak nieuwe mantelzorger aan',
+    'mantelzorger' => 'Mantelzorger',
+    'mantelzorgers' => 'Mantelzorgers',
+    'ouderen' => 'Ouderen',
+    'oudere' => 'Oudere',
+    'hulperlener' => 'Hulpverlener',
+    'hulperleners' => 'Hulpverleners',
+    'create_oudere' => 'Oudere toevoegen',
 );
