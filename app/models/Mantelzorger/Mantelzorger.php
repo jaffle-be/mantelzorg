@@ -19,7 +19,8 @@ class Mantelzorger extends Eloquent{
         'street' => 'required',
         'postal' => 'required',
         'city' => 'required',
-        'birthday' => 'required|date_format:d/m/Y'
+        'birthday' => 'required|date_format:d/m/Y',
+        'hulpverlener' => 'required|exists:users,id'
     );
 
     protected $fillable = array(
