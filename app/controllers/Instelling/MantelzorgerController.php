@@ -20,6 +20,7 @@ class MantelzorgerController extends \AdminController{
 
         $this->beforeFilter('auth');
         $this->beforeFilter('csrf', array('only' => array('store')));
+        $this->beforeFilter('mantelzorgers');
     }
 
     public function index($hulpverlener)
