@@ -13,7 +13,11 @@
 
 Route::pattern('id', '\d+');
 
+Route::pattern('hulpverlener', '\d+');
 Route::model('hulpverlener', 'User');
+
+Route::pattern('mantelzorger', '\d+');
+Route::model('mantelzorger', 'Mantelzorger\Mantelzorger');
 
 Route::resource('instellingen', 'Instelling\PersonController', array('only' => array('index', 'update')));
 
