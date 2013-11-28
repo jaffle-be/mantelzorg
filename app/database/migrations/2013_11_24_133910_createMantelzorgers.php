@@ -22,8 +22,8 @@ class CreateMantelzorgers extends Migration {
             $t->string('city', 100);
             $t->string('phone', 20);
             $t->date('birthday');
-            $t->integer('hulpverlener')->unsigned();
-            $t->foreign('hulpverlener')->references('id')->on('users');
+            $t->integer('hulpverlener_id')->unsigned();
+            $t->foreign('hulpverlener_id')->references('id')->on('users');
             $t->timestamps();
         });
 	}

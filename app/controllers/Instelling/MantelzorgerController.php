@@ -21,20 +21,19 @@ class MantelzorgerController extends \AdminController{
         $this->beforeFilter('csrf', array('only' => array('store')));
     }
 
-    public function index()
+    public function index($hulpverlener)
     {
-        $mantelzorgers = $this->mantelzorger->all();
-        $this->layout->content = View::make('instellingen.mantelzorgers.index', compact(array('mantelzorgers')))
+        $this->layout->content = View::make('instellingen.mantelzorgers.index', compact(array('hulpverlener')))
             ->nest('subnav', 'layout.admin.subnavs.instellingen', array('page' => $this->page));
     }
 
-    public function create()
+    public function create($hulpverlener)
     {
-        $this->layout->content = View::make('instellingen.mantelzorgers.create')
+        $this->layout->content = View::make('instellingen.mantelzorgers.create', compact(array('hulpverlener')))
             ->nest('subnav', 'layout.admin.subnavs.instellingen', array('page' => $this->page));
     }
 
-    public function store()
+    public function store($hulpverlener)
     {
         $validator = $this->mantelzorger->validator();
 

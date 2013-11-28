@@ -21,8 +21,8 @@ class CreateOudere extends Migration {
             $t->string('postal', 10);
             $t->string('city', 100);
             $t->string('phone', 25);
-            $t->integer('mantelzorger')->unsigned();
-            $t->foreign('mantelzorger')->references('id')->on('mantelzorgers');
+            $t->integer('mantelzorger_id')->unsigned();
+            $t->foreign('mantelzorger_id')->references('id')->on('mantelzorgers');
             $t->timestamps();
         });
 	}

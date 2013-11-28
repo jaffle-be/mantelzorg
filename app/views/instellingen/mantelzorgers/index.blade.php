@@ -3,10 +3,10 @@
 <?= $subnav ?>
 
 <div>
-    <a class="btn btn-primary" href="<?= URL::route('mantelzorgers.create') ?>"><?= Lang::get('users.create_mantelzorger') ?></a>
+    <a class="btn btn-primary" href="<?= URL::action('Instelling\MantelzorgerController@create', array(Auth::user()->id)) ?>"><?= Lang::get('users.create_mantelzorger') ?></a>
 </div>
 
-@foreach($mantelzorgers as $mantelzorger)
+@foreach($hulpverlener->mantelzorgers as $mantelzorger)
 <div class="row mantelzorger">
     <div class="col-md-6">
         <div>

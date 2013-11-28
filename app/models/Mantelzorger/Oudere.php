@@ -14,7 +14,7 @@ class Oudere extends \Eloquent{
         'street' => 'required',
         'postal' => 'required',
         'city' => 'required',
-        'mantelzorger' => 'required|exists:ouderen,id'
+        'mantelzorger_id' => 'required|exists:ouderen,id'
     );
 
     protected $fillable = array(

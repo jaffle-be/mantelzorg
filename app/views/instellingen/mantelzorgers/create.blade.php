@@ -7,7 +7,7 @@
 <?= $subnav ?>
 
 
-<?= Form::open(array('route' => 'mantelzorgers.store', 'method' => 'post')) ?>
+<?= Form::open(array('action' => array('Instelling\MantelzorgerController@store', Auth::user()->id), 'method' => 'post')) ?>
 
 <div class="row">
     <div class="col-md-6">
