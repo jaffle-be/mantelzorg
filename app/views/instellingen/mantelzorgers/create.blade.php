@@ -110,7 +110,7 @@
 </div>
 
 <div>
-<input class="btn btn-success" type="submit" value="<?= Lang::get('users.confirm') ?>"/>
+<input class="btn btn-success" type="submit" value="<?= Lang::get('users.create_mantelzorger') ?>"/>
 </div>
 
 

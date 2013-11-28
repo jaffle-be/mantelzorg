@@ -2,6 +2,9 @@
 
 <?= $subnav ?>
 
+<div>
+    <a class="btn btn-primary" href="<?= URL::route('mantelzorgers.create') ?>"><?= Lang::get('users.create_mantelzorger') ?></a>
+</div>
 
 @foreach($mantelzorgers as $mantelzorger)
 <div class="row mantelzorger">
