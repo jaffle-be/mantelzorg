@@ -13,6 +13,7 @@ return array(
     'male' => 'Man',
     'female' => 'Vrouw',
     'phone' => 'Telefoon',
+    'birthday' => 'Geboortedatum',
     'created_at' => 'Op',
     'created' => 'Sinds',
     'is_admin' => 'Gebruiker is een admin.',
