@@ -52,4 +52,9 @@ class Mantelzorger extends Eloquent{
         return $this->hasMany('Mantelzorger\Oudere', 'mantelzorger_id');
     }
 
+    public function hulpverlener()
+    {
+        return $this->belongsTo('User', 'hulpverlener_id');
+    }
+
 } 
