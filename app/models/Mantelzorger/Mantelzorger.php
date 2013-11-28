@@ -47,4 +47,9 @@ class Mantelzorger extends Eloquent{
         return Validator::make($input, $rules);
     }
 
+    public function oudere()
+    {
+        return $this->hasMany('Mantelzorger\Oudere', 'mantelzorger_id');
+    }
+
 } 

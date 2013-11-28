@@ -18,6 +18,11 @@
         </div>
     </div>
 
+    <div class="col-md-6">
+        @foreach($mantelzorger->oudere as $oudere)
+
+        @endforeach
+    </div>
 
 </div>
 @endforeach
