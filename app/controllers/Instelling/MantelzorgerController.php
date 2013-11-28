@@ -49,7 +49,7 @@ class MantelzorgerController extends \AdminController{
 
         $mantelzorger = $this->mantelzorger->create($input);
 
-        return Redirect::action('Instelling\MantelzorgerController@index', array(Auth::user()->id));
+        return Redirect::action('Instelling\MantelzorgerController@index', array($hulpverlener->id));
     }
 
     public function edit()

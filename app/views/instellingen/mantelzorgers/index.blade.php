@@ -3,7 +3,7 @@
 <?= $subnav ?>
 
 <div>
-    <a class="btn btn-primary" href="<?= URL::action('Instelling\MantelzorgerController@create', array(Auth::user()->id)) ?>"><?= Lang::get('users.create_mantelzorger') ?></a>
+    <a class="btn btn-primary" href="<?= URL::action('Instelling\MantelzorgerController@create', array($hulpverlener->id)) ?>"><?= Lang::get('users.create_mantelzorger') ?></a>
 </div>
 
 @foreach($hulpverlener->mantelzorgers as $mantelzorger)
