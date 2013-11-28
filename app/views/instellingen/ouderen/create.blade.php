@@ -6,7 +6,7 @@
 
 
 <?= Form::open(array(
-    'action' => array('Instelling\OudereController@store', $mantelzorger->id),
+    'route' => array('instellingen.{mantelzorger}.oudere.create', $mantelzorger->id),
     'method' => 'post',
 )) ?>
 
@@ -155,6 +155,8 @@
 <div>
     <input class="btn btn-primary" type="submit" value="<?= Lang::get('users.save') ?>"/>
 </div>
+
+<?= Form::close() ?>
 
 
 @stop

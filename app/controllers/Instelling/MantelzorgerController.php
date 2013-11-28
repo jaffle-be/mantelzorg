@@ -53,14 +53,39 @@ class MantelzorgerController extends \AdminController{
         return Redirect::action('Instelling\MantelzorgerController@index', array($hulpverlener->id));
     }
 
-    public function edit()
+    public function edit($hulpverlener, $mantelzorger)
     {
+        $mantelzorger = $this->mantelzorger->find($mantelzorger);
 
+        if($mantelzorger)
+        {
+            $this->layout->content = View::make('instellingen.mantelzorgers.edit', compact(array('hulpverlener', 'mantelzorger')));
+        }
     }
 
-    public function update()
+    public function update($hulpverlener)
     {
+        $input = Input::except('_token');
 
+        $input['mantelzorger_id'] = $hulpverlener->mantelzorger_id;
+
+        $validator = $this->mantelzorger->validator($input);
+
+        if($validator->fails())
+        {
+            return Redirect::back()->withInput()->withErrors($validator->messages());
+        }
+
+        else
+        {
+            $mantelzorger = $this->mantelzorger->find($hulpverlener->mantelzorger_id);
+
+            $mantelzorger->update($input);
+
+            $mantelzorger->save();
+
+            return Redirect::action('Instelling\MantelzorgerController@index', $hulpverlener->id);
+        }
     }
 
     public function delete()

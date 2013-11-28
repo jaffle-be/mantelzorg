@@ -21,7 +21,7 @@ Route::model('mantelzorger', 'Mantelzorger\Mantelzorger');
 
 Route::resource('instellingen', 'Instelling\PersonController', array('only' => array('index', 'update')));
 
-Route::resource('instellingen/{hulpverlener}/mantelzorgers/', 'Instelling\MantelzorgerController');
+Route::resource('instellingen/{hulpverlener}/mantelzorgers', 'Instelling\MantelzorgerController');
 
 Route::resource('instellingen/{mantelzorger}/oudere', 'Instelling\OudereController');
 

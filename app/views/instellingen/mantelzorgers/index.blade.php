@@ -3,7 +3,7 @@
 <?= $subnav ?>
 
 <div>
-    <a class="btn btn-primary" href="<?= URL::action('Instelling\MantelzorgerController@create', array($hulpverlener->id)) ?>"><?= Lang::get('users.create_mantelzorger') ?></a>
+    <a class="btn btn-primary" href="<?= URL::route('instellingen.{hulpverlener}.mantelzorgers.create', array($hulpverlener->id)) ?>"><?= Lang::get('users.create_mantelzorger') ?></a>
 </div>
 
 @foreach($hulpverlener->mantelzorgers as $mantelzorger)
@@ -13,7 +13,7 @@
             <span><i class="glyphicons user"></i>{{ Lang::get('users.mantelzorger') }}</span>
         </div>
         <div>
-            {{ $mantelzorger->firstname . ' ' . $mantelzorger->lastname }}<br/>
+            <a href="<?= URL::route('instellingen.{hulpverlener}.mantelzorgers.edit', array($hulpverlener->id, $mantelzorger->id)) ?>">{{ $mantelzorger->firstname . ' ' . $mantelzorger->lastname }}<br/></a>
             {{ $mantelzorger->city }}<br/>
             {{ $mantelzorger->email }}<br/>
             {{ $mantelzorger->created_at->format('d/m/Y') }}<br/>
