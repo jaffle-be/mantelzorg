@@ -7,19 +7,20 @@ class Oudere extends \Eloquent{
     protected $table = 'ouderen';
 
     protected static $rules = array(
-        'email' => 'required|email|unique:ouderen,email',
+        'email' => 'email|unique:ouderen,email',
         'firstname' => 'required',
         'lastname' => 'required',
         'male' => 'required',
         'street' => 'required',
         'postal' => 'required',
         'city' => 'required',
-        'mantelzorger_id' => 'required|exists:ouderen,id'
+        'mantelzorger_id' => 'required|exists:mantelzorgers,id',
+        'birthday' => 'required',
     );
 
     protected $fillable = array(
         'email', 'firstname', 'lastname', 'male', 'street', 'postal', 'city',
-        'phone', 'mantelzorger'
+        'phone', 'mantelzorger_id', 'birthday',
     );
 
     public function validator($input = array(), $rules = array())
