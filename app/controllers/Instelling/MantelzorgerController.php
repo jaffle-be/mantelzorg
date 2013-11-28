@@ -6,6 +6,7 @@ use Mantelzorger\Mantelzorger;
 use View;
 use Redirect;
 use Input;
+use Auth;
 
 class MantelzorgerController extends \AdminController{
 
@@ -35,16 +36,35 @@ class MantelzorgerController extends \AdminController{
 
     public function store($hulpverlener)
     {
-        $validator = $this->mantelzorger->validator();
+        $input = Input::except('_token');
+
+        $input['hulpverlener_id'] = $hulpverlener->id;
+
+        $validator = $this->mantelzorger->validator($input);
 
         if($validator->fails())
         {
             return Redirect::back()->withInput()->withErrors($validator->messages());
         }
 
-        $mantelzorger = $this->mantelzorger->create(Input::except('_token'));
+        $mantelzorger = $this->mantelzorger->create($input);
 
-        return Redirect::route('mantelzorgers.index');
+        return Redirect::action('Instelling\MantelzorgerController@index', array(Auth::user()->id));
+    }
+
+    public function edit()
+    {
+
+    }
+
+    public function update()
+    {
+
+    }
+
+    public function delete()
+    {
+
     }
 
 } 

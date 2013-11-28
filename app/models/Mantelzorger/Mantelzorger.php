@@ -25,7 +25,7 @@ class Mantelzorger extends Eloquent{
 
     protected $fillable = array(
         'email', 'firstname', 'lastname', 'male', 'street', 'postal',
-        'city', 'birthday', 'phone'
+        'city', 'birthday', 'phone', 'hulpverlener_id'
     );
 
     public function setBirthdayAttribute($value)
