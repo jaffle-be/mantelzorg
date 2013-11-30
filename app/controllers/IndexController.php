@@ -113,7 +113,10 @@ class IndexController extends BaseController {
     {
         $credentials = array('email' => Input::get('email'));
 
-        return Password::remind($credentials);
+        return Password::remind($credentials, function($message, $user){
+            $message->subject(Lang::get('reminders.email.title'));
+            $message->from('thomas@jaffle.be', 'Thomas Warlop');
+        });
     }
 
     public function getReset($token)
