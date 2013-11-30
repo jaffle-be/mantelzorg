@@ -37,7 +37,8 @@
                         @endif
 
                             <p class="form-actions text-center">
-                                <input class="btn btn-lg btn-primary" type="submit" value="<?= Lang::get('front.login.sign-in') ?>"/>
+                                <input class="btn btn-lg btn-primary pull-left" type="submit" value="<?= Lang::get('front.login.sign-in') ?>"/>
+                                <a class='pull-right' href="<?= URL::action('IndexController@getReminder') ?>"><?= Lang::get('front.login.reminder') ?></a>
                             </p>
 
                         </p>

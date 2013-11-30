@@ -39,7 +39,8 @@ return array(
         'intro' => 'Vul je gegevens in',
         'email' => 'Emailadres',
         'password' => 'Wachtwoord',
-        'sign-in' => 'Aanmelden'
+        'sign-in' => 'Aanmelden',
+        'reminder' => 'Paswoord vergeten?'
     ),
 
     /*
