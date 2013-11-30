@@ -24,7 +24,7 @@ return array(
 
     "email" => array(
         'title' => 'Paswoord resetten',
-        'body' => 'Vul het formulier in van onderstaande link in om uw paswoord te resetten.'
+        'body' => 'Vul het formulier van onderstaande link in om uw paswoord te resetten.'
     )
 
 );
