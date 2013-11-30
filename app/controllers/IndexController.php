@@ -104,4 +104,16 @@ class IndexController extends BaseController {
         return Redirect::action('IndexController@getIndex');
     }
 
+    public function getReminder()
+    {
+        $this->layout->content = View::make('reminder');
+    }
+
+    public function postReminder()
+    {
+        $credentials = array('email' => Input::get('email'));
+
+        return Password::remind($credentials);
+    }
+
 }

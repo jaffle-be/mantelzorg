@@ -54,4 +54,10 @@ return array(
     ),
 
 
+    'reminder' => array(
+        'intro' => 'U bent uw wachtwoord vergeten? <br/>Vul onderstaand formulier in om uw wachtwoord te resetten.',
+        'email' => 'Emailadres',
+        'send' => 'Verstuur reset email'
+    )
+
 );
