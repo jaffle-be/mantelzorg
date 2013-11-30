@@ -1,7 +1,10 @@
-@section('content')
-<h2>Password Reset</h2>
+@extends('layout.email.master')
 
-<div>
-    To reset your password, complete this form: {{ URL::to('password/reset', array($token)) }}.
-</div>
+@section('content')
+<h3>{{ Lang::get('reminders.email.title') }}</h3>
+
+<p>
+    {{ Lang::get('reminders.email.body') }}
+    <br/>{{ URL::action('IndexController@getReset', array($token)) }}
+</p>
 @stop

@@ -21,4 +21,10 @@ return array(
 
     "success"  => "De email om uw paswoord te resetten is succesvol verzonden",
 
+
+    "email" => array(
+        'title' => 'Paswoord resetten',
+        'body' => 'Vul het formulier in van onderstaande link in om uw paswoord te resetten.'
+    )
+
 );
