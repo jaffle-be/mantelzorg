@@ -27,11 +27,15 @@
                 <a class="btn btn-default pull-right" href="<?= URL::action('Instelling\OudereController@create', array($mantelzorger->id)) ?>"><i class="glyphicon glyphicon-plus"></i></a>
             </div>
 
-        @foreach($mantelzorger->oudere as $oudere)
             <div>
-            {{ $oudere->firstname . ' ' . $oudere->lastname }}
+                <ul>
+                    @foreach($mantelzorger->oudere as $oudere)
+                    <li>
+                        <a href="<?= URL::route('instellingen.{mantelzorger}.oudere.edit', array($mantelzorger->id, $oudere->id)) ?>">{{ $oudere->firstname . ' ' . $oudere->lastname }}</a>
+                    </li>
+                    @endforeach
+                </ul>
             </div>
-        @endforeach
         </div>
     </div>
 
