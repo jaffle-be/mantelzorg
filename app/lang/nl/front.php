@@ -53,6 +53,13 @@ return array(
         'telefoon_abbr' => 'T',
     ),
 
+    'reset' => array(
+        'intro' => 'Vul onderstaand formulier in om uw paswoord te resetten.',
+        'email' => 'Emailadres',
+        'password' => 'Paswoord',
+        'confirmation' => 'Paswoord bevestigen',
+        'do' => 'Uitvoeren',
+    ),
 
     'reminder' => array(
         'intro' => 'U bent uw wachtwoord vergeten? <br/>Vul onderstaand formulier in om uw wachtwoord te resetten.',

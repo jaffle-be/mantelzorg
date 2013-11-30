@@ -116,4 +116,27 @@ class IndexController extends BaseController {
         return Password::remind($credentials);
     }
 
+    public function getReset($token)
+    {
+        $this->layout->content = View::make('reset')->withToken($token);
+    }
+
+    public function postReset()
+    {
+        $credentials = array(
+            'email' => Input::get('email'),
+            'password' => Input::get('password'),
+            'password_confirmation' => Input::get('password_confirmation')
+        );
+
+        return Password::reset($credentials, function($user, $password)
+        {
+            $user->password = Hash::make($password);
+
+            $user->save();
+
+            return Redirect::action('IndexController@getIndex');
+        });
+    }
+
 }
