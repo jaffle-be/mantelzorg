@@ -38,6 +38,12 @@ class Oudere extends \Eloquent{
         {
             $rules = static::$rules;
         }
+        else
+        {
+            if(!is_array($rules)) $rules = array($rules);
+
+            $rules = array_intersect_key(static::$rules, array_flip($rules));
+        }
 
         return Validator::make($input, $rules);
     }

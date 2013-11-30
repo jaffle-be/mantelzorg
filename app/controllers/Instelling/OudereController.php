@@ -49,6 +49,45 @@ class OudereController extends \AdminController{
 
     }
 
+    public function edit($mantelzorger, $oudere)
+    {
+        $oudere = $this->oudere->find($oudere);
+
+        if($oudere)
+        {
+            $this->layout->content = View::make('instellingen.ouderen.edit', compact(array('mantelzorger', 'oudere')));
+        }
+        else
+        {
+            return Redirect::route('instellingen.{hulpverlener}.mantelzorgers.index', array($mantelzorger->hulpverlener_id));
+        }
+    }
+
+    public function update($mantelzorger, $oudere)
+    {
+        $oudere = $this->oudere->find($oudere);
+
+        if($oudere)
+        {
+            $validator = $this->oudere->validator(array(), array('firstname', 'lastname', 'birthday', 'male', 'street', 'postal', 'city', 'phone'));
+
+            $validator->sometimes('email', 'email|unique:ouderen,email', function($input) use ($oudere){
+                return $input->email !== $oudere->email;
+            });
+
+            if($validator->fails())
+            {
+                return redirect::back()->withInput()->withErrors($validator->messages());
+            }
+            else
+            {
+                $oudere->update(Input::except('_token'));
+            }
+        }
+
+        return Redirect::route('instellingen.{hulpverlener}.mantelzorgers.index', $mantelzorger->hulpverlener_id);
+    }
+
 
 
 } 
