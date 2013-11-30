@@ -63,29 +63,43 @@ class MantelzorgerController extends \AdminController{
         }
     }
 
-    public function update($hulpverlener)
+    public function update($hulpverlener, $mantelzorger)
     {
-        $input = Input::except('_token');
+        $mantelzorger = $this->mantelzorger->find($mantelzorger);
 
-        $input['mantelzorger_id'] = $hulpverlener->mantelzorger_id;
-
-        $validator = $this->mantelzorger->validator($input);
-
-        if($validator->fails())
+        if($mantelzorger)
         {
-            return Redirect::back()->withInput()->withErrors($validator->messages());
+            $input = Input::except('_token');
+
+            $input['mantelzorger_id'] = $mantelzorger->id;
+
+            $validator = $this->mantelzorger->validator($input, array('firstname', 'lastname', 'birthday', 'male', 'street', 'postal', 'city', 'phone'));
+
+            $validator->sometimes('email', 'required|email|unique:users,email', function($input) use ($mantelzorger)
+            {
+                if($input['email'] !== $mantelzorger->email)
+                {
+                    return true;
+                }
+            });
+
+            if($validator->fails())
+            {
+                return Redirect::back()->withInput()->withErrors($validator->messages());
+            }
+
+            else
+            {
+                $mantelzorger->update($input);
+
+                $mantelzorger->save();
+
+            }
+
         }
 
-        else
-        {
-            $mantelzorger = $this->mantelzorger->find($hulpverlener->mantelzorger_id);
+        return Redirect::action('Instelling\MantelzorgerController@index', $hulpverlener->id);
 
-            $mantelzorger->update($input);
-
-            $mantelzorger->save();
-
-            return Redirect::action('Instelling\MantelzorgerController@index', $hulpverlener->id);
-        }
     }
 
     public function delete()

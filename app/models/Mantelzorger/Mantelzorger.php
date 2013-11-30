@@ -39,9 +39,16 @@ class Mantelzorger extends Eloquent{
         {
             $input = Input::all();
         }
+
         if(empty($rules))
         {
             $rules = static::$rules;
+        }
+        else
+        {
+            if(!is_array($rules)) $rules = array($rules);
+
+            $rules = array_intersect_key($rules, array_flip($rules));
         }
 
         return Validator::make($input, $rules);
@@ -55,6 +62,13 @@ class Mantelzorger extends Eloquent{
     public function hulpverlener()
     {
         return $this->belongsTo('User', 'hulpverlener_id');
+    }
+
+    public function getDates()
+    {
+        $dates = parent::getDates();
+
+        return array_merge($dates, array('birthday'));
     }
 
 } 
