@@ -48,7 +48,7 @@ class Mantelzorger extends Eloquent{
         {
             if(!is_array($rules)) $rules = array($rules);
 
-            $rules = array_intersect_key($rules, array_flip($rules));
+            $rules = array_intersect_key(static::$rules, array_flip($rules));
         }
 
         return Validator::make($input, $rules);
