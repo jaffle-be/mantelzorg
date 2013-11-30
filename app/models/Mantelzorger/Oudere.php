@@ -2,6 +2,10 @@
 
 namespace Mantelzorger;
 
+use DateTime;
+use Input;
+use Validator;
+
 class Oudere extends \Eloquent{
 
     protected $table = 'ouderen';
@@ -35,7 +39,17 @@ class Oudere extends \Eloquent{
             $rules = static::$rules;
         }
 
-        return \Validator::make($input, $rules);
+        return Validator::make($input, $rules);
+    }
+
+    public function setBirthdayAttribute($value)
+    {
+        $this->attributes['birthday'] = DateTime::createFromFormat('d/m/Y', $value);
+    }
+
+    public function getDates()
+    {
+        return array_merge(parent::getDates(), array('birthday'));
     }
 
 
