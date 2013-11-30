@@ -11,9 +11,21 @@
 
 .beta-wrapper{
 
+  .betaform{
+    min-height: 390px;
+  }
+
   .intro{
     margin-top: 10px;
     font-size: larger;
+  }
+
+  .intro.login{
+    margin-top: 50px;
+  }
+
+  .intro.reset{
+    margin-top: 35px;
   }
 
   .form-wrapper{
@@ -36,7 +48,9 @@
 
   }
 
-
+  .alert-danger{
+    font-size: small;
+  }
 
   .picture{
     text-align:right;
@@ -46,5 +60,20 @@
       width: 100%;
     }
   }
+}
+
+@media(max-width: @screen-md-max){
+
+  .beta-wrapper{
+
+    .intro{
+      margin-top : 10px;
+    }
+
+    .betaform{
+      min-height: inherit;
+    }
+  }
+
 }
 

@@ -1,5 +1,5 @@
 @section('styles')
-<link rel="stylesheet" href="/css/login.min.css"/>
+<link rel="stylesheet" href="/css/beta.min.css"/>
 @stop
 
 @section('scripts')
@@ -20,7 +20,7 @@
                 <div class="betaform col-md-6">
                     <form id="login-form" action="" method="post" class="form-horizontal">
 
-                        <p class='intro'>
+                        <p class='intro login'>
                             <?= Lang::get('login.intro') ?>
                         </p>
 
