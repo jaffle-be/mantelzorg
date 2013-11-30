@@ -19,7 +19,7 @@ return array(
 
     "token"    => "Dit wachtwoord reset token is niet geldig.",
 
-    "success"  => "De email om uw paswoord te resetten is succesvol verzonden",
+    "success"  => "De email om uw paswoord te resetten is succesvol verzonden.",
 
 
     "email" => array(
