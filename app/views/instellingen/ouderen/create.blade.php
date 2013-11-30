@@ -120,6 +120,15 @@
                         </div>
                     </div>
 
+                    <label for="email"><?= Lang::get('users.email') ?></label>
+                    @if($errors->has('email'))
+                    <span class="errors">{{ $errors->first('email') }}</span>
+                    @endif
+                    <div class="input-group">
+                        <?= Form::text('email', null, array('class' => 'form-control')) ?>
+                        <span class="input-group-addon">@</span>
+                    </div>
+
                     <label for="phone"><?= Lang::get('users.phone') ?></label>
 
                     @if($errors->has('phone'))
@@ -133,14 +142,7 @@
 
                     </div>
 
-                    <label for="email"><?= Lang::get('users.email') ?></label>
-                    @if($errors->has('email'))
-                    <span class="errors">{{ $errors->first('email') }}</span>
-                    @endif
-                    <div class="input-group">
-                        <?= Form::text('email', null, array('class' => 'form-control')) ?>
-                        <span class="input-group-addon">@</span>
-                    </div>
+
                     
                 </div>
 
