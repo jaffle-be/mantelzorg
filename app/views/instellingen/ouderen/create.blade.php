@@ -6,7 +6,7 @@
 
 
 <?= Form::open(array(
-    'route' => array('instellingen.{mantelzorger}.oudere.create', $mantelzorger->id),
+    'route' => array('instellingen.{mantelzorger}.oudere.store', $mantelzorger->id),
     'method' => 'post',
 )) ?>
 
