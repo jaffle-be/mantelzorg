@@ -4,7 +4,16 @@
 
 @section('content')
 
-<?= $subnav ?>
+<?= Template::crumb(array(
+
+    array(
+        'text' => Lang::get('master.navs.instellingen'),
+    ),
+
+    array('text' => Lang::get('master.navs.profiel'))
+
+)) ?>
+
 
 <?= Form::model($user, array(
     'action' => array('Instelling\PersonController@update', $user->id),
