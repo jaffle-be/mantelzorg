@@ -15,9 +15,6 @@ class MantelzorgerController extends \AdminController{
     public function __construct(Mantelzorger $mantelzorger)
     {
         $this->mantelzorger = $mantelzorger;
-
-        $this->page = 'mantelzorger';
-
         $this->beforeFilter('auth');
         $this->beforeFilter('csrf', array('only' => array('store')));
         $this->beforeFilter('mantelzorgers');
@@ -25,14 +22,12 @@ class MantelzorgerController extends \AdminController{
 
     public function index($hulpverlener)
     {
-        $this->layout->content = View::make('instellingen.mantelzorgers.index', compact(array('hulpverlener')))
-            ->nest('subnav', 'layout.admin.subnavs.instellingen', array('page' => $this->page));
+        $this->layout->content = View::make('instellingen.mantelzorgers.index', compact(array('hulpverlener')));
     }
 
     public function create($hulpverlener)
     {
-        $this->layout->content = View::make('instellingen.mantelzorgers.create', compact(array('hulpverlener')))
-            ->nest('subnav', 'layout.admin.subnavs.instellingen', array('page' => $this->page));
+        $this->layout->content = View::make('instellingen.mantelzorgers.create', compact(array('hulpverlener')));
     }
 
     public function store($hulpverlener)
