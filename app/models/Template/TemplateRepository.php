@@ -26,5 +26,9 @@ class TemplateRepository {
         return $this->sidebar->render();
     }
 
+    public function crumb($items)
+    {
+        return $this->crumb->render($items);
+    }
 
 } 

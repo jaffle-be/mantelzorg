@@ -17,6 +17,8 @@ class TemplateServiceProvider extends \Illuminate\Support\ServiceProvider{
 
             $sidebar = new Sidebar($sidebar);
 
+            $crumb = new Breadcrumb();
+
             return new TemplateRepository($sidebar, $crumb);
         });
     }
