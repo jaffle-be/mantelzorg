@@ -1,6 +1,6 @@
 @import 'variables';
 
-.mantelzorger{
+.mantelzorgers .mantelzorger{
 
   &:nth-child(even)
   {
@@ -12,6 +12,21 @@
 
   .ouderen{
 
+    .body{
+
+      padding: 0;
+
+      ul{
+        list-style: none;
+
+        li{
+          margin-top: 5px;
+        }
+
+      }
+
+    }
+
   }
 
   .header{
@@ -20,6 +35,14 @@
     padding-bottom: 5px;
     line-height: 26px;
     color: @blue;
+  }
+
+  .body{
+    padding: 5px 0;
+
+    a:hover, a:active{
+      text-decoration: none;
+    }
   }
 
   .glyphicons{
@@ -38,5 +61,17 @@
 
   &:last-child{
     border-bottom: none;
+  }
+}
+
+.page-actions{
+
+  margin-top: 15px;
+
+  .btn-primary{
+    .glyphicon{
+      color: white;
+      margin-right: 5px;
+    }
   }
 }
