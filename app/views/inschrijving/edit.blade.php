@@ -4,7 +4,6 @@
 
 @section('content')
 
-<?= $subnav ?>
 
 <?= Form::open(array('action' => array('InschrijvingController@update', $inschrijving->id), 'method' => 'put')) ?>
 

@@ -4,7 +4,6 @@
 
 @section('content')
 
-<?= $subnav ?>
 
 <?= Form::model($user, array('action' => array('HulpverlenerController@update', $user->id), 'method' => 'put')) ?>
 <div class="row">

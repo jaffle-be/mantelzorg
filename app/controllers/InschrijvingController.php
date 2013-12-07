@@ -34,10 +34,7 @@ class InschrijvingController extends AdminController{
     {
         $registrations = $this->registration->all();
 
-        $page = 'inschrijving';
-
-        $this->layout->content = View::make('inschrijving.index', compact(array('registrations')))
-            ->nest('subnav', 'layout.admin.subnavs.users', array('page' => $page));
+        $this->layout->content = View::make('inschrijving.index', compact(array('registrations')));
     }
 
     public function edit($id)
@@ -69,10 +66,7 @@ class InschrijvingController extends AdminController{
                 + $locations
                 + array('new' => Lang::get('users.new_location'));
 
-            $page = 'inschrijving';
-
             $this->layout->content = View::make('inschrijving.edit', compact('inschrijving', 'organisations', 'locations'))
-                ->nest('subnav', 'layout.admin.subnavs.users', compact(array('page')))
                 ->nest('creatorOrganisations', 'modals.organisation-creator', compact(array('inschrijving')))
                 ->nest('creatorLocations', 'modals.location-creator', compact(array('inschrijving')));
         }

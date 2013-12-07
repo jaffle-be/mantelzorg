@@ -1,6 +1,5 @@
 @section('content')
 
-<? echo $subnav ?>
 
 <table class="table table-striped table-hover">
 

@@ -22,8 +22,6 @@ class HulpverlenerController extends AdminController{
 
     public function __construct(User $user, Organisation $organisation, Location $location)
     {
-        $this->page = 'hulpverlener';
-
         $this->user = $user;
 
         $this->organisation = $organisation;
@@ -37,8 +35,7 @@ class HulpverlenerController extends AdminController{
     {
         $users = $this->user->with('organisation')->get();
 
-        $this->layout->content = View::make('hulpverlener.index', compact(array('users')))
-            ->nest('subnav', 'layout.admin.subnavs.users', array('page' => $this->page));
+        $this->layout->content = View::make('hulpverlener.index', compact(array('users')));
     }
 
     public function edit($id)
@@ -84,7 +81,6 @@ class HulpverlenerController extends AdminController{
 
 
             $this->layout->content = View::make('hulpverlener.edit', compact(array('user', 'organisations', 'locations')))
-                ->nest('subnav', 'layout.admin.subnavs.users', array('page' => $this->page))
                 ->nest('creatorOrganisations', 'modals.organisation-creator', compact(array('inschrijving')))
                 ->nest('creatorLocations', 'modals.location-creator', compact(array('inschrijving')));
         }
