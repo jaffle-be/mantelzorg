@@ -3,14 +3,12 @@
 <?= Template::crumb(array(
     array(
         'text' => Lang::get('master.navs.instellingen'),
-        'href' => Url::action('Instelling\PersonController@index')
+        'href' => URL::action('Instelling\PersonController@index')
     ),
     array(
         'text' => Lang::get('master.navs.mantelzorgers'),
-    ),
-    array(
-        'text' => Lang::get('master.navs.overzicht')
     )
+
 )) ?>
 
 <div class="mantelzorgers">

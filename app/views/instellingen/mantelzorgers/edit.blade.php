@@ -5,6 +5,22 @@
 @section('content')
 
 
+<?= Template::crumb(array(
+    array(
+        'text' => Lang::get('master.navs.instellingen'),
+        'href' => URL::action('Instelling\PersonController@index')
+    ),
+    array(
+        'text' => Lang::get('master.navs.mantelzorgers'),
+        'href' => URL::route('instellingen.{hulpverlener}.mantelzorgers.index', array(Auth::user()->id))
+    ),
+    array(
+        'text' => Lang::get('master.navs.wijzig')
+    )
+)) ?>
+
+
+
 <?= Form::model($mantelzorger, array(
     'route' => array('instellingen.{hulpverlener}.mantelzorgers.update', $hulpverlener->id, $mantelzorger->id),
     'method' => 'put'

@@ -4,8 +4,20 @@
 
 @section('content')
 
-<?= $subnav ?>
+<?= Template::crumb(array(
+    array(
+        'text' => Lang::get('master.navs.instellingen'),
+        'href' => URL::action('Instelling\PersonController@index')
+    ),
+    array(
+        'text' => Lang::get('master.navs.mantelzorgers'),
+        'href' => URL::route('instellingen.{hulpverlener}.mantelzorgers.index', array(Auth::user()->id))
+    ),
+    array(
+        'text' => Lang::get('master.navs.nieuw')
+    )
 
+)) ?>
 
 <?= Form::open(array('action' => array('Instelling\MantelzorgerController@store', $hulpverlener->id), 'method' => 'post')) ?>
 
