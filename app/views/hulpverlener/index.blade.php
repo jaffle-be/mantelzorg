@@ -3,6 +3,18 @@
 @section('content')
 
 
+<?= Template::crumb(array(
+    array(
+        'text' => Lang::get('master.navs.gebruikers'),
+    ),
+
+    array(
+        'text' => Lang::get('master.navs.hulpverleners'),
+    ),
+
+)) ?>
+
+
 <table class="table table-striped table-hover">
 
     <thead>
