@@ -31,6 +31,8 @@ return array(
         'inschrijvingen' => 'Inschrijvingen',
         'personal' => 'Profiel',
         'mantelzorgers' => 'Mantelzorgers',
+        'profiel' => 'Profiel',
+        'overzicht' => 'Overzicht',
     ),
 
     "general" => array(
