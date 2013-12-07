@@ -25,7 +25,21 @@ return array(
             {
                 $user = Auth::user();
                 return $user->admin === '1';
-            }
+            },
+
+            'sublinks' => array(
+                array(
+                    'text' => Lang::get('master.navs.hulpverleners'),
+
+                    'href' => URL::route('hulpverleners.index')
+                ),
+
+                array(
+                    'text' => Lang::get('master.navs.inschrijvingen'),
+
+                    'href' => URL::route('inschrijvingen.index')
+                )
+            )
         ),
 
         //instrument
@@ -58,7 +72,7 @@ return array(
                 array(
                     'text' => Lang::get('master.navs.profiel'),
 
-                    'href' => Url::action('Instelling\PersonController@index'),
+                    'href' => URL::action('Instelling\PersonController@index'),
                 ),
 
                 array(
