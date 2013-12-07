@@ -34,7 +34,7 @@ class Breadcrumb
 
     public function open()
     {
-        return '<ol class="breadcrumb">';
+        return '<div class="row"><ol class="breadcrumb">';
     }
 
     public function regular($item)
@@ -54,7 +54,7 @@ class Breadcrumb
 
     public function close()
     {
-        return '</ol>';
+        return '</ol></div>';
     }
 
 }
