@@ -1,6 +1,17 @@
 @section('content')
 
-<?= $subnav ?>
+<?= Template::crumb(array(
+    array(
+        'text' => Lang::get('master.navs.instellingen'),
+        'href' => Url::action('Instelling\PersonController@index')
+    ),
+    array(
+        'text' => Lang::get('master.navs.mantelzorgers'),
+    ),
+    array(
+        'text' => Lang::get('master.navs.overzicht')
+    )
+)) ?>
 
 <div>
     <a class="btn btn-primary" href="<?= URL::route('instellingen.{hulpverlener}.mantelzorgers.create', array($hulpverlener->id)) ?>"><?= Lang::get('users.create_mantelzorger') ?></a>
