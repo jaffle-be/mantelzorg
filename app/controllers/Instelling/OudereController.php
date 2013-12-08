@@ -31,6 +31,11 @@ class OudereController extends \AdminController{
     {
         $input = Input::except('_token');
 
+        if(empty($input['email']))
+        {
+            $input['email'] = null;
+        }
+
         $input['mantelzorger_id'] = $mantelzorger->id;
 
         $validator = $this->oudere->validator($input);
