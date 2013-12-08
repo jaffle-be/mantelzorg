@@ -16,7 +16,6 @@ class Questionnaire extends Eloquent{
         'active' => 'in:0,1',
     );
 
-
     public function validator()
     {
         return Validator::make(Input::all(), static::$rules);
