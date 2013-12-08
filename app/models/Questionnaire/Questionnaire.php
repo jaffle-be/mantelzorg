@@ -21,4 +21,9 @@ class Questionnaire extends Eloquent{
         return Validator::make(Input::all(), static::$rules);
     }
 
+    public function panels()
+    {
+        return $this->hasMany('Questionnaire\Panel', 'questionnaire_id');
+    }
+
 } 
