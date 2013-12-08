@@ -14,8 +14,8 @@ class CreateQuestions extends Migration {
 		Schema::create('questionnaire_questions', function($t)
         {
             $t->increments('id');
-            $t->integer('questionnaire')->unsigned();
-            $t->foreign('questionnaire')->references('id')->on('questionnaires');
+            $t->integer('questionnaire_id')->unsigned();
+            $t->foreign('questionnaire_id')->references('id')->on('questionnaires');
             $t->integer('questionnaire_panel_id')->unsigned();
             $t->foreign('questionnaire_panel_id')->references('id')->on('questionnaire_panels');
             $t->string('question', 500);
