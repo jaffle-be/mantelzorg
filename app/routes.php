@@ -61,6 +61,11 @@ Route::resource('organisations', 'OrganisationController', array('only' => array
  */
 Route::resource('hulpverleners', 'HulpverlenerController', array('only' => array('index', 'edit', 'update')));
 
+/**
+ * QUESTIONAIRES
+ */
+Route::resource('questionnaires', 'Questionnaire\QuestionnaireController', array('only' => array('index', 'store')));
+
 
 /**
  * INDEX
