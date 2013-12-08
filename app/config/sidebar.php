@@ -42,6 +42,21 @@ return array(
             )
         ),
 
+        array(
+            'href' => URL::route('questionnaires.index'),
+
+            'text' => Lang::get('master.navs.questionnaires'),
+
+            'class' => 'glyphicons notes_2',
+
+            'condition' => function()
+            {
+                $user = Auth::user();
+
+                return $user->admin === '1';
+            }
+        ),
+
         //instrument
         array(
             'href' => URL::action('InstrumentController@getIndex'),
