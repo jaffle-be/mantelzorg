@@ -8,11 +8,6 @@
         array('text' => Lang::get('master.navs.overzicht'))
     )) ?>
 
-<div class="page-actions">
-    <button class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i><?= Lang::get('questionnaires.new_questionnaire') ?></button>
-</div>
-
-
     @if(count($questionnaires))
 
         <table class="table table-striped table-hover">
@@ -46,6 +41,12 @@
     @else
     {{ Lang::get('questionnaires.no_questionnaires') }}
     @endif
+
+
+
+<div class="page-actions">
+    <button class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i><?= Lang::get('questionnaires.new') ?></button>
+</div>
 
 
 <?= $questionnaireCreator ?>
