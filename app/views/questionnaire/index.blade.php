@@ -25,7 +25,7 @@
                 @foreach($questionnaires as $questionnaire)
                 <tr>
                     <td><?= $teller; ?></td>
-                    <td><?= $questionnaire->title ?></td>
+                    <td><a href="<?= URL::route('questionnaires.{questionnaire}.panels.index', array($questionnaire->id))?>"><?= $questionnaire->title ?></a></td>
                     <td>
                         @if($questionnaire->active === '1')
                         <i class="glyphicons-icon ok_2">&nbsp;</i>

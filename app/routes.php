@@ -19,6 +19,9 @@ Route::model('hulpverlener', 'User');
 Route::pattern('mantelzorger', '\d+');
 Route::model('mantelzorger', 'Mantelzorger\Mantelzorger');
 
+Route::pattern('questionnaire', '\d+');
+Route::model('questionnaire', 'Questionnaire\Questionnaire');
+
 /**
  * INSTELLINGEN
  */
@@ -64,7 +67,10 @@ Route::resource('hulpverleners', 'HulpverlenerController', array('only' => array
 /**
  * QUESTIONAIRES
  */
+
 Route::resource('questionnaires', 'Questionnaire\QuestionnaireController', array('only' => array('index', 'store')));
+
+Route::resource('questionnaires/{questionnaire}/panels', 'Questionnaire\PanelController', array('only' => array('index')));
 
 
 /**
