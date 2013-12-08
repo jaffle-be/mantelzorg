@@ -34,6 +34,7 @@ return array(
         'inschrijvingen' => 'Inschrijvingen',
         'personal' => 'Profiel',
         'mantelzorgers' => 'Mantelzorgers',
+        'questionnaires' => 'Vragenlijsten',
         'ouderen' => 'Ouderen',
         'profiel' => 'Profiel',
         'overzicht' => 'Overzicht',
