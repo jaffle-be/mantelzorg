@@ -2,6 +2,9 @@
 
 namespace Questionnaire;
 
+use View;
+use Input;
+
 class QuestionnaireController extends \AdminController{
 
     /**
@@ -21,6 +24,19 @@ class QuestionnaireController extends \AdminController{
         $this->layout->content = View::make('questionnaire.index', compact(array('questionnaires')))
             ->nest('questionnaireCreator', 'modals.questionnaire-creator');
     }
+
+    public function store()
+    {
+        $validator = $this->questionnaire->validator();
+
+        if($validator->fails())
+        {
+            return json_encode(array('status' => 'error', 'errors' => $validator->messages()->toArray()));
+        }
+
+        $questionnaire = $this->questionnaire->create(Input::all());
+
+        return json_encode(array('status' => 'oke'));
 
     }
 
