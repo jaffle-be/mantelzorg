@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"><?= Lang::get('questionnaires.new_questionnaire') ?></h4>
+                <h4 class="modal-title"><?= Lang::get('questionnaires.new') ?></h4>
             </div>
             <div class="modal-body">
 
@@ -14,7 +14,7 @@
                 )) ?>
 
 
-                <label for="title"><?= Lang::get('questionnaires.questionnaire_title') ?></label>
+                <label for="title"><?= Lang::get('questionnaires.name') ?></label>
                 @if($errors->has('title'))
                 <span class="errors">{{ $errors->first('title') }}</span>
                 @endif

@@ -19,8 +19,8 @@
             <thead>
                 <tr>
                     <th>&nbsp;</th>
-                    <th><?= Lang::get('questionaire.questionnaire_name') ?></th>
-                    <th><?= Lang::get('questionaire.active') ?></th>
+                    <th><?= Lang::get('questionnaires.name') ?></th>
+                    <th><?= Lang::get('questionnaires.active') ?></th>
                 </tr>
             </thead>
 
@@ -44,7 +44,7 @@
         </table>
 
     @else
-    {{ Lang::get('questionnaires.no_questionaires') }}
+    {{ Lang::get('questionnaires.no_questionnaires') }}
     @endif
 
 
