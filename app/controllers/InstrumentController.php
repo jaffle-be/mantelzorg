@@ -12,4 +12,4 @@ class InstrumentController extends AdminController{
         $this->layout->content = View::make('instrument.index');
     }
 
-} 
+}
