@@ -8,41 +8,33 @@
         array('text' => Lang::get('master.navs.overzicht'))
     )) ?>
 
-    @if(count($questionnaires))
+<div class="questionnaires">
 
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>&nbsp;</th>
-                    <th><?= Lang::get('questionnaires.name') ?></th>
-                    <th><?= Lang::get('questionnaires.active') ?></th>
-                </tr>
-            </thead>
-
-            <tbody>
-
-                <? $teller = 1; ?>
-                @foreach($questionnaires as $questionnaire)
-                <tr>
-                    <td><?= $teller; ?></td>
-                    <td><a href="<?= URL::route('questionnaires.{questionnaire}.panels.index', array($questionnaire->id))?>"><?= $questionnaire->title ?></a></td>
-                    <td>
-                        @if($questionnaire->active === '1')
-                        <i class="glyphicons-icon ok_2">&nbsp;</i>
-                        @endif
-                    </td>
-                </tr>
-                <? $teller++ ?>
+    @foreach($questionnaires as $questionnaire)
+    <div class="row">
+        <div class="col-md-4 questionnaire">
+            <div class="header"><i class="glyphicons notes_2"></i><?= Lang::get('questionnaires.questionnaire') ?></div>
+            <div class="body">
+                <?= $questionnaire->title ?>
+                @if($questionnaire->active === '1')
+                <i class="glyphicons-icon ok_2">&nbsp;</i>
+                @endif
+            </div>
+        </div>
+        <div class="col-md-8 panels">
+            <div class="header"><i class="glyphicons list"></i><?= Lang::get('questionnaires.panels') ?></div>
+            <div class="body">
+                <ul>
+                @foreach($questionnaire->panels as $panel)
+                    <li><a href=""><?= $panel->title ?></a></li>
                 @endforeach
+                </ul>
+            </div>
+        </div>
+    </div>
+    @endforeach
 
-            </tbody>
-        </table>
-
-    @else
-    {{ Lang::get('questionnaires.no_questionnaires') }}
-    @endif
-
-
+</div>
 
 <div class="page-actions">
     <button class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i><?= Lang::get('questionnaires.new') ?></button>
