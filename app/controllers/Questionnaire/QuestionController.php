@@ -2,6 +2,8 @@
 
 namespace Questionnaire;
 
+use View;
+
 class QuestionController extends \AdminController{
 
     public function __construct()
@@ -11,7 +13,7 @@ class QuestionController extends \AdminController{
 
     public function index()
     {
-        return 'test';
+        $this->layout->content = View::make('questionnaire.questions.index');
     }
 
 } 
