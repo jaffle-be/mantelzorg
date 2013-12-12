@@ -23,11 +23,6 @@
                     <span class="input-group-addon"><i class="glyphicons tag"></i></span>
                 </div>
 
-                <label class='inline checkbox'>
-                    <?= Form::checkbox('active', 1, false) ?>
-                    <?= Lang::get('questionnaires.active') ?>
-                </label>
-
                 <?= Form::close() ?>
 
                 <div class="alert alert-danger hide">
