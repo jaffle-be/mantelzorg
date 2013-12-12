@@ -6,4 +6,6 @@ return array(
     'active' => 'Actief',
     'panels' => 'Panelen',
     'questionnaire' => 'Vragenlijst',
+
+    'new_question' => 'Nieuwe vraag',
 );
