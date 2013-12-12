@@ -71,6 +71,8 @@ Route::resource('questionnaires', 'Questionnaire\QuestionnaireController', array
 
 Route::resource('questionnaires/{questionnaire}/panels', 'Questionnaire\PanelController', array('only' => array('store', 'update')));
 
+Route::post('questionnaires/{questionnaire}/panels/sort', 'Questionnaire\PanelController@sort');
+
 
 /**
  * INDEX
