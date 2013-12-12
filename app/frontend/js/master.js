@@ -473,6 +473,7 @@ app = {
         this.$container = $('.questionnaires');
         this.titles = '.questionnaire-title';
         this.activators = '.icons .header .glyphicon-check, .icons .header .glyphicon-unchecked';
+        this.sortables = '.sortable';
         this.panelTitles = '.questionnaire-panel-title';
         this.init();
     }
@@ -499,7 +500,13 @@ app = {
             this.$container.on('click', this.activators, function()
             {
                 that.activation($(this));
-            })
+            });
+            this.$container.find(this.sortables).sortable({
+                'update': function(event, ui)
+                {
+                    that.sort($(this));
+                }
+            });
         },
         title: function(title)
         {
@@ -578,6 +585,26 @@ app = {
                     }
                 }
             })
+        },
+        sort: function(panels)
+        {
+            var questionnaire = this.questionnaire(panels),
+                positions = panels.sortable('toArray');
+
+            $.ajax({
+                url: '/questionnaires/' + questionnaire + '/panels/sort',
+                type: 'POST',
+                dataType: 'json',
+                data:
+                {
+                    positions: positions
+                },
+                success: function(response)
+                {
+
+                }
+            });
+
         },
         position: function(weight)
         {

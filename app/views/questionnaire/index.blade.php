@@ -39,9 +39,9 @@
                 <a class="btn btn-default pull-right" data-toggle="panel-creator"><i class="glyphicon glyphicon-plus"></i></a>
             </div>
             <div class="body">
-                <ul>
+                <ul class='sortable'>
                 @foreach($questionnaire->panels as $panel)
-                    <li data-questionnaire-panel-id="<?= $panel->id ?>">
+                    <li data-questionnaire-panel-id="<?= $panel->id ?>" id="panel-<?= $panel->id?>">
                         <div class="input-group">
                             <div class="input-group-addon"><i class="glyphicon glyphicon-move"></i></div>
                             <?= Form::text('title', $panel->title , array(
