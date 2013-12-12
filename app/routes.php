@@ -67,7 +67,7 @@ Route::resource('hulpverleners', 'HulpverlenerController', array('only' => array
  * QUESTIONAIRES
  */
 
-Route::resource('questionnaires', 'Questionnaire\QuestionnaireController', array('only' => array('index', 'store')));
+Route::resource('questionnaires', 'Questionnaire\QuestionnaireController', array('only' => array('index', 'store', 'update')));
 
 Route::resource('questionnaires/{questionnaire}/panels', 'Questionnaire\PanelController', array('only' => array('store', 'update')));
 
