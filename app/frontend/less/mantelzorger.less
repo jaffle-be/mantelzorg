@@ -7,8 +7,12 @@
     background-color: @table-stripe-color;
   }
 
-  padding: 0 0 15px 0;
+  padding: 15px 0 15px 0;
   border-bottom: 1px solid @border-color;
+
+  &:last-child{
+    border-bottom: none;
+  }
 
   .ouderen{
 
@@ -30,7 +34,6 @@
   }
 
   .header{
-    margin-top: 15px;
     text-shadow: none;
     padding-bottom: 5px;
     line-height: 26px;
@@ -58,10 +61,6 @@
     font-size: 8px;
   }
 
-
-  &:last-child{
-    border-bottom: none;
-  }
 }
 
 .page-actions{
