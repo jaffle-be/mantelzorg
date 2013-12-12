@@ -15,6 +15,8 @@ class QuestionnaireController extends \AdminController{
     public function __construct(Questionnaire $questionnaire)
     {
         $this->questionnaire = $questionnaire;
+
+        $this->beforeFilter('auth.admin');
     }
 
     public function index()

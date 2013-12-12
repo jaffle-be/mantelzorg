@@ -15,6 +15,8 @@ class PanelController extends \AdminController{
     public function __construct(Panel $panel)
     {
         $this->panel = $panel;
+
+        $this->beforeFilter('auth.admin');
     }
 
     public function store($questionnaire)

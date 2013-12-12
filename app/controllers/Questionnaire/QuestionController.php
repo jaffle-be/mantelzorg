@@ -1,14 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: thomas
- * Date: 12/12/13
- * Time: 14:03
- */
 
 namespace Questionnaire;
 
+class QuestionController extends \AdminController{
 
-class QuestionController {
+    public function __construct()
+    {
+        $this->beforeFilter('auth.admin');
+    }
+
+    public function index()
+    {
+        return 'test';
+    }
 
 } 
