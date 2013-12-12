@@ -1,14 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: thomas
- * Date: 12/12/13
- * Time: 11:17
- */
 
 namespace Questionnaire;
 
+class ServiceProvider extends \Illuminate\Support\ServiceProvider{
 
-class ServiceProvider {
+    public function register()
+    {
+        $this->app['events']->subscribe(new EventSubscriber(new Questionnaire, new Panel, new Question, new Choise, new Answer));
+    }
 
 } 
