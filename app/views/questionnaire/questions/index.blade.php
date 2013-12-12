@@ -30,4 +30,6 @@
     <a class="btn btn-primary" href=""><?= Lang::get('questionnaires.new_question') ?></a>
 </div>
 
+<?= $questionCreator ?>
+
 @stop
