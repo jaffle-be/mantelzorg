@@ -45,7 +45,7 @@ class QuestionnaireController extends \AdminController{
     {
         $questionnaire = $this->questionnaire->find($questionnaire);
 
-        $validator = $this->questionnaire->validator(null, 'title');
+        $validator = $this->questionnaire->validator(null, Input::has('title') ? 'title' : 'active');
 
         if($validator->fails())
         {
