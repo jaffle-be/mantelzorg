@@ -19,7 +19,11 @@ class QuestionnaireController extends \AdminController{
 
     public function index()
     {
-        $questionnaires = $this->questionnaire->all();
+        $questionnaires = $this->questionnaire->with(array(
+            'panels' => function($query){
+                $query->orderBy('panel_weight');
+            }
+        ))->get();
 
         $this->layout->content = View::make('questionnaire.index', compact(array('questionnaires')))
             ->nest('questionnaireCreator', 'modals.questionnaire-creator')
