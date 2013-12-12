@@ -8,11 +8,12 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider{
     {
         $this->app['events']->subscribe(new EventSubscriber(new Questionnaire, new Panel, new Question, new Choise, new Answer));
 
-        Questionnaire::observe(new Observer\Questionnaire($this->app['events']));
+        Questionnaire::observe($this->app['Questionnaire\Observer\Questionnaire']);
     }
 
     public function register()
     {
+        $this->app['Questionnaire\Observer\Questionnaire'] = new Observer\Questionnaire($this->app['events']);
     }
 
 } 
