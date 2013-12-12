@@ -48,7 +48,11 @@
                                 'class' => 'form-control questionnaire-panel-title',
                                 'data-panel-weight' => $panel->panel_weight
                             )) ?>
-                            <div class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></div>
+                            <div class="input-group-btn">
+                                <a href="<?= URL::route('panels.{panel}.questions.index', array($panel->id)) ?>" class="btn btn-default">
+                                    <i class="glyphicon glyphicon-tag"></i>
+                                </a>
+                            </div>
                         </div>
                     </li>
                 @endforeach
