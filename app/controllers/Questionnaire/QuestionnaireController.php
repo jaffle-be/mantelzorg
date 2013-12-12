@@ -41,4 +41,24 @@ class QuestionnaireController extends \AdminController{
 
     }
 
+    public function update($questionnaire)
+    {
+        $questionnaire = $this->questionnaire->find($questionnaire);
+
+        $validator = $this->questionnaire->validator(null, 'title');
+
+        if($validator->fails())
+        {
+            return $validator->messages();
+        }
+
+        else
+        {
+            $questionnaire->update(Input::all());
+
+            return json_encode(array('status' => 'oke'));
+        }
+
+    }
+
 } 
