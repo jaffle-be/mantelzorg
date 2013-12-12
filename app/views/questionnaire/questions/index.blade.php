@@ -14,6 +14,7 @@
     )
 ))?>
 
+<input name="panel-id" id="panel-id" type="hidden" value="<?= $panel->id ?>"/>
 
 <div class="questions">
     @foreach($panel->questions as $question)
