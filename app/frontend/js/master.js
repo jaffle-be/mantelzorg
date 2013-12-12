@@ -472,6 +472,7 @@ app = {
     {
         this.$container = $('.questionnaires');
         this.titles = '.questionnaire-title';
+        this.activators = '.icons .header .glyphicon-check, .icons .header .glyphicon-unchecked';
         this.panelTitles = '.questionnaire-panel-title';
         this.init();
     }
@@ -494,6 +495,11 @@ app = {
             this.$container.on('change', this.panelTitles, function(){
                 that.panelTitle($(this));
             });
+
+            this.$container.on('click', this.activators, function()
+            {
+                that.activation($(this));
+            })
         },
         title: function(title)
         {
@@ -515,6 +521,23 @@ app = {
                             title.closest('.row').find('.icons .body i').addClass('fade');
                         }, 3000);
                     }
+                }
+            });
+        },
+        activation: function(box)
+        {
+            var that = this;
+            $.ajax({
+                url: '/questionnaires/' + this.questionnaire(box) + '',
+                type: 'POST',
+                data:{
+                    _method: 'PUT',
+                    active: box.hasClass('glyphicon-unchecked') ? '1':'0'
+                },
+                dataType: 'json',
+                success: function()
+                {
+
                 }
             });
         },
