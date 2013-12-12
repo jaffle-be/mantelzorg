@@ -62,18 +62,31 @@
         },
         activation: function(box)
         {
-            var that = this;
+            var that = this,
+                activate = box.hasClass('glyphicon-unchecked') ? true : false;
             $.ajax({
                 url: '/questionnaires/' + this.questionnaire(box) + '',
                 type: 'POST',
                 data:{
                     _method: 'PUT',
-                    active: box.hasClass('glyphicon-unchecked') ? '1':'0'
+                    active: activate ? '1':'0'
                 },
                 dataType: 'json',
-                success: function()
+                success: function(response)
                 {
+                    if(activate)
+                    {
+                        box.closest('.questionnaires').find('.glyphicon-check').each(function()
+                        {
+                            $(this).addClass('glyphicon-unchecked').removeClass('glyphicon-check');
+                        });
 
+                        box.removeClass('glyphicon-unchecked').addClass('glyphicon-check');
+                    }
+                    else
+                    {
+                        box.addClass('glyphicon-unchecked').removeClass('glyphicon-check');
+                    }
                 }
             });
         },
