@@ -38,4 +38,9 @@ class Questionnaire extends Eloquent{
         return $this->hasMany('Questionnaire\Panel', 'questionnaire_id');
     }
 
+    public static function observer()
+    {
+        return new Observer\Questionnaire;
+    }
+
 } 
