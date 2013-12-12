@@ -22,6 +22,9 @@ Route::model('mantelzorger', 'Mantelzorger\Mantelzorger');
 Route::pattern('questionnaire', '\d+');
 Route::model('questionnaire', 'Questionnaire\Questionnaire');
 
+Route::pattern('panel', '\d+');
+Route::model('panel', 'Questionnaire\Panel');
+
 /**
  * INSTELLINGEN
  */

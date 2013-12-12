@@ -11,9 +11,9 @@ class QuestionController extends \AdminController{
         $this->beforeFilter('auth.admin');
     }
 
-    public function index()
+    public function index($panel)
     {
-        $this->layout->content = View::make('questionnaire.questions.index');
+        $this->layout->content = View::make('questionnaire.questions.index', compact(array('panel')));
     }
 
 } 
