@@ -70,4 +70,30 @@ class PanelController extends \AdminController{
         }
     }
 
+    public function sort($questionnaire)
+    {
+        $positions = Input::get('positions');
+
+        //remove 'panel-' prefix
+        $positions = array_map(function($item){
+            return str_replace('panel-', '', $item);
+        }, $positions);
+
+        if($positions)
+        {
+            $panels = $this->panel->whereIn('id', $positions)->get();
+
+            foreach($panels as $panel)
+            {
+                $key = array_search($panel->id, $positions);
+
+                $panel->panel_weight = $key * 10;
+
+                $panel->save();
+            }
+        }
+
+        return json_encode(array('status' => 'oke'));
+    }
+
 } 
