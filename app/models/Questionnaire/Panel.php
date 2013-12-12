@@ -17,9 +17,16 @@ class Panel extends Eloquent{
         'title' => 'required'
     );
 
-    public function validator()
+    public function validator($input = array(), $fields = array())
     {
-        return Validator::make(Input::all(), static::$rules);
+        $rules = array_intersect_key(static::$rules, array_flip($fields));
+
+        if(empty($input))
+        {
+            $input = Input::all();
+        }
+
+        return Validator::make($input, $rules);
     }
 
     public function questions()
@@ -32,4 +39,4 @@ class Panel extends Eloquent{
         return $this->belongsTo('Questionnaire\Questionnaire', 'questionnaire_id');
     }
 
-} 
+}
