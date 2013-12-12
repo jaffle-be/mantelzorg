@@ -34,7 +34,6 @@ Route::resource('instellingen/{mantelzorger}/oudere', 'Instelling\OudereControll
 /**
  * DASH
  */
-
 Route::controller('dash', 'DashController');
 
 /**
@@ -70,7 +69,7 @@ Route::resource('hulpverleners', 'HulpverlenerController', array('only' => array
 
 Route::resource('questionnaires', 'Questionnaire\QuestionnaireController', array('only' => array('index', 'store')));
 
-Route::resource('questionnaires/{questionnaire}/panels', 'Questionnaire\PanelController', array('only' => array('index')));
+Route::resource('questionnaires/{questionnaire}/panels', 'Questionnaire\PanelController', array('only' => array('store', 'update')));
 
 
 /**
