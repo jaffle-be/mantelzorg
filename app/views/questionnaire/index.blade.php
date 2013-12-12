@@ -79,4 +79,6 @@
 
 <?= $questionnaireCreator ?>
 
+<?= $panelCreator ?>
+
 @stop
