@@ -38,8 +38,24 @@ class EventSubscriber{
         $this->answer =$answer;
     }
 
+    /**
+     * Allow only 1 active questionnaire at a time.
+     */
+    public function activation()
+    {
+        $questionnaires = $this->questionnaire->where('active', '1')->get();
+
+        foreach($questionnaires as $questionnaire)
+        {
+            $questionnaire->active = 0;
+
+            $questionnaire->save();
+        }
+    }
+
     public function subscribe($events)
     {
+        $events->listen('questionnaire.activation', 'Questionnaire\EventSubscriber@activation');
     }
 
 } 

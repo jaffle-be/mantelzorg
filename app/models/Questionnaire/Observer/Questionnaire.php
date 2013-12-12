@@ -16,4 +16,12 @@ class Questionnaire {
         $this->events = $events;
     }
 
+    public function updating($model)
+    {
+        if($model->isDirty('active') && $model->active === '1')
+        {
+            $this->events->fire('questionnaire.activation', array());
+        }
+    }
+
 } 
