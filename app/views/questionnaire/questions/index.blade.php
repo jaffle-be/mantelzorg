@@ -54,7 +54,17 @@
             <div class="body">
                 <ul>
                 @foreach($question->choises as $choise)
-                    <li><?= $choise->title ?></li>
+                    <li>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="glyphicon glyphicon-move"></i>
+                            </div>
+                            <div class="input-group-addon"><?= Lang::get('questionnaires.choise-title') ?></div>
+                            <input class="form-control" type="text" value="<?= $choise->title ?>"/>
+                            <div class="input-group-addon"><?= Lang::get('questionnaires.choise-value') ?></div>
+                            <input class="form-control" type="text" value="<?= $choise->value ?>"/>
+                        </div>
+                    </li>
                 @endforeach
                 </ul>
             </div>
