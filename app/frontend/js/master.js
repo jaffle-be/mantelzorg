@@ -871,6 +871,9 @@ app = {
         {
             this.persist(this.route(element), {
                 multiple_choise: element.prop('checked') ? 1 : 0
+            }, function()
+            {
+                element.prop('checked') ? element.closest('.question').find('.choises').slideDown() : element.closest('.question').find('.choises').slideUp();
             });
         },
         name: function(element)
@@ -893,7 +896,7 @@ app = {
         {
             return weight / 10 + 1;
         },
-        persist: function(route, data)
+        persist: function(route, data, callback)
         {
             data = $.extend({
                 '_method': 'PUT'
@@ -906,7 +909,10 @@ app = {
                 data: data,
                 success: function()
                 {
-
+                    if(typeof callback === "function")
+                    {
+                        callback();
+                    }
                 }
             });
         }
