@@ -14,6 +14,7 @@
     Saver.prototype = {
         init: function()
         {
+            this.panelid = $("#panel-id").val();
             this.events();
         },
         events: function()
@@ -23,7 +24,7 @@
                 that.question($(this));
             });
         },
-        route: function(type)
+        route: function(element, type)
         {
             if(typeof type === 'undefined')
                 type = '';
@@ -33,26 +34,26 @@
                     return  '/questions/' + element.closest('.question').data('question-id') + '/choises/' + element.closest('li').data('choise-id');
                     break;
                 default:
-                    return '/questions/' + element.closest('.question').data('question-id')
+                    return '/panels/' + this.panelid + '/questions/' + element.closest('.question').data('question-id');
                     break;
             }
 
         },
         question: function(element)
         {
-            this.persist(this.route(), {
+            this.persist(this.route(element), {
                 question: element.val()
             });
         },
         name: function(element)
         {
-            this.persist(this.route('choise', element), {
+            this.persist(this.route(element, 'choise'), {
                 title: element.val()
             });
         },
         value: function(element)
         {
-            this.persist(this.route('choise', element), {
+            this.persist(this.route(element, 'choise'), {
                 name: element.val()
             });
         },
