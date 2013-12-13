@@ -16,7 +16,7 @@ class Questionnaire {
         $this->events = $events;
     }
 
-    public function updating($model)
+    public function saving($model)
     {
         if($model->isDirty('active') && $model->active === '1')
         {
