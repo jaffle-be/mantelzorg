@@ -31,19 +31,19 @@
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" value="1" class="summary_question"/>
+                    <input type="checkbox" value="1" class="summary_question" <?= $question->summary_question === '1' ? 'checked': '' ?>/>
                     <?= Lang::get('questionnaires.summary_question') ?>
                 </label>
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" value="1" class="explainable"/>
+                    <input type="checkbox" value="1" class="explainable" <?= $question->explainable === '1' ? 'checked': '' ?>/>
                     <?= Lang::get('questionnaires.explainable') ?>
                 </label>
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" value="1" class="multiple_choise"/>
+                    <input type="checkbox" value="1" class="multiple_choise" <?= $question->multiple_choise === '1' ? 'checked': '' ?>/>
                     <?= Lang::get('questionnaires.multiple_choise_question') ?>
                 </label>
             </div>

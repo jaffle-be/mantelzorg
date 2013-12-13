@@ -23,6 +23,19 @@
             this.$container.on('change', 'textarea[name=question]', function(){
                 that.question($(this));
             });
+            this.$container.on('change', '.summary_question', function()
+            {
+                that.summary_question($(this));
+            });
+            this.$container.on('change', '.explainable', function()
+            {
+                that.explainable($(this));
+            });
+            this.$container.on('change', '.multiple_choise', function()
+            {
+                that.multiple_choise($(this));
+            });
+            
         },
         route: function(element, type)
         {
@@ -43,6 +56,24 @@
         {
             this.persist(this.route(element), {
                 question: element.val()
+            });
+        },
+        summary_question: function(element)
+        {
+            this.persist(this.route(element), {
+                summary_question: element.prop('checked') ? 1 : 0
+            });
+        },
+        explainable: function(element)
+        {
+            this.persist(this.route(element), {
+                explainable: element.prop('checked') ? 1 : 0
+            });
+        },
+        multiple_choise: function(element)
+        {
+            this.persist(this.route(element), {
+                multiple_choise: element.prop('checked') ? 1 : 0
             });
         },
         name: function(element)
