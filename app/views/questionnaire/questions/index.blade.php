@@ -52,17 +52,17 @@
                 <button class="pull-right btn btn-default add-choise"><i class="glyphicon glyphicon-plus"></i></button>
             </div>
             <div class="body">
-                <ul>
+                <ul class="sortable">
                 @foreach($question->choises as $choise)
                     <li>
                         <div class="input-group">
-                            <div class="input-group-addon">
+                            <div class="input-group-addon handle">
                                 <i class="glyphicon glyphicon-move"></i>
                             </div>
                             <div class="input-group-addon"><?= Lang::get('questionnaires.choise-title') ?></div>
-                            <input class="form-control" type="text" value="<?= $choise->title ?>"/>
+                            <input class="form-control name" type="text" value="<?= $choise->title ?>"/>
                             <div class="input-group-addon"><?= Lang::get('questionnaires.choise-value') ?></div>
-                            <input class="form-control" type="text" value="<?= $choise->value ?>"/>
+                            <input class="form-control value" type="text" value="<?= $choise->value ?>"/>
                         </div>
                     </li>
                 @endforeach
