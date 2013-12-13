@@ -41,7 +41,7 @@ class QuestionController extends \AdminController{
         {
             return json_encode(array(
                 'status' => 'noke',
-                'errors' => $validator->messages()
+                'errors' => $validator->messages()->toArray()
             ));
         }
 
