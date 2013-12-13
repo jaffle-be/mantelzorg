@@ -26,6 +26,9 @@
             <textarea class="form-control" type="text" name="question" id="question"><?= $question->question ?></textarea>
         </div>
         <div class="right col-md-offset-1 col-md-5">
+            <div class="header">
+                <?= Lang::get('questionnaires.settings') ?>
+            </div>
             <div class="checkbox">
                 <label>
                     <input type="checkbox" value="1" class="summary_question"/>

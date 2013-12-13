@@ -6,6 +6,7 @@ return array(
     'active' => 'Actief',
     'panels' => 'Panelen',
     'questionnaire' => 'Vragenlijst',
+    'settings' => 'Instellingen',
 
     'new_question' => 'Nieuwe vraagstelling',
     'summary_question' => 'Samenvattende vraag',
