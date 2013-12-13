@@ -41,7 +41,7 @@
             <div class="checkbox">
                 <label>
                     <input type="checkbox" value="1" class="multiple_choise"/>
-                    <?= Lang::get('questionnaires.multiple_choise') ?>
+                    <?= Lang::get('questionnaires.multiple_choise_question') ?>
                 </label>
             </div>
         </div>
