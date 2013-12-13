@@ -832,6 +832,14 @@ app = {
             {
                 that.multiple_choise($(this));
             });
+            this.$container.on('change', '.name', function()
+            {
+                that.name($(this));
+            });
+            this.$container.on('change', '.value', function()
+            {
+                that.value($(this));
+            });
             
         },
         route: function(element, type)
@@ -885,7 +893,7 @@ app = {
         value: function(element)
         {
             this.persist(this.route(element, 'choise'), {
-                name: element.val()
+                value: element.val()
             });
         },
         sort: function(title)
