@@ -22,7 +22,8 @@ class QuestionController extends \AdminController{
     public function index($panel)
     {
         $this->layout->content = View::make('questionnaire.questions.index', compact(array('panel')))
-            ->nest('questionCreator', 'modals.question-creator', compact(array()));
+            ->nest('questionCreator', 'modals.question-creator', compact(array()))
+            ->nest('choiseCreator', 'modals.choise-creator', compact(array()));
     }
 
     public function store($panel)

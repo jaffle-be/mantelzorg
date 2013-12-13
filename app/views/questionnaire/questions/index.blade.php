@@ -70,4 +70,6 @@
 
 <?= $questionCreator ?>
 
+<?= $choiseCreator ?>
+
 @stop
