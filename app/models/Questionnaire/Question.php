@@ -20,9 +20,14 @@ class Question extends Eloquent{
         'explainable' => 'in:0,1',
     );
 
-    public function validator()
+    public function validator($input = null, $rules = null)
     {
-        return Validator::make(Input::all(), static::$rules);
+        if(empty($input))
+        {
+            $input = Input::all();
+        }
+
+        return Validator::make($input, static::$rules);
     }
 
     public function answers()

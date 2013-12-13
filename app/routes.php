@@ -76,7 +76,7 @@ Route::resource('questionnaires/{questionnaire}/panels', 'Questionnaire\PanelCon
 
 Route::post('questionnaires/{questionnaire}/panels/sort', 'Questionnaire\PanelController@sort');
 
-Route::resource('panels/{panel}/questions', 'Questionnaire\QuestionController', array('only' => array('index')));
+Route::resource('panels/{panel}/questions', 'Questionnaire\QuestionController', array('only' => array('index', 'store')));
 
 
 /**

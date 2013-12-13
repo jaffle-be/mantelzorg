@@ -18,21 +18,21 @@
 
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="" id=""/>
+                        <input type="checkbox" name="summary_question" id=""/>
                         <?= Lang::get('questionnaires.summary_question') ?>
                     </label>
                 </div>
 
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="" id=""/>
+                        <input type="checkbox" name="multiple_choise" id=""/>
                         <?= Lang::get('questionnaires.multiple_choise_question') ?>
                     </label>
                 </div>
 
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="" id=""/>
+                        <input type="checkbox" name="explainable" id=""/>
                         <?= Lang::get('questionnaires.explainable') ?>
                     </label>
                 </div>
