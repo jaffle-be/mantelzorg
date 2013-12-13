@@ -42,4 +42,41 @@ class ChoiseController extends \AdminController{
         ));
     }
 
+    public function update($question, $choise)
+    {
+        $choise = $this->choise->find($choise);
+
+        if($choise)
+        {
+            $field = $this->field();
+
+            $input = Input::all();
+
+            $validator = $this->choise->validator($input, $field);
+
+            if($validator->fails())
+            {
+                return json_encode(array(
+                    'status' => 'noke',
+                    'errors' => $validator->messages()->toArray()
+                ));
+            }
+
+            $choise->update($input);
+
+            return json_encode(array(
+                'status' => 'oke'
+            ));
+        }
+    }
+
+    protected function field()
+    {
+        $input = Input::all();
+
+        $input = array_keys($input);
+
+        return array_pop($input);
+    }
+
 } 
