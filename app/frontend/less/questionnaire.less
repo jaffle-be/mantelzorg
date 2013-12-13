@@ -1,21 +1,22 @@
 @import 'variables';
 
+.questionnaires .row, .questions .row {
+  padding: 15px 0 15px 0;
+  border-top: 1px solid @border-color;
+}
+
+.row:nth-child(even) {
+  background-color: @table-stripe-color;
+
+}
+
+.row:first-child {
+  border-top: none;
+  margin-top: 0;
+  padding-top: 0;
+}
+
 .questionnaires {
-  .row {
-    padding: 15px 0 15px 0;
-    border-top: 1px solid @border-color;
-  }
-
-  .row:nth-child(even) {
-    background-color: @table-stripe-color;
-
-  }
-
-  .row:first-child {
-    border-top: none;
-    margin-top: 0;
-    padding-top: 0;
-  }
 
   .header i {
     margin-right: 5px;
@@ -90,6 +91,11 @@
       vertical-align: middle;
     }
 
+  }
+
+  .left label{
+    font-weight: normal;
+    margin-bottom: 10px;
   }
 
   .choises {
