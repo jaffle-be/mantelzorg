@@ -8,13 +8,23 @@
     function Saver()
     {
         this.$container = $(".questions");
+        this.sortables = '.sortable';
         this.init();
     }
 
     Saver.prototype = {
         init: function()
         {
+            var that = this;
+
             this.panelid = $("#panel-id").val();
+
+            this.$container.find(this.sortables).sortable({
+                'update': function(event, ui)
+                {
+                    that.sort($(this));
+                }
+            });
             this.events();
         },
         events: function()
@@ -43,6 +53,7 @@
             {
                 that.value($(this));
             });
+
             
         },
         route: function(element, type)
@@ -53,6 +64,9 @@
             {
                 case 'choise':
                     return  '/questions/' + element.closest('.question').data('question-id') + '/choises/' + element.closest('li').data('choise-id');
+                    break;
+                case 'sort':
+                    return  '/questions/' + element.closest('.question').data('question-id') + '/choises/sort';
                     break;
                 default:
                     return '/panels/' + this.panelid + '/questions/' + element.closest('.question').data('question-id');
@@ -99,19 +113,26 @@
                 value: element.val()
             });
         },
-        sort: function(title)
+        sort: function(element)
         {
-
+            var question = element.closest('.question');
+            this.persist(this.route(element, 'sort'),{
+                positions: element.closest('.sortable').sortable('toArray')
+            }, false, false);
         },
         position: function(weight)
         {
             return weight / 10 + 1;
         },
-        persist: function(route, data, callback)
+        persist: function(route, data, callback, extend)
         {
-            data = $.extend({
-                '_method': 'PUT'
-            }, data);
+            extend = typeof extend === 'undefined' ? true : !!extend;
+
+            if(extend){
+                data = $.extend({
+                    '_method': 'PUT'
+                }, data);
+            }
 
             $.ajax({
                 url: route,

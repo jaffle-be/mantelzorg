@@ -57,7 +57,7 @@
             <div class="body">
                 <ul class="sortable">
                 @foreach($question->choises as $choise)
-                    <li data-choise-id="<?= $choise->id ?>">
+                    <li data-choise-id="<?= $choise->id ?>" id="choise-<?= $choise->id?>">
                         <div class="input-group">
                             <div class="input-group-addon handle">
                                 <i class="glyphicon glyphicon-move"></i>
