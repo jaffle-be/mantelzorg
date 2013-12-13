@@ -14,13 +14,23 @@ class Choise extends Eloquent{
     protected static $rules = array(
         'question_id' => 'required|exists:questionnaire_questions,id',
         'title' => 'required',
-        'value' => 'required|int',
-        'sort_weight' => 'required|int'
+        'value' => 'required|integer',
+        'sort_weight' => 'required|integer'
     );
 
-    public function validator()
+    public function validator($input = null, $rules = null)
     {
-        return Validator::make(Input::all(), static::$rules);
+        if(empty($input))
+        {
+            $input = Input::all();
+        }
+
+        if(is_string($rules))
+            $rules = array($rules);
+
+        $rules = array_intersect(static::$rules, array_flip($rules));
+
+        return Validator::make($input, $rules);
     }
 
     public function question()
