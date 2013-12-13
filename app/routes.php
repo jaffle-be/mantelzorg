@@ -25,6 +25,9 @@ Route::model('questionnaire', 'Questionnaire\Questionnaire');
 Route::pattern('panel', '\d+');
 Route::model('panel', 'Questionnaire\Panel');
 
+Route::pattern('question', '\d+');
+Route::model('question', 'Questionnaire\Question');
+
 /**
  * INSTELLINGEN
  */
@@ -77,6 +80,8 @@ Route::resource('questionnaires/{questionnaire}/panels', 'Questionnaire\PanelCon
 Route::post('questionnaires/{questionnaire}/panels/sort', 'Questionnaire\PanelController@sort');
 
 Route::resource('panels/{panel}/questions', 'Questionnaire\QuestionController', array('only' => array('index', 'store')));
+
+Route::resource('questions/{question}/choises', 'Questionnaire\ChoiseController', array('only' => array('store')));
 
 
 /**
