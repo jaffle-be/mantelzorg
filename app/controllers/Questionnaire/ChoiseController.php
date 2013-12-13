@@ -70,6 +70,31 @@ class ChoiseController extends \AdminController{
         }
     }
 
+    public function sort($question)
+    {
+        $positions = Input::get('positions');
+
+        $positions = array_map(function($item){
+            return str_replace('choise-', '', $item);
+        }, $positions);
+
+        $question->load('choises');
+
+        foreach($positions as $position => $id)
+        {
+            $choise = $question->choises->find($id);
+
+            $choise->sort_weight = $position * 10;
+
+            $choise->save();
+        }
+
+        return json_encode(array(
+            'status' => 'oke'
+        ));
+
+    }
+
     protected function field()
     {
         $input = Input::all();

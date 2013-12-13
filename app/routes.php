@@ -83,6 +83,8 @@ Route::resource('panels/{panel}/questions', 'Questionnaire\QuestionController', 
 
 Route::resource('questions/{question}/choises', 'Questionnaire\ChoiseController', array('only' => array('store', 'update')));
 
+Route::post('questions/{question}/choises/sort', 'Questionnaire\ChoiseController@sort');
+
 
 /**
  * INDEX
