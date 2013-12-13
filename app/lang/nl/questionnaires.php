@@ -7,5 +7,14 @@ return array(
     'panels' => 'Panelen',
     'questionnaire' => 'Vragenlijst',
 
-    'new_question' => 'Nieuwe vraag',
+    'new_question' => 'Nieuwe vraagstelling',
+    'summary_question' => 'Samenvattende vraag',
+    'multiple_choise_question' => 'Meerkeuze vraag',
+    'explainable' => 'Vraag met verklaringsmogelijkheid',
+
+    'question' => 'Vraagstelling',
+    'choises' => 'Keuzemogelijkheden',
+    'new_choise' => 'Nieuwe keuzemogelijkheid',
+    'choise-title' => 'Label',
+    'choise-value' => 'Waarde',
 );
