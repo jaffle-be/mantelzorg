@@ -18,11 +18,48 @@
 
 <div class="questions">
     @foreach($panel->questions as $question)
-    <div class="question">
-        <div class="header"><?= $question->title ?></div>
-        <div class="body">
-
+    <div class="question row">
+        <div class="left col-md-6">
+            <label for="question">
+                <?= Lang::get('questionnaires.question') ?>
+            </label>
+            <textarea class="form-control" type="text" name="question" id="question"><?= $question->question ?></textarea>
         </div>
+        <div class="right col-md-offset-1 col-md-5">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="1" class="summary_question"/>
+                    <?= Lang::get('questionnaires.summary_question') ?>
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="1" class="explainable"/>
+                    <?= Lang::get('questionnaires.explainable') ?>
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="1" class="multiple_choise"/>
+                    <?= Lang::get('questionnaires.multiple_choise') ?>
+                </label>
+            </div>
+        </div>
+
+        <div class="choises col-md-6">
+            <div class="header">
+                <span><?= Lang::get('questionnaires.choises') ?></span>
+                <button class="pull-right btn btn-default"><i class="glyphicon glyphicon-plus"></i></button>
+            </div>
+            <div class="body">
+                <ul>
+                @foreach($question->choises as $choise)
+                    <li><?= $choise->title ?></li>
+                @endforeach
+                </ul>
+            </div>
+        </div>
+
     </div>
     @endforeach
 </div>
