@@ -18,5 +18,28 @@ class ChoiseController extends \AdminController{
         $this->beforeFilter('auth.admin');
     }
 
+    public function store($question)
+    {
+        $input = Input::all();
+        $input = array_merge($input, array(
+            'question_id' => $question->id
+        ));
+
+        $validator = $this->choise->validator($input, array('title', 'value', 'question_id'));
+
+        if($validator->fails())
+        {
+            return json_encode(array(
+                'status' => 'noke',
+                'errors' => $validator->messages()->toArray()
+            ));
+        }
+
+        $this->choise->create($input);
+
+        return json_encode(array(
+            'status' => 'oke'
+        ));
+    }
 
 } 
