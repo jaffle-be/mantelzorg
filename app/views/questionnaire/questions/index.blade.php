@@ -49,7 +49,7 @@
         <div class="choises col-md-6">
             <div class="header">
                 <span><?= Lang::get('questionnaires.choises') ?></span>
-                <button class="pull-right btn btn-default"><i class="glyphicon glyphicon-plus"></i></button>
+                <button class="pull-right btn btn-default add-choise"><i class="glyphicon glyphicon-plus"></i></button>
             </div>
             <div class="body">
                 <ul>
