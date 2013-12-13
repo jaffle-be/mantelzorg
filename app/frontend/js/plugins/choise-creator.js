@@ -11,8 +11,6 @@
         this.init();
     }
 
-
-
     Creator.prototype = {
         init: function()
         {
@@ -24,7 +22,7 @@
 
             this.$trigger.on('click', function(event)
             {
-                that.open();
+                that.open($(this).closest('.question').data('question-id'));
                 event.preventDefault();
             });
             this.$creator.on('click', '.btn-primary', function()
