@@ -55,4 +55,40 @@ class QuestionController extends \AdminController{
         }
     }
 
+    public function update($panel, $question)
+    {
+        $question = $this->question->find($question);
+
+        $fields = $this->fields();
+
+        $validator = $this->question->validator(null, $fields);
+
+        if($validator->fails())
+        {
+            return json_encode(array(
+                'status' => 'noke',
+                'errors' => $validator->messages()->toArray()
+            ));
+        }
+
+        $question->update(Input::all());
+
+        return json_encode(array(
+            'status' => 'oke'
+        ));
+    }
+
+    /**
+     * since all updates only update 1 field, we can retrieve it by return the first key
+     */
+    protected function fields()
+    {
+        $input = Input::all();
+
+        $input = array_keys($input);
+
+        return array_pop($input);
+
+    }
+
 } 

@@ -20,14 +20,21 @@ class Question extends Eloquent{
         'explainable' => 'in:0,1',
     );
 
-    public function validator($input = null, $rules = null)
+    public function validator($input = null, $rules = array())
     {
         if(empty($input))
         {
             $input = Input::all();
         }
 
-        return Validator::make($input, static::$rules);
+        if(is_string($rules))
+        {
+            $rules = array($rules);
+        }
+
+        $rules = array_intersect_key(static::$rules, array_flip($rules));
+
+        return Validator::make($input, $rules);
     }
 
     public function answers()
