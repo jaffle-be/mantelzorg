@@ -8,6 +8,8 @@ return array(
     'questionnaire' => 'Vragenlijst',
     'settings' => 'Instellingen',
 
+    'panel-name' => 'Naam van het paneel',
+
     'new_question' => 'Nieuwe vraagstelling',
     'summary_question' => 'Samenvattende vraag',
     'multiple_choise_question' => 'Meerkeuze vraag',
@@ -16,6 +18,7 @@ return array(
     'question' => 'Vraagstelling',
     'choises' => 'Keuzemogelijkheden',
     'new_choise' => 'Nieuwe keuzemogelijkheid',
+    'title' => 'Titel',
     'choise-title' => 'Label',
     'choise-value' => 'Waarde',
 );
