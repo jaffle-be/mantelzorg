@@ -30,6 +30,10 @@
         events: function()
         {
             var that = this;
+            this.$container.on('change', 'input[name=title]', function()
+            {
+                that.title($(this));
+            });
             this.$container.on('change', 'textarea[name=question]', function(){
                 that.question($(this));
             });
@@ -73,6 +77,12 @@
                     break;
             }
 
+        },
+        title: function(element)
+        {
+            this.persist(this.route(element), {
+                title: element.val()
+            });
         },
         question: function(element)
         {
