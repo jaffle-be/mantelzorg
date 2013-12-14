@@ -11,13 +11,22 @@
         this.activators = '.icons .header .glyphicon-check, .icons .header .glyphicon-unchecked';
         this.sortables = '.sortable';
         this.panelTitles = '.questionnaire-panel-title';
+        this.colorSelectors = '.dropdown-menu .panel-color';
+        this.colors = ['blue', 'red', 'gray', 'yellow', 'green', 'orange', 'purple'];
         this.init();
     }
 
     Saver.prototype = {
         init: function()
         {
+            var that = this;
             this.events();
+            this.$container.find(this.sortables).sortable({
+                'update': function(event, ui)
+                {
+                    that.sort($(this));
+                }
+            });
         },
         events: function()
         {
@@ -37,11 +46,11 @@
             {
                 that.activation($(this));
             });
-            this.$container.find(this.sortables).sortable({
-                'update': function(event, ui)
-                {
-                    that.sort($(this));
-                }
+
+            this.$container.on('click', this.colorSelectors, function(event)
+            {
+                that.color($(this));
+                event.preventDefault();
             });
         },
         title: function(title)
@@ -142,6 +151,43 @@
             });
 
         },
+        color:function(element)
+        {
+            var that = this,
+                original = element.parents('.colors').find('.dropdown-toggle .panel-color'),
+                color = this.currentColor(element);
+
+            $.ajax({
+                type:'POST',
+                url: '/questionnaires/' + this.questionnaire(element) + '/panels/' + this.panel(element),
+                data:{
+                    _method:'PUT',
+                    color: color
+                },
+                dataType: 'json',
+                success: function(response)
+                {
+                    if(response.status === 'oke')
+                    {
+                        that.changeColor(original, that.currentColor(original), color);
+                    }
+                }
+            });
+
+
+        },
+        currentColor: function(element)
+        {
+            for(var i in this.colors)
+            {
+                if(element.hasClass('panel-' + this.colors[i]))
+                    return this.colors[i];
+            }
+        },
+        changeColor: function(element, original, color)
+        {
+            element.removeClass('panel-' + original).addClass('panel-' + color);
+        },
         position: function(weight)
         {
             return weight / 10 + 1;
@@ -152,7 +198,7 @@
         },
         panel: function(element)
         {
-            return element.closest('li').data('questionnaire-panel-id');
+            return element.closest('li[data-questionnaire-panel-id]').data('questionnaire-panel-id');
         }
     }
 
