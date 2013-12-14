@@ -697,6 +697,7 @@ app = {
         data: function()
         {
             return {
+                title: this.$creator.find('input[name=title]').val(),
                 question: this.$creator.find('input[name=question]').val(),
                 summary_question: this.$creator.find('input[name=summary_question]').prop('checked') ? 1 : 0,
                 explainable: this.$creator.find('input[name=explainable]').prop('checked') ? 1 : 0,
