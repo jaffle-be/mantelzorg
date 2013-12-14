@@ -9,11 +9,12 @@ class Panel extends Eloquent{
 
     protected $table = 'questionnaire_panels';
 
-    protected $fillable = array('questionnaire_id', 'title', 'panel_weight');
+    protected $fillable = array('questionnaire_id', 'title', 'color', 'panel_weight');
 
     protected static $rules = array(
         'questionnaire_id' => 'required|exists:questionnaires,id',
         'panel_weight' => 'required|int',
+        'color' => 'in:blue,red,green,gray,purple,yellow,green,orange',
         'title' => 'required'
     );
 
