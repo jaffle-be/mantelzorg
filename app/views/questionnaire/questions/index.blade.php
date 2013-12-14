@@ -52,6 +52,13 @@
                     <?= Lang::get('questionnaires.multiple_choise_question') ?>
                 </label>
             </div>
+
+            <div class="checkbox" <?= $question->multiple_choise === '0' ? 'style="display:none;"' : '' ?>>
+                <label>
+                    <input type="checkbox" value="1" class="multiple_answer" <?= $question->multiple_answer === '1' ? 'checked': '' ?>/>
+                    <?= Lang::get('questionnaires.multiple_answer_question') ?>
+                </label>
+            </div>
         </div>
 
         <div class="clearfix"></div>

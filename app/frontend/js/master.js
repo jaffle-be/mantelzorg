@@ -847,6 +847,10 @@ app = {
             {
                 that.multiple_choise($(this));
             });
+            this.$container.on('change', '.multiple_answer', function()
+            {
+                that.multiple_answer($(this));
+            });
             this.$container.on('change', '.name', function()
             {
                 that.name($(this));
@@ -906,7 +910,18 @@ app = {
                 multiple_choise: element.prop('checked') ? 1 : 0
             }, function()
             {
-                element.prop('checked') ? element.closest('.question').find('.choises').slideDown() : element.closest('.question').find('.choises').slideUp();
+                var answers = element.closest('.right').find('.multiple_answer').closest('div.checkbox'),
+                    choises = element.closest('.question').find('.choises');
+
+                element.prop('checked') ? choises.slideDown() : choises.slideUp();
+                element.prop('checked') ? answers.fadeIn() : answers.fadeOut();
+
+            });
+        },
+        multiple_answer: function(element)
+        {
+            this.persist(this.route(element), {
+                multiple_answer: element.prop('checked') ? 1 : 0
             });
         },
         name: function(element)

@@ -9,7 +9,7 @@ class Question extends Eloquent{
 
     protected $table = 'questionnaire_questions';
 
-    protected $fillable = array('questionnaire_id', 'questionnaire_panel_id','title', 'question', 'multiple_choise', 'summary_question', 'explainable');
+    protected $fillable = array('questionnaire_id', 'questionnaire_panel_id','title', 'question', 'multiple_choise','multiple_answer', 'summary_question', 'explainable');
 
     protected static $rules = array(
         'questionnaire_id' => 'required|exists:questionnaires,id',
@@ -17,6 +17,7 @@ class Question extends Eloquent{
         'title' => 'required',
         'question' => 'required',
         'multiple_choise' => 'in:0,1',
+        'multiple_answer' => 'in:0,1',
         'summary_question' => 'in:0,1',
         'explainable' => 'in:0,1',
     );

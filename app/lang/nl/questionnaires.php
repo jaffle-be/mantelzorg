@@ -13,6 +13,7 @@ return array(
     'new_question' => 'Nieuwe vraagstelling',
     'summary_question' => 'Samenvattende vraag',
     'multiple_choise_question' => 'Meerkeuze vraag',
+    'multiple_answer_question' => 'Meerdere antwoorden mogelijk',
     'explainable' => 'Vraag met verklaringsmogelijkheid',
 
     'question' => 'Vraagstelling',
