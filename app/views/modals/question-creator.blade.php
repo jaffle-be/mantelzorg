@@ -7,6 +7,16 @@
             </div>
             <div class="modal-body">
 
+                <label for="title"><?= Lang::get('questionnaires.title') ?></label>
+                @if($errors->has('title'))
+                <span class="errors">{{ $errors->first('title') }}</span>
+                @endif
+                <div class="input-group">
+                    <?= Form::text('title', null, array('class' => 'form-control')) ?>
+                    <span class="input-group-addon"><i class="glyphicons tag"></i></span>
+                </div>
+
+
                 <label for="question"><?= Lang::get('questionnaires.question') ?></label>
                 @if($errors->has('question'))
                 <span class="errors">{{ $errors->first('question') }}</span>
