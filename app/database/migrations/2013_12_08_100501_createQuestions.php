@@ -21,6 +21,7 @@ class CreateQuestions extends Migration {
             $t->string('title', 100);
             $t->string('question', 500);
             $t->boolean('multiple_choise')->default(0);
+            $t->boolean('multiple_answer')->default(0);
             $t->boolean('summary_question')->default(0);
             $t->boolean('explainable')->default(0);
             $t->timestamps();
