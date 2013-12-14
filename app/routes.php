@@ -90,3 +90,9 @@ Route::post('questions/{question}/choises/sort', 'Questionnaire\ChoiseController
  * INDEX
  */
 Route::controller('', 'IndexController');
+
+/**
+ * HOME
+ */
+
+Route::get('', array('as' => 'home', 'uses' => 'IndexController@index'));
