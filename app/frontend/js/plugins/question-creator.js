@@ -71,7 +71,7 @@
         {
             return {
                 title: this.$creator.find('input[name=title]').val(),
-                question: this.$creator.find('input[name=question]').val(),
+                question: this.$creator.find('textarea[name=question]').val(),
                 summary_question: this.$creator.find('input[name=summary_question]').prop('checked') ? 1 : 0,
                 explainable: this.$creator.find('input[name=explainable]').prop('checked') ? 1 : 0,
                 multiple_choise: this.$creator.find('input[name=multiple_choise]').prop('checked') ? 1 : 0
