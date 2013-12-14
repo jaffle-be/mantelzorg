@@ -49,7 +49,7 @@
                                 'data-panel-weight' => $panel->panel_weight
                             )) ?>
                             <div class="input-group-btn colors">
-                                <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle" href=""><i class="panel-color <? $panel->color ? 'panel-' . $panel->color : '' ?>">&nbsp;</i>&nbsp;<i class="caret"></i></button>
+                                <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle" href=""><i class="panel-color <?= $panel->color ? 'panel-' . $panel->color : '' ?>">&nbsp;</i>&nbsp;<i class="caret"></i></button>
                                 <ul class="dropdown-menu">
                                     <li><a href="#" class="panel-color panel-purple">&nbsp;</a></li>
                                     <li><a href="#" class="panel-color panel-blue">&nbsp;</a></li>
