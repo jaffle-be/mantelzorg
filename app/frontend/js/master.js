@@ -910,11 +910,13 @@ app = {
                 multiple_choise: element.prop('checked') ? 1 : 0
             }, function()
             {
-                var answers = element.closest('.right').find('.multiple_answer').closest('div.checkbox'),
+                var box = element.closest('.right').find('.multiple_answer'),
+                    answers = box.closest('div.checkbox'),
                     choises = element.closest('.question').find('.choises');
 
-                element.prop('checked') ? choises.slideDown() : choises.slideUp();
-                element.prop('checked') ? answers.fadeIn() : answers.fadeOut();
+                element.prop('checked') ?
+                    choises.slideDown() && answers.fadeIn() :
+                    choises.slideUp() && answers.fadeOut() && box.prop('checked', false);
 
             });
         },
