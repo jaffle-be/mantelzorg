@@ -16,7 +16,6 @@ class CreateAnswers extends Migration {
             $t->increments('id');
             $t->integer('question_id')->unsigned();
             $t->foreign('question_id')->references('id')->on('questionnaire_questions');
-            $t->integer('answer_id')->unsigned()->nullable();
             $t->foreign('answer_id')->references('id')->on('questionnaire_choises');
             $t->string('explanation', 500);
             $t->timestamps();

@@ -9,11 +9,10 @@ class Answer extends Eloquent{
 
     protected $table = 'questionnaire_answers';
 
-    protected $fillable = array('question_id', 'answer_id', 'explanation');
+    protected $fillable = array('question_id', 'explanation');
 
     protected static $rules = array(
         'question_id' => 'required|exists:questionnaire_questions,id',
-        'answer_id' => 'exists|questionnaire_answers,id',
         'explanation'
     );
 
@@ -27,9 +26,9 @@ class Answer extends Eloquent{
         return $this->belongsTo('Questionnaire\Question', 'question_id');
     }
 
-    public function answer()
+    public function answers()
     {
-        return $this->belongsTo('Questionnaire\Choise', 'answer_id');
+        return $this->belongsToMany('Questionnaire\Choise', 'questionnaire_answer_choises', 'answer_id', 'choise_id');
     }
 
 }
