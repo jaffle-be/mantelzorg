@@ -832,7 +832,8 @@ app = {
             {
                 that.title($(this));
             });
-            this.$container.on('change', 'textarea[name=question]', function(){
+            this.$container.on('change', 'textarea[name=question]', function()
+            {
                 that.question($(this));
             });
             this.$container.on('change', '.summary_question', function()
