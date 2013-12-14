@@ -20,6 +20,11 @@
     @foreach($panel->questions as $question)
     <div class="question row" data-question-id="<?= $question->id ?>">
         <div class="left col-md-6">
+            <label for="title">
+                <?= Lang::get('questionnaires.title') ?>
+            </label>
+            <input class="form-control" type="text" name="title" id="title" value="<?= $question->title ?>"/>
+
             <label for="question">
                 <?= Lang::get('questionnaires.question') ?>
             </label>
