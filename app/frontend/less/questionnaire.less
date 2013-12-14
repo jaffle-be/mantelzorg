@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'bootstrap-variables';
 
 /**
  *  STRIPING
@@ -71,6 +72,14 @@
     &:hover, &:active, &:focus{
       background-color: lighten(purple, 15%) !important;
     }
+  }
+  &.panel-gray{
+    background-color: @gray;
+
+    &:hover, &:active, &:focus{
+      background-color: lighten(@gray, 15%) !important;
+    }
+
   }
   
 }

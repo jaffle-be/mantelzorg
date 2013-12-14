@@ -57,6 +57,7 @@
                                     <li><a href="#" class="panel-color panel-orange">&nbsp;</a></li>
                                     <li><a href="#" class="panel-color panel-yellow">&nbsp;</a></li>
                                     <li><a href="#" class="panel-color panel-green">&nbsp;</a></li>
+                                    <li><a href="#" class="panel-color panel-gray">&nbsp;</a></li>
                                 </ul>
                             </div>
                             <div class="input-group-btn">

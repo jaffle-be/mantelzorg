@@ -17,6 +17,7 @@ class CreateQuestionairePanels extends Migration {
             $t->integer('questionnaire_id')->unsigned();
             $t->foreign('questionnaire_id')->references('id')->on('questionnaires');
             $t->integer('panel_weight');
+            $t->string('color')->default('gray');
             $t->string('title', 100);
             $t->timestamps();
         });
