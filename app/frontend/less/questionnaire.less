@@ -1,5 +1,9 @@
 @import 'variables';
 
+/**
+ *  STRIPING
+ */
+
 .questionnaires .row, .questions .row {
   padding: 15px 0 15px 0;
   border-top: 1px solid @border-color;
@@ -13,6 +17,62 @@
   border-top: none;
   margin-top: 0;
   padding-top: 0;
+}
+
+/**
+ *  COLORS
+ */
+
+.panel-color{
+  display: inline-block;
+  min-width: 20px;
+  &:hover, &:active, &:focus{
+    background-image:none !important;
+  }
+
+  &.panel-blue{
+    background-color: blue;
+
+    &:hover, &:active, &:focus{
+      background-color: lighten(blue, 15%) !important;
+    }
+  }
+  &.panel-yellow{
+    background-color: yellow;
+
+    &:hover, &:active, &:focus{
+      background-color: lighten(yellow, 30%) !important;
+    }
+  }
+  &.panel-red{
+    background-color: red;
+
+    &:hover, &:active, &:focus{
+      background-color: lighten(red, 15%) !important;
+    }
+  }
+  &.panel-green{
+    background-color: green;
+
+    &:hover, &:active, &:focus{
+      background-color: lighten(green, 15%) !important;
+    }
+  }
+  &.panel-orange{
+    background-color: orange;
+
+    &:hover, &:active, &:focus{
+      background-color: lighten(orange, 15%) !important;
+    }
+  }
+  &.panel-purple{
+    background-color: purple;
+
+    &:hover, &:active, &:focus{
+      background-color: lighten(purple, 15%) !important;
+    }
+  }
+  
 }
 
 .questionnaires {
@@ -33,12 +93,19 @@
 
   .panels {
 
-    ul {
+    ul.sortable {
       padding-left: 5px;
       list-style: none;
 
       .input-group-btn a {
         border-left: 0;
+      }
+
+      .colors{
+        .dropdown-toggle{
+          border-radius: 0;
+          border-left: none;
+        }
       }
 
       .glyphicon-move {
@@ -114,7 +181,7 @@
       cursor: move;
     }
 
-    ul {
+    ul.sortable {
       list-style: none;
       padding: 0;
 

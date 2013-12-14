@@ -48,6 +48,17 @@
                                 'class' => 'form-control questionnaire-panel-title',
                                 'data-panel-weight' => $panel->panel_weight
                             )) ?>
+                            <div class="input-group-btn colors">
+                                <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle" href=""><i class="panel-color <? $panel->color ? 'panel-' . $panel->color : '' ?>">&nbsp;</i>&nbsp;<i class="caret"></i></button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" class="panel-color panel-purple">&nbsp;</a></li>
+                                    <li><a href="#" class="panel-color panel-blue">&nbsp;</a></li>
+                                    <li><a href="#" class="panel-color panel-red">&nbsp;</a></li>
+                                    <li><a href="#" class="panel-color panel-orange">&nbsp;</a></li>
+                                    <li><a href="#" class="panel-color panel-yellow">&nbsp;</a></li>
+                                    <li><a href="#" class="panel-color panel-green">&nbsp;</a></li>
+                                </ul>
+                            </div>
                             <div class="input-group-btn">
                                 <a href="<?= URL::route('panels.{panel}.questions.index', array($panel->id)) ?>" class="btn btn-default">
                                     <i class="glyphicon glyphicon-tag"></i>
