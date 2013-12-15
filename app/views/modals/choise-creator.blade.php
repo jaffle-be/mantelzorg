@@ -23,16 +23,6 @@
                     <span class="input-group-addon"><i class="glyphicons tag"></i></span>
                 </div>
 
-
-                <label for="value"><?= Lang::get('questionnaires.choise-value') ?></label>
-                @if($errors->has('value'))
-                <span class="errors">{{ $errors->first('value') }}</span>
-                @endif
-                <div class="input-group">
-                    <?= Form::text('value', null, array('class' => 'form-control')) ?>
-                    <span class="input-group-addon"><i class="glyphicons tag"></i></span>
-                </div>
-
                 <?= Form::close() ?>
 
                 <div class="alert alert-danger hide">

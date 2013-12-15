@@ -17,7 +17,6 @@ class CreateChoises extends Migration {
             $t->integer('question_id')->unsigned();
             $t->foreign('question_id')->references('id')->on('questionnaire_questions');
             $t->string('title');
-            $t->integer('value');
             $t->integer('sort_weight');
             $t->timestamps();
         });

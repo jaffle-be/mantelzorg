@@ -58,12 +58,6 @@
             {
                 that.name($(this));
             });
-            this.$container.on('change', '.value', function()
-            {
-                that.value($(this));
-            });
-
-            
         },
         route: function(element, type)
         {
@@ -133,12 +127,6 @@
         {
             this.persist(this.route(element, 'choise'), {
                 title: element.val()
-            });
-        },
-        value: function(element)
-        {
-            this.persist(this.route(element, 'choise'), {
-                value: element.val()
             });
         },
         sort: function(element)

@@ -69,7 +69,6 @@
         {
             return {
                 title: this.$creator.find('input[name=title]').val(),
-                value: this.$creator.find('input[name=value]').val()
             }
         }
     };

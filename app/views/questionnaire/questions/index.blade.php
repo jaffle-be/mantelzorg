@@ -78,8 +78,6 @@
                             </div>
                             <div class="input-group-addon"><?= Lang::get('questionnaires.choise-title') ?></div>
                             <input class="form-control name" type="text" value="<?= $choise->title ?>"/>
-                            <div class="input-group-addon"><?= Lang::get('questionnaires.choise-value') ?></div>
-                            <input class="form-control value" type="text" value="<?= $choise->value ?>"/>
                         </div>
                     </li>
                 @endforeach

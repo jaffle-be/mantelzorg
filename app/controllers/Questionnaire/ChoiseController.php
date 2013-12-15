@@ -25,7 +25,7 @@ class ChoiseController extends \AdminController{
             'question_id' => $question->id
         ));
 
-        $validator = $this->choise->validator($input, array('title', 'value', 'question_id'));
+        $validator = $this->choise->validator($input, array('title', 'question_id'));
 
         if($validator->fails())
         {

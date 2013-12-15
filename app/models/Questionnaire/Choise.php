@@ -9,12 +9,11 @@ class Choise extends Eloquent{
 
     protected $table = 'questionnaire_choises';
 
-    protected $fillable = array('question_id', 'title', 'value', 'sort_weight');
+    protected $fillable = array('question_id', 'title', 'sort_weight');
 
     protected static $rules = array(
         'question_id' => 'required|exists:questionnaire_questions,id',
         'title' => 'required',
-        'value' => 'required|integer',
         'sort_weight' => 'required|integer'
     );
 

@@ -832,7 +832,6 @@ app = {
         {
             return {
                 title: this.$creator.find('input[name=title]').val(),
-                value: this.$creator.find('input[name=value]').val()
             }
         }
     };
@@ -902,12 +901,6 @@ app = {
             {
                 that.name($(this));
             });
-            this.$container.on('change', '.value', function()
-            {
-                that.value($(this));
-            });
-
-            
         },
         route: function(element, type)
         {
@@ -977,12 +970,6 @@ app = {
         {
             this.persist(this.route(element, 'choise'), {
                 title: element.val()
-            });
-        },
-        value: function(element)
-        {
-            this.persist(this.route(element, 'choise'), {
-                value: element.val()
             });
         },
         sort: function(element)
