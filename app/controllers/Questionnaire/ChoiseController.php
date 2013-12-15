@@ -20,9 +20,12 @@ class ChoiseController extends \AdminController{
 
     public function store($question)
     {
+        $choises = $question->choises;
+        $sort = count($choises) * 10;
         $input = Input::all();
         $input = array_merge($input, array(
-            'question_id' => $question->id
+            'question_id' => $question->id,
+            'sort_weight' => $sort,
         ));
 
         $validator = $this->choise->validator($input, array('title', 'question_id'));
