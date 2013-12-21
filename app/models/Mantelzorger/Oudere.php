@@ -27,6 +27,11 @@ class Oudere extends \Eloquent{
         'phone', 'mantelzorger_id', 'birthday',
     );
 
+    public function getFullnameAttribute()
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
     public function validator($input = array(), $rules = array())
     {
         if(empty($input))
