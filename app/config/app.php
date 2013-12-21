@@ -184,6 +184,7 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
         'Template'        => 'Template\TemplateFacade',
         'Memorize'        => 'Instrument\Memorize\Facade',
+        'InstrumentTool'  => 'Instrument\Engine\Facade',
 
 	),
 

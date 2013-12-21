@@ -15,4 +15,9 @@
 
 )) ?>
 
+<?= InstrumentTool::header($questionnaire, $panel); ?>
+
+
+<?= InstrumentTool::questions($panel) ?>
+
 @stop
