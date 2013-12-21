@@ -79,7 +79,7 @@ Route::resource('inschrijvingen', 'InschrijvingController', array('only' => arra
 /**
  * ORGANISATIONS
  */
-Route::resource('organisations/{id}/locations', 'Organisation\\LocationController', array('only' => array('index', 'store')));
+Route::resource('organisations/{id}/locations', 'Organisation\LocationController', array('only' => array('index', 'store')));
 
 Route::resource('organisations', 'OrganisationController', array('only' => array('store')));
 
@@ -103,6 +103,16 @@ Route::resource('panels/{panel}/questions', 'Questionnaire\QuestionController', 
 Route::resource('questions/{question}/choises', 'Questionnaire\ChoiseController', array('only' => array('store', 'update')));
 
 Route::post('questions/{question}/choises/sort', 'Questionnaire\ChoiseController@sort');
+
+
+/**
+ * API ROUTES
+ */
+
+Route::group(array('prefix' => 'api'), function()
+{
+    Route::get('mantelzorger/{mantelzorger}/ouderen', 'Api\MantelzorgerController@ouderen');
+});
 
 
 /**
