@@ -59,7 +59,7 @@ return array(
 
         //instrument
         array(
-            'href' => URL::action('InstrumentController@getIndex'),
+            'href' => URL::action('InstrumentController@index'),
 
             'class' => 'glyphicon glyphicon-list-alt',
 

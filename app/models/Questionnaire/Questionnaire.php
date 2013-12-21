@@ -16,6 +16,11 @@ class Questionnaire extends Eloquent{
         'active' => 'in:0,1',
     );
 
+    public function scopeActive($query)
+    {
+        $query->where('active', '1');
+    }
+
     public function validator($input = null, $fields = array())
     {
         if(empty($input))

@@ -42,6 +42,7 @@ return array(
         'overzicht' => 'Overzicht',
         'wijzig' => 'Wijzig',
         'nieuw' => 'Nieuw',
+        'start' => 'Start',
     ),
 
     "general" => array(

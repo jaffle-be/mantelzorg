@@ -28,6 +28,11 @@ class Mantelzorger extends Eloquent{
         'city', 'birthday', 'phone', 'hulpverlener_id'
     );
 
+    public function getFullnameAttribute()
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
     public function setBirthdayAttribute($value)
     {
         $this->attributes['birthday'] = DateTime::createFromFormat('d/m/Y', $value);

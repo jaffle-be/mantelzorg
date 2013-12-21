@@ -50,7 +50,26 @@ Route::controller('rapport', 'RapportController');
 /**
  * INSTRUMENT
  */
-Route::controller('instrument','InstrumentController');
+
+Route::get('instrument', array(
+    'uses' => 'InstrumentController@index',
+    'as' => 'instrument'
+));
+
+Route::post('instrument', array(
+    'uses' => 'InstrumentController@postIndex',
+    'as' => 'instrument.submit'
+));
+
+Route::post('instrument/{panel}', array(
+    'uses' => 'InstrumentController@postPanel',
+    'as' => 'instrument.panel.submit'
+));
+
+Route::get('instrument/{panel}', array(
+    'uses' => 'InstrumentController@getPanel',
+    'as' => 'instrument.panel.get'
+));
 
 /**
  * INSCHRIJVINGEN
