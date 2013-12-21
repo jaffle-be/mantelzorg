@@ -68,7 +68,7 @@
         data: function()
         {
             return {
-                title: this.$creator.find('input[name=title]').val(),
+                title: this.$creator.find('input[name=title]').val()
             }
         }
     };
