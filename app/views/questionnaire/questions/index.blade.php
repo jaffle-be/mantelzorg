@@ -90,7 +90,7 @@
 </div>
 
 <div class="page-actions">
-    <a class="btn btn-primary" href=""><?= Lang::get('questionnaires.new_question') ?></a>
+    <a class="btn btn-primary question-creator-trigger" href=""><?= Lang::get('questionnaires.new_question') ?></a>
 </div>
 
 <?= $questionCreator ?>

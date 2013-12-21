@@ -680,7 +680,7 @@ app = {
     function Creator()
     {
         this.$creator = $('#question-creator');
-        this.$trigger = $(".modal .page-actions .btn-primary");
+        this.$trigger = $(".question-creator-trigger");
         this.$id = $('#panel-id');
         this.init();
     }
