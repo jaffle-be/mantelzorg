@@ -680,7 +680,7 @@ app = {
     function Creator()
     {
         this.$creator = $('#question-creator');
-        this.$trigger = $(".page-actions .btn-primary");
+        this.$trigger = $(".modal .page-actions .btn-primary");
         this.$id = $('#panel-id');
         this.init();
     }
@@ -831,7 +831,7 @@ app = {
         data: function()
         {
             return {
-                title: this.$creator.find('input[name=title]').val(),
+                title: this.$creator.find('input[name=title]').val()
             }
         }
     };
