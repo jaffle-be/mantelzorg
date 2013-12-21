@@ -7,7 +7,7 @@
     function Creator()
     {
         this.$creator = $('#question-creator');
-        this.$trigger = $(".page-actions .btn-primary");
+        this.$trigger = $(".modal .page-actions .btn-primary");
         this.$id = $('#panel-id');
         this.init();
     }
