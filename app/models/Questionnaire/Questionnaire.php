@@ -43,4 +43,20 @@ class Questionnaire extends Eloquent{
         return $this->hasMany('Questionnaire\Panel', 'questionnaire_id');
     }
 
+    public function nextPanel(Panel $panel)
+    {
+        $weight = $panel->panel_weight + 10;
+
+        $panels = $this->panels->filter(function($item) use ($weight){
+            return (int) $item->panel_weight === $weight;
+        });
+
+        if(count($panels))
+        {
+            return $panels->first();
+        }
+        else
+            return false;
+    }
+
 }

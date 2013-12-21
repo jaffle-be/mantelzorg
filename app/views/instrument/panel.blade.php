@@ -20,4 +20,6 @@
 
 <?= InstrumentTool::questions($panel) ?>
 
+<?= InstrumentTool::footer($questionnaire, $panel) ?>
+
 @stop

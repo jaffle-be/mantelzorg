@@ -4,6 +4,7 @@ namespace Instrument\Engine;
 
 use Questionnaire\Panel;
 use Questionnaire\Questionnaire;
+use URL;
 
 class Template {
 
@@ -41,6 +42,23 @@ class Template {
         $output .= $this->question->wrapper('close');
 
         return  $output;
+    }
+
+    public function footer(Questionnaire $questionnaire, Panel $current)
+    {
+        $next = $questionnaire->nextPanel($current);
+
+        if($next)
+        {
+            return sprintf('<div><a class="btn btn-primary" href="%s">%s</a></div>', URL::route('instrument.panel.get', array($next->id) ), $next->title);
+        }
+
+        else
+        {
+
+        }
+
+
     }
 
 } 
