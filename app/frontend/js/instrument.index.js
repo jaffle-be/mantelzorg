@@ -1,5 +1,8 @@
 (function($){
 
+    var mantelzorger,
+        oudere;
+
     'use strict';
 
     function persist(value, callback){
@@ -19,8 +22,7 @@
 
     function toggle(show, ouderen)
     {
-        var select = $("#ouderen-select");
-        select.html('');
+        oudere.html('');
         if(typeof ouderen !== 'undefined')
         {
             for(var i in ouderen)
@@ -30,17 +32,25 @@
                     text: ouderen[i]
                 }));
 
-                i === 'select' ? select.prepend(option) : select.append(option);
+                i === 'select' ? oudere.prepend(option) : oudere.append(option);
             }
         }
 
-        show ? select.removeClass('hide') : select.addClass('hide');
+        show ? oudere.removeClass('hide') : oudere.addClass('hide');
 
     }
 
     $(document).ready(function()
     {
-        $('#mantelzorger-select').on('change', function()
+        mantelzorger = $("#mantelzorger-select");
+        oudere = $("#ouderen-select");
+
+        if(mantelzorger.val() != '')
+        {
+            persist(mantelzorger.val(), toggle)
+        }
+
+        mantelzorger.on('change', function()
         {
             if($(this).val() !== '')
             {
@@ -51,7 +61,7 @@
         });
 
         $("form").on('submit', function(){
-            if($("#mantelzorger-select").val() == '' || $("#ouderen-select").val() == '')
+            if(mantelzorger.val() == '' || oudere.val() == '' || oudere.val() == undefined)
             {
                 $(".alert").show();
                 return false;
