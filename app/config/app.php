@@ -115,6 +115,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
         'Template\TemplateServiceProvider',
         'Questionnaire\ServiceProvider',
+        'Instrument\ServiceProvider',
 
 
 	),
@@ -182,6 +183,7 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
         'Template'        => 'Template\TemplateFacade',
+        'Memorize'        => 'Instrument\Memorize\Facade',
 
 	),
 
