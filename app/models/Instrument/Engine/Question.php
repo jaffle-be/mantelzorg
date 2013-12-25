@@ -6,14 +6,14 @@ class Question {
 
     public function render(\Questionnaire\Question $question)
     {
-        return '<p>' . $question->question . '</p>';
+        return '<div class="col-md-offset-1 col-md-11 instrument-question">' . $question->question . '</div>';
     }
 
     public function wrapper($option){
         switch($option)
         {
             case 'open':
-                return '<div class="instrument-questions">';
+                return '<div class="row instrument-questions">';
                 break;
             case 'close':
                 return '</div>';

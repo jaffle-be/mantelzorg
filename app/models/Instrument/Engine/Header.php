@@ -23,7 +23,7 @@ class Header {
 
     protected function open()
     {
-        return '<div class="instrument-header"><ul>';
+        return '<div class="row instrument-header"><ul>';
     }
 
     protected function close()
@@ -33,7 +33,7 @@ class Header {
 
     protected function item(Panel $panel, Panel $current)
     {
-        return sprintf('<li %s>' . $panel->title . '</li>', $panel->id === $current->id ? 'class="active"' : null);
+        return sprintf('<li class="%s %s">%s</li>', $panel->id === $current->id ? 'active' : '', 'panel-' . $panel->color, $panel->title);
     }
 
 } 
