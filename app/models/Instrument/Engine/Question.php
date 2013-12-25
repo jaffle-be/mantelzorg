@@ -43,7 +43,7 @@ class Question {
 
     protected function body(Q $question, $first)
     {
-        $output = sprintf('<div class="body %s">', $first ? '' : '');
+        $output = sprintf('<div class="body %s">', $first ? '' : 'hide');
 
         $output .= '<div class="question">' . $question->question . '</div>';
 
