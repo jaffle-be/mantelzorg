@@ -34,9 +34,13 @@ class Template {
     {
         $output = $this->question->wrapper('open');
 
+        $counter = 0;
+
         foreach($panel->questions as $question)
         {
-            $output .= $this->question->render($question);
+            $output .= $this->question->render($question, $counter == 0);
+
+            $counter++;
         }
 
         $output .= $this->question->wrapper('close');

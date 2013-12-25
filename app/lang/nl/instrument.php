@@ -5,4 +5,6 @@ return array(
     'kies_mantelzorger' => 'Kies een mantelzorger',
     'kies_oudere' => 'Kies een oudere',
     'need_persons_selected' => 'Er moet verplicht een mantelzorger en een oudere worden geselecteerd.',
+    'panel' => 'Vragenpaneel',
+    'toelichting' => 'Toelichting',
 );
