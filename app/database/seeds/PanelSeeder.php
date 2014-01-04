@@ -6,34 +6,34 @@ class PanelSeeder extends Seeder{
     {
         \Questionnaire\Panel::create(array(
             'questionnaire_id' => 1,
-            'title' => 'Zorgverlening',
+            'title' => 'A. Zorgverlening',
             'panel_weight' => 0,
         ));
 
         \Questionnaire\Panel::create(array(
             'questionnaire_id' => 1,
-            'title' => 'Mantelzorger',
+            'title' => 'B. Mantelzorger',
             'panel_weight' => 10,
             'color' => 'green',
         ));
 
         \Questionnaire\Panel::create(array(
             'questionnaire_id' => 1,
-            'title' => 'Relaties',
+            'title' => 'C. Relaties',
             'panel_weight' => 20,
             'color' => 'red'
         ));
 
         \Questionnaire\Panel::create(array(
             'questionnaire_id' => 1,
-            'title' => 'Omgeving',
+            'title' => 'D. Omgeving',
             'panel_weight' => 30,
             'color' => 'orange'
         ));
 
         \Questionnaire\Panel::create(array(
             'questionnaire_id' => 1,
-            'title' => 'Overzicht',
+            'title' => 'E. Overzicht',
             'panel_weight' => 40,
             'color' => 'blue',
         ));
