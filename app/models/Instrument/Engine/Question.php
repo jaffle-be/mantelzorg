@@ -10,7 +10,11 @@ class Question {
 
     public function render(Q $question, $first)
     {
-        $output = sprintf('<div class="col-md-offset-1 col-md-11 instrument-question question-%s">', $question->panel->color);
+        $output = '<div class="row">';
+
+        $output .= sprintf('<div class="col-md-1 question-status question-%s"><i class="glyphicon glyphicon-question-sign"></i><i class="glyphicon glyphicon-ok" style="display:none;"></i></div>', $question->panel->color);
+
+        $output .= sprintf('<div class="col-md-11 instrument-question question-%s" data-question-id="%s">', $question->panel->color, $question->id);
 
         //wrapper to allow for a border
         $output .= '<div>';
@@ -19,7 +23,7 @@ class Question {
 
         $output .= $this->body($question, $first);
 
-        $output .= '</div></div>';
+        $output .= '</div></div></div>';
 
         return $output;
     }
@@ -38,12 +42,12 @@ class Question {
 
     protected function header(Q $question, $first)
     {
-        return sprintf('<div class="header">%s <i class="glyphicon glyphicon-edit %s"></i><i class="glyphicon glyphicon-comment %s"></i></div>', $question->title, $first ? 'hide' : '', $first ? '' : 'hide');
+        return sprintf('<div class="header">%s <i class="glyphicon glyphicon-edit" %s></i><i class="glyphicon glyphicon-comment" %s></i></div>', $question->title, $first ? 'style="display:none;"' : '', $first ? '' : 'style="display:none;"');
     }
 
     protected function body(Q $question, $first)
     {
-        $output = sprintf('<div class="body %s">', $first ? '' : 'hide');
+        $output = sprintf('<div class="body" %s>', $first ? '' : 'style="display:none;"');
 
         $output .= '<div class="question">' . $question->question . '</div>';
 

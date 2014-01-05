@@ -63,6 +63,42 @@
 
 .instrument-questions{
 
+  .question-status{
+    &.question-blue{
+      .question-color(@panel-blue);
+    }
+    
+    &.question-red{
+      .question-color(@panel-red);
+    }
+    
+    &.question-green{
+      .question-color(@panel-green);
+    }
+
+    &.question-purple{
+      .question-color(@panel-purple);
+    }
+
+    &.question-orange{
+      .question-color(@panel-orange);
+    }
+
+    &.question-yellow{
+      .question-color(@panel-yellow);
+    }
+
+    &.question-gray{
+      .question-color(@panel-gray);
+    }
+    
+    font-size: xx-large;
+
+    .glyphicon{
+      margin-top: 15px;
+    }
+  }
+
   .instrument-question{
     border-left: 1px solid @border-color;
     padding-left: 40px;
@@ -74,6 +110,7 @@
     }
 
     .header{
+      cursor: pointer;
       font-size: x-large;
       font-weight: bold;
       margin-bottom: 10px;

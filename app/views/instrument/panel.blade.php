@@ -1,3 +1,9 @@
+@section('scripts')
+
+<script src="/js/instrument.panel.min.js"></script>
+
+@stop
+
 @section('content')
 
 <?= Template::crumb(array(
