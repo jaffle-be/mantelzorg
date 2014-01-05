@@ -50,15 +50,15 @@
 
         if($selectables.size() > 0) {
             if($selectables.filter(':checked').size() == 0) {
-                notOkeStatus($status);
+                return notOkeStatus($status);
             } else {
-                okeStatus($status);
+                return okeStatus($status);
             }
         } else {
             if($el.find('textarea').val() == '') {
-                notOkeStatus($status);
+                return notOkeStatus($status);
             } else {
-                okeStatus($status);
+                return okeStatus($status);
             }
         }
     }
@@ -68,6 +68,7 @@
     {
         $status.find('.glyphicon-question-sign').show();
         $status.find('.glyphicon-ok').hide();
+        return false;
     }
 
     //set the status to oke
@@ -75,6 +76,7 @@
     {
         $status.find('.glyphicon-question-sign').hide();
         $status.find('.glyphicon-ok').show();
+        return true;
     }
 
     $(document).ready(function()
@@ -91,6 +93,23 @@
         $(".instrument-questions").on('change', 'input,textarea', function()
         {
             validateQuestion($(this).closest('.row').find('.instrument-question'));
+        });
+
+        $(".instrument-footer .btn-primary").on('click', function(event)
+        {
+            var status = true;
+            $(".instrument-question").each(function(){
+                if(!validateQuestion($(this)))
+                {
+                    status = false;
+                }
+            });
+
+            if(status)
+            {
+                //get all data for this panel...submit it and redirect or simply wrap the stuff in a form
+            }
+            event.preventDefault();
         });
 
     });
