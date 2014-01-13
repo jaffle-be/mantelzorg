@@ -105,11 +105,10 @@
                 }
             });
 
-            if(status)
+            if(!status)
             {
-                //get all data for this panel...submit it and redirect or simply wrap the stuff in a form
+                event.preventDefault();
             }
-            event.preventDefault();
         });
 
     });

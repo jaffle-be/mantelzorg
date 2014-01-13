@@ -54,7 +54,7 @@ class Template {
 
         if($next)
         {
-            return sprintf('<div class="instrument-footer"><a class="btn btn-primary" href="%s">%s</a></div>', URL::route('instrument.panel.get', array($next->id) ), $next->title);
+            return sprintf('<div class="instrument-footer"><input type="submit" class="btn btn-primary" value="%s"></div>', $next->title);
         }
 
         else
