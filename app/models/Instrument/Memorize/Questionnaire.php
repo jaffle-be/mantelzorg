@@ -130,4 +130,11 @@ class Questionnaire {
         $this->session->set('instrument.answers', $payload);
     }
 
+    public function flush()
+    {
+        $this->session->forget('instrument.mantelzorger');
+        $this->session->forget('instrument.oudere');
+        $this->session->forget('instrument.answers');
+    }
+
 } 
