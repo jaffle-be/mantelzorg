@@ -60,13 +60,13 @@ class Questionnaire {
     public function oudere(Oudere $oudere)
     {
         $this->session->set('instrument.oudere', $oudere->id);
-
-        return $this->oudere->find($id);
     }
 
     public function getOudere()
     {
-        return $this->session->get('instrument.oudere');
+        $id = $this->session->get('instrument.oudere');
+
+        return $this->oudere->find(id);
     }
 
     public function panel(Panel $panel, $payload)
