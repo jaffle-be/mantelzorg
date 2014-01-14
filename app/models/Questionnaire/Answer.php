@@ -26,7 +26,7 @@ class Answer extends Eloquent{
         return $this->belongsTo('Questionnaire\Question', 'question_id');
     }
 
-    public function answers()
+    public function choises()
     {
         return $this->belongsToMany('Questionnaire\Choise', 'questionnaire_answer_choises', 'answer_id', 'choise_id');
     }
