@@ -66,7 +66,7 @@ class Questionnaire {
     {
         $id = $this->session->get('instrument.oudere');
 
-        return $this->oudere->find(id);
+        return $this->oudere->find($id);
     }
 
     public function panel(Panel $panel, $payload)
