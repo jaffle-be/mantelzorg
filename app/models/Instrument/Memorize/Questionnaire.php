@@ -79,4 +79,21 @@ class Questionnaire {
         return 'instrument.panel.panel-' . $panel->id;
     }
 
+    protected function answers()
+    {
+        if(!$this->session->has('answers'))
+        {
+            $answers = array();
+
+            $this->session->set('answers', $answers);
+
+        }
+        return $this->session->get('answers');
+    }
+
+    protected function update($payload)
+    {
+        $this->session->set('answers', $payload);
+    }
+
 } 
