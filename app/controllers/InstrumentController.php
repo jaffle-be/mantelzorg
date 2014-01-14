@@ -106,6 +106,28 @@ class InstrumentController extends AdminController{
      */
     public function postPanel($panel)
     {
+        //save all input into our session
+        $questions = $panel->questions;
+
+        foreach($questions as $question)
+        {
+            Memorize::question($question);
+        }
+
+        $next = $panel->questionnaire->nextPanel($panel);
+
+        if($next)
+        {
+            return Redirect::route('instrument.panel.get', array($next->id));
+        }
+        else
+        {
+            Memorize::persist();
+
+            return Redirect::route('instrument');
+        }
+
+
 
     }
 
