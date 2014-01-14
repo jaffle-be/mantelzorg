@@ -201,6 +201,7 @@ class ChoiseSeeder extends Seeder{
         $this->threeChoises(17);
         $this->threeChoises(18);
 
+        $this->yesNo(19);
         $this->yesNo(20);
 
         $this->fiveChoises(24);
