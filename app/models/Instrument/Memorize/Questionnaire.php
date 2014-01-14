@@ -130,6 +130,51 @@ class Questionnaire {
         $this->session->set('instrument.answers', $payload);
     }
 
+    public function persist()
+    {
+        $answers = $this->answers();
+
+        $mantelzorger = $this->getMantelzorger();
+
+        $oudere = $this->getOudere();
+
+        if($mantelzorger && $oudere)
+        {
+            $session = $this->survey->create(array(
+                'mantelzorger_id' => $mantelzorger->id,
+                'oudere_id' => $oudere->id
+            ));
+
+            foreach($answers as $question => $answer)
+            {
+                $a = $this->answer->create(array(
+                    'session_id' => $session->id,
+                    'question_id' => $question,
+                    'explanation' => isset($answer['explanation']) ? $answer['explanation'] : null
+                ));
+
+                $q = $this->question->find($question);
+
+                if($q->multiple_choise == 1)
+                {
+                    if($q->multiple_answer == 1)
+                    {
+                        $a->choises()->sync($answer['choises']);
+                    }
+                    else
+                    {
+                        $a->choises()->attach($answer['choises']);
+                    }
+                }
+
+            }
+
+        }
+
+        $this->flush();
+
+    }
+
     public function flush()
     {
         $this->session->forget('instrument.mantelzorger');
