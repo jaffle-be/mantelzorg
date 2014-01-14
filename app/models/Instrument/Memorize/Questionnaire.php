@@ -90,7 +90,7 @@ class Questionnaire {
 
         if($question->explainable == 1)
         {
-            $answers[$question->id]['explanation'] = Input::get('explanation' . $question->id);
+            $answers[$question->id]['explanation'] = $this->explanation($question);
         }
 
         if($question->multiple_choise == 1)
@@ -100,6 +100,11 @@ class Questionnaire {
 
         $this->update($answers);
 
+    }
+
+    protected function explanation($question)
+    {
+        return Input::get('explanation' . $question->id);
     }
 
     protected function choise($question)
