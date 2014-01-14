@@ -114,19 +114,19 @@ class Questionnaire {
 
     protected function answers()
     {
-        if(!$this->session->has('answers'))
+        if(!$this->session->has('instrument.answers'))
         {
             $answers = array();
 
-            $this->session->set('answers', $answers);
+            $this->session->set('instrument.answers', $answers);
 
         }
-        return $this->session->get('answers');
+        return $this->session->get('instrument.answers');
     }
 
     protected function update($payload)
     {
-        $this->session->set('answers', $payload);
+        $this->session->set('instrument.answers', $payload);
     }
 
 } 
