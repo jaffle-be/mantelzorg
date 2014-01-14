@@ -79,6 +79,34 @@ class Questionnaire {
         return 'instrument.panel.panel-' . $panel->id;
     }
 
+    public function question(Question $question)
+    {
+        $answers = $this->answers();
+
+        if(!isset($answers[$question->id]))
+        {
+            $answers[$question->id] = array();
+        }
+
+        if($question->explainable == 1)
+        {
+            $answers[$question->id]['explanation'] = Input::get('explanation' . $question->id);
+        }
+
+        if($question->multiple_choise == 1)
+        {
+            $answers[$question->id]['choises'] = $this->choise($question);
+        }
+
+        $this->update($answers);
+
+    }
+
+    protected function choise($question)
+    {
+        return Input::get('question' . $question->id);
+    }
+
     protected function answers()
     {
         if(!$this->session->has('answers'))
