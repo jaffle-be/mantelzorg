@@ -5,6 +5,7 @@ namespace Instrument\Engine;
 use Questionnaire\Panel;
 use Questionnaire\Questionnaire;
 use URL;
+use Lang;
 
 class Template {
 
@@ -52,17 +53,7 @@ class Template {
     {
         $next = $questionnaire->nextPanel($current);
 
-        if($next)
-        {
-            return sprintf('<div class="instrument-footer"><input type="submit" class="btn btn-primary" value="%s"></div>', $next->title);
-        }
-
-        else
-        {
-
-        }
-
-
+        return sprintf('<div class="instrument-footer"><input type="submit" class="btn btn-primary" value="%s"></div>', $next ? $next->title : Lang::get('instrument.bevestigen'));
     }
 
 } 
