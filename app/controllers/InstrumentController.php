@@ -33,6 +33,9 @@ class InstrumentController extends AdminController{
      */
     public function index()
     {
+        //clear the current session if there was one
+        Memorize::flush();
+
         $questionnaire = $this->questionnaire->with(array(
             'panels' => function($query){
                     $query->orderBy('panel_weight');
