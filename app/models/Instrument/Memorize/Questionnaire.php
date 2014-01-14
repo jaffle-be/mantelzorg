@@ -6,14 +6,35 @@ use Illuminate\Session\Store;
 use Mantelzorger\Mantelzorger;
 use Mantelzorger\Oudere;
 use Questionnaire\Panel;
+use Questionnaire\Question;
+use Questionnaire\Answer;
+use Questionnaire\Session;
 
 class Questionnaire {
 
     protected $session;
 
-    public function __construct(Store $session)
+    protected $answer;
+
+    protected $question;
+
+    protected $mantelzorger;
+
+    protected $oudere;
+
+    public function __construct(Store $session, Answer $answer, Question $question, Mantelzorger $mantelzorger, Oudere $oudere, Session $survey)
     {
         $this->session = $session;
+
+        $this->answer = $answer;
+
+        $this->question = $question;
+
+        $this->mantelzorger = $mantelzorger;
+
+        $this->oudere = $oudere;
+
+        $this->survey = $survey;
     }
 
     public function set(array $payload)
