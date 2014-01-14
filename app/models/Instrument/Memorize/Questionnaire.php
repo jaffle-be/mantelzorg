@@ -8,6 +8,7 @@ use Mantelzorger\Oudere;
 use Questionnaire\Panel;
 use Questionnaire\Question;
 use Questionnaire\Answer;
+use Input;
 use Questionnaire\Session;
 
 class Questionnaire {
