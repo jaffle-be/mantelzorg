@@ -20,6 +20,7 @@ class CreateQuestions extends Migration {
             $t->foreign('questionnaire_panel_id')->references('id')->on('questionnaire_panels');
             $t->string('title', 100);
             $t->string('question', 500);
+            $t->string('meta', 500)->nullable();
             $t->boolean('multiple_choise')->default(0);
             $t->boolean('multiple_answer')->default(0);
             $t->boolean('summary_question')->default(0);
