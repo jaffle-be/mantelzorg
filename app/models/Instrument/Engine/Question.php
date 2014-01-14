@@ -124,7 +124,7 @@ class Question {
 
         foreach($choises as $choise)
         {
-            $output .= sprintf('<li class="checkbox"> <label><input class="" type="checkbox" name="%s" value="%s"/>%s</label></li>', 'question' . $choise->question->id , $choise->id , $choise->title);
+            $output .= sprintf('<li class="checkbox"> <label><input class="" type="checkbox" name="%s[]" value="%s"/>%s</label></li>', 'question' . $choise->question->id , $choise->id , $choise->title);
         }
 
         return $output;
