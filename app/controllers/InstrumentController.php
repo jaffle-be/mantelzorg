@@ -43,6 +43,8 @@ class InstrumentController extends AdminController{
 
         $hulpverlener->load('mantelzorgers');
 
+        $surveys = $this->session->where('user_id', $hulpverlener->id);
+
         if(!$questionnaire)
         {
             return Redirect::route('home');

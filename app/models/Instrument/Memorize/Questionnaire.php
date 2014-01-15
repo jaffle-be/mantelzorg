@@ -3,14 +3,16 @@
 namespace Instrument\Memorize;
 
 use Mantelzorger\Mantelzorger;
+use Auth;
 use Mantelzorger\Oudere;
-use Questionnaire\Panel;
 use Questionnaire\Question;
 use Questionnaire\Answer;
 use Input;
 use Questionnaire\Session;
 
 class Questionnaire {
+
+    protected $auth;
 
     protected $answer;
 
@@ -36,6 +38,7 @@ class Questionnaire {
     public function newSurvey($mantelzorger, $oudere)
     {
         return $this->survey->create(array(
+            'user_id' => Auth::user()->id,
             'mantelzorger_id' => $mantelzorger->id,
             'oudere_id' => $oudere->id
         ));
