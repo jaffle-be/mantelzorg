@@ -25,4 +25,9 @@ class Session extends Eloquent{
         return $this->belongsTo('Mantelzorger\Oudere');
     }
 
+    public function answers()
+    {
+        return $this->hasMany('Questionnaire\Answer');
+    }
+
 } 

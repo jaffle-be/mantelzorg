@@ -11,12 +11,12 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider{
 
     public function register()
     {
-        $this->app['instrument.memorize'] = $this->app->share(function($app)
+        $this->app['instrument.memorize'] = $this->app->share(function()
         {
-            return new Memorize\Questionnaire($app['session.store'], new Answer(), new Question(), new Mantelzorger(), new Oudere(), new Session());
+            return new Memorize\Questionnaire(new Answer(), new Question(), new Mantelzorger(), new Oudere(), new Session());
         });
 
-        $this->app['instrument.engine'] = $this->app->share(function($app){
+        $this->app['instrument.engine'] = $this->app->share(function(){
             return new Engine\Template(new Engine\Header, new Engine\Question);
         });
     }

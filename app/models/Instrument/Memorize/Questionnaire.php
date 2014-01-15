@@ -2,7 +2,6 @@
 
 namespace Instrument\Memorize;
 
-use Illuminate\Session\Store;
 use Mantelzorger\Mantelzorger;
 use Mantelzorger\Oudere;
 use Questionnaire\Panel;
@@ -13,8 +12,6 @@ use Questionnaire\Session;
 
 class Questionnaire {
 
-    protected $session;
-
     protected $answer;
 
     protected $question;
@@ -23,10 +20,8 @@ class Questionnaire {
 
     protected $oudere;
 
-    public function __construct(Store $session, Answer $answer, Question $question, Mantelzorger $mantelzorger, Oudere $oudere, Session $survey)
+    public function __construct(Answer $answer, Question $question, Mantelzorger $mantelzorger, Oudere $oudere, Session $survey)
     {
-        $this->session = $session;
-
         $this->answer = $answer;
 
         $this->question = $question;
@@ -46,27 +41,19 @@ class Questionnaire {
         ));
     }
 
-    public function question(Question $question)
+    public function question(Question $question, Session $session)
     {
-        $answers = $this->answers();
-
-        if(!isset($answers[$question->id]))
-        {
-            $answers[$question->id] = array();
-        }
-
         if($question->explainable == 1)
         {
-            $answers[$question->id]['explanation'] = $this->explanation($question);
+            $explanation = $this->explanation($question);
         }
 
         if($question->multiple_choise == 1)
         {
-            $answers[$question->id]['choises'] = $this->choise($question);
+            $choises = $this->choise($question);
         }
 
-        $this->update($answers);
-
+        $this->persist($question, $session, isset($explanation) ? $explanation : null, isset($choises) ? $choises : null);
     }
 
     protected function explanation($question)
@@ -77,6 +64,44 @@ class Questionnaire {
     protected function choise($question)
     {
         return Input::get('question' . $question->id);
+    }
+
+    protected function persist($question, $session, $explanation = null, $choises = null)
+    {
+        //does this need a check? so it wouldn't be loaded all the time?
+        $session->load(array('answers'));
+
+        $answer = $session->answers->filter(function($item) use ($question)
+        {
+            if($item->question_id === $question->id)
+            {
+                return true;
+            }
+        })->first();
+
+        if(!$answer)
+        {
+            $answer = $this->answer->create(array(
+                'session_id' => $session->id,
+                'question_id' => $question->id,
+                'explanation' => $explanation,
+            ));
+        }
+
+        $answer->load('choises');
+
+        if(is_array($choises))
+        {
+            $answer->choises()->sync($choises);
+
+            $answer->touch();
+        }
+        else if($choises)
+        {
+            $answer->choises()->sync(array($choises));
+
+            $answer->touch();
+        }
     }
 
 } 
