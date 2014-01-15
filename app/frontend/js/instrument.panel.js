@@ -23,8 +23,23 @@
     {
         $el.find(".header .glyphicon-edit").hide();
         $el.find('.header .glyphicon-comment').show();
+        $el.find('.body .well').hide();
         $el.find('.body').slideDown();
         scrollTo($el)
+    }
+
+    //show/hide a well
+    function toggleWell($el)
+    {
+        var well = $el.closest('.instrument-question').find('.well');
+        if(well.css('display') == 'none')
+        {
+            well.show();
+        }
+        else
+        {
+            well.hide();
+        }
     }
 
     //scroll to a certain element.
@@ -109,6 +124,12 @@
             {
                 event.preventDefault();
             }
+        });
+
+        $(".instrument-questions").on('click', '.glyphicon-comment', function(event)
+        {
+            toggleWell($(this));
+            return false;
         });
 
     });

@@ -42,7 +42,7 @@ class Question {
 
     protected function header(Q $question, $first)
     {
-        return sprintf('<div class="header">%s <i class="glyphicon glyphicon-edit" %s></i><i class="glyphicon glyphicon-comment" %s></i></div>', $question->title, $first ? 'style="display:none;"' : '', $first ? '' : 'style="display:none;"');
+        return sprintf('<div class="header">%s <i class="glyphicon glyphicon-edit" %s></i><i title="%s" class="glyphicon glyphicon-comment" %s></i></div>', $question->title, $first ? 'style="display:none;"' : '', Lang::get('questionnaires.meta'), $first ? '' : 'style="display:none;"');
     }
 
     protected function body(Q $question, $first)
@@ -51,7 +51,10 @@ class Question {
 
         $output .= '<div class="question">' . $question->question . '</div>';
 
-        $output .= '<div class="well well-sm" style="display:none;">' . $question->meta . '</div>';
+        if($question->meta)
+        {
+            $output .= '<div class="well well-sm" style="display:none;">' . $question->meta . '</div>';
+        }
 
         if($question->multiple_choise === '1')
         {
