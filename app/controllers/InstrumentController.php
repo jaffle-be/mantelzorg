@@ -33,9 +33,6 @@ class InstrumentController extends AdminController{
      */
     public function index()
     {
-        //clear the current session if there was one
-        Memorize::flush();
-
         $questionnaire = $this->questionnaire->with(array(
             'panels' => function($query){
                     $query->orderBy('panel_weight');
@@ -76,11 +73,7 @@ class InstrumentController extends AdminController{
             return Redirect::back();
         }
 
-        Memorize::set(array(
-            'mantelzorger' => $mantelzorger,
-            'oudere' => $oudere
-        ));
-
+        $survey = Memorize::newSurvey($mantelzorger, $oudere);
 
         $questionnaire = $this->questionnaire->with(array(
             'panels' => function($query){
@@ -88,47 +81,42 @@ class InstrumentController extends AdminController{
                 }
         ))->active()->first();
 
-        return Redirect::route('instrument.panel.get', $questionnaire->panels->first()->id);
+        return Redirect::route('instrument.panel.get', array($questionnaire->panels->first()->id, $survey->id));
     }
 
     /**
      * @param $panel
      */
-    public function getPanel($panel)
+    public function getPanel($panel, $survey)
     {
         $questionnaire = $panel->questionnaire;
 
-        $this->layout->content = View::make('instrument.panel', compact(array('panel', 'questionnaire')));
+        $this->layout->content = View::make('instrument.panel', compact(array('panel', 'questionnaire', 'survey')));
     }
 
     /**
      * @param $panel
      */
-    public function postPanel($panel)
+    public function postPanel($panel, $survey)
     {
         //save all input into our session
         $questions = $panel->questions;
 
         foreach($questions as $question)
         {
-            Memorize::question($question);
+            Memorize::question($question, $survey);
         }
 
         $next = $panel->questionnaire->nextPanel($panel);
 
         if($next)
         {
-            return Redirect::route('instrument.panel.get', array($next->id));
+            return Redirect::route('instrument.panel.get', array($next->id, $survey->id));
         }
         else
         {
-            Memorize::persist();
-
             return Redirect::route('instrument');
         }
-
-
-
     }
 
 }

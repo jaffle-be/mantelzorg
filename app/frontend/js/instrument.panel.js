@@ -110,22 +110,6 @@
             validateQuestion($(this).closest('.row').find('.instrument-question'));
         });
 
-        $(".instrument-footer .btn-primary").on('click', function(event)
-        {
-            var status = true;
-            $(".instrument-question").each(function(){
-                if(!validateQuestion($(this)))
-                {
-                    status = false;
-                }
-            });
-
-            if(!status)
-            {
-                event.preventDefault();
-            }
-        });
-
         $(".instrument-questions").on('click', '.glyphicon-comment', function(event)
         {
             toggleWell($(this));

@@ -7,4 +7,5 @@ return array(
     'need_persons_selected' => 'Er moet verplicht een mantelzorger en een oudere worden geselecteerd.',
     'panel' => 'Vragenpaneel',
     'toelichting' => 'Toelichting',
+    'bevestigen' => 'Bevestigen',
 );

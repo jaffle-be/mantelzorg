@@ -28,6 +28,9 @@ Route::model('panel', 'Questionnaire\Panel');
 Route::pattern('question', '\d+');
 Route::model('question', 'Questionnaire\Question');
 
+Route::pattern('survey', '\d+');
+Route::model('survey', 'Questionnaire\Session');
+
 /**
  * INSTELLINGEN
  */
@@ -61,12 +64,12 @@ Route::post('instrument', array(
     'as' => 'instrument.submit'
 ));
 
-Route::post('instrument/{panel}', array(
+Route::post('instrument/{panel}/{survey}', array(
     'uses' => 'InstrumentController@postPanel',
     'as' => 'instrument.panel.submit'
 ));
 
-Route::get('instrument/{panel}', array(
+Route::get('instrument/{panel}/{survey}', array(
     'uses' => 'InstrumentController@getPanel',
     'as' => 'instrument.panel.get'
 ));
