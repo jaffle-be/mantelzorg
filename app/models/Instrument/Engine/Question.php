@@ -51,6 +51,8 @@ class Question {
 
         $output .= '<div class="question">' . $question->question . '</div>';
 
+        $output .= '<div class="well well-sm" style="display:none;">' . $question->meta . '</div>';
+
         if($question->multiple_choise === '1')
         {
             $output .= $this->multipleChoise($question);
