@@ -35,12 +35,13 @@ class Questionnaire {
         $this->survey = $survey;
     }
 
-    public function newSurvey($mantelzorger, $oudere)
+    public function newSurvey($mantelzorger, $oudere, $questionnaire)
     {
         return $this->survey->create(array(
             'user_id' => Auth::user()->id,
             'mantelzorger_id' => $mantelzorger->id,
-            'oudere_id' => $oudere->id
+            'oudere_id' => $oudere->id,
+            'questionnaire_id' => $questionnaire->id,
         ));
     }
 

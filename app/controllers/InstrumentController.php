@@ -82,13 +82,13 @@ class InstrumentController extends AdminController{
             return Redirect::back();
         }
 
-        $survey = Memorize::newSurvey($mantelzorger, $oudere);
-
         $questionnaire = $this->questionnaire->with(array(
             'panels' => function($query){
                     $query->orderBy('panel_weight');
                 }
         ))->active()->first();
+
+        $survey = Memorize::newSurvey($mantelzorger, $oudere, $questionnaire);
 
         return Redirect::route('instrument.panel.get', array($questionnaire->panels->first()->id, $survey->id));
     }

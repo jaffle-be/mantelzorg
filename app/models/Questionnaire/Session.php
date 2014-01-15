@@ -8,12 +8,13 @@ class Session extends Eloquent{
 
     protected $table = "questionnaire_survey_sessions";
 
-    protected $fillable = array('user_id', 'mantelzorger_id', 'oudere_id');
+    protected $fillable = array('user_id', 'mantelzorger_id', 'oudere_id', 'questionnaire_id');
 
     protected static $rules = array(
         'user_id' => 'required|exists:users,id',
         'mantelzorger_id' => 'required|exists:mantelzorgers,id',
-        'oudere_id' => 'required|exists:ouderen,id'
+        'oudere_id' => 'required|exists:ouderen,id',
+        'questionnaire_id' => 'required|exists:questionnaires,id'
     );
 
     public function mantelzorger()
@@ -29,6 +30,11 @@ class Session extends Eloquent{
     public function answers()
     {
         return $this->hasMany('Questionnaire\Answer');
+    }
+
+    public function questionnaire()
+    {
+        return $this->belongsTo('Questionnaire\Questionnaire');
     }
 
 } 

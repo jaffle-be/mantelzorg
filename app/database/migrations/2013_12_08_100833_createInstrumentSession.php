@@ -20,6 +20,8 @@ class CreateInstrumentSession extends Migration {
             $t->foreign('oudere_id')->references('id')->on('ouderen');
             $t->integer('mantelzorger_id')->unsigned();
             $t->foreign('mantelzorger_id')->references('id')->on('mantelzorgers');
+            $t->integer('questionnaire_id')->unsigned();
+            $t->foreign('questionnaire_id')->references('id')->on('questionnaires');
             $t->timestamps();
         });
 	}

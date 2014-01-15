@@ -49,9 +49,34 @@
     </div>
 </div>
 
-<div class="page-actions">
+<div class="row page-actions">
+    <div class="col-md-12">
         <input class="btn btn-primary" type="submit" value="<?= Lang::get('master.general.confirm') ?>"/>
+    </div>
 </div>
+
+<? if(count($surveys)): ?>
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th><?= Lang::get('instrument.mantelzorger') ?></th>
+            <th><?= Lang::get('instrument.oudere') ?></th>
+            <th><?= Lang::get('instrument.created') ?></th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+<? foreach($surveys as $survey): ?>
+        <tr>
+            <td><?= $survey->mantelzorger->fullname ?></td>
+            <td><?= $survey->oudere->fullname ?></td>
+            <td><?= $survey->created_at->format('d/m/Y') ?></td>
+            <td><a href="<?= URL::route('instrument.panel.get', array($survey->questionnaire->panels->first()->id, $survey->id)) ?>"><?= Lang::get('instrument.werkverder') ?></a></td>
+        </tr>
+<? endforeach; ?>
+        </tbody>
+    </table>
+<? endif ?>
 
 <?= Form::close() ?>
 

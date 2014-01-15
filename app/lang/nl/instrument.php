@@ -8,4 +8,8 @@ return array(
     'panel' => 'Vragenpaneel',
     'toelichting' => 'Toelichting',
     'bevestigen' => 'Bevestigen',
+    'oudere' => 'Oudere',
+    'mantelzorger' => 'Mantelzorger',
+    'created' => 'Aangemaakt',
+    'werkverder' => 'Verder werken',
 );
