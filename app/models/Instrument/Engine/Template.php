@@ -31,7 +31,7 @@ class Template {
         return $this->header->render($questionnaire, $panel);
     }
 
-    public function questions(Panel $panel)
+    public function questions(Panel $panel, $survey)
     {
         $output = $this->question->wrapper('open');
 
@@ -39,7 +39,7 @@ class Template {
 
         foreach($panel->questions as $question)
         {
-            $output .= $this->question->render($question, $counter == 0);
+            $output .= $this->question->render($question, $survey, $counter == 0);
 
             $counter++;
         }

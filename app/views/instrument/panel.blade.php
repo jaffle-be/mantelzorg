@@ -25,7 +25,7 @@
 
 <?= InstrumentTool::header($questionnaire, $panel); ?>
 
-<?= InstrumentTool::questions($panel) ?>
+<?= InstrumentTool::questions($panel, $survey) ?>
 
 <?= InstrumentTool::footer($questionnaire, $panel) ?>
 
