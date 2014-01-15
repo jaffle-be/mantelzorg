@@ -17,13 +17,20 @@ class InstrumentController extends AdminController{
     protected $hulpverlener;
 
     /**
+     * @var Questionnaire\Session
+     */
+    protected $session;
+
+    /**
      * @param \Questionnaire\Questionnaire $questionnaire
      */
-    public function __construct(\Questionnaire\Questionnaire $questionnaire, User $hulpverlener)
+    public function __construct(\Questionnaire\Questionnaire $questionnaire, User $hulpverlener, \Questionnaire\Session $session)
     {
         $this->questionnaire = $questionnaire;
 
         $this->hulpverlener = $hulpverlener;
+
+        $this->session = $session;
 
         $this->beforeFilter('auth');
     }
@@ -43,14 +50,14 @@ class InstrumentController extends AdminController{
 
         $hulpverlener->load('mantelzorgers');
 
-        $surveys = $this->session->where('user_id', $hulpverlener->id);
+        $surveys = $this->session->where('user_id', $hulpverlener->id)->get();
 
         if(!$questionnaire)
         {
             return Redirect::route('home');
         }
 
-        $this->layout->content = View::make('instrument.index', compact(array('questionnaire', 'hulpverlener')));
+        $this->layout->content = View::make('instrument.index', compact(array('questionnaire', 'hulpverlener', 'surveys')));
     }
 
     public function postIndex()
