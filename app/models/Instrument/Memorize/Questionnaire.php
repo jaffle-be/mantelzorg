@@ -87,6 +87,11 @@ class Questionnaire {
                 'explanation' => $explanation,
             ));
         }
+        else
+        {
+            $answer->explanation = $explanation;
+            $answer->update();
+        }
 
         $answer->load('choises');
 
