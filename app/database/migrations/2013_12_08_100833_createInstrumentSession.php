@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class createInstrumentSession extends Migration {
+class CreateInstrumentSession extends Migration {
 
 	/**
 	 * Run the migrations.
