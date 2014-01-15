@@ -59,6 +59,15 @@
                     <?= Lang::get('questionnaires.multiple_answer_question') ?>
                 </label>
             </div>
+
+            <div>
+                <label for="extra_info<?= $question->id ?>">
+                    <?= Lang::get('questionnaires.meta') ?>
+                </label>
+
+                <textarea class="form-control meta" type="text"  name="meta" id="question"><?= $question->meta ?></textarea>
+
+            </div>
         </div>
 
         <div class="clearfix"></div>

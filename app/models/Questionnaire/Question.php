@@ -9,7 +9,7 @@ class Question extends Eloquent{
 
     protected $table = 'questionnaire_questions';
 
-    protected $fillable = array('questionnaire_id', 'questionnaire_panel_id','title', 'question', 'multiple_choise','multiple_answer', 'summary_question', 'explainable');
+    protected $fillable = array('questionnaire_id', 'questionnaire_panel_id','title', 'question', 'multiple_choise','multiple_answer', 'summary_question', 'explainable', 'meta');
 
     protected static $rules = array(
         'questionnaire_id' => 'required|exists:questionnaires,id',

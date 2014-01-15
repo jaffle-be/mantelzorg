@@ -8,6 +8,7 @@
     function Saver()
     {
         this.$container = $(".questions");
+        this.$right = $(".right");
         this.sortables = '.sortable';
         this.init();
     }
@@ -57,6 +58,10 @@
             this.$container.on('change', '.name', function()
             {
                 that.name($(this));
+            });
+            this.$right.on('change', '.meta', function()
+            {
+                that.meta($(this));
             });
         },
         route: function(element, type)
@@ -127,6 +132,12 @@
         {
             this.persist(this.route(element, 'choise'), {
                 title: element.val()
+            });
+        },
+        meta: function(element)
+        {
+            this.persist(this.route(element, 'meta'), {
+                meta: element.val()
             });
         },
         sort: function(element)
