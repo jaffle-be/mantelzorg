@@ -21,4 +21,5 @@ return array(
     'new_choise' => 'Nieuwe keuzemogelijkheid',
     'title' => 'Titel',
     'choise-title' => 'Label',
+    'meta' => 'Extra uitleg',
 );
