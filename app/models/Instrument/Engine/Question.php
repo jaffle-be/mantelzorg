@@ -65,7 +65,7 @@ class Question {
 
         if($question->explainable === '1')
         {
-            $output .= $this->explainable($question);
+            $output .= $this->explainable($question, $survey);
         }
 
         $output .= '</div>';
@@ -91,11 +91,17 @@ class Question {
         return $output;
     }
 
-    protected function explainable(Q $question)
+    protected function explainable(Q $question, $survey)
     {
+        $answer = $survey->answers->filter(function($item) use ($question)
+        {
+            if($item->question->id === $question->id)
+                return true;
+        })->first();
+
         $output = '<div class="explanation">';
 
-        $output .= sprintf('<textarea name="explanation%s" class="form-control" placeholder="%s">%s</textarea>', $question->id, Lang::get('instrument.toelichting'), $question->explanation) ;
+        $output .= sprintf('<textarea name="explanation%s" class="form-control" placeholder="%s">%s</textarea>', $question->id, Lang::get('instrument.toelichting'), $answer ? $answer->explanation : null) ;
 
         $output .= '</div>';
 
