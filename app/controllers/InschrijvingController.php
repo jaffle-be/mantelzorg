@@ -1,5 +1,6 @@
 <?php
 use Organisation\Organisation;
+use Beta\Registration;
 
 class InschrijvingController extends AdminController{
 
@@ -18,7 +19,7 @@ class InschrijvingController extends AdminController{
      */
     protected $user;
 
-    public function __construct(\Beta\Registration $registration, Organisation $organisation, User $user)
+    public function __construct(Registration $registration, Organisation $organisation, User $user)
     {
         $this->registration = $registration;
 
@@ -33,10 +34,7 @@ class InschrijvingController extends AdminController{
     {
         $registrations = $this->registration->all();
 
-        $page = 'inschrijving';
-
-        $this->layout->content = View::make('inschrijving.index', compact(array('registrations')))
-            ->nest('subnav', 'layout.admin.subnavs.users', array('page' => $page));
+        $this->layout->content = View::make('inschrijving.index', compact(array('registrations')));
     }
 
     public function edit($id)
@@ -68,10 +66,7 @@ class InschrijvingController extends AdminController{
                 + $locations
                 + array('new' => Lang::get('users.new_location'));
 
-            $page = 'inschrijving';
-
             $this->layout->content = View::make('inschrijving.edit', compact('inschrijving', 'organisations', 'locations'))
-                ->nest('subnav', 'layout.admin.subnavs.users', compact(array('page')))
                 ->nest('creatorOrganisations', 'modals.organisation-creator', compact(array('inschrijving')))
                 ->nest('creatorLocations', 'modals.location-creator', compact(array('inschrijving')));
         }
@@ -98,11 +93,21 @@ class InschrijvingController extends AdminController{
             $inschrijving = $this->registration->find(Input::get('id'));
 
             //hash password before inserting
+            $original = $input['password'];
             $input['password'] = Hash::make($input['password']);
             //set user active
             $input['active'] = '1';
 
             $user = $this->user->create($input);
+
+            if($user)
+            {
+                Mail::send('emails.auth.password', compact(array('original', 'user')), function($message) use ($user){
+                    $message->from('thomas@jaffle.be','Thomas Warlop')
+                        ->to($user->email, $user->firstname . ' ' . $user->lastname)
+                        ->subject(Lang::get('email.registration.subject'));
+                });
+            }
 
             $inschrijving->delete();
 

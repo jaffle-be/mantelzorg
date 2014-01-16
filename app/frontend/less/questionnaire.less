@@ -1,0 +1,202 @@
+@import 'variables';
+@import 'bootstrap-variables';
+
+/**
+ *  STRIPING
+ */
+
+.questionnaires .row, .questions .row {
+  padding: 15px 0 15px 0;
+  border-top: 1px solid @border-color;
+}
+
+.questionnaires .row:nth-child(even), .questions .row:nth-child(even){
+  background-color: @table-stripe-color;
+}
+
+.questionnaires .row:first-child, .questions .row:first-child{
+  border-top: none;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/**
+ *  COLORS
+ */
+
+.panel-color{
+  display: inline-block;
+  min-width: 20px;
+  &:hover, &:active, &:focus{
+    background-image:none !important;
+  }
+
+  &.panel-blue{
+    background-color: @panel-blue;
+
+    &:hover, &:active, &:focus{
+      background-color: lighten(@panel-blue, 15%) !important;
+    }
+  }
+  &.panel-yellow{
+    background-color: @panel-yellow;
+
+    &:hover, &:active, &:focus{
+      background-color: lighten(@panel-yellow, 30%) !important;
+    }
+  }
+  &.panel-red{
+    background-color: @panel-red;
+
+    &:hover, &:active, &:focus{
+      background-color: lighten(@panel-red, 15%) !important;
+    }
+  }
+  &.panel-green{
+    background-color: @panel-green;
+
+    &:hover, &:active, &:focus{
+      background-color: lighten(@panel-green, 15%) !important;
+    }
+  }
+  &.panel-orange{
+    background-color: @panel-orange;
+
+    &:hover, &:active, &:focus{
+      background-color: lighten(@panel-orange, 15%) !important;
+    }
+  }
+  &.panel-purple{
+    background-color: @panel-purple;
+
+    &:hover, &:active, &:focus{
+      background-color: lighten(@panel-purple, 15%) !important;
+    }
+  }
+  &.panel-gray{
+    background-color: @panel-gray;
+
+    &:hover, &:active, &:focus{
+      background-color: lighten(@panel-gray, 15%) !important;
+    }
+
+  }
+  
+}
+
+.questionnaires {
+
+  .header i {
+    margin-right: 5px;
+  }
+
+  .header {
+    margin-bottom: 10px;
+    .btn-default {
+      i {
+        margin-right: 0;
+      }
+      font-size: 8px;
+    }
+  }
+
+  .panels {
+
+    ul.sortable {
+      padding-left: 5px;
+      list-style: none;
+
+      .input-group-btn a {
+        border-left: 0;
+      }
+
+      .colors{
+        .dropdown-toggle{
+          border-radius: 0;
+          border-left: none;
+        }
+      }
+
+      .glyphicon-move {
+        cursor: move;
+      }
+    }
+  }
+
+  .icons, .savers {
+
+    .glyphicon-check, .glyphicon-unchecked {
+      cursor: pointer;
+    }
+
+    i {
+      font-size: larger;
+    }
+  }
+
+  .savers {
+
+    .header {
+      height: 20px;
+    }
+
+    ul {
+      list-style: none;
+
+      li {
+        margin-bottom: 10px;
+        vertical-align: middle;
+        line-height: 34px;
+        height: 34px;
+      }
+    }
+
+  }
+
+}
+
+.question {
+
+  .header {
+
+    margin-bottom: 10px;
+
+    span {
+      line-height: 34px;
+      vertical-align: middle;
+    }
+
+  }
+
+  .left{
+    label{
+      font-weight: normal;
+      margin-bottom: 10px;
+    }
+
+    textarea{
+      height: 125px;
+    }
+
+    input[type=text], textarea
+    {
+      margin-bottom: 10px;
+    }
+  }
+
+  .choises {
+
+    .handle{
+      cursor: move;
+    }
+
+    ul.sortable {
+      list-style: none;
+      padding: 0;
+
+      li input.name{
+        border-left: none;
+      }
+    }
+  }
+}

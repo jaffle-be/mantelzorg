@@ -4,7 +4,23 @@
 
 @section('content')
 
-<?= $subnav ?>
+<?= Template::crumb(array(
+    array(
+        'text' => Lang::get('master.navs.gebruikers'),
+    ),
+
+    array(
+        'text' => Lang::get('master.navs.inschrijvingen'),
+
+        'href' => URL::route('inschrijvingen.index'),
+    ),
+
+    array(
+        'text' => Lang::get('master.navs.wijzig')
+    )
+)) ?>
+
+
 
 <?= Form::open(array('action' => array('InschrijvingController@update', $inschrijving->id), 'method' => 'put')) ?>
 
@@ -60,19 +76,21 @@
 
         <div class="col-md-6">
 
-            <label for="organisation">
-            <?= Lang::get('users.organisatie') ?>
-            </label>
-            <span class="errors"><?= $errors->first('organisation_id') ?></span>
+            <div class="input-select">
+                <label for="organisation">
+                <?= Lang::get('users.organisatie') ?>
+                </label>
+                <span class="errors"><?= $errors->first('organisation_id') ?></span>
 
-            <?= Form::select('organisation_id', $organisations, null, array(
-                'id' => 'organisation',
-                'class' => 'form-control')
-            )?>
+                <?= Form::select('organisation_id', $organisations, null, array(
+                    'id' => 'organisation',
+                    'class' => 'form-control')
+                )?>
+            </div>
 
             <p class="alert alert-info"><?= Lang::get('users.oorspronkelijke_organisatie', array('organisatie' => $inschrijving->organisation)) ?></p>
 
-            <div class="holder <?= !Input::old('organisation_id') ? 'hide' : '' ?>">
+            <div class="input-select holder <?= !Input::old('organisation_id') ? 'hide' : '' ?>">
             <label for="locations"><?= Lang::get('users.locations') ?></label>
             <span class="errors"><?= $errors->first('organisation_location_id') ?></span>
             <?= Form::select('organisation_location_id', $locations, Input::old('organisation_location_id'), array(

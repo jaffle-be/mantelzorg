@@ -106,10 +106,14 @@ return array(
         'male' => 'geslacht',
         'organisation_id' => 'organisatie',
         'organisation_location_id' => 'locatie',
-        'street' => 'straat en huisnummer',
+        'street' => 'straat + huisnummer',
         'city' => 'gemeente/stad',
         'postal' => 'postcode',
-        'current-password' => 'huidig wachtwoord'
+        'current-password' => 'huidig wachtwoord',
+        'birthday' => 'Geboortedatum',
+        'mantelzorger_id' => 'mantelzorger',
+        'hulpverlener_id' => 'hulpverlener',
+        'oudere_id' => 'oudere',
     ),
 
 );

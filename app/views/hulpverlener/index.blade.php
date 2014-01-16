@@ -2,7 +2,18 @@
 
 @section('content')
 
-<? echo $subnav ?>
+
+<?= Template::crumb(array(
+    array(
+        'text' => Lang::get('master.navs.gebruikers'),
+    ),
+
+    array(
+        'text' => Lang::get('master.navs.hulpverleners'),
+    ),
+
+)) ?>
+
 
 <table class="table table-striped table-hover">
 
@@ -24,7 +35,11 @@
         <td>{{ $teller }}</td>
         <td><a href="<?= URL::action('HulpverlenerController@edit', array($user->id)) ?>">{{ $user->firstname . ' ' . $user->lastname}}</a></td>
         <td>{{ $user->email }}</td>
-        <td>{{ $user->organisation->name }}</td>
+        <td>
+            @if($user->organisation)
+            {{ $user->organisation->name }}
+            @endif
+        </td>
         <td>{{ $user->created_at->format('d/m/Y') }}</td>
     </tr>
 

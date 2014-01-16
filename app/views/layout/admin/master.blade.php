@@ -50,35 +50,12 @@
 
     <div class="container">
 
+
+
         <section id="sidebar">
-            <ul>
-                <li>
-                    <a href="<?= URL::action('DashController@getIndex') ?>">
-                        <span class="glyphicon glyphicon-dashboard"></span><?= Lang::get('master.navs.dashboard') ?>
-                    </a>
-                </li>
-                @if($user->admin === '1')
-                <li>
-                    <a href="<?= URL::action('HulpverlenerController@index') ?>">
-                        <span class="glyphicons group"></span><?= Lang::get('master.navs.gebruikers') ?>
-                    </a>
-                </li>
-                @endif
-                <li>
-                    <a href="<?= URL::action('InstrumentController@getIndex') ?>">
-                        <span class="glyphicon glyphicon-list-alt"></span><?= Lang::get('master.navs.instrument') ?>
-                    </a>
-                </li>
-                <li>
-                    <a href="<?= URL::action('RapportController@getIndex') ?>">
-                        <span class="glyphicon glyphicon-folder-close"></span><?= Lang::get('master.navs.rapport') ?>
-                    </a>
-                </li>
-                <li>
-                    <a href="<?= URL::action('Instelling\PersonController@index') ?>">
-                        <span class="glyphicon glyphicon-wrench"></span><?= Lang::get('master.navs.instellingen') ?></a>
-                </li>
-            </ul>
+
+            {{ Template::sidebar() }}
+
         </section>
 
         <section id="content" class="container">
@@ -96,6 +73,7 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+<script type="text/javascript" src="/js/jquery-ui-1.10.3.custom.min.js"></script>
 <script type="text/javascript" src="/vendor/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/master.min.js"></script>
 

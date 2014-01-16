@@ -7,7 +7,7 @@
 <div class="container-small">
 
     <div>
-        <h3><?= Lang::get('team.title') ?></h3>
+        <h3><?= Lang::get('front.team.title') ?></h3>
 
         <address>
             <strong>Lieve De Vos</strong><br>
@@ -25,7 +25,7 @@
             <strong>Faculteit Mens & Welzijn</strong><br>
             Keramiekstraat 80<br>
             9000 Gent<br>
-            <abbr title="<?= Lang::get('team.telefoon') ?>"><?= Lang::get('team.telefoon_abbr') ?>:</abbr> 09/ 321 21 38
+            <abbr title="<?= Lang::get('front.team.telefoon') ?>"><?= Lang::get('front.team.telefoon_abbr') ?>:</abbr> 09/ 321 21 38
         </address>
     </div>
 

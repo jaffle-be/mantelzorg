@@ -4,7 +4,23 @@
 
 @section('content')
 
-<?= $subnav ?>
+
+<?= Template::crumb(array(
+    array(
+        'text' => Lang::get('master.navs.gebruikers'),
+    ),
+
+    array(
+        'text' => Lang::get('master.navs.hulpverleners'),
+
+        'href' => URL::route('hulpverleners.index'),
+    ),
+
+    array(
+        'text' => Lang::get('master.navs.wijzig')
+    )
+)) ?>
+
 
 <?= Form::model($user, array('action' => array('HulpverlenerController@update', $user->id), 'method' => 'put')) ?>
 <div class="row">
@@ -65,10 +81,12 @@
             </label>
             <span class="errors"><?= $errors->first('organisation_id') ?></span>
 
+            <div class="input-select">
             <?= Form::select('organisation_id', $organisations, null, array(
                 'id' => 'organisation',
                 'class' => 'form-control')
             )?>
+            </div>
 
 
             <label for="locations"><?= Lang::get('users.locations') ?></label>

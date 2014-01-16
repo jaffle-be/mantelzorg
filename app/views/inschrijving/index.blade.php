@@ -1,6 +1,17 @@
 @section('content')
 
-<? echo $subnav ?>
+
+<?= Template::crumb(array(
+    array(
+        'text' => Lang::get('master.navs.gebruikers'),
+    ),
+
+    array(
+        'text' => Lang::get('master.navs.inschrijvingen'),
+    )
+
+)) ?>
+
 
 <table class="table table-striped table-hover">
 

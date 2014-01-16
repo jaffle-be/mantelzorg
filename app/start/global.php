@@ -51,6 +51,10 @@ Log::useDailyFiles(storage_path().'/logs/'.$logFile);
 App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
+    if($code === 404)
+    {
+        return Redirect::route('home');
+    }
 });
 
 /*
@@ -81,3 +85,21 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+
+
+View::composer('layout.global.footer', function($view){
+    $view->with('user', Auth::user());
+});
+
+View::composer('layout.admin.master', function($view){
+    $view->with('user', Auth::user());
+});
+
+Validator::extend('passcheck', function($attribute, $value, $parameters){
+
+    $user = Auth::user();
+
+    return Hash::check($value, $user->password);
+
+});

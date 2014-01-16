@@ -21,6 +21,9 @@ return array(
 
     ),
 
+    /**
+     * sidebar + crumbs
+     */
     'navs' => array(
         'dashboard' => 'Dashboard',
         'instellingen' => 'Instellingen',
@@ -31,6 +34,15 @@ return array(
         'inschrijvingen' => 'Inschrijvingen',
         'personal' => 'Profiel',
         'mantelzorgers' => 'Mantelzorgers',
+        'questionnaires' => 'Vragenlijsten',
+        'panels' => 'Panelen',
+        'questions' => 'Vragen',
+        'ouderen' => 'Ouderen',
+        'profiel' => 'Profiel',
+        'overzicht' => 'Overzicht',
+        'wijzig' => 'Wijzig',
+        'nieuw' => 'Nieuw',
+        'start' => 'Start',
     ),
 
     "general" => array(

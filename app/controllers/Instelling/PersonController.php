@@ -38,8 +38,6 @@ class PersonController extends \AdminController{
 
         $this->location = $location;
 
-        $this->page = 'personal';
-
         $this->beforeFilter('auth');
     }
 
@@ -64,15 +62,18 @@ class PersonController extends \AdminController{
                 ->get()
                 ->lists('name', 'id');
         }
-        else
+        else if($user->organisation)
         {
             $locations = $user->organisation->locations()->orderBy('name')->get()->lists('name', 'id');
+        }
+        else
+        {
+            $locations = array();
         }
 
         $locations = array('' => Lang::get('users.pick_location')) + $locations;
 
-        $this->layout->content = View::make('instellingen.index', compact(array('user', 'organisations', 'locations', 'message')))
-            ->nest('subnav', 'layout.admin.subnavs.instellingen', array('page' => $this->page));
+        $this->layout->content = View::make('instellingen.index', compact(array('user', 'organisations', 'locations', 'message')));
     }
 
     public function update()

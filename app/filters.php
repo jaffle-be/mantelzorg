@@ -92,3 +92,19 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+/**
+ * Controleer of de gebruiker de mantelzorgers mag inzien voor een bepaalde hulpverlener
+ */
+Route::filter('mantelzorgers', function(\Illuminate\Routing\Route $route, $request)
+{
+    $hulpverlener = $route->getParameter('hulpverlener');
+
+    $user = Auth::user();
+
+    //indien de gebruiker geen admin is en hij kijkt naar mantelzorgers van iemand anders
+    if($user->admin === '0' && $user->id !== $hulpverlener->id)
+    {
+        return Redirect::route('instellingen.index');
+    }
+});

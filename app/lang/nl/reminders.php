@@ -15,8 +15,16 @@ return array(
 
     "password" => "Wachtwoord moet minimaal zes tekens lang zijn en de wachtwoorden moeten overeenkomen.",
 
-    "user"     => "Geen gebruiker bekend met dat e-mailadres.",
+    "user"     => "Geen gebruiker bekend met dit e-mailadres.",
 
     "token"    => "Dit wachtwoord reset token is niet geldig.",
+
+    "success"  => "De email om uw paswoord te resetten is succesvol verzonden.",
+
+
+    "email" => array(
+        'title' => 'Paswoord resetten',
+        'body' => 'Vul het formulier van onderstaande link in om uw paswoord te resetten.'
+    )
 
 );

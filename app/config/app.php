@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'debug' => true,
+	'debug' => false,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://localhost',
+	'url' => 'http://zichtopmantelzorg.be',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -113,6 +113,11 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
+        'Template\TemplateServiceProvider',
+        'Questionnaire\ServiceProvider',
+        'Instrument\ServiceProvider',
+        'Schickling\Backup\BackupServiceProvider',
+
 
 	),
 
@@ -178,6 +183,9 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
+        'Template'        => 'Template\TemplateFacade',
+        'Memorize'        => 'Instrument\Memorize\Facade',
+        'InstrumentTool'  => 'Instrument\Engine\Facade',
 
 	),
 

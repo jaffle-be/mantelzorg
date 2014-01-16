@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en-US">
-	<head>
-		<meta charset="utf-8">
-	</head>
-	<body>
-		<h2>Password Reset</h2>
+@extends('layout.email.master')
 
-		<div>
-			To reset your password, complete this form: {{ URL::to('password/reset', array($token)) }}.
-		</div>
-	</body>
-</html>
+@section('content')
+<h3>{{ Lang::get('reminders.email.title') }}</h3>
+
+<p>
+    {{ Lang::get('reminders.email.body') }}
+    <br/>{{ URL::action('IndexController@getReset', array($token)) }}
+</p>
+@stop

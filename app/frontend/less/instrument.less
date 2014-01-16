@@ -1,0 +1,163 @@
+@import 'variables';
+@import 'bootstrap-variables';
+
+.instrument-header{
+
+  margin-bottom: 20px;
+
+  ul{
+    list-style: none;
+    padding: 0;
+    text-align: center;
+
+    li{
+      display: inline-block;
+      padding: 10px;
+      border: 1px solid @border-color;
+      border-radius: @border-radius-base;
+      margin-right: 10px;
+      text-shadow: none;
+      color: white;
+    }
+
+    li.panel-gray{
+      background-color: @panel-gray;
+    }
+
+    li.panel-yellow{
+      background-color: @panel-yellow;
+    }
+
+    li.panel-purple{
+      background-color: @panel-purple;
+    }
+
+    li.panel-green{
+      background-color: @panel-green;
+    }
+
+    li.panel-red{
+      background-color: @panel-red;
+    }
+
+    li.panel-blue{
+      background-color: @panel-blue;
+    }
+
+    li.panel-orange{
+      background-color: @panel-orange;
+    }
+  }
+
+}
+
+.question-color(@c){
+  .header{
+    color:@c;
+  }
+
+  .glyphicon{
+    color:@c;
+  }
+}
+
+.instrument-questions{
+
+  .question-status{
+    &.question-blue{
+      .question-color(@panel-blue);
+    }
+    
+    &.question-red{
+      .question-color(@panel-red);
+    }
+    
+    &.question-green{
+      .question-color(@panel-green);
+    }
+
+    &.question-purple{
+      .question-color(@panel-purple);
+    }
+
+    &.question-orange{
+      .question-color(@panel-orange);
+    }
+
+    &.question-yellow{
+      .question-color(@panel-yellow);
+    }
+
+    &.question-gray{
+      .question-color(@panel-gray);
+    }
+    
+    font-size: xx-large;
+
+    .glyphicon{
+      margin-top: 15px;
+    }
+  }
+
+  .instrument-question{
+    border-left: 1px solid @border-color;
+    padding-left: 40px;
+    margin-bottom: 20px;
+
+    & > div{
+      padding: 15px;
+      border: 1px solid @border-color;
+    }
+
+    .header{
+      cursor: pointer;
+      font-size: x-large;
+      font-weight: bold;
+      margin-bottom: 10px;
+
+      .glyphicon{
+        float:right;
+      }
+    }
+
+    .body{
+      .well{
+        margin-top: 10px;
+      }
+    }
+
+    textarea{
+      height: 90px;
+    }
+    
+    &.question-blue{
+      .question-color(@panel-blue)
+    }
+
+    &.question-red{
+      .question-color(@panel-red)
+    }
+
+    &.question-green{
+      .question-color(@panel-green)
+    }
+
+    &.question-orange{
+      .question-color(@panel-orange)
+    }
+
+    &.question-purple{
+      .question-color(@panel-purple)
+    }
+
+    &.question-gray{
+      .question-color(@panel-gray)
+    }
+
+  }
+
+}
+
+.instrument-footer{
+  margin-top: 20px;
+}

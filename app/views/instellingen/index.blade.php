@@ -4,7 +4,16 @@
 
 @section('content')
 
-<?= $subnav ?>
+<?= Template::crumb(array(
+
+    array(
+        'text' => Lang::get('master.navs.instellingen'),
+    ),
+
+    array('text' => Lang::get('master.navs.profiel'))
+
+)) ?>
+
 
 <?= Form::model($user, array(
     'action' => array('Instelling\PersonController@update', $user->id),
@@ -59,23 +68,29 @@
             <fieldset>
                 <legend><?= Lang::get('users.organisatie') ?></legend>
 
-                <label for="organisation">
-                    <?= Lang::get('users.organisatie') ?>
-                </label>
-                <span class="errors"><?= $errors->first('organisation_id') ?></span>
 
-                <?= Form::select('organisation_id', $organisations, null, array(
+                <div class="input-select">
+
+                    <label for="organisation">
+                        <?= Lang::get('users.organisatie') ?>
+                    </label>
+                    <span class="errors"><?= $errors->first('organisation_id') ?></span>
+
+                    <?= Form::select('organisation_id', $organisations, null, array(
                         'id' => 'organisation',
                         'class' => 'form-control')
-                )?>
+                    )?>
+                </div>
 
 
-                <label for="locations"><?= Lang::get('users.locations') ?></label>
-                <span class="errors"><?= $errors->first('organisation_location_id') ?></span>
-                <?= Form::select('organisation_location_id', $locations, null, array(
-                    'id' => 'location',
-                    'class' => 'form-control',
-                )) ?>
+                <div class="input-select">
+                    <label for="locations"><?= Lang::get('users.locations') ?></label>
+                    <span class="errors"><?= $errors->first('organisation_location_id') ?></span>
+                    <?= Form::select('organisation_location_id', $locations, null, array(
+                        'id' => 'location',
+                        'class' => 'form-control',
+                    )) ?>
+                </div>
 
             </fieldset>
         </div>
