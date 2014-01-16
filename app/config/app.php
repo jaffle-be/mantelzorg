@@ -116,6 +116,7 @@ return array(
         'Template\TemplateServiceProvider',
         'Questionnaire\ServiceProvider',
         'Instrument\ServiceProvider',
+        'Schickling\Backup\BackupServiceProvider',
 
 
 	),
