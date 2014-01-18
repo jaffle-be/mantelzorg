@@ -53,7 +53,7 @@ class Template {
     {
         $next = $questionnaire->nextPanel($current);
 
-        return sprintf('<div class="instrument-footer"><input type="submit" class="btn btn-primary" value="%s"></div>', $next ? $next->title : Lang::get('instrument.bevestigen'));
+        return sprintf('<div class="instrument-footer"><input type="submit" class="btn btn-%s" value="%s"></div>', $current->color ? $current->color : 'primary' ,$next ? $next->title : Lang::get('instrument.bevestigen'));
     }
 
 } 
