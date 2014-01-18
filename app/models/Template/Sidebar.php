@@ -54,7 +54,7 @@ class Sidebar {
     {
         if($sublinks)
         {
-            return '<ul class="subnav">';
+            return '<div><ul class="subnav">';
         }
 
         return '<ul>';
@@ -63,8 +63,12 @@ class Sidebar {
     /**
      * @return string
      */
-    protected function close()
+    protected function close($sublinks = false)
     {
+        if($sublinks)
+        {
+            return '</ul></div>';
+        }
         return '</ul>';
     }
 
@@ -83,9 +87,9 @@ class Sidebar {
                 $output .= $this->item($sublink);
             }
 
-            $output .= $this->close();
+            $output .= $this->close(true);
 
-            return sprintf('<li><a href="%s"><span class="%s"></span>%s%s</a>', $item['href'], isset($item['class']) ? $item['class'] : null, $item['text'], $output);
+            return sprintf('<li><a href="%s"><span class="%s"></span>%s</a>%s', $item['href'], isset($item['class']) ? $item['class'] : null, $item['text'], $output);
         }
 
         return sprintf('<li><a href="%s"><span class="%s"></span>%s</a>', $item['href'], isset($item['class']) ? $item['class'] : null, $item['text']);
