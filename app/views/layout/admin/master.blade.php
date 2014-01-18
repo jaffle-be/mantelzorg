@@ -46,19 +46,21 @@
 
 @include('layout.admin.header')
 
-<div class="content-wrapper">
+<div class="container">
 
-    <div class="container">
+    <div class="row">
 
 
 
-        <section id="sidebar">
+        <section id="sidebar" class="col-md-3 col-xs-12">
 
             {{ Template::sidebar() }}
 
+            <div class="clearfix"></div>
+
         </section>
 
-        <section id="content" class="container">
+        <section id="content" class="col-md-9 col-xs-12">
             @yield('content')
         </section>
 

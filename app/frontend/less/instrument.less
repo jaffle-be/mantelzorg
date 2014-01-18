@@ -1,5 +1,34 @@
 @import 'variables';
 @import 'bootstrap-variables';
+@import 'bootstrap-mixins';
+
+.btn-gray{
+  .button-variant(@white, @panel-gray, darken(@panel-gray, 10%));
+}
+
+.btn-green{
+  .button-variant(@white, @panel-green, darken(@panel-green, 10%));
+}
+
+.btn-purple{
+  .button-variant(@white, @panel-purple, darken(@panel-purple, 10%));
+}
+
+.btn-yellow{
+  .button-variant(@white, @panel-yellow, darken(@panel-yellow, 10%));
+}
+
+.btn-blue{
+  .button-variant(@white, @panel-blue, darken(@panel-blue, 10%));
+}
+
+.btn-red{
+  .button-variant(@white, @panel-red, darken(@panel-red, 10%));
+}
+
+.btn-orange{
+  .button-variant(@white, @panel-orange, darken(@panel-orange, 10%));
+}
 
 .instrument-header{
 
@@ -17,6 +46,9 @@
       border-radius: @border-radius-base;
       margin-right: 10px;
       text-shadow: none;
+    }
+
+    li.active{
       color: white;
     }
 
@@ -100,7 +132,7 @@
   }
 
   .instrument-question{
-    border-left: 1px solid @border-color;
+//    border-left: 1px solid @border-color;
     padding-left: 40px;
     margin-bottom: 20px;
 

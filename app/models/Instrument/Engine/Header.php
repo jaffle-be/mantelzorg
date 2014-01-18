@@ -33,7 +33,8 @@ class Header {
 
     protected function item(Panel $panel, Panel $current)
     {
-        return sprintf('<li class="%s %s">%s</li>', $panel->id === $current->id ? 'active' : '', 'panel-' . $panel->color, $panel->title);
+        $active = $panel->id === $current->id;
+        return sprintf('<li class="%s %s">%s</li>', $active ? 'active' : '', $active ? 'panel-' . $panel->color : '', $panel->title);
     }
 
 } 

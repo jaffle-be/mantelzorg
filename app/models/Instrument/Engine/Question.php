@@ -14,9 +14,11 @@ class Question {
 
         $output = '<div class="row">';
 
-        $output .= sprintf('<div class="col-md-1 question-status question-%s"><i class="glyphicon glyphicon-question-sign"></i><i class="glyphicon glyphicon-ok" style="display:none;"></i></div>', $question->panel->color);
+        $output .= '<div class="col-xs-1 visible-xs"></div>';
 
-        $output .= sprintf('<div class="col-md-11 instrument-question question-%s" data-question-id="%s">', $question->panel->color, $question->id);
+        $output .= sprintf('<div class="col-md-1 col-xs-1 question-status question-%s"><i class="glyphicon glyphicon-question-sign"></i><i class="glyphicon glyphicon-ok" style="display:none;"></i></div>', $question->panel->color);
+
+        $output .= sprintf('<div class="col-md-11 col-xs-9 instrument-question question-%s" data-question-id="%s">', $question->panel->color, $question->id);
 
         //wrapper to allow for a border
         $output .= '<div>';

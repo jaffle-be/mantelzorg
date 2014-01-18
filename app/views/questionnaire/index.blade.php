@@ -12,13 +12,13 @@
 
     @foreach($questionnaires as $questionnaire)
     <div class="row" data-questionnaire-id="<?= $questionnaire->id ?>">
-        <div class="col-md-4 questionnaire">
+        <div class="col-xs-10 col-sm-4 questionnaire">
             <div class="header"><i class="glyphicons notes_2"></i><?= Lang::get('questionnaires.questionnaire') ?></div>
             <div class="body">
                 <?= Form::text('title', $questionnaire->title, array('class' => 'form-control questionnaire-title')) ?>
             </div>
         </div>
-        <div class="col-md-1 icons">
+        <div class="col-xs-2 col-sm-1 icons">
             <div class="header">
                 @if($questionnaire->active === '1')
                 <i class="glyphicon glyphicon-check"></i>
@@ -31,7 +31,7 @@
             </div>
 
         </div>
-        <div class="col-md-5 panels">
+        <div class="col-xs-10 col-sm-5 panels">
             <div class="header">
                 <span>
                     <i class="glyphicons list"></i><?= Lang::get('questionnaires.panels') ?>
@@ -71,7 +71,7 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-2 savers">
+        <div class="col-xs-2 col-sm-2 savers">
             <div class="header">&nbsp;</div>
             <div class="body">
                 <ul>
