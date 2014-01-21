@@ -56,4 +56,16 @@ return array(
     'hulperlener' => 'Hulpverlener',
     'hulperleners' => 'Hulpverleners',
     'create_oudere' => 'Oudere toevoegen',
+
+    /**
+     * ouderen
+     */
+    'diagnose' => 'Diagnose',
+
+
+    /**
+     * mantelzorgers
+     */
+    'relatie_oudere' => 'Relatie oudere',
+    'select_relation_oudere' => 'Kies relatie',
 );
