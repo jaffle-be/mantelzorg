@@ -21,7 +21,10 @@
 
 )) ?>
 
-<?= Form::open(array('route' => array('instrument.panel.submit', $panel->id, $survey->id))) ?>
+<?= Form::open(array(
+    'route' => array('instrument.panel.submit', $panel->id, $survey->id),
+    'id' => 'panel-form'
+)) ?>
 
 <?= InstrumentTool::header($questionnaire, $panel); ?>
 

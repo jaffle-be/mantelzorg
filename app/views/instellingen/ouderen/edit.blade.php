@@ -94,6 +94,16 @@
                             <span class="block errors"><?= $errors->first('male') ?></span>
                         </div>
 
+                        <div class="col-md-12">
+                            <label for="diagnose"><?= Lang::get('users.diagnose') ?></label>
+
+                            <?= Form::textarea('diagnose', $oudere->diagnose, array(
+                                'class' => 'form-control',
+                                'id' => 'diagnose'
+                            ));
+                            ?>
+                        </div>
+
                     </div>
 
                 </div>
@@ -173,6 +183,7 @@
 </div>
 
 <div>
+    <br/>
     <input class="btn btn-primary" type="submit" value="<?= Lang::get('users.save') ?>"/>
 </div>
 

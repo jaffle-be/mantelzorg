@@ -116,6 +116,11 @@ class InstrumentController extends AdminController{
             Memorize::question($question, $survey);
         }
 
+        if($next = Input::get('next_panel'))
+        {
+            return Redirect::route('instrument.panel.get', array($next, $survey->id));
+        }
+
         $next = $panel->questionnaire->nextPanel($panel);
 
         if($next)

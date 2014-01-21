@@ -24,7 +24,7 @@ class Oudere extends \Eloquent{
 
     protected $fillable = array(
         'email', 'firstname', 'lastname', 'male', 'street', 'postal', 'city',
-        'phone', 'mantelzorger_id', 'birthday',
+        'phone', 'mantelzorger_id', 'birthday', 'diagnose'
     );
 
     public function getFullnameAttribute()

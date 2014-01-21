@@ -12,7 +12,7 @@ class Mantelzorger extends Eloquent{
     protected $table = 'mantelzorgers';
 
     protected static $rules = array(
-        'email' => 'email|unique:mantelzorgers,email|required',
+        'email' => 'email|unique:mantelzorgers,email',
         'firstname' => 'required',
         'lastname' => 'required',
         'male' => 'required',

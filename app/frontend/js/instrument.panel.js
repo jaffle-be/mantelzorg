@@ -116,6 +116,15 @@
             return false;
         });
 
+        $(".instrument-header").on('click', 'a', function(event)
+        {
+            $("#next_panel").val($(this).data('target-id'));
+
+            $("#panel-form").submit();
+
+            event.preventDefault();
+        })
+
     });
 
 })(window.jQuery, window.app)
