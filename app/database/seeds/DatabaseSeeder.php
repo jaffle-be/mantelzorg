@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
 //        $this->call('QuestionSeeder');
 //        $this->call('ChoiseSeeder');
 
-        $this->call('MetaContextValueSeeder');
+//        $this->call('MetaContextValueSeeder');
     }
 
 }
