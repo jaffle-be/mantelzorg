@@ -167,11 +167,44 @@
 
         </fieldset>
 
+
+        <fieldset>
+            <legend><?= Lang::get('users.dossier_details') ?></legend>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+
+                    <span class="block errors"><?= $errors->first('mantelzorger_relation') ?></span>
+
+                    <label for="mantelzorger_relation"><?= Lang::get('users.relatie_mantelzorger') ?></label>
+
+                    <?= Form::select('mantelzorger_relation', $relations_mantelzorger, null, array('id' => 'mantelzorger_relation', 'class' => 'form-control')) ?>
+
+                    <label for="mantelzorger_relation_alternate"><?= Lang::get('users.relatie_mantelzorger_alternate') ?></label>
+
+                    <?= Form::text('mantelzorger_relation_alternate', null, array(
+                        'id' => 'mantelzorger_relation_alternate',
+                        'class' => 'form-control'
+                    )) ?>
+                </div>
+
+                <div class="col-xs-12 col-md-6">
+                    <label for="diagnose"><?= Lang::get('users.diagnose') ?></label>
+
+                    <?= Form::textarea('diagnose', null, array(
+                        'class' => 'form-control',
+                        'id' => 'diagnose'
+                    ));
+                    ?>
+                </div>
+            </div>
+        </fieldset>
+
     </div>
     
 </div>
 
 <div>
+    <br/>
     <input class="btn btn-primary" type="submit" value="<?= Lang::get('users.save') ?>"/>
 </div>
 

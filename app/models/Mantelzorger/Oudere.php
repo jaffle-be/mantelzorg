@@ -19,12 +19,13 @@ class Oudere extends \Eloquent{
         'postal' => 'required',
         'city' => 'required',
         'mantelzorger_id' => 'required|exists:mantelzorgers,id',
+        'mantelzorger_relation' => 'exists:meta_values,id',
         'birthday' => 'required',
     );
 
     protected $fillable = array(
         'email', 'firstname', 'lastname', 'male', 'street', 'postal', 'city',
-        'phone', 'mantelzorger_id', 'birthday', 'diagnose'
+        'phone', 'mantelzorger_id', 'birthday', 'diagnose', 'mantelzorger_relation'
     );
 
     public function getFullnameAttribute()
@@ -56,6 +57,11 @@ class Oudere extends \Eloquent{
     public function setBirthdayAttribute($value)
     {
         $this->attributes['birthday'] = DateTime::createFromFormat('d/m/Y', $value);
+    }
+
+    public function mantelzorger_relation()
+    {
+        $this->belongsTo('Meta\Meta', 'mantelzorger_relation');
     }
 
     public function getDates()

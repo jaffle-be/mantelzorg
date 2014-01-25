@@ -66,6 +66,8 @@ return array(
     /**
      * mantelzorgers
      */
-    'relatie_oudere' => 'Relatie oudere',
+    'relatie_mantelzorger' => 'Relatie met mantelzorger',
+    'relatie_mantelzorger_alternate' => 'Andere relatie met mantelzorger',
     'select_relation_oudere' => 'Kies relatie',
+    'dossier_details' => 'Details dossier oudere',
 );
