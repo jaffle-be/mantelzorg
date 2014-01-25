@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
 //        $this->call('PanelSeeder');
 //        $this->call('QuestionSeeder');
 //        $this->call('ChoiseSeeder');
+
+        $this->call('MetaContextValueSeeder');
     }
 
 }
