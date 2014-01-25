@@ -8,15 +8,28 @@ use Redirect;
 use Input;
 use Auth;
 
+/**
+ * Class MantelzorgerController
+ * @package Instelling
+ */
 class MantelzorgerController extends \AdminController{
 
+    /**
+     * @var \Mantelzorger\Mantelzorger
+     */
     protected $mantelzorger;
 
+    /**
+     * @param Mantelzorger $mantelzorger
+     */
     public function __construct(Mantelzorger $mantelzorger)
     {
         $this->mantelzorger = $mantelzorger;
+
         $this->beforeFilter('auth');
+
         $this->beforeFilter('csrf', array('only' => array('store')));
+
         $this->beforeFilter('mantelzorgers');
     }
 
@@ -102,4 +115,4 @@ class MantelzorgerController extends \AdminController{
 
     }
 
-} 
+}
