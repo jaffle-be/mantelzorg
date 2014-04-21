@@ -14,6 +14,9 @@
             <!--            <li><a href="">--><?//= Lang::get('master.footer.blog') ?><!--</a></li>-->
             <!--            <li><a href="">--><?//= Lang::get('master.footer.pers') ?><!--</a></li>-->
             <li><a href="<?= URL::action('IndexController@getHetTeam') ?>"><?= Lang::get('master.footer.team') ?></a></li>
+            <li>
+                <a target="_blank" href="http://www.youtube.com/watch?v=gqDFSs_z5_A&feature=youtu.be">Film studiedag</a>
+            </li>
             <!--            <li><a href="">--><?//= Lang::get('master.footer.help') ?><!--</a></li>-->
         </ul>
 

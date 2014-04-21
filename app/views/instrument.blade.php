@@ -28,6 +28,13 @@
 
     </div>
 
+    <div>
+        <h3>{{ Lang::get('front.instrument.s4-title') }}</h3>
+        <p>
+            {{ Lang::get('front.instrument.s4-p1', array('url' => 'http://www.academiapress.be/zicht-op-mantelzorg.html')) }}
+        </p>
+    </div>
+
 </div>
 
 @stop

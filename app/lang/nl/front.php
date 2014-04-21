@@ -33,6 +33,9 @@ return array(
         "s3-p1" => "Mantelzorg wordt binnen alle organisaties als zeer belangrijk aanzien. Het idee dat mantelzorgers zo veel mogelijk betrokken en op een gepaste manier ondersteund moeten worden, heeft zijn plaats verworven. ",
         "s3-p2" => "Over hoe dit in de praktijk kan gebeuren, bestaat echter minder duidelijkheid. De zorg die mantelzorgers opnemen voor de oudere, behoort in verschillende organisaties tot de standaardinformatie die men verzamelt bij de oudere. Deze informatie wordt in sommige gevallen geregistreerd in een cliëntendossier. Er worden daarentegen geen instrumenten genoemd om de situatie en beleving van mantelzorgers in kaart te brengen. De beleving van de zorg en de ondersteuningsnoden van de mantelzorger worden veeleer ‘tussen de regels door’ en weinig expliciet bevraagd.",
         "s3-p3" => "Door zicht te krijgen op de situatie en verwachtingen van de mantelzorger zijn hulpverleners beter in staat om passende informatie en ondersteuning te bieden.",
+
+        "s4-title" => "Instrument bestellen",
+        "s4-p1" => "U kan uw exemplaar <a href=':url' target='_blank'>hier</a> bestellen.",
     ),
 
     'login' => array(
