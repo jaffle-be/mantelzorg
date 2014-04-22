@@ -22,11 +22,22 @@
         </address>
 
         <address>
+            <strong>Nadine De Stercke</strong><br/>
+            maatschappelijk werker en gezinstherapeut - lector Opleiding Sociaal werk HoGent <a target="_blank" href="http://pure.hogent.be/portal/nl/persons/nadine-de-stercke%2822a4b236-b856-4a00-8cc2-08e2ff12424f%29.html">(expertise)</a><br/>
+        </address>
+
+        <address>
+            <strong>Nico De Witte</strong><br/>
+            verpleegkundige en gerontoloog - lector Opleiding Verpleegkunde HoGent <a target="_blank" href="http://pure.hogent.be/portal/nl/persons/nico-de-witte%28945280a6-c572-486c-9530-e199f08114c9%29.html">(expertise)</a><br/>
+        </address>
+
+        <address>
             <strong>Faculteit Mens & Welzijn</strong><br>
             Keramiekstraat 80<br>
             9000 Gent<br>
             <abbr title="<?= Lang::get('front.team.telefoon') ?>"><?= Lang::get('front.team.telefoon_abbr') ?>:</abbr> 09/ 321 21 38
         </address>
+
     </div>
 
 </div>
