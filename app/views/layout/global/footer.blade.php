@@ -34,15 +34,15 @@
 
     <div class="pull-right">
         <span class="copyright">
-        <?
-        $date = new DateTime();
-        if($date->format('Y') === '2013'){
-            echo 'Copyright ® 2013';
-        }
-        else{
-            echo 'Copyright ® 2013 - ' . $date->format('Y');
-        }
-        ?>
+
+            <? $date = new DateTime() ?>
+
+            @if($date->format('Y') === '2013')
+                {{ 'Copyright &copy; 2013'}}
+            @else
+                {{'Copyright &copy; 2013 - ' . $date->format('Y')}}
+            @endif
+
         </span>
         <a target="_blank" href="http://www.hogent.be">
             <img class="logo-hogent" src="/images/logo-footer.png" alt=""/>
