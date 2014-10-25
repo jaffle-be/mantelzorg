@@ -49,9 +49,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'mantelzorg',
-			'username'  => 'mantelzorg',
-			'password'  => 'm4nt3lz0rg123',
+			'database'  => getenv('DB_DATABASE') ? getenv('DB_DATABASE') : 'mantelzorg',
+			'username'  => getenv('DB_USERNAME') ? getenv('DB_USERNAME') : 'mantelzorg',
+			'password'  => getenv('DB_PASSWORD') ? getenv('DB_PASSWORD') :'m4nt3lz0rg123',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
