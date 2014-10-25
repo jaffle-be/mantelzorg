@@ -18,6 +18,8 @@ return array(
 
 	'driver' => 'native',
 
+    'expire_on_close' => false,
+
 	/*
 	|--------------------------------------------------------------------------
 	| Session Lifetime
