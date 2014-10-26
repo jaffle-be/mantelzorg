@@ -24,7 +24,7 @@ return array(
             'condition' => function()
             {
                 $user = Auth::user();
-                return $user->admin === '1';
+                return $user->admin == '1';
             },
 
             'sublinks' => array(
@@ -53,7 +53,7 @@ return array(
             {
                 $user = Auth::user();
 
-                return $user->admin === '1';
+                return $user->admin == '1';
             }
         ),
 
