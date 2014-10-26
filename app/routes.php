@@ -127,4 +127,4 @@ Route::controller('', 'IndexController');
  * HOME
  */
 
-Route::get('', array('as' => 'home', 'uses' => 'IndexController@index'));
+Route::get('', array('as' => 'home', 'uses' => 'IndexController@getIndex'));
