@@ -138,4 +138,36 @@ class HulpverlenerController extends AdminController{
 
     }
 
+    /**
+     * Get an array of ids to use to regen the passwords.
+     */
+    public function regenPasswords()
+    {
+        $input = Input::get('ids');
+
+        if(!is_array($input) || empty($input))
+        {
+            return json_encode([
+                'status' => 'no decent input provided.'
+            ]);
+        }
+
+        $users = $this->user->whereIn('id', $input)->get();
+
+        /** @var User $user */
+        foreach($users as $user)
+        {
+            $original = $user->generateNewPassword();
+
+            $user->password = Hash::make($original);
+
+            if($user->save())
+            {
+                Event::fire('user.password-generated', array($user, $original));
+            }
+        }
+
+        return json_encode(['status' => 'oke', 'message' => Lang::get('users.emails-sent')]);
+    }
+
 }

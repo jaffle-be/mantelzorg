@@ -91,6 +91,8 @@ Route::resource('organisations', 'OrganisationController', array('only' => array
  */
 Route::resource('hulpverleners', 'HulpverlenerController', array('only' => array('index', 'edit', 'update')));
 
+Route::post('hulpverleners/regen-passwords', array('uses' => 'HulpverlenerController@regenPasswords', 'as' => 'hulpverleners.regen-passwords'));
+
 /**
  * QUESTIONAIRES
  */

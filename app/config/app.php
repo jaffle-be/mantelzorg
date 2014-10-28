@@ -125,9 +125,8 @@ return array(
         'Questionnaire\ServiceProvider',
         'Instrument\ServiceProvider',
         'Schickling\Backup\BackupServiceProvider',
-        'Mantelzorger\MantelzorgerServiceProvider'
-
-
+        'Mantelzorger\MantelzorgerServiceProvider',
+        'UserServiceProvider',
     ),
 
     /*

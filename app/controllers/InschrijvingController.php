@@ -102,18 +102,13 @@ class InschrijvingController extends AdminController{
 
             if($user)
             {
-                Mail::send('emails.auth.password', compact(array('original', 'user')), function($message) use ($user){
-                    $message->from('thomas@jaffle.be','Thomas Warlop')
-                        ->to($user->email, $user->firstname . ' ' . $user->lastname)
-                        ->subject(Lang::get('email.registration.subject'));
-                });
+                Event::fire('user.password-generated', array($user, $original));
             }
 
             $inschrijving->delete();
 
             return Redirect::action('InschrijvingController@index');
         }
-
 
     }
 
