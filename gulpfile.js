@@ -39,3 +39,23 @@ gulp.task('master', function()
         .pipe(rename('beta.min.css'))
         .pipe(gulp.dest('public/css'));
 });
+
+gulp.task('js', function()
+{
+    gulp.src([
+        'app/frontend/js/plugins/boot.js',
+        'app/frontend/js/plugins/organisations.js',
+        'app/frontend/js/plugins/locations.js',
+        'app/frontend/js/plugins/questionnaires.js',
+        'app/frontend/js/plugins/questionnaire-panel.js',
+        'app/frontend/js/plugins/questionnaire-saver.js',
+        'app/frontend/js/plugins/question-creator.js',
+        'app/frontend/js/plugins/choise-creator.js',
+        'app/frontend/js/plugins/question-saver.js',
+        'app/frontend/js/plugins/bootstrap-datepicker.js',
+        'app/frontend/js/plugins/start.js'
+    ])
+        .pipe(concat('master.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('public/js'));
+});
