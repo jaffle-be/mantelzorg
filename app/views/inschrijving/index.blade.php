@@ -13,6 +13,13 @@
 )) ?>
 
 
+@if($registrations->count())
+<div class="text-center">
+    {{ $registrations->links() }}
+</div>
+@endif
+
+
 <table class="table table-striped table-hover">
 
     <thead>
@@ -41,5 +48,11 @@
     @endforeach
     </tbody>
 </table>
+
+@if($registrations->count())
+<div class="text-center">
+    {{ $registrations->links() }}
+</div>
+@endif
 
 @stop

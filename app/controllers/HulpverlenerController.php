@@ -33,7 +33,7 @@ class HulpverlenerController extends AdminController{
 
     public function index()
     {
-        $users = $this->user->with('organisation')->get();
+        $users = $this->user->with('organisation')->paginate();
 
         $this->layout->content = View::make('hulpverlener.index', compact(array('users')));
     }

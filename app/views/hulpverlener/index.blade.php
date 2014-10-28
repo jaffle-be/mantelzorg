@@ -14,6 +14,11 @@
 
 )) ?>
 
+@if($users->count())
+<div class="text-center">
+    {{ $users->links() }}
+</div>
+@endif
 
 <table class="table table-striped table-hover">
 
@@ -47,6 +52,12 @@
     @endforeach
     </tbody>
 </table>
+
+@if($users->count())
+<div class="text-center">
+    {{ $users->links() }}
+</div>
+@endif
 
 
 @stop

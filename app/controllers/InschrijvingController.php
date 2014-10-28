@@ -32,7 +32,7 @@ class InschrijvingController extends AdminController{
 
     public function index()
     {
-        $registrations = $this->registration->all();
+        $registrations = $this->registration->paginate();
 
         $this->layout->content = View::make('inschrijving.index', compact(array('registrations')));
     }
