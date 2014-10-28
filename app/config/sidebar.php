@@ -79,7 +79,7 @@ return array(
         array(
             'href' => Url::action('Instelling\PersonController@index'),
 
-            'class' => 'glyphicon glyphicon-wrench',
+            'class' => 'glyphicons wrench',
 
             'text' => Lang::get('master.navs.instellingen'),
 

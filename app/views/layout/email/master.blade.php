@@ -13,12 +13,11 @@
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <link rel="stylesheet" href="<?= asset('/css/bootstrap.css') ?>"/>
-    <link rel="stylesheet" href="<?= asset('/css/bootstrap-theme.css') ?>"/>
+    <link rel="stylesheet" href="<?= asset('/css/master.min.css') ?>"/>
+
     <link href='http://fonts.googleapis.com/css?family=Didact+Gothic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic' rel='stylesheet' type='text/css'>
 
-    <link rel="stylesheet" href="<?= asset('/css/master.min.css') ?>"/>
 
     @yield('styles')
 
