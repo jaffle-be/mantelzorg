@@ -10,14 +10,12 @@ var gulp = require('gulp'),
     rename = require('gulp-rename');
 
 /**
- * Twitter Bootstrap related tasks
+ * Master css file
  */
 
 gulp.task('master', function()
 {
     //copy the assets
-
-
     var master = gulp.src('app/frontend/css/master.less')
         .pipe(less())
         .pipe(autoprefixer())
@@ -58,4 +56,37 @@ gulp.task('js', function()
         .pipe(concat('master.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('public/js'));
+});
+
+
+/**
+ * jquery, twitter bootstrap, jquery-ui, modernizr
+ */
+gulp.task('libs', function()
+{
+    gulp.src('app/components/modernizr/modernizr.js')
+        .pipe(uglify())
+        .pipe(rename('modernizr.min.js'))
+        .pipe(gulp.dest('public/js'));
+
+    gulp.src([
+        'app/components/jquery/dist/jquery.min.js',
+        'app/components/bootstrap/dist/js/bootstrap.min.js',
+    ])
+        .pipe(gulp.dest('public/js'));
+
+    gulp.src(
+        'app/components/bootstrap/dist/fonts/*'
+    ).pipe(gulp.dest('public/fonts'));
+
+    gulp.src([
+        'app/components/jquery-ui/ui/core.js',
+        'app/components/jquery-ui/ui/widget.js',
+        'app/components/jquery-ui/ui/mouse.js',
+        'app/components/jquery-ui/ui/position.js',
+        'app/components/jquery-ui/ui/sortable.js'
+    ])
+        .pipe(concat('jquery-ui.custom.min.js'))
+        .pipe(gulp.dest('public/js'));
+
 });
