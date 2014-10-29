@@ -13,15 +13,10 @@ class TemplateServiceProvider extends \Illuminate\Support\ServiceProvider{
     {
         $this->app['template'] = $this->app->share(function($app)
         {
-            $sidebar = $app['config']->get('sidebar');
-
-            $sidebar = new Sidebar($sidebar);
-
             $crumb = new Breadcrumb();
 
-            return new TemplateRepository($sidebar, $crumb);
+            return new TemplateRepository($crumb);
         });
     }
-
 
 } 

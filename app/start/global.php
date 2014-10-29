@@ -96,6 +96,11 @@ View::composer('layout.admin.master', function($view){
     $view->with('user', Auth::user());
 });
 
+View::composer('layout.admin.sidebar', function($view)
+{
+    $view->with('me', Auth::user());
+});
+
 Validator::extend('passcheck', function($attribute, $value, $parameters){
 
     $user = Auth::user();

@@ -1,79 +1,71 @@
 @import 'variables';
 
-section#sidebar{
+section#sidebar {
 
-  ul{
+  ul {
     list-style: none;
 
-    li{
+    li {
+      color: @green;
       margin-top: 10px;
       text-transform: capitalize;
 
-      a{
-//        font-size: large;
+      .glyphicon, .glyphicons {
+        color: @green;
+        margin-right: 5px;
+      }
 
-        .glyphicon, .glyphicons{
-          color:@green;
-          margin-right: 5px;
-        }
-
-        @media(max-width: @screen-xs-max)
-        {
-          font-size: inherit;
-        }
+      @media (max-width: @screen-xs-max) {
+        font-size: inherit;
       }
     }
 
-    li:first-child{
+    li:first-child {
       margin-top: 0px;
     }
   }
 
-  ul.subnav li
-  {
+  ul.subnav li {
     margin-top: 0;
 
-    a{
+    a {
       font-size: small;
     }
   }
 
-  @media(max-width:@screen-sm-max)
-  {
-    ul{
+  @media (max-width: @screen-sm-max) {
+    ul {
       float: left;
       margin-left: 0px;
       padding-left: @padding-base-horizontal;
 
-
-      li{
+      li {
         margin-top: 0;
         float: left;
-        display:block;
+        display: block;
         padding-left: @padding-base-horizontal;
         padding-right: @padding-base-horizontal;
-        padding-top:@padding-base-vertical;
+        padding-top: @padding-base-vertical;
         padding-bottom: @padding-base-vertical;
       }
     }
 
-    ul.subnav{
-      display:none;
-      clear:both;
+    ul.subnav {
+      display: none;
+      clear: both;
     }
 
-
-    ul li:active ul.subnav, ul li:hover ul.subnav{
+    ul li:active ul.subnav, ul li:hover ul.subnav {
       position: absolute;
       z-index: @zindex-dropdown;
       display: block;
-      float:none;
+      float: none;
       padding-left: 0;
       background-color: #FFF;
       border: 1px solid @border-color;
 
-      li{
-        float:none;
+      li {
+        float: none;
       }
     }
   }
