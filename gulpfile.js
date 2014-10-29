@@ -15,26 +15,11 @@ var gulp = require('gulp'),
 
 gulp.task('master', function()
 {
-    //copy the assets
-    var master = gulp.src('app/frontend/css/master.less')
+    gulp.src('app/frontend/css/**/*.less', {base:'app/frontend/css'})
         .pipe(less())
         .pipe(autoprefixer())
         .pipe(minify())
-        .pipe(rename('master.min.css'))
-        .pipe(gulp.dest('public/css'));
-
-    var users = gulp.src('app/frontend/css/users.less')
-        .pipe(less())
-        .pipe(autoprefixer())
-        .pipe(minify())
-        .pipe(rename('users.min.css'))
-        .pipe(gulp.dest('public/css'));
-
-    var beta = gulp.src('app/frontend/css/beta.less')
-        .pipe(less())
-        .pipe(autoprefixer())
-        .pipe(minify())
-        .pipe(rename('beta.min.css'))
+        .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest('public/css'));
 });
 
@@ -55,6 +40,11 @@ gulp.task('js', function()
     ])
         .pipe(concat('master.min.js'))
         .pipe(uglify())
+        .pipe(gulp.dest('public/js'));
+
+    gulp.src('app/frontend/js/*.js')
+        .pipe(uglify())
+        .pipe(rename({suffix:'.min'}))
         .pipe(gulp.dest('public/js'));
 });
 
