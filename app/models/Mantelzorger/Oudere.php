@@ -22,6 +22,20 @@ class Oudere extends \Eloquent{
         'phone', 'mantelzorger_id', 'birthday', 'diagnose', 'mantelzorger_relation'
     );
 
+    public function getDisplayNameAttribute()
+    {
+        if(!empty($this->firstname) || !empty($this->lastname))
+        {
+            return trim($this->getFullnameAttribute());
+        }
+        else if(!empty($this->identifier)){
+            return $this->identifier;
+        }
+        else{
+            return '#ID#' . $this->id;
+        }
+    }
+
     public function getFullnameAttribute()
     {
         return $this->firstname . ' ' . $this->lastname;

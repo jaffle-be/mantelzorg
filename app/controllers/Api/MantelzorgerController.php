@@ -10,8 +10,8 @@ class MantelzorgerController extends \AdminController{
         return json_encode(array(
             'status' => 'oke',
             'ouderen' => array('select' => Lang::get('instrument.kies_oudere')) + $mantelzorger->oudere->sortBy(function($item){
-                    return $item->fullname;
-                })->lists('fullname', 'id')
+                    return $item->displayName;
+                })->lists('displayName', 'id')
         ));
     }
 

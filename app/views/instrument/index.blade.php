@@ -25,8 +25,8 @@
     <div class="col-md-6">
         <?= Form::select(
             'mantelzorger', array('' => Lang::get('instrument.kies_mantelzorger')) + $hulpverlener->mantelzorgers->sortBy(function($item){
-                return $item->fullname;
-            })->lists('fullname', 'id'), null, array(
+                return $item->displayName;
+            })->lists('displayName', 'id'), null, array(
                 'id' => 'mantelzorger-select',
                 'class' => 'form-control'
             )
@@ -68,8 +68,8 @@
         <tbody>
 <? foreach($surveys as $survey): ?>
         <tr>
-            <td><?= $survey->mantelzorger->fullname ?></td>
-            <td><?= $survey->oudere->fullname ?></td>
+            <td><?= $survey->mantelzorger->displayName ?></td>
+            <td><?= $survey->oudere->displayName ?></td>
             <td><?= $survey->created_at->format('d/m/Y') ?></td>
             <td><a href="<?= URL::route('instrument.panel.get', array($survey->questionnaire->panels->first()->id, $survey->id)) ?>"><?= Lang::get('instrument.werkverder') ?></a></td>
         </tr>

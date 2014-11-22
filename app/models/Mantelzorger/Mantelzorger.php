@@ -22,6 +22,20 @@ class Mantelzorger extends Eloquent{
         'city', 'birthday', 'phone', 'hulpverlener_id'
     );
 
+    public function getDisplayNameAttribute()
+    {
+        if(!empty($this->firstname) || !empty($this->lastname))
+        {
+            return trim($this->getFullnameAttribute());
+        }
+        else if(!empty($this->identifier)){
+            return $this->identifier;
+        }
+        else{
+            return '#ID#' . $this->id;
+        }
+    }
+
     public function getFullnameAttribute()
     {
         return $this->firstname . ' ' . $this->lastname;

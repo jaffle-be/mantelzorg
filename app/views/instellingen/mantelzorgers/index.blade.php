@@ -20,7 +20,7 @@
             </div>
             <div class="body">
                 <a href="<?= URL::route('instellingen.{hulpverlener}.mantelzorgers.edit', array($hulpverlener->id, $mantelzorger->id)) ?>">
-                    <?= Form::text('name', $mantelzorger->firstname . ' ' .  $mantelzorger->lastname, array('class' => 'form-control')) ?>
+                    <?= Form::text('name', $mantelzorger->displayName, array('class' => 'form-control')) ?>
                 </a>
             </div>
         </div>
@@ -37,7 +37,7 @@
                         @foreach($mantelzorger->oudere as $oudere)
                         <li>
                             <a href="<?= URL::route('instellingen.{mantelzorger}.oudere.edit', array($mantelzorger->id, $oudere->id)) ?>">
-                                <?= Form::text('name', $oudere->firstname . ' ' . $oudere->lastname, array('class' => 'form-control')) ?>
+                                <?= Form::text('name', $oudere->displayName, array('class' => 'form-control')) ?>
                             </a>
                         </li>
                         @endforeach
