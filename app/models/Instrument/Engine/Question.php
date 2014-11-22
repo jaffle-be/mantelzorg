@@ -13,13 +13,19 @@ class Question
 
     public function render(Panel $panel, Q $question, Session $survey, $first)
     {
-        $answer = $survey->wasAnswered($question);
+        $answer = $survey->getAnswered($question);
 
         $output = '<div class="row">';
 
         $output .= '<div class="col-xs-1 visible-xs"></div>';
 
-        $output .= sprintf('<div class="col-md-1 col-xs-1 question-status question-%s"><i class="glyphicon glyphicon-question-sign"></i><i class="glyphicon glyphicon-ok" style="display:none;"></i></div>', $panel->color);
+        $filled = $answer && $answer->wasFilledIn();
+
+        $mark = $filled ? 'display:none;' : null;
+
+        $check = $filled ? null : 'display:none;';
+
+        $output .= sprintf('<div class="col-md-1 col-xs-1 question-status question-%s"><i class="glyphicon glyphicon-question-sign" style="%s"></i><i class="glyphicon glyphicon-ok" style="%s"></i></div>', $panel->color, $mark, $check);
 
         $output .= sprintf('<div class="col-md-11 col-xs-9 instrument-question question-%s" data-question-id="%s">', $panel->color, $question->id);
 

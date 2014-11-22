@@ -44,9 +44,9 @@ class Session extends Eloquent
      *
      * @param Question $question
      *
-     * @return mixed
+     * @return Answer
      */
-    public function wasAnswered(Question $question)
+    public function getAnswered(Question $question)
     {
         return $this->answers->filter(function ($item) use ($question)
         {

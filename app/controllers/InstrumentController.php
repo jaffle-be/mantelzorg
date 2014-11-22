@@ -6,7 +6,6 @@
 class InstrumentController extends AdminController
 {
 
-
     /**
      * @var Questionnaire\Questionnaire
      */

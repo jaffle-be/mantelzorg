@@ -61,16 +61,17 @@
     function validateQuestion($el)
     {
         var $selectables = $el.find("input[type=radio],input[type=checkbox]"),
-            $status = $el.closest('.row').find('.question-status');
+            $status = $el.closest('.row').find('.question-status'),
+            textarea = $el.find('textarea');
 
         if($selectables.size() > 0) {
-            if($selectables.filter(':checked').size() == 0) {
-                return notOkeStatus($status);
-            } else {
+            if($selectables.filter(':checked').size() > 0 || textarea.size() > 0 && textarea.val() != '') {
                 return okeStatus($status);
+            } else {
+                return notOkeStatus($status);
             }
         } else {
-            if($el.find('textarea').val() == '') {
+            if(textarea.val() == '') {
                 return notOkeStatus($status);
             } else {
                 return okeStatus($status);
