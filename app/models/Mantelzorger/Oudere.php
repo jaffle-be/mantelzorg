@@ -50,7 +50,10 @@ class Oudere extends \Eloquent{
 
     public function setBirthdayAttribute($value)
     {
-        $this->attributes['birthday'] = DateTime::createFromFormat('d/m/Y', $value);
+        if(!empty($value))
+        {
+            $this->attributes['birthday'] = DateTime::createFromFormat('d/m/Y', $value);
+        }
     }
 
     public function mantelzorger_relation()

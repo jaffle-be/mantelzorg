@@ -74,7 +74,7 @@
                             <label for="birthday"><?= Lang::get('users.birthday') ?></label>
 
                             <div class="input-group">
-                                <?= Form::text('birthday', $oudere->birthday->format('d/m/Y'), array('class' => 'form-control datepicker')) ?>
+                                <?= Form::text('birthday', $oudere->birthday ? $oudere->birthday->format('d/m/Y') : null, array('class' => 'form-control datepicker')) ?>
                                 <span class="input-group-addon"><i class="glyphicons birthday_cake"></i></span>
                             </div>
 

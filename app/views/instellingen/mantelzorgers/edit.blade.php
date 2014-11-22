@@ -71,7 +71,7 @@
                             <span class="block errors"><?= $errors->first('birthday') ?></span>
 
                             <div class="input-group">
-                                <?= Form::text('birthday', $mantelzorger->birthday->format('d/m/Y'), array('class' => 'form-control datepicker')) ?>
+                                <?= Form::text('birthday', $mantelzorger->birthday ? $mantelzorger->birthday->format('d/m/Y') : null, array('class' => 'form-control datepicker')) ?>
                                 <span class="input-group-addon"><i class="glyphicons birthday_cake"></i></span>
                             </div>
                         </div>
