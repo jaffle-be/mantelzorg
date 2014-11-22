@@ -12,15 +12,9 @@ class Oudere extends \Eloquent{
 
     protected static $rules = array(
         'email' => 'email|unique:ouderen,email',
-        'firstname' => 'required',
-        'lastname' => 'required',
-        'male' => 'required',
-        'street' => 'required',
-        'postal' => 'required',
-        'city' => 'required',
         'mantelzorger_id' => 'required|exists:mantelzorgers,id',
         'mantelzorger_relation' => 'exists:meta_values,id',
-        'birthday' => 'required',
+        'birthday' => 'date_format:d/m/Y',
     );
 
     protected $fillable = array(

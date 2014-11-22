@@ -13,13 +13,7 @@ class Mantelzorger extends Eloquent{
 
     protected static $rules = array(
         'email' => 'email|unique:mantelzorgers,email',
-        'firstname' => 'required',
-        'lastname' => 'required',
-        'male' => 'required',
-        'street' => 'required',
-        'postal' => 'required',
-        'city' => 'required',
-        'birthday' => 'required|date_format:d/m/Y',
+        'birthday' => 'date_format:d/m/Y',
         'hulpverlener_id' => 'required|exists:users,id'
     );
 
