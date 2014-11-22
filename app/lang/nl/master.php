@@ -26,7 +26,7 @@ return [
      */
     "navs"       => [
         "dashboard"      => "Dashboard",
-        "instellingen"   => "Instellingen",
+        "instellingen"   => "Profiel",
         "instrument"     => "Instrument",
         "rapport"        => "Rapport",
         "gebruikers"     => "Gebruikers",
@@ -38,7 +38,7 @@ return [
         "panels"         => "Panelen",
         "questions"      => "Vragen",
         "ouderen"        => "Ouderen",
-        "profiel"        => "Profiel",
+        "profiel"        => "Hulpverlener",
         "overzicht"      => "Overzicht",
         "wijzig"         => "Wijzig",
         "nieuw"          => "Nieuw",
