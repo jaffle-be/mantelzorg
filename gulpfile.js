@@ -80,3 +80,10 @@ gulp.task('libs', function()
         .pipe(gulp.dest('public/js'));
 
 });
+
+gulp.task('default', ['watch']);
+
+gulp.task('watch', function()
+{
+    gulp.watch('app/frontend/less/*.less', ['master']);
+});
