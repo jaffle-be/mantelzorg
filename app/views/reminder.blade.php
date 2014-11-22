@@ -26,6 +26,8 @@
 
                         <p class="form-wrapper">
 
+                            @include('layout.messages')
+
                             <label for="email"><?= Lang::get('front.reminder.email') ?></label>
                             <?= Form::text('email', null, array('class' => 'form-control'))?>
                             @if (Session::has('error'))
