@@ -40,4 +40,9 @@ class Panel extends Eloquent{
         return $this->belongsTo('Questionnaire\Questionnaire', 'questionnaire_id');
     }
 
+    public function nextPanel()
+    {
+        return $this->questionnaire->nextPanel($this);
+    }
+
 }

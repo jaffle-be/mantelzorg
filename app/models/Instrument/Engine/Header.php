@@ -7,11 +7,11 @@ use Questionnaire\Questionnaire;
 
 class Header {
 
-    public function render(Questionnaire $questionnaire, Panel $panel)
+    public function render(Panel $panel)
     {
         $output = $this->open();
 
-        foreach($questionnaire->panels as $item)
+        foreach($panel->questionnaire->panels as $item)
         {
             $output .= $this->item($item, $panel);
         }

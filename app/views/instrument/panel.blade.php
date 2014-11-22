@@ -26,11 +26,11 @@
     'id' => 'panel-form'
 )) ?>
 
-<?= InstrumentTool::header($questionnaire, $panel); ?>
+<?= InstrumentTool::header($panel); ?>
 
 <?= InstrumentTool::questions($panel, $survey) ?>
 
-<?= InstrumentTool::footer($questionnaire, $panel) ?>
+<?= InstrumentTool::footer($panel) ?>
 
 <? Form::close() ?>
 

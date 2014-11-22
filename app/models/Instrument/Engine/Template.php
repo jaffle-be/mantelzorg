@@ -26,9 +26,9 @@ class Template {
         $this->question = $question;
     }
 
-    public function header(Questionnaire $questionnaire, Panel $panel)
+    public function header(Panel $panel)
     {
-        return $this->header->render($questionnaire, $panel);
+        return $this->header->render($panel);
     }
 
     public function questions(Panel $panel, $survey)
@@ -39,7 +39,7 @@ class Template {
 
         foreach($panel->questions as $question)
         {
-            $output .= $this->question->render($question, $survey, $counter == 0);
+            $output .= $this->question->render($panel, $question, $survey, $counter == 0);
 
             $counter++;
         }
@@ -49,15 +49,15 @@ class Template {
         return  $output;
     }
 
-    public function footer(Questionnaire $questionnaire, Panel $current)
+    public function footer(Panel $panel)
     {
-        $next = $questionnaire->nextPanel($current);
+        $next = $panel->nextPanel();
 
         $output = '<div class="instrument-footer">';
 
         $output = '<input type="hidden" id="next_panel" name="next_panel"/>';
 
-        $output .= sprintf('<input type="submit" class="btn btn-%s" value="%s">', $current->color ? $current->color : 'primary' ,$next ? $next->title : Lang::get('instrument.bevestigen'));
+        $output .= sprintf('<input type="submit" class="btn btn-%s" value="%s">', $panel->color ? $panel->color : 'primary' ,$next ? $next->title : Lang::get('instrument.bevestigen'));
 
         $output .= '</div>';
 

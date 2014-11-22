@@ -37,4 +37,15 @@ class Answer extends Eloquent{
         return $this->belongsToMany('Questionnaire\Choise', 'questionnaire_answer_choises', 'answer_id', 'choise_id')->withTimestamps();
     }
 
+    public function wasChecked(Choise $choise)
+    {
+        return $this->choises->filter(function ($item) use ($choise)
+        {
+            if ($item->id === $choise->id)
+            {
+                return true;
+            }
+        })->first();
+    }
+
 }

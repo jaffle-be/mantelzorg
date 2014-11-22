@@ -3,7 +3,8 @@
 /**
  * Class InstrumentController
  */
-class InstrumentController extends AdminController{
+class InstrumentController extends AdminController
+{
 
 
     /**
@@ -35,15 +36,13 @@ class InstrumentController extends AdminController{
         $this->beforeFilter('auth');
     }
 
-    /**
-     *
-     */
     public function index()
     {
         $questionnaire = $this->questionnaire->with(array(
-            'panels' => function($query){
-                    $query->orderBy('panel_weight');
-                }
+            'panels' => function ($query)
+            {
+                $query->orderBy('panel_weight');
+            }
         ))->active()->first();
 
         $hulpverlener = Auth::user();
@@ -52,7 +51,7 @@ class InstrumentController extends AdminController{
 
         $surveys = $this->session->where('user_id', $hulpverlener->id)->get();
 
-        if(!$questionnaire)
+        if (!$questionnaire)
         {
             return Redirect::route('home');
         }
@@ -65,27 +64,28 @@ class InstrumentController extends AdminController{
         $input = Input::except('token');
 
         $hulpverlener = $this->hulpverlener->with(array(
-            'mantelzorgers','mantelzorgers.oudere'
+            'mantelzorgers', 'mantelzorgers.oudere'
         ))->find(Auth::user()->id);
 
         $mantelzorger = $hulpverlener->mantelzorgers->find($input['mantelzorger']);
 
-        if(!$mantelzorger)
+        if (!$mantelzorger)
         {
             return Redirect::back();
         }
 
         $oudere = $mantelzorger->oudere->find($input['oudere']);
 
-        if(!$oudere)
+        if (!$oudere)
         {
             return Redirect::back();
         }
 
         $questionnaire = $this->questionnaire->with(array(
-            'panels' => function($query){
-                    $query->orderBy('panel_weight');
-                }
+            'panels' => function ($query)
+            {
+                $query->orderBy('panel_weight');
+            }
         ))->active()->first();
 
         $survey = Memorize::newSurvey($mantelzorger, $oudere, $questionnaire);
@@ -98,6 +98,10 @@ class InstrumentController extends AdminController{
      */
     public function getPanel($panel, $survey)
     {
+        $panel->load(array('questionnaire', 'questionnaire.panels', 'questions', 'questions.choises'));
+
+        $survey->load(array('answers', 'answers.choises'));
+
         $questionnaire = $panel->questionnaire;
 
         $this->layout->content = View::make('instrument.panel', compact(array('panel', 'questionnaire', 'survey')));
@@ -111,19 +115,19 @@ class InstrumentController extends AdminController{
         //save all input into our session
         $questions = $panel->questions;
 
-        foreach($questions as $question)
+        foreach ($questions as $question)
         {
             Memorize::question($question, $survey);
         }
 
-        if($next = Input::get('next_panel'))
+        if ($next = Input::get('next_panel'))
         {
             return Redirect::route('instrument.panel.get', array($next, $survey->id));
         }
 
         $next = $panel->questionnaire->nextPanel($panel);
 
-        if($next)
+        if ($next)
         {
             return Redirect::route('instrument.panel.get', array($next->id, $survey->id));
         }
