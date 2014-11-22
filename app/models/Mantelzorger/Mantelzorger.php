@@ -18,7 +18,7 @@ class Mantelzorger extends Eloquent{
     );
 
     protected $fillable = array(
-        'email', 'firstname', 'lastname', 'male', 'street', 'postal',
+        'identifier', 'email', 'firstname', 'lastname', 'male', 'street', 'postal',
         'city', 'birthday', 'phone', 'hulpverlener_id'
     );
 

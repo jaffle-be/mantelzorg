@@ -39,6 +39,15 @@
 
                 <div class="col-md-6">
 
+                    <label for="identifier"><?= Lang::get('users.identifier') ?></label>
+                    @if($errors->has('identifier'))
+                        <span class="errors">{{ $errors->first('identifier') }}</span>
+                    @endif
+                    <div class="input-group">
+                        <?= Form::text('identifier', null, array('class' => 'form-control')) ?>
+                        <span class="input-group-addon"><i class="glyphicons tag"></i></span>
+                    </div>
+
                     <label for="firstname"><?= Lang::get('users.firstname') ?></label>
                     @if($errors->has('firstname'))
                     <span class="errors">{{ $errors->first('firstname') }}</span>
