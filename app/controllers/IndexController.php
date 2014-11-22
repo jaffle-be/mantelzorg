@@ -129,17 +129,18 @@ class IndexController extends BaseController {
         $credentials = array(
             'email' => Input::get('email'),
             'password' => Input::get('password'),
-            'password_confirmation' => Input::get('password_confirmation')
+            'password_confirmation' => Input::get('password_confirmation'),
+            'token' => Input::get('token')
         );
 
-        return Password::reset($credentials, function($user, $password)
+        $message = Password::reset($credentials, function($user, $password)
         {
             $user->password = Hash::make($password);
 
             $user->save();
-
-            return Redirect::action('IndexController@getIndex');
         });
+
+        return Redirect::back()->withMessage(Lang::get($message));
     }
 
 }

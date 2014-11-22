@@ -37,9 +37,7 @@
                             <label for="password_confirmation"><?= Lang::get('front.reset.confirmation') ?></label>
                             <input type="password" name="password_confirmation" id="password_confirmation" class="form-control"/>
 
-                            @if(Session::has('error'))
-                                <p class="alert alert-danger">{{ trans(Session::get('reason')) }}</p>
-                            @endif
+                            @include('layout.messages')
 
                             <p class="form-actions text-center">
                                 <input class="btn btn-lg btn-primary" type="submit" value="<?= Lang::get('front.reset.do') ?>"/>
