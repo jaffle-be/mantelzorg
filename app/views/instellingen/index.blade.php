@@ -104,12 +104,6 @@
             <fieldset>
                 <legend><?= Lang::get('users.beveiliging') ?></legend>
 
-                @if(Session::has('message'))
-                <div class="alert alert-success">
-                    {{ $message }}
-                </div>
-                @endif
-
                 <div class="row">
 
 

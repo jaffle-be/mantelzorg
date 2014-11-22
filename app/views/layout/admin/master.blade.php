@@ -41,6 +41,9 @@
         @include('layout.admin.sidebar')
 
         <section id="content" class="col-md-9 col-xs-12">
+
+            @include('layout.messages')
+
             @yield('content')
         </section>
 

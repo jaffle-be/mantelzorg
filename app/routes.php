@@ -41,11 +41,6 @@ Route::resource('instellingen/{hulpverlener}/mantelzorgers', 'Instelling\Mantelz
 Route::resource('instellingen/{mantelzorger}/oudere', 'Instelling\OudereController');
 
 /**
- * DASH
- */
-Route::controller('dash', 'DashController');
-
-/**
  * RAPPORT
  */
 Route::controller('rapport', 'RapportController');
@@ -129,4 +124,5 @@ Route::controller('', 'IndexController');
  * HOME
  */
 
+Route::get('instrument', array('as' => 'dash', 'uses' => 'InstrumentController@index'));
 Route::get('', array('as' => 'home', 'uses' => 'IndexController@getIndex'));

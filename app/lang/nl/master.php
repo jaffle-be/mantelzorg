@@ -25,7 +25,6 @@ return [
      * sidebar + crumbs
      */
     "navs"       => [
-        "dashboard"      => "Dashboard",
         "instellingen"   => "Profiel",
         "instrument"     => "Instrument",
         "rapport"        => "Rapport",

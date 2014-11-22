@@ -54,9 +54,7 @@ class IndexController extends BaseController {
 
     public function getLogin()
     {
-        $error = Session::has('error') ? Session::get('error') : null;
-
-        $this->layout->content = View::make('login', compact(array('error')));
+        $this->layout->content = View::make('login');
     }
 
     public function postLogin()
@@ -71,7 +69,7 @@ class IndexController extends BaseController {
         {
             $user = Auth::user();
 
-            return Redirect::action('DashController@getIndex');
+            return Redirect::route('dash');
         }
         else
         {

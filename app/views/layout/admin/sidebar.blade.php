@@ -1,10 +1,6 @@
 <section id="sidebar" class="col-md-3 col-xs-12">
 
     <ul>
-    	<li>
-    	    <a href="{{ action('DashController@getIndex') }}"><span class="glyphicon glyphicon-dashboard"></span>{{ Lang::get('master.navs.dashboard') }}</a>
-    	</li>
-
     	@if($me->admin == 1)
     	<li>
     	    <span class="glyphicons group"></span>{{ Lang::get('master.navs.gebruikers') }}

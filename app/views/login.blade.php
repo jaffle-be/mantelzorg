@@ -32,9 +32,7 @@
                             <label for="password"><?= Lang::get('front.login.password') ?></label>
                             <input type="password" name="password" id="password" class="form-control"/>
 
-                        @if($error)
-                            <p class="alert alert-danger"><?= $error ?></p>
-                        @endif
+                            @include('layout.messages')
 
                             <p class="form-actions text-center">
                                 <input class="btn btn-lg btn-primary pull-left" type="submit" value="<?= Lang::get('front.login.sign-in') ?>"/>

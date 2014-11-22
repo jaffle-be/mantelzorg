@@ -101,6 +101,17 @@ View::composer('layout.admin.sidebar', function($view)
     $view->with('me', Auth::user());
 });
 
+View::composer('layout.messages', function($view)
+{
+    $message = Session::has('message') ? Session::get('message') : null;
+
+    $error = Session::has('error') ? Session::get('error') : null;
+
+    $data = compact('message', 'error');
+
+    $view->with(compact('message', 'error'));
+});
+
 Validator::extend('passcheck', function($attribute, $value, $parameters){
 
     $user = Auth::user();

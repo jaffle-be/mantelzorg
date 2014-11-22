@@ -43,7 +43,6 @@ class PersonController extends \AdminController{
 
     public function index()
     {
-        $message = Session::has('message') ? Session::get('message') : null;
         $user = Auth::user();
 
         $organisations = $this->organisation->orderBy('name')->get();
@@ -73,7 +72,7 @@ class PersonController extends \AdminController{
 
         $locations = array('' => Lang::get('users.pick_location')) + $locations;
 
-        $this->layout->content = View::make('instellingen.index', compact(array('user', 'organisations', 'locations', 'message')));
+        $this->layout->content = View::make('instellingen.index', compact(array('user', 'organisations', 'locations')));
     }
 
     public function update()
