@@ -1,10 +1,10 @@
 <?php
 
-return [
+return array(
 
     "main-title" => "ZICHT OP MANTELZORG",
 
-    "footer"     => [
+    "footer"     => array(
         "instrument" => "Het instrument",
         "veiligheid" => "Veiligheid",
         "blog"       => "Blog",
@@ -15,16 +15,14 @@ return [
         "logout"     => "Afmelden",
         "email"      => "E-mailadres",
         "password"   => "Paswoord",
-    ],
+    ),
 
-    "header"     => [
-
-    ],
+    "header"     => array(),
 
     /**
      * sidebar + crumbs
      */
-    "navs"       => [
+    "navs"       => array(
         "instellingen"   => "Profiel",
         "instrument"     => "Instrument",
         "rapport"        => "Rapport",
@@ -42,36 +40,36 @@ return [
         "wijzig"         => "Wijzig",
         "nieuw"          => "Nieuw",
         "start"          => "Start",
-    ],
+    ),
 
-    "tools"      => [
+    "tools"      => array(
         "acties"      => "Acties",
         "select_all"  => "Alles selecteren",
         "select_none" => "Niets selecteren",
         "remove"      => "Verwijderen",
-    ],
+    ),
 
-    "general"    => [
+    "general"    => array(
         "cancel"  => "Annuleren",
         "confirm" => "Bevestigen",
-    ],
+    ),
 
     /**
      * These are used throughout the application. errors are used in sign in form at the time of writing.
      */
 
-    "errors"     => [
+    "errors"     => array(
         "auth-email"    => "Emailadres is niet gekend.",
         "auth-active"   => "Deze gebruiker is niet meer actief.",
         "auth-password" => "Paswoord was niet correct.",
-    ],
+    ),
 
     /**
      * This is used to show the user a message when he requested a page he cannot without sufficient permissions.
      */
-    "info"       => [
+    "info"       => array(
         "no-right-to-section" => "U heeft geen bevoegdheid om de gevraagde pagina in te kijken.",
         "password_changed"    => "Wachtwoord succesvol veranderd.",
-    ]
+    )
 
-];
+);
