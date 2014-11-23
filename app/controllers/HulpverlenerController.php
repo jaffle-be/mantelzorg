@@ -147,9 +147,9 @@ class HulpverlenerController extends AdminController{
 
         if(!is_array($input) || empty($input))
         {
-            return json_encode([
+            return json_encode(array(
                 'status' => 'no decent input provided.'
-            ]);
+            ));
         }
 
         $users = $this->user->whereIn('id', $input)->get();
