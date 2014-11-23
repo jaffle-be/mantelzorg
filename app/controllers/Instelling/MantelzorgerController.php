@@ -83,14 +83,6 @@ class MantelzorgerController extends \AdminController{
 
             $validator = $this->mantelzorger->validator($input, array('firstname', 'lastname', 'birthday', 'male', 'street', 'postal', 'city', 'phone'));
 
-            $validator->sometimes('email', 'required|email|unique:users,email', function($input) use ($mantelzorger)
-            {
-                if($input['email'] !== $mantelzorger->email)
-                {
-                    return true;
-                }
-            });
-
             if($validator->fails())
             {
                 return Redirect::back()->withInput()->withErrors($validator->messages());

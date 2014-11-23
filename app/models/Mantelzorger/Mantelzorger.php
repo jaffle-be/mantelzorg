@@ -36,6 +36,14 @@ class Mantelzorger extends Eloquent{
         }
     }
 
+    public function setEmailAttribute($value)
+    {
+        if(empty($value))
+            $value = null;
+
+        $this->attributes['email'] = $value;
+    }
+
     public function getFullnameAttribute()
     {
         return $this->firstname . ' ' . $this->lastname;
