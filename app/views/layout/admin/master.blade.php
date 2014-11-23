@@ -51,6 +51,8 @@
 
 </div>
 
+@include('modals.confirmation');
+
 @include('layout.global.footer')
 
 <script type="text/javascript" src="/js/jquery.min.js"></script>

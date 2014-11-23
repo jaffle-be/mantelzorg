@@ -19,16 +19,23 @@
 
             });
 
-            //start request
-            $.post('/hulpverleners/regen-passwords', {
-                'ids':ids
-            }, function(response)
+            if(ids.length > 0)
             {
+                var success = function()
+                {
+                    //start request
+                    $.post('/hulpverleners/regen-passwords', {
+                        'ids':ids
+                    }, function(response)
+                    {
+                        window.location.reload();
+                    });
+                }
 
-            });
+                app.confirm(success);
+            }
 
             event.preventDefault();
-
         });
 
     });

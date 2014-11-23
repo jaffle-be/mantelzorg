@@ -50,8 +50,10 @@ return array(
     ),
 
     "general"    => array(
-        "cancel"  => "Annuleren",
-        "confirm" => "Bevestigen",
+        "cancel"             => "Annuleren",
+        "confirm"            => "Bevestigen",
+        "needs-confirmation" => "Deze handeling moet bevestigd worden",
+        "confirmation-text"  => "Indien u zeker bent dat u deze actie wil uitvoeren, klik dan op <b>bevestigen.</b>",
     ),
 
     /**
