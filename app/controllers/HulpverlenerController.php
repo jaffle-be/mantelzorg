@@ -167,7 +167,7 @@ class HulpverlenerController extends AdminController{
             }
         }
 
-        return json_encode(['status' => 'oke', 'message' => Lang::get('users.emails-sent')]);
+        return json_encode(array('status' => 'oke', 'message' => Lang::get('users.emails-sent')));
     }
 
 }
