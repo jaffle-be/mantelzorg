@@ -4,6 +4,7 @@ return array(
     /**
      * users (beta && users)
      */
+    'identifier'                     => 'Uniek nummer',
     'naam'                           => 'Naam',
     'email'                          => 'Emailadres',
     'organisatie'                    => 'Organisatie',
