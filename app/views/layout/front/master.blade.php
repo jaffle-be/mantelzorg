@@ -31,13 +31,21 @@
 </head>
 <body>
 
-@include('layout.front.header')
+    @include('layout.front.header')
 
-<div class="content-wrapper">
-    @yield('content')
-</div>
+    <section id="page-header">
+        <div class="container">
+                @yield('page-header')
+        </div>
+    </section>
 
-@include('layout.global.footer')
+    <section id="content">
+
+        @yield('content')
+
+    </section>
+
+    @include('layout.global.footer')
 
 <script type="text/javascript" src="/js/jquery.min.js"></script>
 <script type="text/javascript" src="/js/jquery-ui.custom.min.js"></script>

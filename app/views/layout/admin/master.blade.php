@@ -32,26 +32,32 @@
 </head>
 <body>
 
-@include('layout.admin.header')
+    @include('layout.admin.header')
 
-<div class="container">
+    @yield('page-header')
 
-    <div class="row">
+    <section id="content">
 
-        @include('layout.admin.sidebar')
+        <div class="container">
 
-        <section id="content" class="col-md-9 col-xs-12">
+            <div class="row">
 
-            @include('layout.messages')
+                @include('layout.admin.sidebar')
 
-            @yield('content')
-        </section>
+                <section id="main-content" class="col-md-9 col-xs-12">
 
-    </div>
+                    @include('layout.messages')
 
-</div>
+                    @yield('content')
+                </section>
 
-@include('modals.confirmation');
+            </div>
+
+        </div>
+
+    </section>
+
+@include('modals.confirmation')
 
 @include('layout.global.footer')
 
