@@ -121,6 +121,7 @@ return array(
         'Illuminate\Validation\ValidationServiceProvider',
         'Illuminate\View\ViewServiceProvider',
         'Illuminate\Workbench\WorkbenchServiceProvider',
+        'Intouch\LaravelNewrelic\LaravelNewrelicServiceProvider',
         'Template\TemplateServiceProvider',
         'Questionnaire\ServiceProvider',
         'Instrument\ServiceProvider',
@@ -196,6 +197,7 @@ return array(
         'Template'          => 'Template\TemplateFacade',
         'Memorize'          => 'Instrument\Memorize\Facade',
         'InstrumentTool'    => 'Instrument\Engine\Facade',
+        'Newrelic'          => 'Intouch\LaravelNewrelic\Facades\Newrelic',
 
     ),
 
