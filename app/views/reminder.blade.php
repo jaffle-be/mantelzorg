@@ -1,9 +1,7 @@
 @section('styles')
-    <link rel="stylesheet" href="/css/beta.min.css"/>
 @stop
 
 @section('scripts')
-    <!--<script type="text/javascript" src="/js/beta.min.js"></script>-->
 @stop
 
 @section('page-header')
