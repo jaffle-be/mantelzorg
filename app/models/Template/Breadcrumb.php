@@ -34,7 +34,7 @@ class Breadcrumb
 
     public function open()
     {
-        return '<div class="row"><ol class="breadcrumb">';
+        return '<div class="container"><ol class="breadcrumb">';
     }
 
     public function regular($item)

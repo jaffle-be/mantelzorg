@@ -1,5 +1,23 @@
 @import 'variables';
 
-.breadcrumb li{
-  color: @brand-primary;
+.breadcrumb {
+  margin-bottom: 0;
+  border-radius: 0;
+  background: none;
+
+  li {
+    color: white;
+
+    &.active {
+      color: darken(@brand-primary, 15);
+    }
+
+    a {
+      color: @white;
+
+      &:hover {
+        color: lighten(@brand-primary, 30);
+      }
+    }
+  }
 }

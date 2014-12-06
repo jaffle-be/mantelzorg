@@ -2,25 +2,25 @@
 <link rel="stylesheet" href="/css/users.min.css"/>
 @stop
 
+@section('page-header')
+    <?= Template::crumb(array(
+            array(
+                    'text' => Lang::get('master.navs.gebruikers'),
+            ),
+
+            array(
+                    'text' => Lang::get('master.navs.hulpverleners'),
+
+                    'href' => URL::route('hulpverleners.index'),
+            ),
+
+            array(
+                    'text' => Lang::get('master.navs.wijzig')
+            )
+    )) ?>
+@stop
+
 @section('content')
-
-
-<?= Template::crumb(array(
-    array(
-        'text' => Lang::get('master.navs.gebruikers'),
-    ),
-
-    array(
-        'text' => Lang::get('master.navs.hulpverleners'),
-
-        'href' => URL::route('hulpverleners.index'),
-    ),
-
-    array(
-        'text' => Lang::get('master.navs.wijzig')
-    )
-)) ?>
-
 
 <?= Form::model($user, array('action' => array('HulpverlenerController@update', $user->id), 'method' => 'put')) ?>
 <div class="row">

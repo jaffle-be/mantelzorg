@@ -1,12 +1,15 @@
-@section('content')
-
+@section('page-header')
     <?= Template::crumb(array(
-        array(
-            'text' => Lang::get('master.navs.questionnaires'),
-        ),
+            array(
+                    'text' => Lang::get('master.navs.questionnaires'),
+            ),
 
-        array('text' => Lang::get('master.navs.overzicht'))
+            array('text' => Lang::get('master.navs.overzicht'))
     )) ?>
+
+@stop
+
+@section('content')
 
 <div class="questionnaires">
 

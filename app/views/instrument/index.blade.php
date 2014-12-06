@@ -2,14 +2,14 @@
 <script src="/js/instrument.index.min.js"></script>
 @stop
 
+@section('page-header')
+    <?= Template::crumb(array(
+            array('text' => Lang::get('master.navs.instrument')),
+            array('text' => Lang::get('master.navs.start'))
+    )) ?>
+@stop
+
 @section('content')
-
-<?= Template::crumb(array(
-    array('text' => Lang::get('master.navs.instrument')),
-    array('text' => Lang::get('master.navs.start'))
-)) ?>
-
-
 
 <?= Form::open(array(
     'class' => 'form-horizontal',

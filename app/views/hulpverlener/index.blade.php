@@ -4,19 +4,20 @@
 
 @stop
 
+@section('page-header')
+    <?= Template::crumb(array(
+            array(
+                    'text' => Lang::get('master.navs.gebruikers'),
+            ),
+
+            array(
+                    'text' => Lang::get('master.navs.hulpverleners'),
+            ),
+
+    )) ?>
+@stop
+
 @section('content')
-
-
-<?= Template::crumb(array(
-    array(
-        'text' => Lang::get('master.navs.gebruikers'),
-    ),
-
-    array(
-        'text' => Lang::get('master.navs.hulpverleners'),
-    ),
-
-)) ?>
 
 @if($users->count())
 <div class="text-center">

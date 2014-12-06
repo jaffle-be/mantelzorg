@@ -34,7 +34,9 @@
 
     @include('layout.global.header')
 
-    @yield('page-header')
+    <section id="page-header">
+        @yield('page-header')
+    </section>
 
     <section id="content">
 

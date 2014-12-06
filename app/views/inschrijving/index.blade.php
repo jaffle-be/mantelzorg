@@ -1,17 +1,17 @@
+@section('page-header')
+    <?= Template::crumb(array(
+            array(
+                    'text' => Lang::get('master.navs.gebruikers'),
+            ),
+
+            array(
+                    'text' => Lang::get('master.navs.inschrijvingen'),
+            )
+
+    )) ?>
+@stop
+
 @section('content')
-
-
-<?= Template::crumb(array(
-    array(
-        'text' => Lang::get('master.navs.gebruikers'),
-    ),
-
-    array(
-        'text' => Lang::get('master.navs.inschrijvingen'),
-    )
-
-)) ?>
-
 
 @if($registrations->count())
 <div class="text-center">

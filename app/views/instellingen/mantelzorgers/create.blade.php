@@ -2,22 +2,24 @@
 <link rel="stylesheet" href="/css/users.min.css"/>
 @stop
 
-@section('content')
-
-<?= Template::crumb(array(
-    array(
-        'text' => Lang::get('master.navs.instellingen'),
-        'href' => URL::action('Instelling\PersonController@index')
+@section('page-header')
+    <?= Template::crumb(array(
+            array(
+                    'text' => Lang::get('master.navs.instellingen'),
+                    'href' => action('Instelling\PersonController@index')
     ),
     array(
-        'text' => Lang::get('master.navs.mantelzorgers'),
-        'href' => URL::route('instellingen.{hulpverlener}.mantelzorgers.index', array(Auth::user()->id))
+    'text' => Lang::get('master.navs.mantelzorgers'),
+    'href' => route('instellingen.{hulpverlener}.mantelzorgers.index', array(Auth::user()->id))
     ),
     array(
-        'text' => Lang::get('master.navs.nieuw')
+    'text' => Lang::get('master.navs.nieuw')
     )
 
-)) ?>
+    )) ?>
+@stop
+
+@section('content')
 
 <?= Form::open(array('action' => array('Instelling\MantelzorgerController@store', $hulpverlener->id), 'method' => 'post')) ?>
 

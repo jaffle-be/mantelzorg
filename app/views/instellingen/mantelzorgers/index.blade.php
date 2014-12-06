@@ -1,15 +1,17 @@
-@section('content')
-
-<?= Template::crumb(array(
-    array(
-        'text' => Lang::get('master.navs.instellingen'),
-        'href' => URL::action('Instelling\PersonController@index')
+@section('page-header')
+    <?= Template::crumb(array(
+            array(
+                    'text' => Lang::get('master.navs.instellingen'),
+                    'href' => URL::action('Instelling\PersonController@index')
     ),
     array(
-        'text' => Lang::get('master.navs.mantelzorgers'),
+    'text' => Lang::get('master.navs.mantelzorgers'),
     )
 
-)) ?>
+    )) ?>
+@stop
+
+@section('content')
 
 <div class="mantelzorgers">
     @foreach($hulpverlener->mantelzorgers as $mantelzorger)
