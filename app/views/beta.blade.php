@@ -6,13 +6,16 @@
 <script type="text/javascript" src="/js/beta.min.js"></script>
 @stop
 
+@section('page-header')
+    <h2>{{ Lang::get('front.beta.sub-header') }}</h2>
+@stop
+
 @section('content')
 
 <div class="beta-wrapper">
 
     <div class="banner">
         <div class="container">
-            <h3><?= Lang::get('front.beta.sub-header') ?></h3>
             <div class="row">
                 <div class="picture col-md-6">
                     <img class="img-responsive" src="/images/sfeer.png" alt="beta-banner"/>
