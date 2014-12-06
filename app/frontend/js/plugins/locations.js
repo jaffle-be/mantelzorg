@@ -130,15 +130,15 @@
             {
                 //remove all other options
                 var $options = this.$location.find('option'),
-                    $new = $options.filter(':first-child[value=]');
+                    $emptyOption = $options.filter(':first-child[value=""]');
 
                 //remove all options
-                $options.not(':last-child[value=new], :first-child[value=]').remove();
+                $options.not(':last-child[value="new"], :first-child[value=""]').remove();
 
                 //add new options after the first option ('selecteer een ?')
                 for(var i in locations)
                 {
-                    $new.after($('<option>', {
+                    $emptyOption.after($('<option>', {
                         value: locations[i].id,
                         html: locations[i].name
                     }));
