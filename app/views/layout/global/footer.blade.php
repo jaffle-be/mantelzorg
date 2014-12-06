@@ -1,52 +1,58 @@
-<div class="dot-line"></div>
+<footer>
 
-<div class="footer container">
+        <section class="container clearfix" id="footnav">
 
+            <nav>
+                <div class="row">
+                    <div class="col-xs-12 col-md-4">
+                        <h3>@lang('master.navs.blog')</h3>
+                        <p>
+                            @lang('master.navs.blog-text', ['url' => '//zichtopmantelzorg.be'])
+                        </p>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <h3>@lang('master.navs.instrument')</h3>
+                        <p>
+                            @lang('master.navs.instrument-text', ['url' => $user ? route('dash') : route('home')])
+                        </p>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <h3>@lang('master.navs.contact')</h3>
+                        <p>
+                            @lang('master.navs.contact-text', ['url' => '//zichtopmantelzorg.be/contact'])
+                        </p>
+                    </div>
+                </div>
+            </nav>
 
+        </section>
 
-    <div class="clearfix"></div>
+        <section id="copyright">
 
-    <div class="pull-left">
+            <div class="container">
 
-        <ul>
-            <li><a href="<?= URL::action('IndexController@getHetInstrument') ?>"><?= Lang::get('master.footer.instrument') ?></a></li>
-            <!--            <li><a href="">--><?//= Lang::get('master.footer.veiligheid') ?><!--</a></li>-->
-            <!--            <li><a href="">--><?//= Lang::get('master.footer.blog') ?><!--</a></li>-->
-            <!--            <li><a href="">--><?//= Lang::get('master.footer.pers') ?><!--</a></li>-->
-            <li><a href="<?= URL::action('IndexController@getHetTeam') ?>"><?= Lang::get('master.footer.team') ?></a></li>
-            <li>
-                <a target="_blank" href="http://www.youtube.com/watch?v=gqDFSs_z5_A&feature=youtu.be">Film studiedag</a>
-            </li>
-            <!--            <li><a href="">--><?//= Lang::get('master.footer.help') ?><!--</a></li>-->
-        </ul>
+                <div class="row">
 
+                    <p class="col-xs-6">
+                        <? $date = new DateTime() ?>
+                        @if($date->format('Y') === '2013')
+                            {{ 'Copyright &copy; 2013'}}
+                        @else
+                            {{'Copyright &copy; 2013 - ' . $date->format('Y')}}
+                        @endif
+                    </p>
 
-        <ul>
-            @if(!$user)
-            <li><a id="log-in" href="<?= URL::action('IndexController@getLogin') ?>"><?= Lang::get('master.footer.login') ?></a></li>
-            @else
-            <li><a id="log-out" href="<?= URL::action('IndexController@getLogout') ?>"><?= Lang::get('master.footer.logout') ?></a></li>
-            @endif
+                    <p class="col-xs-6">
+                        <a target="_blank" href="http://www.hogent.be">
+                            <img class="logo-hogent" src="/images/logo-footer.png" alt=""/>
+                        </a>
+                    </p>
 
-        </ul>
+                </div>
+            </div>
+
+        </section>
 
     </div>
 
-    <div class="pull-right">
-        <span class="copyright">
-
-            <? $date = new DateTime() ?>
-
-            @if($date->format('Y') === '2013')
-                {{ 'Copyright &copy; 2013'}}
-            @else
-                {{'Copyright &copy; 2013 - ' . $date->format('Y')}}
-            @endif
-
-        </span>
-        <a target="_blank" href="http://www.hogent.be">
-            <img class="logo-hogent" src="/images/logo-footer.png" alt=""/>
-        </a>
-    </div>
-
-</div>
+</footer>
