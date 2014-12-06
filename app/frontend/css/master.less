@@ -19,120 +19,33 @@
 html {
   overflow: -moz-scrollbars-vertical;
   overflow: scroll;
+  background-color: #1a1a1a;
 }
 
-*{
-  font-family: 'Didact Gothic', sans-serif;
-  color : @blue;
-  text-shadow: 1px 1px 1px #DDD;
+#content{
+  margin: 2em 0;
 }
 
-h1,h2,h3,h4,h5,h6,h7{
-  color: @green;
-  font-family: @title-font;
-  src: url('conduit_itc.ttf');
-  text-shadow: 1px 1px 1px lighten(@green, 10%);
+p{
+  margin: 1.3em 0;
+}
 
-  a{
-    color: @green;
-    font-family: @title-font;
-    src: url('conduit_itc.ttf');
-    text-decoration: none !important;
-  }
+label{
+  color: @gray;
+  font-weight: 400;
+}
+
+a:active, a:hover{
+  text-decoration: none;
+}
+
+h1,h2,h3,h4,h5,h6{
+  color: #333;
+  margin: 0;
 }
 
 .container-small{
   width: 600px;
   margin-left: auto;
   margin-right: auto;
-}
-
-.header{
-
-  h1{
-    font-weight:bold;
-    text-align: center;
-    margin-bottom: 0px;
-
-    a{
-      font-size: 36px;
-    }
-  }
-
-}
-
-.content-wrapper{
-
-  h3{
-    padding-bottom: 10px;
-    border-bottom: 1px solid #EEE;
-    margin-bottom: 20px;
-    border-color: @green;
-  }
-
-}
-
-.footer{
-
-  *{
-    font-size: 24px;
-  }
-
-  margin-bottom: 15px;
-
-  .login-form{
-    display: none;
-    padding-bottom:10px;
-    margin-bottom: 5px;
-
-    input{
-      width: auto;
-      display: inline-block;
-      margin-left: 10px;
-    }
-
-    input:first-child{
-      width: 200px;
-      margin-left: 0px;
-    }
-
-  }
-
-  .copyright{
-    color: black;
-    margin-right: 40px;
-  }
-
-}
-
-/**
- *  NAVIGATIONS
- */
-
-.footer, .header{
-
-  ul{
-    float: left;
-    margin-left: 25px;
-    padding-left: 0px;
-  }
-
-  ul:first-child{
-    margin-left: 0;
-  }
-
-  ul li{
-    color: @green;
-    float: left;
-    margin-left: 15px;
-    list-style: none;
-  }
-
-  ul li:first-child{
-    margin-left: 0px;
-  }
-}
-
-#content nav{
-  margin-bottom: 15px;
 }
