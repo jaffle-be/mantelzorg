@@ -17,29 +17,32 @@ return array(
         "password"   => "Paswoord",
     ),
 
-    "header"     => array(),
-
     /**
      * sidebar + crumbs
      */
     "navs"       => array(
-        "instellingen"   => "Profiel",
-        "instrument"     => "Instrument",
-        "rapport"        => "Rapport",
-        "gebruikers"     => "Gebruikers",
-        "hulpverleners"  => "Hulpverleners",
-        "inschrijvingen" => "Inschrijvingen",
-        "personal"       => "Profiel",
-        "mantelzorgers"  => "Mantelzorgers",
-        "questionnaires" => "Vragenlijsten",
-        "panels"         => "Panelen",
-        "questions"      => "Vragen",
-        "ouderen"        => "Ouderen",
-        "profiel"        => "Hulpverlener",
-        "overzicht"      => "Overzicht",
-        "wijzig"         => "Wijzig",
-        "nieuw"          => "Nieuw",
-        "start"          => "Start",
+        "instellingen"    => "Profiel",
+        "instrument"      => "Instrument",
+        "rapport"         => "Rapport",
+        "gebruikers"      => "Gebruikers",
+        "hulpverleners"   => "Hulpverleners",
+        "inschrijvingen"  => "Inschrijvingen",
+        "personal"        => "Profiel",
+        "mantelzorgers"   => "Mantelzorgers",
+        "questionnaires"  => "Vragenlijsten",
+        "panels"          => "Panelen",
+        "questions"       => "Vragen",
+        "ouderen"         => "Ouderen",
+        "profiel"         => "Hulpverlener",
+        "overzicht"       => "Overzicht",
+        "wijzig"          => "Wijzig",
+        "nieuw"           => "Nieuw",
+        "start"           => "Start",
+        "blog"            => "Blog",
+        "contact"         => "Contact",
+        "blog-text"       => "Lees het laatste nieuws via onze <a href=':url'>blog</a>",
+        "instrument-text" => "Ga vlot het gesprek aan met de mantelzorger met ons digitaal <a href=':url'>instrument</a>",
+        "contact-text"    => "Kom alles te weten over ons <a href=':url'>team</a> en hoe je ze kan bereiken."
     ),
 
     "tools"      => array(
