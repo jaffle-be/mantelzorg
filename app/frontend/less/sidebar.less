@@ -1,17 +1,31 @@
 @import 'variables';
 
-section#sidebar {
+#sidebar {
+
+  ul:first-child {
+    padding-left: 0;
+
+    > li {
+      margin-bottom: 1.3em;
+    }
+  }
 
   ul {
     list-style: none;
 
     li {
-      color: @green;
       margin-top: 10px;
       text-transform: capitalize;
 
+      a {
+        color: inherit;
+
+        &:hover, &:active {
+          color: @brand-primary;
+        }
+      }
+
       .glyphicon, .glyphicons {
-        color: @green;
         margin-right: 5px;
       }
 
@@ -43,10 +57,7 @@ section#sidebar {
         margin-top: 0;
         float: left;
         display: block;
-        padding-left: @padding-base-horizontal;
-        padding-right: @padding-base-horizontal;
-        padding-top: @padding-base-vertical;
-        padding-bottom: @padding-base-vertical;
+        padding: @padding-base-vertical @padding-base-horizontal;
       }
     }
 
