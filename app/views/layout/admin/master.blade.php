@@ -32,7 +32,7 @@
 </head>
 <body>
 
-    @include('layout.admin.header')
+    @include('layout.global.header')
 
     @yield('page-header')
 

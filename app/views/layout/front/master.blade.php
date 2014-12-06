@@ -31,7 +31,7 @@
 </head>
 <body>
 
-    @include('layout.front.header')
+    @include('layout.global.header')
 
     <section id="page-header">
         <div class="container">

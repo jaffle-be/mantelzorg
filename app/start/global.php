@@ -88,17 +88,8 @@ require app_path().'/filters.php';
 
 
 
-View::composer('layout.global.footer', function($view){
+View::composer('layout.*', function($view){
     $view->with('user', Auth::user());
-});
-
-View::composer('layout.admin.master', function($view){
-    $view->with('user', Auth::user());
-});
-
-View::composer('layout.admin.sidebar', function($view)
-{
-    $view->with('me', Auth::user());
 });
 
 View::composer('layout.messages', function($view)
