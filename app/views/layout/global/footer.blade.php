@@ -7,19 +7,19 @@
                     <div class="col-xs-12 col-md-4">
                         <h3>@lang('master.navs.blog')</h3>
                         <p>
-                            @lang('master.navs.blog-text', ['url' => '//zichtopmantelzorg.be'])
+                            @lang('master.navs.blog-text', array('url' => '//zichtopmantelzorg.be'))
                         </p>
                     </div>
                     <div class="col-xs-12 col-md-4">
                         <h3>@lang('master.navs.instrument')</h3>
                         <p>
-                            @lang('master.navs.instrument-text', ['url' => $user ? route('dash') : route('home')])
+                            @lang('master.navs.instrument-text', array('url' => $user ? route('dash') : route('home')))
                         </p>
                     </div>
                     <div class="col-xs-12 col-md-4">
                         <h3>@lang('master.navs.contact')</h3>
                         <p>
-                            @lang('master.navs.contact-text', ['url' => '//zichtopmantelzorg.be/contact'])
+                            @lang('master.navs.contact-text', array('url' => '//zichtopmantelzorg.be/contact'))
                         </p>
                     </div>
                 </div>
