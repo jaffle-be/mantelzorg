@@ -1,7 +1,7 @@
 <section id="sidebar" class="col-md-3 col-xs-12">
 
     <ul>
-    	@if($me->admin == 1)
+    	@if($user->admin == 1)
     	<li>
     	    <span class="glyphicons group"></span>{{ Lang::get('master.navs.gebruikers') }}
 
@@ -33,7 +33,7 @@
     	            <a href="{{ action('Instelling\PersonController@index') }}">{{ Lang::get('master.navs.profiel') }}</a>
     	        </li>
     	        <li>
-    	            <a href="{{ route('instellingen.{hulpverlener}.mantelzorgers.index', array($me->id)) }}">{{ Lang::get('master.navs.mantelzorgers') }}</a>
+    	            <a href="{{ route('instellingen.{hulpverlener}.mantelzorgers.index', array($user->id)) }}">{{ Lang::get('master.navs.mantelzorgers') }}</a>
     	        </li>
     	    </ul>
     	</li>
