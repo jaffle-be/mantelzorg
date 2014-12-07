@@ -15,6 +15,6 @@ return array(
 
         'closing' =>'Indien u vragen heeft of suggesties om dit instrument te verbeteren, laat dan niet na ons te contacteren.',
 
-        'bye' => 'Vriendelijke groeten,<br>Het team'
+        'bye' => 'Vriendelijke groeten,<br><br>Het team'
     )
 );

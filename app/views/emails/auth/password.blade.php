@@ -1,8 +1,10 @@
 @extends('layout.email.master')
 
-@section('content')
+@section('page-header')
+    <h2><?= Lang::get('email.registration.title') ?></h2>
+@stop
 
-<h3><?= Lang::get('email.registration.title') ?></h3>
+@section('content')
 
 <p>
     <?= Lang::get('email.registration.hello', array('firstname' => $user->firstname)) ?>
