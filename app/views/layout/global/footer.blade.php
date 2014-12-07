@@ -7,7 +7,7 @@
                     <div class="col-xs-12 col-md-4">
                         <h3>@lang('master.navs.blog')</h3>
                         <p>
-                            @lang('master.navs.blog-text', array('url' => '//zichtopmantelzorg.be'))
+                            @lang('master.navs.blog-text', array('url' => 'http://zichtopmantelzorg.be'))
                         </p>
                     </div>
                     <div class="col-xs-12 col-md-4">
@@ -19,7 +19,7 @@
                     <div class="col-xs-12 col-md-4">
                         <h3>@lang('master.navs.contact')</h3>
                         <p>
-                            @lang('master.navs.contact-text', array('url' => '//zichtopmantelzorg.be/contact'))
+                            @lang('master.navs.contact-text', array('url' => 'http://zichtopmantelzorg.be/contact'))
                         </p>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
 
                     <p class="col-xs-6">
                         <a target="_blank" href="http://www.hogent.be">
-                            <img class="logo-hogent" src="/images/logo-footer.png" alt=""/>
+                            <img class="logo-hogent" src="{{ asset('/images/logo-footer.png') }}" alt=""/>
                         </a>
                     </p>
 

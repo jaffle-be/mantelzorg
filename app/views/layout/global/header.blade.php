@@ -17,13 +17,13 @@
                 <ul class="nav navbar-nav">
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="//zichtopmantelzorg.be">@lang('master.navs.blog')</a></li>
+                    <li class="active"><a href="http://zichtopmantelzorg.be">@lang('master.navs.blog')</a></li>
 
                     @if(!$user)
-                        <li><a id="log-in" href="<?= action('IndexController@getLogin') ?>"><?= Lang::get('master.footer.login') ?></a></li>
+                        <li><a id="log-in" href="{{ action('IndexController@getLogin') }}">{{ Lang::get('master.footer.login') }}</a></li>
                     @else
                         <li><a href="<?= route('dash') ?>">@lang('master.navs.instrument')</a></li>
-                        <li><a id="log-out" href="<?= action('IndexController@getLogout') ?>"><?= Lang::get('master.footer.logout') ?></a></li>
+                        <li><a id="log-out" href="{{ action('IndexController@getLogout') }}">{{ Lang::get('master.footer.logout') }}</a></li>
                     @endif
                 </ul>
             </div>
