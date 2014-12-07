@@ -16,21 +16,25 @@
 </head>
 <body>
 
-@include('layout.email.header')
+@include('layout.global.header')
 
-<div class="content-wrapper">
+<section id="page-header">
+    <div class="container">
+        @yield('page-header')
+    </div>
+</section>
+
+<section id="content">
 
     <div class="container">
-
-        <section id="content" class="container">
+        <section id="main-content">
             @yield('content')
         </section>
-
     </div>
 
-</div>
+</section>
 
-@include('layout.email.footer')
+@include('layout.global.footer')
 
 </body>
 </html>
