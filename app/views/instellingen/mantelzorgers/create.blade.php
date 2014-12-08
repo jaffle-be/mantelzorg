@@ -148,7 +148,7 @@
 </div>
 
 <div>
-<input class="btn btn-success" type="submit" value="<?= Lang::get('users.create_mantelzorger') ?>"/>
+<input class="btn btn-primary" type="submit" value="<?= Lang::get('users.create_mantelzorger') ?>"/>
 </div>
 
 

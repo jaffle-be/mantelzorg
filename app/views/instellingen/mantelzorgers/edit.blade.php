@@ -157,7 +157,7 @@
     </div>
 
     <div>
-        <input class="btn btn-success" type="submit" value="<?= Lang::get('users.save') ?>"/>
+        <input class="btn btn-primary" type="submit" value="<?= Lang::get('users.save') ?>"/>
     </div>
 
 
