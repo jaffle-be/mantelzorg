@@ -7,7 +7,7 @@ return array(
     "footer"     => array(
         "instrument" => "Het instrument",
         "veiligheid" => "Veiligheid",
-        "blog"       => "Blog",
+        "blog"       => "Nieuws",
         "pers"       => "Pers",
         "team"       => "Team",
         "help"       => "Help",
@@ -38,9 +38,9 @@ return array(
         "wijzig"          => "Wijzig",
         "nieuw"           => "Nieuw",
         "start"           => "Start",
-        "blog"            => "Blog",
+        "blog"            => "Nieuws",
         "contact"         => "Contact",
-        "blog-text"       => "Lees het laatste nieuws via onze <a href=':url'>blog</a>",
+        "blog-text"       => "Lees hier de laatste <a href=':url'>berichten</a>",
         "instrument-text" => "Ga vlot het gesprek aan met de mantelzorger met ons digitaal <a href=':url'>instrument</a>",
         "contact-text"    => "Kom alles te weten over ons <a href=':url'>team</a> en hoe je ze kan bereiken."
     ),
