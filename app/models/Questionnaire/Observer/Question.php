@@ -18,7 +18,7 @@ class Question {
 
     public function saving($model)
     {
-        if($model->isDirty('multiple_choise') && $model->multiple_choise === '0')
+        if($model->isDirty('multiple_choise') && $model->multiple_choise == '0')
         {
             $model->multiple_answer = 0;
         }

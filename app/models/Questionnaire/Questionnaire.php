@@ -48,7 +48,7 @@ class Questionnaire extends Eloquent{
         $weight = $panel->panel_weight + 10;
 
         $panels = $this->panels->filter(function($item) use ($weight){
-            return (int) $item->panel_weight === $weight;
+            return (int) $item->panel_weight == $weight;
         });
 
         if(count($panels))

@@ -14,7 +14,7 @@ class Breadcrumb
 
         while($teller <= count($items))
         {
-            if($teller === count($items))
+            if($teller == count($items))
             {
                 $output .= $this->last($items[$teller - 1]);
             }

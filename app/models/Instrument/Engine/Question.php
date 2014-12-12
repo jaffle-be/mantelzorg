@@ -70,12 +70,12 @@ class Question
             $output .= '<div class="well well-sm" style="display:none;">' . $question->meta . '</div>';
         }
 
-        if ($question->multiple_choise === '1')
+        if ($question->multiple_choise == '1')
         {
             $output .= $this->multipleChoise($question, $answer);
         }
 
-        if ($question->explainable === '1')
+        if ($question->explainable == '1')
         {
             $output .= $this->explainable($question, $answer);
         }
@@ -89,7 +89,7 @@ class Question
     {
         $output = $this->openChoises();
 
-        if ($question->multiple_answer === '1')
+        if ($question->multiple_answer == '1')
         {
             $output .= $this->checkboxes($question, $answer);
         }

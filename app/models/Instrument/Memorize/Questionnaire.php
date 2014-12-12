@@ -77,7 +77,7 @@ class Questionnaire {
 
         $answer = $session->answers->filter(function($item) use ($question)
         {
-            if($item->question_id === $question->id)
+            if($item->question_id == $question->id)
             {
                 return true;
             }
