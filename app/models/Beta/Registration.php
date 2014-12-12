@@ -30,7 +30,7 @@ class Registration extends Eloquent{
         'firstname' => 'required',
         'lastname' => 'required',
         'email' => 'required|email|unique:beta_registrations',
-        'organisation' => array('required', 'firm-name' => 'regex:/^[a-zA-Z09 -\.]+$/')
+        'organisation' => 'required',
     );
 
 }
