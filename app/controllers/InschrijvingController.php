@@ -112,4 +112,21 @@ class InschrijvingController extends AdminController{
 
     }
 
+    public function destroy()
+    {
+        $ids = Input::get('ids');
+
+        if(count($ids))
+        {
+            $registrations = $this->registration->whereIn('id', $ids)->get();
+
+            foreach($registrations as $registration)
+            {
+                $registration->delete();
+            }
+        }
+
+        return [];
+    }
+
 } 

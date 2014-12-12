@@ -140,6 +140,32 @@ class HulpverlenerController extends AdminController
 
     }
 
+    public function destroy()
+    {
+        $ids = Input::get('ids');
+
+        if(!empty($ids))
+        {
+            //make sure one cannot delete oneself :-).
+            $ids = array_filter($ids, function($id)
+            {
+                return $id != Auth::user()->id;
+            });
+
+            if(!empty($ids))
+            {
+                $users = $this->user->whereIn('id', $ids)->with(['mantelzorgers', 'mantelzorgers.oudere'])->get();
+
+                foreach($users as $user)
+                {
+                    $user->delete();
+                }
+            }
+        }
+
+        return [];
+    }
+
     /**
      * Get an array of ids to use to regen the passwords.
      */

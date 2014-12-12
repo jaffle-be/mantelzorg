@@ -48,7 +48,7 @@ class InstrumentController extends AdminController
 
         $hulpverlener->load('mantelzorgers');
 
-        $surveys = $this->session->where('user_id', $hulpverlener->id)->get();
+        $surveys = $this->session->where('user_id', $hulpverlener->id)->paginate(40);
 
         if (!$questionnaire)
         {
@@ -90,6 +90,27 @@ class InstrumentController extends AdminController
         $survey = Memorize::newSurvey($mantelzorger, $oudere, $questionnaire);
 
         return Redirect::route('instrument.panel.get', array($questionnaire->panels->first()->id, $survey->id));
+    }
+
+    public function destroy()
+    {
+        $ids = Input::get('ids');
+
+        if(count($ids))
+        {
+            $hulpverlener = Auth::user();
+
+            $surveys = $this->session->where('user_id', $hulpverlener->id)->whereIn('id', $ids)->with([
+                'answers'
+            ])->get();
+
+            foreach($surveys as $survey)
+            {
+                $survey->delete();
+            }
+        }
+
+        return [];
     }
 
     /**

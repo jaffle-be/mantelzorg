@@ -11,6 +11,10 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider{
         Questionnaire::observe($this->app['Questionnaire\Observer\Questionnaire']);
 
         Question::observe($this->app['Questionnaire\Observer\Question']);
+
+        Session::observe($this->app['Questionnaire\Observer\Session']);
+
+        Answer::observe($this->app['Questionnaire\Observer\Answer']);
     }
 
     public function register()
@@ -18,6 +22,10 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider{
         $this->app['Questionnaire\Observer\Questionnaire'] = new Observer\Questionnaire($this->app['events']);
 
         $this->app['Questionnaire\Observer\Question'] = new Observer\Question($this->app['events']);
+
+        $this->app['Questionnaire\Observer\Session'] = new Observer\Session($this->app['events']);
+
+        $this->app['Questionnaire\Observer\Answer'] = new Observer\Answer($this->app['events']);
     }
 
 } 

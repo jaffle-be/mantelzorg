@@ -88,6 +88,11 @@ class Mantelzorger extends Eloquent{
         return $this->belongsTo('User', 'hulpverlener_id');
     }
 
+    public function surveys()
+    {
+        return $this->hasMany('Questionnaire\\Session', 'mantelzorger_id');
+    }
+
     public function getDates()
     {
         $dates = parent::getDates();

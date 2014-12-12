@@ -3,40 +3,40 @@
     'use strict';
 
     $(document).ready(function () {
-
         $(".actions").on('click', '.regen-password', function (event) {
-
-            var ids = [];
-
+            var ids = app.getIds($(this));
             //find the checked boxes
-            $(this).closest('table').find('tbody tr td:first-child input:checkbox').each(function () {
-
-                if($(this).prop('checked') == true)
-                {
-                    //add id to ids if it was checked
-                    ids.push($(this).closest('tr').data('id'));
-                }
-
-            });
-
-            if(ids.length > 0)
-            {
-                var success = function()
-                {
+            if (ids.length > 0) {
+                var success = function () {
                     //start request
                     $.post('/hulpverleners/regen-passwords', {
-                        'ids':ids
-                    }, function(response)
-                    {
+                        'ids': ids
+                    }, function (response) {
                         window.location.reload();
                     });
                 }
-
                 app.confirm(success);
             }
 
             event.preventDefault();
+        }).on('click', '.remove', function (event) {
+            var $me = $(this);
+            app.confirm(function () {
+                var ids = app.getIds($me);
+
+                $.ajax({
+                    url: '/hulpverleners/destroy',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {'ids': ids},
+                    success: function () {
+                        window.location.reload();
+                    }
+                });
+            });
+            event.preventDefault();
         });
+
 
     });
 

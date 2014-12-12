@@ -3,6 +3,7 @@
 namespace Mantelzorger\Observer;
 
 use Illuminate\Events\Dispatcher;
+use Mantelzorger\Mantelzorger as Model;
 
 /**
  * Class Mantelzorger
@@ -23,9 +24,6 @@ class Mantelzorger {
         $this->events = $events;
     }
 
-    /**
-     *
-     */
     public function updating($model)
     {
         if(empty($model->email))
@@ -34,6 +32,16 @@ class Mantelzorger {
         }
     }
 
+    public function deleting(Model $model)
+    {
+        foreach($model->surveys as $survey)
+        {
+            $survey->delete();
+        }
 
-
-} 
+        foreach($model->oudere as $oudere)
+        {
+            $oudere->delete();
+        }
+    }
+}

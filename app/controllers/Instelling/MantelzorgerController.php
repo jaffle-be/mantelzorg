@@ -35,7 +35,9 @@ class MantelzorgerController extends \AdminController{
 
     public function index($hulpverlener)
     {
-        $this->layout->content = View::make('instellingen.mantelzorgers.index', compact(array('hulpverlener')));
+        $mantelzorgers = $hulpverlener->mantelzorgers()->with(['oudere'])->paginate(5);
+
+        $this->layout->content = View::make('instellingen.mantelzorgers.index', compact(array('hulpverlener', 'mantelzorgers')));
     }
 
     public function create($hulpverlener)

@@ -28,7 +28,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         'email', 'firstname', 'lastname', 'male', 'admin', 'active', 'password', 'phone', 'organisation_id', 'organisation_location_id'
     );
 
-
 	/**
 	 * The attributes excluded from the model's JSON form.
 	 *

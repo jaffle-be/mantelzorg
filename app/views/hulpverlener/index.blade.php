@@ -37,8 +37,8 @@
                 <li><a class="select-none" href="">{{ Lang::get('master.tools.select_none') }}</a></li>
                 <li class="divider"></li>
                 <li><a class="regen-password" href="">{{ Lang::get('users.regen-password') }}</a></li>
-                {{--<li class="divider"></li>--}}
-                {{--<li><a class="remove" href="">{{ Lang::get('master.tools.remove') }}</a></li>--}}
+                <li class="divider"></li>
+                <li><a class="remove" href="">{{ Lang::get('master.tools.remove') }}</a></li>
             </ul>
         </div>
         </th>
@@ -53,8 +53,8 @@
     <? $teller = 1 ?>
     @foreach($users as $user)
 
-    <tr data-id="{{$user->id}}">
-        <td>{{ $teller }} <input type="checkbox"/></td>
+    <tr>
+        <td>{{ $teller }} <input type="checkbox" value="{{$user->id}}"/></td>
         <td><a href="<?= URL::action('HulpverlenerController@edit', array($user->id)) ?>">{{ $user->firstname . ' ' . $user->lastname}}</a></td>
         <td>{{ $user->email }}</td>
         <td>

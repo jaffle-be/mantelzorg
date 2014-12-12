@@ -14,4 +14,9 @@ class UserServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->app['events']->listen('user.password-generated', 'UserMailer@passwordGenerated');
     }
 
+    public function boot()
+    {
+        User::observe($this->app->make('UserObserver'));
+    }
+
 } 

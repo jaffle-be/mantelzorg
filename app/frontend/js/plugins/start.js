@@ -5,6 +5,16 @@
     {
         app.datepickers();
 
+        app.getIds = function($element)
+        {
+            var ids = []
+            $element.closest('table').find('tbody td:first-child input:checked').each(function () {
+                ids.push($(this).val());
+            });
+
+            return ids;
+        };
+
         $(".actions").on('click', '.select-all', function(event)
         {
             $(this).closest('table').find('tbody tr td:first-child input:checkbox').each(function()
