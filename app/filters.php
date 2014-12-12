@@ -53,7 +53,7 @@ Route::filter('auth.admin', function()
 
     if($user->admin === '0')
     {
-        return Redirect::action('DashController@getIndex')->with('message', Lang::get('master.info.no-right-to-section'));
+        return Redirect::route('dash')->with('message', Lang::get('master.info.no-right-to-section'));
     }
 
 });

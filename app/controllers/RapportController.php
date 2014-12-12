@@ -4,7 +4,7 @@ class RapportController extends AdminController{
 
     function __construct()
     {
-        $this->beforeFilter('auth');
+        $this->beforeFilter('auth.admin');
     }
 
 
