@@ -48,7 +48,7 @@ class Answer extends Eloquent
     {
         return $this->choises->filter(function ($item) use ($choise)
         {
-            if ($item->id === $choise->id)
+            if ($item->id == $choise->id)
             {
                 return true;
             }
