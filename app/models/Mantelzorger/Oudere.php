@@ -70,9 +70,14 @@ class Oudere extends \Eloquent{
         }
     }
 
+    public function mantelzorger()
+    {
+        return $this->belongsTo('Mantelzorger\Mantelzorger');
+    }
+
     public function mantelzorger_relation()
     {
-        $this->belongsTo('Meta\Meta', 'mantelzorger_relation');
+        return $this->belongsTo('Meta\Meta', 'mantelzorger_relation');
     }
 
     public function getDates()

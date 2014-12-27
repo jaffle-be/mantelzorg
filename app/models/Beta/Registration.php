@@ -2,11 +2,30 @@
 
 namespace Beta;
 
-use Eloquent;
+use Eloquent, Input, Validator;
+use Search\Model\Searchable;
+use Search\Model\SearchableTrait;
 
-class Registration extends Eloquent{
+class Registration extends Eloquent implements Searchable{
+
+    use SearchableTrait;
 
     protected $table = 'beta_registrations';
+
+    protected static $searchableMapping = [
+        'created_at' => [
+            'type' => 'date',
+            'format' => 'yyyy-MM-dd HH:mm:ss'
+        ],
+        'updated_at' => [
+            'type' => 'date',
+            'format' => 'yyyy-MM-dd HH:mm:ss'
+        ],
+        'email' => [
+            'type' => 'string',
+            'analyzer' => 'email'
+        ]
+    ];
 
     protected $fillable = array('firstname', 'lastname', 'email', 'organisation');
 
@@ -14,7 +33,7 @@ class Registration extends Eloquent{
     {
         if(empty($input))
         {
-            $input = \Input::all();
+            $input = Input::all();
         }
 
         if(empty($rules))
@@ -22,7 +41,7 @@ class Registration extends Eloquent{
             $rules = static::$rules;
         }
 
-        return \Validator::make($input, $rules);
+        return Validator::make($input, $rules);
 
     }
 

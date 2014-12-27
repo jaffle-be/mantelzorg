@@ -12,12 +12,12 @@ class HulpverlenerController extends AdminController
     protected $user;
 
     /**
-     * @var Organisation\Organisation
+     * @var Organisation
      */
     protected $organisation;
 
     /**
-     * @var Organisation\Location
+     * @var Location
      */
     protected $location;
 
@@ -34,9 +34,24 @@ class HulpverlenerController extends AdminController
 
     public function index()
     {
-        $users = $this->user->with('organisation')->paginate();
+        $search = $this->user->search();
+
+        $query = Input::get('query');
+
+        $users = $search
+            ->whereMulti_match(['firstname', 'lastname', 'email', 'organisation.name'], $query)
+            ->orderBy('created_at', 'asc')
+            ->orderBy('organisation.name', 'asc')
+            ->get();
+
+        $users->appends('query', $query);
 
         $this->layout->content = View::make('hulpverlener.index', compact(array('users')));
+    }
+
+    protected function finishIndexQuery($query)
+    {
+        return $query->with('organisation')->paginate();
     }
 
     public function edit($id)
@@ -60,7 +75,7 @@ class HulpverlenerController extends AdminController
              * the locations that are linked to that organisation
              */
 
-            if (Input::old() && $user->organisation_id !== Input::old('organisation_id'))
+            if (Input::old('organisation_id') && $user->organisation_id !== Input::old('organisation_id'))
             {
                 $locations = $this->location->where('organisation_id', Input::old('organisation_id'))
                     ->orderBy('name')
@@ -144,19 +159,19 @@ class HulpverlenerController extends AdminController
     {
         $ids = Input::get('ids');
 
-        if(!empty($ids))
+        if (!empty($ids))
         {
             //make sure one cannot delete oneself :-).
-            $ids = array_filter($ids, function($id)
+            $ids = array_filter($ids, function ($id)
             {
                 return $id != Auth::user()->id;
             });
 
-            if(!empty($ids))
+            if (!empty($ids))
             {
                 $users = $this->user->whereIn('id', $ids)->with(['mantelzorgers', 'mantelzorgers.oudere'])->get();
 
-                foreach($users as $user)
+                foreach ($users as $user)
                 {
                     $user->delete();
                 }

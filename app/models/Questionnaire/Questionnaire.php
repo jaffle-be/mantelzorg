@@ -38,6 +38,11 @@ class Questionnaire extends Eloquent{
         return Validator::make($input, $rules);
     }
 
+    public function questions()
+    {
+        return $this->hasManyThrough('Qestionnaire\Question', 'Questionnaire\Panel');
+    }
+
     public function panels()
     {
         return $this->hasMany('Questionnaire\Panel', 'questionnaire_id');

@@ -2,25 +2,54 @@
 
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
+use Search\Model\Searchable;
+use Search\Model\SearchableTrait;
 
-class User extends Eloquent implements UserInterface, RemindableInterface {
+class User extends Eloquent implements UserInterface, RemindableInterface, Searchable
+{
 
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'users';
+    use SearchableTrait;
+
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'users';
+
+    protected static $searchableMapping = [
+        'male' => [
+            'type' => 'boolean',
+        ],
+        'admin' => [
+            'type' => 'boolean',
+        ],
+        'active' => [
+            'type' => 'boolean',
+        ],
+        'created_at' => [
+            'type' => 'date',
+            'format' => 'yyyy-MM-dd HH:mm:ss'
+        ],
+        'updated_at' => [
+            'type' => 'date',
+            'format' => 'yyyy-MM-dd HH:mm:ss'
+        ],
+        'email' => [
+            'type' => 'string',
+            'analyzer' => 'email'
+        ]
+    ];
 
     protected static $rules = array(
-        'email' => 'required|email|unique:users',
-        'firstname' => 'required',
-        'lastname' => 'required',
-        'male' => 'required|',
-        'admin' => 'in:0,1',
-        'active' => 'in:0,1',
-        'password' => 'required',
-        'organisation_id' => 'required|exists:organisations,id',
+        'email'                    => 'required|email|unique:users',
+        'firstname'                => 'required',
+        'lastname'                 => 'required',
+        'male'                     => 'required|',
+        'admin'                    => 'in:0,1',
+        'active'                   => 'in:0,1',
+        'password'                 => 'required',
+        'organisation_id'          => 'required|exists:organisations,id',
         'organisation_location_id' => 'required|exists:locations,id',
     );
 
@@ -28,42 +57,42 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         'email', 'firstname', 'lastname', 'male', 'admin', 'active', 'password', 'phone', 'organisation_id', 'organisation_location_id'
     );
 
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	protected $hidden = array('password');
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = array('password', 'remember_token');
 
-	/**
-	 * Get the unique identifier for the user.
-	 *
-	 * @return mixed
-	 */
-	public function getAuthIdentifier()
-	{
-		return $this->getKey();
-	}
+    /**
+     * Get the unique identifier for the user.
+     *
+     * @return mixed
+     */
+    public function getAuthIdentifier()
+    {
+        return $this->getKey();
+    }
 
-	/**
-	 * Get the password for the user.
-	 *
-	 * @return string
-	 */
-	public function getAuthPassword()
-	{
-		return $this->password;
-	}
+    /**
+     * Get the password for the user.
+     *
+     * @return string
+     */
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
 
-	/**
-	 * Get the e-mail address where password reminders are sent.
-	 *
-	 * @return string
-	 */
-	public function getReminderEmail()
-	{
-		return $this->email;
-	}
+    /**
+     * Get the e-mail address where password reminders are sent.
+     *
+     * @return string
+     */
+    public function getReminderEmail()
+    {
+        return $this->email;
+    }
 
     /**
      * Get the token value for the "remember me" session.
@@ -97,19 +126,27 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return 'remember_token';
     }
 
+    public function getFullnameAttribute()
+    {
+        return $this->attributes['firstname'] . ' ' . $this->attributes['lastname'];
+    }
+
 
     public function validator($fields = null, $input = null)
     {
         $rules = static::$rules;
 
-        if(!empty($fields))
+        if (!empty($fields))
         {
-            if(!is_array($fields)) $fields = array($fields);
+            if (!is_array($fields))
+            {
+                $fields = array($fields);
+            }
 
             $rules = array_intersect_key($rules, array_flip($fields));
         }
 
-        if(empty($input))
+        if (empty($input))
         {
             $input = Input::all();
         }
@@ -121,26 +158,34 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     {
         $vowels = 'aeiouy';
         $consonants = 'bcdfghjklmnpqrstvwxz';
-        if ($strength & 1) {
+        if ($strength & 1)
+        {
             $consonants .= 'BCDFGHJKLMNPQRSTVWXZ';
         }
-        if ($strength & 2) {
+        if ($strength & 2)
+        {
             $vowels .= "AEIOUY";
         }
-        if ($strength & 4) {
+        if ($strength & 4)
+        {
             $consonants .= '23456789';
         }
-        if ($strength & 8) {
+        if ($strength & 8)
+        {
             $consonants .= '@#$%';
         }
 
         $password = '';
         $alt = time() % 2;
-        for ($i = 0; $i < $length; $i++) {
-            if ($alt == 1) {
+        for ($i = 0; $i < $length; $i++)
+        {
+            if ($alt == 1)
+            {
                 $password .= $consonants[(rand() % strlen($consonants))];
                 $alt = 0;
-            } else {
+            }
+            else
+            {
                 $password .= $vowels[(rand() % strlen($vowels))];
                 $alt = 1;
             }
@@ -157,6 +202,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     public function mantelzorgers()
     {
         return $this->hasMany('Mantelzorger\\Mantelzorger', 'hulpverlener_id');
+    }
+
+    public function organisation_location()
+    {
+        return $this->belongsTo('Organisation\\Location', 'organisation_location_id');
     }
 
     public function surveys()

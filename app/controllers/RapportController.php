@@ -2,11 +2,14 @@
 
 class RapportController extends AdminController{
 
-    function __construct()
+    protected $search;
+
+    function __construct(Search\SearchServiceInterface $search)
     {
+        $this->search = $search;
+
         $this->beforeFilter('auth.admin');
     }
-
 
     public function getIndex()
     {

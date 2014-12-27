@@ -2,12 +2,15 @@
 
 namespace Mantelzorger;
 
+use Search\Model\Searchable;
+use Search\Model\SearchableTrait;
 use Validator;
 use Input;
 use Eloquent;
-use DateTime;
 
-class Mantelzorger extends Eloquent{
+class Mantelzorger extends Eloquent implements Searchable{
+
+    use SearchableTrait;
 
     protected $table = 'mantelzorgers';
 
@@ -51,10 +54,7 @@ class Mantelzorger extends Eloquent{
 
     public function setBirthdayAttribute($value)
     {
-        if(!empty($value))
-        {
-            $this->attributes['birthday'] = DateTime::createFromFormat('d/m/Y', $value);
-        }
+
     }
 
     public function validator(array $input = array(), array $rules = array())

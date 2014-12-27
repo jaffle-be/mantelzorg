@@ -50,6 +50,7 @@ return array(
         "select_all"  => "Alles selecteren",
         "select_none" => "Niets selecteren",
         "remove"      => "Verwijderen",
+        "zoeken"      => "Zoeken",
     ),
 
     "general"    => array(

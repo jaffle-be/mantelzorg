@@ -121,13 +121,18 @@ return array(
         'Illuminate\Validation\ValidationServiceProvider',
         'Illuminate\View\ViewServiceProvider',
         'Illuminate\Workbench\WorkbenchServiceProvider',
+
+        'Search\SearchServiceProvider',
         'Intouch\LaravelNewrelic\LaravelNewrelicServiceProvider',
+
         'Template\TemplateServiceProvider',
         'Questionnaire\ServiceProvider',
         'Instrument\ServiceProvider',
         'Schickling\Backup\BackupServiceProvider',
         'Mantelzorger\MantelzorgerServiceProvider',
         'UserServiceProvider',
+        'Beta\BetaServiceProvider',
+        'Way\Generators\GeneratorsServiceProvider',
     ),
 
     /*
@@ -198,7 +203,6 @@ return array(
         'Memorize'          => 'Instrument\Memorize\Facade',
         'InstrumentTool'    => 'Instrument\Engine\Facade',
         'Newrelic'          => 'Intouch\LaravelNewrelic\Facades\Newrelic',
-
     ),
 
 );

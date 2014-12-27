@@ -14,7 +14,7 @@
                     }, function (response) {
                         window.location.reload();
                     });
-                }
+                };
                 app.confirm(success);
             }
 
@@ -36,8 +36,6 @@
             });
             event.preventDefault();
         });
-
-
     });
 
 })(window.jQuery, window.app);

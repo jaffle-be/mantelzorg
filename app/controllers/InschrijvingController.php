@@ -32,7 +32,17 @@ class InschrijvingController extends AdminController{
 
     public function index()
     {
-        $registrations = $this->registration->paginate();
+        $query = Input::get('query');
+
+        $search = $this->registration->search();
+
+        $registrations = $search->whereMulti_match(['email', 'firstname', 'lastname'], $query)
+            ->orderBy('created_at', 'asc')
+            ->orderBy('firstname', 'asc')
+            ->orderBy('lastname', 'asc')
+            ->get();
+
+        $registrations->appends('query', $query);
 
         $this->layout->content = View::make('inschrijving.index', compact(array('registrations')));
     }

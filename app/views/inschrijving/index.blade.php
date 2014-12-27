@@ -18,8 +18,19 @@
 @section('content')
 
     @if($registrations->count())
-        <div class="text-center">
-            {{ $registrations->links() }}
+        <div class="row easy-search">
+            <div class="col-sm-5">
+                @include('inschrijving.search')
+            </div>
+            <div class="col-sm-7 text-right">
+                {{ $registrations->links('pagination::simple') }}
+            </div>
+        </div>
+    @else
+        <div class="row easy-search">
+            <div class="col-sm-5">
+                @include('inschrijving.search')
+            </div>
         </div>
     @endif
 
