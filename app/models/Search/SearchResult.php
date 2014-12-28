@@ -7,6 +7,7 @@ use Illuminate\Support\Collection;
 
 class SearchResult extends Collection
 {
+
     public function __construct($paginator, $items, $paginate)
     {
         $this->_shards = $result['_shards'];
@@ -17,10 +18,8 @@ class SearchResult extends Collection
 
         $this->max_score = $result['hits']['max_score'];
 
-        $items = array_map(function ($item)
-        {
+        $items = array_map(function ($item) {
             return $item['_source'];
-
         }, $result['hits']['hits']);
 
         parent::__construct($items);

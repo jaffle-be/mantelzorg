@@ -5,7 +5,8 @@ namespace Questionnaire;
 use View;
 use Input;
 
-class QuestionController extends \AdminController{
+class QuestionController extends \AdminController
+{
 
     /**
      * @var Question
@@ -23,10 +24,9 @@ class QuestionController extends \AdminController{
     {
         $panel->load(array(
             'questions',
-            'questions.choises' => function($query)
-                {
-                    $query->orderBy('sort_weight');
-                }
+            'questions.choises' => function ($query) {
+                $query->orderBy('sort_weight');
+            }
         ));
         $this->layout->content = View::make('questionnaire.questions.index', compact(array('panel')))
             ->nest('questionCreator', 'modals.question-creator', compact(array()))
@@ -38,22 +38,18 @@ class QuestionController extends \AdminController{
 
         $input = Input::all();
         $input = array_merge($input, array(
-            'questionnaire_id' => $panel->questionnaire->id,
+            'questionnaire_id'       => $panel->questionnaire->id,
             'questionnaire_panel_id' => $panel->id,
         ));
 
         $validator = $this->question->validator($input);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return json_encode(array(
                 'status' => 'noke',
                 'errors' => $validator->messages()->toArray()
             ));
-        }
-
-        else
-        {
+        } else {
             $this->question->create($input);
 
             return json_encode(array(
@@ -70,8 +66,7 @@ class QuestionController extends \AdminController{
 
         $validator = $this->question->validator(null, $fields);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return json_encode(array(
                 'status' => 'noke',
                 'errors' => $validator->messages()->toArray()
@@ -95,7 +90,5 @@ class QuestionController extends \AdminController{
         $input = array_keys($input);
 
         return array_pop($input);
-
     }
-
-} 
+}

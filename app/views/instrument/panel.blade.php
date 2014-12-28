@@ -1,6 +1,6 @@
 @section('scripts')
 
-<script src="/js/instrument.panel.min.js"></script>
+    <script src="/js/instrument.panel.min.js"></script>
 
 @stop
 
@@ -23,17 +23,17 @@
 
 @section('content')
 
-<?= Form::open(array(
-    'route' => array('instrument.panel.submit', $panel->id, $survey->id),
-    'id' => 'panel-form'
-)) ?>
+    <?= Form::open(array(
+            'route' => array('instrument.panel.submit', $panel->id, $survey->id),
+            'id'    => 'panel-form'
+    )) ?>
 
-<?= InstrumentTool::header($panel); ?>
+    <?= InstrumentTool::header($panel); ?>
 
-<?= InstrumentTool::questions($panel, $survey) ?>
+    <?= InstrumentTool::questions($panel, $survey) ?>
 
-<?= InstrumentTool::footer($panel) ?>
+    <?= InstrumentTool::footer($panel) ?>
 
-<? Form::close() ?>
+    <? Form::close() ?>
 
 @stop

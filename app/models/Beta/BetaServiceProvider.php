@@ -3,7 +3,8 @@
 use Illuminate\Support\ServiceProvider;
 use Search\SearchServiceInterface;
 
-class BetaServiceProvider extends ServiceProvider{
+class BetaServiceProvider extends ServiceProvider
+{
 
     /**
      * Register the service provider.
@@ -22,5 +23,4 @@ class BetaServiceProvider extends ServiceProvider{
 
         $search->addAutoIndexing(new Registration());
     }
-
 }

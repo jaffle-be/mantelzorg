@@ -1,10 +1,11 @@
 <?php
 
-class RapportController extends AdminController{
+class RapportController extends AdminController
+{
 
     protected $search;
 
-    function __construct(Search\SearchServiceInterface $search)
+    public function __construct(Search\SearchServiceInterface $search)
     {
         $this->search = $search;
 
@@ -15,5 +16,4 @@ class RapportController extends AdminController{
     {
         $this->layout->content = View::make('rapport.index');
     }
-
-} 
+}

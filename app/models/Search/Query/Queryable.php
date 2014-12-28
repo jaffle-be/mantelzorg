@@ -3,7 +3,6 @@
 
 namespace Search\Query;
 
-
 interface Queryable
 {
 
@@ -30,5 +29,4 @@ interface Queryable
      * @return mixed
      */
     public function orderBy($column, $value);
-
 }

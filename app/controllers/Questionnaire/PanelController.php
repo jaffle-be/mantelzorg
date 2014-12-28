@@ -5,7 +5,8 @@ namespace Questionnaire;
 use Input;
 use View;
 
-class PanelController extends \AdminController{
+class PanelController extends \AdminController
+{
 
     /**
      * @var Panel
@@ -26,8 +27,7 @@ class PanelController extends \AdminController{
         $input['questionnaire_id'] = $questionnaire->id;
 
         //find heighest weight, add 10 to it, if no records -> start with 0;
-        $panels = $questionnaire->panels->sortBy(function($panel)
-        {
+        $panels = $questionnaire->panels->sortBy(function ($panel) {
             return $panel->panel_weight;
         }, 'desc');
 
@@ -37,21 +37,17 @@ class PanelController extends \AdminController{
 
         $validator = $this->panel->validator($input);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return json_encode(array(
                 'status' => 'error'
             ));
-        }
-        else
-        {
+        } else {
             $this->panel->create($input);
 
             return json_encode(array(
                 'status' => 'oke'
             ));
         }
-
     }
 
     public function update($questionnaire, $panel)
@@ -60,12 +56,9 @@ class PanelController extends \AdminController{
 
         $validator = $this->panel->validator();
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return $validator->messages();
-        }
-        else
-        {
+        } else {
             $panel->update(Input::all());
 
             return json_encode(array('status' => 'oke'));
@@ -77,16 +70,14 @@ class PanelController extends \AdminController{
         $positions = Input::get('positions');
 
         //remove 'panel-' prefix
-        $positions = array_map(function($item){
+        $positions = array_map(function ($item) {
             return str_replace('panel-', '', $item);
         }, $positions);
 
-        if($positions)
-        {
+        if ($positions) {
             $panels = $this->panel->whereIn('id', $positions)->get();
 
-            foreach($panels as $panel)
-            {
+            foreach ($panels as $panel) {
                 $key = array_search($panel->id, $positions);
 
                 $panel->panel_weight = $key * 10;
@@ -97,5 +88,4 @@ class PanelController extends \AdminController{
 
         return json_encode(array('status' => 'oke'));
     }
-
-} 
+}

@@ -15,5 +15,4 @@ class Value extends Eloquent
     {
         return $this->belongsTo('Meta\Context', 'context_id');
     }
-
-} 
+}

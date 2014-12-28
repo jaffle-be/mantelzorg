@@ -13,13 +13,11 @@ class AddIdentifierFields extends Migration
      */
     public function up()
     {
-        Schema::table('ouderen', function (Blueprint $table)
-        {
-			$table->string('identifier', 20)->after('id');
+        Schema::table('ouderen', function (Blueprint $table) {
+            $table->string('identifier', 20)->after('id');
         });
 
-        Schema::table('mantelzorgers', function (Blueprint $table)
-        {
+        Schema::table('mantelzorgers', function (Blueprint $table) {
             $table->string('identifier', 20)->after('id');
         });
     }
@@ -31,10 +29,10 @@ class AddIdentifierFields extends Migration
      */
     public function down()
     {
-        Schema::table('ouderen', function(Blueprint $table){
+        Schema::table('ouderen', function (Blueprint $table) {
             $table->dropColumn('identifier');
         });
-        Schema::table('mantelzorgers', function(Blueprint $table){
+        Schema::table('mantelzorgers', function (Blueprint $table) {
             $table->dropColumn('identifier');
         });
     }

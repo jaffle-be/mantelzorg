@@ -39,25 +39,25 @@
     <table class="table table-striped table-hover">
 
         <thead>
-            <tr>
-                <th>
-                    <div class="dropdown actions">
-                        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">{{ Lang::get('master.tools.acties') }}&nbsp;<span class="caret">&nbsp;</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="select-all" href="">{{ Lang::get('master.tools.select_all') }}</a></li>
-                            <li><a class="select-none" href="">{{ Lang::get('master.tools.select_none') }}</a></li>
-                            <li class="divider"></li>
-                            <li><a class="regen-password" href="">{{ Lang::get('users.regen-password') }}</a></li>
-                            <li class="divider"></li>
-                            <li><a class="remove" href="">{{ Lang::get('master.tools.remove') }}</a></li>
-                        </ul>
-                    </div>
-                </th>
-                <th><?= Lang::get('users.naam') ?></th>
-                <th><?= Lang::get('users.email') ?></th>
-                <th><?= Lang::get('users.organisatie') ?></th>
-                <th><?= Lang::get('users.created') ?></th>
-            </tr>
+        <tr>
+            <th>
+                <div class="dropdown actions">
+                    <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">{{ Lang::get('master.tools.acties') }}&nbsp;<span class="caret">&nbsp;</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="select-all" href="">{{ Lang::get('master.tools.select_all') }}</a></li>
+                        <li><a class="select-none" href="">{{ Lang::get('master.tools.select_none') }}</a></li>
+                        <li class="divider"></li>
+                        <li><a class="regen-password" href="">{{ Lang::get('users.regen-password') }}</a></li>
+                        <li class="divider"></li>
+                        <li><a class="remove" href="">{{ Lang::get('master.tools.remove') }}</a></li>
+                    </ul>
+                </div>
+            </th>
+            <th><?= Lang::get('users.naam') ?></th>
+            <th><?= Lang::get('users.email') ?></th>
+            <th><?= Lang::get('users.organisatie') ?></th>
+            <th><?= Lang::get('users.created') ?></th>
+        </tr>
         </thead>
 
 

@@ -1,80 +1,65 @@
-(function($, app)
-{
+(function ($, app) {
     'use strict';
 
-    if(typeof app.questionnaire === 'undefined') app.questionnaire = {};
+    if (typeof app.questionnaire === 'undefined') app.questionnaire = {};
 
-    function Creator()
-    {
+    function Creator() {
         this.$creator = $('#choise-creator');
         this.$trigger = $(".add-choise");
         this.init();
     }
 
     Creator.prototype = {
-        init: function()
-        {
+        init: function () {
             this.events();
         },
-        events: function()
-        {
+        events: function () {
             var that = this;
 
-            this.$trigger.on('click', function(event)
-            {
+            this.$trigger.on('click', function (event) {
                 that.open($(this).closest('.question').data('question-id'));
                 event.preventDefault();
             });
-            this.$creator.on('click', '.btn-primary', function()
-            {
+            this.$creator.on('click', '.btn-primary', function () {
                 that.create();
             });
         },
-        create: function()
-        {
+        create: function () {
             var that = this;
-            this.persist(function(response)
-            {
+            this.persist(function (response) {
                 response.status === 'oke' ? that.success(response) : that.error(response);
             });
         },
-        persist: function(callback)
-        {
+        persist: function (callback) {
             var that = this;
             $.ajax({
                 url: '/questions/' + that.questionid + '/choises',
                 type: 'POST',
                 dataType: 'json',
                 data: that.data(),
-                success: function(response)
-                {
+                success: function (response) {
                     callback(response)
                 }
             });
         },
-        success: function(response)
-        {
+        success: function (response) {
             window.location.reload();
         },
-        error: function(response)
-        {
+        error: function (response) {
 
         },
-        open: function(questionid)
-        {
+        open: function (questionid) {
             this.questionid = questionid
             this.$creator.modal('show');
         },
-        data: function()
-        {
+        data: function () {
             return {
                 title: this.$creator.find('input[name=title]').val()
             }
         }
     };
 
-    $(document).ready(function()
-    {
+    $(document).ready(function () {
         app.questionnaire.question = new Creator();
     })
 

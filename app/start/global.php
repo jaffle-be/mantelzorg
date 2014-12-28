@@ -13,10 +13,10 @@
 
 ClassLoader::addDirectories(array(
 
-	app_path().'/commands',
-	app_path().'/controllers',
-	app_path().'/models',
-	app_path().'/database/seeds',
+    app_path() . '/commands',
+    app_path() . '/controllers',
+    app_path() . '/models',
+    app_path() . '/database/seeds',
 
 ));
 
@@ -31,9 +31,9 @@ ClassLoader::addDirectories(array(
 |
 */
 
-$logFile = 'log-'.php_sapi_name().'.txt';
+$logFile = 'log-' . php_sapi_name() . '.txt';
 
-Log::useDailyFiles(storage_path().'/logs/'.$logFile);
+Log::useDailyFiles(storage_path() . '/logs/' . $logFile);
 
 /*
 |--------------------------------------------------------------------------
@@ -48,11 +48,9 @@ Log::useDailyFiles(storage_path().'/logs/'.$logFile);
 |
 */
 
-App::error(function(Exception $exception, $code)
-{
-	Log::error($exception);
-    if($code === 404)
-    {
+App::error(function (Exception $exception, $code) {
+    Log::error($exception);
+    if ($code === 404) {
         return Redirect::route('home');
     }
 });
@@ -68,9 +66,8 @@ App::error(function(Exception $exception, $code)
 |
 */
 
-App::down(function()
-{
-	return Response::make("Be right back!", 503);
+App::down(function () {
+    return Response::make("Be right back!", 503);
 });
 
 /*
@@ -84,16 +81,14 @@ App::down(function()
 |
 */
 
-require app_path().'/filters.php';
+require app_path() . '/filters.php';
 
 
-
-View::composer('layout.*', function($view){
+View::composer('layout.*', function ($view) {
     $view->with('user', Auth::user());
 });
 
-View::composer('layout.messages', function($view)
-{
+View::composer('layout.messages', function ($view) {
     $message = Session::has('message') ? Session::get('message') : null;
 
     $error = Session::has('error') ? Session::get('error') : null;
@@ -103,7 +98,7 @@ View::composer('layout.messages', function($view)
     $view->with(compact('message', 'error'));
 });
 
-Validator::extend('passcheck', function($attribute, $value, $parameters){
+Validator::extend('passcheck', function ($attribute, $value, $parameters) {
 
     $user = Auth::user();
 

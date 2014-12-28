@@ -4,7 +4,8 @@ namespace Organisation;
 use AdminController;
 use Input;
 
-class LocationController extends AdminController{
+class LocationController extends AdminController
+{
 
     /**
      * @var \Organisation\Location
@@ -35,22 +36,18 @@ class LocationController extends AdminController{
 
         $validator = $this->location->validator(null, $input);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return array(
                 'status' => 'error',
                 'errors' => $validator->messages()->toArray()
             );
-        }
-        else
-        {
+        } else {
             $location = $this->location->create($input);
 
             return array(
-                'status' => 'oke',
+                'status'   => 'oke',
                 'location' => $location->toArray()
             );
         }
     }
-
-} 
+}

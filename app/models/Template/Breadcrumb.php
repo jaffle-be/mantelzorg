@@ -2,24 +2,20 @@
 
 namespace Template;
 
-
 class Breadcrumb
 {
 
-    public function render($items){
+    public function render($items)
+    {
 
         $output = $this->open();
 
         $teller = 1;
 
-        while($teller <= count($items))
-        {
-            if($teller == count($items))
-            {
+        while ($teller <= count($items)) {
+            if ($teller == count($items)) {
                 $output .= $this->last($items[$teller - 1]);
-            }
-            else
-            {
+            } else {
                 $output .= $this->regular($items[$teller - 1]);
             }
 
@@ -29,7 +25,6 @@ class Breadcrumb
         $output .= $this->close();
 
         return $output;
-
     }
 
     public function open()
@@ -39,8 +34,7 @@ class Breadcrumb
 
     public function regular($item)
     {
-        if(isset($item['href']))
-        {
+        if (isset($item['href'])) {
             return sprintf('<li><a href="%s">%s</a></li>', $item['href'], $item['text']);
         }
 
@@ -56,5 +50,4 @@ class Breadcrumb
     {
         return '</ol>';
     }
-
 }

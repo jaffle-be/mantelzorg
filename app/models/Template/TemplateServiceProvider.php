@@ -2,7 +2,8 @@
 
 namespace Template;
 
-class TemplateServiceProvider extends \Illuminate\Support\ServiceProvider{
+class TemplateServiceProvider extends \Illuminate\Support\ServiceProvider
+{
 
     /**
      * Register the service provider.
@@ -11,12 +12,10 @@ class TemplateServiceProvider extends \Illuminate\Support\ServiceProvider{
      */
     public function register()
     {
-        $this->app['template'] = $this->app->share(function($app)
-        {
+        $this->app['template'] = $this->app->share(function ($app) {
             $crumb = new Breadcrumb();
 
             return new TemplateRepository($crumb);
         });
     }
-
-} 
+}

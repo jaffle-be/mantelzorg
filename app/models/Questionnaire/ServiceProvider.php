@@ -2,7 +2,8 @@
 
 namespace Questionnaire;
 
-class ServiceProvider extends \Illuminate\Support\ServiceProvider{
+class ServiceProvider extends \Illuminate\Support\ServiceProvider
+{
 
     public function boot()
     {
@@ -27,5 +28,4 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider{
 
         $this->app['Questionnaire\Observer\Answer'] = new Observer\Answer($this->app['events']);
     }
-
-} 
+}

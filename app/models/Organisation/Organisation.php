@@ -1,10 +1,12 @@
 <?php
 namespace Organisation;
+
 use Input;
 use Validator;
 use Eloquent;
 
-class Organisation extends Eloquent{
+class Organisation extends Eloquent
+{
 
     protected $table = 'organisations';
 
@@ -18,12 +20,10 @@ class Organisation extends Eloquent{
 
     public function validator($rules = null, $input = null)
     {
-        if(empty($rules))
-        {
+        if (empty($rules)) {
             $rules = static::$rules;
         }
-        if(empty($input))
-        {
+        if (empty($input)) {
             $input = Input::all();
         }
 
@@ -34,5 +34,4 @@ class Organisation extends Eloquent{
     {
         return $this->hasMany('Organisation\\Location');
     }
-
-} 
+}

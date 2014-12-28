@@ -18,7 +18,7 @@ app = {
 
         modal.on('click', '.btn-default', function () {
 
-            if(typeof cancel === 'function')
+            if (typeof cancel === 'function')
             {
                 cancel();
             }

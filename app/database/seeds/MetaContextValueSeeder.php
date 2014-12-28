@@ -11,22 +11,22 @@ class MetaContextValueSeeder extends \Illuminate\Database\Seeder
 
         Meta\Value::create(array(
             'context_id' => 1,
-            'value' => 'partner',
+            'value'      => 'partner',
         ));
 
         Meta\Value::create(array(
             'context_id' => 1,
-            'value' => 'kind',
+            'value'      => 'kind',
         ));
 
         Meta\Value::create(array(
             'context_id' => 1,
-            'value' => 'vriend',
+            'value'      => 'vriend',
         ));
 
         Meta\Value::create(array(
             'context_id' => 1,
-            'value' => 'buur',
+            'value'      => 'buur',
         ));
     }
 

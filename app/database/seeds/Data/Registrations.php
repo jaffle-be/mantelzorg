@@ -5,21 +5,21 @@ use Beta\Registration;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 
-class Registrations extends Seeder {
+class Registrations extends Seeder
+{
 
-	public function run()
-	{
-		$faker = Faker::create();
+    public function run()
+    {
+        $faker = Faker::create();
 
-		foreach(range(1, 100) as $index)
-		{
-			Registration::create([
-				'email' => $faker->unique()->email,
-				'firstname' => $faker->firstName,
-				'lastname' => $faker->lastName,
-				'organisation' => $faker->name
-			]);
-		}
-	}
+        foreach (range(1, 100) as $index) {
+            Registration::create([
+                'email'        => $faker->unique()->email,
+                'firstname'    => $faker->firstName,
+                'lastname'     => $faker->lastName,
+                'organisation' => $faker->name
+            ]);
+        }
+    }
 
 }

@@ -47,8 +47,7 @@ class UpdateMapping extends Command
     {
         $type = $this->argument('type');
 
-        if ($this->search->updateMapping($type))
-        {
+        if ($this->search->updateMapping($type)) {
             //we need to rebuild the type to make sure the new mapping is used.
             $this->search->build($type);
         }
@@ -65,5 +64,4 @@ class UpdateMapping extends Command
             array('type', InputArgument::REQUIRED, 'The type to remap'),
         );
     }
-
 }

@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Mail\Mailer;
 
 class UserMailer
@@ -22,11 +21,9 @@ class UserMailer
      */
     public function passwordGenerated(User $user, $original)
     {
-        $this->mailer->send('emails.auth.password', compact(array('original', 'user')), function ($message) use ($user)
-        {
+        $this->mailer->send('emails.auth.password', compact(array('original', 'user')), function ($message) use ($user) {
             $message->to($user->email, $user->firstname . ' ' . $user->lastname)
                 ->subject(Lang::get('email.registration.subject'));
         });
     }
-
-} 
+}

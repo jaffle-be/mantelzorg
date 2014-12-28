@@ -2,7 +2,8 @@
 
 use \Beta\Registration;
 
-class IndexController extends BaseController {
+class IndexController extends BaseController
+{
 
     protected $layout = 'layout.front.master';
 
@@ -23,21 +24,20 @@ class IndexController extends BaseController {
         $this->user = $user;
     }
 
-	public function getIndex()
-	{
-		$this->layout->content = View::make('beta');
-	}
+    public function getIndex()
+    {
+        $this->layout->content = View::make('beta');
+    }
 
     public function postIndex()
     {
         $validator = $this->registration->validator();
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return Redirect::to('/')->with('errors', $validator->messages())->withInput();
-        }
-        else{
+        } else {
             $this->registration->create(Input::all());
+
             return Redirect::to('/')->with('message', true);
         }
     }
@@ -60,33 +60,24 @@ class IndexController extends BaseController {
     public function postLogin()
     {
         $credentials = array(
-            'email' => Input::get('email'),
+            'email'    => Input::get('email'),
             'password' => Input::get('password'),
-            'active' => true
+            'active'   => true
         );
 
-        if(Auth::attempt($credentials))
-        {
+        if (Auth::attempt($credentials)) {
             $user = Auth::user();
 
             return Redirect::route('dash');
-        }
-        else
-        {
+        } else {
             $user = $this->user->whereEmail(Input::get('email'))->first();
 
-            if(!$user)
-            {
+            if (!$user) {
                 $error = Lang::get('master.errors.auth-email');
-            }
-            else
-            {
-                if($user->active === '0')
-                {
+            } else {
+                if ($user->active === '0') {
                     $error = Lang::get('master.errors.auth-active');
-                }
-                else
-                {
+                } else {
                     $error = Lang::get('master.errors.auth-password');
                 }
             }
@@ -111,7 +102,7 @@ class IndexController extends BaseController {
     {
         $credentials = array('email' => Input::get('email'));
 
-        $message = Password::remind($credentials, function($message, $user){
+        $message = Password::remind($credentials, function ($message, $user) {
             $message->subject(Lang::get('reminders.email.title'));
             $message->from('thomas@jaffle.be', 'Thomas Warlop');
         });
@@ -127,14 +118,13 @@ class IndexController extends BaseController {
     public function postReset()
     {
         $credentials = array(
-            'email' => Input::get('email'),
-            'password' => Input::get('password'),
+            'email'                 => Input::get('email'),
+            'password'              => Input::get('password'),
             'password_confirmation' => Input::get('password_confirmation'),
-            'token' => Input::get('token')
+            'token'                 => Input::get('token')
         );
 
-        $message = Password::reset($credentials, function($user, $password)
-        {
+        $message = Password::reset($credentials, function ($user, $password) {
             $user->password = Hash::make($password);
 
             $user->save();
@@ -142,5 +132,4 @@ class IndexController extends BaseController {
 
         return Redirect::back()->withMessage(Lang::get($message));
     }
-
 }

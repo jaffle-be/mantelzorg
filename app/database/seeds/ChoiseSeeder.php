@@ -1,6 +1,7 @@
 <?php
 
-class ChoiseSeeder extends Seeder{
+class ChoiseSeeder extends Seeder
+{
 
     public function run()
     {
@@ -15,115 +16,115 @@ class ChoiseSeeder extends Seeder{
     {
         \Questionnaire\Choise::create(array(
             'question_id' => 1,
-            'title' => 'Boodschappen',
+            'title'       => 'Boodschappen',
             'sort_weight' => 0
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 1,
-            'title' => 'Maaltijden bereiden',
+            'title'       => 'Maaltijden bereiden',
             'sort_weight' => 10
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 1,
-            'title' => 'Poetsen',
+            'title'       => 'Poetsen',
             'sort_weight' => 20
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 1,
-            'title' => 'Kledij wassen / strijken',
+            'title'       => 'Kledij wassen / strijken',
             'sort_weight' => 30
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 1,
-            'title' => 'Persoonsverzorging',
+            'title'       => 'Persoonsverzorging',
             'sort_weight' => 40
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 1,
-            'title' => 'Transfers',
+            'title'       => 'Transfers',
             'sort_weight' => 50
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 1,
-            'title' => 'Socio-emotionele steun',
+            'title'       => 'Socio-emotionele steun',
             'sort_weight' => 60
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 1,
-            'title' => 'Vervoer, begeleiding uitstappen',
+            'title'       => 'Vervoer, begeleiding uitstappen',
             'sort_weight' => 70
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 1,
-            'title' => 'Administratie',
+            'title'       => 'Administratie',
             'sort_weight' => 80
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 1,
-            'title' => 'Organiseren professionele zorg',
+            'title'       => 'Organiseren professionele zorg',
             'sort_weight' => 90
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 1,
-            'title' => 'Hulp bij medicatiegebruik',
+            'title'       => 'Hulp bij medicatiegebruik',
             'sort_weight' => 100
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 1,
-            'title' => 'Toezicht houden, aanwezig zijn',
+            'title'       => 'Toezicht houden, aanwezig zijn',
             'sort_weight' => 110
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 1,
-            'title' => 'Andere',
+            'title'       => 'Andere',
             'sort_weight' => 120
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 2,
-            'title' => '24/24',
+            'title'       => '24/24',
             'sort_weight' => 0
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 2,
-            'title' => 'Dagelijks minder dan een uur',
+            'title'       => 'Dagelijks minder dan een uur',
             'sort_weight' => 10
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 2,
-            'title' => 'Dagelijks meer dan een uur',
+            'title'       => 'Dagelijks meer dan een uur',
             'sort_weight' => 20
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 2,
-            'title' => 'Wekelijks minder dan 3 uur',
+            'title'       => 'Wekelijks minder dan 3 uur',
             'sort_weight' => 30
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 2,
-            'title' => 'Wekelijks meer dan 3 uur',
+            'title'       => 'Wekelijks meer dan 3 uur',
             'sort_weight' => 40
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 2,
-            'title' => 'andere',
+            'title'       => 'andere',
             'sort_weight' => 50
         ));
 
@@ -141,33 +142,33 @@ class ChoiseSeeder extends Seeder{
     {
         \Questionnaire\Choise::create(array(
             'question_id' => 13,
-            'title' => 'Betaald werk',
+            'title'       => 'Betaald werk',
             'sort_weight' => 0
         ));
         \Questionnaire\Choise::create(array(
             'question_id' => 13,
-            'title' => '(Klein) kinderen',
+            'title'       => '(Klein) kinderen',
             'sort_weight' => 10
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 13,
-            'title' => 'Huishouden',
+            'title'       => 'Huishouden',
             'sort_weight' => 20
         ));
         \Questionnaire\Choise::create(array(
             'question_id' => 13,
-            'title' => 'Mantelzorg voor andere personen',
+            'title'       => 'Mantelzorg voor andere personen',
             'sort_weight' => 30
         ));
         \Questionnaire\Choise::create(array(
             'question_id' => 13,
-            'title' => 'Vrijwilligerswerk',
+            'title'       => 'Vrijwilligerswerk',
             'sort_weight' => 40
         ));
         \Questionnaire\Choise::create(array(
             'question_id' => 13,
-            'title' => "Vrije tijd of hobby's",
+            'title'       => "Vrije tijd of hobby's",
             'sort_weight' => 50
         ));
 
@@ -175,25 +176,25 @@ class ChoiseSeeder extends Seeder{
 
         \Questionnaire\Choise::create(array(
             'question_id' => 15,
-            'title' => "Vermoeidheid of slaapproblemen",
+            'title'       => "Vermoeidheid of slaapproblemen",
             'sort_weight' => 0
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 15,
-            'title' => "Veranderingen in gedrag",
+            'title'       => "Veranderingen in gedrag",
             'sort_weight' => 10
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 15,
-            'title' => "Psychische klachten",
+            'title'       => "Psychische klachten",
             'sort_weight' => 20
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 15,
-            'title' => "Lichamelijke klachten",
+            'title'       => "Lichamelijke klachten",
             'sort_weight' => 30
         ));
 
@@ -211,31 +212,31 @@ class ChoiseSeeder extends Seeder{
     {
         \Questionnaire\Choise::create(array(
             'question_id' => 25,
-            'title' => "IADL- / ADL-problemen",
+            'title'       => "IADL- / ADL-problemen",
             'sort_weight' => 0
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 25,
-            'title' => "Gedragsstoornissen",
+            'title'       => "Gedragsstoornissen",
             'sort_weight' => 10
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 25,
-            'title' => "Karakterveranderingen",
+            'title'       => "Karakterveranderingen",
             'sort_weight' => 20
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 25,
-            'title' => "Cognitieve achteruitgang",
+            'title'       => "Cognitieve achteruitgang",
             'sort_weight' => 30
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => 25,
-            'title' => "Stemmingstoornissen",
+            'title'       => "Stemmingstoornissen",
             'sort_weight' => 40
         ));
 
@@ -260,27 +261,27 @@ class ChoiseSeeder extends Seeder{
         $this->yesNo(43);
         \Questionnaire\Choise::create(array(
             'question_id' => 44,
-            'title' => "Mobiliteit",
+            'title'       => "Mobiliteit",
             'sort_weight' => 0
         ));
         \Questionnaire\Choise::create(array(
             'question_id' => 44,
-            'title' => "Eetsituatie",
+            'title'       => "Eetsituatie",
             'sort_weight' => 10
         ));
         \Questionnaire\Choise::create(array(
             'question_id' => 44,
-            'title' => "Verzorging",
+            'title'       => "Verzorging",
             'sort_weight' => 20
         ));
         \Questionnaire\Choise::create(array(
             'question_id' => 44,
-            'title' => "Communicatie",
+            'title'       => "Communicatie",
             'sort_weight' => 30
         ));
         \Questionnaire\Choise::create(array(
             'question_id' => 44,
-            'title' => "Veiligheid",
+            'title'       => "Veiligheid",
             'sort_weight' => 40
         ));
         $this->yesNo(45);
@@ -293,27 +294,27 @@ class ChoiseSeeder extends Seeder{
     {
         \Questionnaire\Choise::create(array(
             'question_id' => 52,
-            'title' => "zeer zwaar",
+            'title'       => "zeer zwaar",
             'sort_weight' => 0
         ));
         \Questionnaire\Choise::create(array(
             'question_id' => 52,
-            'title' => "zwaar",
+            'title'       => "zwaar",
             'sort_weight' => 10
         ));
         \Questionnaire\Choise::create(array(
             'question_id' => 52,
-            'title' => "matig zwaar",
+            'title'       => "matig zwaar",
             'sort_weight' => 20
         ));
         \Questionnaire\Choise::create(array(
             'question_id' => 52,
-            'title' => "niet zwaar",
+            'title'       => "niet zwaar",
             'sort_weight' => 30
         ));
         \Questionnaire\Choise::create(array(
             'question_id' => 52,
-            'title' => "helemaal niet zwaar",
+            'title'       => "helemaal niet zwaar",
             'sort_weight' => 40
         ));
 
@@ -323,13 +324,13 @@ class ChoiseSeeder extends Seeder{
     {
         \Questionnaire\Choise::create(array(
             'question_id' => $questionid,
-            'title' => 'ja',
+            'title'       => 'ja',
             'sort_weight' => 0
         ));
 
         \Questionnaire\Choise::create(array(
             'question_id' => $questionid,
-            'title' => 'nee',
+            'title'       => 'nee',
             'sort_weight' => 10
         ));
     }
@@ -338,17 +339,17 @@ class ChoiseSeeder extends Seeder{
     {
         \Questionnaire\Choise::create(array(
             'question_id' => $questionid,
-            'title' => 'laag',
+            'title'       => 'laag',
             'sort_weight' => 0
         ));
         \Questionnaire\Choise::create(array(
             'question_id' => $questionid,
-            'title' => 'midden',
+            'title'       => 'midden',
             'sort_weight' => 10
         ));
         \Questionnaire\Choise::create(array(
             'question_id' => $questionid,
-            'title' => 'hoog',
+            'title'       => 'hoog',
             'sort_weight' => 20
         ));
     }
@@ -357,27 +358,27 @@ class ChoiseSeeder extends Seeder{
     {
         \Questionnaire\Choise::create(array(
             'question_id' => $questionid,
-            'title' => 'zeer ontevreden',
+            'title'       => 'zeer ontevreden',
             'sort_weight' => 0
         ));
         \Questionnaire\Choise::create(array(
             'question_id' => $questionid,
-            'title' => 'ontevreden',
+            'title'       => 'ontevreden',
             'sort_weight' => 10
         ));
         \Questionnaire\Choise::create(array(
             'question_id' => $questionid,
-            'title' => 'matig tevreden',
+            'title'       => 'matig tevreden',
             'sort_weight' => 20
         ));
         \Questionnaire\Choise::create(array(
             'question_id' => $questionid,
-            'title' => 'tevreden',
+            'title'       => 'tevreden',
             'sort_weight' => 30
         ));
         \Questionnaire\Choise::create(array(
             'question_id' => $questionid,
-            'title' => 'zeer tevreden',
+            'title'       => 'zeer tevreden',
             'sort_weight' => 40
         ));
     }

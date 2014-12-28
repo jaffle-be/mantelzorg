@@ -13,7 +13,8 @@ use Redirect;
 use Hash;
 use Session;
 
-class PersonController extends \AdminController{
+class PersonController extends \AdminController
+{
 
     /**
      * @var \User
@@ -47,26 +48,21 @@ class PersonController extends \AdminController{
 
         $organisations = $this->organisation->orderBy('name')->get();
 
-        $organisations =  array('' => Lang::get('users.pick_organisation')) + $organisations->lists('name', 'id');
+        $organisations = array('' => Lang::get('users.pick_organisation')) + $organisations->lists('name', 'id');
 
         /**
          * We need to load the locations depending on the organisation_id
          * If the user had submit the form and switched organisation, we need to load the locations for that organisation
          */
 
-        if(Input::old() && $user->organisation_id !== Input::old('organisation_id'))
-        {
+        if (Input::old() && $user->organisation_id !== Input::old('organisation_id')) {
             $locations = $this->location->where('organisation_id', Input::old('organisation_id'))
                 ->orderBy('name')
                 ->get()
                 ->lists('name', 'id');
-        }
-        else if($user->organisation)
-        {
+        } else if ($user->organisation) {
             $locations = $user->organisation->locations()->orderBy('name')->get()->lists('name', 'id');
-        }
-        else
-        {
+        } else {
             $locations = array();
         }
 
@@ -81,7 +77,7 @@ class PersonController extends \AdminController{
 
         $validator = $this->user->validator(array('firstname', 'lastname', 'male', 'phone', 'organisation_id', 'organisation_location_id'));
 
-        $validator->sometimes('email', 'required|email|unique:users', function($input) use ($user){
+        $validator->sometimes('email', 'required|email|unique:users', function ($input) use ($user) {
             return $user->email !== $input->email;
         });
 
@@ -89,37 +85,30 @@ class PersonController extends \AdminController{
          * If the user has entered a new password, the current-password needs to match the existing password
          * The new password needs to be confirmed too! (second rule)
          */
-        $validator->sometimes('current-password', 'passcheck', function($input){
+        $validator->sometimes('current-password', 'passcheck', function ($input) {
             return !empty($input->password);
         });
 
-        $validator->sometimes(array('password'), 'required|confirmed', function($input)
-        {
+        $validator->sometimes(array('password'), 'required|confirmed', function ($input) {
             return !empty($input->password);
         });
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return Redirect::back()->withErrors($validator->messages())->withInput();
-        }
-        else
-        {
+        } else {
             $input = Input::all();
 
             /**
              * make sure to unset the password field, so the password isn't being emptied
              * when the user did not try to change it.
              */
-            if(!empty($input['password']))
-            {
+            if (!empty($input['password'])) {
                 /**
                  * hash the password to insert it into the database.
                  */
                 $input['password'] = Hash::make($input['password']);
                 $message = Lang::get('master.info.password_changed');
-            }
-            else
-            {
+            } else {
                 unset($input['password']);
             }
 

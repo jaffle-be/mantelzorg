@@ -29,14 +29,14 @@ return [
      */
     'types'    => [
 
-        'mantelzorgers' => 'Mantelzorger\Mantelzorger',
+        'mantelzorgers'      => 'Mantelzorger\Mantelzorger',
 
         'beta_registrations' => [
             'class' => 'Beta\Registration',
-            'with' => []
+            'with'  => []
         ],
 
-        'users'         => [
+        'users'              => [
             'class' => 'User',
             'with'  => [
                 'organisation',
@@ -61,14 +61,14 @@ return [
                         'filter'    => ['standard', 'asciifolding', 'lowercase', 'snowball', 'elision']
                     ],
 
-                    'code' => [
+                    'code'                   => [
                         'tokenizer' => 'pattern',
-                        'filter' => ['standard', 'lowercase', 'code']
+                        'filter'    => ['standard', 'lowercase', 'code']
                     ],
 
-                    'email' => [
+                    'email'                  => [
                         'tokenizer' => 'uax_url_email',
-                        'filter' => ['email', 'lowercase', 'unique']
+                        'filter'    => ['email', 'lowercase', 'unique']
                     ]
                 ],
 
@@ -81,24 +81,24 @@ return [
                 ],
 
                 'filter'    => [
-                    'snowball'      => [
+                    'snowball' => [
                         'type'     => 'snowball',
                         'language' => 'dutch',
                     ],
 
-                    'code' => [
-                        'type' => 'pattern_capture',
+                    'code'     => [
+                        'type'              => 'pattern_capture',
                         'preserve_original' => 1,
-                        'patterns' => [
+                        'patterns'          => [
                             "(\\p{Ll}+|\\p{Lu}\\p{Ll}+|\\p{Lu}+)",
                             "(\\d+)"
                         ]
                     ],
 
-                    'email' => [
-                        'type' => 'pattern_capture',
+                    'email'    => [
+                        'type'              => 'pattern_capture',
                         'preserve_original' => 1,
-                        'patterns' => [
+                        'patterns'          => [
                             "(\\w+)",
                             "(\\p{L}+)",
                             "(\\d+)",

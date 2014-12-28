@@ -4,7 +4,6 @@ namespace Questionnaire;
 
 use Eloquent;
 
-
 class Session extends Eloquent
 {
 
@@ -48,13 +47,10 @@ class Session extends Eloquent
      */
     public function getAnswered(Question $question)
     {
-        return $this->answers->filter(function ($item) use ($question)
-        {
-            if ($item->question_id == $question->id)
-            {
+        return $this->answers->filter(function ($item) use ($question) {
+            if ($item->question_id == $question->id) {
                 return true;
             }
         })->first();
     }
-
-} 
+}

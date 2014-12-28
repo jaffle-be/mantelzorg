@@ -10,7 +10,8 @@ use Meta\Context;
 use Meta\Value;
 use Lang;
 
-class OudereController extends \AdminController{
+class OudereController extends \AdminController
+{
 
     /**
      * @var \Mantelzorger\Oudere
@@ -51,44 +52,35 @@ class OudereController extends \AdminController{
     {
         $input = Input::except('_token');
 
-        if(empty($input['email']))
-        {
+        if (empty($input['email'])) {
             $input['email'] = null;
         }
 
         $input['mantelzorger_id'] = $mantelzorger->id;
 
-
         $input = $this->processValue($input);
 
         $validator = $this->oudere->validator($input);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return Redirect::back()->withErrors($validator->messages())->withInput();
-        }
-        else
-        {
+        } else {
 
             $this->oudere->create($input);
 
             return Redirect::action('Instelling\MantelzorgerController@index', $mantelzorger->hulpverlener->id);
         }
-
     }
 
     public function edit($mantelzorger, $oudere)
     {
         $oudere = $this->oudere->find($oudere);
 
-        if($oudere)
-        {
+        if ($oudere) {
             $relations_mantelzorger = $this->getRelationsMantelzorger();
 
             $this->layout->content = View::make('instellingen.ouderen.edit', compact(array('mantelzorger', 'oudere', 'relations_mantelzorger')));
-        }
-        else
-        {
+        } else {
             return Redirect::route('instellingen.{hulpverlener}.mantelzorgers.index', array($mantelzorger->hulpverlener_id));
         }
     }
@@ -97,22 +89,18 @@ class OudereController extends \AdminController{
     {
         $oudere = $this->oudere->find($oudere);
 
-        if($oudere)
-        {
+        if ($oudere) {
             $input = $this->processValue(Input::except('_token'));
 
             $validator = $this->oudere->validator($input, array('firstname', 'lastname', 'birthday', 'male', 'street', 'postal', 'city', 'phone', 'mantelzorger_relation'));
 
-            $validator->sometimes('email', 'email|unique:ouderen,email', function($data) use ($oudere){
+            $validator->sometimes('email', 'email|unique:ouderen,email', function ($data) use ($oudere) {
                 return $data->email !== $oudere->email;
             });
 
-            if($validator->fails())
-            {
+            if ($validator->fails()) {
                 return redirect::back()->withInput()->withErrors($validator->messages());
-            }
-            else
-            {
+            } else {
                 $oudere->update($input);
             }
         }
@@ -135,14 +123,12 @@ class OudereController extends \AdminController{
         //find the meta value by the id, if none exists... we need to create it
         $value = $this->metaValue->find($input['mantelzorger_relation']);
 
-        if(!$value)
-        {
+        if (!$value) {
             //if both are not empty, we create a value using the alternate
-            if($input['mantelzorger_relation'] == '*new*' && $input['mantelzorger_relation_alternate'])
-            {
+            if ($input['mantelzorger_relation'] == '*new*' && $input['mantelzorger_relation_alternate']) {
                 $value = $this->metaValue->create(array(
-                    'context_id'=> $context->id,
-                    'value' => $input['mantelzorger_relation_alternate']
+                    'context_id' => $context->id,
+                    'value'      => $input['mantelzorger_relation_alternate']
                 ));
             }
         }
@@ -153,7 +139,5 @@ class OudereController extends \AdminController{
         unset($input['mantelzorger_relation_alternate']);
 
         return $input;
-
     }
-
-} 
+}

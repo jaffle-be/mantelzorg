@@ -39,7 +39,6 @@ interface Searchable
      */
     public function getSearchableIndex();
 
-
     /**
      * Returns a Queryable object for the type.
      *
@@ -94,5 +93,4 @@ interface Searchable
      * @return mixed
      */
     public function getSearchableMapping();
-
 }

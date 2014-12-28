@@ -124,6 +124,7 @@ return array(
 
         'Search\SearchServiceProvider',
         'Intouch\LaravelNewrelic\LaravelNewrelicServiceProvider',
+        'LeroyMerlin\LaraSniffer\ServiceProvider',
 
         'Template\TemplateServiceProvider',
         'Questionnaire\ServiceProvider',

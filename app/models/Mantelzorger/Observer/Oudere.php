@@ -6,9 +6,11 @@ use Illuminate\Events\Dispatcher;
 
 /**
  * Class Mantelzorger
+ *
  * @package Mantelzorger\Observer
  */
-class Oudere {
+class Oudere
+{
 
     /**
      * @var \Illuminate\Events\Dispatcher
@@ -28,12 +30,8 @@ class Oudere {
      */
     public function updating($model)
     {
-        if(empty($model->email))
-        {
+        if (empty($model->email)) {
             $model->email = null;
         }
     }
-
-
-
-} 
+}

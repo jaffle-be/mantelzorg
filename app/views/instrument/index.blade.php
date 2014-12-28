@@ -1,5 +1,5 @@
 @section('scripts')
-<script src="/js/instrument.index.min.js"></script>
+    <script src="/js/instrument.index.min.js"></script>
 @stop
 
 @section('page-header')
@@ -11,57 +11,57 @@
 
 @section('content')
 
-<?= Form::open(array(
-    'class' => 'form-horizontal',
-    'name' => 'instrument-persons',
-    'method' => 'POST',
-    'route' => 'instrument.submit'
-)); ?>
+    <?= Form::open(array(
+            'class'  => 'form-horizontal',
+            'name'   => 'instrument-persons',
+            'method' => 'POST',
+            'route'  => 'instrument.submit'
+    )); ?>
 
-<div class="row">
+    <div class="row">
 
-    <div class="well">{{ Lang::get('instrument.introduction') }}</div>
+        <div class="well">{{ Lang::get('instrument.introduction') }}</div>
 
-    <div class="col-md-6">
-        <?= Form::select(
-            'mantelzorger', array('' => Lang::get('instrument.kies_mantelzorger')) + $hulpverlener->mantelzorgers->sortBy(function($item){
-                return $item->displayName;
-            })->lists('displayName', 'id'), null, array(
-                'id' => 'mantelzorger-select',
-                'class' => 'form-control'
-            )
-        ) ?>
+        <div class="col-md-6">
+            <?= Form::select(
+                    'mantelzorger', array('' => Lang::get('instrument.kies_mantelzorger')) + $hulpverlener->mantelzorgers->sortBy(function ($item) {
+                        return $item->displayName;
+                    })->lists('displayName', 'id'), null, array(
+                            'id'    => 'mantelzorger-select',
+                            'class' => 'form-control'
+                    )
+            ) ?>
+
+        </div>
+
+        <div class="col-md-6">
+            <?= Form::select('oudere', array(), null, array(
+                    'class' => 'form-control hide',
+                    'id'    => 'ouderen-select'
+            )) ?>
+        </div>
 
     </div>
 
-    <div class="col-md-6">
-        <?= Form::select('oudere', array(), null, array(
-            'class' => 'form-control hide',
-            'id' => 'ouderen-select'
-        )) ?>
+    <div class="row page-actions">
+        <div class="col-md-12">
+            <div class="alert alert-danger" style="display:none;"><?= Lang::get('instrument.need_persons_selected') ?></div>
+        </div>
     </div>
 
-</div>
-
-<div class="row page-actions">
-    <div class="col-md-12">
-        <div class="alert alert-danger" style="display:none;"><?= Lang::get('instrument.need_persons_selected') ?></div>
+    <div class="row page-actions">
+        <div class="col-md-12">
+            <input class="btn btn-primary" type="submit" value="<?= Lang::get('master.general.confirm') ?>"/>
+        </div>
     </div>
-</div>
 
-<div class="row page-actions">
-    <div class="col-md-12">
-        <input class="btn btn-primary" type="submit" value="<?= Lang::get('master.general.confirm') ?>"/>
+    <?= Form::close() ?>
+
+    <? if(count($surveys)): ?>
+
+    <div class="text-center">
+        {{ $surveys->links() }}
     </div>
-</div>
-
-<?= Form::close() ?>
-
-<? if(count($surveys)): ?>
-
-<div class="text-center">
-{{ $surveys->links() }}
-</div>
 
     <table class="table table-striped table-hover">
         <thead>
@@ -85,7 +85,7 @@
         </thead>
         <tbody>
         <? $teller = 1; ?>
-<? foreach($surveys as $survey): ?>
+        <? foreach($surveys as $survey): ?>
         <tr>
             <td>
                 <label class="checkbox-inline">
@@ -95,17 +95,19 @@
             <td><?= $survey->mantelzorger->displayName ?></td>
             <td><?= $survey->oudere->displayName ?></td>
             <td><?= $survey->created_at->format('d/m/Y') ?></td>
-            <td><a href="<?= URL::route('instrument.panel.get', array($survey->questionnaire->panels->first()->id, $survey->id)) ?>"><?= Lang::get('instrument.werkverder') ?></a></td>
+            <td>
+                <a href="<?= URL::route('instrument.panel.get', array($survey->questionnaire->panels->first()->id, $survey->id)) ?>"><?= Lang::get('instrument.werkverder') ?></a>
+            </td>
         </tr>
         <? $teller++ ?>
-<? endforeach; ?>
+        <? endforeach; ?>
         </tbody>
     </table>
 
-<div class="text-center">
-{{ $surveys->links() }}
-</div>
+    <div class="text-center">
+        {{ $surveys->links() }}
+    </div>
 
-<? endif ?>
+    <? endif ?>
 
 @stop

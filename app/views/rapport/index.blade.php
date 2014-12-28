@@ -1,3 +1,3 @@
 @section('content')
-rapport
+    rapport
 @stop

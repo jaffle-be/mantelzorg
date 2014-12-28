@@ -121,8 +121,7 @@ Route::post('questions/{question}/choises/sort', 'Questionnaire\ChoiseController
  * API ROUTES
  */
 
-Route::group(['prefix' => 'api'], function ()
-{
+Route::group(['prefix' => 'api'], function () {
     Route::get('mantelzorger/{mantelzorger}/ouderen', 'Api\MantelzorgerController@ouderen');
 });
 

@@ -14,7 +14,8 @@
 @section('content')
 
     <div class="page-actions">
-        <a class="btn btn-primary" href="{{ route('instellingen.{hulpverlener}.mantelzorgers.create', array($hulpverlener->id)) }}"><i class="glyphicon glyphicon-plus"></i>{{ Lang::get('users.create_mantelzorger') }}</a>
+        <a class="btn btn-primary" href="{{ route('instellingen.{hulpverlener}.mantelzorgers.create', array($hulpverlener->id)) }}"><i class="glyphicon glyphicon-plus"></i>{{ Lang::get('users.create_mantelzorger') }}
+        </a>
     </div>
 
 

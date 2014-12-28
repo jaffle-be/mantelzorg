@@ -11,15 +11,13 @@
 |
 */
 
-App::before(function($request)
-{
-	//
+App::before(function ($request) {
+    //
 });
 
 
-App::after(function($request, $response)
-{
-	//
+App::after(function ($request, $response) {
+    //
 });
 
 /*
@@ -33,26 +31,26 @@ App::after(function($request, $response)
 |
 */
 
-Route::filter('auth', function()
-{
-	if (Auth::guest()) return Redirect::action('IndexController@getLogin');
+Route::filter('auth', function () {
+    if (Auth::guest()) {
+        return Redirect::action('IndexController@getLogin');
+    }
 
     $user = Auth::user();
 
-    if($user->active === '0')
-    {
+    if ($user->active === '0') {
         return Redirect::action('IndexController@getLogout');
     }
 });
 
-Route::filter('auth.admin', function()
-{
-    if (Auth::guest()) return Redirect::action('IndexController@getLogin');
+Route::filter('auth.admin', function () {
+    if (Auth::guest()) {
+        return Redirect::action('IndexController@getLogin');
+    }
 
     $user = Auth::user();
 
-    if($user->admin === '0')
-    {
+    if ($user->admin === '0') {
         return Redirect::route('dash')->with('message', Lang::get('master.info.no-right-to-section'));
     }
 
@@ -69,9 +67,10 @@ Route::filter('auth.admin', function()
 |
 */
 
-Route::filter('guest', function()
-{
-	if (Auth::check()) return Redirect::to('/');
+Route::filter('guest', function () {
+    if (Auth::check()) {
+        return Redirect::to('/');
+    }
 });
 
 /*
@@ -85,26 +84,22 @@ Route::filter('guest', function()
 |
 */
 
-Route::filter('csrf', function()
-{
-	if (Session::token() != Input::get('_token'))
-	{
-		throw new Illuminate\Session\TokenMismatchException;
-	}
+Route::filter('csrf', function () {
+    if (Session::token() != Input::get('_token')) {
+        throw new Illuminate\Session\TokenMismatchException;
+    }
 });
 
 /**
  * Controleer of de gebruiker de mantelzorgers mag inzien voor een bepaalde hulpverlener
  */
-Route::filter('mantelzorgers', function(\Illuminate\Routing\Route $route, $request)
-{
+Route::filter('mantelzorgers', function (\Illuminate\Routing\Route $route, $request) {
     $hulpverlener = $route->getParameter('hulpverlener');
 
     $user = Auth::user();
 
     //indien de gebruiker geen admin is en hij kijkt naar mantelzorgers van iemand anders
-    if($user->admin === '0' && $user->id !== $hulpverlener->id)
-    {
+    if ($user->admin === '0' && $user->id !== $hulpverlener->id) {
         return Redirect::route('instellingen.index');
     }
 });

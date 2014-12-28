@@ -1,9 +1,9 @@
 <?php
 
-
 use Illuminate\Events\Dispatcher;
 
-class UserObserver {
+class UserObserver
+{
 
     /**
      * @var Dispatcher
@@ -20,10 +20,8 @@ class UserObserver {
 
     public function deleting(User $model)
     {
-        foreach($model->mantelzorgers as $mantelzorger)
-        {
+        foreach ($model->mantelzorgers as $mantelzorger) {
             $mantelzorger->delete();
         }
     }
-
 }

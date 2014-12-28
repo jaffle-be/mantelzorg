@@ -13,12 +13,10 @@ class SurveySessions extends Seeder
     {
         $faker = Faker::create();
 
-        $ouderen = Oudere::chunk(250, function ($ouderen) use ($faker)
-        {
+        $ouderen = Oudere::chunk(250, function ($ouderen) use ($faker) {
             $ouderen->load('mantelzorger');
 
-            foreach ($ouderen as $oudere)
-            {
+            foreach ($ouderen as $oudere) {
                 $this->addData($oudere, $faker);
             }
         });

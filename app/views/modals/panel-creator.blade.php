@@ -8,15 +8,15 @@
             <div class="modal-body">
 
                 <?= Form::open(array(
-                    'method' => 'post',
-                    'class' => 'form-horizontal',
+                        'method' => 'post',
+                        'class'  => 'form-horizontal',
                 )) ?>
 
                 <input id="questionnaire-id" type="hidden"/>
 
                 <label for="title"><?= Lang::get('questionnaires.panel-name') ?></label>
                 @if($errors->has('title'))
-                <span class="errors">{{ $errors->first('title') }}</span>
+                    <span class="errors">{{ $errors->first('title') }}</span>
                 @endif
                 <div class="input-group">
                     <?= Form::text('title', null, array('class' => 'form-control')) ?>

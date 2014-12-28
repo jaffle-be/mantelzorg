@@ -7,6 +7,7 @@ use Illuminate\Events\Dispatcher;
 
 class Answer
 {
+
     /**
      * @var Dispatcher
      */
@@ -21,5 +22,4 @@ class Answer
     {
         $model->choises()->sync([]);
     }
-
 }

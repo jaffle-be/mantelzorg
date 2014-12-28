@@ -4,7 +4,8 @@ namespace Questionnaire;
 
 use Input;
 
-class ChoiseController extends \AdminController{
+class ChoiseController extends \AdminController
+{
 
     /**
      * @var Choise
@@ -30,8 +31,7 @@ class ChoiseController extends \AdminController{
 
         $validator = $this->choise->validator($input, array('title', 'question_id'));
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return json_encode(array(
                 'status' => 'noke',
                 'errors' => $validator->messages()->toArray()
@@ -49,16 +49,14 @@ class ChoiseController extends \AdminController{
     {
         $choise = $this->choise->find($choise);
 
-        if($choise)
-        {
+        if ($choise) {
             $field = $this->field();
 
             $input = Input::all();
 
             $validator = $this->choise->validator($input, $field);
 
-            if($validator->fails())
-            {
+            if ($validator->fails()) {
                 return json_encode(array(
                     'status' => 'noke',
                     'errors' => $validator->messages()->toArray()
@@ -77,14 +75,13 @@ class ChoiseController extends \AdminController{
     {
         $positions = Input::get('positions');
 
-        $positions = array_map(function($item){
+        $positions = array_map(function ($item) {
             return str_replace('choise-', '', $item);
         }, $positions);
 
         $question->load('choises');
 
-        foreach($positions as $position => $id)
-        {
+        foreach ($positions as $position => $id) {
             $choise = $question->choises->find($id);
 
             $choise->sort_weight = $position * 10;
@@ -95,7 +92,6 @@ class ChoiseController extends \AdminController{
         return json_encode(array(
             'status' => 'oke'
         ));
-
     }
 
     protected function field()
@@ -106,5 +102,4 @@ class ChoiseController extends \AdminController{
 
         return array_pop($input);
     }
-
-} 
+}

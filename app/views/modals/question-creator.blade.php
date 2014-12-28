@@ -9,7 +9,7 @@
 
                 <label><?= Lang::get('questionnaires.title') ?></label>
                 @if($errors->has('title'))
-                <span class="errors">{{ $errors->first('title') }}</span>
+                    <span class="errors">{{ $errors->first('title') }}</span>
                 @endif
                 <div class="input-group">
                     <?= Form::text('title', null, array('class' => 'form-control')) ?>
@@ -19,7 +19,7 @@
 
                 <label><?= Lang::get('questionnaires.question') ?></label>
                 @if($errors->has('question'))
-                <span class="errors">{{ $errors->first('question') }}</span>
+                    <span class="errors">{{ $errors->first('question') }}</span>
                 @endif
                 <?= Form::textarea('question', null, array('class' => 'form-control')) ?>
 

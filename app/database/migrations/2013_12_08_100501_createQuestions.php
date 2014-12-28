@@ -2,17 +2,17 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CreateQuestions extends Migration {
+class CreateQuestions extends Migration
+{
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('questionnaire_questions', function($t)
-        {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('questionnaire_questions', function ($t) {
             $t->increments('id');
             $t->integer('questionnaire_id')->unsigned();
             $t->foreign('questionnaire_id')->references('id')->on('questionnaires');
@@ -27,16 +27,16 @@ class CreateQuestions extends Migration {
             $t->boolean('explainable')->default(0);
             $t->timestamps();
         });
-	}
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('questionnaire_questions');
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('questionnaire_questions');
+    }
 
 }

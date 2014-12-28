@@ -26,8 +26,7 @@ class SearchServiceProvider extends ServiceProvider
 
     private function registerClient()
     {
-        $this->app['Search\SearchService'] = $this->app->share(function ($app)
-        {
+        $this->app['Search\SearchService'] = $this->app->share(function ($app) {
             $config = $app->make('config');
 
             $config = $config->get('elasticsearch');
@@ -42,5 +41,4 @@ class SearchServiceProvider extends ServiceProvider
     {
         $this->commands(['Search\Command\BuildIndexes', 'Search\Command\FlushType', 'Search\Command\UpdateSettings', 'Search\Command\UpdateMapping']);
     }
-
 }

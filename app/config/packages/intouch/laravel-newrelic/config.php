@@ -18,7 +18,7 @@ return array(
      * Define the name provider used when automatically naming transactions.
      * Accepts either a closure or null to use the package default.
      */
-    'name_provider' => null,
+    'name_provider'          => null,
 
     // 'name_provider' => function ($request, $response, $app) {
     //     return $app['router']->currentRouteAction()

@@ -46,13 +46,10 @@ class Answer extends Eloquent
 
     public function wasChecked(Choise $choise)
     {
-        return $this->choises->filter(function ($item) use ($choise)
-        {
-            if ($item->id == $choise->id)
-            {
+        return $this->choises->filter(function ($item) use ($choise) {
+            if ($item->id == $choise->id) {
                 return true;
             }
         })->first();
     }
-
 }

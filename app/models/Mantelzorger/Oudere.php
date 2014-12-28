@@ -6,15 +6,16 @@ use DateTime;
 use Input;
 use Validator;
 
-class Oudere extends \Eloquent{
+class Oudere extends \Eloquent
+{
 
     protected $table = 'ouderen';
 
     protected static $rules = array(
-        'email' => 'email|unique:ouderen,email',
-        'mantelzorger_id' => 'required|exists:mantelzorgers,id',
+        'email'                 => 'email|unique:ouderen,email',
+        'mantelzorger_id'       => 'required|exists:mantelzorgers,id',
         'mantelzorger_relation' => 'exists:meta_values,id',
-        'birthday' => 'date_format:d/m/Y',
+        'birthday'              => 'date_format:d/m/Y',
     );
 
     protected $fillable = array(
@@ -24,14 +25,11 @@ class Oudere extends \Eloquent{
 
     public function getDisplayNameAttribute()
     {
-        if(!empty($this->firstname) || !empty($this->lastname))
-        {
+        if (!empty($this->firstname) || !empty($this->lastname)) {
             return trim($this->getFullnameAttribute());
-        }
-        else if(!empty($this->identifier)){
+        } else if (!empty($this->identifier)) {
             return $this->identifier;
-        }
-        else{
+        } else {
             return '#ID#' . $this->id;
         }
     }
@@ -43,18 +41,16 @@ class Oudere extends \Eloquent{
 
     public function validator($input = array(), $rules = array())
     {
-        if(empty($input))
-        {
+        if (empty($input)) {
             $input = Input::all();
         }
 
-        if(empty($rules))
-        {
+        if (empty($rules)) {
             $rules = static::$rules;
-        }
-        else
-        {
-            if(!is_array($rules)) $rules = array($rules);
+        } else {
+            if (!is_array($rules)) {
+                $rules = array($rules);
+            }
 
             $rules = array_intersect_key(static::$rules, array_flip($rules));
         }
@@ -64,8 +60,7 @@ class Oudere extends \Eloquent{
 
     public function setBirthdayAttribute($value)
     {
-        if(!empty($value))
-        {
+        if (!empty($value)) {
             $this->attributes['birthday'] = DateTime::createFromFormat('d/m/Y', $value);
         }
     }
@@ -84,6 +79,4 @@ class Oudere extends \Eloquent{
     {
         return array_merge(parent::getDates(), array('birthday'));
     }
-
-
-} 
+}

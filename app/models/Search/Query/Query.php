@@ -43,7 +43,6 @@ class Query implements Queryable
 
     protected $pagination = 10;
 
-
     /**
      * @param SearchServiceInterface $service
      * @param Searchable             $searchable
@@ -69,8 +68,7 @@ class Query implements Queryable
 
         $params = array_merge($base, ['body' => $body]);
 
-        if ($needsPagination = $this->needsPagination())
-        {
+        if ($needsPagination = $this->needsPagination()) {
             $params['from'] = $this->skip();
             $params['size'] = $this->take();
         }
@@ -84,15 +82,12 @@ class Query implements Queryable
     {
         $collection = $this->asModels($results['hits']['hits']);
 
-        if ($this->needsPagination())
-        {
+        if ($this->needsPagination()) {
             /** @var \Illuminate\Pagination\Environment $paginator */
             $paginator = $this->service->getPaginator();
 
             $results = $paginator->make($collection, $results['hits']['total'], $this->pagination);
-        }
-        else
-        {
+        } else {
             //did we run a find query? return only the model
 
         }
@@ -108,8 +103,7 @@ class Query implements Queryable
 
         $with = $config['with'];
 
-        foreach ($results as $result)
-        {
+        foreach ($results as $result) {
             //need to also match the related models, which are for now specified into the config file.
             $model = $this->searchable->getSearchableNewModel($result['_source'], $with);
 
@@ -128,25 +122,21 @@ class Query implements Queryable
 
     public function where($column, $operator, $value = null, $boolean = 'and')
     {
-        if (func_num_args() == 2)
-        {
+        if (func_num_args() == 2) {
             list($value, $operator) = [$operator, 'match'];
         }
 
-        if ($this->invalidBoolean($boolean))
-        {
+        if ($this->invalidBoolean($boolean)) {
             throw new Exception('Invalid boolean for search clause');
         }
 
-        if ($this->invalidOperator($operator))
-        {
+        if ($this->invalidOperator($operator)) {
             throw new Exception("Invalid operator for search clause. If it's, not supported. Use the gateway method.");
         }
 
         $method = 'where' . ucfirst($operator);
 
-        if (method_exists($this, $method))
-        {
+        if (method_exists($this, $method)) {
             call_user_func_array([$this, $method], [$column, $value, $boolean]);
         }
 
@@ -155,8 +145,7 @@ class Query implements Queryable
 
     public function whereMatch($column, $value, $boolean = 'and', $fuzziness = 0, $prefix_length = 2)
     {
-        if (!empty($value))
-        {
+        if (!empty($value)) {
             $this->match[$column] = [
                 'query'         => $value,
                 'fuzziness'     => $fuzziness,
@@ -170,8 +159,7 @@ class Query implements Queryable
     public function whereMulti_match(array $columns, $value, $boolean = 'and', $fuzziness = 0, $prefix_length = 2, $analyzer = 'standard')
     {
         //if the value is empty, it wouldn't return a resultset when querying. which is quite weird to be honest.
-        if (!empty($value))
-        {
+        if (!empty($value)) {
             $this->multi_match[] = [
                 'fields'        => $columns,
                 'query'         => $value,
@@ -239,16 +227,13 @@ class Query implements Queryable
     {
         $body = [];
 
-        foreach ($this->operators as $operation)
-        {
-            if (!empty($this->$operation))
-            {
+        foreach ($this->operators as $operation) {
+            if (!empty($this->$operation)) {
                 $body['query'][$operation] = $this->$operation;
             }
         }
 
-        if ($sort = $this->sort())
-        {
+        if ($sort = $this->sort()) {
             $body['sort'] = $sort;
         }
 
@@ -257,8 +242,7 @@ class Query implements Queryable
 
     private function sort()
     {
-        if (!empty($this->sort))
-        {
+        if (!empty($this->sort)) {
             return $this->sort;
         }
     }
@@ -279,5 +263,4 @@ class Query implements Queryable
     {
         return $this->pagination ? true : false;
     }
-
 }

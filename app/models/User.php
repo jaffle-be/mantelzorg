@@ -18,25 +18,25 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Searc
     protected $table = 'users';
 
     protected static $searchableMapping = [
-        'male' => [
+        'male'       => [
             'type' => 'boolean',
         ],
-        'admin' => [
+        'admin'      => [
             'type' => 'boolean',
         ],
-        'active' => [
+        'active'     => [
             'type' => 'boolean',
         ],
         'created_at' => [
-            'type' => 'date',
+            'type'   => 'date',
             'format' => 'yyyy-MM-dd HH:mm:ss'
         ],
         'updated_at' => [
-            'type' => 'date',
+            'type'   => 'date',
             'format' => 'yyyy-MM-dd HH:mm:ss'
         ],
-        'email' => [
-            'type' => 'string',
+        'email'      => [
+            'type'     => 'string',
             'analyzer' => 'email'
         ]
     ];
@@ -131,23 +131,19 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Searc
         return $this->attributes['firstname'] . ' ' . $this->attributes['lastname'];
     }
 
-
     public function validator($fields = null, $input = null)
     {
         $rules = static::$rules;
 
-        if (!empty($fields))
-        {
-            if (!is_array($fields))
-            {
+        if (!empty($fields)) {
+            if (!is_array($fields)) {
                 $fields = array($fields);
             }
 
             $rules = array_intersect_key($rules, array_flip($fields));
         }
 
-        if (empty($input))
-        {
+        if (empty($input)) {
             $input = Input::all();
         }
 
@@ -158,34 +154,26 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Searc
     {
         $vowels = 'aeiouy';
         $consonants = 'bcdfghjklmnpqrstvwxz';
-        if ($strength & 1)
-        {
+        if ($strength & 1) {
             $consonants .= 'BCDFGHJKLMNPQRSTVWXZ';
         }
-        if ($strength & 2)
-        {
+        if ($strength & 2) {
             $vowels .= "AEIOUY";
         }
-        if ($strength & 4)
-        {
+        if ($strength & 4) {
             $consonants .= '23456789';
         }
-        if ($strength & 8)
-        {
+        if ($strength & 8) {
             $consonants .= '@#$%';
         }
 
         $password = '';
         $alt = time() % 2;
-        for ($i = 0; $i < $length; $i++)
-        {
-            if ($alt == 1)
-            {
+        for ($i = 0; $i < $length; $i++) {
+            if ($alt == 1) {
                 $password .= $consonants[(rand() % strlen($consonants))];
                 $alt = 0;
-            }
-            else
-            {
+            } else {
                 $password .= $vowels[(rand() % strlen($vowels))];
                 $alt = 1;
             }
@@ -213,5 +201,4 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Searc
     {
         return $this->hasMany('Questionnaire\\Session', 'user_id');
     }
-
 }

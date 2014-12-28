@@ -26,6 +26,6 @@ return array(
     |
     */
 
-    'url' => 'http://local.mantelzorg',
+    'url'   => 'http://local.mantelzorg',
 
 );

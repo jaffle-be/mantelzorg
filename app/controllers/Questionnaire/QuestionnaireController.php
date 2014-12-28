@@ -5,7 +5,8 @@ namespace Questionnaire;
 use View;
 use Input;
 
-class QuestionnaireController extends \AdminController{
+class QuestionnaireController extends \AdminController
+{
 
     /**
      * @var Questionnaire
@@ -22,7 +23,7 @@ class QuestionnaireController extends \AdminController{
     public function index()
     {
         $questionnaires = $this->questionnaire->with(array(
-            'panels' => function($query){
+            'panels' => function ($query) {
                 $query->orderBy('panel_weight');
             }
         ))->get();
@@ -36,15 +37,13 @@ class QuestionnaireController extends \AdminController{
     {
         $validator = $this->questionnaire->validator();
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return json_encode(array('status' => 'error', 'errors' => $validator->messages()->toArray()));
         }
 
         $questionnaire = $this->questionnaire->create(Input::all());
 
         return json_encode(array('status' => 'oke'));
-
     }
 
     public function update($questionnaire)
@@ -53,18 +52,12 @@ class QuestionnaireController extends \AdminController{
 
         $validator = $this->questionnaire->validator(null, Input::has('title') ? 'title' : 'active');
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return $validator->messages();
-        }
-
-        else
-        {
+        } else {
             $questionnaire->update(Input::all());
 
             return json_encode(array('status' => 'oke'));
         }
-
     }
-
-} 
+}

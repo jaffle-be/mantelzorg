@@ -5,14 +5,14 @@ namespace Instrument\Engine;
 use Questionnaire\Panel;
 use Questionnaire\Questionnaire;
 
-class Header {
+class Header
+{
 
     public function render(Panel $panel)
     {
         $output = $this->open();
 
-        foreach($panel->questionnaire->panels as $item)
-        {
+        foreach ($panel->questionnaire->panels as $item) {
             $output .= $this->item($item, $panel);
         }
 
@@ -37,5 +37,4 @@ class Header {
 
         return sprintf('<li class="%s %s"><a data-target-id="%s" href="">%s</a></li>', $active ? 'active' : '', $active ? 'panel-' . $panel->color : '', $panel->id, $panel->title);
     }
-
-} 
+}

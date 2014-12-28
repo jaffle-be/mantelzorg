@@ -7,17 +7,17 @@
             array(
                     'text' => Lang::get('master.navs.instellingen'),
                     'href' => URL::action('Instelling\PersonController@index')
-            ),
-            array(
-                    'text' => Lang::get('master.navs.mantelzorgers'),
-                    'href' => URL::route('instellingen.{hulpverlener}.mantelzorgers.index', array(Auth::user()->id))
-            ),
-            array(
-                    'text' => Lang::get('master.navs.ouderen')
-            ),
-            array(
-                    'text' => Lang::get('master.navs.wijzig')
-            )
+    ),
+    array(
+    'text' => Lang::get('master.navs.mantelzorgers'),
+    'href' => URL::route('instellingen.{hulpverlener}.mantelzorgers.index', array(Auth::user()->id))
+    ),
+    array(
+    'text' => Lang::get('master.navs.ouderen')
+    ),
+    array(
+    'text' => Lang::get('master.navs.wijzig')
+    )
 
     )) ?>
 @stop
@@ -26,7 +26,7 @@
 
     <?= Form::model($oudere, array(
             'route'  => array('instellingen.{mantelzorger}.oudere.update', $mantelzorger->id, $oudere->id),
-            'method' => 'put',
+    'method' => 'put',
     )) ?>
 
     <div class="row">
@@ -196,7 +196,7 @@
 
                         <?= Form::text('mantelzorger_relation_alternate', null, array(
                                 'id'    => 'mantelzorger_relation_alternate',
-                                'class' => 'form-control'
+                        'class' => 'form-control'
                         )) ?>
                     </div>
 
@@ -205,7 +205,7 @@
 
                         <?= Form::textarea('diagnose', null, array(
                                 'class' => 'form-control',
-                                'id'    => 'diagnose'
+                        'id' => 'diagnose'
                         ));
                         ?>
                     </div>

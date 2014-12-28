@@ -1,6 +1,7 @@
 <?php
 
-class UserTableSeeder extends \Illuminate\Database\Seeder{
+class UserTableSeeder extends \Illuminate\Database\Seeder
+{
 
     public function run()
     {
@@ -8,12 +9,12 @@ class UserTableSeeder extends \Illuminate\Database\Seeder{
         //I always change my pass right after i seeded in the application itself.
         User::create(array(
             'firstname' => 'Thomas',
-            'lastname' => 'Warlop',
-            'email' => 'thomas@jaffle.be',
-            'password' => Hash::make('thomas'),
-            'admin' => '1',
-            'active' => '1',
-            'male' => '1'
+            'lastname'  => 'Warlop',
+            'email'     => 'thomas@jaffle.be',
+            'password'  => Hash::make('thomas'),
+            'admin'     => '1',
+            'active'    => '1',
+            'male'      => '1'
         ));
     }
 

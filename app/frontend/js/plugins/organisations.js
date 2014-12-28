@@ -1,20 +1,16 @@
-
-(function($, app)
-{
+(function ($, app) {
 
     'use strict';
 
-    $(document).ready(function()
-    {
+    $(document).ready(function () {
 
-        if(typeof app.organisation === "undefined") app.organisation = {};
+        if (typeof app.organisation === "undefined") app.organisation = {};
 
 
-        function Creator()
-        {
+        function Creator() {
             this.$creator = $("#organisation-creator"),
-            this.$organisation = $("#organisation"),
-            this.$new = this.$creator.find("[name=organisation_name]");
+                this.$organisation = $("#organisation"),
+                this.$new = this.$creator.find("[name=organisation_name]");
             this.$locations = $("#location-selector");
             this.init();
         }
@@ -27,19 +23,18 @@
             events: function () {
                 var that = this;
 
-                this.$creator.on('click', '.btn-primary', function()
-                {
+                this.$creator.on('click', '.btn-primary', function () {
                     that.create();
                 });
 
-                this.$organisation.on('change', function(){
-                    if($(this).val() === 'new')
+                this.$organisation.on('change', function () {
+                    if ($(this).val() === 'new')
                     {
                         that.$creator.modal('show', function () {
                             that.$new.focus();
                         });
                     }
-                    else if($(this).val() === '')
+                    else if ($(this).val() === '')
                     {
                         that.$location.hide();
                         that.$location.val('');
@@ -50,22 +45,20 @@
                     }
                 });
 
-                this.$creator.on('click', '[data-dismiss="modal"]', function()
-                {
+                this.$creator.on('click', '[data-dismiss="modal"]', function () {
                     that.$organisation.val('');
                 });
 
-                this.$creator.on('submit', 'form', function(event)
-                {
+                this.$creator.on('submit', 'form', function (event) {
                     that.$creator.find('.btn-primary').trigger('click');
                     event.preventDefault();
                 });
             },
             create: function () {
                 var that = this;
-                if(this.$new.val() !== '')
+                if (this.$new.val() !== '')
                 {
-                    this.persist(function(response){
+                    this.persist(function (response) {
                         that.cleanErrors();
                         response.status === 'oke' ? that.success(response) : that.error(response);
                     });
@@ -75,13 +68,11 @@
                 $.ajax({
                     url: '/organisations',
                     type: 'POST',
-                    data:
-                    {
+                    data: {
                         name: this.$new.val()
                     },
                     dataType: 'json',
-                    success: function(response)
-                    {
+                    success: function (response) {
                         callback(response);
                     }
                 });
@@ -95,15 +86,15 @@
             },
             error: function (response) {
                 var errors = response.errors.name;
-                for(var i in errors)
+                for (var i in errors)
                 {
                     this.$creator.find('.alert').append($('<span>', {
-                        'text' : errors[i]
+                        'text': errors[i]
                     })).removeClass('hide');
                 }
             },
             add: function (o) {
-                this.$organisation.find('option:last-child').before($('<option>',{
+                this.$organisation.find('option:last-child').before($('<option>', {
                     value: o.id,
                     html: o.name,
                     selected: true
@@ -115,7 +106,7 @@
         };
 
 
-        $(document).ready(function(){
+        $(document).ready(function () {
             app.organisation.creator = new Creator();
         });
 

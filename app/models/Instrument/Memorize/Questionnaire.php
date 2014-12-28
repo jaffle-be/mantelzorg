@@ -10,7 +10,8 @@ use Questionnaire\Answer;
 use Input;
 use Questionnaire\Session;
 
-class Questionnaire {
+class Questionnaire
+{
 
     protected $auth;
 
@@ -38,22 +39,20 @@ class Questionnaire {
     public function newSurvey($mantelzorger, $oudere, $questionnaire)
     {
         return $this->survey->create(array(
-            'user_id' => Auth::user()->id,
-            'mantelzorger_id' => $mantelzorger->id,
-            'oudere_id' => $oudere->id,
+            'user_id'          => Auth::user()->id,
+            'mantelzorger_id'  => $mantelzorger->id,
+            'oudere_id'        => $oudere->id,
             'questionnaire_id' => $questionnaire->id,
         ));
     }
 
     public function question(Question $question, Session $session)
     {
-        if($question->explainable == 1)
-        {
+        if ($question->explainable == 1) {
             $explanation = $this->explanation($question);
         }
 
-        if($question->multiple_choise == 1)
-        {
+        if ($question->multiple_choise == 1) {
             $choises = $this->choise($question);
         }
 
@@ -75,42 +74,33 @@ class Questionnaire {
         //does this need a check? so it wouldn't be loaded all the time?
         $session->load(array('answers'));
 
-        $answer = $session->answers->filter(function($item) use ($question)
-        {
-            if($item->question_id == $question->id)
-            {
+        $answer = $session->answers->filter(function ($item) use ($question) {
+            if ($item->question_id == $question->id) {
                 return true;
             }
         })->first();
 
-        if(!$answer)
-        {
+        if (!$answer) {
             $answer = $this->answer->create(array(
-                'session_id' => $session->id,
+                'session_id'  => $session->id,
                 'question_id' => $question->id,
                 'explanation' => $explanation,
             ));
-        }
-        else
-        {
+        } else {
             $answer->explanation = $explanation;
             $answer->update();
         }
 
         $answer->load('choises');
 
-        if(is_array($choises))
-        {
+        if (is_array($choises)) {
             $answer->choises()->sync($choises);
 
             $answer->touch();
-        }
-        else if($choises)
-        {
+        } else if ($choises) {
             $answer->choises()->sync(array($choises));
 
             $answer->touch();
         }
     }
-
-} 
+}

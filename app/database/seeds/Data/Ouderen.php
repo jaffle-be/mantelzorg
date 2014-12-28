@@ -16,16 +16,14 @@ class Ouderen extends Seeder
 
         $mantelzorgers = Mantelzorger::all();
 
-        foreach ($mantelzorgers as $mantelzorger)
-        {
+        foreach ($mantelzorgers as $mantelzorger) {
             $this->addData($faker, $mantelzorger);
         }
     }
 
     public function addData($faker, $mantelzorger)
     {
-        foreach (range(1, 5) as $index)
-        {
+        foreach (range(1, 5) as $index) {
             Oudere::create([
                 'identifier'      => $faker->uuid,
                 'email'           => $faker->unique()->email,

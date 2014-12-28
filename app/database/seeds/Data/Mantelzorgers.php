@@ -15,16 +15,14 @@ class Mantelzorgers extends Seeder
 
         $users = User::all();
 
-        foreach ($users as $user)
-        {
+        foreach ($users as $user) {
             $this->addData($user, $faker);
         }
     }
 
     private function addData($user, $faker)
     {
-        foreach (range(1, 10) as $index)
-        {
+        foreach (range(1, 10) as $index) {
             Mantelzorger::create([
                 'identifier'      => $faker->uuid,
                 'email'           => $faker->unique()->email,

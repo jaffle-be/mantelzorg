@@ -1,11 +1,10 @@
-(function($, app){
+(function ($, app) {
 
     'use strict';
 
-    if(typeof app.questionnaire === 'undefined') app.questionnaire = {};
+    if (typeof app.questionnaire === 'undefined') app.questionnaire = {};
 
-    function Saver()
-    {
+    function Saver() {
         this.$container = $('.questionnaires');
         this.titles = '.questionnaire-title';
         this.activators = '.icons .header .glyphicon-check, .icons .header .glyphicon-unchecked';
@@ -17,44 +16,37 @@
     }
 
     Saver.prototype = {
-        init: function()
-        {
+        init: function () {
             var that = this;
             this.events();
             this.$container.find(this.sortables).sortable({
-                'update': function(event, ui)
-                {
+                'update': function (event, ui) {
                     that.sort($(this));
                 }
             });
         },
-        events: function()
-        {
+        events: function () {
             var that = this;
 
             //pass all elements as a jquery element as a convenience.
-            this.$container.on('change', this.titles, function()
-            {
+            this.$container.on('change', this.titles, function () {
                 that.title($(this));
             });
 
-            this.$container.on('change', this.panelTitles, function(){
+            this.$container.on('change', this.panelTitles, function () {
                 that.panelTitle($(this));
             });
 
-            this.$container.on('click', this.activators, function()
-            {
+            this.$container.on('click', this.activators, function () {
                 that.activation($(this));
             });
 
-            this.$container.on('click', this.colorSelectors, function(event)
-            {
+            this.$container.on('click', this.colorSelectors, function (event) {
                 that.color($(this));
                 event.preventDefault();
             });
         },
-        title: function(title)
-        {
+        title: function (title) {
             $.ajax({
                 url: '/questionnaires/' + this.questionnaire(title),
                 type: 'POST',
@@ -63,37 +55,32 @@
                     _method: 'PUT'
                 },
                 dataType: 'json',
-                success: function(response)
-                {
-                    if(response.status === 'oke')
+                success: function (response) {
+                    if (response.status === 'oke')
                     {
                         title.closest('.row').find('.icons .body i').removeClass('fade');
-                        setTimeout(function()
-                        {
+                        setTimeout(function () {
                             title.closest('.row').find('.icons .body i').addClass('fade');
                         }, 3000);
                     }
                 }
             });
         },
-        activation: function(box)
-        {
+        activation: function (box) {
             var that = this,
                 activate = box.hasClass('glyphicon-unchecked') ? true : false;
             $.ajax({
                 url: '/questionnaires/' + this.questionnaire(box) + '',
                 type: 'POST',
-                data:{
+                data: {
                     _method: 'PUT',
-                    active: activate ? '1':'0'
+                    active: activate ? '1' : '0'
                 },
                 dataType: 'json',
-                success: function(response)
-                {
-                    if(activate)
+                success: function (response) {
+                    if (activate)
                     {
-                        box.closest('.questionnaires').find('.glyphicon-check').each(function()
-                        {
+                        box.closest('.questionnaires').find('.glyphicon-check').each(function () {
                             $(this).addClass('glyphicon-unchecked').removeClass('glyphicon-check');
                         });
 
@@ -106,8 +93,7 @@
                 }
             });
         },
-        panelTitle: function(title)
-        {
+        panelTitle: function (title) {
             var that = this;
             $.ajax({
                 url: '/questionnaires/' + this.questionnaire(title) + '/panels/' + this.panel(title),
@@ -117,22 +103,19 @@
                     _method: 'PUT'
                 },
                 dataType: 'json',
-                success: function(response)
-                {
+                success: function (response) {
                     var position = that.position(title.data('panel-weight'));
-                    if(response.status === 'oke')
+                    if (response.status === 'oke')
                     {
-                        title.closest('.row').find('.savers .body ul li:nth-child('+ position + ') i').removeClass('fade');
-                        setTimeout(function()
-                        {
-                            title.closest('.row').find('.savers .body ul li:nth-child('+ position + ') i').addClass('fade');
+                        title.closest('.row').find('.savers .body ul li:nth-child(' + position + ') i').removeClass('fade');
+                        setTimeout(function () {
+                            title.closest('.row').find('.savers .body ul li:nth-child(' + position + ') i').addClass('fade');
                         }, 3000);
                     }
                 }
             })
         },
-        sort: function(panels)
-        {
+        sort: function (panels) {
             var questionnaire = this.questionnaire(panels),
                 positions = panels.sortable('toArray');
 
@@ -140,34 +123,30 @@
                 url: '/questionnaires/' + questionnaire + '/panels/sort',
                 type: 'POST',
                 dataType: 'json',
-                data:
-                {
+                data: {
                     positions: positions
                 },
-                success: function(response)
-                {
+                success: function (response) {
 
                 }
             });
 
         },
-        color:function(element)
-        {
+        color: function (element) {
             var that = this,
                 original = element.parents('.colors').find('.dropdown-toggle .panel-color'),
                 color = this.currentColor(element);
 
             $.ajax({
-                type:'POST',
+                type: 'POST',
                 url: '/questionnaires/' + this.questionnaire(element) + '/panels/' + this.panel(element),
-                data:{
-                    _method:'PUT',
+                data: {
+                    _method: 'PUT',
                     color: color
                 },
                 dataType: 'json',
-                success: function(response)
-                {
-                    if(response.status === 'oke')
+                success: function (response) {
+                    if (response.status === 'oke')
                     {
                         that.changeColor(original, that.currentColor(original), color);
                     }
@@ -176,34 +155,28 @@
 
 
         },
-        currentColor: function(element)
-        {
-            for(var i in this.colors)
+        currentColor: function (element) {
+            for (var i in this.colors)
             {
-                if(element.hasClass('panel-' + this.colors[i]))
+                if (element.hasClass('panel-' + this.colors[i]))
                     return this.colors[i];
             }
         },
-        changeColor: function(element, original, color)
-        {
+        changeColor: function (element, original, color) {
             element.removeClass('panel-' + original).addClass('panel-' + color);
         },
-        position: function(weight)
-        {
+        position: function (weight) {
             return weight / 10 + 1;
         },
-        questionnaire: function(element)
-        {
+        questionnaire: function (element) {
             return element.closest('.row').data('questionnaire-id');
         },
-        panel: function(element)
-        {
+        panel: function (element) {
             return element.closest('li[data-questionnaire-panel-id]').data('questionnaire-panel-id');
         }
     }
 
-    $(document).ready(function()
-    {
+    $(document).ready(function () {
         app.questionnaire.saver = new Saver;
     });
 

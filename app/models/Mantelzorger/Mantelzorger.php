@@ -8,15 +8,16 @@ use Validator;
 use Input;
 use Eloquent;
 
-class Mantelzorger extends Eloquent implements Searchable{
+class Mantelzorger extends Eloquent implements Searchable
+{
 
     use SearchableTrait;
 
     protected $table = 'mantelzorgers';
 
     protected static $rules = array(
-        'email' => 'email|unique:mantelzorgers,email',
-        'birthday' => 'date_format:d/m/Y',
+        'email'           => 'email|unique:mantelzorgers,email',
+        'birthday'        => 'date_format:d/m/Y',
         'hulpverlener_id' => 'required|exists:users,id'
     );
 
@@ -27,22 +28,20 @@ class Mantelzorger extends Eloquent implements Searchable{
 
     public function getDisplayNameAttribute()
     {
-        if(!empty($this->firstname) || !empty($this->lastname))
-        {
+        if (!empty($this->firstname) || !empty($this->lastname)) {
             return trim($this->getFullnameAttribute());
-        }
-        else if(!empty($this->identifier)){
+        } else if (!empty($this->identifier)) {
             return $this->identifier;
-        }
-        else{
+        } else {
             return '#ID#' . $this->id;
         }
     }
 
     public function setEmailAttribute($value)
     {
-        if(empty($value))
+        if (empty($value)) {
             $value = null;
+        }
 
         $this->attributes['email'] = $value;
     }
@@ -54,23 +53,20 @@ class Mantelzorger extends Eloquent implements Searchable{
 
     public function setBirthdayAttribute($value)
     {
-
     }
 
     public function validator(array $input = array(), array $rules = array())
     {
-        if(empty($input))
-        {
+        if (empty($input)) {
             $input = Input::all();
         }
 
-        if(empty($rules))
-        {
+        if (empty($rules)) {
             $rules = static::$rules;
-        }
-        else
-        {
-            if(!is_array($rules)) $rules = array($rules);
+        } else {
+            if (!is_array($rules)) {
+                $rules = array($rules);
+            }
 
             $rules = array_intersect_key(static::$rules, array_flip($rules));
         }
@@ -99,5 +95,4 @@ class Mantelzorger extends Eloquent implements Searchable{
 
         return array_merge($dates, array('birthday'));
     }
-
-} 
+}

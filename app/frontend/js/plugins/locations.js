@@ -23,7 +23,8 @@
                 var that = this;
 
                 that.$location.on('change', function () {
-                    if ($(this).val() === 'new') {
+                    if ($(this).val() === 'new')
+                    {
                         that.cleanErrors();
                         that.$modal.modal('show');
                     }
@@ -36,7 +37,7 @@
 
                 //override the close -> so we can put the previous value back.
                 that.$modal.on('hidden.bs.modal', function () {
-                    if(that.creating == false)
+                    if (that.creating == false)
                     {
                         that.cancel();
                     }
@@ -45,7 +46,8 @@
             create: function () {
                 var that = this;
                 //if not empty fields
-                if (that.validateInput()) {
+                if (that.validateInput())
+                {
                     that.persist(function (response) {
                         that.cleanErrors();
                         response.status === 'oke' ? that.success(response) : that.error(response);
@@ -69,8 +71,7 @@
                     }
                 });
             },
-            cancel: function()
-            {
+            cancel: function () {
                 this.$location.val(this.initialValue);
             },
             success: function (response) {
@@ -82,8 +83,10 @@
             },
             error: function (response) {
                 var errors = response.errors;
-                for (var field in errors) {
-                    for (var error in errors[field]) {
+                for (var field in errors)
+                {
+                    for (var error in errors[field])
+                    {
                         var alert = this.$modal.find('.alert[data-target=' + field + ']');
                         var html = alert.html();
                         alert.html(html + errors[field][error]);
@@ -141,7 +144,8 @@
                 $options.not(':last-child[value="new"], :first-child[value=""]').remove();
 
                 //add new options after the first option ('selecteer een ?')
-                for (var i in locations) {
+                for (var i in locations)
+                {
                     $emptyOption.after($('<option>', {
                         value: locations[i].id,
                         html: locations[i].name

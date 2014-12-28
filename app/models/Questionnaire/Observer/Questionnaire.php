@@ -4,7 +4,8 @@ namespace Questionnaire\Observer;
 
 use Illuminate\Events\Dispatcher;
 
-class Questionnaire {
+class Questionnaire
+{
 
     /**
      * @var \Illuminate\Events\Dispatcher
@@ -18,10 +19,8 @@ class Questionnaire {
 
     public function saving($model)
     {
-        if($model->isDirty('active') && $model->active == '1')
-        {
+        if ($model->isDirty('active') && $model->active == '1') {
             $this->events->fire('questionnaire.activation', array());
         }
     }
-
-} 
+}

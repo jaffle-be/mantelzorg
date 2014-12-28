@@ -2,46 +2,46 @@
 @import 'bootstrap-variables';
 @import 'bootstrap-mixins';
 
-.btn-gray{
+.btn-gray {
   .button-variant(@white, @panel-gray, darken(@panel-gray, 10%));
 }
 
-.btn-green{
+.btn-green {
   .button-variant(@white, @panel-green, darken(@panel-green, 10%));
 }
 
-.btn-purple{
+.btn-purple {
   .button-variant(@white, @panel-purple, darken(@panel-purple, 10%));
 }
 
-.btn-yellow{
+.btn-yellow {
   .button-variant(@white, @panel-yellow, darken(@panel-yellow, 10%));
 }
 
-.btn-blue{
+.btn-blue {
   .button-variant(@white, @panel-blue, darken(@panel-blue, 10%));
 }
 
-.btn-red{
+.btn-red {
   .button-variant(@white, @panel-red, darken(@panel-red, 10%));
 }
 
-.btn-orange{
+.btn-orange {
   .button-variant(@white, @panel-orange, darken(@panel-orange, 10%));
 }
 
-.instrument-header{
+.instrument-header {
 
   margin-bottom: 20px;
 
-  ul{
+  ul {
     list-style: none;
     padding: 0;
     text-align: center;
 
-    li{
+    li {
 
-      text-decoration:none;
+      text-decoration: none;
       display: inline-block;
       padding: 10px;
       border: 1px solid @border-color;
@@ -50,141 +50,141 @@
       text-shadow: none;
     }
 
-    li.active a{
+    li.active a {
       color: white;
     }
 
-    li.panel-gray{
+    li.panel-gray {
       background-color: @panel-gray;
     }
 
-    li.panel-yellow{
+    li.panel-yellow {
       background-color: @panel-yellow;
     }
 
-    li.panel-purple{
+    li.panel-purple {
       background-color: @panel-purple;
     }
 
-    li.panel-green{
+    li.panel-green {
       background-color: @panel-green;
     }
 
-    li.panel-red{
+    li.panel-red {
       background-color: @panel-red;
     }
 
-    li.panel-blue{
+    li.panel-blue {
       background-color: @panel-blue;
     }
 
-    li.panel-orange{
+    li.panel-orange {
       background-color: @panel-orange;
     }
   }
 
 }
 
-.question-color(@c){
-  .header{
-    color:@c;
+.question-color(@c) {
+  .header {
+    color: @c;
   }
 
-  .glyphicon{
-    color:@c;
+  .glyphicon {
+    color: @c;
   }
 }
 
-.instrument-questions{
+.instrument-questions {
 
-  .question-status{
-    &.question-blue{
+  .question-status {
+    &.question-blue {
       .question-color(@panel-blue);
     }
-    
-    &.question-red{
+
+    &.question-red {
       .question-color(@panel-red);
     }
-    
-    &.question-green{
+
+    &.question-green {
       .question-color(@panel-green);
     }
 
-    &.question-purple{
+    &.question-purple {
       .question-color(@panel-purple);
     }
 
-    &.question-orange{
+    &.question-orange {
       .question-color(@panel-orange);
     }
 
-    &.question-yellow{
+    &.question-yellow {
       .question-color(@panel-yellow);
     }
 
-    &.question-gray{
+    &.question-gray {
       .question-color(@panel-gray);
     }
-    
+
     font-size: xx-large;
 
-    .glyphicon{
+    .glyphicon {
       margin-top: 15px;
     }
   }
 
-  .instrument-question{
-//    border-left: 1px solid @border-color;
+  .instrument-question {
+    //    border-left: 1px solid @border-color;
     padding-left: 40px;
     margin-bottom: 20px;
 
-    & > div{
+    & > div {
       padding: 15px;
       border: 1px solid @border-color;
     }
 
-    .header{
+    .header {
       cursor: pointer;
       font-size: x-large;
       font-weight: bold;
       margin-bottom: 10px;
 
-      .glyphicon{
-        float:right;
+      .glyphicon {
+        float: right;
       }
     }
 
-    .body{
-      .well{
+    .body {
+      .well {
         margin-top: 10px;
       }
     }
 
-    textarea{
+    textarea {
       height: 90px;
     }
-    
-    &.question-blue{
+
+    &.question-blue {
       .question-color(@panel-blue)
     }
 
-    &.question-red{
+    &.question-red {
       .question-color(@panel-red)
     }
 
-    &.question-green{
+    &.question-green {
       .question-color(@panel-green)
     }
 
-    &.question-orange{
+    &.question-orange {
       .question-color(@panel-orange)
     }
 
-    &.question-purple{
+    &.question-purple {
       .question-color(@panel-purple)
     }
 
-    &.question-gray{
+    &.question-gray {
       .question-color(@panel-gray)
     }
 
@@ -192,6 +192,6 @@
 
 }
 
-.instrument-footer{
+.instrument-footer {
   margin-top: 20px;
 }

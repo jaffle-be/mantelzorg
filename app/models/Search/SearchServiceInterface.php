@@ -85,5 +85,4 @@ interface SearchServiceInterface
      * @return mixed
      */
     public function updateMapping($type);
-
 }

@@ -43,8 +43,7 @@ class Question
 
     public function wrapper($option)
     {
-        switch ($option)
-        {
+        switch ($option) {
             case 'open':
                 return '<div class="row instrument-questions">';
                 break;
@@ -65,18 +64,15 @@ class Question
 
         $output .= '<div class="question">' . $question->question . '</div>';
 
-        if ($question->meta)
-        {
+        if ($question->meta) {
             $output .= '<div class="well well-sm" style="display:none;">' . $question->meta . '</div>';
         }
 
-        if ($question->multiple_choise == '1')
-        {
+        if ($question->multiple_choise == '1') {
             $output .= $this->multipleChoise($question, $answer);
         }
 
-        if ($question->explainable == '1')
-        {
+        if ($question->explainable == '1') {
             $output .= $this->explainable($question, $answer);
         }
 
@@ -89,12 +85,9 @@ class Question
     {
         $output = $this->openChoises();
 
-        if ($question->multiple_answer == '1')
-        {
+        if ($question->multiple_answer == '1') {
             $output .= $this->checkboxes($question, $answer);
-        }
-        else
-        {
+        } else {
             $output .= $this->radios($question, $answer);
         }
 
@@ -130,8 +123,7 @@ class Question
 
         $identifier = 'question' . $question->id;
 
-        foreach ($question->choises as $choise)
-        {
+        foreach ($question->choises as $choise) {
             $checked = $answer && $answer->wasChecked($choise) ? 'checked="checked"' : null;
 
             $output .= sprintf('<li class="radio"> <label><input class="" type="radio" %s name="%s" value="%s"/>%s</label></li>', $checked, $identifier, $choise->id, $choise->title);
@@ -146,8 +138,7 @@ class Question
 
         $identifier = 'question' . $question->id;
 
-        foreach ($question->choises as $choise)
-        {
+        foreach ($question->choises as $choise) {
             $checked = $answer && $answer->wasChecked($choise) ? 'checked="checked"' : null;
 
             $output .= sprintf('<li class="checkbox"> <label><input class="" type="checkbox" %s name="%s[]" value="%s"/>%s</label></li>', $checked, $identifier, $choise->id, $choise->title);
@@ -155,5 +146,4 @@ class Question
 
         return $output;
     }
-
-} 
+}

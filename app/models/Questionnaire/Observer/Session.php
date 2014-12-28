@@ -6,7 +6,8 @@ namespace Questionnaire\Observer;
 use Illuminate\Events\Dispatcher;
 use Questionnaire\Session as Model;
 
-class Session {
+class Session
+{
 
     /**
      * @var Dispatcher
@@ -23,10 +24,8 @@ class Session {
 
     public function deleting(Model $model)
     {
-        foreach($model->answers as $answer)
-        {
+        foreach ($model->answers as $answer) {
             $answer->delete();
         }
     }
-
 }

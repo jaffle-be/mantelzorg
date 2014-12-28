@@ -4,7 +4,8 @@ namespace Meta;
 
 use Eloquent;
 
-class Context extends Eloquent{
+class Context extends Eloquent
+{
 
     const RELATION_MANTELZORGER_OUDERE = 'relation_mantelzorger_oudere';
 
@@ -16,5 +17,4 @@ class Context extends Eloquent{
     {
         return $this->hasMany('Meta\Value', 'context_id');
     }
-
-} 
+}

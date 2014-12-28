@@ -2,7 +2,8 @@
 
 namespace Questionnaire;
 
-class EventSubscriber{
+class EventSubscriber
+{
 
     /**
      * @var Questionnaire
@@ -35,7 +36,7 @@ class EventSubscriber{
         $this->panel = $panel;
         $this->question = $question;
         $this->choise = $choise;
-        $this->answer =$answer;
+        $this->answer = $answer;
     }
 
     /**
@@ -45,8 +46,7 @@ class EventSubscriber{
     {
         $questionnaires = $this->questionnaire->where('active', '1')->get();
 
-        foreach($questionnaires as $questionnaire)
-        {
+        foreach ($questionnaires as $questionnaire) {
             $questionnaire->active = 0;
 
             $questionnaire->save();
@@ -57,5 +57,4 @@ class EventSubscriber{
     {
         $events->listen('questionnaire.activation', 'Questionnaire\EventSubscriber@activation');
     }
-
-} 
+}

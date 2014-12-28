@@ -5,7 +5,8 @@ namespace Mantelzorger;
 use Illuminate\Support\ServiceProvider;
 use Search\SearchServiceInterface;
 
-class MantelzorgerServiceProvider extends ServiceProvider{
+class MantelzorgerServiceProvider extends ServiceProvider
+{
 
     public function register()
     {
@@ -30,5 +31,4 @@ class MantelzorgerServiceProvider extends ServiceProvider{
 
         $search->addAutoIndexing(new Mantelzorger());
     }
-
-} 
+}

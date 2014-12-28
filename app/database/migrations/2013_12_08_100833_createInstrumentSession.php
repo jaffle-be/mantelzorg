@@ -2,17 +2,17 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInstrumentSession extends Migration {
+class CreateInstrumentSession extends Migration
+{
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('questionnaire_survey_sessions', function($t)
-        {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('questionnaire_survey_sessions', function ($t) {
             $t->increments('id');
             $t->integer('user_id')->unsigned();
             $t->foreign('user_id')->references('id')->on('users');
@@ -24,16 +24,16 @@ class CreateInstrumentSession extends Migration {
             $t->foreign('questionnaire_id')->references('id')->on('questionnaires');
             $t->timestamps();
         });
-	}
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('questionnaire_survey_sessions');
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('questionnaire_survey_sessions');
+    }
 
 }

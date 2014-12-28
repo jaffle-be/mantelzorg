@@ -7,9 +7,11 @@ use Mantelzorger\Mantelzorger as Model;
 
 /**
  * Class Mantelzorger
+ *
  * @package Mantelzorger\Observer
  */
-class Mantelzorger {
+class Mantelzorger
+{
 
     /**
      * @var \Illuminate\Events\Dispatcher
@@ -26,21 +28,18 @@ class Mantelzorger {
 
     public function updating($model)
     {
-        if(empty($model->email))
-        {
+        if (empty($model->email)) {
             $model->email = null;
         }
     }
 
     public function deleting(Model $model)
     {
-        foreach($model->surveys as $survey)
-        {
+        foreach ($model->surveys as $survey) {
             $survey->delete();
         }
 
-        foreach($model->oudere as $oudere)
-        {
+        foreach ($model->oudere as $oudere) {
             $oudere->delete();
         }
     }

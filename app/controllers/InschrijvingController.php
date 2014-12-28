@@ -2,7 +2,8 @@
 use Organisation\Organisation;
 use Beta\Registration;
 
-class InschrijvingController extends AdminController{
+class InschrijvingController extends AdminController
+{
 
     /**
      * @var Beta\Registration
@@ -51,8 +52,7 @@ class InschrijvingController extends AdminController{
     {
         $inschrijving = $this->registration->find($id);
 
-        if($inschrijving)
-        {
+        if ($inschrijving) {
             $organisations = $this->organisation->orderBy('name')->get();
 
             //create an array that has has en empty first value, then all the organisations, then a 'create new' option
@@ -61,14 +61,11 @@ class InschrijvingController extends AdminController{
                 $organisations->lists('name', 'id') +
                 array('new' => Lang::get('users.new_organisation'));
 
-            if(Input::old('organisation_id'))
-            {
+            if (Input::old('organisation_id')) {
                 $organisation = $this->organisation->with(array('locations'))->find(Input::old('organisation_id'));
 
                 $locations = $organisation->locations->lists('name', 'id');
-            }
-            else
-            {
+            } else {
                 $locations = array();
             }
 
@@ -79,9 +76,7 @@ class InschrijvingController extends AdminController{
             $this->layout->content = View::make('inschrijving.edit', compact('inschrijving', 'organisations', 'locations'))
                 ->nest('creatorOrganisations', 'modals.organisation-creator', compact(array('inschrijving')))
                 ->nest('creatorLocations', 'modals.location-creator', compact(array('inschrijving')));
-        }
-        else
-        {
+        } else {
             return Redirect::back();
         }
     }
@@ -94,12 +89,9 @@ class InschrijvingController extends AdminController{
 
         $validator = $this->user->validator(null, $input);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return Redirect::back()->withErrors($validator->messages())->withInput();
-        }
-        else
-        {
+        } else {
             $inschrijving = $this->registration->find(Input::get('id'));
 
             //hash password before inserting
@@ -110,8 +102,7 @@ class InschrijvingController extends AdminController{
 
             $user = $this->user->create($input);
 
-            if($user)
-            {
+            if ($user) {
                 Event::fire('user.password-generated', array($user, $original));
             }
 
@@ -119,24 +110,20 @@ class InschrijvingController extends AdminController{
 
             return Redirect::action('InschrijvingController@index');
         }
-
     }
 
     public function destroy()
     {
         $ids = Input::get('ids');
 
-        if(count($ids))
-        {
+        if (count($ids)) {
             $registrations = $this->registration->whereIn('id', $ids)->get();
 
-            foreach($registrations as $registration)
-            {
+            foreach ($registrations as $registration) {
                 $registration->delete();
             }
         }
 
         return [];
     }
-
-} 
+}

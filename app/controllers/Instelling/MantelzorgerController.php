@@ -10,9 +10,11 @@ use Auth;
 
 /**
  * Class MantelzorgerController
+ *
  * @package Instelling
  */
-class MantelzorgerController extends \AdminController{
+class MantelzorgerController extends \AdminController
+{
 
     /**
      * @var \Mantelzorger\Mantelzorger
@@ -53,8 +55,7 @@ class MantelzorgerController extends \AdminController{
 
         $validator = $this->mantelzorger->validator($input);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return Redirect::back()->withInput()->withErrors($validator->messages());
         }
 
@@ -67,8 +68,7 @@ class MantelzorgerController extends \AdminController{
     {
         $mantelzorger = $this->mantelzorger->find($mantelzorger);
 
-        if($mantelzorger)
-        {
+        if ($mantelzorger) {
             $this->layout->content = View::make('instellingen.mantelzorgers.edit', compact(array('hulpverlener', 'mantelzorger')));
         }
     }
@@ -77,36 +77,26 @@ class MantelzorgerController extends \AdminController{
     {
         $mantelzorger = $this->mantelzorger->find($mantelzorger);
 
-        if($mantelzorger)
-        {
+        if ($mantelzorger) {
             $input = Input::except('_token');
 
             $input['mantelzorger_id'] = $mantelzorger->id;
 
             $validator = $this->mantelzorger->validator($input, array('firstname', 'lastname', 'birthday', 'male', 'street', 'postal', 'city', 'phone'));
 
-            if($validator->fails())
-            {
+            if ($validator->fails()) {
                 return Redirect::back()->withInput()->withErrors($validator->messages());
-            }
-
-            else
-            {
+            } else {
                 $mantelzorger->update($input);
 
                 $mantelzorger->save();
-
             }
-
         }
 
         return Redirect::action('Instelling\MantelzorgerController@index', $hulpverlener->id);
-
     }
 
     public function delete()
     {
-
     }
-
 }

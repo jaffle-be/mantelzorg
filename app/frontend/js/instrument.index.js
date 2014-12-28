@@ -11,7 +11,8 @@
             type: 'GET',
             dataType: 'json',
             success: function (response) {
-                if (response.status === 'oke') {
+                if (response.status === 'oke')
+                {
                     callback(true, response.ouderen);
                 }
             }
@@ -20,8 +21,10 @@
 
     function toggle(show, ouderen) {
         oudere.html('');
-        if (typeof ouderen !== 'undefined') {
-            for (var i in ouderen) {
+        if (typeof ouderen !== 'undefined')
+        {
+            for (var i in ouderen)
+            {
                 var option = ($('<option>', {
                     value: i === 'select' ? '' : i,
                     text: ouderen[i]
@@ -66,12 +69,14 @@
         mantelzorger = $("#mantelzorger-select");
         oudere = $("#ouderen-select");
 
-        if (mantelzorger.val() != '') {
+        if (mantelzorger.val() != '')
+        {
             persist(mantelzorger.val(), toggle)
         }
 
         mantelzorger.on('change', function () {
-            if ($(this).val() !== '') {
+            if ($(this).val() !== '')
+            {
                 persist($(this).val(), toggle)
             }
             else
@@ -79,11 +84,13 @@
         });
 
         $("form").on('submit', function () {
-            if (mantelzorger.val() == '' || oudere.val() == '' || oudere.val() == undefined) {
+            if (mantelzorger.val() == '' || oudere.val() == '' || oudere.val() == undefined)
+            {
                 $(".alert").show();
                 return false;
             }
-            else {
+            else
+            {
                 $(".alert").hide();
             }
         });

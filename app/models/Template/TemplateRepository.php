@@ -2,7 +2,8 @@
 
 namespace Template;
 
-class TemplateRepository {
+class TemplateRepository
+{
 
     /**
      * @var Breadcrumb
@@ -18,5 +19,4 @@ class TemplateRepository {
     {
         return $this->crumb->render($items);
     }
-
-} 
+}

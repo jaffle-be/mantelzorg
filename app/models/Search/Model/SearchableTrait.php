@@ -130,10 +130,8 @@ trait SearchableTrait
         $model = $this->newFromBuilder($base);
 
         //need to setup relations too :-)
-        foreach ($with as $relation)
-        {
-            if ($relation_data = $this->getSearchableNestedDocument($relations, $relation))
-            {
+        foreach ($with as $relation) {
+            if ($relation_data = $this->getSearchableNestedDocument($relations, $relation)) {
                 /** @var Relation $foreign */
                 $foreign = $model->$relation();
 
@@ -143,27 +141,21 @@ trait SearchableTrait
 
                 $needsLoop = ['HasMany', 'BelongsToMany'];
 
-                foreach ($needsLoop as $loop)
-                {
-                    if (ends_with($type, $loop))
-                    {
+                foreach ($needsLoop as $loop) {
+                    if (ends_with($type, $loop)) {
                         $needsLoop = true;
 
                         break;
                     }
                 }
 
-                if ($needsLoop === true)
-                {
+                if ($needsLoop === true) {
                     $collection = new Collection();
 
-                    foreach ($relation_data as $object)
-                    {
+                    foreach ($relation_data as $object) {
                         $collection->add(new $build($object));
                     }
-                }
-                else
-                {
+                } else {
                     $relation_data = new $build($relation_data);
                 }
             }
@@ -176,18 +168,15 @@ trait SearchableTrait
 
     protected function getSearchableNestedDocument($relations, $relation)
     {
-        if (isset($relations[$relation]) && !empty($relations[$relation]))
-        {
+        if (isset($relations[$relation]) && !empty($relations[$relation])) {
             return $relations[$relation];
         }
     }
 
     public function getSearchableMapping()
     {
-        if(property_exists(__CLASS__, 'searchableMapping'))
-        {
+        if (property_exists(__CLASS__, 'searchableMapping')) {
             return static::$searchableMapping;
         }
     }
-
 }

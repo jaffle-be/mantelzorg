@@ -5,14 +5,15 @@ use Eloquent;
 use Validator;
 use Input;
 
-class Questionnaire extends Eloquent{
+class Questionnaire extends Eloquent
+{
 
     protected $table = 'questionnaires';
 
     protected $fillable = array('title', 'active');
 
     protected static $rules = array(
-        'title' => 'required|unique:questionnaires,title',
+        'title'  => 'required|unique:questionnaires,title',
         'active' => 'in:0,1',
     );
 
@@ -23,13 +24,11 @@ class Questionnaire extends Eloquent{
 
     public function validator($input = null, $fields = array())
     {
-        if(empty($input))
-        {
+        if (empty($input)) {
             $input = Input::all();
         }
 
-        if(is_string($fields))
-        {
+        if (is_string($fields)) {
             $fields = array($fields);
         }
 
@@ -52,16 +51,14 @@ class Questionnaire extends Eloquent{
     {
         $weight = $panel->panel_weight + 10;
 
-        $panels = $this->panels->filter(function($item) use ($weight){
-            return (int) $item->panel_weight == $weight;
+        $panels = $this->panels->filter(function ($item) use ($weight) {
+            return (int)$item->panel_weight == $weight;
         });
 
-        if(count($panels))
-        {
+        if (count($panels)) {
             return $panels->first();
-        }
-        else
+        } else {
             return false;
+        }
     }
-
 }

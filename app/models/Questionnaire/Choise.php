@@ -1,11 +1,13 @@
 <?php
 
 namespace Questionnaire;
+
 use Eloquent;
 use Input;
 use Validator;
 
-class Choise extends Eloquent{
+class Choise extends Eloquent
+{
 
     protected $table = 'questionnaire_choises';
 
@@ -13,19 +15,19 @@ class Choise extends Eloquent{
 
     protected static $rules = array(
         'question_id' => 'required|exists:questionnaire_questions,id',
-        'title' => 'required',
+        'title'       => 'required',
         'sort_weight' => 'required|integer'
     );
 
     public function validator($input = null, $rules = null)
     {
-        if(empty($input))
-        {
+        if (empty($input)) {
             $input = Input::all();
         }
 
-        if(is_string($rules))
+        if (is_string($rules)) {
             $rules = array($rules);
+        }
 
         $rules = array_intersect(static::$rules, array_flip($rules));
 
@@ -36,5 +38,4 @@ class Choise extends Eloquent{
     {
         return $this->belongsTo('Questionnaire\Question', 'question_id');
     }
-
-} 
+}

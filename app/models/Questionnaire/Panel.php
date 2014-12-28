@@ -1,11 +1,13 @@
 <?php
 
 namespace Questionnaire;
+
 use Eloquent;
 use Input;
 use Validator;
 
-class Panel extends Eloquent{
+class Panel extends Eloquent
+{
 
     protected $table = 'questionnaire_panels';
 
@@ -13,17 +15,16 @@ class Panel extends Eloquent{
 
     protected static $rules = array(
         'questionnaire_id' => 'required|exists:questionnaires,id',
-        'panel_weight' => 'required|int',
-        'color' => 'in:blue,red,green,gray,purple,yellow,green,orange',
-        'title' => 'required'
+        'panel_weight'     => 'required|int',
+        'color'            => 'in:blue,red,green,gray,purple,yellow,green,orange',
+        'title'            => 'required'
     );
 
     public function validator($input = array(), $fields = array())
     {
         $rules = array_intersect_key(static::$rules, array_flip($fields));
 
-        if(empty($input))
-        {
+        if (empty($input)) {
             $input = Input::all();
         }
 
@@ -44,5 +45,4 @@ class Panel extends Eloquent{
     {
         return $this->questionnaire->nextPanel($this);
     }
-
 }

@@ -2,17 +2,17 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CreateQuestionairePanels extends Migration {
+class CreateQuestionairePanels extends Migration
+{
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('questionnaire_panels', function($t)
-        {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('questionnaire_panels', function ($t) {
             $t->increments('id');
             $t->integer('questionnaire_id')->unsigned();
             $t->foreign('questionnaire_id')->references('id')->on('questionnaires');
@@ -21,16 +21,16 @@ class CreateQuestionairePanels extends Migration {
             $t->string('title', 100);
             $t->timestamps();
         });
-	}
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('questionnaire_panels');
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('questionnaire_panels');
+    }
 
 }

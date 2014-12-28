@@ -58,8 +58,7 @@ class HulpverlenerController extends AdminController
     {
         $user = $this->user->find($id);
 
-        if ($user)
-        {
+        if ($user) {
             $organisations = $this->organisation->orderBy('name')->get();
 
             /**
@@ -75,57 +74,44 @@ class HulpverlenerController extends AdminController
              * the locations that are linked to that organisation
              */
 
-            if (Input::old('organisation_id') && $user->organisation_id !== Input::old('organisation_id'))
-            {
+            if (Input::old('organisation_id') && $user->organisation_id !== Input::old('organisation_id')) {
                 $locations = $this->location->where('organisation_id', Input::old('organisation_id'))
                     ->orderBy('name')
                     ->get()
                     ->lists('name', 'id');
-            }
-            else if ($user->organisation)
-            {
+            } else if ($user->organisation) {
                 $locations = $user->organisation->locations()
                     ->orderBy('name')
                     ->get()
                     ->lists('name', 'id');
-            }
-            else
-            {
+            } else {
                 $locations = array();
             }
             $locations = array('' => Lang::get('users.pick_location'))
                 + $locations + array('new' => Lang::get('users.new_location'));
 
-
             $this->layout->content = View::make('hulpverlener.edit', compact(array('user', 'organisations', 'locations')))
                 ->nest('creatorOrganisations', 'modals.organisation-creator', compact(array('inschrijving')))
                 ->nest('creatorLocations', 'modals.location-creator', compact(array('inschrijving')));
-        }
-
-        else
-        {
+        } else {
             return Redirect::action('HulpverlenerController@index');
         }
-
     }
 
     public function update($id)
     {
         $user = $this->user->find($id);
 
-        if (!$user)
-        {
+        if (!$user) {
             return Redirect::action('HulpverlenerController@index');
         }
 
         $input = Input::all();
 
-        if (!isset($input['active']))
-        {
+        if (!isset($input['active'])) {
             $input['active'] = '0';
         }
-        if (!isset($input['admin']))
-        {
+        if (!isset($input['admin'])) {
             $input['admin'] = '0';
         }
 
@@ -136,43 +122,33 @@ class HulpverlenerController extends AdminController
         ), $input);
 
         //validation rule if email was changed
-        $validator->sometimes('email', 'required|email|unique:users', function ($input) use ($user)
-        {
+        $validator->sometimes('email', 'required|email|unique:users', function ($input) use ($user) {
             return $user->email !== $input->email;
         });
 
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return Redirect::back()->withErrors($validator->messages())->withInput($input);
-        }
-
-        else
-        {
+        } else {
             $user->update($input);
 
             return Redirect::action('HulpverlenerController@index');
         }
-
     }
 
     public function destroy()
     {
         $ids = Input::get('ids');
 
-        if (!empty($ids))
-        {
+        if (!empty($ids)) {
             //make sure one cannot delete oneself :-).
-            $ids = array_filter($ids, function ($id)
-            {
+            $ids = array_filter($ids, function ($id) {
                 return $id != Auth::user()->id;
             });
 
-            if (!empty($ids))
-            {
+            if (!empty($ids)) {
                 $users = $this->user->whereIn('id', $ids)->with(['mantelzorgers', 'mantelzorgers.oudere'])->get();
 
-                foreach ($users as $user)
-                {
+                foreach ($users as $user) {
                     $user->delete();
                 }
             }
@@ -188,8 +164,7 @@ class HulpverlenerController extends AdminController
     {
         $input = Input::get('ids');
 
-        if (!is_array($input) || empty($input))
-        {
+        if (!is_array($input) || empty($input)) {
             return json_encode(array(
                 'status' => 'no decent input provided.'
             ));
@@ -198,14 +173,12 @@ class HulpverlenerController extends AdminController
         $users = $this->user->whereIn('id', $input)->get();
 
         /** @var User $user */
-        foreach ($users as $user)
-        {
+        foreach ($users as $user) {
             $original = $user->generateNewPassword();
 
             $user->password = Hash::make($original);
 
-            if ($user->save())
-            {
+            if ($user->save()) {
                 Event::fire('user.password-generated', array($user, $original));
             }
         }
@@ -214,5 +187,4 @@ class HulpverlenerController extends AdminController
 
         return json_encode(array('status' => 'oke'));
     }
-
 }

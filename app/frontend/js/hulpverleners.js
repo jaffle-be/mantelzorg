@@ -6,7 +6,8 @@
         $(".actions").on('click', '.regen-password', function (event) {
             var ids = app.getIds($(this));
             //find the checked boxes
-            if (ids.length > 0) {
+            if (ids.length > 0)
+            {
                 var success = function () {
                     //start request
                     $.post('/hulpverleners/regen-passwords', {

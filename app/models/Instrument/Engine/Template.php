@@ -7,7 +7,8 @@ use Questionnaire\Questionnaire;
 use URL;
 use Lang;
 
-class Template {
+class Template
+{
 
     /**
      * @var Header
@@ -37,8 +38,7 @@ class Template {
 
         $counter = 0;
 
-        foreach($panel->questions as $question)
-        {
+        foreach ($panel->questions as $question) {
             $output .= $this->question->render($panel, $question, $survey, $counter == 0);
 
             $counter++;
@@ -46,7 +46,7 @@ class Template {
 
         $output .= $this->question->wrapper('close');
 
-        return  $output;
+        return $output;
     }
 
     public function footer(Panel $panel)
@@ -57,11 +57,10 @@ class Template {
 
         $output = '<input type="hidden" id="next_panel" name="next_panel"/>';
 
-        $output .= sprintf('<input type="submit" class="btn btn-%s" value="%s">', $panel->color ? $panel->color : 'primary' ,$next ? $next->title : Lang::get('instrument.bevestigen'));
+        $output .= sprintf('<input type="submit" class="btn btn-%s" value="%s">', $panel->color ? $panel->color : 'primary', $next ? $next->title : Lang::get('instrument.bevestigen'));
 
         $output .= '</div>';
 
         return $output;
     }
-
-} 
+}

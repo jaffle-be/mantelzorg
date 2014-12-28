@@ -79,18 +79,15 @@ class SearchService implements SearchServiceInterface
 
         $me = $this;
 
-        foreach ($this->listeners as $event => $listener)
-        {
+        foreach ($this->listeners as $event => $listener) {
             $trigger = $type->getSearchableEventname($event);
 
             $type->setSearchableService($me);
 
             $type->setSearchableIndex($me->index);
 
-            if ($trigger)
-            {
-                $callback = function (Searchable $type) use ($me, $listener)
-                {
+            if ($trigger) {
+                $callback = function (Searchable $type) use ($me, $listener) {
                     return $me->$listener($type);
                 };
 
@@ -112,10 +109,8 @@ class SearchService implements SearchServiceInterface
 
         $me = $this;
 
-        $type->with($relations)->chunk(50, function ($documents) use ($me)
-        {
-            foreach ($documents as $document)
-            {
+        $type->with($relations)->chunk(50, function ($documents) use ($me) {
+            foreach ($documents as $document) {
                 $me->add($document);
             }
         });
@@ -199,7 +194,7 @@ class SearchService implements SearchServiceInterface
 
         $settings = [
             'index' => $this->index,
-            'body' => $settings,
+            'body'  => $settings,
         ];
 
         $indices->putSettings($settings);
@@ -223,10 +218,10 @@ class SearchService implements SearchServiceInterface
 
         $mapping = [
             'index' => $this->index,
-            'type' => $type->getSearchableType(),
-            'body' => [
+            'type'  => $type->getSearchableType(),
+            'body'  => [
                 $type->getSearchableType() => $type->getSearchableMapping(),
-                ]
+            ]
         ];
 
         $this->client->indices()->putMapping($mapping);
@@ -243,8 +238,7 @@ class SearchService implements SearchServiceInterface
      */
     protected function getSearchable($type)
     {
-        if (is_string($type))
-        {
+        if (is_string($type)) {
             $config = $this->types[$type];
 
             $classname = $this->getClassname($config);
@@ -256,8 +250,7 @@ class SearchService implements SearchServiceInterface
             return array($type, $with);
         }
 
-        if (!is_object($type) || !($type instanceof Searchable))
-        {
+        if (!is_object($type) || !($type instanceof Searchable)) {
             throw new Exception('Invalid searchable provided, expecting something Search\\Searchable');
         }
 
@@ -268,15 +261,13 @@ class SearchService implements SearchServiceInterface
     {
         $params = $this->getBaseParams($type);
 
-        if ($this->client->indices()->getMapping($params))
-        {
+        if ($this->client->indices()->getMapping($params)) {
             $params = array_merge($params, ['id' => '_mapping']);
 
             $this->client->delete($params);
         }
 
-        if ($mapping = $type->getSearchableMapping())
-        {
+        if ($mapping = $type->getSearchableMapping()) {
             $params = $this->getBaseParams($type);
 
             $mapping = array_merge($params, [
@@ -308,8 +299,7 @@ class SearchService implements SearchServiceInterface
 
         $indices = $this->client->indices();
 
-        if (!$indices->exists($params))
-        {
+        if (!$indices->exists($params)) {
             $indices->create($params);
         }
     }
@@ -331,8 +321,7 @@ class SearchService implements SearchServiceInterface
 
     protected function getClassname($config)
     {
-        if (!is_array($config))
-        {
+        if (!is_array($config)) {
             return $config;
         }
 
@@ -341,12 +330,10 @@ class SearchService implements SearchServiceInterface
 
     protected function getWith($config)
     {
-        if (!is_array($config))
-        {
+        if (!is_array($config)) {
             return array();
         }
 
         return isset($config['with']) ? $config['with'] : [];
     }
-
 }

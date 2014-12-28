@@ -10,11 +10,11 @@
   border-top: 1px solid @border-color;
 }
 
-.questionnaires .row:nth-child(even), .questions .row:nth-child(even){
+.questionnaires .row:nth-child(even), .questions .row:nth-child(even) {
   background-color: @table-stripe-color;
 }
 
-.questionnaires .row:first-child, .questions .row:first-child{
+.questionnaires .row:first-child, .questions .row:first-child {
   border-top: none;
   margin-top: 0;
   padding-top: 0;
@@ -24,40 +24,39 @@
  *  COLORS
  */
 
-.panel-color-snippet(@color)
-{
+.panel-color-snippet(@color) {
   background-color: @color;
-  &:hover, &:active, &:focus{
+  &:hover, &:active, &:focus {
     background-color: lighten(@color, 15%) !important;
   }
 }
 
-.panel-color{
+.panel-color {
   display: inline-block;
   min-width: 20px;
-  &:hover, &:active, &:focus{
-    background-image:none !important;
+  &:hover, &:active, &:focus {
+    background-image: none !important;
   }
 
-  &.panel-blue{
+  &.panel-blue {
     .panel-color-snippet(@panel-blue);
   }
-  &.panel-yellow{
+  &.panel-yellow {
     .panel-color-snippet(@panel-yellow);
   }
-  &.panel-red{
+  &.panel-red {
     .panel-color-snippet(@panel-red);
   }
-  &.panel-green{
-  .panel-color-snippet(@panel-green);
+  &.panel-green {
+    .panel-color-snippet(@panel-green);
   }
-  &.panel-orange{
+  &.panel-orange {
     .panel-color-snippet(@panel-orange);
   }
-  &.panel-purple{
+  &.panel-purple {
     .panel-color-snippet(@panel-purple)
   }
-  &.panel-gray{
+  &.panel-gray {
     .panel-color-snippet(@panel-gray);
   }
 }
@@ -88,12 +87,12 @@
         border-left: 0;
       }
 
-      .colors .dropdown-toggle{
-          border-radius: 0;
-          border-left: none;
+      .colors .dropdown-toggle {
+        border-radius: 0;
+        border-left: none;
 
-          &:focus{
-            outline: none;
+        &:focus {
+          outline: none;
         }
       }
 
@@ -103,9 +102,8 @@
     }
   }
 
-  @media(max-width: @screen-xs-max)
-  {
-    .panels, .savers{
+  @media (max-width: @screen-xs-max) {
+    .panels, .savers {
       margin-top: 20px;
     }
 
@@ -156,25 +154,24 @@
 
   }
 
-  .left{
-    label{
+  .left {
+    label {
       font-weight: normal;
       margin-bottom: 10px;
     }
 
-    textarea{
+    textarea {
       height: 125px;
     }
 
-    input[type=text], textarea
-    {
+    input[type=text], textarea {
       margin-bottom: 10px;
     }
   }
 
   .choises {
 
-    .handle{
+    .handle {
       cursor: move;
     }
 
@@ -182,15 +179,14 @@
       list-style: none;
       padding: 0;
 
-      li input.name{
+      li input.name {
         border-left: none;
       }
     }
   }
 
-  @media(max-width: @screen-sm-max)
-  {
-    .choises{
+  @media (max-width: @screen-sm-max) {
+    .choises {
       margin-top: 20px;
     }
 

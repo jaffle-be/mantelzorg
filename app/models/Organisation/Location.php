@@ -6,15 +6,16 @@ use Eloquent;
 use Input;
 use Validator;
 
-class Location extends Eloquent{
+class Location extends Eloquent
+{
 
     protected $table = 'locations';
 
     protected static $rules = array(
-        'name' => 'required',
-        'street' => 'required',
-        'postal' => 'required',
-        'city' => 'required',
+        'name'            => 'required',
+        'street'          => 'required',
+        'postal'          => 'required',
+        'city'            => 'required',
         'organisation_id' => 'required|exists:organisations,id'
     );
 
@@ -24,12 +25,10 @@ class Location extends Eloquent{
 
     public function validator($rules = null, $input = null)
     {
-        if(empty($rules))
-        {
+        if (empty($rules)) {
             $rules = static::$rules;
         }
-        if(empty($input))
-        {
+        if (empty($input)) {
             $input = Input::all();
         }
 
@@ -40,5 +39,4 @@ class Location extends Eloquent{
     {
         return $this->belongsTo('Organisation\\Organisation');
     }
-
-} 
+}

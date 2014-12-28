@@ -17,10 +17,8 @@ class SurveyAnswers extends Seeder
 
         $questionnaire = Questionnaire::with(array('panels', 'panels.questions', 'panels.questions.choises'))->find(1);
 
-        Session::chunk(200, function ($results) use ($questionnaire, $faker)
-        {
-            foreach ($results as $result)
-            {
+        Session::chunk(200, function ($results) use ($questionnaire, $faker) {
+            foreach ($results as $result) {
                 $this->loopTroughQuestions($faker, $result, $questionnaire);
             }
         });
@@ -28,10 +26,8 @@ class SurveyAnswers extends Seeder
 
     private function loopTroughQuestions($faker, $session, $questionnaire)
     {
-        foreach ($questionnaire->panels as $panel)
-        {
-            foreach ($panel->questions as $question)
-            {
+        foreach ($questionnaire->panels as $panel) {
+            foreach ($panel->questions as $question) {
                 $answer = Answer::create([
                     'session_id'  => $session->id,
                     'question_id' => $question->id,
@@ -40,19 +36,14 @@ class SurveyAnswers extends Seeder
 
                 $choises = $question->choises;
 
-                if ($question->multiple_choise)
-                {
-                    if ($question->multiple_answer)
-                    {
+                if ($question->multiple_choise) {
+                    if ($question->multiple_answer) {
                         $picked = $choises->random(rand(1, $choises->count()));
 
-                        if (!is_array($picked))
-                        {
+                        if (!is_array($picked)) {
                             $picked = array($picked);
                         }
-                    }
-                    else
-                    {
+                    } else {
                         $picked = array($choises->random(1));
                     }
 

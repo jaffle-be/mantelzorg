@@ -1,13 +1,11 @@
 <?php
 
-
 class UserServiceProvider extends \Illuminate\Support\ServiceProvider
 {
 
     public function register()
     {
-        $this->app['UserMailer'] = $this->app->share(function ($app)
-        {
+        $this->app['UserMailer'] = $this->app->share(function ($app) {
             return new UserMailer($app['mailer']);
         });
 
@@ -28,5 +26,4 @@ class UserServiceProvider extends \Illuminate\Support\ServiceProvider
 
         $search->addAutoIndexing(new User());
     }
-
-} 
+}

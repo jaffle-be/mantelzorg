@@ -2,16 +2,17 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOudere extends Migration {
+class CreateOudere extends Migration
+{
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('ouderen', function($t){
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('ouderen', function ($t) {
             $t->increments('id');
             $t->string('email', 150)->unique()->nullable();
             $t->string('firstname', 100);
@@ -26,16 +27,16 @@ class CreateOudere extends Migration {
             $t->foreign('mantelzorger_id')->references('id')->on('mantelzorgers');
             $t->timestamps();
         });
-	}
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('ouderen');
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('ouderen');
+    }
 
 }

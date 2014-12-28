@@ -1,6 +1,7 @@
 <?php
 
-class AdminController extends BaseController{
+class AdminController extends BaseController
+{
 
     protected $layout = 'layout.admin.master';
 

@@ -9,7 +9,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <h1><a class="navbar-brand" href="<?= $user ? route('dash') : route('home') ?>" id="brand">Zicht op mantelzorg</a></h1>
+                <h1>
+                    <a class="navbar-brand" href="<?= $user ? route('dash') : route('home') ?>" id="brand">Zicht op mantelzorg</a>
+                </h1>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -20,10 +22,14 @@
                     <li class="active"><a href="http://zichtopmantelzorg.be">@lang('master.navs.blog')</a></li>
 
                     @if(!$user)
-                        <li><a id="log-in" href="{{ action('IndexController@getLogin') }}">{{ Lang::get('master.footer.login') }}</a></li>
+                        <li>
+                            <a id="log-in" href="{{ action('IndexController@getLogin') }}">{{ Lang::get('master.footer.login') }}</a>
+                        </li>
                     @else
                         <li><a href="<?= route('dash') ?>">@lang('master.navs.instrument')</a></li>
-                        <li><a id="log-out" href="{{ action('IndexController@getLogout') }}">{{ Lang::get('master.footer.logout') }}</a></li>
+                        <li>
+                            <a id="log-out" href="{{ action('IndexController@getLogout') }}">{{ Lang::get('master.footer.logout') }}</a>
+                        </li>
                     @endif
                 </ul>
             </div>

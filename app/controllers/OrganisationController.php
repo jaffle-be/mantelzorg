@@ -1,7 +1,8 @@
 <?php
 use Organisation\Organisation;
 
-class OrganisationController extends AdminController{
+class OrganisationController extends AdminController
+{
 
     /**
      * @var Organisation\Organisation
@@ -21,25 +22,20 @@ class OrganisationController extends AdminController{
 
         $validator = $this->organisation->validator();
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return array(
                 'status' => 'failed',
                 'errors' => $validator->messages()->toArray()
             );
-        }
-        else
-        {
+        } else {
             $organisation = $this->organisation->create(array(
                 'name' => $name
             ));
 
             return array(
-                'status' => 'oke',
+                'status'       => 'oke',
                 'organisation' => $organisation->toArray()
             );
         }
-
     }
-
-} 
+}

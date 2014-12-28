@@ -38,8 +38,7 @@ class InstrumentController extends AdminController
     public function index()
     {
         $questionnaire = $this->questionnaire->with(array(
-            'panels' => function ($query)
-            {
+            'panels' => function ($query) {
                 $query->orderBy('panel_weight');
             }
         ))->active()->first();
@@ -50,8 +49,7 @@ class InstrumentController extends AdminController
 
         $surveys = $this->session->where('user_id', $hulpverlener->id)->paginate(40);
 
-        if (!$questionnaire)
-        {
+        if (!$questionnaire) {
             return Redirect::route('home');
         }
 
@@ -68,21 +66,18 @@ class InstrumentController extends AdminController
 
         $mantelzorger = $hulpverlener->mantelzorgers->find($input['mantelzorger']);
 
-        if (!$mantelzorger)
-        {
+        if (!$mantelzorger) {
             return Redirect::back();
         }
 
         $oudere = $mantelzorger->oudere->find($input['oudere']);
 
-        if (!$oudere)
-        {
+        if (!$oudere) {
             return Redirect::back();
         }
 
         $questionnaire = $this->questionnaire->with(array(
-            'panels' => function ($query)
-            {
+            'panels' => function ($query) {
                 $query->orderBy('panel_weight');
             }
         ))->active()->first();
@@ -96,16 +91,14 @@ class InstrumentController extends AdminController
     {
         $ids = Input::get('ids');
 
-        if(count($ids))
-        {
+        if (count($ids)) {
             $hulpverlener = Auth::user();
 
             $surveys = $this->session->where('user_id', $hulpverlener->id)->whereIn('id', $ids)->with([
                 'answers'
             ])->get();
 
-            foreach($surveys as $survey)
-            {
+            foreach ($surveys as $survey) {
                 $survey->delete();
             }
         }
@@ -135,26 +128,20 @@ class InstrumentController extends AdminController
         //save all input into our session
         $questions = $panel->questions;
 
-        foreach ($questions as $question)
-        {
+        foreach ($questions as $question) {
             Memorize::question($question, $survey);
         }
 
-        if ($next = Input::get('next_panel'))
-        {
+        if ($next = Input::get('next_panel')) {
             return Redirect::route('instrument.panel.get', array($next, $survey->id));
         }
 
         $next = $panel->questionnaire->nextPanel($panel);
 
-        if ($next)
-        {
+        if ($next) {
             return Redirect::route('instrument.panel.get', array($next->id, $survey->id));
-        }
-        else
-        {
+        } else {
             return Redirect::route('instrument');
         }
     }
-
 }
