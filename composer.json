@@ -4,11 +4,9 @@
     "laravel/framework": "4.1.*",
     "intouch/laravel-newrelic": "*",
     "schickling/backup": "dev-master",
-    "elasticsearch/elasticsearch": "*",
-    "leroy-merlin-br/larasniffer": "dev-master"
+    "elasticsearch/elasticsearch": "*"
   },
   "require-dev":{
-    "way/generators": "~2.0",
     "fzaninotto/faker": "*"
   },
   "autoload": {

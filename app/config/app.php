@@ -124,7 +124,7 @@ return array(
 
         'Search\SearchServiceProvider',
         'Intouch\LaravelNewrelic\LaravelNewrelicServiceProvider',
-        'LeroyMerlin\LaraSniffer\ServiceProvider',
+//        'LeroyMerlin\LaraSniffer\ServiceProvider',
 
         'Template\TemplateServiceProvider',
         'Questionnaire\ServiceProvider',
@@ -133,7 +133,7 @@ return array(
         'Mantelzorger\MantelzorgerServiceProvider',
         'UserServiceProvider',
         'Beta\BetaServiceProvider',
-        'Way\Generators\GeneratorsServiceProvider',
+//        'Way\Generators\GeneratorsServiceProvider',
     ),
 
     /*
