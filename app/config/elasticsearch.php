@@ -17,7 +17,7 @@ return [
      * All the hosts that are in the cluster.
      */
     'hosts'    => [
-        'local.mantelzorg:9200',
+        'localhost:9200',
     ],
 
     /**
