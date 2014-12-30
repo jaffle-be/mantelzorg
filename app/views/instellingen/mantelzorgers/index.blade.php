@@ -19,12 +19,26 @@
     </div>
 
 
-    @if(count($mantelzorgers))
+    @if($mantelzorgers->count())
+
+        @if($mantelzorgers->count())
+            <div class="row easy-search">
+                <div class="col-sm-5">
+                    @include('instellingen.mantelzorgers.search')
+                </div>
+                <div class="col-sm-7 text-right">
+                    {{ $mantelzorgers->links('pagination::simple') }}
+                </div>
+            </div>
+        @else
+            <div class="row easy-search">
+                <div class="col-sm-5">
+                    @include('instellingen.mantelzorgers.search')
+                </div>
+            </div>
+        @endif
 
         <div class="mantelzorgers">
-            <div class="text-center">
-                {{$mantelzorgers->links() }}
-            </div>
             @foreach($mantelzorgers as $mantelzorger)
                 <div class="row mantelzorger">
                     <div class="col-md-3">

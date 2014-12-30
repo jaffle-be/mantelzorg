@@ -2,6 +2,7 @@
 
 namespace Instelling;
 
+use Illuminate\Pagination\Paginator;
 use Mantelzorger\Mantelzorger;
 use View;
 use Redirect;
@@ -37,7 +38,15 @@ class MantelzorgerController extends \AdminController
 
     public function index($hulpverlener)
     {
-        $mantelzorgers = $hulpverlener->mantelzorgers()->with(['oudere'])->paginate(5);
+        $search = $this->mantelzorger->search();
+
+        /** @var Paginator $mantelzorgers */
+        $mantelzorgers = $search
+            ->filterMatch('hulpverlener_id', $hulpverlener->id)
+            ->whereMulti_match(['firstname', 'lastname', 'identifier', 'oudere.firstname', 'oudere.lastname', 'oudere.identifier'], Input::get('query'))
+            ->orderBy('lastname', 'asc')
+            ->orderBy('firstname', 'asc')
+            ->get();
 
         $this->layout->content = View::make('instellingen.mantelzorgers.index', compact(array('hulpverlener', 'mantelzorgers')));
     }

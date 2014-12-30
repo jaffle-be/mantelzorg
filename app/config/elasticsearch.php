@@ -29,7 +29,10 @@ return [
      */
     'types'    => [
 
-        'mantelzorgers'      => 'Mantelzorger\Mantelzorger',
+        'mantelzorgers'      => [
+            'class' => 'Mantelzorger\Mantelzorger',
+            'with' => ['oudere', 'hulpverlener']
+        ],
 
         'beta_registrations' => [
             'class' => 'Beta\Registration',

@@ -33,7 +33,7 @@ class Query implements Queryable
      *
      * @var array
      */
-    protected $operators = ['match', 'multi_match', 'fuzzy_like_this'];
+    protected $queryOperators = ['match', 'multi_match', 'fuzzy_like_this'];
 
     protected $match = [];
 
@@ -41,7 +41,13 @@ class Query implements Queryable
 
     protected $fuzzy_like_this = [];
 
+    protected $filter_match = [];
+
+    protected $filter_multi_match = [];
+
     protected $pagination = 10;
+
+    protected $filterOperators = ['filter_match', 'filter_multi_match'];
 
     /**
      * @param SearchServiceInterface $service
@@ -89,7 +95,7 @@ class Query implements Queryable
             $results = $paginator->make($collection, $results['hits']['total'], $this->pagination);
         } else {
             //did we run a find query? return only the model
-
+            //this is probably rather useless!
         }
 
         return $results;
@@ -116,6 +122,30 @@ class Query implements Queryable
     public function paginate($amount = 10)
     {
         $this->pagination = $amount;
+
+        return $this;
+    }
+
+    public function filterMatch($column, $value, $fuzziness = 0, $prefix_length = 2, $analyzer = 'standard')
+    {
+        $this->filter_match[$column] = [
+            'query'         => $value,
+            'fuzziness'     => $fuzziness,
+            'prefix_length' => $prefix_length
+        ];
+
+        return $this;
+    }
+
+    public function filterMulti_match(array $columns, $value, $fuzziness = 0, $prefix_length = 2, $analyzer = 'standard')
+    {
+        $this->filter_multi_match[] = [
+            'fields'        => $columns,
+            'query'         => $value,
+            'fuzziness'     => $fuzziness,
+            'prefix_length' => $prefix_length,
+            'analyzer'      => $analyzer
+        ];
 
         return $this;
     }
@@ -205,7 +235,7 @@ class Query implements Queryable
      */
     protected function invalidOperator($operator)
     {
-        return !in_array($operator, $this->operators);
+        return !in_array($operator, $this->queryOperators);
     }
 
     public function orderBy($field, $direction)
@@ -215,7 +245,7 @@ class Query implements Queryable
         return $this;
     }
 
-    private function base()
+    protected function base()
     {
         return [
             'index' => $this->searchable->getSearchableIndex(),
@@ -223,15 +253,13 @@ class Query implements Queryable
         ];
     }
 
-    private function body()
+    protected function body()
     {
         $body = [];
 
-        foreach ($this->operators as $operation) {
-            if (!empty($this->$operation)) {
-                $body['query'][$operation] = $this->$operation;
-            }
-        }
+        $body['query'] = $this->getQueryBody();
+
+        $body['filter'] = $this->getFilterBody();
 
         if ($sort = $this->sort()) {
             $body['sort'] = $sort;
@@ -240,27 +268,62 @@ class Query implements Queryable
         return $body;
     }
 
-    private function sort()
+    protected function sort()
     {
         if (!empty($this->sort)) {
             return $this->sort;
         }
     }
 
-    private function skip()
+    protected function skip()
     {
         $page = Input::has('page') ? Input::get('page') : 1;
 
         return $this->pagination * ($page - 1);
     }
 
-    private function take()
+    protected function take()
     {
         return $this->pagination;
     }
 
-    private function needsPagination()
+    protected function needsPagination()
     {
         return $this->pagination ? true : false;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getQueryBody()
+    {
+        $queries = [];
+
+        foreach ($this->queryOperators as $operator) {
+            if (!empty($this->$operator)) {
+                $queries[$operator] = $this->$operator;
+            }
+        }
+
+        //if we do not provide a match all clause when no query provided, the get method will fail if nothing else
+        // was set like sorting.
+        if (empty($queries)) {
+            $queries['match_all'] = [];
+        }
+
+        return $queries;
+    }
+
+    protected function getFilterBody()
+    {
+        $filters = [];
+
+        foreach ($this->filterOperators as $operator) {
+            if (!empty($this->$operator)) {
+                $filters[str_replace('filter_', '', $operator)] = $this->$operator;
+            }
+        }
+
+        return ['query' => $filters];
     }
 }

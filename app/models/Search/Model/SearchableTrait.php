@@ -155,6 +155,9 @@ trait SearchableTrait
                     foreach ($relation_data as $object) {
                         $collection->add(new $build($object));
                     }
+
+                    $relation_data = $collection;
+
                 } else {
                     $relation_data = new $build($relation_data);
                 }
