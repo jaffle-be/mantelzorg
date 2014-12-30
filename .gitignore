@@ -5,6 +5,6 @@ node_modules
 composer.phar
 .DS_Store
 .idea
-.env.local.php
+.env.*.php
 .env.php
 app/components
