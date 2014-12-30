@@ -2,8 +2,6 @@
 
 use Illuminate\Console\Command;
 use Search\SearchServiceInterface;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 
 class UpdateSettings extends Command
 {

@@ -7,7 +7,6 @@ use Elasticsearch\Client;
 use Exception;
 use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
-use Illuminate\Filesystem\Filesystem;
 use Mustache_Engine;
 use Search\Model\Searchable;
 
@@ -214,7 +213,7 @@ class SearchService implements SearchServiceInterface
     public function updateMapping($type)
     {
         /** @var Searchable $type */
-        list($type, $relations) = $this->getSearchable($type);
+        list($type) = $this->getSearchable($type);
 
         $mapping = [
             'index' => $this->index,

@@ -2,7 +2,6 @@
 
 namespace Instelling;
 
-use Illuminate\Pagination\Paginator;
 use Mantelzorger\Mantelzorger;
 use View;
 use Redirect;
@@ -40,7 +39,6 @@ class MantelzorgerController extends \AdminController
     {
         $search = $this->mantelzorger->search();
 
-        /** @var Paginator $mantelzorgers */
         $mantelzorgers = $search
             ->filterMatch('hulpverlener_id', $hulpverlener->id)
             ->whereMulti_match(['firstname', 'lastname', 'identifier', 'oudere.firstname', 'oudere.lastname', 'oudere.identifier'], Input::get('query'))

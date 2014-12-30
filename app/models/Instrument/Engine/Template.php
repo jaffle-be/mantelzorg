@@ -3,7 +3,6 @@
 namespace Instrument\Engine;
 
 use Questionnaire\Panel;
-use Questionnaire\Questionnaire;
 use URL;
 use Lang;
 
@@ -55,7 +54,7 @@ class Template
 
         $output = '<div class="instrument-footer">';
 
-        $output = '<input type="hidden" id="next_panel" name="next_panel"/>';
+        $output .= '<input type="hidden" id="next_panel" name="next_panel"/>';
 
         $output .= sprintf('<input type="submit" class="btn btn-%s" value="%s">', $panel->color ? $panel->color : 'primary', $next ? $next->title : Lang::get('instrument.bevestigen'));
 

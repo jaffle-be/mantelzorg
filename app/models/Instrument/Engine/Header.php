@@ -3,7 +3,6 @@
 namespace Instrument\Engine;
 
 use Questionnaire\Panel;
-use Questionnaire\Questionnaire;
 
 class Header
 {

@@ -2,7 +2,6 @@
 
 namespace Instrument\Engine;
 
-use Illuminate\Database\Eloquent\Collection;
 use Questionnaire\Panel;
 use Questionnaire\Question as Q;
 use Lang;

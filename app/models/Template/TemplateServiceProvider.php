@@ -12,7 +12,7 @@ class TemplateServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function register()
     {
-        $this->app['template'] = $this->app->share(function ($app) {
+        $this->app['template'] = $this->app->share(function () {
             $crumb = new Breadcrumb();
 
             return new TemplateRepository($crumb);

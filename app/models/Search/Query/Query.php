@@ -131,7 +131,8 @@ class Query implements Queryable
         $this->filter_match[$column] = [
             'query'         => $value,
             'fuzziness'     => $fuzziness,
-            'prefix_length' => $prefix_length
+            'prefix_length' => $prefix_length,
+            'analyzer'      => $analyzer,
         ];
 
         return $this;
@@ -173,20 +174,21 @@ class Query implements Queryable
         return $this;
     }
 
-    public function whereMatch($column, $value, $boolean = 'and', $fuzziness = 0, $prefix_length = 2)
+    public function whereMatch($column, $value, $fuzziness = 0, $prefix_length = 2, $analyzer = 'standard')
     {
         if (!empty($value)) {
             $this->match[$column] = [
                 'query'         => $value,
                 'fuzziness'     => $fuzziness,
-                'prefix_length' => 2
+                'prefix_length' => $prefix_length,
+                'analyzer'      => $analyzer,
             ];
         }
 
         return $this;
     }
 
-    public function whereMulti_match(array $columns, $value, $boolean = 'and', $fuzziness = 0, $prefix_length = 2, $analyzer = 'standard')
+    public function whereMulti_match(array $columns, $value, $fuzziness = 0, $prefix_length = 2, $analyzer = 'standard')
     {
         //if the value is empty, it wouldn't return a resultset when querying. which is quite weird to be honest.
         if (!empty($value)) {
@@ -259,7 +261,9 @@ class Query implements Queryable
 
         $body['query'] = $this->getQueryBody();
 
-        $body['filter'] = $this->getFilterBody();
+        if ($filters = $this->getFilterBody()) {
+            $body['filter'] = $filters;
+        }
 
         if ($sort = $this->sort()) {
             $body['sort'] = $sort;
@@ -324,6 +328,9 @@ class Query implements Queryable
             }
         }
 
-        return ['query' => $filters];
+        if(!empty($filters))
+        {
+            return ['query' => $filters];
+        }
     }
 }

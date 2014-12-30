@@ -157,7 +157,6 @@ trait SearchableTrait
                     }
 
                     $relation_data = $collection;
-
                 } else {
                     $relation_data = new $build($relation_data);
                 }
