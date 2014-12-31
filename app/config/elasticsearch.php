@@ -3,11 +3,6 @@
 return [
 
     /**
-     * the path to the directory containing all json query views.
-     */
-    'path'     => realpath(__DIR__ . '/../searches'),
-
-    /**
      * The name of the index
      * Your app name might be a sane default value.
      */

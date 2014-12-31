@@ -7,13 +7,10 @@ use Elasticsearch\Client;
 use Exception;
 use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
-use Mustache_Engine;
 use Search\Model\Searchable;
 
 class SearchService implements SearchServiceInterface
 {
-
-    protected $path;
 
     /**
      * @var Container
@@ -67,8 +64,6 @@ class SearchService implements SearchServiceInterface
         $this->index = $config['index'];
 
         $this->types = $config['types'];
-
-        $this->path = $config['path'];
     }
 
     public function addAutoIndexing(Searchable $type)
