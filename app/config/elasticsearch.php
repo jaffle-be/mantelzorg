@@ -31,7 +31,10 @@ return [
 
         'mantelzorgers'      => [
             'class' => 'Mantelzorger\Mantelzorger',
-            'with' => ['oudere', 'hulpverlener']
+            'with'  => [
+                'oudere'       => 'Mantelzorger\Oudere',
+                'hulpverlener' => 'User'
+            ]
         ],
 
         'beta_registrations' => [
@@ -42,17 +45,17 @@ return [
         'users'              => [
             'class' => 'User',
             'with'  => [
-                'organisation',
-                'organisation_location',
+                'organisation'          => 'Organisation\Organisation',
+                'organisation_location' => 'Organisation\Location',
             ]
         ],
 
-        'surveys' => [
+        'surveys'            => [
             'class' => 'Questionnaire\Session',
-            'with' => [
-                'mantelzorger',
-                'oudere',
-                'hulpverlener'
+            'with'  => [
+                'mantelzorger' => 'Mantelzorger\Mantelzorger',
+                'oudere'       => 'Mantelzorger\Oudere',
+                'hulpverlener' => 'User'
             ]
         ]
     ],

@@ -121,44 +121,24 @@ trait SearchableTrait
      */
     public function getSearchableNewModel($data, array $with)
     {
-        $base = array_except($data, $with);
+        $base = array_except($data, array_keys($with));
 
-        $relations = array_only($data, $with);
+        $relations = array_only($data, array_keys($with));
 
         unset($data);
 
         $model = $this->newFromBuilder($base);
 
         //need to setup relations too :-)
-        foreach ($with as $relation) {
+        foreach ($with as $relation => $build) {
             if ($relation_data = $this->getSearchableNestedDocument($relations, $relation)) {
-                /** @var Relation $foreign */
-                $foreign = $model->$relation();
 
-                $build = $foreign->getRelated();
+                $type = $this->getRelationType($relation, $model);
 
-                $type = get_class($foreign);
-
-                $needsLoop = ['HasMany', 'BelongsToMany'];
-
-                foreach ($needsLoop as $loop) {
-                    if (ends_with($type, $loop)) {
-                        $needsLoop = true;
-
-                        break;
-                    }
-                }
-
-                if ($needsLoop === true) {
-                    $collection = new Collection();
-
-                    foreach ($relation_data as $object) {
-                        $collection->add(new $build($object));
-                    }
-
-                    $relation_data = $collection;
+                if ($needsLoop = $this->relationNeedsLooping($type)) {
+                    $relation_data = $this->getLoopedRelationData($build, $relation_data);
                 } else {
-                    $relation_data = new $build($relation_data);
+                    $relation_data = $this->getSimpleRelationData($build, $relation_data);
                 }
             }
 
@@ -180,5 +160,71 @@ trait SearchableTrait
         if (property_exists(__CLASS__, 'searchableMapping')) {
             return static::$searchableMapping;
         }
+    }
+
+    /**
+     * @param $relation
+     * @param $model
+     *
+     * @return array
+     */
+    private function getRelationType($relation, $model)
+    {
+        /** @var Relation $foreign */
+        $foreign = $model->$relation();
+
+        $type = get_class($foreign);
+
+        return $type;
+    }
+
+    /**
+     * @param $type
+     *
+     * @return array|bool
+     */
+    private function relationNeedsLooping($type)
+    {
+        $needsLoop = ['HasMany', 'BelongsToMany'];
+
+        foreach ($needsLoop as $loop) {
+            if (ends_with($type, $loop)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param $build
+     * @param $relation_data
+     *
+     * @return Collection
+     */
+    private function getLoopedRelationData($build, $relation_data)
+    {
+        $collection = new Collection();
+
+        foreach ($relation_data as $object) {
+            $collection->add(new $build($object));
+        }
+
+        $relation_data = $collection;
+
+        return $relation_data;
+    }
+
+    /**
+     * @param $build
+     * @param $relation_data
+     *
+     * @return mixed
+     */
+    private function getSimpleRelationData($build, $relation_data)
+    {
+        $relation_data = new $build($relation_data);
+
+        return $relation_data;
     }
 }

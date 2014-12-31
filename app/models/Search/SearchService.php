@@ -246,7 +246,7 @@ class SearchService implements SearchServiceInterface
 
             $type = $this->container->make($classname);
 
-            return array($type, $with);
+            return array($type, array_keys($with));
         }
 
         if (!is_object($type) || !($type instanceof Searchable)) {
