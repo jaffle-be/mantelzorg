@@ -49,6 +49,12 @@ class InstrumentController extends AdminController
 
         $surveys = $this->session->where('user_id', $hulpverlener->id)->paginate(40);
 
+        $search = $this->session->search();
+
+        $surveys = $search->filterMatch('user_id', $hulpverlener->id)
+            ->whereMulti_match(['mantelzorger.firstname', 'mantelzorger.lastname', 'mantelzorger.identifier', 'oudere.firstname', 'oudere.lastname', 'oudere.identifier'], Input::get('query'))
+            ->get();
+
         if (!$questionnaire) {
             return Redirect::route('home');
         }
@@ -56,7 +62,7 @@ class InstrumentController extends AdminController
         $this->layout->content = View::make('instrument.index', compact(array('questionnaire', 'hulpverlener', 'surveys')));
     }
 
-    public function postIndex()
+    public function newSurvey()
     {
         $input = Input::except('token');
 

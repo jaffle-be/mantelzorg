@@ -27,5 +27,15 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->app['Questionnaire\Observer\Session'] = new Observer\Session($this->app['events']);
 
         $this->app['Questionnaire\Observer\Answer'] = new Observer\Answer($this->app['events']);
+
+        $this->registerSearchIndexer();
+    }
+
+    protected function registerSearchIndexer()
+    {
+        /** @var SearchServiceInterface $search */
+        $search = $this->app->make('Search\SearchServiceInterface');
+
+        $search->addAutoIndexing(new Session());
     }
 }

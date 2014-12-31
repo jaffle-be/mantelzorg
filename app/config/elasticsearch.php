@@ -45,6 +45,15 @@ return [
                 'organisation',
                 'organisation_location',
             ]
+        ],
+
+        'surveys' => [
+            'class' => 'Questionnaire\Session',
+            'with' => [
+                'mantelzorger',
+                'oudere',
+                'hulpverlener'
+            ]
         ]
     ],
 

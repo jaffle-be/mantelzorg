@@ -55,7 +55,7 @@ Route::get('instrument', [
 ]);
 
 Route::post('instrument', [
-    'uses' => 'InstrumentController@postIndex',
+    'uses' => 'InstrumentController@newSurvey',
     'as'   => 'instrument.submit'
 ]);
 

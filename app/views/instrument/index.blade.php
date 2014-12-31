@@ -13,6 +13,7 @@
 
     <?= Form::open(array(
             'class'  => 'form-horizontal',
+            'id'     => 'creator-form',
             'name'   => 'instrument-persons',
             'method' => 'POST',
             'route'  => 'instrument.submit'
@@ -59,9 +60,22 @@
 
     <? if(count($surveys)): ?>
 
-    <div class="text-center">
-        {{ $surveys->links() }}
-    </div>
+    @if($surveys->count())
+        <div class="row easy-search">
+            <div class="col-sm-5">
+                @include('instrument.search')
+            </div>
+            <div class="col-sm-7 text-right">
+                {{ $surveys->links('pagination::simple') }}
+            </div>
+        </div>
+    @else
+        <div class="row easy-search">
+            <div class="col-sm-5">
+                @include('instrument.search')
+            </div>
+        </div>
+    @endif
 
     <table class="table table-striped table-hover">
         <thead>

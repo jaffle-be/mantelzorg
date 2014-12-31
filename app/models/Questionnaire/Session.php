@@ -3,9 +3,19 @@
 namespace Questionnaire;
 
 use Eloquent;
+use Search\Model\Searchable;
+use Search\Model\SearchableTrait;
 
-class Session extends Eloquent
+class Session extends Eloquent implements Searchable
 {
+
+    use SearchableTrait;
+
+    //override the searchable name to shorten it
+    public function getSearchableType()
+    {
+        return 'surveys';
+    }
 
     protected $table = "questionnaire_survey_sessions";
 
@@ -17,6 +27,11 @@ class Session extends Eloquent
         'oudere_id'        => 'required|exists:ouderen,id',
         'questionnaire_id' => 'required|exists:questionnaires,id'
     );
+
+    public function hulpverlener()
+    {
+        return $this->belongsTo('User');
+    }
 
     public function mantelzorger()
     {

@@ -83,7 +83,7 @@
                 toggle(false);
         });
 
-        $("form").on('submit', function () {
+        $("#creator-form").on('submit', function () {
             if (mantelzorger.val() == '' || oudere.val() == '' || oudere.val() == undefined)
             {
                 $(".alert").show();
