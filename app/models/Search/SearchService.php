@@ -69,16 +69,14 @@ class SearchService implements SearchServiceInterface
         $this->config = $config;
     }
 
-    public function setup()
+    public function boot()
     {
         $this->parseConfig();
 
-        $this->setupTypes();
-
-        $this->setupInvertedTypes();
+        $this->autoIndex();
     }
 
-    protected function setupTypes()
+    protected function autoIndex()
     {
         foreach ($this->types as $type => $config) {
 
@@ -88,13 +86,12 @@ class SearchService implements SearchServiceInterface
 
             $class->setSearchableService($this);
 
-            $this->addAutoIndexing($class);
+            $this->regularAutoIndex($class);
         }
-    }
 
-    protected function setupInvertedTypes()
-    {
-
+        foreach ($this->invertedTypes as $updated => $config) {
+            $this->invertedAutoIndex($updated, $config);
+        }
     }
 
     protected function parseConfig()
@@ -106,7 +103,7 @@ class SearchService implements SearchServiceInterface
         $this->invertedTypes = $this->invertTypes($this->config['types']);
     }
 
-    public function addAutoIndexing(Searchable $type)
+    public function regularAutoIndex(Searchable $type)
     {
         /** @var Dispatcher $dispatcher */
         $dispatcher = $this->container->make('events');
@@ -127,21 +124,48 @@ class SearchService implements SearchServiceInterface
 
                 $dispatcher->listen($trigger, $callback, 15);
             }
-
-//            //add an update listener for all inverted documents.
-//            if ($event == 'updated') {
-//
-//                $nested = $this->getNestedDocumentTypes($type);
-//
-//                $with = array_keys($nested);
-//
-//                $inverted = $this->getInvertedDocumentTypes($type);
-//
-//                foreach ($inverted as $relation => $class) {
-//                    $this->addInvertedListener($type, $relation, $class, $with);
-//                }
-//            }
         }
+    }
+
+    protected function invertedAutoIndex($updated, $inverted)
+    {
+        foreach ($inverted as $invert) {
+
+            $parent = new $invert['class']();
+
+            $relation = $invert['relation'];
+
+            $key = $invert['key'];
+
+            $config = $this->getConfig($parent);
+
+            $this->addInvertedListener($parent, $updated, $relation, $key, array_keys($config['with']));
+        }
+    }
+
+    protected function addInvertedListener(Searchable $parent, $updated, $relation, $key, array $with)
+    {
+        $updated = new $updated();
+
+        $updated->updated(function ($model) use ($parent, $relation, $key, $with) {
+
+            $result = $parent->with($with)->whereHas($relation, function ($query) use ($model, $key) {
+                $query->where($model->getKeyName(), '=', $model->getKey());
+            });
+
+            $documents = $result->get();
+
+            foreach ($documents as $document) {
+                $this->update($document);
+            }
+        });
+    }
+
+    protected function getRelationsToLoad($parent)
+    {
+        $class = new $parent();
+
+        return $this->types[$class->getSearchableType()]['with'];
     }
 
     /**
@@ -407,8 +431,9 @@ class SearchService implements SearchServiceInterface
                 }
 
                 $inverted[$key][] = [
-                    'class' => $config['class'],
-                    'key'   => $class['key']
+                    'class'    => $config['class'],
+                    'key'      => $class['key'],
+                    'relation' => $relation
                 ];
             }
         }
@@ -423,31 +448,10 @@ class SearchService implements SearchServiceInterface
         return $config['with'];
     }
 
-    private function addInvertedListener(Searchable $type, $relation, array $config, array $with)
-    {
-        /** @var Searchable $related */
-        $related = new $config['class'];
-
-        $related->updated(function ($model) use ($type, $relation, $config, $related, $with) {
-
-            $result = $type->with($with)->whereHas($relation, function ($query) use ($model, $config) {
-                $query->where($config['key'], '=', $model->getKey());
-            });
-
-            $documents = $result->get();
-
-            foreach ($documents as $document) {
-                $this->update($document);
-            }
-        });
-    }
-
     private function getInvertedDocumentTypes($type)
     {
-        $key = get_class($type);
-
-        if (isset($this->invertedTypes[$key])) {
-            return $this->invertedTypes[$key];
+        if (isset($this->invertedTypes[$type])) {
+            return $this->invertedTypes[$type];
         }
 
         return [];

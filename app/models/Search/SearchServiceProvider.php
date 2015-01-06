@@ -10,6 +10,12 @@ use Mustache_Engine;
 class SearchServiceProvider extends ServiceProvider
 {
 
+    public function boot()
+    {
+        //keep this in the boot section so we bind to the event dispatcher actually used in the eloquent model instances.
+        $this->app['Search\SearchServiceInterface']->boot();
+    }
+
     /**
      * Register the service provider.
      *
@@ -20,8 +26,6 @@ class SearchServiceProvider extends ServiceProvider
         $this->registerClient();
 
         $this->app->bind('Search\SearchServiceInterface', 'Search\SearchService');
-
-        $this->app['Search\SearchServiceInterface']->setup();
 
         $this->registerCommands();
     }

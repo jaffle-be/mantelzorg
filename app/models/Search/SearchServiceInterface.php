@@ -13,7 +13,7 @@ interface SearchServiceInterface
      *
      * @param Searchable $type
      */
-    public function addAutoIndexing(Searchable $type);
+    public function regularAutoIndex(Searchable $type);
 
     /**
      * Build the index for a type.
