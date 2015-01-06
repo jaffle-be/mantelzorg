@@ -29,7 +29,7 @@ class PanelController extends \AdminController
         //find heighest weight, add 10 to it, if no records -> start with 0;
         $panels = $questionnaire->panels->sortBy(function ($panel) {
             return $panel->panel_weight;
-        }, 'desc');
+        }, SORT_REGULAR, true);
 
         $heighestPanel = $panels->last();
 
