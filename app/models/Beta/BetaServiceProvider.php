@@ -13,6 +13,10 @@ class BetaServiceProvider extends ServiceProvider
      */
     public function register()
     {
+    }
+
+    public function boot()
+    {
         $this->registerSearchIndexer();
     }
 

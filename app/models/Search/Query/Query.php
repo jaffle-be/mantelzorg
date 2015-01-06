@@ -4,6 +4,7 @@
 namespace Search\Query;
 
 use Exception;
+use Illuminate\Support\Collection;
 use Search\Model\Searchable;
 use Input;
 use Search\SearchServiceInterface;
@@ -84,6 +85,11 @@ class Query implements Queryable
         return $this->response($results);
     }
 
+    public function all()
+    {
+        return $this->paginate(false)->get();
+    }
+
     protected function response($results)
     {
         $collection = $this->asModels($results['hits']['hits']);
@@ -94,8 +100,7 @@ class Query implements Queryable
 
             $results = $paginator->make($collection, $results['hits']['total'], $this->pagination);
         } else {
-            //did we run a find query? return only the model
-            //this is probably rather useless!
+            $results = new Collection($collection);
         }
 
         return $results;
@@ -328,8 +333,7 @@ class Query implements Queryable
             }
         }
 
-        if(!empty($filters))
-        {
+        if (!empty($filters)) {
             return ['query' => $filters];
         }
     }

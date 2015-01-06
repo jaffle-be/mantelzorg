@@ -2,6 +2,7 @@
 
 namespace Mantelzorger;
 
+use Carbon\Carbon;
 use Search\Model\Searchable;
 use Search\Model\SearchableTrait;
 use Validator;
@@ -53,6 +54,10 @@ class Mantelzorger extends Eloquent implements Searchable
 
     public function setBirthdayAttribute($value)
     {
+        if(!empty($value))
+        {
+            $this->attributes['birthday'] = Carbon::createFromFormat('d/m/Y', $value);
+        }
     }
 
     public function validator(array $input = array(), array $rules = array())

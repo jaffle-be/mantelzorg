@@ -24,6 +24,11 @@ class SearchService implements SearchServiceInterface
     protected $client;
 
     /**
+     * @var array
+     */
+    protected $config;
+
+    /**
      * The name of the index to use.
      *
      * @var string
@@ -42,7 +47,12 @@ class SearchService implements SearchServiceInterface
     /**
      * @var array
      */
-    protected $types;
+    protected $types = [];
+
+    /**
+     * @var array
+     */
+    protected $invertedTypes = [];
 
     /**
      * @param Container $container
@@ -56,14 +66,44 @@ class SearchService implements SearchServiceInterface
 
         $this->client = $client;
 
-        $this->parseConfig($config);
+        $this->config = $config;
     }
 
-    protected function parseConfig($config)
+    public function setup()
     {
-        $this->index = $config['index'];
+        $this->parseConfig();
 
-        $this->types = $config['types'];
+        $this->setupTypes();
+
+        $this->setupInvertedTypes();
+    }
+
+    protected function setupTypes()
+    {
+        foreach ($this->types as $type => $config) {
+
+            $class = $config['class'];
+
+            $class = new $class;
+
+            $class->setSearchableService($this);
+
+            $this->addAutoIndexing($class);
+        }
+    }
+
+    protected function setupInvertedTypes()
+    {
+
+    }
+
+    protected function parseConfig()
+    {
+        $this->index = $this->config['index'];
+
+        $this->types = $this->config['types'];
+
+        $this->invertedTypes = $this->invertTypes($this->config['types']);
     }
 
     public function addAutoIndexing(Searchable $type)
@@ -87,6 +127,20 @@ class SearchService implements SearchServiceInterface
 
                 $dispatcher->listen($trigger, $callback, 15);
             }
+
+//            //add an update listener for all inverted documents.
+//            if ($event == 'updated') {
+//
+//                $nested = $this->getNestedDocumentTypes($type);
+//
+//                $with = array_keys($nested);
+//
+//                $inverted = $this->getInvertedDocumentTypes($type);
+//
+//                foreach ($inverted as $relation => $class) {
+//                    $this->addInvertedListener($type, $relation, $class, $with);
+//                }
+//            }
         }
     }
 
@@ -329,5 +383,73 @@ class SearchService implements SearchServiceInterface
         }
 
         return isset($config['with']) ? $config['with'] : [];
+    }
+
+    /**
+     * This method will save an inverted array of relations.
+     * We can then use it to trigger nested document changes.
+     *
+     * @param $types
+     *
+     * @return array
+     */
+    private function invertTypes($types)
+    {
+        $inverted = [];
+
+        foreach ($types as $type => $config) {
+            foreach ($config['with'] as $relation => $class) {
+
+                $key = $class['class'];
+
+                if (!array_key_exists($key, $inverted)) {
+                    $inverted[$key] = [];
+                }
+
+                $inverted[$key][] = [
+                    'class' => $config['class'],
+                    'key'   => $class['key']
+                ];
+            }
+        }
+
+        return $inverted;
+    }
+
+    private function getNestedDocumentTypes(Searchable $type)
+    {
+        $config = $this->types[$type->getSearchableType()];
+
+        return $config['with'];
+    }
+
+    private function addInvertedListener(Searchable $type, $relation, array $config, array $with)
+    {
+        /** @var Searchable $related */
+        $related = new $config['class'];
+
+        $related->updated(function ($model) use ($type, $relation, $config, $related, $with) {
+
+            $result = $type->with($with)->whereHas($relation, function ($query) use ($model, $config) {
+                $query->where($config['key'], '=', $model->getKey());
+            });
+
+            $documents = $result->get();
+
+            foreach ($documents as $document) {
+                $this->update($document);
+            }
+        });
+    }
+
+    private function getInvertedDocumentTypes($type)
+    {
+        $key = get_class($type);
+
+        if (isset($this->invertedTypes[$key])) {
+            return $this->invertedTypes[$key];
+        }
+
+        return [];
     }
 }

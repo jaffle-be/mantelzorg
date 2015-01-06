@@ -204,15 +204,9 @@ trait SearchableTrait
      */
     private function getLoopedRelationData($build, $relation_data)
     {
-        $collection = new Collection();
+        $class = $build['class'];
 
-        foreach ($relation_data as $object) {
-            $collection->add(new $build($object));
-        }
-
-        $relation_data = $collection;
-
-        return $relation_data;
+        return $class::hydrate($relation_data);
     }
 
     /**
@@ -223,8 +217,10 @@ trait SearchableTrait
      */
     private function getSimpleRelationData($build, $relation_data)
     {
-        $relation_data = new $build($relation_data);
+        $class = $build['class'];
 
-        return $relation_data;
+        $result = $class::hydrate($relation_data);
+
+        return $result->first();
     }
 }

@@ -33,7 +33,11 @@ class SearchServiceProvider extends ServiceProvider
 
             $client = new Client(array_only($config, ['hosts']));
 
-            return new SearchService($app, $client, $config);
+            $service = new SearchService($app, $client, $config);
+
+            $service->setup();
+
+            return $service;
         });
     }
 

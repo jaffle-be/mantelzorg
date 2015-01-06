@@ -94,9 +94,8 @@ class MantelzorgerController extends \AdminController
             if ($validator->fails()) {
                 return Redirect::back()->withInput()->withErrors($validator->messages());
             } else {
-                $mantelzorger->update($input);
 
-                $mantelzorger->save();
+                $mantelzorger->update($input);
             }
         }
 

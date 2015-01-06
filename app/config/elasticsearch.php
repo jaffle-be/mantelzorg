@@ -27,8 +27,14 @@ return [
         'mantelzorgers'      => [
             'class' => 'Mantelzorger\Mantelzorger',
             'with'  => [
-                'oudere'       => 'Mantelzorger\Oudere',
-                'hulpverlener' => 'User'
+                'oudere'       => [
+                    'class' => 'Mantelzorger\Oudere',
+                    'key'   => 'oudere_id'
+                ],
+                'hulpverlener' => [
+                    'class' => 'User',
+                    'key'   => 'hulpverlener_id'
+                ]
             ]
         ],
 
@@ -40,17 +46,32 @@ return [
         'users'              => [
             'class' => 'User',
             'with'  => [
-                'organisation'          => 'Organisation\Organisation',
-                'organisation_location' => 'Organisation\Location',
+                'organisation'          => [
+                    'class' => 'Organisation\Organisation',
+                    'key'   => 'organisation_id'
+                ],
+                'organisation_location' => [
+                    'class' => 'Organisation\Location',
+                    'key'   => 'organisation_location_id',
+                ],
             ]
         ],
 
         'surveys'            => [
             'class' => 'Questionnaire\Session',
             'with'  => [
-                'mantelzorger' => 'Mantelzorger\Mantelzorger',
-                'oudere'       => 'Mantelzorger\Oudere',
-                'hulpverlener' => 'User'
+                'mantelzorger' => [
+                    'class' => 'Mantelzorger\Mantelzorger',
+                    'key'   => 'mantelzorger_id',
+                ],
+                'oudere'       => [
+                    'class' => 'Mantelzorger\Oudere',
+                    'key'   => 'oudere_id',
+                ],
+                'hulpverlener' => [
+                    'class' => 'User',
+                    'key'   => 'user_id'
+                ]
             ]
         ]
     ],

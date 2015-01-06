@@ -1,5 +1,7 @@
 <?php
 
+use Search\SearchServiceInterface;
+
 class UserServiceProvider extends \Illuminate\Support\ServiceProvider
 {
 
@@ -11,7 +13,7 @@ class UserServiceProvider extends \Illuminate\Support\ServiceProvider
 
         $this->app['events']->listen('user.password-generated', 'UserMailer@passwordGenerated');
 
-        $this->registerSearchIndexer();
+//        $this->registerSearchIndexer();
     }
 
     public function boot()

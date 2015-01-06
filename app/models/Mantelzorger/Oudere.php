@@ -2,8 +2,10 @@
 
 namespace Mantelzorger;
 
-use DateTime;
+use Carbon\Carbon;
 use Input;
+use Search\Model\Searchable;
+use Search\Model\SearchableTrait;
 use Validator;
 
 class Oudere extends \Eloquent
@@ -61,7 +63,7 @@ class Oudere extends \Eloquent
     public function setBirthdayAttribute($value)
     {
         if (!empty($value)) {
-            $this->attributes['birthday'] = DateTime::createFromFormat('d/m/Y', $value);
+            $this->attributes['birthday'] = Carbon::createFromFormat('d/m/Y', $value);
         }
     }
 
