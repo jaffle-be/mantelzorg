@@ -96,8 +96,6 @@ class Mantelzorger extends Eloquent implements Searchable
 
     public function getDates()
     {
-        $dates = parent::getDates();
-
-        return array_merge($dates, array('birthday'));
+        return array_merge(parent::getDates(), array('birthday'));
     }
 }
