@@ -16,8 +16,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         Session::observe($this->app['Questionnaire\Observer\Session']);
 
         Answer::observe($this->app['Questionnaire\Observer\Answer']);
-
-        $this->registerSearchIndexer();
     }
 
     public function register()
@@ -29,15 +27,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->app['Questionnaire\Observer\Session'] = new Observer\Session($this->app['events']);
 
         $this->app['Questionnaire\Observer\Answer'] = new Observer\Answer($this->app['events']);
-
-
     }
 
-    protected function registerSearchIndexer()
-    {
-        /** @var SearchServiceInterface $search */
-        $search = $this->app->make('Search\SearchServiceInterface');
-
-        $search->addAutoIndexing(new Session());
-    }
 }

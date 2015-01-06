@@ -20,15 +20,5 @@ class MantelzorgerServiceProvider extends ServiceProvider
         Mantelzorger::observe($this->app['Mantelzorger\Observer\Mantelzorger']);
 
         Oudere::observe($this->app['Mantelzorger\Observer\Oudere']);
-
-        $this->registerSearchIndexer();
-    }
-
-    private function registerSearchIndexer()
-    {
-        /** @var SearchServiceInterface $search */
-        $search = $this->app->make('Search\SearchServiceInterface');
-
-        $search->addAutoIndexing(new Mantelzorger());
     }
 }

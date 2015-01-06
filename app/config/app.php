@@ -122,7 +122,7 @@ return array(
         'Illuminate\View\ViewServiceProvider',
         'Illuminate\Workbench\WorkbenchServiceProvider',
 
-        'Search\SearchServiceProvider',
+
         'Intouch\LaravelNewrelic\LaravelNewrelicServiceProvider',
 //        'LeroyMerlin\LaraSniffer\ServiceProvider',
 
@@ -132,8 +132,10 @@ return array(
         'Schickling\Backup\BackupServiceProvider',
         'Mantelzorger\MantelzorgerServiceProvider',
         'UserServiceProvider',
-        'Beta\BetaServiceProvider',
 //        'Way\Generators\GeneratorsServiceProvider',
+
+
+        'Search\SearchServiceProvider',
     ),
 
     /*

@@ -21,6 +21,8 @@ class SearchServiceProvider extends ServiceProvider
 
         $this->app->bind('Search\SearchServiceInterface', 'Search\SearchService');
 
+        $this->app['Search\SearchServiceInterface']->setup();
+
         $this->registerCommands();
     }
 
@@ -34,8 +36,6 @@ class SearchServiceProvider extends ServiceProvider
             $client = new Client(array_only($config, ['hosts']));
 
             $service = new SearchService($app, $client, $config);
-
-            $service->setup();
 
             return $service;
         });
