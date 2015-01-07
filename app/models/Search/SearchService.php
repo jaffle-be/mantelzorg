@@ -441,19 +441,4 @@ class SearchService implements SearchServiceInterface
         return $inverted;
     }
 
-    private function getNestedDocumentTypes(Searchable $type)
-    {
-        $config = $this->types[$type->getSearchableType()];
-
-        return $config['with'];
-    }
-
-    private function getInvertedDocumentTypes($type)
-    {
-        if (isset($this->invertedTypes[$type])) {
-            return $this->invertedTypes[$type];
-        }
-
-        return [];
-    }
 }
