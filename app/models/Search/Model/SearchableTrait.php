@@ -219,7 +219,7 @@ trait SearchableTrait
     {
         $class = $build['class'];
 
-        $result = $class::hydrate($relation_data);
+        $result = $class::hydrate([$relation_data]);
 
         return $result->first();
     }
