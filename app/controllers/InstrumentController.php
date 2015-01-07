@@ -47,8 +47,6 @@ class InstrumentController extends AdminController
 
         $hulpverlener->load('mantelzorgers');
 
-        $surveys = $this->session->where('user_id', $hulpverlener->id)->paginate(40);
-
         $search = $this->session->search();
 
         $surveys = $search->filterMatch('user_id', $hulpverlener->id)

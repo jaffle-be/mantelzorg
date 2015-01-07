@@ -150,20 +150,11 @@ class SearchService implements SearchServiceInterface
 
         $updated->updated(function ($model) use ($parent, $relation, $key, $with) {
 
-            try {
-                $result = $parent->with($with)->whereHas($relation, function ($query) use ($model, $key) {
-                    $query->where($model->getKeyName(), '=', $model->getKey());
-                });
+            $result = $parent->with($with)->whereHas($relation, function ($query) use ($model, $key) {
+                $query->where($model->getKeyName(), '=', $model->getKey());
+            });
 
-                $documents = $result->get();
-            }
-            catch (QueryException $e) {
-                var_dump($model->getKeyName());
-                var_dump(get_class($model), $parent, $relation, $key);
-
-                echo $e->getMessage();
-                exit();
-            }
+            $documents = $result->get();
 
             foreach ($documents as $document) {
                 $this->update($document);
