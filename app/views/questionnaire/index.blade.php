@@ -24,11 +24,13 @@
                 </div>
                 <div class="col-xs-2 col-sm-1 icons">
                     <div class="header">
-                        @if($questionnaire->active == '1')
-                            <i class="glyphicon glyphicon-check"></i>
-                        @else
-                            <i class="glyphicon glyphicon-unchecked"></i>
-                        @endif
+                        @unless($questionnaire->panels->count() == 0)
+                            @if($questionnaire->active == '1')
+                                <i class="glyphicon glyphicon-check"></i>
+                            @else
+                                <i class="glyphicon glyphicon-unchecked"></i>
+                            @endif
+                        @endunless
                     </div>
                     <div class="body">
                         <i class="glyphicon glyphicon-floppy-saved fade"></i>
