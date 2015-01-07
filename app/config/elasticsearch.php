@@ -68,7 +68,7 @@ return [
                     'class' => 'Mantelzorger\Oudere',
                     'key'   => 'oudere_id',
                 ],
-                'hulpverlener' => [
+                'user' => [
                     'class' => 'User',
                     'key'   => 'user_id'
                 ]

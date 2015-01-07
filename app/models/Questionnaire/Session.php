@@ -28,7 +28,7 @@ class Session extends Eloquent implements Searchable
         'questionnaire_id' => 'required|exists:questionnaires,id'
     );
 
-    public function hulpverlener()
+    public function user()
     {
         return $this->belongsTo('User');
     }

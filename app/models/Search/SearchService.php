@@ -6,6 +6,7 @@ namespace Search;
 use Elasticsearch\Client;
 use Exception;
 use Illuminate\Container\Container;
+use Illuminate\Database\QueryException;
 use Illuminate\Events\Dispatcher;
 use Search\Model\Searchable;
 
@@ -149,11 +150,20 @@ class SearchService implements SearchServiceInterface
 
         $updated->updated(function ($model) use ($parent, $relation, $key, $with) {
 
-            $result = $parent->with($with)->whereHas($relation, function ($query) use ($model, $key) {
-                $query->where($model->getKeyName(), '=', $model->getKey());
-            });
+            try {
+                $result = $parent->with($with)->whereHas($relation, function ($query) use ($model, $key) {
+                    $query->where($model->getKeyName(), '=', $model->getKey());
+                });
 
-            $documents = $result->get();
+                $documents = $result->get();
+            }
+            catch (QueryException $e) {
+                var_dump($model->getKeyName());
+                var_dump(get_class($model), $parent, $relation, $key);
+
+                echo $e->getMessage();
+                exit();
+            }
 
             foreach ($documents as $document) {
                 $this->update($document);
@@ -440,5 +450,4 @@ class SearchService implements SearchServiceInterface
 
         return $inverted;
     }
-
 }
