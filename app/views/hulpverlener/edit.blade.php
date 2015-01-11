@@ -86,19 +86,20 @@
                 <span class="errors"><?= $errors->first('organisation_id') ?></span>
 
                 <div class="input-select">
-                    <?= Form::select('organisation_id', $organisations, null, array(
-                'id' => 'organisation',
-                    'class' => 'form-control')
-                    )?>
+                    {{ Form::select('organisation_id', $organisations, null, array(
+                        'id' => 'organisation',
+                        'class' => 'form-control',
+                        'data-original' => $user->organisation_id ? $user->organisation_id : null
+                    )) }}
                 </div>
-
 
                 <label for="locations"><?= Lang::get('users.locations') ?></label>
                 <span class="errors"><?= $errors->first('organisation_location_id') ?></span>
-                <?= Form::select('organisation_location_id', $locations, null, array(
-                'id' => 'location',
-                'class' => 'form-control',
-                )) ?>
+                {{ Form::select('organisation_location_id', $locations, null, array(
+                    'id' => 'location',
+                    'class' => 'form-control',
+                    'data-original' => $user->organisation_location_id ? $user->organisation_location_id : null,
+                )) }}
 
             </fieldset>
         </div>

@@ -63,10 +63,10 @@ class HulpverlenerController extends AdminController
 
             /**
              * create an array that has has en empty first value, then all the organisations, then a 'create new' option
-             * empty has no value, organisations have their id as value, new has 'new' as value
+             * organisations have their id as value, new has 'new' as value
+             * organisation is mandatory, so no need to add option 'kies organisation'
              */
-            $organisations = array('' => Lang::get('users.pick_organisation')) +
-                $organisations->lists('name', 'id') +
+            $organisations = $organisations->lists('name', 'id') +
                 array('new' => Lang::get('users.new_organisation'));
 
             /**
@@ -87,8 +87,11 @@ class HulpverlenerController extends AdminController
             } else {
                 $locations = array();
             }
-            $locations = array('' => Lang::get('users.pick_location'))
-                + $locations + array('new' => Lang::get('users.new_location'));
+
+            /**
+             * locations are also mandatory, so we do not add it like we did for inschrijvings form.
+             */
+            $locations = $locations + array('new' => Lang::get('users.new_location'));
 
             $this->layout->content = View::make('hulpverlener.edit', compact(array('user', 'organisations', 'locations')))
                 ->nest('creatorOrganisations', 'modals.organisation-creator', compact(array('inschrijving')))

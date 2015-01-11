@@ -27,14 +27,16 @@ return array(
      * organisations
      */
     'oorspronkelijke_organisatie'    => 'De gebruiker had <strong>:organisatie</strong> ingevuld.',
-    'new_organisation'               => 'Nieuwe organisatie aanmaken',
+    'new_organisation'               => '++ Nieuwe organisatie aanmaken ++',
+    'new_organisation_title'         => 'Nieuwe organisatie aanmaken',
     'organisation_name'              => 'Naam van de organisatie',
     'pick_organisation'              => 'Kies een organisatie',
 
     /**
      * locations
      */
-    'new_location'                   => 'Een nieuwe locatie',
+    'new_location'                   => '++ Een nieuwe locatie ++',
+    'new_location_title'             => 'Een nieuwe locatie',
     'locations'                      => 'Locaties',
     'pick_location'                  => 'Kies een locatie',
     'location_name'                  => 'Naam van de locatie',
@@ -62,7 +64,6 @@ return array(
      * ouderen
      */
     'diagnose'                       => 'Diagnose',
-
 
     /**
      * mantelzorgers

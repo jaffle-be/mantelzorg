@@ -72,7 +72,17 @@
                 });
             },
             cancel: function () {
-                this.$location.val(this.initialValue);
+                var that = this;
+                var options = this.$location.find('option').filter(function (item) {
+                    return $(this).val() == that.initialValue;
+                });
+                if(options.size() > 0)
+                {
+                    this.$location.val(this.initialValue);
+                }
+                else{
+                    this.$location.val(this.$location.find('option:first').val());
+                }
             },
             success: function (response) {
                 this.$modal.find('.alert').addClass('hide');
@@ -125,17 +135,30 @@
             events: function () {
 
             },
-            load: function (organisationid) {
-                var that = this;
-                $.ajax({
-                    url: '/organisations/' + organisationid + '/locations/',
-                    dataType: 'json',
-                    success: function (response) {
-                        that.fill(response);
-                    }
-                });
+            load: function (organisationid, setOriginal) {
+
+                if (typeof setOriginal == 'undefined')
+                {
+                    setOriginal = false;
+                }
+
+                if (organisationid)
+                {
+                    var that = this;
+                    $.ajax({
+                        url: '/organisations/' + organisationid + '/locations/',
+                        dataType: 'json',
+                        success: function (response) {
+                            that.fill(response, setOriginal);
+                        }
+                    });
+                }
+                else
+                {
+                    this.fill([], setOriginal);
+                }
             },
-            fill: function (locations) {
+            fill: function (locations, setOriginal) {
                 //remove all other options
                 var $options = this.$location.find('option'),
                     $emptyOption = $options.filter(':first-child[value=""]');
@@ -143,16 +166,48 @@
                 //remove all options
                 $options.not(':last-child[value="new"], :first-child[value=""]').remove();
 
-                //add new options after the first option ('selecteer een ?')
+                //add new options after the first option ('selecteer een ?'), unless its not there, then use the first element, add that, and use that element to add others after that.
+                var teller = 0;
                 for (var i in locations)
                 {
-                    $emptyOption.after($('<option>', {
-                        value: locations[i].id,
-                        html: locations[i].name
-                    }));
+                    var $newOption = this.getNewOption(locations[i]);
+                    if (teller == 0 && $emptyOption.size() == 0)
+                    {
+                        $emptyOption = $newOption
+                        this.$location.prepend($newOption);
+                    }
+                    else
+                    {
+                        $emptyOption.after($newOption);
+                    }
                 }
 
-                this.$location.parents('.holder').removeClass('hide');
+                if (setOriginal)
+                {
+                    this.$location.val(this.$location.data('original'));
+                }
+                else
+                {
+                    this.$location.val(this.$location.find('option:first').val());
+                }
+
+                this.toggle(locations.length > 0);
+            },
+            getNewOption: function (location) {
+                return $('<option>', {
+                    value: location.id,
+                    html: location.name
+                })
+            },
+            toggle: function (show) {
+                if (show)
+                {
+                    this.$location.parents('.holder').removeClass('hide');
+                }
+                else
+                {
+                    this.$location.parents('.holder').addClass('hide');
+                }
             }
         };
 

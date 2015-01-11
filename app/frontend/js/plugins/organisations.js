@@ -8,10 +8,10 @@
 
 
         function Creator() {
-            this.$creator = $("#organisation-creator"),
-                this.$organisation = $("#organisation"),
-                this.$new = this.$creator.find("[name=organisation_name]");
-            this.$locations = $("#location-selector");
+            this.$creator = $("#organisation-creator");
+            this.$organisation = $("#organisation");
+            this.$new = this.$creator.find("[name=organisation_name]");
+            this.$location = $("#location");
             this.init();
         }
 
@@ -34,19 +34,21 @@
                             that.$new.focus();
                         });
                     }
-                    else if ($(this).val() === '')
-                    {
-                        that.$location.hide();
-                        that.$location.val('');
-                    }
                     else
                     {
                         app.locations.loader.load($(this).val());
                     }
                 });
 
+                /**
+                 * cancel creating should put the value back to the original.
+                 * it should also hide the locations if the original was empty.
+                 */
                 this.$creator.on('click', '[data-dismiss="modal"]', function () {
-                    that.$organisation.val('');
+                    var value = that.$organisation.data('original');
+                    that.$organisation.val(value);
+
+                    app.locations.loader.load(value, true);
                 });
 
                 this.$creator.on('submit', 'form', function (event) {
