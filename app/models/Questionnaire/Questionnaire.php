@@ -47,6 +47,11 @@ class Questionnaire extends Eloquent
         return $this->hasMany('Questionnaire\Panel', 'questionnaire_id');
     }
 
+    public function sessions()
+    {
+        return $this->hasMany('Questionnaire\Session');
+    }
+
     public function nextPanel(Panel $panel)
     {
         $weight = $panel->panel_weight + 10;

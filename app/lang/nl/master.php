@@ -42,7 +42,8 @@ return array(
         "contact"         => "Contact",
         "blog-text"       => "Lees hier de laatste <a href=':url'>berichten</a>",
         "instrument-text" => "Ga vlot het gesprek aan met de mantelzorger met ons digitaal <a href=':url'>instrument</a>",
-        "contact-text"    => "Kom alles te weten over ons <a href=':url'>team</a> en hoe je ze kan bereiken."
+        "contact-text"    => "Kom alles te weten over ons <a href=':url'>team</a> en hoe je ze kan bereiken.",
+        "downloaden"      => "Downloaden",
     ),
 
     "tools"      => array(

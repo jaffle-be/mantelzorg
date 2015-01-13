@@ -124,6 +124,7 @@ return array(
 
 
         'Intouch\LaravelNewrelic\LaravelNewrelicServiceProvider',
+        'Maatwebsite\Excel\ExcelServiceProvider',
 //        'LeroyMerlin\LaraSniffer\ServiceProvider',
 
         'Template\TemplateServiceProvider',

@@ -19,7 +19,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ action('RapportController@getIndex') }}"><span class="glyphicon glyphicon-folder-close"></span>{{ Lang::get('master.navs.rapport') }}
+                <a href="{{ route('rapport.index') }}"><span class="glyphicon glyphicon-folder-close"></span>{{ Lang::get('master.navs.rapport') }}
                 </a>
             </li>
         @endif

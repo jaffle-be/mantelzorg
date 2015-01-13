@@ -2,6 +2,8 @@
 
 namespace Questionnaire;
 
+use Questionnaire\Export\CsvExport;
+
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
 
@@ -27,6 +29,9 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->app['Questionnaire\Observer\Session'] = new Observer\Session($this->app['events']);
 
         $this->app['Questionnaire\Observer\Answer'] = new Observer\Answer($this->app['events']);
-    }
 
+        $this->app['Questionnaire\Export\Exporter'] = $this->app->share(function ($app) {
+            return new CsvExport($app['excel']);
+        });
+    }
 }

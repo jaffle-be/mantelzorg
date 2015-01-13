@@ -43,7 +43,15 @@ Route::resource('instellingen/{mantelzorger}/oudere', 'Instelling\OudereControll
 /**
  * RAPPORT
  */
-Route::controller('rapport', 'RapportController');
+Route::get('rapport', [
+    'uses' => 'RapportController@index',
+    'as' => 'rapport.index'
+]);
+
+Route::post('rapport', [
+    'uses' => 'RapportController@download',
+    'as' => 'rapport.download'
+]);
 
 /**
  * INSTRUMENT

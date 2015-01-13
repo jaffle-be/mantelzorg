@@ -112,6 +112,7 @@ return array(
         'mantelzorger_id'          => 'mantelzorger',
         'hulpverlener_id'          => 'hulpverlener',
         'oudere_id'                => 'oudere',
+        'survey'                   => 'vragenlijst',
     ),
 
 );
