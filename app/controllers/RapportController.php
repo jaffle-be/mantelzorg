@@ -51,7 +51,13 @@ class RapportController extends AdminController
 
         $survey->load(['sessions' => function($query){
             $query->take(25);
-        }, 'sessions.answers', 'sessions.answers.choises']);
+        },
+            'sessions.answers',
+            'sessions.answers.choises',
+            'panels',
+            'panels.questions',
+            'panels.questions.choises'
+        ]);
 
         $sessions = $survey->sessions;
 
