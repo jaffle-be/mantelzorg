@@ -104,19 +104,6 @@ trait SearchableTrait
     }
 
     /**
-     * This is the quick and dirty implementation using a json template rendered by mustache.
-     *
-     * @param       $view
-     * @param array $params
-     *
-     * @return mixed
-     */
-    public function view($view, array $params)
-    {
-        return static::$searchableService->view($view, $params);
-    }
-
-    /**
      * @inheritdoc
      */
     public function getSearchableNewModel($data, array $with)
@@ -131,18 +118,25 @@ trait SearchableTrait
 
         //need to setup relations too :-)
         foreach ($with as $relation => $build) {
-            if ($relation_data = $this->getSearchableNestedDocument($relations, $relation)) {
 
-                $type = $this->getRelationType($relation, $model);
+            $type = $this->getRelationType($relation, $model);
+
+            if ($relation_data = $this->getSearchableNestedDocument($relations, $relation)) {
 
                 if ($needsLoop = $this->relationNeedsLooping($type)) {
                     $relation_data = $this->getLoopedRelationData($build, $relation_data);
                 } else {
                     $relation_data = $this->getSimpleRelationData($build, $relation_data);
                 }
-            }
 
-            $model->setRelation($relation, $relation_data);
+                $model->setRelation($relation, $relation_data);
+            }
+            else{
+                if($this->relationNeedsLooping($type))
+                {
+                    $model->setRelation($relation, array());
+                }
+            }
         }
 
         return $model;

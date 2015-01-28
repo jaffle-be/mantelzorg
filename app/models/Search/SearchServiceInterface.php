@@ -12,8 +12,11 @@ interface SearchServiceInterface
      * Register the regular listeners for the given type.
      *
      * @param Searchable $type
+     * @param array      $with
+     *
+     * @return
      */
-    public function regularAutoIndex(Searchable $type);
+    public function regularAutoIndex(Searchable $type, array $with);
 
     /**
      * Build the index for a type.

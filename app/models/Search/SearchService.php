@@ -87,7 +87,7 @@ class SearchService implements SearchServiceInterface
 
             $class->setSearchableService($this);
 
-            $this->regularAutoIndex($class);
+            $this->regularAutoIndex($class, $config['with']);
         }
 
         foreach ($this->invertedTypes as $updated => $config) {
@@ -104,7 +104,7 @@ class SearchService implements SearchServiceInterface
         $this->invertedTypes = $this->invertTypes($this->config['types']);
     }
 
-    public function regularAutoIndex(Searchable $type)
+    public function regularAutoIndex(Searchable $type, array $with)
     {
         /** @var Dispatcher $dispatcher */
         $dispatcher = $this->container->make('events');
@@ -112,6 +112,10 @@ class SearchService implements SearchServiceInterface
         $me = $this;
 
         foreach ($this->listeners as $event => $listener) {
+            if ($event == 'created') {
+                $type->load(array_keys($with));
+            }
+
             $trigger = $type->getSearchableEventname($event);
 
             $type->setSearchableService($me);
@@ -182,7 +186,7 @@ class SearchService implements SearchServiceInterface
 
         $me = $this;
 
-        $type->with($relations)->chunk(50, function ($documents) use ($me) {
+        $type->with($relations)->chunk(250, function ($documents) use ($me) {
             foreach ($documents as $document) {
                 $me->add($document);
             }
