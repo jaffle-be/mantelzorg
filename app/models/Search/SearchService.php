@@ -150,9 +150,11 @@ class SearchService implements SearchServiceInterface
 
     protected function addInvertedListener(Searchable $parent, $updated, $relation, $key, array $with)
     {
-        $updated = new $updated();
+        $dispatcher = $this->container->make('events');
 
-        $updated->updated(function ($model) use ($parent, $relation, $key, $with) {
+        $event = 'eloquent.saved: ' . $updated;
+
+        $dispatcher->listen($event, function ($model) use ($parent, $relation, $key, $with) {
 
             $result = $parent->with($with)->whereHas($relation, function ($query) use ($model, $key) {
                 $query->where($model->getKeyName(), '=', $model->getKey());
