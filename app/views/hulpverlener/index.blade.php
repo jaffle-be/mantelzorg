@@ -21,16 +21,16 @@
 
     @if($users->count())
         <div class="row easy-search">
-            <div class="col-md-5">
+            <div class="col-xs-5">
                 @include('hulpverlener.search')
             </div>
-            <div class="col-md-7 text-right">
+            <div class="col-xs-7 text-right">
                 {{ $users->links('pagination::simple') }}
             </div>
         </div>
     @else
         <div class="row easy-search">
-            <div class="col-md-5">
+            <div class="col-xs-5">
                 @include('hulpverlener.search')
             </div>
         </div>
