@@ -31,7 +31,7 @@ return array(
         "questionnaires"  => "Vragenlijsten",
         "panels"          => "Panelen",
         "questions"       => "Vragen",
-        "ouderen"         => "Ouderen",
+        "ouderen"         => "Zorgbehoevende personen",
         "profiel"         => "Hulpverlener",
         "overzicht"       => "Overzicht",
         "wijzig"          => "Wijzig",

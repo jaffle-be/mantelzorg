@@ -111,7 +111,7 @@ return array(
         'birthday'                 => 'Geboortedatum',
         'mantelzorger_id'          => 'mantelzorger',
         'hulpverlener_id'          => 'hulpverlener',
-        'oudere_id'                => 'oudere',
+        'oudere_id'                => 'zorgbehoevende persoon',
         'survey'                   => 'vragenlijst',
     ),
 

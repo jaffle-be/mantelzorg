@@ -54,11 +54,11 @@ return array(
     'create_mantelzorger'            => 'Maak nieuwe mantelzorger aan',
     'mantelzorger'                   => 'Mantelzorger',
     'mantelzorgers'                  => 'Mantelzorgers',
-    'ouderen'                        => 'Ouderen',
-    'oudere'                         => 'Oudere',
+    'ouderen'                        => 'Zorgbehoevende personen',
+    'oudere'                         => 'Zorgbehoevende persoon',
     'hulperlener'                    => 'Hulpverlener',
     'hulperleners'                   => 'Hulpverleners',
-    'create_oudere'                  => 'Oudere toevoegen',
+    'create_oudere'                  => 'Zorgbehoevende persoon toevoegen',
 
     /**
      * ouderen
@@ -71,7 +71,7 @@ return array(
     'relatie_mantelzorger'           => 'Relatie met mantelzorger',
     'relatie_mantelzorger_alternate' => 'Andere relatie met mantelzorger',
     'select_relation_oudere'         => 'Kies relatie',
-    'dossier_details'                => 'Details dossier oudere',
+    'dossier_details'                => 'Details dossier zorgbehoevende persoon',
 
     /**
      * actions

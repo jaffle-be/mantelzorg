@@ -3,7 +3,7 @@
 return array(
 
     'beta'       => array(
-        "sub-header"          => "Gespreksleidraad voor de behoefteanalyse bij mantelzorgers van thuiswonende ouderen",
+        "sub-header"          => "Gespreksleidraad voor de behoefteanalyse bij mantelzorgers van zorgbehoevende personen",
         "beta-banner"         => "Sfeerfoto",
         "intro-intrested"     => "Interesse in ons instrument?",
         "firstname"           => "Voornaam",
