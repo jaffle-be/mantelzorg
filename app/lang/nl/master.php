@@ -9,7 +9,6 @@ return array(
         "veiligheid" => "Veiligheid",
         "blog"       => "Nieuws",
         "pers"       => "Pers",
-        "team"       => "Team",
         "help"       => "Help",
         "login"      => "Log in",
         "logout"     => "Afmelden",

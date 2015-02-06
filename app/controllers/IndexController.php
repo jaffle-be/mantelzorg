@@ -42,16 +42,6 @@ class IndexController extends BaseController
         }
     }
 
-    public function getHetInstrument()
-    {
-        $this->layout->content = View::make('instrument');
-    }
-
-    public function getHetTeam()
-    {
-        $this->layout->content = View::make('team');
-    }
-
     public function getLogin()
     {
         $this->layout->content = View::make('login');
