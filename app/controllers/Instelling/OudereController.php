@@ -45,16 +45,14 @@ class OudereController extends \AdminController
     {
         $relations_mantelzorger = $this->getRelationsMantelzorger();
 
-        $this->layout->content = View::make('instellingen.ouderen.create', compact(array('mantelzorger', 'relations_mantelzorger')));
+        $woonsituaties = $this->getWoonsituaties();
+
+        $this->layout->content = View::make('instellingen.ouderen.create', compact('mantelzorger', 'relations_mantelzorger', 'woonsituaties'));
     }
 
     public function store($mantelzorger)
     {
         $input = Input::except('_token');
-
-        if (empty($input['email'])) {
-            $input['email'] = null;
-        }
 
         $input['mantelzorger_id'] = $mantelzorger->id;
 
@@ -81,7 +79,9 @@ class OudereController extends \AdminController
         if ($oudere) {
             $relations_mantelzorger = $this->getRelationsMantelzorger();
 
-            $this->layout->content = View::make('instellingen.ouderen.edit', compact(array('mantelzorger', 'oudere', 'relations_mantelzorger')));
+            $woonsituaties = $this->getWoonsituaties();
+
+            $this->layout->content = View::make('instellingen.ouderen.edit', compact('mantelzorger', 'oudere', 'relations_mantelzorger', 'woonsituaties'));
         } else {
             return Redirect::route('instellingen.{hulpverlener}.mantelzorgers.index', array($mantelzorger->hulpverlener_id));
         }
@@ -143,5 +143,12 @@ class OudereController extends \AdminController
         unset($input['mantelzorger_relation_alternate']);
 
         return $input;
+    }
+
+    protected function getWoonsituaties()
+    {
+        $values = $this->metaContext->with(['values'])->where('context', Context::OUDEREN_WOONSITUATIE)->first()->values->lists('value', 'id');
+
+        return array('' => Lang::get('users.pick_woonsituatie')) + $values;
     }
 }

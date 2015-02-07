@@ -200,6 +200,12 @@
                     </div>
 
                     <div class="col-xs-12 col-md-6">
+                        <label for="woonsituatie">{{ Lang::get('users.woonsituatie') }}</label>
+                        <?= Form::select('woonsituatie', $woonsituaties, null, array('id' => 'woonsituatie', 'class' => 'form-control')) ?>
+
+                    </div>
+
+                    <div class="col-xs-12 col-md-6">
                         <label for="diagnose"><?= Lang::get('users.diagnose') ?></label>
 
                         <?= Form::textarea('diagnose', null, array(

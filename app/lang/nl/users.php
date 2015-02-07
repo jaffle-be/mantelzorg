@@ -64,6 +64,8 @@ return array(
      * ouderen
      */
     'diagnose'                       => 'Diagnose',
+    'woonsituatie'                   => 'Woonsituatie',
+    'pick_woonsituatie'              => 'selecteer een woonsituatie',
 
     /**
      * mantelzorgers
