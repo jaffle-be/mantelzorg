@@ -60,7 +60,9 @@ class OudereController extends \AdminController
 
         $input = $this->processValue($input);
 
-        $validator = $this->oudere->validator($input);
+        $validator = $this->oudere->validator($input, [], [
+            'mantelzorger' => $mantelzorger->id
+        ]);
 
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator->messages())->withInput();
@@ -90,13 +92,15 @@ class OudereController extends \AdminController
         $oudere = $this->oudere->find($oudere);
 
         if ($oudere) {
+
             $input = $this->processValue(Input::except('_token'));
 
-            $validator = $this->oudere->validator($input, array('firstname', 'lastname', 'birthday', 'male', 'street', 'postal', 'city', 'phone', 'mantelzorger_relation'));
+            $input['mantelzorger_id'] = $mantelzorger->id;
 
-            $validator->sometimes('email', 'email|unique:ouderen,email', function ($data) use ($oudere) {
-                return $data->email !== $oudere->email;
-            });
+            $validator = $this->oudere->validator($input, [], [
+                'oudere' => $oudere->id,
+                'mantelzorger' => $mantelzorger->id
+            ]);
 
             if ($validator->fails()) {
                 return redirect::back()->withInput()->withErrors($validator->messages());

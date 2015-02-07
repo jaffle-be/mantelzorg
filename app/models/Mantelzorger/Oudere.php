@@ -14,10 +14,12 @@ class Oudere extends \Eloquent
     protected $table = 'ouderen';
 
     protected static $rules = array(
-        'email'                 => 'email|unique:ouderen,email',
+        'identifier'            => 'required|unique:ouderen,identifier,#oudere,id,mantelzorger_id,#mantelzorger',
+        'male'                  => 'required|in:0,1',
+        'email'                 => 'email|unique:ouderen,email,#oudere,id,mantelzorger_id,#mantelzorger',
         'mantelzorger_id'       => 'required|exists:mantelzorgers,id',
         'mantelzorger_relation' => 'exists:meta_values,id',
-        'birthday'              => 'date_format:d/m/Y',
+        'birthday'              => 'required|date_format:d/m/Y',
     );
 
     protected $fillable = array(
@@ -41,21 +43,23 @@ class Oudere extends \Eloquent
         return $this->firstname . ' ' . $this->lastname;
     }
 
-    public function validator($input = array(), $rules = array())
+    public function validator($input = array(), $rules = array(), array $placeholders = [])
     {
         if (empty($input)) {
             $input = Input::all();
         }
 
-        if (empty($rules)) {
-            $rules = static::$rules;
-        } else {
-            if (!is_array($rules)) {
-                $rules = array($rules);
-            }
+        $rules = array_merge($rules, static::$rules);
 
-            $rules = array_intersect_key(static::$rules, array_flip($rules));
-        }
+        array_walk($rules, function (&$rule) use ($placeholders) {
+            foreach ($placeholders as $placeholder => $value) {
+                $rule = str_replace('#' . $placeholder, $value, $rule);
+            }
+        });
+
+        array_walk($rules, function (&$rule) {
+            $rule = preg_replace('/#[^,]+/', 'NULL', $rule);
+        });
 
         return Validator::make($input, $rules);
     }

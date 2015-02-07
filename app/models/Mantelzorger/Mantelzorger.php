@@ -17,8 +17,10 @@ class Mantelzorger extends Eloquent implements Searchable
     protected $table = 'mantelzorgers';
 
     protected static $rules = array(
-        'email'           => 'email|unique:mantelzorgers,email',
-        'birthday'        => 'date_format:d/m/Y',
+        'identifier'      => 'required|unique:mantelzorgers,identifier,#mantelzorger,id,hulpverlener_id,#hulpverlener',
+        'male'            => 'required|in:0,1',
+        'email'           => 'email|unique:mantelzorgers,email,#mantelzorger,id,hulpverlener_id,#hulpverlener',
+        'birthday'        => 'required|date_format:d/m/Y',
         'hulpverlener_id' => 'required|exists:users,id'
     );
 
@@ -54,27 +56,28 @@ class Mantelzorger extends Eloquent implements Searchable
 
     public function setBirthdayAttribute($value)
     {
-        if(!empty($value))
-        {
+        if (!empty($value)) {
             $this->attributes['birthday'] = Carbon::createFromFormat('d/m/Y', $value);
         }
     }
 
-    public function validator(array $input = array(), array $rules = array())
+    public function validator(array $input = [], array $rules = [], array $placeholders = [])
     {
         if (empty($input)) {
             $input = Input::all();
         }
 
-        if (empty($rules)) {
-            $rules = static::$rules;
-        } else {
-            if (!is_array($rules)) {
-                $rules = array($rules);
-            }
+        $rules = array_merge($rules, static::$rules);
 
-            $rules = array_intersect_key(static::$rules, array_flip($rules));
-        }
+        array_walk($rules, function (&$rule) use ($placeholders) {
+            foreach ($placeholders as $placeholder => $value) {
+                $rule = str_replace('#' . $placeholder, $value, $rule);
+            }
+        });
+
+        array_walk($rules, function (&$rule) {
+            $rule = preg_replace('/#[^,]+/', 'NULL', $rule);
+        });
 
         return Validator::make($input, $rules);
     }

@@ -60,7 +60,7 @@ class MantelzorgerController extends \AdminController
 
         $input['hulpverlener_id'] = $hulpverlener->id;
 
-        $validator = $this->mantelzorger->validator($input);
+        $validator = $this->mantelzorger->validator($input, [], ['hulpverlener' => $hulpverlener->id]);
 
         if ($validator->fails()) {
             return Redirect::back()->withInput()->withErrors($validator->messages());
@@ -89,7 +89,7 @@ class MantelzorgerController extends \AdminController
 
             $input['mantelzorger_id'] = $mantelzorger->id;
 
-            $validator = $this->mantelzorger->validator($input, array('firstname', 'lastname', 'birthday', 'male', 'street', 'postal', 'city', 'phone'));
+            $validator = $this->mantelzorger->validator($input, [], ['hulpverlener' => $hulpverlener->id, 'mantelzorger' => $mantelzorger->id]);
 
             if ($validator->fails()) {
                 return Redirect::back()->withInput()->withErrors($validator->messages());
