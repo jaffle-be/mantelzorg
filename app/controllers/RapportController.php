@@ -42,22 +42,19 @@ class RapportController extends AdminController
 
         $validator = Validator::make(Input::except('_token'), ['survey' => 'required|exists:questionnaires,id']);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return Redirect::back()->with('errors', $validator->messages());
         }
 
         $survey = $this->questionnaire->find($id);
 
-        $survey->load(['sessions' => function($query){
-            $query->take(25);
-        },
+        $survey->load([
             'sessions.answers',
             'sessions.answers.choises',
             'panels',
             'panels.questions',
             'panels.questions.choises'
-        ]);
+        ])->all();
 
         $sessions = $survey->sessions;
 
