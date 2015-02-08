@@ -88,6 +88,7 @@ class MantelzorgerController extends \AdminController
             $input = Input::except('_token');
 
             $input['mantelzorger_id'] = $mantelzorger->id;
+            $input['hulpverlener_id'] =  $hulpverlener->id;
 
             $validator = $this->mantelzorger->validator($input, [], ['hulpverlener' => $hulpverlener->id, 'mantelzorger' => $mantelzorger->id]);
 
