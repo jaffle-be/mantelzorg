@@ -47,7 +47,9 @@ class OudereController extends \AdminController
 
         $woonsituaties = $this->getWoonsituaties();
 
-        $this->layout->content = View::make('instellingen.ouderen.create', compact('mantelzorger', 'relations_mantelzorger', 'woonsituaties'));
+        $hulpbehoeftes = $this->getHulpbehoeftes();
+
+        $this->layout->content = View::make('instellingen.ouderen.create', compact('mantelzorger', 'relations_mantelzorger', 'woonsituaties', 'hulpbehoeftes'));
     }
 
     public function store($mantelzorger)
@@ -56,7 +58,8 @@ class OudereController extends \AdminController
 
         $input['mantelzorger_id'] = $mantelzorger->id;
 
-        $input = $this->processValue($input);
+        $input = $this->processValue($input, Context::MANTELZORGER_RELATION);
+        $input = $this->processValue($input, Context::OORZAAK_HULPBEHOEFTE);
 
         $validator = $this->oudere->validator($input, [], [
             'mantelzorger' => $mantelzorger->id
@@ -81,7 +84,9 @@ class OudereController extends \AdminController
 
             $woonsituaties = $this->getWoonsituaties();
 
-            $this->layout->content = View::make('instellingen.ouderen.edit', compact('mantelzorger', 'oudere', 'relations_mantelzorger', 'woonsituaties'));
+            $hulpbehoeftes = $this->getHulpbehoeftes();
+
+            $this->layout->content = View::make('instellingen.ouderen.edit', compact('mantelzorger', 'oudere', 'relations_mantelzorger', 'woonsituaties', 'hulpbehoeftes'));
         } else {
             return Redirect::route('instellingen.{hulpverlener}.mantelzorgers.index', array($mantelzorger->hulpverlener_id));
         }
@@ -93,9 +98,12 @@ class OudereController extends \AdminController
 
         if ($oudere) {
 
-            $input = $this->processValue(Input::except('_token'));
+            $input = Input::except('_token');
 
             $input['mantelzorger_id'] = $mantelzorger->id;
+
+            $input = $this->processValue($input, Context::MANTELZORGER_RELATION);
+            $input = $this->processValue($input, Context::OORZAAK_HULPBEHOEFTE);
 
             $validator = $this->oudere->validator($input, [], [
                 'oudere' => $oudere->id,
@@ -114,33 +122,43 @@ class OudereController extends \AdminController
 
     protected function getRelationsMantelzorger()
     {
-        $relations_mantelzorger = $this->metaContext->with('values')->where('context', Context::RELATION_MANTELZORGER_OUDERE)->first()->values->lists('value', 'id');
+        $relations_mantelzorger = $this->metaContext->with('values')->where('context', Context::MANTELZORGER_RELATION)->first()->values->lists('value', 'id');
 
         //append an empty option
         return array('' => Lang::get('users.relatie_mantelzorger')) + $relations_mantelzorger + array('*new*' => Lang::get('users.relatie_mantelzorger_alternate'));
     }
 
-    protected function processValue($input)
+    protected function processValue(array $input, $context)
     {
-        $context = $this->metaContext->where('context', Context::RELATION_MANTELZORGER_OUDERE)->first();
+        $context = $this->metaContext->where('context', $context)->first();
 
         //find the meta value by the id, if none exists... we need to create it
-        $value = $this->metaValue->find($input['mantelzorger_relation']);
+        $value = $this->metaValue->find($input[$context->context]);
+
+        $alternate = $context->context . '_alternate';
 
         if (!$value) {
-            //if both are not empty, we create a value using the alternate
-            if ($input['mantelzorger_relation'] == '*new*' && $input['mantelzorger_relation_alternate']) {
-                $value = $this->metaValue->create(array(
-                    'context_id' => $context->id,
-                    'value'      => $input['mantelzorger_relation_alternate']
-                ));
+
+            //need to create a new one? -> check for existing, or create.
+            if ($input[$context->context] == '*new*' && $input[$alternate]) {
+
+                $value = $this->metaValue->where('context_id', $context->id)
+                    ->where('value', $input[$alternate])->first();
+
+                if(!$value)
+                {
+                    $value = $this->metaValue->create(array(
+                        'context_id' => $context->id,
+                        'value'      => $input[$alternate]
+                    ));
+                }
             }
         }
 
-        $input['mantelzorger_relation'] = $value ? $value->id : null;
+        $input[$context->context] = $value ? $value->id : null;
 
-        //always unset alternate, by now relation_oudere has the correct value for the mantelzorger model
-        unset($input['mantelzorger_relation_alternate']);
+        //always unset alternate, by now context value has the correct value for the model
+        unset($input[$alternate]);
 
         return $input;
     }
@@ -150,5 +168,12 @@ class OudereController extends \AdminController
         $values = $this->metaContext->with(['values'])->where('context', Context::OUDEREN_WOONSITUATIE)->first()->values->lists('value', 'id');
 
         return array('' => Lang::get('users.pick_woonsituatie')) + $values;
+    }
+
+    private function getHulpbehoeftes()
+    {
+        $values = $this->metaContext->with(['values'])->where('context', Context::OORZAAK_HULPBEHOEFTE)->first()->values->lists('value', 'id');
+
+        return array('' => Lang::get('users.pick_oorzaak_hulpbehoefte')) + $values + array('*new*' => Lang::get('users.oorzaak_hulpbehoefte_alternate'));
     }
 }

@@ -7,8 +7,9 @@ use Eloquent;
 class Context extends Eloquent
 {
 
-    const RELATION_MANTELZORGER_OUDERE = 'relation_mantelzorger_oudere';
+    const MANTELZORGER_RELATION = 'mantelzorger_relation';
     const OUDEREN_WOONSITUATIE = 'ouderen_woonsituatie';
+    const OORZAAK_HULPBEHOEFTE = 'oorzaak_hulpbehoefte';
 
     protected $table = 'meta_contexts';
 

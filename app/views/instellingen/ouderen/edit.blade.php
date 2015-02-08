@@ -207,13 +207,18 @@
                     </div>
 
                     <div class="col-xs-12 col-md-6">
-                        <label for="diagnose"><?= Lang::get('users.diagnose') ?></label>
+                        <label for="oorzaak_hulpbehoefte"><?= Lang::get('users.oorzaak_hulpbehoefte') ?></label>
 
-                        <?= Form::textarea('diagnose', null, array(
-                                'class' => 'form-control',
-                        'id' => 'diagnose'
-                        ));
-                        ?>
+                        <?= Form::select('oorzaak_hulpbehoefte', $hulpbehoeftes, null, array('id' => 'oorzaak_hulpbehoefte', 'class' => 'form-control')); ?>
+
+                        <label for="oorzaak_hulpbehoefte_alternate"><?= Lang::get('users.oorzaak_hulpbehoefte_alternate') ?></label>
+
+                        <?= Form::text('oorzaak_hulpbehoefte_alternate', null, array(
+                                'id'    => 'oorzaak_hulpbehoefte_alternate',
+                        'class' => 'form-control'
+                        )) ?>
+                    </div>
+
                     </div>
                 </div>
 

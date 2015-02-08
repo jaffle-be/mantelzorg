@@ -6,7 +6,7 @@ class MetaContextValueSeeder extends \Illuminate\Database\Seeder
     public function run()
     {
         Meta\Context::create(array(
-            'context' => 'relation_mantelzorger_oudere',
+            'context' => 'mantelzorger_relation',
         ));
 
         Meta\Value::create(array(

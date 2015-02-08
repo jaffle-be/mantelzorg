@@ -24,7 +24,7 @@ class Oudere extends \Eloquent
 
     protected $fillable = array(
         'identifier', 'email', 'firstname', 'lastname', 'male', 'street', 'postal', 'city',
-        'phone', 'mantelzorger_id', 'birthday', 'diagnose', 'mantelzorger_relation', 'woonsituatie'
+        'phone', 'mantelzorger_id', 'birthday', 'diagnose', 'mantelzorger_relation', 'woonsituatie', 'oorzaak_hulpbehoefte'
     );
 
     public function getDisplayNameAttribute()
@@ -37,10 +37,10 @@ class Oudere extends \Eloquent
             return '#ID#' . $this->id;
         }
     }
+
     public function setEmailAttribute($value)
     {
-        if(empty($value))
-        {
+        if (empty($value)) {
             $value = null;
         }
 
@@ -49,12 +49,19 @@ class Oudere extends \Eloquent
 
     public function setWoonsituatieAttribute($value)
     {
-        if(empty($value))
-        {
-            $value=  null;
+        if (empty($value)) {
+            $value = null;
         }
 
         $this->attributes['woonsituatie'] = $value;
+    }
+
+    public function setOorzaakHulpbehoefteAttribute($value)
+    {
+        if(empty($value))
+            $value = null;
+
+        $this->attributes['oorzaak_hulpbehoefte'] = $value;
     }
 
     public function getFullnameAttribute()
@@ -98,6 +105,11 @@ class Oudere extends \Eloquent
     public function mantelzorger_relation()
     {
         return $this->belongsTo('Meta\Meta', 'mantelzorger_relation');
+    }
+
+    public function oorzaak_hulpbehoefte()
+    {
+        return $this->belongsTo('Meta\Value', 'oorzaak_hulpbehoefte');
     }
 
     public function getDates()
