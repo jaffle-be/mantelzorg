@@ -24,7 +24,7 @@ class Oudere extends \Eloquent
 
     protected $fillable = array(
         'identifier', 'email', 'firstname', 'lastname', 'male', 'street', 'postal', 'city',
-        'phone', 'mantelzorger_id', 'birthday', 'diagnose', 'mantelzorger_relation', 'woonsituatie', 'oorzaak_hulpbehoefte'
+        'phone', 'mantelzorger_id', 'birthday', 'diagnose', 'mantelzorger_relation', 'woonsituatie', 'oorzaak_hulpbehoefte', 'bel_profiel',
     );
 
     public function getDisplayNameAttribute()
@@ -58,10 +58,20 @@ class Oudere extends \Eloquent
 
     public function setOorzaakHulpbehoefteAttribute($value)
     {
-        if(empty($value))
+        if (empty($value)) {
             $value = null;
+        }
 
         $this->attributes['oorzaak_hulpbehoefte'] = $value;
+    }
+
+    public function setBelProfielAttribute($value)
+    {
+        if (empty($value)) {
+            $value = null;
+        }
+        
+        $this->attributes['bel_profiel'] = $value;
     }
 
     public function getFullnameAttribute()

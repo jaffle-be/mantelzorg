@@ -219,6 +219,10 @@
                         )) ?>
                     </div>
 
+                    <div class="col-xs-12 col-md-6">
+                        <label for="bel_profiel"><?= Lang::get('users.bel_profiel') ?></label>
+
+                        <?= Form::select('bel_profiel', $belprofielen, null, array('id' => 'bel_profiel', 'class' => 'form-control')) ?>
                     </div>
                 </div>
 

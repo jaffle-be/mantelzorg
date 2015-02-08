@@ -10,6 +10,7 @@ class Context extends Eloquent
     const MANTELZORGER_RELATION = 'mantelzorger_relation';
     const OUDEREN_WOONSITUATIE = 'ouderen_woonsituatie';
     const OORZAAK_HULPBEHOEFTE = 'oorzaak_hulpbehoefte';
+    const BEL_PROFIEL = 'bel_profiel';
 
     protected $table = 'meta_contexts';
 

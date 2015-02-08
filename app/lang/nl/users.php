@@ -68,14 +68,12 @@ return array(
     'oorzaak_hulpbehoefte_alternate' => 'andere oorzaak hulpbehoefte',
     'woonsituatie'                   => 'Woonsituatie',
     'pick_woonsituatie'              => 'selecteer een woonsituatie',
-
-    /**
-     * mantelzorgers
-     */
     'relatie_mantelzorger'           => 'Relatie met mantelzorger',
     'relatie_mantelzorger_alternate' => 'Andere relatie met mantelzorger',
     'select_relation_oudere'         => 'Kies relatie',
     'dossier_details'                => 'Details dossier zorgbehoevende persoon',
+    'bel_profiel'                    => 'BEL-profiel',
+    'pick_bel_profiel'               => 'selecteer een score',
 
     /**
      * actions

@@ -49,7 +49,9 @@ class OudereController extends \AdminController
 
         $hulpbehoeftes = $this->getHulpbehoeftes();
 
-        $this->layout->content = View::make('instellingen.ouderen.create', compact('mantelzorger', 'relations_mantelzorger', 'woonsituaties', 'hulpbehoeftes'));
+        $belprofielen = $this->getBelprofielen();
+
+        $this->layout->content = View::make('instellingen.ouderen.create', compact('mantelzorger', 'relations_mantelzorger', 'woonsituaties', 'hulpbehoeftes', 'belprofielen'));
     }
 
     public function store($mantelzorger)
@@ -86,7 +88,9 @@ class OudereController extends \AdminController
 
             $hulpbehoeftes = $this->getHulpbehoeftes();
 
-            $this->layout->content = View::make('instellingen.ouderen.edit', compact('mantelzorger', 'oudere', 'relations_mantelzorger', 'woonsituaties', 'hulpbehoeftes'));
+            $belprofielen = $this->getBelprofielen();
+
+            $this->layout->content = View::make('instellingen.ouderen.edit', compact('mantelzorger', 'oudere', 'relations_mantelzorger', 'woonsituaties', 'hulpbehoeftes', 'belprofielen'));
         } else {
             return Redirect::route('instellingen.{hulpverlener}.mantelzorgers.index', array($mantelzorger->hulpverlener_id));
         }
@@ -170,10 +174,17 @@ class OudereController extends \AdminController
         return array('' => Lang::get('users.pick_woonsituatie')) + $values;
     }
 
-    private function getHulpbehoeftes()
+    protected function getHulpbehoeftes()
     {
         $values = $this->metaContext->with(['values'])->where('context', Context::OORZAAK_HULPBEHOEFTE)->first()->values->lists('value', 'id');
 
         return array('' => Lang::get('users.pick_oorzaak_hulpbehoefte')) + $values + array('*new*' => Lang::get('users.oorzaak_hulpbehoefte_alternate'));
+    }
+
+    protected function getBelprofielen()
+    {
+        $values = $this->metaContext->with(['values'])->where('context', Context::BEL_PROFIEL)->first()->values->lists('value', 'id');
+
+        return array('' => Lang::get('users.pick_bel_profiel')) + $values;
     }
 }
