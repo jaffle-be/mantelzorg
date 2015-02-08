@@ -20,6 +20,8 @@ class Oudere extends \Eloquent
         'mantelzorger_id'       => 'required|exists:mantelzorgers,id',
         'mantelzorger_relation' => 'exists:meta_values,id',
         'birthday'              => 'required|date_format:d/m/Y',
+        'woonsituatie'          => 'required|exists:meta_values,id',
+        'oorzaak_hulpbehoefte'  => 'required|exists:meta_values,id'
     );
 
     protected $fillable = array(
@@ -70,7 +72,7 @@ class Oudere extends \Eloquent
         if (empty($value)) {
             $value = null;
         }
-        
+
         $this->attributes['bel_profiel'] = $value;
     }
 

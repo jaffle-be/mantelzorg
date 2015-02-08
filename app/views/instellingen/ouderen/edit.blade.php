@@ -204,12 +204,16 @@
                         <label for="woonsituatie">{{ Lang::get('users.woonsituatie') }}</label>
                         <?= Form::select('woonsituatie', $woonsituaties, null, array('id' => 'woonsituatie', 'class' => 'form-control')) ?>
 
+                        <span class="errors">{{ $errors->first('woonsituatie') }}</span>
+
                     </div>
 
                     <div class="col-xs-12 col-md-6">
                         <label for="oorzaak_hulpbehoefte"><?= Lang::get('users.oorzaak_hulpbehoefte') ?></label>
 
                         <?= Form::select('oorzaak_hulpbehoefte', $hulpbehoeftes, null, array('id' => 'oorzaak_hulpbehoefte', 'class' => 'form-control')); ?>
+
+                        <span class="errors">{{ $errors->first('oorzaak_hulpbehoefte') }}</span>
 
                         <label for="oorzaak_hulpbehoefte_alternate"><?= Lang::get('users.oorzaak_hulpbehoefte_alternate') ?></label>
 
