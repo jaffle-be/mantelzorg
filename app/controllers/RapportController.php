@@ -52,8 +52,15 @@ class RapportController extends AdminController
             'sessions.answers',
             'sessions.answers.choises',
             'panels',
-            'panels.questions',
-            'panels.questions.choises'
+            //make sure questions follow the order of the questionnaire to number them in the report. not so transparent
+            //but that is how they wanted it.
+            'panels.questions' => function($query){
+                $query->orderBy('sort');
+            },
+            //same reasoning applies for the options available to a question.
+            'panels.questions.choises' => function($query){
+                $query->orderBy('sort_weight');
+            }
         ])->all();
 
         $sessions = $survey->sessions;

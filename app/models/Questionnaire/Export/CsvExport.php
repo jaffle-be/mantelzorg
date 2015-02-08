@@ -36,10 +36,8 @@ class CsvExport implements Exporter
 
         $this->data($data, $survey);
 
-        $this->excel->create($survey->title, function($excel) use ($data)
-        {
-            $excel->sheet($excel->getTitle(), function($sheet) use ($data)
-            {
+        $this->excel->create($survey->title, function ($excel) use ($data) {
+            $excel->sheet($excel->getTitle(), function ($sheet) use ($data) {
                 $sheet->fromArray($data->toArray(), null, 'A1', true, false);
             });
         })->download();
@@ -51,42 +49,42 @@ class CsvExport implements Exporter
 
         $headers->push('id');
 
-        foreach($survey->panels as $panel)
-        {
-            $this->panel($panel, $headers);
+        $counter = 1;
+
+        foreach ($survey->panels as $panel) {
+            $this->panel($panel, $headers, $counter);
         }
 
         return $headers;
-
     }
 
-    protected function panel(Panel $panel, Collection $headers)
+    protected function panel(Panel $panel, Collection $headers, &$counter)
     {
-        foreach($panel->questions as $question)
-        {
-            $this->choises($headers, $question);
+        foreach ($panel->questions as $question) {
+            $this->choises($headers, $question, $counter);
+            $counter++;
         }
     }
 
-    protected function choises(Collection $headers, Question $question)
+    protected function choises(Collection $headers, Question $question, $counter)
     {
-        foreach($question->choises as $choise)
-        {
-            $headers->push($question->id . 'option' . $choise->id);
+        $options = 1;
+
+        foreach ($question->choises as $choise) {
+            $headers->push($counter . 'option' . $options);
+            $options++;
         }
     }
 
     protected function data($data, $survey)
     {
-        foreach($survey->sessions as $session)
-        {
+        foreach ($survey->sessions as $session) {
             $sessionData = new Collection();
 
             //add the session id as first column.
             $sessionData->push($session->id);
 
-            foreach($survey->panels as $panel)
-            {
+            foreach ($survey->panels as $panel) {
                 $this->answers($sessionData, $panel, $session);
             }
 
@@ -96,24 +94,17 @@ class CsvExport implements Exporter
 
     protected function answers(Collection $data, $panel, $session)
     {
-        foreach($panel->questions as $question)
-        {
-            if($answers = $session->getAnswered($question))
-            {
-                foreach($question->choises as $choise)
-                {
-                    if($answers->wasChecked($choise))
-                    {
+        foreach ($panel->questions as $question) {
+            if ($answers = $session->getAnswered($question)) {
+                foreach ($question->choises as $choise) {
+                    if ($answers->wasChecked($choise)) {
                         $data->push(1);
-                    }
-                    else{
+                    } else {
                         $data->push(0);
                     }
                 }
-            }
-            else{
-                foreach($question->choises as $choise)
-                {
+            } else {
+                foreach ($question->choises as $choise) {
                     $data->push(0);
                 }
             }

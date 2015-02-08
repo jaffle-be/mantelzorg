@@ -115,7 +115,16 @@ class InstrumentController extends AdminController
      */
     public function getPanel($panel, $survey)
     {
-        $panel->load(array('questionnaire', 'questionnaire.panels', 'questions', 'questions.choises'));
+        $panel->load([
+            'questionnaire',
+            'questionnaire.panels',
+            'questions' => function ($query) {
+                $query->orderBy('sort');
+            },
+            'questions.choises' => function($query){
+                $query->orderBy('sort_weight');
+            }
+        ]);
 
         $survey->load(array('answers', 'answers.choises'));
 

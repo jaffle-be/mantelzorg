@@ -3,6 +3,7 @@
 namespace Questionnaire\Observer;
 
 use Illuminate\Events\Dispatcher;
+use Questionnaire\Question as QuestionModel;
 
 class Question
 {
@@ -12,9 +13,27 @@ class Question
      */
     protected $events;
 
-    public function __construct(Dispatcher $events)
+    protected $questions;
+
+    public function __construct(Dispatcher $events, QuestionModel $questions)
     {
         $this->events = $events;
+        $this->questions = $questions;
+    }
+
+    /**
+     * @param $model
+     */
+    public function creating($model)
+    {
+        //because we had to rearrange questions, we added a sort field, but it needs autoupdating per panel.
+        $sort = $model->where('questionnaire_panel_id', $model->questionnaire_panel_id)->max('sort');
+
+        if($sort == null){
+            $sort = 0;
+        }
+
+        $model->sort = $sort + 1;
     }
 
     public function saving($model)

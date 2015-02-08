@@ -24,7 +24,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     {
         $this->app['Questionnaire\Observer\Questionnaire'] = new Observer\Questionnaire($this->app['events']);
 
-        $this->app['Questionnaire\Observer\Question'] = new Observer\Question($this->app['events']);
+        $this->app['Questionnaire\Observer\Question'] = new Observer\Question($this->app['events'], new Question());
 
         $this->app['Questionnaire\Observer\Session'] = new Observer\Session($this->app['events']);
 

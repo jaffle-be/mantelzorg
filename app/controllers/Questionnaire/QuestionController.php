@@ -23,7 +23,9 @@ class QuestionController extends \AdminController
     public function index($panel)
     {
         $panel->load(array(
-            'questions',
+            'questions' => function($query){
+                $query->orderBy('sort');
+            },
             'questions.choises' => function ($query) {
                 $query->orderBy('sort_weight');
             }
