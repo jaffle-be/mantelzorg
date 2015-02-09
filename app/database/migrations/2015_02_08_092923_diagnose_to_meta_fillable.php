@@ -80,6 +80,7 @@ class DiagnoseToMetaFillable extends Migration
             ['value' => 'een acute ziekte of ongeval'],
             ['value' => 'een chronische of terminale ziekte'],
             ['value' => 'algemene beperkingen door ouderdom'],
+            ['value' => 'andere oorzaak hulpbehoefte']
         ];
     }
 

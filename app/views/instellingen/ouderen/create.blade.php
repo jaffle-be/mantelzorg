@@ -214,12 +214,7 @@
 
                         <span class="errors">{{$errors->first('oorzaak_hulpbehoefte')}}</span>
 
-                        <label for="oorzaak_hulpbehoefte_alternate"><?= Lang::get('users.oorzaak_hulpbehoefte_alternate') ?></label>
 
-                        <?= Form::text('oorzaak_hulpbehoefte_alternate', null, array(
-                                'id'    => 'oorzaak_hulpbehoefte_alternate',
-                        'class' => 'form-control'
-                        )) ?>
                     </div>
 
                     <div class="col-xs-12 col-md-6">

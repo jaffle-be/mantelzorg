@@ -61,7 +61,6 @@ class OudereController extends \AdminController
         $input['mantelzorger_id'] = $mantelzorger->id;
 
         $input = $this->processValue($input, Context::MANTELZORGER_RELATION);
-        $input = $this->processValue($input, Context::OORZAAK_HULPBEHOEFTE);
 
         $validator = $this->oudere->validator($input, [], [
             'mantelzorger' => $mantelzorger->id
@@ -107,7 +106,6 @@ class OudereController extends \AdminController
             $input['mantelzorger_id'] = $mantelzorger->id;
 
             $input = $this->processValue($input, Context::MANTELZORGER_RELATION);
-            $input = $this->processValue($input, Context::OORZAAK_HULPBEHOEFTE);
 
             $validator = $this->oudere->validator($input, [], [
                 'oudere' => $oudere->id,
@@ -178,7 +176,7 @@ class OudereController extends \AdminController
     {
         $values = $this->metaContext->with(['values'])->where('context', Context::OORZAAK_HULPBEHOEFTE)->first()->values->lists('value', 'id');
 
-        return array('' => Lang::get('users.pick_oorzaak_hulpbehoefte')) + $values + array('*new*' => Lang::get('users.oorzaak_hulpbehoefte_alternate'));
+        return array('' => Lang::get('users.pick_oorzaak_hulpbehoefte')) + $values;
     }
 
     protected function getBelprofielen()

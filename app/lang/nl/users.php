@@ -65,7 +65,6 @@ return array(
      */
     'oorzaak_hulpbehoefte'           => 'Oorzaak hulpbehoefte',
     'pick_oorzaak_hulpbehoefte'      => 'selecteer oorzaak hulpbehoefte',
-    'oorzaak_hulpbehoefte_alternate' => 'andere oorzaak hulpbehoefte',
     'woonsituatie'                   => 'Woonsituatie',
     'pick_woonsituatie'              => 'selecteer een woonsituatie',
     'relatie_mantelzorger'           => 'Relatie met mantelzorger',
