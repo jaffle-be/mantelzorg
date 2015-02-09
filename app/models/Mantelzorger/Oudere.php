@@ -26,7 +26,7 @@ class Oudere extends \Eloquent
 
     protected $fillable = array(
         'identifier', 'email', 'firstname', 'lastname', 'male', 'street', 'postal', 'city',
-        'phone', 'mantelzorger_id', 'birthday', 'diagnose', 'mantelzorger_relation', 'woonsituatie', 'oorzaak_hulpbehoefte', 'bel_profiel',
+        'phone', 'mantelzorger_id', 'birthday', 'diagnose', 'mantelzorger_relation', 'woonsituatie', 'oorzaak_hulpbehoefte', 'bel_profiel', 'details_diagnose',
     );
 
     public function getDisplayNameAttribute()

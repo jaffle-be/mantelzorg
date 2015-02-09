@@ -215,6 +215,12 @@
 
                         <span class="errors">{{ $errors->first('oorzaak_hulpbehoefte') }}</span>
 
+                    </div>
+
+                    <div class="col-xs-12 col-md-6">
+                        <label for="details_diagnose"><?= Lang::get('users.details_diagnose') ?></label>
+
+                        <?= Form::textarea('details_diagnose', null, array('id' => 'details_diagnose', 'class' => 'form-control')) ?>
 
                     </div>
 

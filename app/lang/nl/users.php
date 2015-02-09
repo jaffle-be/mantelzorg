@@ -73,6 +73,7 @@ return array(
     'dossier_details'                => 'Details dossier zorgbehoevende persoon',
     'bel_profiel'                    => 'BEL-profiel',
     'pick_bel_profiel'               => 'selecteer een score',
+    'details_diagnose'               => 'Details diagnose',
 
     /**
      * actions
