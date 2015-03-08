@@ -40,7 +40,7 @@
 
                         <div class="input-group">
                             <?= Form::text('identifier', null, array('class' => 'form-control')) ?>
-                            <span class="input-group-addon"><i class="glyphicons tag"></i></span>
+                            <span class="input-group-addon"><i class="fa fa-tag"></i></span>
                         </div>
 
                         <label for="firstname"><?= Lang::get('users.firstname') ?></label>
@@ -48,7 +48,7 @@
 
                         <div class="input-group">
                             <?= Form::text('firstname', null, array('class' => 'form-control')) ?>
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
                         </div>
 
                         <label for="lastname"><?= Lang::get('users.lastname') ?></label>
@@ -56,7 +56,7 @@
 
                         <div class="input-group">
                             <?= Form::text('lastname', null , array('class' => 'form-control')) ?>
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
                         </div>
 
 
@@ -69,7 +69,7 @@
 
                                 <div class="input-group">
                                     <?= Form::text('birthday', null, array('class' => 'form-control datepicker')) ?>
-                                    <span class="input-group-addon"><i class="glyphicons birthday_cake"></i></span>
+                                    <span class="input-group-addon"><i class="fa fa-birthday-cake"></i></span>
                                 </div>
                             </div>
 
@@ -80,12 +80,12 @@
                                 <div>
                                     <div class="radio-inline">
                                         <label>
-                                            <?= Form::radio('male', 1) ?><?= Lang::get('users.male') ?>&nbsp;<i class="glyphicons male"></i>
+                                            <?= Form::radio('male', 1) ?><?= Lang::get('users.male') ?>&nbsp;<i class="fa fa-male"></i>
                                         </label>
                                     </div>
                                     <div class="radio-inline">
                                         <label>
-                                            <?= Form::radio('male', 0) ?><?= Lang::get('users.female') ?>&nbsp;<i class="glyphicons female"></i>
+                                            <?= Form::radio('male', 0) ?><?= Lang::get('users.female') ?>&nbsp;<i class="fa fa-female"></i>
                                         </label>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@
 
                         <div class="input-group">
                             <?= Form::text('street', null, array('class' => 'form-control')) ?>
-                            <span class="input-group-addon"><i class="glyphicons road"></i></span>
+                            <span class="input-group-addon"><i class="fa fa-road"></i></span>
                         </div>
 
                         <div class="row">
@@ -110,7 +110,7 @@
 
                                 <div class="input-group">
                                     <?= Form::text('postal', null, array('class' => 'form-control')) ?>
-                                    <span class="input-group-addon"><i class="glyphicons road"></i></span>
+                                    <span class="input-group-addon"><i class="fa fa-road"></i></span>
                                 </div>
                                 <span class="block errors"><?= $errors->first('postal') ?></span>
                             </div>
@@ -120,7 +120,7 @@
 
                                 <div class="input-group">
                                     <?= Form::text('city', null, array('class' => 'form-control')) ?>
-                                    <span class="input-group-addon"><i class="glyphicons road"></i></span>
+                                    <span class="input-group-addon"><i class="fa fa-road"></i></span>
                                 </div>
                                 <span class="block errors"><?= $errors->first('city') ?></span>
                             </div>
@@ -139,7 +139,7 @@
 
                         <div class="input-group">
                             <?= Form::text('phone', null, array('class' => 'form-control')) ?>
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
+                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                         </div>
 
 

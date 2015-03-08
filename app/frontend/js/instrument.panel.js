@@ -82,15 +82,15 @@
 
     //set the question status to not oke
     function notOkeStatus($status) {
-        $status.find('.glyphicon-question-sign').show();
-        $status.find('.glyphicon-ok').hide();
+        $status.find('.fa-question-circle').show();
+        $status.find('.fa-check').hide();
         return false;
     }
 
     //set the status to oke
     function okeStatus($status) {
-        $status.find('.glyphicon-question-sign').hide();
-        $status.find('.glyphicon-ok').show();
+        $status.find('.fa-question-circle').hide();
+        $status.find('.fa-check').show();
         return true;
     }
 

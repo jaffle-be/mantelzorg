@@ -13,7 +13,7 @@
                 @endif
                 <div class="input-group">
                     <?= Form::text('title', null, array('class' => 'form-control')) ?>
-                    <span class="input-group-addon"><i class="glyphicons tag"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-tag"></i></span>
                 </div>
 
 

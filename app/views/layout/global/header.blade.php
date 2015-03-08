@@ -9,6 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+
             <h1>
                 <a class="navbar-brand" href="<?= $user ? route('dash') : route('home') ?>" id="brand">Zicht op mantelzorg</a>
             </h1>

@@ -42,6 +42,12 @@
     <div id="page-wrapper">
 
         <section id="page-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sidebar">
+                <span class="sr-only">{{ Lang::get('dash/general.toggle_nav') }}</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
             <div class="left">
                 @yield('page-header')
             </div>
@@ -51,8 +57,8 @@
         </section>
 
         <section id="content">
-            <div class="container">
-                    @yield('content')
+            <div class="container-fluid">
+                @yield('content')
             </div>
 
         </section>

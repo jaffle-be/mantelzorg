@@ -1,5 +1,5 @@
 <div class="navbar-default sidebar" role="navigation">
-    <div class="sidebar-nav navbar-collapse">
+    <div class="sidebar-nav navbar-collapse collapse" id="sidebar">
         <ul class="nav" id="side-menu">
             {{--<li class="sidebar-search">--}}
                 {{--<div class="input-group custom-search-form">--}}
@@ -16,7 +16,7 @@
             @if($user->admin == 1)
                 <li>
 
-                    <a href="#"><span class="glyphicons group"></span>&nbsp;{{ Lang::get('master.navs.gebruikers') }}
+                    <a href="#"><span class="fa fa-users"></span>&nbsp;{{ Lang::get('master.navs.gebruikers') }}
                         <span class="fa arrow"></span></a>
 
                     <ul class="nav nav-second-level">
@@ -29,21 +29,21 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="{{ route('questionnaires.index') }}"><span class="glyphicons notes_2"></span>&nbsp;{{ Lang::get('master.navs.questionnaires') }}
+                    <a href="{{ route('questionnaires.index') }}"><span class="fa fa-file-text-o"></span>&nbsp;{{ Lang::get('master.navs.questionnaires') }}
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('rapport.index') }}"><span class="glyphicon glyphicon-folder-close"></span>&nbsp;{{ Lang::get('master.navs.rapport') }}
+                    <a href="{{ route('rapport.index') }}"><span class="fa fa-folder-open"></span>&nbsp;{{ Lang::get('master.navs.rapport') }}
                     </a>
                 </li>
             @endif
 
             <li>
-                <a href="{{ action('InstrumentController@index') }}"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;{{ Lang::get('master.navs.instrument') }}
+                <a href="{{ action('InstrumentController@index') }}"><span class="fa fa-list-alt"></span>&nbsp;{{ Lang::get('master.navs.instrument') }}
                 </a>
             </li>
             <li>
-                <a href="#"><span class="glyphicons wrench"></span>&nbsp;{{ Lang::get('master.navs.instellingen') }}<span class="fa arrow"></span></a>
+                <a href="#"><span class="fa fa-wrench"></span>&nbsp;{{ Lang::get('master.navs.instellingen') }}<span class="fa arrow"></span></a>
 
                 <ul class="nav nav-second-level">
                     <li>

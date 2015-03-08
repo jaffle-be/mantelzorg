@@ -60,3 +60,29 @@
     margin-left: auto;
   }
 }
+
+
+/**
+ * SPECIAL SIDEBAR TOGGLE
+ */
+#page-header{
+   .navbar-toggle{
+     float:left;
+     border-color: @white;
+     margin: 0 1.5em;
+
+     &:hover{
+       border-color: @brand-primary;
+       background-color: @white;
+
+       .icon-bar{
+         background-color: @brand-primary;
+       }
+     }
+
+     .icon-bar{
+       background-color: @white;
+     }
+   }
+}
+
