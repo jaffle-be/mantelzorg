@@ -17,6 +17,13 @@ header {
 
 #page-header {
   background-color: @brand-primary;
+  padding: 1.5em;
+
+  &::after{
+    content: ' ';
+    clear:both;
+    display:block;
+  }
 
   .left {
     float: left;
@@ -38,10 +45,5 @@ header {
     font-weight: normal;
     text-transform: none;
     color: @white;
-  }
-
-  .container {
-    padding-top: 1.5em;
-    padding-bottom: 1.5em;
   }
 }

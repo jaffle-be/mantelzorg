@@ -34,42 +34,36 @@
 </head>
 <body>
 
-@include('layout.global.header')
+<div id="wrapper">
 
-<section id="page-header">
+    @include('layout.global.header', ['includeSidebar' => true])
 
-    <div class="container">
-        <div class="left">
-            @yield('page-header')
-        </div>
-        <div class="right">
-            @include('layout.messages')
-        </div>
-    </div>
-</section>
 
-<section id="content">
+    <div id="page-wrapper">
 
-    <div class="container">
+        <section id="page-header">
+            <div class="left">
+                @yield('page-header')
+            </div>
+            <div class="right">
+                @include('layout.messages')
+            </div>
+        </section>
 
-        <div class="row">
+        <section id="content">
+            <div class="container">
+                    @yield('content')
+            </div>
 
-            @include('layout.admin.sidebar')
+        </section>
 
-            <section id="main-content" class="col-md-9 col-xs-12">
-
-                @yield('content')
-            </section>
-
-        </div>
+        @include('modals.confirmation')
 
     </div>
 
-</section>
+    @include('layout.global.footer')
 
-@include('modals.confirmation')
-
-@include('layout.global.footer')
+</div>
 
 <script type="text/javascript" src="/js/jquery.min.js"></script>
 <script type="text/javascript" src="/js/jquery-ui.custom.min.js"></script>

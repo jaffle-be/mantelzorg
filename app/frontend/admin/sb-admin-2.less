@@ -1,0 +1,69 @@
+@import "mixins.less";
+
+// Global Styles
+
+body {
+    background-color: @gray-lightest;
+}
+
+// Wrappers
+@import "wrapper";
+
+// Navigation
+
+// --Topbar
+@import "topbar";
+
+// --Sidebar
+
+@import "sidebar";
+
+// Buttons
+@import "buttons";
+
+// Chat Widget
+
+@import "chat";
+
+// Login Page
+
+.login-panel {
+    margin-top: 25%;
+}
+
+// Flot Charts Containers
+
+.flot-chart {
+    display: block;
+    height: 400px;
+}
+
+.flot-chart-content {
+    width: 100%;
+    height: 100%;
+}
+
+@import "datatables";
+
+// Circle Buttons 
+
+
+// Grid Demo Elements
+
+.show-grid [class^="col-"] {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 1px solid #ddd;
+    background-color: #eee !important;
+}
+
+.show-grid {
+    margin: 15px 0;
+}
+
+// Custom Colored Panels
+
+.huge {
+    font-size: 40px;
+}
+@import "panels";

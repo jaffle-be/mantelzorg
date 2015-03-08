@@ -1,7 +1,8 @@
 {
   "name": "mantelzorg",
   "dependencies": {
-    "bootstrap": "~3.2.0",
+    "components-font-awesome": "*",
+    "bootstrap": "~3.3.0",
     "modernizr": "~2.8.3"
   }
 }
