@@ -17,8 +17,8 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navigation">
-            <ul class="nav navbar-nav">
-            </ul>
+            {{--<ul class="nav navbar-nav">--}}
+            {{--</ul>--}}
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="http://zichtopmantelzorg.be">@lang('master.navs.blog')</a></li>
 
