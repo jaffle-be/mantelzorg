@@ -31,6 +31,13 @@
 
     </script>
 
+    @if(Agent::isTablet() || Agnet::isMobile())
+        <style rel="stylesheet">html {
+                background-color: white;
+            }</style>
+    @endif
+
+
 </head>
 <body class="{{ Agent::isTablet() || Agent::isMobile() ? 'tablet' : ''}}">
 
@@ -42,7 +49,7 @@
 
         {{--added this so we can clear it with an @overwrite on the instrument page --}}
         @section('page-header-wrapper')
-        <section id="page-header">
+            <section id="page-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sidebar">
                     <span class="sr-only">{{ Lang::get('dash/general.toggle_nav') }}</span>
                     <span class="icon-bar"></span>
@@ -56,7 +63,7 @@
                     @include('layout.messages')
                 </div>
                 <div class="clearfix"></div>
-        </section>
+            </section>
         @stop
 
         @yield('page-header-wrapper')
