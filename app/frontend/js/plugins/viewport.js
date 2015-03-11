@@ -5,11 +5,11 @@
     app.fixWidth = function()
     {
         $("body.tablet").css({
-            'max-height': $(window).outerHeight(),
-            'height': $(window).outerHeight()
+            'max-height': $(window).height(),
+            'height': $(window).height()
         });
 
-        var contentHeight = $(window).outerHeight() - $("header").outerHeight() - $("#page-header").outerHeight();
+        var contentHeight = $(window).height() - $("header").outerHeight() - $("#page-header").outerHeight();
 
         $("body.tablet #content").css({
             'max-height':  contentHeight,
