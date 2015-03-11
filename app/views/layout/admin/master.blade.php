@@ -31,7 +31,7 @@
 
     </script>
 
-    @if(Agent::isTablet() || Agnet::isMobile())
+    @if(Agent::isTablet() || Agent::isMobile())
         <style rel="stylesheet">html {
                 background-color: white;
             }</style>
@@ -82,13 +82,6 @@
     @unless($fullScreen)
         @include('layout.global.footer')
     @endunless
-
-    <div class="sidebar-collapser">
-        <a href="#">
-            <i class="fa fa-2x fa-arrow-left"></i>
-            <i class="fa fa-2x fa-arrow-right" style="display: none;"></i>
-        </a>
-    </div>
 
 </div>
 
