@@ -87,13 +87,6 @@
   }
 }
 
-.question-wrapper{
-
-  & .instrument-questions:first-child{
-    margin-top: 1em;
-  }
-}
-
 .question-color(@c) {
   .header {
     color: @c;
@@ -105,6 +98,10 @@
 }
 
 .instrument-questions {
+
+  & > div:first-child{
+    margin-top: 1em;
+  }
 
   .question-status {
     &.question-blue {

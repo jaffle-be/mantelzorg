@@ -28,9 +28,7 @@
 
     @include('instrument.template.header', ['panel' => $panel])
 
-    <div class="question-wrapper">
-        <?= InstrumentTool::questions($panel, $survey) ?>
-    </div>
+    <?= InstrumentTool::questions($panel, $survey) ?>
 
     <?= InstrumentTool::footer($panel) ?>
 

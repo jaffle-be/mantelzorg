@@ -18,6 +18,7 @@
         });
     };
 
+    //make sure the container still fits the window after resize or changing tablet orientation.
     $(window).on('resize orientationChanged', function()
     {
         app.fixWidth();

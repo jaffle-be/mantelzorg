@@ -44,7 +44,7 @@ class Question
     {
         switch ($option) {
             case 'open':
-                return '<div class="row instrument-questions">';
+                return '<div class="instrument-questions">';
                 break;
             case 'close':
                 return '</div>';
