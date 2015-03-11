@@ -14,7 +14,7 @@ class Question
     {
         $answer = $survey->getAnswered($question);
 
-        $output = '<div class="">';
+        $output = '<div class="row">';
 
         $output .= '<div class="col-xs-1 visible-xs"></div>';
 
