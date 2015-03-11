@@ -2,7 +2,6 @@
 @import 'bootstrap-variables';
 @import 'bootstrap-mixins';
 
-
 .question-color(@c) {
   .header {
     color: @c;
@@ -42,38 +41,41 @@
 }
 
 .instrument-header {
-  padding: 1em 3em;
 
-  h3 {
-    font-weight: normal;
-    color: @white;
+  .heading {
+    padding: 1em 3em;
+
+    h3 {
+      font-weight: normal;
+      color: @white;
+    }
   }
 
   &.panel-gray, .panel-gray {
     background-color: @panel-gray;
   }
 
-  &.panel-yellow {
+  &.panel-yellow, .panel-yellow {
     background-color: @panel-yellow;
   }
 
-  &.panel-purple {
+  &.panel-purple, .panel-purple {
     background-color: @panel-purple;
   }
 
-  &.panel-green {
+  &.panel-green, .panel-green {
     background-color: @panel-green;
   }
 
-  &.panel-red {
+  &.panel-red, .panel-red {
     background-color: @panel-red;
   }
 
-  &.panel-blue {
+  &.panel-blue, .panel-blue {
     background-color: @panel-blue;
   }
 
-  &.panel-orange {
+  &.panel-orange, .panel-orange {
     background-color: @panel-orange;
   }
 
@@ -100,7 +102,7 @@
 
 .instrument-questions {
 
-  & > div:first-child{
+  & > div:first-child {
     margin-top: 1em;
   }
 
@@ -202,7 +204,7 @@
 // TABLET IMPROVEMENTS TO UX
 body.tablet {
 
-  #content{
+  #content {
     overflow: scroll;
     //account for the footer;
     padding-bottom: 63px !important;

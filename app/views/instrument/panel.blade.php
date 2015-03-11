@@ -19,11 +19,6 @@
     )) ?>
 @stop
 
-@if(Agent::isTablet() || Agent::isMobile())
-@section('page-header-wrapper')
-@overwrite
-@endif
-
 @section('content')
 
     <?= Form::open(array(
