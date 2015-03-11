@@ -110,5 +110,7 @@
 
 </script>
 
+{{--make sure to clear all floats--}}
+<div class="clearfix"></div>
 </body>
 </html>
