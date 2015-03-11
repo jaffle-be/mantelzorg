@@ -5,8 +5,8 @@
     app.fixWidth = function()
     {
         $("body.tablet").css({
-            'max-height': $(window).height(),
-            'height': $(window).height()
+            'max-height': $(window).outerHeight(),
+            'height': $(window).outerHeight()
         });
 
         var contentHeight = $(window).outerHeight() - $("header").outerHeight() - $("#page-header").outerHeight();
