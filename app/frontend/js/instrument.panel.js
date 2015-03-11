@@ -1,19 +1,6 @@
 (function ($, app) {
     'use strict';
-
-    $("body.tablet").css({
-        'max-height': $(window).height(),
-        'height': $(window).height()
-    });
-
-    var contentHeight = $(window).outerHeight() - $("header").outerHeight() - $("#page-header").outerHeight();
-
-    $("body.tablet #content").css({
-        'max-height':  contentHeight,
-        'min-height': contentHeight,
-        height: contentHeight
-    });
-
+    
     /**
      * start instrument header
      */
