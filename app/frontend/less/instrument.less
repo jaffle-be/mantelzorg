@@ -2,6 +2,17 @@
 @import 'bootstrap-variables';
 @import 'bootstrap-mixins';
 
+
+.question-color(@c) {
+  .header {
+    color: @c;
+  }
+
+  .fa {
+    color: @c;
+  }
+}
+
 .btn-gray {
   .button-variant(@white, @panel-gray, darken(@panel-gray, 10%));
 }
@@ -38,7 +49,7 @@
     color: @white;
   }
 
-  &.panel-gray {
+  &.panel-gray, .panel-gray {
     background-color: @panel-gray;
   }
 
@@ -84,16 +95,6 @@
         text-decoration: none;
       }
     }
-  }
-}
-
-.question-color(@c) {
-  .header {
-    color: @c;
-  }
-
-  .fa {
-    color: @c;
   }
 }
 

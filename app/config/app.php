@@ -122,19 +122,19 @@ return array(
         'Illuminate\View\ViewServiceProvider',
         'Illuminate\Workbench\WorkbenchServiceProvider',
 
-
         'Intouch\LaravelNewrelic\LaravelNewrelicServiceProvider',
         'Maatwebsite\Excel\ExcelServiceProvider',
+        'Schickling\Backup\BackupServiceProvider',
+        'Jenssegers\Agent\AgentServiceProvider',
+
 //        'LeroyMerlin\LaraSniffer\ServiceProvider',
+//        'Way\Generators\GeneratorsServiceProvider',
 
         'Template\TemplateServiceProvider',
         'Questionnaire\ServiceProvider',
         'Instrument\ServiceProvider',
-        'Schickling\Backup\BackupServiceProvider',
         'Mantelzorger\MantelzorgerServiceProvider',
         'UserServiceProvider',
-//        'Way\Generators\GeneratorsServiceProvider',
-
 
         'Search\SearchServiceProvider',
     ),
@@ -207,6 +207,7 @@ return array(
         'Memorize'          => 'Instrument\Memorize\Facade',
         'InstrumentTool'    => 'Instrument\Engine\Facade',
         'Newrelic'          => 'Intouch\LaravelNewrelic\Facades\Newrelic',
+        'Agent'             => 'Jenssegers\Agent\Facades\Agent',
     ),
 
 );

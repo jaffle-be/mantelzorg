@@ -32,7 +32,7 @@
     </script>
 
 </head>
-<body class="{{ $fullScreen ? 'tablet' : ''}}">
+<body class="{{ Agent::isTablet() || Agent::isMobile() ? 'tablet' : ''}}">
 
 <div id="wrapper">
 
@@ -40,23 +40,28 @@
 
     <div id="page-wrapper">
 
+        {{--added this so we can clear it with an @overwrite on the instrument page --}}
+        @section('page-header-wrapper')
         <section id="page-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sidebar">
-                <span class="sr-only">{{ Lang::get('dash/general.toggle_nav') }}</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <div class="left">
-                @yield('page-header')
-            </div>
-            <div class="right">
-                @include('layout.messages')
-            </div>
-            <div class="clearfix"></div>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sidebar">
+                    <span class="sr-only">{{ Lang::get('dash/general.toggle_nav') }}</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="left">
+                    @yield('page-header')
+                </div>
+                <div class="right">
+                    @include('layout.messages')
+                </div>
+                <div class="clearfix"></div>
         </section>
+        @stop
 
-        <section id="content" class="{{ isset($fullScreen) && $fullScreen ? 'full-screen' : '' }}">
+        @yield('page-header-wrapper')
+
+        <section id="content">
             <div class="container-fluid">
                 @yield('content')
             </div>
