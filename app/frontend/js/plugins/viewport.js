@@ -20,7 +20,6 @@
 
     $(window).on('resize orientationChanged', function()
     {
-        alert('test');
         app.fixWidth();
     });
 
