@@ -32,12 +32,11 @@
     </script>
 
 </head>
-<body>
+<body class="{{ $fullScreen ? 'tablet' : ''}}">
 
 <div id="wrapper">
 
     @include('layout.global.header', ['includeSidebar' => true])
-
 
     <div id="page-wrapper">
 
@@ -54,9 +53,10 @@
             <div class="right">
                 @include('layout.messages')
             </div>
+            <div class="clearfix"></div>
         </section>
 
-        <section id="content">
+        <section id="content" class="{{ isset($fullScreen) && $fullScreen ? 'full-screen' : '' }}">
             <div class="container-fluid">
                 @yield('content')
             </div>
@@ -67,7 +67,16 @@
 
     </div>
 
-    @include('layout.global.footer')
+    @unless($fullScreen)
+        @include('layout.global.footer')
+    @endunless
+
+    <div class="sidebar-collapser">
+        <a href="#">
+            <i class="fa fa-2x fa-arrow-left"></i>
+            <i class="fa fa-2x fa-arrow-right" style="display: none;"></i>
+        </a>
+    </div>
 
 </div>
 

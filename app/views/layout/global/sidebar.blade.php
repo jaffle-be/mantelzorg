@@ -15,11 +15,10 @@
 
             @if($user->admin == 1)
                 <li>
-
                     <a href="#"><span class="fa fa-users"></span>&nbsp;{{ Lang::get('master.navs.gebruikers') }}
                         <span class="fa arrow"></span></a>
 
-                    <ul class="nav nav-second-level">
+                    <ul class="nav nav-second-level collapse">
                         <li>
                             <a href="{{ route('hulpverleners.index') }}">{{ Lang::get('master.navs.hulpverleners') }}</a>
                         </li>
@@ -45,7 +44,7 @@
             <li>
                 <a href="#"><span class="fa fa-wrench"></span>&nbsp;{{ Lang::get('master.navs.instellingen') }}<span class="fa arrow"></span></a>
 
-                <ul class="nav nav-second-level">
+                <ul class="nav nav-second-level  collapse">
                     <li>
                         <a href="{{ action('Instelling\PersonController@index') }}">{{ Lang::get('master.navs.profiel') }}</a>
                     </li>

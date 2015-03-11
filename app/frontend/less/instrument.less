@@ -31,58 +31,67 @@
 }
 
 .instrument-header {
+  padding: 1em 3em;
 
-  margin-bottom: 20px;
-
-  ul {
-    list-style: none;
-    padding: 0;
-    text-align: center;
-
-    li {
-
-      text-decoration: none;
-      display: inline-block;
-      padding: 10px;
-      border: 1px solid @border-color;
-      border-radius: @border-radius-base;
-      margin-right: 10px;
-      text-shadow: none;
-    }
-
-    li.active a {
-      color: white;
-    }
-
-    li.panel-gray {
-      background-color: @panel-gray;
-    }
-
-    li.panel-yellow {
-      background-color: @panel-yellow;
-    }
-
-    li.panel-purple {
-      background-color: @panel-purple;
-    }
-
-    li.panel-green {
-      background-color: @panel-green;
-    }
-
-    li.panel-red {
-      background-color: @panel-red;
-    }
-
-    li.panel-blue {
-      background-color: @panel-blue;
-    }
-
-    li.panel-orange {
-      background-color: @panel-orange;
-    }
+  h3 {
+    font-weight: normal;
+    color: @white;
   }
 
+  &.panel-gray {
+    background-color: @panel-gray;
+  }
+
+  &.panel-yellow {
+    background-color: @panel-yellow;
+  }
+
+  &.panel-purple {
+    background-color: @panel-purple;
+  }
+
+  &.panel-green {
+    background-color: @panel-green;
+  }
+
+  &.panel-red {
+    background-color: @panel-red;
+  }
+
+  &.panel-blue {
+    background-color: @panel-blue;
+  }
+
+  &.panel-orange {
+    background-color: @panel-orange;
+  }
+
+  div.active {
+    width: 100%;
+
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      padding: 1em 2em;
+
+      a {
+        color: @white;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.question-wrapper{
+
+  & .instrument-questions:first-child{
+    margin-top: 1em;
+  }
 }
 
 .question-color(@c) {
@@ -190,9 +199,25 @@
     }
 
   }
-
 }
 
-.instrument-footer {
-  margin-top: 20px;
+// TABLET IMPROVEMENTS TO UX
+body.tablet {
+
+  #content{
+    overflow: scroll;
+    //account for the footer;
+    padding-bottom: 63px !important;
+  }
+
+  .instrument-footer {
+    border-top: 1px solid @border-color;
+    padding: 1em;
+    background-color: @white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+
 }

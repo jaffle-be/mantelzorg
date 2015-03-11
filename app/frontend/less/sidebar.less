@@ -52,12 +52,27 @@
     z-index: 1;
     position: absolute;
     width: 250px;
+    height: 100%;
   }
 
   .navbar-top-links .dropdown-messages,
   .navbar-top-links .dropdown-tasks,
   .navbar-top-links .dropdown-alerts {
     margin-left: auto;
+  }
+
+  .sidebar-collapser{
+    background-color: @brand-primary;
+    padding: 0.5em;
+    border-radius: 3px;
+    position: absolute;
+    left: 1.5em;
+    bottom: 1.5em;
+    display: block;
+
+    a{
+      color: @white;
+    }
   }
 }
 

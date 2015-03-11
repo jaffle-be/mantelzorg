@@ -9,26 +9,11 @@ use Lang;
 class Template
 {
 
-    /**
-     * @var Header
-     */
-    protected $header;
-
-    /**
-     * @var Question
-     */
     protected $question;
 
-    public function __construct(Header $header, Question $question)
+    public function __construct(Question $question)
     {
-        $this->header = $header;
-
         $this->question = $question;
-    }
-
-    public function header(Panel $panel)
-    {
-        return $this->header->render($panel);
     }
 
     public function questions(Panel $panel, $survey)
