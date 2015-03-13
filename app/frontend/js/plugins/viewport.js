@@ -24,4 +24,10 @@
         app.fixWidth();
     });
 
+    app.fixWidth();
+
+    $(window).ready(function(){
+        app.fixWidth()
+    });
+
 })(window.jQuery, window.app);
