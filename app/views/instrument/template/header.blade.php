@@ -12,7 +12,7 @@
 
         <ul style="display: none;">
             @foreach($panel->questionnaire->panels as $item)
-                <li class="{{ 'panel-' . $item->color }}">
+                <li class="{{ 'panel-' . $panel->color }}">
                     <a data-target-id="{{ $item->id }}" href="">{{ $item->title }}</a>
                 </li>
             @endforeach
