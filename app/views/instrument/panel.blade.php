@@ -30,7 +30,7 @@
 
     <?= InstrumentTool::questions($panel, $survey) ?>
 
-    <?= InstrumentTool::footer($panel) ?>
+    @include('instrument.template.footer', [ 'panel' => $panel, 'next' => $panel->nextPanel() ])
 
     <? Form::close() ?>
 
