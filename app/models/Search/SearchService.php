@@ -278,9 +278,9 @@ class SearchService implements SearchServiceInterface
 
         $indices->putSettings($settings);
 
-        $indices->refresh($toggle);
-
         $indices->open($toggle);
+
+        $indices->refresh($toggle);
     }
 
     /**
