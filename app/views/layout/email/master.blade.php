@@ -16,7 +16,7 @@
 </head>
 <body>
 
-@include('layout.global.header')
+@include('layout.global.header', ['includeSidebar' => false])
 
 <section id="page-header">
     <div class="container">
