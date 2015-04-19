@@ -54,7 +54,7 @@ class Question
 
     protected function header(Q $question, $first)
     {
-        return sprintf('<div class="header">%s <i class="fa fa-pencil-square-o" %s></i><i title="%s" class="fa fa-comment" %s></i></div>', $question->title, $first ? 'style="display:none;"' : '', Lang::get('questionnaires.meta'), $first ? '' : 'style="display:none;"');
+        return sprintf('<div class="header">%s <i data-show-on="not-editing" class="fa fa-pencil-square-o" %s></i><i data-show-on="editing" data-trigger="toggle-comment" title="%s" class="fa fa-comment" %s></i></div>', $question->title, $first ? 'style="display:none;"' : '', Lang::get('questionnaires.meta'), $first ? '' : 'style="display:none;"');
     }
 
     protected function body(Q $question, $answer, $first)

@@ -25,11 +25,8 @@
                 <div class="col-xs-2 col-sm-1 icons">
                     <div class="header">
                         @unless($questionnaire->panels->count() == 0)
-                            @if($questionnaire->active == '1')
-                                <i class="fa fa-check-square-o"></i>
-                            @else
-                                <i class="fa fa-square-o"></i>
-                            @endif
+                            <i data-trigger="deactivate" style="display:{{ $questionnaire->active ? "block" : "none" }};" class="fa fa-check-square-o"></i>
+                            <i data-trigger="activate" style="display:{{ !$questionnaire->active ? "block" : "none" }};" class="fa fa-square-o"></i>
                         @endunless
                     </div>
                     <div class="body">

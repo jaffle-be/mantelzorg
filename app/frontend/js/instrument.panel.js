@@ -1,13 +1,11 @@
 (function ($, app) {
     'use strict';
-    
+
     /**
      * start instrument header
      */
-    $(document).ready(function()
-    {
-        $(".instrument-header").on('click', function()
-        {
+    $(document).ready(function () {
+        $(".instrument-header").on('click', function () {
             $(this).find('ul').slideToggle();
         });
     });
@@ -32,8 +30,9 @@
 
     //show a certain question, el is a jquery object
     function showQuestion($el) {
-        $el.find(".header .glyphicon-edit").hide();
-        $el.find('.header .glyphicon-comment').show();
+        //on activating a question, we need to show the comment icon instead of the pencil icon
+        $el.find('.header [data-show-on="not-editing"]').hide();
+        $el.find('.header [data-show-on="editing"]').show();
         $el.find('.body .well').hide();
         $el.find('.body').slideDown();
         scrollTo($el)
@@ -62,8 +61,8 @@
 
     //hide a certain question.
     function hideQuestion($el) {
-        $el.find(".header .glyphicon-edit").show();
-        $el.find('.header .glyphicon-comment').hide();
+        $el.find('.header [data-show-on="not-editing"]').show();
+        $el.find('.header [data-show-on="editing"]').hide();
         $el.find(".body").slideUp();
     }
 
@@ -110,10 +109,13 @@
 
     $(document).ready(function () {
         $(".instrument-questions").on('click', '.instrument-question .header', function () {
+            //if we clicked the current header, hide all questions
             if ($(this).closest('.instrument-question').find('.body').css('display') == 'block')
             {
                 toggleQuestions();
-            } else
+            }
+            //else we will hide all questions except for the one we clicked
+            else
             {
                 toggleQuestions($(this).closest('.instrument-question'));
             }
@@ -123,7 +125,7 @@
             validateQuestion($(this).closest('.row').find('.instrument-question'));
         });
 
-        $(".instrument-questions").on('click', '.glyphicon-comment', function (event) {
+        $(".instrument-questions").on('click', '[data-trigger="toggle-comment"]', function (event) {
             toggleWell($(this));
             return false;
         });

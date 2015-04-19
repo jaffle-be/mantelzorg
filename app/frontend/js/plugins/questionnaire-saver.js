@@ -7,7 +7,7 @@
     function Saver() {
         this.$container = $('.questionnaires');
         this.titles = '.questionnaire-title';
-        this.activators = '.icons .header .glyphicon-check, .icons .header .glyphicon-unchecked';
+        this.activators = '.icons .header [data-trigger="deactivate"], .icons .header [data-trigger="activate"]';
         this.sortables = '.sortable';
         this.panelTitles = '.questionnaire-panel-title';
         this.colorSelectors = '.dropdown-menu .panel-color';
@@ -68,7 +68,7 @@
         },
         activation: function (box) {
             var that = this,
-                activate = box.hasClass('glyphicon-unchecked') ? true : false;
+                activate = box.data('trigger') == 'activate' ? true : false;
             $.ajax({
                 url: '/questionnaires/' + this.questionnaire(box) + '',
                 type: 'POST',
@@ -78,17 +78,21 @@
                 },
                 dataType: 'json',
                 success: function (response) {
-                    if (activate)
-                    {
-                        box.closest('.questionnaires').find('.glyphicon-check').each(function () {
-                            $(this).addClass('glyphicon-unchecked').removeClass('glyphicon-check');
-                        });
+                    var questionnaires = box.closest('.questionnaires');
+                    var questionnaire = box.closest('.header');
 
-                        box.removeClass('glyphicon-unchecked').addClass('glyphicon-check');
-                    }
-                    else
+                    //set all questionnaires to 'deactivated state'
+                    questionnaires.find('[data-trigger="activate"]').show();
+                    questionnaires.find('[data-trigger="deactivate"]').hide();
+
+                    if(activate)
                     {
-                        box.addClass('glyphicon-unchecked').removeClass('glyphicon-check');
+                        questionnaire.find('[data-trigger="activate"]').hide();
+                        questionnaire.find('[data-trigger="deactivate"]').show();
+                    }
+                    else{
+                        questionnaire.find('[data-trigger="activate"]').show();
+                        questionnaire.find('[data-trigger="deactivate"]').hide();
                     }
                 }
             });
