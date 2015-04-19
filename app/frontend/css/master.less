@@ -59,3 +59,9 @@ h1, h2, h3, h4, h5, h6 {
 #content{
   position: relative;
 }
+
+//this avoids drop-downs being clipped when the table doesn't contain enough rows.
+//you should set this to the height of the biggest drop-down in our app that's within a table.
+.table-responsive{
+  min-height: 300px;
+}
