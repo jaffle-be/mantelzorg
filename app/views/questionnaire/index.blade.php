@@ -97,8 +97,10 @@
     </div>
 
     <div class="page-actions">
-        <button class="btn btn-primary"><i class="fa fa-plus"></i><?= Lang::get('questionnaires.new') ?>
-        </button>
+        <p>
+            <button class="btn btn-primary"><i class="fa fa-plus"></i><?= Lang::get('questionnaires.new') ?>
+            </button>
+        </p>
     </div>
 
 
