@@ -43,7 +43,7 @@
 
 <div id="wrapper">
 
-    @include('layout.global.header', ['includeSidebar' => true])
+    @include('layout.global.header', ['includeSidebar' => true, 'forceShowLogin' => false])
 
     <div id="page-wrapper">
 

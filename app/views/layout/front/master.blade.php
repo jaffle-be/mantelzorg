@@ -34,7 +34,7 @@
 </head>
 <body>
 
-@include('layout.global.header', ['includeSidebar' => false])
+@include('layout.global.header', ['includeSidebar' => false, 'forceShowLogin' => false])
 
 <section id="page-header">
     <div class="container">
