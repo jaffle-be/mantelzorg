@@ -11,10 +11,8 @@
             this.$creator = $("#organisation-creator");
             this.$organisation = $("#organisation");
             this.$new = this.$creator.find("[name=organisation_name]");
-            this.$location = $("#location");
             this.init();
         }
-
 
         Creator.prototype = {
             init: function () {
