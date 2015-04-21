@@ -37,6 +37,8 @@ class MantelzorgerController extends \AdminController
 
     public function index($hulpverlener)
     {
+        $query = Input::get('query');
+
         $search = $this->mantelzorger->search();
 
         $mantelzorgers = $search
@@ -45,6 +47,8 @@ class MantelzorgerController extends \AdminController
             ->orderBy('lastname', 'asc')
             ->orderBy('firstname', 'asc')
             ->get();
+
+        $mantelzorgers->appends('query', $query);
 
         $this->layout->content = View::make('instellingen.mantelzorgers.index', compact(array('hulpverlener', 'mantelzorgers')));
     }
