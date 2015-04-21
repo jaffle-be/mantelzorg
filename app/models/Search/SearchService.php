@@ -217,7 +217,7 @@ class SearchService implements SearchServiceInterface
          */
         if($needsLoading)
         {
-            $type->load(array_keys($with));
+            $type->load(array_values($with));
         }
 
         $this->client->index($this->data($type));
