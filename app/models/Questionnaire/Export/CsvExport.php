@@ -16,6 +16,8 @@ class CsvExport implements Exporter
 
     public function __construct(Excel $excel)
     {
+        ini_set('max_execution_time', 300);
+
         $this->excel = $excel;
     }
 
@@ -26,7 +28,7 @@ class CsvExport implements Exporter
      * @param Questionnaire $survey
      * @param Collection    $sessions
      */
-    public function generate(Questionnaire $survey, Collection $sessions)
+    public function generate(Questionnaire $survey)
     {
         $data = new Collection();
 
@@ -78,18 +80,27 @@ class CsvExport implements Exporter
 
     protected function data($data, $survey)
     {
-        foreach ($survey->sessions as $session) {
-            $sessionData = new Collection();
+        $survey->sessions()->chunk(25, function ($sessions) use ($survey, &$data) {
 
-            //add the session id as first column.
-            $sessionData->push($session->id);
+            $sessions->load([
+                'answers',
+                'answers.choises',
+            ]);
 
-            foreach ($survey->panels as $panel) {
-                $this->answers($sessionData, $panel, $session);
+            foreach($sessions as $session)
+            {
+                $sessionData = new Collection();
+
+                //add the session id as first column.
+                $sessionData->push($session->id);
+
+                foreach ($survey->panels as $panel) {
+                    $this->answers($sessionData, $panel, $session);
+                }
+
+                $data->push($sessionData);
             }
-
-            $data->push($sessionData);
-        }
+        });
     }
 
     protected function answers(Collection $data, $panel, $session)
