@@ -31,45 +31,59 @@
 
     </script>
 
+    @if(Agent::isTablet() || Agent::isMobile())
+        <style rel="stylesheet">html {
+                background-color: white;
+            }</style>
+    @endif
+
+
 </head>
-<body>
+<body class="{{ Agent::isTablet() || Agent::isMobile() ? 'tablet' : ''}}">
 
-@include('layout.global.header')
+<div id="wrapper">
 
-<section id="page-header">
+    @include('layout.global.header', ['includeSidebar' => true, 'forceShowLogin' => false])
 
-    <div class="container">
-        <div class="left">
-            @yield('page-header')
-        </div>
-        <div class="right">
-            @include('layout.messages')
-        </div>
-    </div>
-</section>
+    <div id="page-wrapper">
 
-<section id="content">
-
-    <div class="container">
-
-        <div class="row">
-
-            @include('layout.admin.sidebar')
-
-            <section id="main-content" class="col-md-9 col-xs-12">
-
-                @yield('content')
+        {{--added this so we can clear it with an @overwrite on the instrument page --}}
+        @section('page-header-wrapper')
+            <section id="page-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sidebar">
+                    <span class="sr-only">{{ Lang::get('dash/general.toggle_nav') }}</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="left">
+                    @yield('page-header')
+                </div>
+                <div class="right">
+                    @include('layout.messages')
+                </div>
+                <div class="clearfix"></div>
             </section>
+        @stop
 
-        </div>
+        @yield('page-header-wrapper')
+
+        <section id="content">
+            <div class="container-fluid">
+                @yield('content')
+            </div>
+
+        </section>
+
+        @include('modals.confirmation')
 
     </div>
 
-</section>
+    @unless($fullScreen)
+        @include('layout.global.footer')
+    @endunless
 
-@include('modals.confirmation')
-
-@include('layout.global.footer')
+</div>
 
 <script type="text/javascript" src="/js/jquery.min.js"></script>
 <script type="text/javascript" src="/js/jquery-ui.custom.min.js"></script>
@@ -96,5 +110,7 @@
 
 </script>
 
+{{--make sure to clear all floats--}}
+<div class="clearfix"></div>
 </body>
 </html>

@@ -26,5 +26,7 @@
             event.preventDefault();
         });
 
+        $("#side-menu").metisMenu();
+
     }
 })(window.jQuery, window.app);

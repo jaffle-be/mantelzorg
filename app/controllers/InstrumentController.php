@@ -130,7 +130,11 @@ class InstrumentController extends AdminController
 
         $questionnaire = $panel->questionnaire;
 
-        $this->layout->content = View::make('instrument.panel', compact(array('panel', 'questionnaire', 'survey')));
+        $arguments = array_merge([
+            'zeroPadding' => true,
+        ], compact(array('panel', 'questionnaire', 'survey')));
+
+        $this->layout->content = View::make('instrument.panel', $arguments);
     }
 
     /**

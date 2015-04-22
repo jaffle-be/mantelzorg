@@ -10,6 +10,6 @@ interface Exporter {
      *
      * @param Questionnaire $survey
      */
-    public function generate(Questionnaire $survey, Collection $sessions);
+    public function generate(Questionnaire $survey);
 
 }

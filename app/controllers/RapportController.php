@@ -49,8 +49,6 @@ class RapportController extends AdminController
         $survey = $this->questionnaire->find($id);
 
         $survey->load([
-            'sessions.answers',
-            'sessions.answers.choises',
             'panels',
             //make sure questions follow the order of the questionnaire to number them in the report. not so transparent
             //but that is how they wanted it.
@@ -63,8 +61,6 @@ class RapportController extends AdminController
             }
         ])->all();
 
-        $sessions = $survey->sessions;
-
-        return $this->export->generate($survey, $sessions);
+        return $this->export->generate($survey);
     }
 }

@@ -17,7 +17,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         });
 
         $this->app['instrument.engine'] = $this->app->share(function () {
-            return new Engine\Template(new Engine\Header, new Engine\Question);
+            return new Engine\Template(new Engine\Question);
         });
     }
 }

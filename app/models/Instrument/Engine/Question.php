@@ -24,7 +24,7 @@ class Question
 
         $check = $filled ? null : 'display:none;';
 
-        $output .= sprintf('<div class="col-md-1 col-xs-1 question-status question-%s"><i class="glyphicon glyphicon-question-sign" style="%s"></i><i class="glyphicon glyphicon-ok" style="%s"></i></div>', $panel->color, $mark, $check);
+        $output .= sprintf('<div class="col-md-1 col-xs-1 question-status question-%s"><i class="fa fa-question-circle" style="%s"></i><i class="fa fa-check" style="%s"></i></div>', $panel->color, $mark, $check);
 
         $output .= sprintf('<div class="col-md-11 col-xs-9 instrument-question question-%s" data-question-id="%s">', $panel->color, $question->id);
 
@@ -44,7 +44,7 @@ class Question
     {
         switch ($option) {
             case 'open':
-                return '<div class="row instrument-questions">';
+                return '<div class="instrument-questions">';
                 break;
             case 'close':
                 return '</div>';
@@ -54,7 +54,7 @@ class Question
 
     protected function header(Q $question, $first)
     {
-        return sprintf('<div class="header">%s <i class="glyphicon glyphicon-edit" %s></i><i title="%s" class="glyphicon glyphicon-comment" %s></i></div>', $question->title, $first ? 'style="display:none;"' : '', Lang::get('questionnaires.meta'), $first ? '' : 'style="display:none;"');
+        return sprintf('<div class="header">%s <i data-show-on="not-editing" class="fa fa-pencil-square-o" %s></i><i data-show-on="editing" data-trigger="toggle-comment" title="%s" class="fa fa-comment" %s></i></div>', $question->title, $first ? 'style="display:none;"' : '', Lang::get('questionnaires.meta'), $first ? '' : 'style="display:none;"');
     }
 
     protected function body(Q $question, $answer, $first)

@@ -16,7 +16,7 @@
 </head>
 <body>
 
-@include('layout.global.header')
+@include('layout.global.header', ['includeSidebar' => false, 'forceShowLogin' => true ])
 
 <section id="page-header">
     <div class="container">

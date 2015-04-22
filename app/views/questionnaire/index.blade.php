@@ -17,7 +17,7 @@
             <div class="row" data-questionnaire-id="<?= $questionnaire->id ?>">
                 <div class="col-xs-10 col-sm-4 questionnaire">
                     <div class="header">
-                        <i class="glyphicons notes_2"></i><?= Lang::get('questionnaires.questionnaire') ?></div>
+                        <i class="fa fa-file-text-o"></i><?= Lang::get('questionnaires.questionnaire') ?></div>
                     <div class="body">
                         <?= Form::text('title', $questionnaire->title, array('class' => 'form-control questionnaire-title')) ?>
                     </div>
@@ -25,31 +25,28 @@
                 <div class="col-xs-2 col-sm-1 icons">
                     <div class="header">
                         @unless($questionnaire->panels->count() == 0)
-                            @if($questionnaire->active == '1')
-                                <i class="glyphicon glyphicon-check"></i>
-                            @else
-                                <i class="glyphicon glyphicon-unchecked"></i>
-                            @endif
+                            <i data-trigger="deactivate" style="display:{{ $questionnaire->active ? "block" : "none" }};" class="fa fa-check-square-o"></i>
+                            <i data-trigger="activate" style="display:{{ !$questionnaire->active ? "block" : "none" }};" class="fa fa-square-o"></i>
                         @endunless
                     </div>
                     <div class="body">
-                        <i class="glyphicon glyphicon-floppy-saved fade"></i>
+                        <i class="fa fa-cloud-upload fade"></i>
                     </div>
 
                 </div>
                 <div class="col-xs-10 col-sm-5 panels">
                     <div class="header">
                 <span>
-                    <i class="glyphicons list"></i><?= Lang::get('questionnaires.panels') ?>
+                    <i class="fa fa-list-ul"></i><?= Lang::get('questionnaires.panels') ?>
                 </span>
-                        <a class="btn btn-default pull-right" data-toggle="panel-creator"><i class="glyphicon glyphicon-plus"></i></a>
+                        <a class="btn btn-default pull-right" data-toggle="panel-creator"><i class="fa fa-plus"></i></a>
                     </div>
                     <div class="body">
                         <ul class='sortable'>
                             @foreach($questionnaire->panels as $panel)
                                 <li data-questionnaire-panel-id="<?= $panel->id ?>" id="panel-<?= $panel->id?>">
                                     <div class="input-group">
-                                        <div class="input-group-addon"><i class="glyphicon glyphicon-move"></i></div>
+                                        <div class="input-group-addon"><i class="fa fa-arrows"></i></div>
                                         <?= Form::text('title', $panel->title, array(
                                                 'class'             => 'form-control questionnaire-panel-title',
                                                 'data-panel-weight' => $panel->panel_weight
@@ -70,7 +67,7 @@
                                         </div>
                                         <div class="input-group-btn">
                                             <a href="<?= URL::route('panels.{panel}.questions.index', array($panel->id)) ?>" class="btn btn-default">
-                                                <i class="glyphicon glyphicon-tag"></i>
+                                                <i class="fa fa-tag"></i>
                                             </a>
                                         </div>
                                     </div>
@@ -85,7 +82,7 @@
                         <ul>
                             <? $teller = 1; ?>
                             @while($teller <= count($questionnaire->panels))
-                                <li><i class="glyphicon glyphicon-floppy-saved fade"></i></li>
+                                <li><i class="fa fa-cloud-upload fade"></i></li>
                                 <? $teller++; ?>
                             @endwhile
                         </ul>
@@ -97,8 +94,10 @@
     </div>
 
     <div class="page-actions">
-        <button class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i><?= Lang::get('questionnaires.new') ?>
-        </button>
+        <p>
+            <button class="btn btn-primary"><i class="fa fa-plus"></i><?= Lang::get('questionnaires.new') ?>
+            </button>
+        </p>
     </div>
 
 

@@ -8,7 +8,6 @@
     <?= Template::crumb(array(
             array(
                     'text' => Lang::get('master.navs.instrument'),
-
             ),
             array(
                     'text' => Lang::get('master.navs.start'),
@@ -17,7 +16,6 @@
             array(
                     'text' => Lang::get('instrument.panel')
             )
-
     )) ?>
 @stop
 
@@ -28,11 +26,11 @@
             'id'    => 'panel-form'
     )) ?>
 
-    <?= InstrumentTool::header($panel); ?>
+    @include('instrument.template.header', ['panel' => $panel])
 
     <?= InstrumentTool::questions($panel, $survey) ?>
 
-    <?= InstrumentTool::footer($panel) ?>
+    @include('instrument.template.footer', [ 'panel' => $panel, 'next' => $panel->nextPanel() ])
 
     <? Form::close() ?>
 

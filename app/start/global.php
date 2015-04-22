@@ -98,6 +98,14 @@ View::composer('layout.messages', function ($view) {
     $view->with(compact('message', 'error'));
 });
 
+View::composer('layout.admin.master', function($view)
+{
+    /** @var \Illuminate\Routing\Route $route */
+    $route = Route::getCurrentRoute();
+    //Add zero padding to the interface for better UX on tablets.
+    $view->with(['fullScreen' => $route->getName() == 'instrument.panel.get' ]);
+});
+
 Validator::extend('passcheck', function ($attribute, $value, $parameters) {
 
     $user = Auth::user();

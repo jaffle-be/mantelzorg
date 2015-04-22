@@ -2,6 +2,16 @@
 @import 'bootstrap-variables';
 @import 'bootstrap-mixins';
 
+.question-color(@c) {
+  .header {
+    color: @c;
+  }
+
+  .fa {
+    color: @c;
+  }
+}
+
 .btn-gray {
   .button-variant(@white, @panel-gray, darken(@panel-gray, 10%));
 }
@@ -32,66 +42,71 @@
 
 .instrument-header {
 
-  margin-bottom: 20px;
+  .heading {
+    padding: 1em 3em;
+
+    h3 {
+      font-weight: normal;
+      color: @white;
+    }
+  }
+
+  &.panel-gray, .panel-gray {
+    background-color: @panel-gray;
+  }
+
+  &.panel-yellow, .panel-yellow {
+    background-color: @panel-yellow;
+  }
+
+  &.panel-purple, .panel-purple {
+    background-color: @panel-purple;
+  }
+
+  &.panel-green, .panel-green {
+    background-color: @panel-green;
+  }
+
+  &.panel-red, .panel-red {
+    background-color: @panel-red;
+  }
+
+  &.panel-blue, .panel-blue {
+    background-color: @panel-blue;
+  }
+
+  &.panel-orange, .panel-orange {
+    background-color: @panel-orange;
+  }
+
+  div.active {
+    width: 100%;
+
+  }
 
   ul {
-    list-style: none;
+    list-style-type: none;
     padding: 0;
-    text-align: center;
+    margin: 0;
 
     li {
+      padding: 1em 2em;
+      border-bottom: 1px solid @border-color;
 
-      text-decoration: none;
-      display: inline-block;
-      padding: 10px;
-      border: 1px solid @border-color;
-      border-radius: @border-radius-base;
-      margin-right: 10px;
-      text-shadow: none;
+      a {
+        display:block;
+        color: @white;
+        text-decoration: none;
+      }
     }
 
-    li.active a {
-      color: white;
+    li:first-child{
+      border-top: 1px solid @border-color;
     }
 
-    li.panel-gray {
-      background-color: @panel-gray;
+    li:last-child{
+      border-bottom: none;
     }
-
-    li.panel-yellow {
-      background-color: @panel-yellow;
-    }
-
-    li.panel-purple {
-      background-color: @panel-purple;
-    }
-
-    li.panel-green {
-      background-color: @panel-green;
-    }
-
-    li.panel-red {
-      background-color: @panel-red;
-    }
-
-    li.panel-blue {
-      background-color: @panel-blue;
-    }
-
-    li.panel-orange {
-      background-color: @panel-orange;
-    }
-  }
-
-}
-
-.question-color(@c) {
-  .header {
-    color: @c;
-  }
-
-  .glyphicon {
-    color: @c;
   }
 }
 
@@ -128,7 +143,8 @@
 
     font-size: xx-large;
 
-    .glyphicon {
+    .fa {
+      margin-left: 15px;
       margin-top: 15px;
     }
   }
@@ -149,7 +165,7 @@
       font-weight: bold;
       margin-bottom: 10px;
 
-      .glyphicon {
+      .fa {
         float: right;
       }
     }
@@ -189,9 +205,25 @@
     }
 
   }
-
 }
 
-.instrument-footer {
-  margin-top: 20px;
+// TABLET IMPROVEMENTS TO UX
+body.tablet {
+
+  #content {
+    overflow: scroll;
+    //account for the footer;
+    padding-bottom: 63px !important;
+  }
+
+  .instrument-footer {
+    border-top: 1px solid @border-color;
+    padding: 1em;
+    background-color: @white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+
 }
