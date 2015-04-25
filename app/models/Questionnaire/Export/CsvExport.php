@@ -38,7 +38,7 @@ class CsvExport implements Exporter
      */
     public function generate(Questionnaire $survey)
     {
-        $this->excel->create($survey->title . '-' . $this->carbon->now()->format('y-m-d H:i:s'), function ($excel) use ($survey) {
+        $excel = $this->excel->create($survey->title . '-' . $this->carbon->now()->format('y-m-d H:i:s'), function ($excel) use ($survey) {
 
             $excel->sheet($survey->title, function (LaravelExcelWorksheet $sheet) use ($survey) {
                 //disable autosize for faster export.. (this dropped +-44 s with 200 sessions)
@@ -50,7 +50,11 @@ class CsvExport implements Exporter
                 //now add all data rows
                 $this->data($sheet, $survey);
             });
-        })->store('xls');
+        });
+
+        $excel->store('xls');
+
+        return $excel->getFileName();
     }
 
     protected function headers(Questionnaire $survey)
@@ -94,8 +98,7 @@ class CsvExport implements Exporter
 
         $map = [];
 
-        foreach($panels as $panel)
-        {
+        foreach ($panels as $panel) {
             $map[$panel['id']] = $panel['questions'];
         }
 
