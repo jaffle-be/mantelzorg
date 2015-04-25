@@ -5,7 +5,7 @@
     $(document).ready(function () {
 
         //prevent accidental deletion of files.
-        $("[data-trigger='rapport-list']").on('click', 'a', function()
+        $("[data-trigger='rapport-list']").on('click', 'a[data-trigger="confirm"]', function()
         {
             var link = $(this).attr('href');
 

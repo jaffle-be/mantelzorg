@@ -70,7 +70,7 @@
                                 <li>
                                     <a title="{{ Lang::get('rapport.download') }}" href="{{ route('rapport.download', array($file)) }}">{{ $file }}</a>
 
-                                    <a class="btn btn-danger btn-sm" href="{{ route('rapport.delete', [$file]) }}">
+                                    <a class="btn btn-danger btn-sm" data-trigger="confirm" href="{{ route('rapport.delete', [$file]) }}">
                                         <i class="fa fa-times"></i>&nbsp; verwijderen
                                     </a>
                                 </li>
