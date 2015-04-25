@@ -63,7 +63,7 @@ class Session extends Eloquent implements Searchable
     public function getAnswered(Question $question)
     {
         return $this->answers->filter(function ($item) use ($question) {
-            if ($item->question_id == $question->id) {
+            if ($item->getAttribute('question_id') == $question->getAttribute('id')) {
                 return true;
             }
         })->first();

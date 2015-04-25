@@ -61,6 +61,8 @@ class RapportController extends AdminController
             }
         ])->all();
 
-        return $this->export->generate($survey);
+        $this->export->generate($survey);
+
+        return Redirect::back();
     }
 }
