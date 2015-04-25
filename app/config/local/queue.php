@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'default' => 'redis'
+    'default' => 'sync'
 ];
