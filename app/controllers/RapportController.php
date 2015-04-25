@@ -1,6 +1,7 @@
 <?php
 
 use Questionnaire\Export\Exporter;
+use Questionnaire\Export\FileManager;
 use Questionnaire\Questionnaire;
 
 class RapportController extends AdminController
@@ -18,13 +19,15 @@ class RapportController extends AdminController
      */
     protected $export;
 
-    public function __construct(Questionnaire $questionnaire, Exporter $export)
+    public function __construct(Questionnaire $questionnaire, Exporter $export, FileManager $files)
     {
         $this->beforeFilter('auth.admin');
 
         $this->questionnaire = $questionnaire;
 
         $this->export = $export;
+
+        $this->files = $files;
     }
 
     public function index()
@@ -33,18 +36,7 @@ class RapportController extends AdminController
 
         $questionnaires = ['' => Lang::get('rapport.select_survey')] + $questionnaires->lists('title', 'id');
 
-        //this should list downloads.
-        $exports = scandir(app_path('storage') . '/exports');
-
-        $files = [];
-
-        while($file = array_shift($exports))
-        {
-            if(strpos($file, '.') !== 0)
-            {
-                array_push($files, $file);
-            }
-        }
+        $files = $this->files->listFiles();
 
         $this->layout->content = View::make('rapport.index', compact('questionnaires', 'files'));
     }
@@ -82,5 +74,12 @@ class RapportController extends AdminController
     public function download($filename)
     {
         return Response::download(app_path('storage') . '/exports/' . $filename);
+    }
+
+    public function delete($filename)
+    {
+        $this->files->delete($filename);
+
+        return Redirect::back();
     }
 }

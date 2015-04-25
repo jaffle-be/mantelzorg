@@ -58,6 +58,11 @@ Route::get('rapport/download/{filename}', [
     'as' => 'rapport.download'
 ]);
 
+Route::get('rapport/delete/{filename}', [
+    'uses' => 'RapportController@delete',
+    'as' => 'rapport.delete',
+]);
+
 /**
  * INSTRUMENT
  */

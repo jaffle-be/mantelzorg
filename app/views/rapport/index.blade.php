@@ -40,33 +40,39 @@
 
     {{ Form::close() }}
 
-    <div class="row">
+    @if(count($files))
 
-        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-            <div class="panel panel-default">
+        <div class="row">
 
-                <div class="panel-heading">
-                    <h3 class="panel-title">Files</h3>
-                </div>
+            <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                <div class="panel panel-default">
 
-                <div class="panel-body">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ Lang::get('rapport.rapporten') }}</h3>
+                    </div>
 
-                    @if(count($files))
+                    <div class="panel-body">
+
+
                         <ul>
                             @foreach($files as $file)
-                                <li><a href="{{ route('rapport.download', array($file)) }}">{{ $file }}</a></li>
+                                <li>
+                                    <a href="{{ route('rapport.download', array($file)) }}">{{ $file }}</a>
+
+                                    <a class="btn btn-danger btn-sm" href="{{ route('rapport.delete', [$file]) }}">
+                                        <i class="fa fa-times"></i>&nbsp; verwijderen
+                                    </a>
+                                </li>
                             @endforeach
                         </ul>
-                    @else
-
-                    @endif
+                    </div>
 
                 </div>
-
             </div>
+
         </div>
 
-    </div>
+    @endif
 
 
 
