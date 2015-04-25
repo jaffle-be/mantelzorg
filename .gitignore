@@ -2,6 +2,7 @@
 node_modules
 /vendor
 /app/storage/dumps/*
+/app/storage/exports/*
 composer.phar
 .DS_Store
 .idea
