@@ -11,7 +11,7 @@
 
 @section('content')
 
-    {{ Form::open(['route' => 'rapport.download', 'class' => 'form-horizontal']) }}
+    {{ Form::open(['route' => 'rapport.generate', 'class' => 'form-horizontal']) }}
 
     <div class="form-group">
         <label for="survey" class="control-label col-xs-12 col-sm-3">{{ Lang::get('rapport.survey') }}</label>
@@ -39,5 +39,35 @@
     </div>
 
     {{ Form::close() }}
+
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <h3 class="panel-title">Files</h3>
+                </div>
+
+                <div class="panel-body">
+
+                    @if(count($files))
+                        <ul>
+                            @foreach($files as $file)
+                                <li><a href="{{ route('rapport.download', array($file)) }}">{{ $file }}</a></li>
+                            @endforeach
+                        </ul>
+                    @else
+
+                    @endif
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
 
 @stop

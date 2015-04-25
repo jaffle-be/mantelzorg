@@ -33,10 +33,23 @@ class RapportController extends AdminController
 
         $questionnaires = ['' => Lang::get('rapport.select_survey')] + $questionnaires->lists('title', 'id');
 
-        $this->layout->content = View::make('rapport.index', compact('questionnaires'));
+        //this should list downloads.
+        $exports = scandir(app_path('storage') . '/exports');
+
+        $files = [];
+
+        while($file = array_shift($exports))
+        {
+            if(strpos($file, '.') !== 0)
+            {
+                array_push($files, $file);
+            }
+        }
+
+        $this->layout->content = View::make('rapport.index', compact('questionnaires', 'files'));
     }
 
-    public function download()
+    public function generate()
     {
         $id = Input::get('survey');
 
@@ -64,5 +77,10 @@ class RapportController extends AdminController
         $this->export->generate($survey);
 
         return Redirect::back();
+    }
+
+    public function download($filename)
+    {
+        return Response::download(app_path('storage') . '/exports/' . $filename);
     }
 }

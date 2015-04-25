@@ -49,8 +49,13 @@ Route::get('rapport', [
 ]);
 
 Route::post('rapport', [
-    'uses' => 'RapportController@download',
-    'as'   => 'rapport.download'
+    'uses' => 'RapportController@generate',
+    'as'   => 'rapport.generate'
+]);
+
+Route::get('rapport/download/{filename}', [
+    'uses'=> 'RapportController@download',
+    'as' => 'rapport.download'
 ]);
 
 /**
