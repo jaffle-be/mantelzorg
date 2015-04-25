@@ -1,3 +1,8 @@
+@section('scripts')
+    <script src="/js/rapport.min.js"></script>
+@stop
+
+
 @section('page-header')
     <?= Template::crumb(array(
             array(
@@ -60,7 +65,7 @@
                     </div>
 
                     <div class="panel-body">
-                        <ul class="rapport-files">
+                        <ul class="rapport-files" data-trigger="rapport-list">
                             @foreach($files as $file)
                                 <li>
                                     <a title="{{ Lang::get('rapport.download') }}" href="{{ route('rapport.download', array($file)) }}">{{ $file }}</a>
