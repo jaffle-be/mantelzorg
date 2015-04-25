@@ -45,12 +45,12 @@ Route::resource('instellingen/{mantelzorger}/oudere', 'Instelling\OudereControll
  */
 Route::get('rapport', [
     'uses' => 'RapportController@index',
-    'as' => 'rapport.index'
+    'as'   => 'rapport.index'
 ]);
 
 Route::post('rapport', [
     'uses' => 'RapportController@download',
-    'as' => 'rapport.download'
+    'as'   => 'rapport.download'
 ]);
 
 /**
@@ -124,7 +124,6 @@ Route::resource('questions/{question}/choises', 'Questionnaire\ChoiseController'
 
 Route::post('questions/{question}/choises/sort', 'Questionnaire\ChoiseController@sort');
 
-
 /**
  * API ROUTES
  */
@@ -132,7 +131,6 @@ Route::post('questions/{question}/choises/sort', 'Questionnaire\ChoiseController
 Route::group(['prefix' => 'api'], function () {
     Route::get('mantelzorger/{mantelzorger}/ouderen', 'Api\MantelzorgerController@ouderen');
 });
-
 
 /**
  * INDEX
