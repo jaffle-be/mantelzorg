@@ -49,8 +49,8 @@ class InstrumentController extends AdminController
 
         $search = $this->session->search();
 
-        $surveys = $search->filterMatch('user_id', $hulpverlener->id)
-            ->whereMulti_match(['mantelzorger.firstname', 'mantelzorger.lastname', 'mantelzorger.identifier', 'oudere.firstname', 'oudere.lastname', 'oudere.identifier'], Input::get('query'))
+        $surveys = $search->filterTerm('user_id', $hulpverlener->id)
+            ->filterMulti_match(['mantelzorger.firstname', 'mantelzorger.lastname', 'mantelzorger.identifier', 'oudere.firstname', 'oudere.lastname', 'oudere.identifier'], Input::get('query'))
             ->get();
 
         if (!$questionnaire) {
