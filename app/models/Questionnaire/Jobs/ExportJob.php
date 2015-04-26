@@ -69,7 +69,7 @@ class ExportJob {
         }
         catch(Exception $e)
         {
-            $this->log->error(sprintf('%s job failed: %s', __CLASS__ , $job->getRawBody()));
+            $this->log->error(sprintf('%s job failed: %s error: %s', __CLASS__ , $job->getRawBody(), $e->getMessage()));
         }
     }
 
