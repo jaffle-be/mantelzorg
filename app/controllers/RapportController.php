@@ -51,7 +51,7 @@ class RapportController extends AdminController
 
         Queue::push('Questionnaire\Jobs\ExportJob@fire', ['id' => $id]);
 
-        return Redirect::back();
+        return Redirect::back()->with('success', \Lang::get('rapport.success'));
     }
 
     public function download($filename)
