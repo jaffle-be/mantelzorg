@@ -36,15 +36,18 @@ class FileManager
     {
         $filepath = $this->path . '/' . $filename;
 
-        if($this->files->exists($filepath))
+        if($this->files->exists($filepath, false))
         {
             $this->files->delete($filepath);
         }
     }
 
-    public function exists($filename)
+    public function exists($filename, $buildPath = true)
     {
-        $path = $this->path . '/' . $filename;
+        if($buildPath)
+        {
+            $path = $this->path . '/' . $filename;
+        }
 
         return $this->files->exists($path);
     }
