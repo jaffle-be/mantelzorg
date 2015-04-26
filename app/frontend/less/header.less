@@ -1,5 +1,9 @@
 @import "variables";
 
+//customisations for header height can be found in the navbar bootstrap-variables and their custom rules
+//bootstrap/navbar.less
+//navbar-tablet.less
+
 #brand {
   font-size: 28px;
   text-transform: uppercase;
@@ -18,6 +22,10 @@ header {
 #page-header {
   background-color: @brand-primary;
   padding: 1.5em;
+
+  @media (max-width: @grid-float-breakpoint) {
+    padding: 1em;
+  }
 
   &::after{
     content: ' ';

@@ -1,0 +1,44 @@
+@media(max-width: @screen-sm)
+{
+  .navbar-vertical-align-tablet(@element-height){
+    margin-top: ((@navbar-height-tablet - @element-height) / 2);
+    margin-bottom: ((@navbar-height-tablet - @element-height) / 2);
+  }
+
+  .navbar {
+    min-height: @navbar-height-tablet; // Ensure a navbar always shows (e.g., without a .navbar-brand in collapsed mode)
+    margin-bottom: @navbar-margin-bottom-tablet;
+  }
+
+  .navbar-brand {
+    padding: @navbar-padding-vertical-tablet @navbar-padding-horizontal;
+    height: @navbar-height-tablet;
+  }
+
+  .navbar-toggle {
+    .navbar-vertical-align-tablet(34px);
+  }
+
+  .navbar-nav {
+    margin: (@navbar-padding-vertical-tablet / 2) -@navbar-padding-horizontal;
+  }
+
+  .navbar-form {
+    .navbar-vertical-align-tablet(@input-height-base);
+  }
+
+  .navbar-btn {
+    .navbar-vertical-align-tablet(@input-height-base);
+
+    &.btn-sm {
+      .navbar-vertical-align-tablet(@input-height-small);
+    }
+    &.btn-xs {
+      .navbar-vertical-align-tablet(22);
+    }
+  }
+
+  .navbar-text {
+    .navbar-vertical-align-tablet(@line-height-computed);
+  }
+}
