@@ -19,22 +19,7 @@
 
 @section('content')
 
-    @if($users->count())
-        <div class="row easy-search">
-            <div class="col-xs-5">
-                @include('hulpverlener.search')
-            </div>
-            <div class="col-xs-7 text-right">
-                {{ $users->links('pagination::simple') }}
-            </div>
-        </div>
-    @else
-        <div class="row easy-search">
-            <div class="col-xs-5">
-                @include('hulpverlener.search')
-            </div>
-        </div>
-    @endif
+    @include('layout.easy-search-top', ['view' => 'hulpverlener.search', 'data' => $users])
 
     <div class="table-responsive">
         <table class="table table-striped table-hover">
@@ -86,11 +71,7 @@
         </table>
     </div>
 
-    @if($users->count())
-        <div class="text-center">
-            {{ $users->links() }}
-        </div>
-    @endif
+    @include('layout.easy-search-bottom', ['data' => $users])
 
 
 @stop

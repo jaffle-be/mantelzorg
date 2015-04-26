@@ -17,23 +17,7 @@
 
 @section('content')
 
-    @if($registrations->count())
-        <div class="row easy-search">
-            <div class="col-xs-5">
-                @include('inschrijving.search')
-            </div>
-            <div class="col-xs-7 text-right">
-                {{ $registrations->links('pagination::simple') }}
-            </div>
-        </div>
-    @else
-        <div class="row easy-search">
-            <div class="col-xs-5">
-                @include('inschrijving.search')
-            </div>
-        </div>
-    @endif
-
+    @include('layout.easy-search-top', ['view' => 'inschrijving.search', 'data' => $registrations])
 
     <div class="table-responsive">
         <table class="table table-striped table-hover">
@@ -81,10 +65,6 @@
         </table>
     </div>
 
-    @if($registrations->count())
-        <div class="text-center">
-            {{ $registrations->links() }}
-        </div>
-    @endif
+    @include('layout.easy-search-bottom', ['data' => $registrations])
 
 @stop

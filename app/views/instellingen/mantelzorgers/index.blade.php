@@ -18,23 +18,7 @@
         </a>
     </div>
 
-
-    @if($mantelzorgers->count())
-        <div class="row easy-search">
-            <div class="col-sm-5">
-                @include('instellingen.mantelzorgers.search')
-            </div>
-            <div class="col-sm-7 text-right">
-                {{ $mantelzorgers->links('pagination::simple') }}
-            </div>
-        </div>
-    @else
-        <div class="row easy-search">
-            <div class="col-sm-5">
-                @include('instellingen.mantelzorgers.search')
-            </div>
-        </div>
-    @endif
+    @include('layout.easy-search-top', ['view' => 'instellingen.mantelzorgers.search', 'data' => $mantelzorgers])
 
     @if($mantelzorgers->count())
 
@@ -77,10 +61,8 @@
 
             @endforeach
 
+            @include('layout.easy-search-bottom', ['data' => $mantelzorgers])
 
-            <div class="text-center">
-                {{$mantelzorgers->links() }}
-            </div>
         </div>
     @endif
 

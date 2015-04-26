@@ -60,22 +60,7 @@
 
     <? if(count($surveys)): ?>
 
-    @if($surveys->count())
-        <div class="row easy-search">
-            <div class="col-sm-5">
-                @include('instrument.search')
-            </div>
-            <div class="col-sm-7 text-right">
-                {{ $surveys->links('pagination::simple') }}
-            </div>
-        </div>
-    @else
-        <div class="row easy-search">
-            <div class="col-sm-5">
-                @include('instrument.search')
-            </div>
-        </div>
-    @endif
+    @include('layout.easy-search-top', ['view' => 'instrument.search', 'data' => $surveys])
 
     <div class="table-responsive">
         <table class="table table-striped table-hover">
@@ -120,9 +105,7 @@
         </table>
     </div>
 
-    <div class="text-center">
-        {{ $surveys->links() }}
-    </div>
+    @include('layout.easy-search-bottom', ['data' => $surveys])
 
     <? endif ?>
 
