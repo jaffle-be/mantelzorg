@@ -44,8 +44,8 @@ class FileManager
 
     public function exists($filename)
     {
-        $filename = $filename . '.xls';
+        $path = $this->path . '/' . $filename;
 
-        return $this->files->exists($this->path . './' . $filename);
+        return $this->files->exists($path);
     }
 }
