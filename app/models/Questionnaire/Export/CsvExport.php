@@ -54,7 +54,7 @@ class CsvExport implements Exporter
 
         $excel->store('xls');
 
-        return $excel->getFileName();
+        return $excel->getFileName() . '.xls';
     }
 
     protected function headers(Questionnaire $survey)

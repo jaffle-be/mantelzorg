@@ -56,7 +56,15 @@ class RapportController extends AdminController
 
     public function download($filename)
     {
-        return Response::download(app_path('storage') . '/exports/' . $filename);
+        if($this->files->exists($filename))
+        {
+            return Response::download(app_path('storage') . '/exports/' . $filename);
+        }
+        else
+        {
+            return Redirect::route('rapport.index');
+        }
+
     }
 
     public function delete($filename)

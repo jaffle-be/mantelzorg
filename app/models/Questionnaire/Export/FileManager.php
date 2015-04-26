@@ -41,4 +41,11 @@ class FileManager
             $this->files->delete($filepath);
         }
     }
+
+    public function exists($filename)
+    {
+        $filename = $filename . '.xls';
+
+        return $this->files->exists($this->path . './' . $filename);
+    }
 }
