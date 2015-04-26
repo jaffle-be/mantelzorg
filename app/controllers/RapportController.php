@@ -19,12 +19,16 @@ class RapportController extends AdminController
      */
     protected $export;
 
+    /**
+     * @var AuthManager
+     */
+    protected $auth;
+
     public function __construct(Questionnaire $questionnaire, FileManager $files)
     {
         $this->beforeFilter('auth.admin');
 
         $this->questionnaire = $questionnaire;
-
         $this->files = $files;
     }
 
@@ -43,13 +47,15 @@ class RapportController extends AdminController
     {
         $id = Input::get('survey');
 
+        $user = \Auth::user();
+
         $validator = Validator::make(Input::except('_token'), ['survey' => 'required|exists:questionnaires,id']);
 
         if ($validator->fails()) {
             return Redirect::back()->with('errors', $validator->messages());
         }
 
-        Queue::push('Questionnaire\Jobs\ExportJob@fire', ['id' => $id]);
+        Queue::push('Questionnaire\Jobs\ExportJob@fire', ['id' => $id, 'userid' => $user->id]);
 
         return Redirect::back()->with('success', \Lang::get('rapport.success'));
     }
