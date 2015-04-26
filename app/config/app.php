@@ -137,6 +137,7 @@ return array(
         'UserServiceProvider',
 
         'Search\SearchServiceProvider',
+        'Notifications\NotificationServiceProvider',
     ),
 
     /*

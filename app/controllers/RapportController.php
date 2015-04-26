@@ -1,6 +1,7 @@
 <?php
 
 use Questionnaire\Export\Exporter;
+use Questionnaire\Export\FileManager;
 use Questionnaire\Questionnaire;
 
 class RapportController extends AdminController
@@ -18,13 +19,17 @@ class RapportController extends AdminController
      */
     protected $export;
 
-    public function __construct(Questionnaire $questionnaire, Exporter $export)
+    /**
+     * @var AuthManager
+     */
+    protected $auth;
+
+    public function __construct(Questionnaire $questionnaire, FileManager $files)
     {
         $this->beforeFilter('auth.admin');
 
         $this->questionnaire = $questionnaire;
-
-        $this->export = $export;
+        $this->files = $files;
     }
 
     public function index()
@@ -33,12 +38,16 @@ class RapportController extends AdminController
 
         $questionnaires = ['' => Lang::get('rapport.select_survey')] + $questionnaires->lists('title', 'id');
 
-        $this->layout->content = View::make('rapport.index', compact('questionnaires'));
+        $files = $this->files->listFiles();
+
+        $this->layout->content = View::make('rapport.index', compact('questionnaires', 'files'));
     }
 
-    public function download()
+    public function generate()
     {
         $id = Input::get('survey');
+
+        $user = \Auth::user();
 
         $validator = Validator::make(Input::except('_token'), ['survey' => 'required|exists:questionnaires,id']);
 
@@ -46,21 +55,28 @@ class RapportController extends AdminController
             return Redirect::back()->with('errors', $validator->messages());
         }
 
-        $survey = $this->questionnaire->find($id);
+        Queue::push('Questionnaire\Jobs\ExportJob@fire', ['id' => $id, 'userid' => $user->id]);
 
-        $survey->load([
-            'panels',
-            //make sure questions follow the order of the questionnaire to number them in the report. not so transparent
-            //but that is how they wanted it.
-            'panels.questions' => function($query){
-                $query->orderBy('sort');
-            },
-            //same reasoning applies for the options available to a question.
-            'panels.questions.choises' => function($query){
-                $query->orderBy('sort_weight');
-            }
-        ])->all();
+        return Redirect::back()->with('success', \Lang::get('rapport.success'));
+    }
 
-        return $this->export->generate($survey);
+    public function download($filename)
+    {
+        if($this->files->exists($filename))
+        {
+            return Response::download(app_path('storage') . '/exports/' . $filename);
+        }
+        else
+        {
+            return Redirect::route('rapport.index');
+        }
+
+    }
+
+    public function delete($filename)
+    {
+        $this->files->delete($filename);
+
+        return Redirect::back();
     }
 }

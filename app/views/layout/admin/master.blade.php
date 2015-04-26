@@ -56,12 +56,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <div class="left">
-                    @yield('page-header')
-                </div>
-                <div class="right">
-                    @include('layout.messages')
-                </div>
+                @yield('page-header')
                 <div class="clearfix"></div>
             </section>
         @stop
@@ -70,6 +65,13 @@
 
         <section id="content">
             <div class="container-fluid">
+
+                <div class="row">
+                    <div id="global-messages" class="col-xs-10 col-xs-offset-1">
+                        @include('layout.messages')
+                    </div>
+                </div>
+
                 @yield('content')
             </div>
 

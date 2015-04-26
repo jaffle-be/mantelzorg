@@ -1,6 +1,8 @@
 <?php namespace Questionnaire\Export;
 
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Classes\LaravelExcelWorksheet;
 use Maatwebsite\Excel\Excel;
 use Questionnaire\Panel;
 use Questionnaire\Question;
@@ -14,11 +16,17 @@ class CsvExport implements Exporter
      */
     protected $excel;
 
-    public function __construct(Excel $excel)
+    protected $repository;
+
+    public function __construct(Excel $excel, Repository $repo, Carbon $carbon)
     {
         ini_set('max_execution_time', 300);
 
         $this->excel = $excel;
+
+        $this->repository = $repo;
+
+        $this->carbon = $carbon;
     }
 
     /**
@@ -30,19 +38,23 @@ class CsvExport implements Exporter
      */
     public function generate(Questionnaire $survey)
     {
-        $data = new Collection();
+        $excel = $this->excel->create($survey->title . '-' . $this->carbon->now()->format('y-m-d H:i:s'), function ($excel) use ($survey) {
 
-        $headers = $this->headers($survey);
-
-        $data->push($headers);
-
-        $this->data($data, $survey);
-
-        $this->excel->create($survey->title, function ($excel) use ($data) {
-            $excel->sheet($excel->getTitle(), function ($sheet) use ($data) {
-                $sheet->fromArray($data->toArray(), null, 'A1', true, false);
+            $excel->sheet($survey->title, function (LaravelExcelWorksheet $sheet) use ($survey) {
+                //disable autosize for faster export.. (this dropped +-44 s with 200 sessions)
+                $sheet->setAutoSize(false);
+                //get the headers
+                $headers = $this->headers($survey);
+                //and add them
+                $sheet->appendRow($headers->toArray());
+                //now add all data rows
+                $this->data($sheet, $survey);
             });
-        })->download();
+        });
+
+        $excel->store('xls');
+
+        return $excel->getFileName() . '.xls';
     }
 
     protected function headers(Questionnaire $survey)
@@ -78,47 +90,80 @@ class CsvExport implements Exporter
         }
     }
 
-    protected function data($data, $survey)
+    protected function mapPanels(Questionnaire $survey)
     {
-        $survey->sessions()->chunk(25, function ($sessions) use ($survey, &$data) {
+        $panels = $survey->getAttribute('panels');
 
-            $sessions->load([
-                'answers',
-                'answers.choises',
-            ]);
+        $panels = $panels->toArray();
 
-            foreach($sessions as $session)
-            {
-                $sessionData = new Collection();
+        $map = [];
+
+        foreach ($panels as $panel) {
+            $map[$panel['id']] = $panel['questions'];
+        }
+
+        return $map;
+    }
+
+    protected function data(LaravelExcelWorksheet $sheet, $survey)
+    {
+        $repository = $this->repository;
+
+        $panels = $this->mapPanels($survey);
+
+        $survey->sessions()->chunk(100, function ($sessions) use ($panels, $sheet, $repository) {
+
+            $answers = $repository->getAnswers($sessions->lists('id'));
+
+            $choises = $repository->getChoises(array_pluck($answers, 'id'));
+
+            foreach ($sessions as $session) {
+                $sessionData = [];
 
                 //add the session id as first column.
-                $sessionData->push($session->id);
+                $sessionData[] = $session->getAttribute('id');
 
-                foreach ($survey->panels as $panel) {
-                    $this->answers($sessionData, $panel, $session);
+                $session = $session->toArray();
+
+                foreach ($panels as $panelid => $questions) {
+                    $sessionData = $this->answers($sessionData, $questions, $session, $answers, $choises);
                 }
 
-                $data->push($sessionData);
+                $sheet->appendRow($sessionData);
             }
         });
     }
 
-    protected function answers(Collection $data, $panel, $session)
+    protected function answers(array $data, $questions, $session, $answers, $chosen)
     {
-        foreach ($panel->questions as $question) {
-            if ($answers = $session->getAnswered($question)) {
-                foreach ($question->choises as $choise) {
-                    if ($answers->wasChecked($choise)) {
-                        $data->push(1);
+        foreach ($questions as $question) {
+            //check if the session answered the question
+            if ($answer = $this->wasAnswered($answers, $question['id'])) {
+
+                foreach ($question['choises'] as $choise) {
+                    if ($this->wasChecked($chosen, $choise['id'], $answer->id)) {
+                        $data[] = 1;
                     } else {
-                        $data->push(0);
+                        $data[] = 0;
                     }
                 }
             } else {
-                foreach ($question->choises as $choise) {
-                    $data->push(0);
+                foreach ($question['choises'] as $choise) {
+                    $data[] = 0;
                 }
             }
         }
+
+        return $data;
+    }
+
+    protected function wasAnswered(array $answers, $questionid)
+    {
+        return isset($answers[$questionid]) ? $answers[$questionid] : false;
+    }
+
+    protected function wasChecked($choises, $choiseid, $answerid)
+    {
+        return isset($choises[$answerid]) && in_array($choiseid, $choises[$answerid]);
     }
 }
