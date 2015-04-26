@@ -26,7 +26,7 @@ class EmailNotifier
 
     public function notify(User $user, $view, array $data)
     {
-        $subject = $this->lang->get('notification.' . $view . '.subject');
+        $subject = $this->lang->get('notifications.' . $view . '.subject');
 
         $view = 'emails.notifications.' . $view;
 
