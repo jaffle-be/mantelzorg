@@ -20,6 +20,11 @@ class FileManager
 
     public function listFiles()
     {
+        if(!$this->files->isDirectory($this->path))
+        {
+            return [];
+        }
+
         $exports = $this->files->allFiles($this->path);
 
         $files = [];

@@ -54,7 +54,7 @@ return array(
     |
     */
 
-    'from'       => array('address' => 'systeem@zichtopmantelzorg.be', 'name' => 'Zicht op mantelzorg'),
+    'from'       => array('address' => 'systeem@zichtopmantelzorg.be', 'name' => 'no-reply'),
 
     /*
     |--------------------------------------------------------------------------

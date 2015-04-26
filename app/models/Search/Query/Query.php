@@ -42,13 +42,15 @@ class Query implements Queryable
 
     protected $fuzzy_like_this = [];
 
+    protected $filter_term = [];
+
     protected $filter_match = [];
 
     protected $filter_multi_match = [];
 
     protected $pagination = 10;
 
-    protected $filterOperators = ['filter_match', 'filter_multi_match'];
+    protected $filterOperators = ['filter_term', 'filter_match', 'filter_multi_match'];
 
     /**
      * @param SearchServiceInterface $service
@@ -131,6 +133,13 @@ class Query implements Queryable
         return $this;
     }
 
+    public function filterTerm($column, $value)
+    {
+        $this->filter_term[$column] = $value;
+
+        return $this;
+    }
+
     public function filterMatch($column, $value, $fuzziness = 0, $prefix_length = 2, $analyzer = 'standard')
     {
         $this->filter_match[$column] = [
@@ -143,15 +152,16 @@ class Query implements Queryable
         return $this;
     }
 
-    public function filterMulti_match(array $columns, $value, $fuzziness = 0, $prefix_length = 2, $analyzer = 'standard')
+    public function filterMulti_match(array $columns, $value)
     {
-        $this->filter_multi_match[] = [
-            'fields'        => $columns,
-            'query'         => $value,
-            'fuzziness'     => $fuzziness,
-            'prefix_length' => $prefix_length,
-            'analyzer'      => $analyzer
-        ];
+        if(!empty($value))
+        {
+            $this->filter_multi_match = [
+                'fields'        => $columns,
+                'query'         => $value
+            ];
+        }
+
 
         return $this;
     }
@@ -264,10 +274,15 @@ class Query implements Queryable
     {
         $body = [];
 
-        $body['query'] = $this->getQueryBody();
+        $queries = $this->getQueryBody();
 
-        if ($filters = $this->getFilterBody()) {
-            $body['filter'] = $filters;
+        if ($filters = $this->getFilteredBody()) {
+            $body['query']['filtered'] = $filters;
+        }
+
+        if(empty($queries) && empty($filters))
+        {
+            $body['query'] = ['match_all' => []];
         }
 
         if ($sort = $this->sort()) {
@@ -314,27 +329,38 @@ class Query implements Queryable
             }
         }
 
-        //if we do not provide a match all clause when no query provided, the get method will fail if nothing else
-        // was set like sorting.
-        if (empty($queries)) {
-            $queries['match_all'] = [];
-        }
-
         return $queries;
     }
 
-    protected function getFilterBody()
+    protected function getFilteredBody()
     {
-        $filters = [];
+        $response = [];
 
-        foreach ($this->filterOperators as $operator) {
-            if (!empty($this->$operator)) {
-                $filters[str_replace('filter_', '', $operator)] = $this->$operator;
+        if(!empty($this->filter_multi_match))
+        {
+            $response['query'] = [];
+            $response['query']['multi_match'] = $this->filter_multi_match;
+        }
+
+        if(!empty($this->filter_match))
+        {
+            if(!isset($response['query']))
+            {
+                $response['query'] = [];
             }
+            $response['query']['match'] = $this->filter_match;
         }
 
-        if (!empty($filters)) {
-            return ['query' => $filters];
+        if(!empty($this->filter_term))
+        {
+            $response['filter']['term'] = $this->filter_term;
         }
+
+        if(!empty($response))
+        {
+            return $response;
+        }
+
+        return;
     }
 }
