@@ -39,7 +39,7 @@ class HulpverlenerController extends AdminController
         $query = Input::get('query');
 
         $users = $search
-            ->whereMulti_match(['firstname', 'lastname', 'email', 'organisation.name'], $query)
+            ->filterMulti_match(['firstname', 'lastname', 'email', 'organisation.name'], $query)
             ->orderBy('created_at', 'asc')
             ->orderBy('organisation.name', 'asc')
             ->get();

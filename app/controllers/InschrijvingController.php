@@ -37,7 +37,7 @@ class InschrijvingController extends AdminController
 
         $search = $this->registration->search();
 
-        $registrations = $search->whereMulti_match(['email', 'firstname', 'lastname'], $query)
+        $registrations = $search->filterMulti_match(['email', 'firstname', 'lastname'], $query)
             ->orderBy('created_at', 'asc')
             ->orderBy('firstname', 'asc')
             ->orderBy('lastname', 'asc')
