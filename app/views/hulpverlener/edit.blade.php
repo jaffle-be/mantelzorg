@@ -128,14 +128,14 @@
                     </div>
 
                     <div class="col-md-6">
-                        <div class="checkbox">
+                        <div>
                             <?= Form::checkbox('active', 1, null, array(
                             'id' => 'active',
                             )) ?>
                             <label for="active"><?= Lang::get('users.is_active') ?></label>
                         </div>
 
-                        <div class="checkbox">
+                        <div>
                             <?= Form::checkbox('admin', 1, null, array(
                             'id' => 'admin',
                             )) ?>
