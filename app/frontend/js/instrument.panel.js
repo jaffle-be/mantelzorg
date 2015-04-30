@@ -1,19 +1,6 @@
 (function ($, app) {
     'use strict';
 
-    /**
-     * start instrument header
-     */
-    $(document).ready(function () {
-        $(".instrument-header").on('click', function () {
-            $(this).find('ul').slideToggle();
-        });
-    });
-
-    /**
-     * STOP INSTRUMENT HEADER
-     */
-
     //toggling of all questions
     function toggleQuestions($show) {
         $(".instrument-question").each(function (i, el) {
@@ -36,7 +23,7 @@
         $el.find('.body .well').hide();
         $el.find('.body').slideDown();
 
-        if(!$('body').hasClass('tablet'))
+        if (!$('body').hasClass('tablet'))
         {
             scrollTo($el)
         }
@@ -112,6 +99,11 @@
     }
 
     $(document).ready(function () {
+
+        $(".instrument-header").on('click', function () {
+            $(this).find('ul').slideToggle();
+        });
+
         $(".instrument-questions").on('click', '.instrument-question .header', function () {
             //if we clicked the current header, hide all questions
             if ($(this).closest('.instrument-question').find('.body').css('display') == 'block')
