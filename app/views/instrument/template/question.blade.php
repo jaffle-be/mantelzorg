@@ -8,9 +8,15 @@ $mark = $filled ? 'display:none;' : null;
 
 $check = $filled ? null : 'display:none;';
 
+/**
+ * first part: for mobiles or tablets, only show the first element
+ * second part: for anything else then mobiles or tablets show the elements
+ */
+$show = ($first && (Agent::isMobile() ||  Agent::isTablet())) || !Agent::isMobile() && !Agent::isTablet() ? '' : 'display:none;';
+
 ?>
 
-<div class="instrument-question question-{{$panel->color}}" data-question-id="">
+<div class="instrument-question question-{{$panel->color}}" data-question-id="{{ $question->id }}" style="{{ $show }}">
 
     {{--wrapper for borders on desktops--}}
     <div>
