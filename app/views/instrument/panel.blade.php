@@ -28,9 +28,21 @@
 
     @include('instrument.template.header', ['panel' => $panel])
 
-    <?= InstrumentTool::questions($panel, $survey) ?>
+    <?php $first = true ?>
 
-    @include('instrument.template.footer', [ 'panel' => $panel, 'next' => $panel->nextPanel() ])
+    <div class="instrument-questions">
+
+        @foreach($panel->questions as $question)
+
+            @include('instrument.template.question', ['panel' => $panel, 'question' => $question, 'survey' => $survey, 'first' => $first])
+
+            <?php $first = false; ?>
+
+        @endforeach
+
+        @include('instrument.template.footer', [ 'panel' => $panel, 'next' => $panel->nextPanel() ])
+
+    </div>
 
     <? Form::close() ?>
 
