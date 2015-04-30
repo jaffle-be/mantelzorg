@@ -98,7 +98,7 @@ View::composer('layout.messages', function ($view) {
     $view->with(compact('message', 'error', 'success'));
 });
 
-View::composer('layout.admin.master', function($view)
+View::composer('*', function($view)
 {
     /** @var \Illuminate\Routing\Route $route */
     $route = Route::getCurrentRoute();
