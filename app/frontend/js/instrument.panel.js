@@ -35,7 +35,11 @@
         $el.find('.header [data-show-on="editing"]').show();
         $el.find('.body .well').hide();
         $el.find('.body').slideDown();
-        scrollTo($el)
+
+        if(!$('body').hasClass('tablet'))
+        {
+            scrollTo($el)
+        }
     }
 
     //show/hide a well
