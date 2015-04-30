@@ -94,17 +94,17 @@
       border-bottom: 1px solid @border-color;
 
       a {
-        display:block;
+        display: block;
         color: @white;
         text-decoration: none;
       }
     }
 
-    li:first-child{
+    li:first-child {
       border-top: 1px solid @border-color;
     }
 
-    li:last-child{
+    li:last-child {
       border-bottom: none;
     }
   }
@@ -142,21 +142,17 @@
     }
 
     font-size: xx-large;
-
-    .fa {
-      margin-left: 15px;
-      margin-top: 15px;
-    }
   }
 
   .instrument-question {
-    //    border-left: 1px solid @border-color;
-    padding-left: 40px;
     margin-bottom: 20px;
 
     & > div {
+      //these are changed below for tablets.
       padding: 15px;
       border: 1px solid @border-color;
+      margin: 0 5%;
+
     }
 
     .header {
@@ -164,9 +160,20 @@
       font-size: x-large;
       font-weight: bold;
       margin-bottom: 10px;
+      position: relative;
+      padding-left: 40px;
+      padding-right: 40px;
 
-      .fa {
-        float: right;
+      .question-status {
+        position: absolute;
+        left: 0;
+        top: -7px;
+      }
+
+      .question-editing {
+        position: absolute;
+        right: 0;
+        top: 0;
       }
     }
 
@@ -209,6 +216,12 @@
 
 // TABLET IMPROVEMENTS TO UX
 body.tablet {
+
+  .instrument-question > div {
+    padding: 0 15px;
+    border: none;
+    margin: 0;
+  }
 
   #content {
     overflow: scroll;
