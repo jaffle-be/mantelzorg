@@ -31,7 +31,7 @@ $show = ($first && (Agent::isMobile() ||  Agent::isTablet())) || !Agent::isMobil
 
                 </span>
 
-            {{$question->title}}
+            <h3>{{$question->title}}</h3>
 
             {{--question editing--}}
 
