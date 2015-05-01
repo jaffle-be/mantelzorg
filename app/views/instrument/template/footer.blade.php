@@ -4,7 +4,9 @@
 
         @if($fullScreen)
             <div class="previous col-xs-3">
-                <button data-trigger="previous-question" class="btn btn-{{ $panel->color }}"><i class="fa fa-arrow-left"></i>{{ Agent::isTablet() ? Lang::get('instrument.previous-question') : null}}</button>
+                <button data-trigger="previous-question" class="btn btn-{{ $panel->color }}" style="display:none;">
+                    <i class="fa fa-arrow-left"></i>{{ Agent::isTablet() ? Lang::get('instrument.previous-question') : null}}
+                </button>
             </div>
         @endif
 
@@ -15,7 +17,10 @@
 
         @if($fullScreen)
             <div class="next col-xs-3">
-                <button data-trigger="next-question" class="btn btn-{{ $panel->color }}">{{ Agent::isTablet() ? Lang::get('instrument.next-question'): null }}<i class="fa fa-arrow-right"></i></button>
+                <button data-trigger="next-question" class="btn btn-{{ $panel->color }}">
+                    {{ Agent::isTablet() ? Lang::get('instrument.next-question'): null }}
+                    <i class="fa fa-arrow-right"></i>
+                </button>
             </div>
         @endif
 

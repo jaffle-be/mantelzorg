@@ -98,6 +98,113 @@
         return true;
     }
 
+
+    var MobileNavigator = function()
+    {
+        this.buttons = {
+            next: $("[data-trigger='next-question']"),
+            previous: $("[data-trigger='previous-question']")
+        };
+        this.questions = $(".instrument-questions .instrument-question");
+        this.current = 1;
+        this.events();
+    };
+
+    MobileNavigator.prototype = {
+        events: function()
+        {
+            var that = this;
+
+            this.buttons.previous.on('click', function()
+            {
+                that.previousQuestion();
+                return false;
+            });
+            this.buttons.next.on('click', function()
+            {
+                that.nextQuestion();
+                return false;
+            });
+        },
+        nextQuestion: function()
+        {
+            var next = this.current + 1;
+
+            if(this.getElementByPosition(next))
+            {
+                //show or hide the next button
+                if(next == this.questions.size())
+                {
+                    this.buttons.next.hide();
+                }
+                else
+                {
+                    this.buttons.next.show();
+                }
+
+                this.buttons.previous.show();
+
+                if(this.hideQuestion(this.current) && this.showQuestion(next))
+                {
+                    this.current++
+                }
+            }
+        },
+        previousQuestion: function()
+        {
+            var previous = this.current - 1;
+
+            if(this.getElementByPosition(previous))
+            {
+                //show or hide previous button
+                if(previous == 1)
+                {
+                    this.buttons.previous.hide();
+                }
+                else
+                {
+                    this.buttons.previous.show();
+                }
+
+                this.buttons.next.show();
+
+                if(this.hideQuestion(this.current) && this.showQuestion(previous))
+                {
+                    this.current--;
+                }
+            }
+        },
+        getElementByPosition: function(position)
+        {
+            return this.questions[position - 1] ? this.questions[position - 1] : false;
+        },
+        showQuestion: function(position)
+        {
+            var element = this.getElementByPosition(position);
+
+            if(element)
+            {
+                $(element).show();
+
+                return true;
+            }
+
+            return element;
+        },
+        hideQuestion: function(position)
+        {
+            var element = this.getElementByPosition(position);
+
+            if(element)
+            {
+                $(element).hide();
+                return true;
+            }
+
+            return false;
+        }
+    };
+
     $(document).ready(function () {
 
         $(".instrument-header").on('click', function () {
@@ -132,7 +239,9 @@
             $("#panel-form").submit();
 
             event.preventDefault();
-        })
+        });
+
+        var navigator = new MobileNavigator();
 
     });
 
