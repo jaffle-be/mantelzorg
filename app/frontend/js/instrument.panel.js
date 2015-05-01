@@ -1,106 +1,136 @@
 (function ($, app) {
     'use strict';
 
-    //toggling of all questions
-    function toggleQuestions($show) {
-        $(".instrument-question").each(function (i, el) {
-            hideQuestion($(el));
-        });
+    var RegularNavigator = function () {
+        this.wrapper = $(".instrument-questions");
+        this.questions = $(".instrument-question");
+        //are we on tablet or mobile?
+        this.isMobileOrTablet = $("body").hasClass('tablet');
 
-        $(':animated').promise().done(function () {
-            if ($show)
+        if(this.isMobileOrTablet)
+        {
+            this.initLayout();
+        }
+
+        this.events();
+    };
+
+    RegularNavigator.prototype = {
+        //adjustments for layout on phones or tablets should be done here
+        initLayout: function()
+        {
+            //show all question bodies, no need for effects
+            this.questions.find('.body').show();
+            this.questions.find('[data-show-on="editing"]').show();
+            this.questions.find('[data-show-on="not-editing"]').hide();
+        },
+        events: function () {
+            var that = this;
+
+            if(!this.isMobileOrTablet)
             {
-                showQuestion($show);
+                this.wrapper.on('click', '.instrument-question .header', function () {
+                    //if we clicked the current header, hide all questions
+                    that.handleHeaderClick(this);
+                });
             }
-        });
-    }
 
-    //show a certain question, el is a jquery object
-    function showQuestion($el) {
-        //on activating a question, we need to show the comment icon instead of the pencil icon
-        $el.find('.header [data-show-on="not-editing"]').hide();
-        $el.find('.header [data-show-on="editing"]').show();
-        $el.find('.body .well').hide();
-        $el.find('.body').slideDown();
+            this.wrapper.on('change', 'input,textarea', function () {
+                that.validateQuestion($(this).closest('.instrument-question'));
+            });
 
-        if (!$('body').hasClass('tablet'))
-        {
-            scrollTo($el)
-        }
-    }
-
-    //show/hide a well
-    function toggleWell($el) {
-        var well = $el.closest('.instrument-question').find('.well');
-        if (well.css('display') == 'none')
-        {
-            well.show();
-        }
-        else
-        {
-            well.hide();
-        }
-    }
-
-    //scroll to a certain element.
-    function scrollTo($element) {
-        $('html,body').animate({
-                scrollTop: $element.offset().top
-            },
-            'slow');
-    }
-
-    //hide a certain question.
-    function hideQuestion($el) {
-        $el.find('.header [data-show-on="not-editing"]').show();
-        $el.find('.header [data-show-on="editing"]').hide();
-        $el.find(".body").slideUp();
-    }
-
-    //validate if a question has been completed.
-    function validateQuestion($el) {
-        var $selectables = $el.find("input[type=radio],input[type=checkbox]"),
-            $status = $el.closest('.row').find('.question-status'),
-            textarea = $el.find('textarea');
-
-        if ($selectables.size() > 0)
-        {
-            if ($selectables.filter(':checked').size() > 0 || textarea.size() > 0 && textarea.val() != '')
+            this.wrapper.on('click', '[data-trigger="toggle-comment"]', function (event) {
+                that.toggleWell($(this));
+                return false;
+            });
+        },
+        handleHeaderClick: function (clicked) {
+            if ($(clicked).closest('.instrument-question').find('.body').css('display') == 'block')
             {
-                return okeStatus($status);
-            } else
-            {
-                return notOkeStatus($status);
+                this.toggleQuestions();
             }
-        } else
-        {
-            if (textarea.val() == '')
+            //else we will hide all questions except for the one we clicked
+            else
             {
-                return notOkeStatus($status);
-            } else
+                this.toggleQuestions($(clicked).closest('.instrument-question'));
+            }
+        },
+        toggleQuestions: function ($show) {
+            var that = this;
+
+            this.questions.each(function (i, el) {
+                that.hideQuestion($(el));
+            });
+
+            $(':animated').promise().done(function () {
+                if ($show)
+                {
+                    that.showQuestion($show);
+                }
+            });
+        },
+        showQuestion: function ($el) {
+            this.startEditing($el);
+
+            $el.find('.body .well').hide();
+            $el.find('.body').slideDown();
+
+            if (!$('body').hasClass('tablet'))
             {
-                return okeStatus($status);
+                this.scrollTo($el)
+            }
+        },
+        startEditing: function($el){
+            $el.find('.header [data-show-on="not-editing"]').hide();
+            $el.find('.header [data-show-on="editing"]').show();
+        },
+        toggleWell: function ($el) {
+            var well = $el.closest('.instrument-question').find('.well');
+
+            well.css('display') == 'none' ? well.show() : well.hide();
+        },
+        scrollTo: function ($element) {
+            $('html,body').animate({
+                    scrollTop: $element.offset().top
+                },
+                'slow');
+        },
+        hideQuestion: function ($el) {
+            $el.find('.header [data-show-on="not-editing"]').show();
+            $el.find('.header [data-show-on="editing"]').hide();
+            $el.find(".body").slideUp();
+        },
+        validateQuestion: function ($el) {
+            //checkboxes or radios
+            var $selectables = $el.find("input[type=radio],input[type=checkbox]"),
+            //status icon wrapper
+                $status = $el.closest('.instrument-question').find('.question-status'),
+                textarea = $el.find('textarea');
+
+            this.questionStatus($status, this.somethingWasChecked($selectables) || this.somethingWasFilledIn(textarea));
+        },
+        somethingWasChecked: function ($selectables) {
+            return $selectables.size() > 0 && $selectables.filter(':checked').size() > 0
+        },
+        somethingWasFilledIn: function (textarea) {
+            return textarea.size() > 0 && textarea.val() != '';
+        },
+        questionStatus: function ($status, status) {
+            if (status)
+            {
+                $status.find('.fa-question-circle').hide();
+                $status.find('.fa-check').show();
+            }
+            else
+            {
+                $status.find('.fa-question-circle').show();
+                $status.find('.fa-check').hide();
             }
         }
-    }
-
-    //set the question status to not oke
-    function notOkeStatus($status) {
-        $status.find('.fa-question-circle').show();
-        $status.find('.fa-check').hide();
-        return false;
-    }
-
-    //set the status to oke
-    function okeStatus($status) {
-        $status.find('.fa-question-circle').hide();
-        $status.find('.fa-check').show();
-        return true;
-    }
+    };
 
 
-    var MobileNavigator = function()
-    {
+    var MobileNavigator = function () {
         this.buttons = {
             next: $("[data-trigger='next-question']"),
             previous: $("[data-trigger='previous-question']")
@@ -111,29 +141,25 @@
     };
 
     MobileNavigator.prototype = {
-        events: function()
-        {
+        events: function () {
             var that = this;
 
-            this.buttons.previous.on('click', function()
-            {
+            this.buttons.previous.on('click', function () {
                 that.previousQuestion();
                 return false;
             });
-            this.buttons.next.on('click', function()
-            {
+            this.buttons.next.on('click', function () {
                 that.nextQuestion();
                 return false;
             });
         },
-        nextQuestion: function()
-        {
+        nextQuestion: function () {
             var next = this.current + 1;
 
-            if(this.getElementByPosition(next))
+            if (this.getElementByPosition(next))
             {
                 //show or hide the next button
-                if(next == this.questions.size())
+                if (next == this.questions.size())
                 {
                     this.buttons.next.hide();
                 }
@@ -144,20 +170,19 @@
 
                 this.buttons.previous.show();
 
-                if(this.hideQuestion(this.current) && this.showQuestion(next))
+                if (this.hideQuestion(this.current) && this.showQuestion(next))
                 {
                     this.current++
                 }
             }
         },
-        previousQuestion: function()
-        {
+        previousQuestion: function () {
             var previous = this.current - 1;
 
-            if(this.getElementByPosition(previous))
+            if (this.getElementByPosition(previous))
             {
                 //show or hide previous button
-                if(previous == 1)
+                if (previous == 1)
                 {
                     this.buttons.previous.hide();
                 }
@@ -168,21 +193,19 @@
 
                 this.buttons.next.show();
 
-                if(this.hideQuestion(this.current) && this.showQuestion(previous))
+                if (this.hideQuestion(this.current) && this.showQuestion(previous))
                 {
                     this.current--;
                 }
             }
         },
-        getElementByPosition: function(position)
-        {
+        getElementByPosition: function (position) {
             return this.questions[position - 1] ? this.questions[position - 1] : false;
         },
-        showQuestion: function(position)
-        {
+        showQuestion: function (position) {
             var element = this.getElementByPosition(position);
 
-            if(element)
+            if (element)
             {
                 $(element).show();
 
@@ -191,11 +214,10 @@
 
             return element;
         },
-        hideQuestion: function(position)
-        {
+        hideQuestion: function (position) {
             var element = this.getElementByPosition(position);
 
-            if(element)
+            if (element)
             {
                 $(element).hide();
                 return true;
@@ -211,28 +233,6 @@
             $(this).find('ul').slideToggle();
         });
 
-        $(".instrument-questions").on('click', '.instrument-question .header', function () {
-            //if we clicked the current header, hide all questions
-            if ($(this).closest('.instrument-question').find('.body').css('display') == 'block')
-            {
-                toggleQuestions();
-            }
-            //else we will hide all questions except for the one we clicked
-            else
-            {
-                toggleQuestions($(this).closest('.instrument-question'));
-            }
-        });
-
-        $(".instrument-questions").on('change', 'input,textarea', function () {
-            validateQuestion($(this).closest('.row').find('.instrument-question'));
-        });
-
-        $(".instrument-questions").on('click', '[data-trigger="toggle-comment"]', function (event) {
-            toggleWell($(this));
-            return false;
-        });
-
         $(".instrument-header").on('click', 'a', function (event) {
             $("#next_panel").val($(this).data('target-id'));
 
@@ -241,7 +241,9 @@
             event.preventDefault();
         });
 
-        var navigator = new MobileNavigator();
+        var regular = new RegularNavigator();
+
+        var mobile = new MobileNavigator();
 
     });
 
