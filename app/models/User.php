@@ -4,8 +4,9 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 use Search\Model\Searchable;
 use Search\Model\SearchableTrait;
+use System\Database\Eloquent\Model;
 
-class User extends Eloquent implements UserInterface, RemindableInterface, Searchable
+class User extends Model implements UserInterface, RemindableInterface, Searchable
 {
 
     use SearchableTrait;

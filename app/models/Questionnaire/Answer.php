@@ -2,11 +2,11 @@
 
 namespace Questionnaire;
 
-use Eloquent;
 use Input;
+use System\Database\Eloquent\Model;
 use Validator;
 
-class Answer extends Eloquent
+class Answer extends Model
 {
 
     protected $table = 'questionnaire_answers';

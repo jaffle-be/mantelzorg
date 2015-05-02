@@ -2,10 +2,10 @@
 namespace Organisation;
 
 use Input;
+use System\Database\Eloquent\Model;
 use Validator;
-use Eloquent;
 
-class Organisation extends Eloquent
+class Organisation extends Model
 {
 
     protected $table = 'organisations';

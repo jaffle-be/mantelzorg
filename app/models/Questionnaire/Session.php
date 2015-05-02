@@ -2,11 +2,11 @@
 
 namespace Questionnaire;
 
-use Eloquent;
 use Search\Model\Searchable;
 use Search\Model\SearchableTrait;
+use System\Database\Eloquent\Model;
 
-class Session extends Eloquent implements Searchable
+class Session extends Model implements Searchable
 {
 
     use SearchableTrait;

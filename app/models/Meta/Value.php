@@ -2,9 +2,10 @@
 
 namespace Meta;
 
-use Eloquent;
 
-class Value extends Eloquent
+use System\Database\Eloquent\Model;
+
+class Value extends Model
 {
 
     protected $table = 'meta_values';

@@ -2,11 +2,12 @@
 
 namespace Beta;
 
-use Eloquent, Input, Validator;
+use Input, Validator;
 use Search\Model\Searchable;
 use Search\Model\SearchableTrait;
+use System\Database\Eloquent\Model;
 
-class Registration extends Eloquent implements Searchable
+class Registration extends Model implements Searchable
 {
 
     use SearchableTrait;

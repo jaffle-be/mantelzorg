@@ -2,9 +2,10 @@
 
 namespace Meta;
 
-use Eloquent;
 
-class Context extends Eloquent
+use System\Database\Eloquent\Model;
+
+class Context extends Model
 {
 
     const MANTELZORGER_RELATION = 'mantelzorger_relation';
