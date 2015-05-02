@@ -5,14 +5,14 @@
         @if($fullScreen)
             <div class="previous col-xs-3 col-sm-2">
                 <button data-trigger="previous-question" class="btn btn-instrument" style="display:none;">
-                    <i class="fa fa-arrow-left"></i>{{ Agent::isTablet() ? Lang::get('instrument.previous-question') : null}}
+                    <i class="fa fa-arrow-left"></i>{{ UI::isTablet() ? Lang::get('instrument.previous-question') : null}}
                 </button>
             </div>
         @endif
 
         <div class="middle {{ $fullScreen ? 'col-xs-6 col-sm-8' : 'col-xs-12' }}">
 
-            @if(Agent::isTablet())
+            @if(UI::isTablet())
                 <div class="question-list">
                     <?
                     $question = $panel->questions->first();
@@ -77,7 +77,7 @@
             <div class="next col-xs-3 col-sm-2">
                 <div data-trigger="next-question">
                     <button class="btn btn-instrument">
-                        {{ Agent::isTablet() ? Lang::get('instrument.next-question'): null }}
+                        {{ UI::isTablet() ? Lang::get('instrument.next-question'): null }}
                         <i class="fa fa-arrow-right"></i>
                     </button>
                 </div>

@@ -1,6 +1,6 @@
 @section('page-header-wrapper')
 
-    @if(! Agent::isTablet() && !Agent::isMobile())
+    @if(!UI::isTablet() && !UI::isMobile())
         @parent
     @endif
 

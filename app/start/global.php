@@ -103,7 +103,7 @@ View::composer('*', function($view)
     /** @var \Illuminate\Routing\Route $route */
     $route = Route::getCurrentRoute();
     //Add zero padding to the interface for better UX on tablets.
-    $view->with(['fullScreen' => Agent::isMobile() || Agent::isTablet() ]);
+    $view->with(['fullScreen' => UI::isMobile() || UI::isTablet() ]);
 });
 
 Validator::extend('passcheck', function ($attribute, $value, $parameters) {
