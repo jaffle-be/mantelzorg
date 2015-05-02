@@ -138,7 +138,9 @@
         //the actual questions
         this.questions = $(".instrument-questions .instrument-question");
         //navigation list of questions in the footer
-        this.list = $(".instrument-footer .question-list ul li");
+        this.listQuestions = $(".instrument-footer .question-list ul li");
+        this.trigger = $(".instrument-footer h4");
+        this.switcher = $(".instrument-questions .question-list ul");
         this.title = $(".instrument-footer h4 .title");
         this.current = 1;
         this.events();
@@ -156,6 +158,44 @@
                 that.nextQuestion();
                 return false;
             });
+            this.trigger.on('click', function(event)
+            {
+                that.showSwitcher();
+                event.stopPropagation();
+            });
+
+            this.switcher.on('click', 'li', function()
+            {
+                that.goto(this);
+            });
+
+            $("html").on('click', function(event)
+            {
+                that.hideSwitcher();
+            });
+        },
+        showSwitcher: function()
+        {
+            this.switcher.show();
+        },
+        hideSwitcher: function()
+        {
+            this.switcher.hide();
+        },
+        goto: function(clicked)
+        {
+            var target = $(clicked).data('target-position');
+
+            if(!isNaN(target) && 0 < target && target <= this.questions.size())
+            {
+                this.buttons.previous.toggle(target != 1);
+                this.buttons.next.toggle(target != this.questions.size());
+
+                this.showQuestion(target);
+                this.hideQuestion(this.current);
+
+                this.current = target;
+            }
         },
         nextQuestion: function () {
             var next = this.current + 1;
@@ -208,30 +248,33 @@
         },
         getListItem: function(position)
         {
-            return this.list[position - 1] ? this.list[position - 1] : false;
+            return this.listQuestions[position - 1] ? this.listQuestions[position - 1] : false;
         },
         showQuestion: function (position) {
             var element = this.getQuestion(position);
             var listItem = this.getListItem(position);
 
-            if (element && listItem)
+            if (element)
             {
                 $(element).show();
-                this.title.html($(listItem).find('[data-title]').html());
 
-                return true;
+                if(listItem)
+                {
+                    this.title.html($(listItem).find('[data-title]').html());
+                }
+
+
             }
 
-            return element;
+            return element ? true : false;
         },
         hideQuestion: function (position) {
             var element = this.getQuestion(position);
             var listItem = this.getListItem(position);
 
-            if (element && listItem)
+            if (element)
             {
                 $(element).hide();
-                //$(listItem).hide();
                 return true;
             }
 

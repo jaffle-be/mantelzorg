@@ -34,11 +34,11 @@
   }
 
   .instrument-footer {
-    .question-list , ul li{
+    .question-list, ul li {
       background-color: @c;
     }
 
-    li:active, li:focus{
+    li:active, li:focus {
       background-color: darken(@c, 7%);
     }
   }
@@ -218,25 +218,33 @@
   }
 
   .question-list {
+    cursor: pointer;
     position: relative;
     z-index: 1000;
     border: 1px solid @border-color;
     border-radius: @border-radius-base;
-    color:@white;
+    color: @white;
     line-height: 34px;
     vertical-align: middle;
 
-    h4{
+    h4 {
       line-height: 34px;
       height: 34px;
       vertical-align: middle;
       color: @white;
-      font-size: small;
       padding: 0 15px;
+      font-size: small;
       font-weight: normal;
+
+      .title{
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
 
-    ul{
+    ul {
       .nav;
       position: absolute;
       width: 100%;
@@ -246,30 +254,38 @@
       border-radius: @border-radius-base;
       border-color: @border-color;
 
-      li{
+      li {
         box-sizing: border-box;
         border-bottom: 1px solid @white;
         text-overflow: ellipsis;
         vertical-align: middle;
         padding: 0 15px;
 
-//        ellipsis
+        .title{
+          display: inline-block;
+          width: 75%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+      }
+
+        //        ellipsis
         width: 100%;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
 
-        .count{
+        .count {
           .pull-right;
         }
       }
 
-      li:last-child{
+      li:last-child {
         border-bottom: none;
       }
     }
 
-    span.caret-down{
+    span.caret-down {
       position: absolute;
       top: 0;
       right: 1em;
