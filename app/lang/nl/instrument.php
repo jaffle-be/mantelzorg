@@ -12,4 +12,7 @@ return array(
     'mantelzorger'          => 'Mantelzorger',
     'created'               => 'Aangemaakt',
     'werkverder'            => 'Verder werken',
+    'previous-question'     => 'Vorige',
+    'next-question'         => 'Volgende',
+    'close'                 => 'Sluiten',
 );

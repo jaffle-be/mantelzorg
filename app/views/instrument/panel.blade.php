@@ -21,29 +21,33 @@
 
 @section('content')
 
-    <?= Form::open(array(
-            'route' => array('instrument.panel.submit', $panel->id, $survey->id),
-            'id'    => 'panel-form'
-    )) ?>
+    <div class="instrument panel-{{ $panel->color }}">
 
-    @include('instrument.template.header', ['panel' => $panel])
+        <?= Form::open(array(
+                'route' => array('instrument.panel.submit', $panel->id, $survey->id),
+                'id'    => 'panel-form'
+        )) ?>
 
-    <?php $first = true ?>
+        @include('instrument.template.header', ['panel' => $panel])
 
-    <div class="instrument-questions">
+        <?php $first = true ?>
 
-        @foreach($panel->questions as $question)
+        <div class="instrument-questions">
 
-            @include('instrument.template.question', ['panel' => $panel, 'question' => $question, 'survey' => $survey, 'first' => $first])
+            @foreach($panel->questions as $question)
 
-            <?php $first = false; ?>
+                @include('instrument.template.question', ['panel' => $panel, 'question' => $question, 'survey' => $survey, 'first' => $first])
 
-        @endforeach
+                <?php $first = false; ?>
 
-        @include('instrument.template.footer', [ 'panel' => $panel, 'next' => $panel->nextPanel() ])
+            @endforeach
+
+            @include('instrument.template.footer', [ 'panel' => $panel, 'next' => $panel->nextPanel() ])
+
+        </div>
+
+        <? Form::close() ?>
 
     </div>
-
-    <? Form::close() ?>
 
 @stop
