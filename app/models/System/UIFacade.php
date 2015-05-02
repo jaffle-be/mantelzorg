@@ -1,4 +1,4 @@
-<?php namespace UI;
+<?php namespace System;
 
 use Illuminate\Support\Facades\Facade;
 

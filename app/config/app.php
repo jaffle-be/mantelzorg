@@ -130,7 +130,7 @@ return array(
 //        'LeroyMerlin\LaraSniffer\ServiceProvider',
 //        'Way\Generators\GeneratorsServiceProvider',
 
-        'UI\UIServiceProvider',
+        'System\UIServiceProvider',
 
         'Template\TemplateServiceProvider',
         'Questionnaire\ServiceProvider',
@@ -209,7 +209,7 @@ return array(
         'Template'          => 'Template\TemplateFacade',
         'Memorize'          => 'Instrument\Memorize\Facade',
         'Newrelic'          => 'Intouch\LaravelNewrelic\Facades\Newrelic',
-        'UI'                => 'UI\UIFacade'
+        'UI'                => 'System\UIFacade'
     ),
 
 );
