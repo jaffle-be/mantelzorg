@@ -11,6 +11,9 @@ class Session extends Eloquent implements Searchable
 
     use SearchableTrait;
 
+    //map to cache answers to questions
+    protected static $cache = [];
+
     //override the searchable name to shorten it
     public function getSearchableType()
     {
@@ -62,10 +65,20 @@ class Session extends Eloquent implements Searchable
      */
     public function getAnswered(Question $question)
     {
-        return $this->answers->filter(function ($item) use ($question) {
+        if(isset(static::$cache[$question->id]))
+        {
+            return static::$cache[$question->id];
+        }
+
+
+        $answer = $this->answers->filter(function ($item) use ($question) {
             if ($item->getAttribute('question_id') == $question->getAttribute('id')) {
                 return true;
             }
         })->first();
+
+        static::$cache[$question->id] = $answer;
+
+        return $answer;
     }
 }
