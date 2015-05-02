@@ -18,8 +18,8 @@
     .button-variant(@white, @c, darken(@c, 10%));
   }
 
-  .instrument-question{
-    .header h3, .fa{
+  .instrument-question {
+    .header h3, .fa {
       color: @c;
     }
   }
@@ -32,69 +32,77 @@
       }
     }
   }
+
+  .instrument-footer {
+    .question-list , ul li{
+      background-color: @c;
+    }
+
+    li:active, li:focus{
+      background-color: darken(@c, 7%);
+    }
+  }
 }
 
-.header-color(@c){
+.header-color(@c) {
   background-color: @c;
 }
 
-.instrument.panel-gray{
+.instrument.panel-gray {
   .instrument-color(@panel-gray);
 }
 
-.instrument-header.panel-gray{
+.instrument-header.panel-gray {
   .header-color(@panel-gray);
 }
 
-.instrument.panel-green{
+.instrument.panel-green {
   .instrument-color(@panel-green);
 }
 
-.instrument-header.panel-green{
+.instrument-header.panel-green {
   .header-color(@panel-green);
 }
 
-.instrument.panel-purple{
+.instrument.panel-purple {
   .instrument-color(@panel-purple);
 }
 
-.instrument-header.panel-purple{
+.instrument-header.panel-purple {
   .header-color(@panel-purple);
 }
 
-.instrument.panel-yellow{
+.instrument.panel-yellow {
   .instrument-color(@panel-yellow);
 }
 
-.instrument-header.panel-yellow{
+.instrument-header.panel-yellow {
   .header-color(@panel-yellow);
 }
 
-.instrument.panel-blue{
+.instrument.panel-blue {
   .instrument-color(@panel-blue);
 }
 
-.instrument-header.panel-blue{
+.instrument-header.panel-blue {
   .header-color(@panel-blue);
 }
 
-.instrument.panel-red{
+.instrument.panel-red {
   .instrument-color(@panel-red);
 }
 
-.instrument-header.panel-red{
+.instrument-header.panel-red {
   .header-color(@panel-red);
 }
 
-.instrument.panel-orange{
+.instrument.panel-orange {
   .instrument-color(@panel-orange);
 }
 
-.instrument-header.panel-orange{
+.instrument-header.panel-orange {
   .header-color(@panel-orange);
 }
-
-
 
 .instrument-header {
 
@@ -206,6 +214,65 @@
     text-align: right;
     .fa {
       margin-left: 5px;
+    }
+  }
+
+  .question-list {
+    position: relative;
+    z-index: 1000;
+    border: 1px solid @border-color;
+    border-radius: @border-radius-base;
+    color:@white;
+    line-height: 34px;
+    vertical-align: middle;
+
+    h4{
+      line-height: 34px;
+      height: 34px;
+      vertical-align: middle;
+      color: @white;
+      font-size: small;
+      padding: 0 15px;
+      font-weight: normal;
+    }
+
+    ul{
+      .nav;
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      z-index: 1001;
+      border-radius: @border-radius-base;
+      border-color: @border-color;
+
+      li{
+        box-sizing: border-box;
+        border-bottom: 1px solid @white;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+        padding: 0 15px;
+
+//        ellipsis
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        .count{
+          .pull-right;
+        }
+      }
+
+      li:last-child{
+        border-bottom: none;
+      }
+    }
+
+    span.caret-down{
+      position: absolute;
+      top: 0;
+      right: 1em;
     }
   }
 }

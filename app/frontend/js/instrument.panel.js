@@ -135,7 +135,11 @@
             next: $("[data-trigger='next-question']"),
             previous: $("[data-trigger='previous-question']")
         };
+        //the actual questions
         this.questions = $(".instrument-questions .instrument-question");
+        //navigation list of questions in the footer
+        this.list = $(".instrument-footer .question-list ul li");
+        this.title = $(".instrument-footer h4 .title");
         this.current = 1;
         this.events();
     };
@@ -156,7 +160,7 @@
         nextQuestion: function () {
             var next = this.current + 1;
 
-            if (this.getElementByPosition(next))
+            if (this.getQuestion(next))
             {
                 //show or hide the next button
                 if (next == this.questions.size())
@@ -179,7 +183,7 @@
         previousQuestion: function () {
             var previous = this.current - 1;
 
-            if (this.getElementByPosition(previous))
+            if (this.getQuestion(previous))
             {
                 //show or hide previous button
                 if (previous == 1)
@@ -199,15 +203,21 @@
                 }
             }
         },
-        getElementByPosition: function (position) {
+        getQuestion: function (position) {
             return this.questions[position - 1] ? this.questions[position - 1] : false;
         },
+        getListItem: function(position)
+        {
+            return this.list[position - 1] ? this.list[position - 1] : false;
+        },
         showQuestion: function (position) {
-            var element = this.getElementByPosition(position);
+            var element = this.getQuestion(position);
+            var listItem = this.getListItem(position);
 
-            if (element)
+            if (element && listItem)
             {
                 $(element).show();
+                this.title.html($(listItem).find('[data-title]').html());
 
                 return true;
             }
@@ -215,11 +225,13 @@
             return element;
         },
         hideQuestion: function (position) {
-            var element = this.getElementByPosition(position);
+            var element = this.getQuestion(position);
+            var listItem = this.getListItem(position);
 
-            if (element)
+            if (element && listItem)
             {
                 $(element).hide();
+                //$(listItem).hide();
                 return true;
             }
 
