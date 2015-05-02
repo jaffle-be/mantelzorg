@@ -36,7 +36,7 @@
 
                             $filled = $answer && $answer->wasFilledIn();
                             ?>
-                            <li data-target-position="{{ $counter }}">
+                            <li data-target-position="{{ $counter }}" {{ $counter == 1 ? 'class="active"' : null }} data-question-id="{{ $question->id }}">
 
                                 <span class="pull-left">
                                     <i class="fa fa-question-circle"{{ $filled ? 'style="display:none;"' : null; }}></i>
