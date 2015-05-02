@@ -31,7 +31,7 @@
 
     </script>
 
-    @if(Agent::isTablet() || Agent::isMobile())
+    @if(UI::isTablet() || UI::isMobile())
         <style rel="stylesheet">html {
                 background-color: white;
             }</style>
@@ -39,7 +39,7 @@
 
 
 </head>
-<body class="{{ Agent::isTablet() || Agent::isMobile() ? 'tablet' : ''}}">
+<body class="{{ UI::isTablet() || UI::isMobile() ? 'tablet' : ''}}">
 
 <div id="wrapper">
 

@@ -2,11 +2,11 @@
 
 namespace Organisation;
 
-use Eloquent;
 use Input;
+use System\Database\Eloquent\Model;
 use Validator;
 
-class Location extends Eloquent
+class Location extends Model
 {
 
     protected $table = 'locations';

@@ -12,7 +12,7 @@ $check = $filled ? null : 'display:none;';
  * first part: for mobiles or tablets, only show the first element
  * second part: for anything else then mobiles or tablets show the elements
  */
-$show = ($first && (Agent::isMobile() ||  Agent::isTablet())) || !Agent::isMobile() && !Agent::isTablet() ? '' : 'display:none;';
+$show = ($first && (UI::isMobile() ||  UI::isTablet())) || !UI::isMobile() && !UI::isTablet() ? '' : 'display:none;';
 
 ?>
 

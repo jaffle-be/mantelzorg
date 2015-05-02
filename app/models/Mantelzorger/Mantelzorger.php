@@ -5,11 +5,11 @@ namespace Mantelzorger;
 use Carbon\Carbon;
 use Search\Model\Searchable;
 use Search\Model\SearchableTrait;
+use System\Database\Eloquent\Model;
 use Validator;
 use Input;
-use Eloquent;
 
-class Mantelzorger extends Eloquent implements Searchable
+class Mantelzorger extends Model implements Searchable
 {
 
     use SearchableTrait;

@@ -4,6 +4,7 @@
     var RegularNavigator = function () {
         this.wrapper = $(".instrument-questions");
         this.questions = $(".instrument-question");
+        this.listQuestions = $(".question-list")
         //are we on tablet or mobile?
         this.isMobileOrTablet = $("body").hasClass('tablet');
 
@@ -105,9 +106,12 @@
             var $selectables = $el.find("input[type=radio],input[type=checkbox]"),
             //status icon wrapper
                 $status = $el.closest('.instrument-question').find('.question-status'),
-                textarea = $el.find('textarea');
+                $listStatus = this.listQuestions.find('[data-question-id=' + $el.data('question-id') + ']'),
+                textarea = $el.find('textarea'),
+                status = this.somethingWasChecked($selectables) || this.somethingWasFilledIn(textarea);
 
-            this.questionStatus($status, this.somethingWasChecked($selectables) || this.somethingWasFilledIn(textarea));
+            this.questionStatus($status, status);
+            this.questionStatus($listStatus, status);
         },
         somethingWasChecked: function ($selectables) {
             return $selectables.size() > 0 && $selectables.filter(':checked').size() > 0
@@ -191,8 +195,8 @@
                 this.buttons.previous.toggle(target != 1);
                 this.buttons.next.toggle(target != this.questions.size());
 
-                this.showQuestion(target);
                 this.hideQuestion(this.current);
+                this.showQuestion(target);
 
                 this.current = target;
             }
@@ -260,6 +264,7 @@
 
                 if(listItem)
                 {
+                    $(listItem).addClass('active');
                     this.title.html($(listItem).find('[data-title]').html());
                 }
 
@@ -275,6 +280,12 @@
             if (element)
             {
                 $(element).hide();
+
+                if(listItem)
+                {
+                    $(listItem).removeClass('active');
+                }
+
                 return true;
             }
 

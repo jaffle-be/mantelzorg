@@ -38,7 +38,7 @@
       background-color: @c;
     }
 
-    li:active, li:focus {
+    li:active, li:focus, li.active {
       background-color: darken(@c, 7%);
     }
   }
@@ -256,7 +256,9 @@
 
       li {
         box-sizing: border-box;
-        border-bottom: 1px solid @white;
+        border-left: 1px solid @border-color;
+        border-right: 1px solid @border-color;
+        border-bottom: 1px solid @border-color;
         text-overflow: ellipsis;
         vertical-align: middle;
         padding: 0 15px;
@@ -282,6 +284,10 @@
 
       li:last-child {
         border-bottom: none;
+      }
+
+      li:first-child{
+        border-top: 1px solid @border-color;
       }
     }
 
