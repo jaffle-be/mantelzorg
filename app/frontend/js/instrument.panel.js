@@ -187,6 +187,13 @@
         {
             this.switcher.hide();
         },
+        scroll: function ($element)
+        {
+            $('html,body').animate({
+                    scrollTop: $element.offset().top
+                },
+                'slow');
+        },
         goto: function(clicked)
         {
             var target = $(clicked).data('target-position');
@@ -262,6 +269,7 @@
             if (element)
             {
                 $(element).show();
+                this.scroll($(element));
 
                 if(listItem)
                 {
