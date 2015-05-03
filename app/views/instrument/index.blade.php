@@ -88,9 +88,7 @@
             <? foreach($surveys as $survey): ?>
             <tr>
                 <td>
-                    <label class="checkbox-inline">
-                        <input type="checkbox" value="{{$survey->id}}"/>{{$teller}}
-                    </label>
+                    {{$teller}} <input type="checkbox" value="{{$survey->id}}"/>
                 </td>
                 <td><?= $survey->mantelzorger->displayName ?></td>
                 <td><?= $survey->oudere->displayName ?></td>

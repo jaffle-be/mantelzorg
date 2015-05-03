@@ -47,9 +47,7 @@
 
                 <tr>
                     <td>
-                        <label class="checkbox-inline">
-                            <input type="checkbox" value="{{ $registration->id }}"/>{{ $teller }}
-                        </label>
+                        {{ $teller }} <input type="checkbox" value="{{ $registration->id }}"/>
                     </td>
                     <td>
                         <a href="<?= URL::action('InschrijvingController@edit', array($registration->id)) ?>">{{ $registration->firstname . ' ' . $registration->lastname}}</a>
