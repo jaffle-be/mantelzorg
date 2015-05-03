@@ -57,16 +57,18 @@ class Repository
         return $this->mapAnswers($result);
     }
 
-    public function getChoises($answerids)
+    public function getChoises($sessions)
     {
-        if(empty($answerids))
+        if(empty($sessions))
             return array();
 
         $query = $this->tableChoise();
 
-        $query->whereIn('answer_id', $answerids);
+        $query->leftJoin('questionnaire_answers', 'questionnaire_answers.id', '=', 'questionnaire_answer_choises.answer_id');
 
-        $result =  $query->get(['answer_id', 'choise_id']);
+        $query->whereIn('questionnaire_answers.session_id', $sessions);
+
+        $result = $query->get(['questionnaire_answer_choises.answer_id', 'questionnaire_answer_choises.choise_id']);
 
         return $this->mapChoises($result);
     }
@@ -92,7 +94,7 @@ class Repository
         $answered = [];
 
         array_walk($answers, function ($answer) use (&$answered) {
-            $answered[$answer->question_id] = $answer;
+            $answered[$answer->session_id][$answer->question_id] = $answer;
         });
 
         return $answered;

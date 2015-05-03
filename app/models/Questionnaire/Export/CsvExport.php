@@ -139,9 +139,10 @@ class CsvExport implements Exporter
                 'mantelzorger'
             ]);
 
-            $answers = $repository->getAnswers($sessions->lists('id'));
+            $sessionIds = $sessions->lists('id');
 
-            $choises = $repository->getChoises(array_pluck($answers, 'id'));
+            $answers = $repository->getAnswers($sessionIds);
+            $choises = $repository->getChoises($sessionIds);
 
             foreach ($sessions as $session) {
                 $sessionData = [];
@@ -160,10 +161,14 @@ class CsvExport implements Exporter
                 $session = $session->toArray();
 
                 foreach ($panels as $panelid => $questions) {
-                    $sessionData = $this->answers($sessionData, $questions, $session, $answers, $choises);
+
+                    $sessionAnswers = isset($answers[$session['id']]) ? $answers[$session['id']] : [];
+
+                    $sessionData = $this->answers($sessionData, $questions, $session, $sessionAnswers, $choises);
                 }
 
                 $sheet->appendRow($sessionData);
+
             }
         });
     }
@@ -187,6 +192,12 @@ class CsvExport implements Exporter
                     }
                 }
             } else {
+
+                if($question['explainable'])
+                {
+                    $data[] = '';
+                }
+
                 foreach ($question['choises'] as $choise) {
                     $data[] = 0;
                 }
