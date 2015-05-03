@@ -140,6 +140,7 @@
             previous: $("[data-trigger='previous-question']"),
             confirm: $("[data-trigger='confirm']")
         };
+        this.content = $('#content');
         //the actual questions
         this.questions = $(".instrument-questions .instrument-question");
         //navigation list of questions in the footer
@@ -187,12 +188,9 @@
         {
             this.switcher.hide();
         },
-        scroll: function ($element)
+        resetView: function ()
         {
-            $('html,body').animate({
-                    scrollTop: $element.offset().top
-                },
-                'slow');
+            this.content.scrollTop(0);
         },
         goto: function(clicked)
         {
@@ -269,7 +267,7 @@
             if (element)
             {
                 $(element).show();
-                this.scroll($(element));
+                this.resetView();
 
                 if(listItem)
                 {
