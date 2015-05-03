@@ -18,10 +18,10 @@ class Generated
 
     public function handle(User $user, Questionnaire $survey, $filename)
     {
-        $this->email->notify($user, 'rapport.generated', [
-            'user'     => $user,
-            'survey'   => $survey,
-            'filename' => $filename
-        ]);
+//        $this->email->notify($user, 'rapport.generated', [
+//            'user'     => $user,
+//            'survey'   => $survey,
+//            'filename' => $filename
+//        ]);
     }
 }

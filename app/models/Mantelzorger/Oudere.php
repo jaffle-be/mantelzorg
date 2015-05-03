@@ -4,11 +4,13 @@ namespace Mantelzorger;
 
 use Carbon\Carbon;
 use Input;
+use Questionnaire\Export\Exportable;
 use Search\Model\Searchable;
 use Search\Model\SearchableTrait;
+use System\Database\Eloquent\Model;
 use Validator;
 
-class Oudere extends \Eloquent
+class Oudere extends Model implements Exportable
 {
 
     protected $table = 'ouderen';
@@ -28,6 +30,35 @@ class Oudere extends \Eloquent
         'identifier', 'email', 'firstname', 'lastname', 'male', 'street', 'postal', 'city',
         'phone', 'mantelzorger_id', 'birthday', 'diagnose', 'mantelzorger_relation', 'woonsituatie', 'oorzaak_hulpbehoefte', 'bel_profiel', 'details_diagnose',
     );
+
+    /**
+     * @return array
+     */
+    public function toExportArray()
+    {
+        return [
+            'hulpbehoevende-id' => isset($this->attributes['id']) ? $this->attributes['id'] : null,
+            'hulpbehoevende-identifier' => isset($this->attributes['identifier']) ? $this->attributes['identifier'] : null,
+            'hulpbehoevende-email' => isset($this->attributes['email']) ? $this->attributes['email'] : null,
+            'hulpbehoevende-firstname' => isset($this->attributes['firstname']) ? $this->attributes['firstname'] : null,
+            'hulpbehoevende-lastname' => isset($this->attributes['lastname']) ? $this->attributes['lastname'] : null,
+            'hulpbehoevende-male' => isset($this->attributes['male']) ? $this->attributes['male'] : null,
+            'hulpbehoevende-street' => isset($this->attributes['street']) ? $this->attributes['street'] : null,
+            'hulpbehoevende-postal' => isset($this->attributes['postal']) ? $this->attributes['postal'] : null,
+            'hulpbehoevende-city' => isset($this->attributes['city']) ? $this->attributes['city'] : null,
+            'hulpbehoevende-phone' => isset($this->attributes['phone']) ? $this->attributes['phone'] : null,
+            'hulpbehoevende-birthday' => isset($this->attributes['birthday']) ? $this->attributes['birthday'] : null,
+            'hulpbehoevende-diagnose' => isset($this->attributes['diagnose']) ? $this->attributes['diagnose'] : null,
+//            'hulpbehoevende-mantelzorger_id',
+//            'hulpbehoevende-mantelzorger_relation',
+//            'hulpbehoevende-created_at',
+//            'hulpbehoevende-updated_at',
+//            'hulpbehoevende-woonsituatie',
+//            'hulpbehoevende-oorzaak_hulpbehoefte',
+//            'hulpbehoevende-bel_profiel',
+//            'hulpbehoevende-details_diagnose'
+        ];
+    }
 
     public function getDisplayNameAttribute()
     {
