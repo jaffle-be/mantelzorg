@@ -81,6 +81,15 @@
                         <i class="fa fa-arrow-right"></i>
                     </button>
                 </div>
+
+                @if(UI::isTablet())
+                    <div data-trigger="confirm" style="display:none;">
+                        <button class="btn btn-instrument">
+                            {{ Lang::get('instrument.bevestigen') }}
+                            <i class="fa fa-check"></i>
+                        </button>
+                    </div>
+                @endif
             </div>
         @endif
 

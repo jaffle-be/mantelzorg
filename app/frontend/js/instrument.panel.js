@@ -137,7 +137,8 @@
     var MobileNavigator = function () {
         this.buttons = {
             next: $("[data-trigger='next-question']"),
-            previous: $("[data-trigger='previous-question']")
+            previous: $("[data-trigger='previous-question']"),
+            confirm: $("[data-trigger='confirm']")
         };
         //the actual questions
         this.questions = $(".instrument-questions .instrument-question");
@@ -268,7 +269,14 @@
                     this.title.html($(listItem).find('[data-title]').html());
                 }
 
-
+                //if the question is the last question, we show the confirm button
+                if(position == this.questions.size())
+                {
+                    this.buttons.confirm.show();
+                }
+                else{
+                    this.buttons.confirm.hide();
+                }
             }
 
             return element ? true : false;
