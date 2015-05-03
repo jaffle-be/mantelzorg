@@ -46,6 +46,10 @@
 
 .header-color(@c) {
   background-color: @c;
+
+  li:active, li:focus, li:hover, li.active {
+    background-color: darken(@c, 7%);
+  }
 }
 
 .instrument.panel-gray {
@@ -105,6 +109,8 @@
 }
 
 .instrument-header {
+
+  cursor: pointer;
 
   .heading {
     padding: 1em 3em;
@@ -236,7 +242,7 @@
       font-size: small;
       font-weight: normal;
 
-      .title{
+      .title {
         width: 100%;
         white-space: nowrap;
         overflow: hidden;
@@ -263,13 +269,13 @@
         vertical-align: middle;
         padding: 0 15px;
 
-        .title{
+        .title {
           display: inline-block;
           width: 75%;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-      }
+        }
 
         //        ellipsis
         width: 100%;
@@ -286,7 +292,7 @@
         border-bottom: none;
       }
 
-      li:first-child{
+      li:first-child {
         border-top: 1px solid @border-color;
       }
     }

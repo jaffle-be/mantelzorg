@@ -12,7 +12,7 @@
 
         <ul style="display: none;">
             @foreach($panel->questionnaire->panels as $item)
-                <li>
+                <li class="{{$item->id == $panel->id ? 'active' : null}}">
                     <a data-target-id="{{ $item->id }}" href="">{{ $item->title }}</a>
                 </li>
             @endforeach
