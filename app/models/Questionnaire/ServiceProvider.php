@@ -4,6 +4,7 @@ namespace Questionnaire;
 
 use Carbon\Carbon;
 use Questionnaire\Export\CsvExport;
+use Questionnaire\Export\DataHandler;
 use Questionnaire\Export\Repository;
 use Questionnaire\Jobs\ExportJob;
 
@@ -39,9 +40,14 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
         $this->app['Questionnaire\Export\Exporter'] = $this->app->share(function ($app) {
 
+            return new CsvExport($app['excel'], new Carbon(), $app['Questionnaire\Export\DataHandler']);
+        });
+
+        $this->app['Questionnaire\Export\DataHandler'] = $this->app->share(function($app)
+        {
             $repo = new Repository(new Answer, new Choise, $app['db']->connection());
 
-            return new CsvExport($app['excel'], $repo, new Carbon());
+            return new DataHandler($repo);
         });
 
         $commands = [

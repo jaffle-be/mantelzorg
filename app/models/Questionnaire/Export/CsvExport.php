@@ -19,17 +19,15 @@ class CsvExport implements Exporter
      */
     protected $excel;
 
-    protected $repository;
-
-    public function __construct(Excel $excel, Repository $repo, Carbon $carbon)
+    public function __construct(Excel $excel, Carbon $carbon, DataHandler $handler)
     {
         ini_set('max_execution_time', 300);
 
         $this->excel = $excel;
 
-        $this->repository = $repo;
-
         $this->carbon = $carbon;
+
+        $this->handler = $handler;
     }
 
     /**
@@ -41,7 +39,9 @@ class CsvExport implements Exporter
      */
     public function generate(Questionnaire $survey)
     {
-        $excel = $this->excel->create($survey->title . '-' . $this->carbon->now()->format('y-m-d H:i:s'), function ($excel) use ($survey) {
+        $filename = $survey->title . '-' . $this->carbon->now()->format('y-m-d H:i:s');
+
+        $excel = $this->excel->create($filename, function ($excel) use ($survey) {
 
             $excel->sheet($survey->title, function (LaravelExcelWorksheet $sheet) use ($survey) {
                 //disable autosize for faster export.. (this dropped +-44 s with 200 sessions)
@@ -127,94 +127,13 @@ class CsvExport implements Exporter
 
     protected function data(LaravelExcelWorksheet $sheet, Questionnaire $survey)
     {
-        $repository = $this->repository;
-
         $panels = $this->mapPanels($survey);
 
-        $survey->sessions()->chunk(100, function ($sessions) use ($panels, $sheet, $repository) {
+        $survey->sessions()->chunk(100, function ($sessions) use ($panels, $sheet) {
 
-            $sessions->load([
-                'user',
-                'oudere',
-                'mantelzorger'
-            ]);
+            $this->handler->handle($sessions, $panels, $sheet);
 
-            $sessionIds = $sessions->lists('id');
-
-            $answers = $repository->getAnswers($sessionIds);
-            $choises = $repository->getChoises($sessionIds);
-
-            foreach ($sessions as $session) {
-                $sessionData = [];
-
-                //add the session id as first column.
-                $sessionData[] = $session->getAttribute('id');
-
-                $user = $session->user->toExportArray();
-                $mantelzorger = $session->mantelzorger->toExportArray();
-                $oudere = $session->oudere->toExportArray();
-
-                $sessionData = array_merge($sessionData, array_values($user));
-                $sessionData = array_merge($sessionData, array_values($mantelzorger));
-                $sessionData = array_merge($sessionData, array_values($oudere));
-
-                $session = $session->toArray();
-
-                foreach ($panels as $panelid => $questions) {
-
-                    $sessionAnswers = isset($answers[$session['id']]) ? $answers[$session['id']] : [];
-
-                    $sessionData = $this->answers($sessionData, $questions, $session, $sessionAnswers, $choises);
-                }
-
-                $sheet->appendRow($sessionData);
-
-            }
         });
-    }
-
-    protected function answers(array $data, $questions, $session, $answers, $chosen)
-    {
-        foreach ($questions as $question) {
-            //check if the session answered the question
-            if ($answer = $this->wasAnswered($answers, $question['id'])) {
-
-                if($question['explainable'])
-                {
-                    $data[] = $answer->explanation;
-                }
-
-                foreach ($question['choises'] as $choise) {
-                    if ($this->wasChecked($chosen, $choise['id'], $answer->id)) {
-                        $data[] = 1;
-                    } else {
-                        $data[] = 0;
-                    }
-                }
-            } else {
-
-                if($question['explainable'])
-                {
-                    $data[] = '';
-                }
-
-                foreach ($question['choises'] as $choise) {
-                    $data[] = 0;
-                }
-            }
-        }
-
-        return $data;
-    }
-
-    protected function wasAnswered(array $answers, $questionid)
-    {
-        return isset($answers[$questionid]) ? $answers[$questionid] : false;
-    }
-
-    protected function wasChecked($choises, $choiseid, $answerid)
-    {
-        return isset($choises[$answerid]) && in_array($choiseid, $choises[$answerid]);
     }
 
     /**
