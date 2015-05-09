@@ -5,7 +5,7 @@
     </div>
 
 
-    <div class="panel-body">
+    <div class="panel-body" id="rapport-generator">
 
         {{ Form::open(['route' => 'rapport.generate', 'class' => 'form-horizontal']) }}
 
@@ -14,7 +14,8 @@
 
             <div class="col-xs-12 col-sm-8">
                 {{ Form::select('survey', $questionnaires, null, [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'id' => 'survey',
                 ]) }}
             </div>
 
