@@ -2,41 +2,44 @@
 
     'use strict';
 
-    var woonsituaties = Morris.Donut({
-        element: 'woonsituatie',
-        data: [{
-            label: 'loading',
-            value: ''
-        }],
-        resize: true
-    });
+    var OuderenChart = function()
+    {
+        this.woonsituaties = Morris.Donut({
+            element: 'woonsituatie',
+            data: [{
+                label: 'loading',
+                value: ''
+            }],
+            resize: true
+        });
 
-    var relations = Morris.Donut({
-        element: 'mantelzorger_relation',
-        data: [{
-            label: 'loading',
-            value: ''
-        }],
-        resize: true
-    });
+        this.relations = Morris.Donut({
+            element: 'mantelzorger_relation',
+            data: [{
+                label: 'loading',
+                value: ''
+            }],
+            resize: true
+        });
 
-    var bel_profiel = Morris.Donut({
-        element: 'bel_profiel',
-        data: [{
-            label: 'loading',
-            value: ''
-        }],
-        resize: true
-    });
+        this.bel_profiel = Morris.Donut({
+            element: 'bel_profiel',
+            data: [{
+                label: 'loading',
+                value: ''
+            }],
+            resize: true
+        });
 
-    var oorzaak_hulpbehoefte = Morris.Donut({
-        element: 'oorzaak_hulpbehoefte',
-        data: [{
-            label: 'loading',
-            value: ''
-        }],
-        resize: true
-    });
+        this.oorzaak_hulpbehoefte = Morris.Donut({
+            element: 'oorzaak_hulpbehoefte',
+            data: [{
+                label: 'loading',
+                value: ''
+            }],
+            resize: true
+        });
+    };
 
     function load(stat, chart) {
         $.ajax({
@@ -56,10 +59,12 @@
 
     $(document).ready(function () {
 
-        load('woonsituatie', woonsituaties);
-        load('mantelzorger_relation', relations);
-        load('bel_profiel', bel_profiel);
-        load('oorzaak_hulpbehoefte', oorzaak_hulpbehoefte);
+        var ouderen = new OuderenChart();
+
+        load('woonsituatie', ouderen.woonsituaties);
+        load('mantelzorger_relation', ouderen.relations);
+        load('bel_profiel', ouderen.bel_profiel);
+        load('oorzaak_hulpbehoefte', ouderen.oorzaak_hulpbehoefte);
 
     });
 
