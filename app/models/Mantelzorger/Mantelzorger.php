@@ -47,9 +47,6 @@ class Mantelzorger extends Model implements Searchable, Exportable
             'mantelzorger-city' => isset($this->attributes['city']) ? $this->attributes['city'] : null,
             'mantelzorger-phone' => isset($this->attributes['phone']) ? $this->attributes['phone'] : null,
             'mantelzorger-birthday' => isset($this->attributes['birthday']) ? $this->attributes['birthday'] : null,
-//            'mantelzorger-hulpverlener_id' => $this->attributes['hulpverlener_id'],
-//            'mantelzorger-created_at' => $this->attributes['created_at'],
-//            'mantelzorger-updated_at' => $this->attributes['updated_at'],
         ];
     }
 
