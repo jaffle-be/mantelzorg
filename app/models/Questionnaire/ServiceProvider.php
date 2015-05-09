@@ -5,6 +5,7 @@ namespace Questionnaire;
 use Carbon\Carbon;
 use Questionnaire\Export\CsvExport;
 use Questionnaire\Export\DataHandler;
+use Questionnaire\Export\ExportLogger;
 use Questionnaire\Export\Repository;
 use Questionnaire\Jobs\ExportJob;
 
@@ -35,7 +36,10 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->app['Questionnaire\Observer\Answer'] = new Observer\Answer($this->app['events']);
 
         $this->app['Questionnaire\Jobs\ExportJob'] = $this->app->share(function ($app) {
-            return new ExportJob(new Questionnaire(), $app['Questionnaire\Export\Exporter'], $app['log'], $app['events'], new \User());
+
+            $logger = new ExportLogger($app['log'], $app['db']);
+
+            return new ExportJob(new Questionnaire(), $app['Questionnaire\Export\Exporter'], $logger, $app['events'], new \User());
         });
 
         $this->app['Questionnaire\Export\Exporter'] = $this->app->share(function ($app) {

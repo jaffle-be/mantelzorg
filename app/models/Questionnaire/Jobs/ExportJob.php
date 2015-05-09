@@ -6,6 +6,7 @@ use Illuminate\Events\Dispatcher;
 use Illuminate\Log\Writer;
 use Illuminate\Queue\Jobs\Job;
 use Questionnaire\Export\Exporter;
+use Questionnaire\Export\ExportLogger;
 use Questionnaire\Questionnaire;
 use User;
 
@@ -18,17 +19,17 @@ class ExportJob {
 
     protected $questionnaire;
 
-    protected $log;
+    protected $logger;
 
     protected $events;
 
     protected $user;
 
-    public function __construct(Questionnaire $questionnaire, Exporter $export, Writer $log, Dispatcher $events, User $user)
+    public function __construct(Questionnaire $questionnaire, Exporter $export, ExportLogger $logger, Dispatcher $events, User $user)
     {
         $this->questionnaire = $questionnaire;
         $this->export = $export;
-        $this->log = $log;
+        $this->logger = $logger;
         $this->events = $events;
         $this->user = $user;
     }
@@ -36,9 +37,7 @@ class ExportJob {
     public function fire(Job $job, $payload)
     {
         try{
-            $this->log->info('job started for ' . $payload['id']);
-
-            $start = microtime(true);
+            $this->logger->start($payload['id']);
 
             $survey = $this->questionnaire->find($payload['id']);
 
@@ -59,9 +58,7 @@ class ExportJob {
 
             $filename = $this->export->generate($survey);
 
-            $time = microtime(true) - $start;
-
-            $this->log->info(sprintf('generating export for %s took %d seconds', $survey->title, $time));
+            $this->logger->stop($survey);
 
             \Event::fire('rapport.generated', [$user, $survey, $filename]);
 
@@ -69,7 +66,9 @@ class ExportJob {
         }
         catch(Exception $e)
         {
-            $this->log->error(sprintf('job failed: %s error: %s in file %s on line %d', __CLASS__ , $e->getMessage(), $e->getFile(), $e->getLine()));
+            $this->logger->error($e);
+
+            \Event::fire('rapport.failed', [$user, $survey]);
         }
     }
 
