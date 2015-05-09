@@ -3,6 +3,7 @@
   "dependencies": {
     "components-font-awesome": "*",
     "bootstrap": "~3.3.0",
-    "modernizr": "~2.8.3"
+    "modernizr": "~2.8.3",
+    "moment": "~2.10.2"
   }
 }

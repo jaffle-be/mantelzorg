@@ -28,6 +28,7 @@ gulp.task('js', function()
     gulp.src([
         //other plugins
         'app/components/metisMenu/src/metisMenu.js',
+        'app/components/moment/min/moment-with-locales.js',
 
         'app/frontend/js/plugins/boot.js',
         'app/frontend/js/plugins/viewport.js',
