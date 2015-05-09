@@ -90,6 +90,6 @@ gulp.task('default', ['watch']);
 gulp.task('watch', function()
 {
     gulp.watch('app/frontend/css/*.less', ['master']);
-    gulp.watch('app/frontend/less/*.less', ['master']);
+    gulp.watch('app/frontend/less/**/*.less', ['master']);
     gulp.watch('app/frontend/js/**/*.js', ['js'])
 });
