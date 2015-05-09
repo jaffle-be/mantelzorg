@@ -72,14 +72,6 @@ return [
                     'class' => 'User',
                     'key'   => 'user_id'
                 ],
-//                'questionnaire'        => [
-//                    'class' => 'Questionnaire\Questionnaire',
-//                    'key'   => 'questionnaire_id',
-//                ],
-//                'questionnaire.panels' => [
-//                    'class' => 'Questionnaire\Panel',
-//                    'key'   => 'panel_id'
-//                ]
             ]
         ]
     ],
