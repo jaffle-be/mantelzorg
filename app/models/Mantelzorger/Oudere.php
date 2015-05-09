@@ -22,13 +22,13 @@ class Oudere extends Model implements Exportable
         'mantelzorger_id'       => 'required|exists:mantelzorgers,id',
         'mantelzorger_relation' => 'exists:meta_values,id',
         'birthday'              => 'required|date_format:d/m/Y',
-        'woonsituatie'          => 'required|exists:meta_values,id',
-        'oorzaak_hulpbehoefte'  => 'required|exists:meta_values,id'
+        'woonsituatie_id'          => 'required|exists:meta_values,id',
+        'oorzaak_hulpbehoefte_id'  => 'required|exists:meta_values,id'
     );
 
     protected $fillable = array(
         'identifier', 'email', 'firstname', 'lastname', 'male', 'street', 'postal', 'city',
-        'phone', 'mantelzorger_id', 'birthday', 'diagnose', 'mantelzorger_relation', 'woonsituatie', 'oorzaak_hulpbehoefte', 'bel_profiel', 'details_diagnose',
+        'phone', 'mantelzorger_id', 'birthday', 'diagnose', 'mantelzorger_relation_id', 'woonsituatie_id', 'oorzaak_hulpbehoefte_id', 'bel_profiel_id', 'details_diagnose',
     );
 
     /**
@@ -77,31 +77,41 @@ class Oudere extends Model implements Exportable
         $this->attributes['email'] = $value;
     }
 
-    public function setWoonsituatieAttribute($value)
+    //avoid mysql errors on setting an empty string
+    public function setMantelzorgerRelationIdAttribute($value)
     {
         if (empty($value)) {
             $value = null;
         }
 
-        $this->attributes['woonsituatie'] = $value;
+        $this->attributes['mantelzorger_relation_id'] = $value;
     }
 
-    public function setOorzaakHulpbehoefteAttribute($value)
+    public function setWoonsituatieIdAttribute($value)
     {
         if (empty($value)) {
             $value = null;
         }
 
-        $this->attributes['oorzaak_hulpbehoefte'] = $value;
+        $this->attributes['woonsituatie_id'] = $value;
     }
 
-    public function setBelProfielAttribute($value)
+    public function setOorzaakHulpbehoefteIdAttribute($value)
     {
         if (empty($value)) {
             $value = null;
         }
 
-        $this->attributes['bel_profiel'] = $value;
+        $this->attributes['oorzaak_hulpbehoefte_id'] = $value;
+    }
+
+    public function setBelProfielIdAttribute($value)
+    {
+        if (empty($value)) {
+            $value = null;
+        }
+
+        $this->attributes['bel_profiel_id'] = $value;
     }
 
     public function getFullnameAttribute()
@@ -144,12 +154,21 @@ class Oudere extends Model implements Exportable
 
     public function mantelzorger_relation()
     {
-        return $this->belongsTo('Meta\Meta', 'mantelzorger_relation');
+        return $this->belongsTo('Meta\Value', 'mantelzorger_relation_id');
     }
 
     public function oorzaak_hulpbehoefte()
     {
-        return $this->belongsTo('Meta\Value', 'oorzaak_hulpbehoefte');
+        return $this->belongsTo('Meta\Value', 'oorzaak_hulpbehoefte_id');
+    }
+
+    public function bel_profiel(){
+        return $this->belongsTo('Meta\Value', 'bel_profiel_id');
+    }
+
+    public function woon_situatie()
+    {
+        return $this->belongsTo('Meta\Value', 'woonsituatie_id');
     }
 
     public function getDates()

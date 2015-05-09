@@ -188,32 +188,32 @@
 
                         <span class="block errors"><?= $errors->first('mantelzorger_relation') ?></span>
 
-                        <label for="mantelzorger_relation"><?= Lang::get('users.relatie_mantelzorger') ?></label>
+                        <label for="mantelzorger_relation_id"><?= Lang::get('users.relatie_mantelzorger') ?></label>
 
-                        <?= Form::select('mantelzorger_relation', $relations_mantelzorger, $oudere->mantelzorger_relation, array('id' => 'mantelzorger_relation', 'class' => 'form-control')) ?>
+                        <?= Form::select('mantelzorger_relation_id', $relations_mantelzorger, $oudere->mantelzorger_relation_id, array('id' => 'mantelzorger_relation_id', 'class' => 'form-control')) ?>
 
-                        <label for="mantelzorger_relation_alternate"><?= Lang::get('users.relatie_mantelzorger_alternate') ?></label>
+                        <label for="mantelzorger_relation_id_alternate"><?= Lang::get('users.relatie_mantelzorger_alternate') ?></label>
 
-                        <?= Form::text('mantelzorger_relation_alternate', null, array(
-                                'id'    => 'mantelzorger_relation_alternate',
+                        <?= Form::text('mantelzorger_relation_id_alternate', null, array(
+                                'id'    => 'mantelzorger_relation_id_alternate',
                         'class' => 'form-control'
                         )) ?>
                     </div>
 
                     <div class="col-xs-12 col-md-6">
-                        <label for="woonsituatie">{{ Lang::get('users.woonsituatie') }}</label>
-                        <?= Form::select('woonsituatie', $woonsituaties, null, array('id' => 'woonsituatie', 'class' => 'form-control')) ?>
+                        <label for="woonsituatie_id">{{ Lang::get('users.woonsituatie') }}</label>
+                        <?= Form::select('woonsituatie_id', $woonsituaties, null, array('id' => 'woonsituatie_id', 'class' => 'form-control')) ?>
 
-                        <span class="errors">{{ $errors->first('woonsituatie') }}</span>
+                        <span class="errors">{{ $errors->first('woonsituatie_id') }}</span>
 
                     </div>
 
                     <div class="col-xs-12 col-md-6">
-                        <label for="oorzaak_hulpbehoefte"><?= Lang::get('users.oorzaak_hulpbehoefte') ?></label>
+                        <label for="oorzaak_hulpbehoefte_id"><?= Lang::get('users.oorzaak_hulpbehoefte') ?></label>
 
-                        <?= Form::select('oorzaak_hulpbehoefte', $hulpbehoeftes, null, array('id' => 'oorzaak_hulpbehoefte', 'class' => 'form-control')); ?>
+                        <?= Form::select('oorzaak_hulpbehoefte_id', $hulpbehoeftes, null, array('id' => 'oorzaak_hulpbehoefte_id', 'class' => 'form-control')); ?>
 
-                        <span class="errors">{{ $errors->first('oorzaak_hulpbehoefte') }}</span>
+                        <span class="errors">{{ $errors->first('oorzaak_hulpbehoefte_id') }}</span>
 
                     </div>
 
@@ -225,9 +225,9 @@
                     </div>
 
                     <div class="col-xs-12 col-md-6">
-                        <label for="bel_profiel"><?= Lang::get('users.bel_profiel') ?></label>
+                        <label for="bel_profiel_id"><?= Lang::get('users.bel_profiel') ?></label>
 
-                        <?= Form::select('bel_profiel', $belprofielen, null, array('id' => 'bel_profiel', 'class' => 'form-control')) ?>
+                        <?= Form::select('bel_profiel_id', $belprofielen, null, array('id' => 'bel_profiel_id', 'class' => 'form-control')) ?>
                     </div>
                 </div>
 
