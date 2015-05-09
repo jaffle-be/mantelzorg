@@ -137,6 +137,7 @@ return array(
         'Instrument\ServiceProvider',
         'Mantelzorger\MantelzorgerServiceProvider',
         'UserServiceProvider',
+        'Organisation\OrganisationServiceProvider',
 
         'Search\SearchServiceProvider',
         'Notifications\NotificationServiceProvider',
