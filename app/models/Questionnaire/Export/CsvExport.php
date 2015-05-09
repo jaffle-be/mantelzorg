@@ -39,6 +39,8 @@ class CsvExport implements Exporter
      */
     public function generate(Questionnaire $survey)
     {
+        $this->boot($survey);
+
         $filename = $survey->title . '-' . $this->carbon->now()->format('y-m-d H:i:s');
 
         $excel = $this->excel->create($filename, function ($excel) use ($survey) {
@@ -176,5 +178,21 @@ class CsvExport implements Exporter
         $keys = array_keys($oudere->toExportArray());
 
         return $headers->merge($keys);
+    }
+
+    protected function boot($survey)
+    {
+        $survey->load([
+            'panels',
+            //make sure questions follow the order of the questionnaire to number them in the report. not so transparent
+            //but that is how they wanted it.
+            'panels.questions'         => function ($query) {
+                $query->orderBy('sort');
+            },
+            //same reasoning applies for the options available to a question.
+            'panels.questions.choises' => function ($query) {
+                $query->orderBy('sort_weight');
+            }
+        ])->all();
     }
 }
