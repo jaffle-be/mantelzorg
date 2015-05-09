@@ -6,7 +6,7 @@
         element: 'woonsituatie',
         data: [{
             label: 'loading',
-            value: 100
+            value: ''
         }],
         resize: true
     });
@@ -15,7 +15,7 @@
         element: 'mantelzorger_relation',
         data: [{
             label: 'loading',
-            value: 100
+            value: ''
         }],
         resize: true
     });
@@ -24,7 +24,7 @@
         element: 'bel_profiel',
         data: [{
             label: 'loading',
-            value: 100
+            value: ''
         }],
         resize: true
     });
@@ -33,7 +33,7 @@
         element: 'oorzaak_hulpbehoefte',
         data: [{
             label: 'loading',
-            value: 100
+            value: ''
         }],
         resize: true
     });
