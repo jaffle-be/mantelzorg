@@ -49,11 +49,11 @@ class Oudere extends Model implements Exportable
             'hulpbehoevende-phone' => isset($this->attributes['phone']) ? $this->attributes['phone'] : null,
             'hulpbehoevende-birthday' => isset($this->attributes['birthday']) ? $this->attributes['birthday'] : null,
             'hulpbehoevende-diagnose' => isset($this->attributes['diagnose']) ? $this->attributes['diagnose'] : null,
-//            'hulpbehoevende-mantelzorger_relation',
-//            'hulpbehoevende-woonsituatie',
-//            'hulpbehoevende-oorzaak_hulpbehoefte',
-//            'hulpbehoevende-bel_profiel',
-//            'hulpbehoevende-details_diagnose'
+            'hulpbehoevende-mantelzorger_relation' => $this->mantelzorger_relation ? $this->mantelzorger_relation->value : null,
+            'hulpbehoevende-woonsituatie' => $this->woon_situatie ? $this->woon_situatie->value : null,
+            'hulpbehoevende-oorzaak_hulpbehoefte' => $this->oorzaak_hulpbehoefte ? $this->oorzaak_hulpbehoefte->value : null,
+            'hulpbehoevende-bel_profiel' => $this->bel_profiel ? $this->bel_profiel->value : null,
+            'hulpbehoevende-details_diagnose' => isset($this->attributes['details_diagnose']) ? $this->attributes['details_diagnose'] : null
         ];
     }
 

@@ -18,6 +18,10 @@ class DataHandler
     protected $relations = [
         'user',
         'oudere',
+        'oudere.mantelzorger_relation',
+        'oudere.oorzaak_hulpbehoefte',
+        'oudere.woon_situatie',
+        'oudere.bel_profiel',
         'mantelzorger'
     ];
 
