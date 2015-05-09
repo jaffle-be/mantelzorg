@@ -113,6 +113,11 @@ return array(
         'hulpverlener_id'          => 'hulpverlener',
         'oudere_id'                => 'zorgbehoevende persoon',
         'survey'                   => 'vragenlijst',
+        'identifier'               => 'uniek nummer',
+        'woonsituatie_id'          => 'woonsituatie',
+        'oorzaak_hulpbehoefte_id'  => 'oorzaak hulpbehoefte',
+        'bel_profiel_id'           => 'bel profiel',
+        'mantelzorger_relation_id' => 'relatie met mantelzorger',
     ),
 
 );
