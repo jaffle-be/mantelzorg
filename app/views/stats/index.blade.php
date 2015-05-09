@@ -19,26 +19,18 @@
 
     <div class="row">
 
-        <div class="chart">
-            <div id="mantelzorger_relation"></div>
+        <div class="col-xs-12 col-lg-6">
+            @include('stats.ouderen')
         </div>
 
-        <div class="chart">
-            <div id="woonsituatie"></div>
+        <div class="col-xs-12 col-lg-6">
+            @include('stats.sessions')
         </div>
 
-        <div class="chart">
-            <div id="oorzaak_hulpbehoefte"></div>
-        </div>
-
-        <div class="chart">
-            <div id="bel_profiel"></div>
+        <div class="col-xs-12 col-lg-6">
+            @include('stats.organisations')
         </div>
 
     </div>
-
-    <div id="errors">
-
-    </div>
-
+    
 @stop
