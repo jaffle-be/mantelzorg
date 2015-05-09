@@ -6,7 +6,8 @@
     "schickling/backup": "dev-master",
     "elasticsearch/elasticsearch": "*",
     "maatwebsite/excel": "1.*",
-    "jenssegers/agent": "~2.1"
+    "jenssegers/agent": "~2.1",
+    "doctrine/dbal": "~2.5"
   },
   "require-dev":{
     "fzaninotto/faker": "*"
