@@ -113,7 +113,7 @@ class OudereController extends \AdminController
             ]);
 
             if ($validator->fails()) {
-                return redirect::back()->withInput()->withErrors($validator->messages());
+                return Redirect::back()->withInput()->withErrors($validator->messages());
             } else {
                 $oudere->update($input);
             }
