@@ -24,7 +24,7 @@ class ExportLogger {
     {
         $this->log->info('job started for ' . $id);
 
-        $this->db->getDefaultConnection()->enableQueryLog();
+        $this->db->connection()->enableQueryLog();
 
         $this->start = microtime(true);
     }
@@ -33,7 +33,7 @@ class ExportLogger {
     {
         $time = microtime(true) - $this->start;
 
-        $log = $this->db->getDefaultConnection()->getQueryLog();
+        $log = $this->db->connection()->getQueryLog();
 
         $this->log->info(sprintf('generating export for %s took %d seconds', $survey->title, $time));
         $this->log->info(sprintf('we made %d database calls during the export', count($log)));
