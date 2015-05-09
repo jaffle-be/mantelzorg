@@ -13,6 +13,15 @@ class DataHandler
     protected $repository;
 
     /**
+     * @var array
+     */
+    protected $relations = [
+        'user',
+        'oudere',
+        'mantelzorger'
+    ];
+
+    /**
      * @param Repository $repository
      */
     public function __construct(Repository $repository)
@@ -27,16 +36,7 @@ class DataHandler
      */
     public function handle(Collection $sessions, array $panels, LaravelExcelWorksheet $sheet)
     {
-        $sessions->load([
-            'user',
-            'oudere',
-            'mantelzorger'
-        ]);
-
-        $sessionIds = $sessions->lists('id');
-
-        $answers = $this->repository->getAnswers($sessionIds);
-        $choises = $this->repository->getChoises($sessionIds);
+        list($answers, $choises) = $this->boot($sessions);
 
         foreach ($sessions as $session) {
 
@@ -203,5 +203,22 @@ class DataHandler
         }
 
         return $data;
+    }
+
+    /**
+     * @param Collection $sessions
+     *
+     * @return array
+     */
+    protected function boot(Collection $sessions)
+    {
+        $sessions->load($this->relations);
+
+        $sessionIds = $sessions->lists('id');
+
+        $answers = $this->repository->getAnswers($sessionIds);
+        $choises = $this->repository->getChoises($sessionIds);
+
+        return array($answers, $choises);
     }
 }
