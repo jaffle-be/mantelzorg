@@ -165,24 +165,30 @@ class OudereController extends \AdminController
         return $input;
     }
 
+    protected function getMeta($context)
+    {
+        return $this->metaContext->with(['values'])->where('context', $context)->first()->values->lists('value', 'id');
+    }
+
     protected function getWoonsituaties()
     {
-        $values = $this->metaContext->with(['values'])->where('context', Context::OUDEREN_WOONSITUATIE)->first()->values->lists('value', 'id');
+        $values = $this->getMeta(Context::OUDEREN_WOONSITUATIE);
 
         return array('' => Lang::get('users.pick_woonsituatie')) + $values;
     }
 
     protected function getHulpbehoeftes()
     {
-        $values = $this->metaContext->with(['values'])->where('context', Context::OORZAAK_HULPBEHOEFTE)->first()->values->lists('value', 'id');
+        $values = $this->getMeta(Context::OORZAAK_HULPBEHOEFTE);
 
         return array('' => Lang::get('users.pick_oorzaak_hulpbehoefte')) + $values;
     }
 
     protected function getBelprofielen()
     {
-        $values = $this->metaContext->with(['values'])->where('context', Context::BEL_PROFIEL)->first()->values->lists('value', 'id');
+        $values = $this->getMeta(Context::BEL_PROFIEL);
 
         return array('' => Lang::get('users.pick_bel_profiel')) + $values;
     }
+
 }
