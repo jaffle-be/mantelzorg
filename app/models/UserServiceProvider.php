@@ -12,6 +12,8 @@ class UserServiceProvider extends \Illuminate\Support\ServiceProvider
         });
 
         $this->app['events']->listen('user.password-generated', 'UserMailer@passwordGenerated');
+
+        $this->app->bind('UserRepositoryInterface', 'UserRepository');
     }
 
     public function boot()

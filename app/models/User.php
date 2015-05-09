@@ -147,6 +147,11 @@ class User extends Model implements UserInterface, RemindableInterface, Searchab
 
     public function getFullnameAttribute()
     {
+        if(isset($this->attributes['fullname']))
+        {
+            return $this->attributes['fullname'];
+        }
+
         return $this->attributes['firstname'] . ' ' . $this->attributes['lastname'];
     }
 
