@@ -14,14 +14,18 @@ use User;
 class CsvExport implements Exporter
 {
 
+    protected $filter;
+
     /**
      * @var Excel
      */
     protected $excel;
 
-    public function __construct(Excel $excel, Carbon $carbon, DataHandler $handler)
+    public function __construct(SessionFilter $filter, Excel $excel, Carbon $carbon, DataHandler $handler)
     {
         ini_set('max_execution_time', 300);
+
+        $this->filter = $filter;
 
         $this->excel = $excel;
 
@@ -35,17 +39,19 @@ class CsvExport implements Exporter
      * Dan moet je per sessie per antwoord aanduiden of het was geselecteerd of niet.
      *
      * @param Questionnaire $survey
-     * @param Collection    $sessions
+     * @param array         $filters
+     *
+     * @return string
      */
-    public function generate(Questionnaire $survey)
+    public function generate(Questionnaire $survey, array $filters = [])
     {
         $this->boot($survey);
 
         $filename = $survey->title . '-' . $this->carbon->now()->format('y-m-d H:i:s');
 
-        $excel = $this->excel->create($filename, function ($excel) use ($survey) {
+        $excel = $this->excel->create($filename, function ($excel) use ($survey, $filters) {
 
-            $excel->sheet($survey->title, function (LaravelExcelWorksheet $sheet) use ($survey) {
+            $excel->sheet($survey->title, function (LaravelExcelWorksheet $sheet) use ($survey, $filters) {
                 //disable autosize for faster export.. (this dropped +-44 s with 200 sessions)
                 $sheet->setAutoSize(false);
                 //get the headers
@@ -57,7 +63,7 @@ class CsvExport implements Exporter
                 $sheet->appendRow($headers);
 
                 //now add all data rows
-                $this->data($sheet, $survey);
+                $this->data($sheet, $survey, $filters);
             });
         });
 
@@ -127,11 +133,13 @@ class CsvExport implements Exporter
         return $map;
     }
 
-    protected function data(LaravelExcelWorksheet $sheet, Questionnaire $survey)
+    protected function data(LaravelExcelWorksheet $sheet, Questionnaire $survey, array $filters)
     {
         $panels = $this->mapPanels($survey);
 
-        $survey->sessions()->chunk(100, function ($sessions) use ($panels, $sheet) {
+        $query = $this->filter->filter($survey, $filters);
+
+        $query->chunk(100, function ($sessions) use ($panels, $sheet) {
 
             $this->handler->handle($sessions, $panels, $sheet);
 
@@ -180,7 +188,7 @@ class CsvExport implements Exporter
         return $headers->merge($keys);
     }
 
-    protected function boot($survey)
+    protected function boot(Questionnaire $survey)
     {
         $survey->load([
             'panels',

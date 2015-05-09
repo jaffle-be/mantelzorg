@@ -43,7 +43,7 @@ class ExportJob {
 
             $user = $this->user->find($payload['userid']);
 
-            $filename = $this->export->generate($survey);
+            $filename = $this->export->generate($survey, $payload['filters']);
 
             $this->logger->stop($survey);
 
