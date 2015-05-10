@@ -152,21 +152,21 @@ class Oudere extends Model implements Exportable
         return $this->belongsTo('Mantelzorger\Mantelzorger');
     }
 
-    public function mantelzorger_relation()
+    public function mantelzorgerRelation()
     {
         return $this->belongsTo('Meta\Value', 'mantelzorger_relation_id');
     }
 
-    public function oorzaak_hulpbehoefte()
+    public function oorzaakHulpbehoefte()
     {
         return $this->belongsTo('Meta\Value', 'oorzaak_hulpbehoefte_id');
     }
 
-    public function bel_profiel(){
+    public function belProfiel(){
         return $this->belongsTo('Meta\Value', 'bel_profiel_id');
     }
 
-    public function woon_situatie()
+    public function woonSituatie()
     {
         return $this->belongsTo('Meta\Value', 'woonsituatie_id');
     }
