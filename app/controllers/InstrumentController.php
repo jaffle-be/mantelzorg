@@ -1,4 +1,6 @@
 <?php
+use Barryvdh\Snappy\Facades\SnappyPdf;
+use Barryvdh\Snappy\PdfWrapper;
 
 /**
  * Class InstrumentController
@@ -62,6 +64,25 @@ class InstrumentController extends AdminController
 
     public function download($id)
     {
+        $session = $this->session->with([
+            'questionnaire',
+            'user',
+            'answers',
+            'answers.choises',
+            'mantelzorger',
+            'oudere',
+            'oudere.woonSituatie',
+            'oudere.oorzaakHulpbehoefte',
+            'oudere.mantelzorgerRelation',
+            'oudere.belProfiel',
+        ])->find($id);
+
+        /** @var PdfWrapper $snappy */
+        $snappy = App::make('snappy.pdf.wrapper');
+
+        return View::make('instrument.pdf', ['session' => $session]);
+
+        return $snappy->loadView('instrument.pdf', ['session' => $session])->download($session->questionnaire->title . '.pdf');
     }
 
     public function newSurvey()
