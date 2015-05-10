@@ -72,6 +72,11 @@ Route::get('instrument', [
     'as'   => 'instrument'
 ]);
 
+Route::get('instrument/download/{id}', [
+    'uses' => 'InstrumentController@download',
+    'as'   => 'instrument.download',
+]);
+
 Route::post('instrument', [
     'uses' => 'InstrumentController@newSurvey',
     'as'   => 'instrument.submit'

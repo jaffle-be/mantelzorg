@@ -60,6 +60,10 @@ class InstrumentController extends AdminController
         $this->layout->content = View::make('instrument.index', compact(array('questionnaire', 'hulpverlener', 'surveys')));
     }
 
+    public function download($id)
+    {
+    }
+
     public function newSurvey()
     {
         $input = Input::except('token');
