@@ -1,14 +1,25 @@
-<header>
+<section class="survey-personals">
+
+    <div class="branding">
+
+        <div class="img">
+            <img src="{{ asset('/images/logo-footer.png') }}" alt="{{ Lang::get('master.hogent') }}"/>
+        </div>
+
+        <div class="title">{{ Lang::get("master.main-title") }}</div>
+
+    </div>
+
 
     <div class="row">
 
         {{--instrument details--}}
-        <div class="details">
+        <div class="survey-details">
 
             <h3>{{ Lang::get('pdf.overzicht') }}</h3>
 
-            <label>{{ Lang::get('pdf.vragenlijst') }}</label>
-            <span>{{ $session->questionnaire->title ? : '&nbsp;'}}</span>
+            <label>{{ Lang::get('pdf.identifier') }}</label>
+            <span>{{ $session->getIdentifier() }}</span>
 
             <label>{{ Lang::get('pdf.created') }}</label>
             <span>{{ $session->created_at->format('d/m/Y') }}</span>
@@ -21,7 +32,7 @@
         {{-- hulpverlener details --}}
         @if($user = $session->user)
 
-            <div class="details">
+            <div class="survey-details">
 
                 <h3>{{ Lang::get('pdf.hulpverlener') }}</h3>
 
@@ -45,7 +56,7 @@
         {{--mantelzorger details--}}
         @if($mantelzorger = $session->mantelzorger)
 
-            <div class="details">
+            <div class="survey-details">
 
                 <h3>{{ Lang::get('pdf.mantelzorger') }}</h3>
 
@@ -78,15 +89,12 @@
         {{--oudere details--}}
         @if($oudere = $session->oudere)
 
-            <div class="details">
+            <div class="survey-details">
 
-                <h3>{{ Lang::get('pdf.hulpbehoefende') }}</h3>
+                <h3>{{ Lang::get('pdf.hulpbehoevende') }}</h3>
 
                 <label for="">{{ Lang::get('pdf.identifier') }}</label>
                 <span>{{ $oudere->identifier ? : '&nbps;' }}</span>
-
-                <label for="">{{ Lang::get('pdf.email') }}</label>
-                <span>{{ $oudere->email ? : '&nbsp;' }}</span>
 
                 <label for="">{{ Lang::get('pdf.fullname') }}</label>
                 <span>{{ $oudere->fullname ? : '&nbps;' }}
@@ -100,6 +108,9 @@
 
                 <label for="">{{ Lang::get('pdf.birthday') }}</label>
                 <span>{{ $oudere->birthday ? $oudere->birthday->format('d/m/Y')  : '&nbsp;'}}</span>
+
+                <label for="">{{ Lang::get('pdf.email') }}</label>
+                <span>{{ $oudere->email ? : '&nbsp;' }}</span>
 
                 <label for="">{{ Lang::get('pdf.phone') }}</label>
                 <span>{{ $oudere->phone ? : '&nbsp;' }}</span>
@@ -117,7 +128,6 @@
 
                 <label for="">{{ Lang::get('pdf.mantelzorger_relation') }}</label>
                 <span>{{ $oudere->mantelzorger_relation ? $oudere->mantelzorger_relation->value : '&nbsp;' }}</span>
-
 
 
             </div>

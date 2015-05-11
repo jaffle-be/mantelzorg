@@ -1,21 +1,37 @@
-<div class="panel">
+<div class="survey-panel {{ 'panel-' . $panel->color }}">
 
-    <h3>{{ $panel->title }}</h3>
+    <h3 class="title">{{ $panel->title }}</h3>
     @foreach($panel->questions as $question)
 
-        @if($question->summary_question)
+        <div class="question-wrapper {{ $question->summary_question ? 'summary-question' : null}}">
 
-            <div class="question">
-                <span>{{ $question->question }}</span>
+            <div class="question"><i class="fa fa-quote-left"></i>{{ $question->title }}</div>
 
-                @if($answer = $session->getAnswered($question))
-                    <span>{{ $answer->answer }}</span>
+
+            @if($answer = $session->getAnswered($question))
+
+                @if($question->multiple_choise)
+
+                    <ul class="choises">
+                        @foreach($answer->choises as $choise)
+
+                            <li>{{ $choise->title }}</li>
+
+                        @endforeach
+                    </ul>
 
                 @endif
-            </div>
 
 
-        @endif
+                @if($answer->explanation)
+                    <p class="explanation">{{ $answer->explanation }}</p>
+                @endif
+
+            @endif
+
+        </div>
+
+
 
     @endforeach
 

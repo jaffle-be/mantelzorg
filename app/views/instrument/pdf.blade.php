@@ -13,7 +13,7 @@
 
 <div class="container">
 
-    @include('instrument.pdf.header', ['session' => $session])
+    @include('instrument.pdf.personals', ['session' => $session])
 
     @foreach($session->questionnaire->panels as $panel)
 
