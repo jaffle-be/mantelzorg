@@ -26,6 +26,12 @@
 
             <label>{{ Lang::get('pdf.updated') }}</label>
             <span>{{ $session->updated_at->format('d/m/Y') }}</span>
+
+            <label>{{ Lang::get('pdf.answered') }}</label>
+            <span>{{ $session->answers->filter(function($item){
+                return $item->wasFilledIn();
+            })->count()  }} / {{ $session->questionnaire->questions->count() }}</span>
+
         </div>
 
 
