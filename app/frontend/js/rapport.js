@@ -23,7 +23,7 @@
         $("#rapport-generator").on('change', 'select', function(){
 
             var value = $(this).val(),
-                clicked = $(this).attr('id');
+                changed = $(this).attr('id');
 
             if(value == '')
             {
@@ -32,10 +32,10 @@
                     $(this).attr('disabled', false);
                 });
             }
-            else{
+            else if(changed != 'survey'){
                 $("#rapport-generator select").each(function(){
 
-                    if($(this).attr('id') != clicked && $(this).attr('id') != 'survey')
+                    if($(this).attr('id') != changed && $(this).attr('id') != 'survey')
                     {
                         $(this).val('');
                         $(this).attr('disabled', true);
