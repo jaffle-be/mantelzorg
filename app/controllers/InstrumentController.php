@@ -80,9 +80,8 @@ class InstrumentController extends AdminController
         /** @var PdfWrapper $snappy */
         $snappy = App::make('snappy.pdf.wrapper');
 
-        return View::make('instrument.pdf', ['session' => $session]);
-
-        return $snappy->loadView('instrument.pdf', ['session' => $session])->download($session->questionnaire->title . '.pdf');
+        return $snappy->loadView('instrument.pdf', ['session' => $session])
+            ->download($session->questionnaire->title . '.pdf');
     }
 
     public function newSurvey()

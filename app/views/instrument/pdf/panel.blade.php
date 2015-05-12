@@ -7,18 +7,34 @@
 
             <div class="question"><i class="fa fa-quote-left"></i>{{ $question->title }}</div>
 
+            <? $answer = $session->getAnswered($question) ?>
 
-            @if($answer = $session->getAnswered($question))
+            @if($answer && $answer->wasFilledIn())
 
                 @if($question->multiple_choise)
 
-                    <ul class="choises">
-                        @foreach($answer->choises as $choise)
+                    {{--checkboxes: only show when checked--}}
+                    @if($question->multiple_answer)
 
-                            <li>{{ $choise->title }}</li>
+                        <ul class="choises">
+                            @foreach($answer->question->choises as $choise)
 
-                        @endforeach
-                    </ul>
+                                <li class="box {{ $answer->wasChecked($choise) ? 'checked': null }}">{{ $choise->title }}</li>
+
+                            @endforeach
+                        </ul>
+                    {{--radios: show all--}}
+                    @else
+
+                        <ul class="choises">
+                            @foreach($answer->question->choises as $option)
+
+                                <li class="radio {{ $option->id == $answer->choises->first()->id ? 'checked' : null }}">{{ $option->title }}</li>
+
+                            @endforeach
+                        </ul>
+
+                    @endif
 
                 @endif
 
