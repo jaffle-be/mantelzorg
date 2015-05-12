@@ -39,7 +39,7 @@ class Questionnaire extends Model
 
     public function questions()
     {
-        return $this->hasManyThrough('Qestionnaire\Question', 'Questionnaire\Panel');
+        return $this->hasManyThrough('Questionnaire\Question', 'Questionnaire\Panel', 'questionnaire_id', 'questionnaire_panel_id');
     }
 
     public function panels()

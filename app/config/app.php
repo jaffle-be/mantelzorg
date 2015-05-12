@@ -126,6 +126,7 @@ return array(
         'Maatwebsite\Excel\ExcelServiceProvider',
         'Schickling\Backup\BackupServiceProvider',
         'Jenssegers\Agent\AgentServiceProvider',
+        'Barryvdh\Snappy\ServiceProvider',
 
 //        'LeroyMerlin\LaraSniffer\ServiceProvider',
 //        'Way\Generators\GeneratorsServiceProvider',
