@@ -41,6 +41,22 @@ Route::resource('instellingen/{hulpverlener}/mantelzorgers', 'Instelling\Mantelz
 Route::resource('instellingen/{mantelzorger}/oudere', 'Instelling\OudereController');
 
 /**
+ * STATS
+ */
+Route::get('stats', [
+    'uses' => 'StatsController@index',
+    'as' => 'stats.index',
+]);
+
+Route::post('stats/ouderen', [
+    'uses' => 'StatsController@ouderen',
+]);
+
+Route::post('stats/sessions', [
+    'uses' => 'StatsController@sessions',
+]);
+
+/**
  * RAPPORT
  */
 Route::get('rapport', [
