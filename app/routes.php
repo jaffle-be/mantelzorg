@@ -54,13 +54,13 @@ Route::post('rapport', [
 ]);
 
 Route::get('rapport/download/{filename}', [
-    'uses'=> 'RapportController@download',
-    'as' => 'rapport.download'
+    'uses' => 'RapportController@download',
+    'as'   => 'rapport.download'
 ]);
 
 Route::get('rapport/delete/{filename}', [
     'uses' => 'RapportController@delete',
-    'as' => 'rapport.delete',
+    'as'   => 'rapport.delete',
 ]);
 
 /**
@@ -70,6 +70,11 @@ Route::get('rapport/delete/{filename}', [
 Route::get('instrument', [
     'uses' => 'InstrumentController@index',
     'as'   => 'instrument'
+]);
+
+Route::get('instrument/download/{id}', [
+    'uses' => 'InstrumentController@download',
+    'as'   => 'instrument.download',
 ]);
 
 Route::post('instrument', [

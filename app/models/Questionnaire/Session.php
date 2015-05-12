@@ -65,11 +65,9 @@ class Session extends Model implements Searchable
      */
     public function getAnswered(Question $question)
     {
-        if(isset(static::$cache[$question->id]))
-        {
+        if (isset(static::$cache[$question->id])) {
             return static::$cache[$question->id];
         }
-
 
         $answer = $this->answers->filter(function ($item) use ($question) {
             if ($item->getAttribute('question_id') == $question->getAttribute('id')) {
@@ -80,5 +78,27 @@ class Session extends Model implements Searchable
         static::$cache[$question->id] = $answer;
 
         return $answer;
+    }
+
+    /**
+     * Return a string that helps identify this session
+     *
+     * @param string|null $name
+     *
+     * @return mixed
+     */
+    public function getIdentifier($name = null)
+    {
+        if (empty($name)) {
+            $name = $this->questionnaire->title;
+        }
+
+        $key = $this->getKey();
+
+        if (strlen($key) < 5) {
+            $key = str_pad($key, 5, 0, STR_PAD_LEFT);
+        }
+
+        return $name . '-' . $key;
     }
 }
