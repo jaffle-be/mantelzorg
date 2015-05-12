@@ -24,10 +24,10 @@ class AdjustOudereMetaFields extends Migration {
 			$table->renameColumn('bel_profiel', 'bel_profiel_id');
 			$table->renameColumn('oorzaak_hulpbehoefte', 'oorzaak_hulpbehoefte_id');
 
-			$table->foreign('woonsituatie', 'woonsituatie_ouderen')->references('id')->on('meta_values');
-			$table->foreign('mantelzorger_relation')->references('id')->on('meta_values');
-			$table->foreign('bel_profiel', 'bel_profiel_to_meta_value')->references('id')->on('meta_values');
-			$table->foreign('oorzaak_hulpbehoefte', 'oorzaak_hulpbehoefte_to_meta_values')->references('id')->on('meta_values');
+			$table->foreign('woonsituatie_id', 'woonsituatie_ouderen')->references('id')->on('meta_values');
+			$table->foreign('mantelzorger_relation_id', 'mantelzorger_relation')->references('id')->on('meta_values');
+			$table->foreign('bel_profiel_id', 'bel_profiel_to_meta_value')->references('id')->on('meta_values');
+			$table->foreign('oorzaak_hulpbehoefte_id', 'oorzaak_hulpbehoefte_to_meta_values')->references('id')->on('meta_values');
 		});
 
 		DB::table('meta_contexts')->where('context', 'ouderen_woonsituatie')->update(['context' => 'woonsituatie_id']);
@@ -46,10 +46,20 @@ class AdjustOudereMetaFields extends Migration {
 	{
 		Schema::table('ouderen', function(Blueprint $table)
 		{
+			$table->dropForeign('woonsituatie_ouderen');
+			$table->dropForeign('mantelzorger_relation');
+			$table->dropForeign('bel_profiel_to_meta_value');
+			$table->dropForeign('oorzaak_hulpbehoefte_to_meta_values');
+
 			$table->renameColumn('woonsituatie_id', 'woonsituatie');
 			$table->renameColumn('mantelzorger_relation_id', 'mantelzorger_relation');
 			$table->renameColumn('bel_profiel_id', 'bel_profiel');
 			$table->renameColumn('oorzaak_hulpbehoefte_id', 'oorzaak_hulpbehoefte');
+
+			$table->foreign('woonsituatie', 'woonsituatie_ouderen')->references('id')->on('meta_values');
+			$table->foreign('mantelzorger_relation')->references('id')->on('meta_values');
+			$table->foreign('bel_profiel', 'bel_profiel_to_meta_value')->references('id')->on('meta_values');
+			$table->foreign('oorzaak_hulpbehoefte', 'oorzaak_hulpbehoefte_to_meta_values')->references('id')->on('meta_values');
 		});
 
 		DB::table('meta_contexts')->where('context', 'woonsituatie_id')->update(['context' => 'ouderen_woonsituatie']);
