@@ -20,10 +20,10 @@ class DataHandler
         'user.organisation',
         'user.organisation_location',
         'oudere',
-        'oudere.mantelzorger_relation',
-        'oudere.oorzaak_hulpbehoefte',
-        'oudere.woon_situatie',
-        'oudere.bel_profiel',
+        'oudere.mantelzorgerRelation',
+        'oudere.oorzaakHulpbehoefte',
+        'oudere.woonSituatie',
+        'oudere.belProfiel',
         'mantelzorger'
     ];
 

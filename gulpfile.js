@@ -7,7 +7,8 @@ var gulp = require('gulp'),
     less = require('gulp-less'),
     uglify = require('gulp-uglify'),
     concat = require('gulp-concat'),
-    rename = require('gulp-rename');
+    rename = require('gulp-rename'),
+    plumb = require('gulp-plumber');
 
 /**
  * Master css file
@@ -16,6 +17,7 @@ var gulp = require('gulp'),
 gulp.task('master', function()
 {
     gulp.src('app/frontend/css/**/*.less', {base:'app/frontend/css'})
+        .pipe(plumb())
         .pipe(less())
         .pipe(autoprefixer())
         .pipe(minify())
@@ -43,6 +45,7 @@ gulp.task('js', function()
         'app/frontend/js/plugins/bootstrap-datepicker.js',
         'app/frontend/js/plugins/start.js'
     ])
+        .pipe(plumb())
         .pipe(concat('master.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('public/js'));
@@ -60,6 +63,7 @@ gulp.task('js', function()
 gulp.task('libs', function()
 {
     gulp.src('app/components/modernizr/modernizr.js')
+        .pipe(plumb())
         .pipe(uglify())
         .pipe(rename('modernizr.min.js'))
         .pipe(gulp.dest('public/js'));
@@ -68,11 +72,14 @@ gulp.task('libs', function()
         'app/components/jquery/dist/jquery.min.js',
         'app/components/bootstrap/dist/js/bootstrap.min.js',
     ])
+        .pipe(plumb())
         .pipe(gulp.dest('public/js'));
 
     gulp.src(
         'app/components/bootstrap/dist/fonts/*'
-    ).pipe(gulp.dest('public/fonts'));
+    )
+        .pipe(plumb())
+        .pipe(gulp.dest('public/fonts'));
 
     gulp.src([
         'app/components/jquery-ui/ui/core.js',
@@ -81,6 +88,7 @@ gulp.task('libs', function()
         'app/components/jquery-ui/ui/position.js',
         'app/components/jquery-ui/ui/sortable.js'
     ])
+        .pipe(plumb())
         .pipe(concat('jquery-ui.custom.min.js'))
         .pipe(gulp.dest('public/js'));
 
