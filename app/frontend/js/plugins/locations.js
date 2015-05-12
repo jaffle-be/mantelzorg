@@ -25,8 +25,7 @@
                 that.$location.on('change', function () {
                     if ($(this).val() === 'new')
                     {
-                        that.cleanErrors();
-                        that.$modal.modal('show');
+                        that.open();
                     }
                 });
 
@@ -42,6 +41,11 @@
                         that.cancel();
                     }
                 });
+            },
+            open: function()
+            {
+                this.cleanErrors();
+                this.$modal.modal('show');
             },
             create: function () {
                 var that = this;
@@ -199,14 +203,12 @@
                     html: location.name
                 })
             },
-            toggle: function (show) {
-                if (show)
+            toggle: function (hasLocations) {
+                this.$location.parents('.holder').removeClass('hide');
+
+                if (!hasLocations)
                 {
-                    this.$location.parents('.holder').removeClass('hide');
-                }
-                else
-                {
-                    this.$location.parents('.holder').addClass('hide');
+                    app.locations.creator.open();
                 }
             }
         };

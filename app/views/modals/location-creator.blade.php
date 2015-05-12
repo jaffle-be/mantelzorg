@@ -15,7 +15,7 @@
                         <?= Form::text('name', null, array(
                                 'class' => 'form-control'
                         )) ?>
-                        <span class="input-group-addon"><i class="glyphicons tag"></i></span>
+                        <span class="input-group-addon"><i class="fa fa-tag"></i></span>
                     </div>
 
                     <label for=""><?= Lang::get('users.street') ?></label>
@@ -25,7 +25,7 @@
                         <?= Form::text('street', null, array(
                                 'class' => 'form-control'
                         )) ?>
-                        <span class="input-group-addon"><i class="glyphicons road"></i></span>
+                        <span class="input-group-addon"><i class="fa fa-road"></i></span>
                     </div>
 
                     <div class="row">
@@ -40,7 +40,7 @@
                                 <?= Form::text('postal', null, array(
                                         'class' => 'form-control'
                                 )) ?>
-                                <span class="input-group-addon"><i class="glyphicons road"></i></span>
+                                <span class="input-group-addon"><i class="fa fa-road"></i></span>
                             </div>
 
                         </div>
@@ -55,7 +55,7 @@
                                         'class' => 'form-control'
 
                                 )) ?>
-                                <span class="input-group-addon"><i class="glyphicons road"></i></span>
+                                <span class="input-group-addon"><i class="fa fa-road"></i></span>
                             </div>
 
                         </div>

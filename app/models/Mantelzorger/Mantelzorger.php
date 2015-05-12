@@ -3,13 +3,14 @@
 namespace Mantelzorger;
 
 use Carbon\Carbon;
+use Questionnaire\Export\Exportable;
 use Search\Model\Searchable;
 use Search\Model\SearchableTrait;
+use System\Database\Eloquent\Model;
 use Validator;
 use Input;
-use Eloquent;
 
-class Mantelzorger extends Eloquent implements Searchable
+class Mantelzorger extends Model implements Searchable, Exportable
 {
 
     use SearchableTrait;
@@ -28,6 +29,26 @@ class Mantelzorger extends Eloquent implements Searchable
         'identifier', 'email', 'firstname', 'lastname', 'male', 'street', 'postal',
         'city', 'birthday', 'phone', 'hulpverlener_id'
     );
+
+    /**
+     * @return array
+     */
+    public function toExportArray()
+    {
+        return [
+            'mantelzorger-id' => isset($this->attributes['id']) ? $this->attributes['id'] : null,
+            'mantelzorger-identifier' => isset($this->attributes['identifier']) ? $this->attributes['identifier'] : null,
+            'mantelzorger-email' => isset($this->attributes['email']) ? $this->attributes['email'] : null,
+            'mantelzorger-firstname' => isset($this->attributes['firstname']) ? $this->attributes['firstname'] : null,
+            'mantelzorger-lastname' => isset($this->attributes['lastname']) ? $this->attributes['lastname'] : null,
+            'mantelzorger-male' => isset($this->attributes['male']) ? $this->attributes['male'] : null,
+            'mantelzorger-street' => isset($this->attributes['street']) ? $this->attributes['street'] : null,
+            'mantelzorger-postal' => isset($this->attributes['postal']) ? $this->attributes['postal'] : null,
+            'mantelzorger-city' => isset($this->attributes['city']) ? $this->attributes['city'] : null,
+            'mantelzorger-phone' => isset($this->attributes['phone']) ? $this->attributes['phone'] : null,
+            'mantelzorger-birthday' => isset($this->attributes['birthday']) ? $this->attributes['birthday'] : null,
+        ];
+    }
 
     public function getDisplayNameAttribute()
     {

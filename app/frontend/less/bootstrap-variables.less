@@ -18,6 +18,7 @@
 // #999
 @gray-lighter: lighten(#000, 93.5%);
 // #eee
+@gray-lightest: lighten(#000, 97.25%);
 
 // Brand colors
 // -------------------------
@@ -266,6 +267,12 @@
 @navbar-border-radius: @border-radius-base;
 @navbar-padding-horizontal: floor(@grid-gutter-width / 2.5);
 @navbar-padding-vertical: ((@navbar-height - @line-height-computed) / 2);
+
+//added variables by me for better tablet and mobile views considering navbar
+@navbar-height-tablet: 50px;
+@navbar-padding-vertical-tablet: ((@navbar-height-tablet - @line-height-computed) / 2);
+@navbar-margin-bottom-tablet: 0;
+
 
 @navbar-default-color: #777;
 @navbar-default-bg: white;

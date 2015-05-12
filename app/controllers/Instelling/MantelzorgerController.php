@@ -37,14 +37,18 @@ class MantelzorgerController extends \AdminController
 
     public function index($hulpverlener)
     {
+        $query = Input::get('query');
+
         $search = $this->mantelzorger->search();
 
         $mantelzorgers = $search
-            ->filterMatch('hulpverlener_id', $hulpverlener->id)
-            ->whereMulti_match(['firstname', 'lastname', 'identifier', 'oudere.firstname', 'oudere.lastname', 'oudere.identifier'], Input::get('query'))
+            ->filterTerm('hulpverlener_id', $hulpverlener->id)
+            ->filterMulti_match(['firstname', 'lastname', 'identifier', 'oudere.firstname', 'oudere.lastname', 'oudere.identifier'], Input::get('query'))
             ->orderBy('lastname', 'asc')
             ->orderBy('firstname', 'asc')
             ->get();
+
+        $mantelzorgers->appends('query', $query);
 
         $this->layout->content = View::make('instellingen.mantelzorgers.index', compact(array('hulpverlener', 'mantelzorgers')));
     }

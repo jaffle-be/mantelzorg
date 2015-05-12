@@ -1,10 +1,15 @@
 <?php namespace Questionnaire\Export;
 
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Classes\LaravelExcelWorksheet;
 use Maatwebsite\Excel\Excel;
+use Mantelzorger\Mantelzorger;
+use Mantelzorger\Oudere;
 use Questionnaire\Panel;
 use Questionnaire\Question;
 use Questionnaire\Questionnaire;
+use User;
 
 class CsvExport implements Exporter
 {
@@ -14,9 +19,15 @@ class CsvExport implements Exporter
      */
     protected $excel;
 
-    public function __construct(Excel $excel)
+    public function __construct(Excel $excel, Carbon $carbon, DataHandler $handler)
     {
+        ini_set('max_execution_time', 300);
+
         $this->excel = $excel;
+
+        $this->carbon = $carbon;
+
+        $this->handler = $handler;
     }
 
     /**
@@ -26,21 +37,32 @@ class CsvExport implements Exporter
      * @param Questionnaire $survey
      * @param Collection    $sessions
      */
-    public function generate(Questionnaire $survey, Collection $sessions)
+    public function generate(Questionnaire $survey)
     {
-        $data = new Collection();
+        $filename = $survey->title . '-' . $this->carbon->now()->format('y-m-d H:i:s');
 
-        $headers = $this->headers($survey);
+        $excel = $this->excel->create($filename, function ($excel) use ($survey) {
 
-        $data->push($headers);
+            $excel->sheet($survey->title, function (LaravelExcelWorksheet $sheet) use ($survey) {
+                //disable autosize for faster export.. (this dropped +-44 s with 200 sessions)
+                $sheet->setAutoSize(false);
+                //get the headers
+                $headers = $this->headers($survey);
 
-        $this->data($data, $survey);
+                //and add them
+                $headers = $headers->toArray();
 
-        $this->excel->create($survey->title, function ($excel) use ($data) {
-            $excel->sheet($excel->getTitle(), function ($sheet) use ($data) {
-                $sheet->fromArray($data->toArray(), null, 'A1', true, false);
+                $sheet->appendRow($headers);
+
+                //now add all data rows
+                $this->data($sheet, $survey);
             });
-        })->download();
+        });
+
+        //do not change the value of the extension to xls, since that will only allow 256 columns
+        $excel->store('xlsx');
+
+        return $excel->getFileName() . '.xlsx';
     }
 
     protected function headers(Questionnaire $survey)
@@ -48,6 +70,11 @@ class CsvExport implements Exporter
         $headers = new Collection();
 
         $headers->push('id');
+
+        //add columns for people related info
+        $headers = $this->headersHulpverlener($headers);
+        $headers = $this->headersMantelzorger($headers);
+        $headers = $this->headersOuders($headers);
 
         $counter = 1;
 
@@ -61,7 +88,14 @@ class CsvExport implements Exporter
     protected function panel(Panel $panel, Collection $headers, &$counter)
     {
         foreach ($panel->questions as $question) {
+
+            if($question->getAttribute('explainable'))
+            {
+                $headers->push($counter . 'explanation');
+            }
+
             $this->choises($headers, $question, $counter);
+
             $counter++;
         }
     }
@@ -76,38 +110,71 @@ class CsvExport implements Exporter
         }
     }
 
-    protected function data($data, $survey)
+    protected function mapPanels(Questionnaire $survey)
     {
-        foreach ($survey->sessions as $session) {
-            $sessionData = new Collection();
+        $panels = $survey->getAttribute('panels');
 
-            //add the session id as first column.
-            $sessionData->push($session->id);
+        $panels = $panels->toArray();
 
-            foreach ($survey->panels as $panel) {
-                $this->answers($sessionData, $panel, $session);
-            }
+        $map = [];
 
-            $data->push($sessionData);
+        foreach ($panels as $panel) {
+            $map[$panel['id']] = $panel['questions'];
         }
+
+        return $map;
     }
 
-    protected function answers(Collection $data, $panel, $session)
+    protected function data(LaravelExcelWorksheet $sheet, Questionnaire $survey)
     {
-        foreach ($panel->questions as $question) {
-            if ($answers = $session->getAnswered($question)) {
-                foreach ($question->choises as $choise) {
-                    if ($answers->wasChecked($choise)) {
-                        $data->push(1);
-                    } else {
-                        $data->push(0);
-                    }
-                }
-            } else {
-                foreach ($question->choises as $choise) {
-                    $data->push(0);
-                }
-            }
-        }
+        $panels = $this->mapPanels($survey);
+
+        $survey->sessions()->chunk(100, function ($sessions) use ($panels, $sheet) {
+
+            $this->handler->handle($sessions, $panels, $sheet);
+
+        });
+    }
+
+    /**
+     * @param $headers
+     *
+     * @return mixed
+     */
+    protected function headersHulpverlener($headers)
+    {
+        $user = new User();
+
+        $keys = array_keys($user->toExportArray());
+
+        return $headers->merge($keys);
+    }
+
+    /**
+     * @param $headers
+     *
+     * @return mixed
+     */
+    protected function headersMantelzorger($headers)
+    {
+        $mantelzorger = new Mantelzorger();
+
+        $keys = array_keys($mantelzorger->toExportArray());
+
+        return $headers->merge($keys);
+    }
+
+    /**
+     * @param $headers
+     *
+     * @return mixed
+     */
+    protected function headersOuders($headers)
+    {
+        $oudere = new Oudere();
+
+        $keys = array_keys($oudere->toExportArray());
+
+        return $headers->merge($keys);
     }
 }

@@ -2,145 +2,171 @@
 @import 'bootstrap-variables';
 @import 'bootstrap-mixins';
 
-.btn-gray {
-  .button-variant(@white, @panel-gray, darken(@panel-gray, 10%));
-}
-
-.btn-green {
-  .button-variant(@white, @panel-green, darken(@panel-green, 10%));
-}
-
-.btn-purple {
-  .button-variant(@white, @panel-purple, darken(@panel-purple, 10%));
-}
-
-.btn-yellow {
-  .button-variant(@white, @panel-yellow, darken(@panel-yellow, 10%));
-}
-
-.btn-blue {
-  .button-variant(@white, @panel-blue, darken(@panel-blue, 10%));
-}
-
-.btn-red {
-  .button-variant(@white, @panel-red, darken(@panel-red, 10%));
-}
-
-.btn-orange {
-  .button-variant(@white, @panel-orange, darken(@panel-orange, 10%));
-}
-
-.instrument-header {
-
-  margin-bottom: 20px;
-
-  ul {
-    list-style: none;
-    padding: 0;
-    text-align: center;
-
-    li {
-
-      text-decoration: none;
-      display: inline-block;
-      padding: 10px;
-      border: 1px solid @border-color;
-      border-radius: @border-radius-base;
-      margin-right: 10px;
-      text-shadow: none;
-    }
-
-    li.active a {
-      color: white;
-    }
-
-    li.panel-gray {
-      background-color: @panel-gray;
-    }
-
-    li.panel-yellow {
-      background-color: @panel-yellow;
-    }
-
-    li.panel-purple {
-      background-color: @panel-purple;
-    }
-
-    li.panel-green {
-      background-color: @panel-green;
-    }
-
-    li.panel-red {
-      background-color: @panel-red;
-    }
-
-    li.panel-blue {
-      background-color: @panel-blue;
-    }
-
-    li.panel-orange {
-      background-color: @panel-orange;
-    }
-  }
-
-}
-
 .question-color(@c) {
   .header {
     color: @c;
   }
 
-  .glyphicon {
+  .fa {
     color: @c;
+  }
+}
+
+.instrument-color(@c) {
+
+  .btn-instrument {
+    .button-variant(@white, @c, darken(@c, 10%));
+  }
+
+  .instrument-question {
+    .header h3, .fa {
+      color: @c;
+    }
+  }
+
+  //this is probably a duplicate
+  .instrument-questions {
+    .question-status {
+      .header h3, .fa {
+        color: @c;
+      }
+    }
+  }
+
+  .instrument-footer {
+    .question-list, ul li {
+      background-color: @c;
+    }
+
+    li:active, li:focus, li.active {
+      background-color: darken(@c, 7%);
+    }
+  }
+}
+
+.header-color(@c) {
+  background-color: @c;
+
+  li:active, li:focus, li:hover, li.active {
+    background-color: darken(@c, 7%);
+  }
+}
+
+.instrument.panel-gray {
+  .instrument-color(@panel-gray);
+}
+
+.instrument-header.panel-gray {
+  .header-color(@panel-gray);
+}
+
+.instrument.panel-green {
+  .instrument-color(@panel-green);
+}
+
+.instrument-header.panel-green {
+  .header-color(@panel-green);
+}
+
+.instrument.panel-purple {
+  .instrument-color(@panel-purple);
+}
+
+.instrument-header.panel-purple {
+  .header-color(@panel-purple);
+}
+
+.instrument.panel-yellow {
+  .instrument-color(@panel-yellow);
+}
+
+.instrument-header.panel-yellow {
+  .header-color(@panel-yellow);
+}
+
+.instrument.panel-blue {
+  .instrument-color(@panel-blue);
+}
+
+.instrument-header.panel-blue {
+  .header-color(@panel-blue);
+}
+
+.instrument.panel-red {
+  .instrument-color(@panel-red);
+}
+
+.instrument-header.panel-red {
+  .header-color(@panel-red);
+}
+
+.instrument.panel-orange {
+  .instrument-color(@panel-orange);
+}
+
+.instrument-header.panel-orange {
+  .header-color(@panel-orange);
+}
+
+.instrument-header {
+
+  cursor: pointer;
+
+  .heading {
+    padding: 1em 3em;
+
+    h3 {
+      font-weight: normal;
+      color: @white;
+    }
+  }
+
+  div.active {
+    width: 100%;
+
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      padding: 1em 2em;
+      border-bottom: 1px solid @border-color;
+
+      a {
+        display: block;
+        color: @white;
+        text-decoration: none;
+      }
+    }
+
+    li:first-child {
+      border-top: 1px solid @border-color;
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
   }
 }
 
 .instrument-questions {
 
   .question-status {
-    &.question-blue {
-      .question-color(@panel-blue);
-    }
-
-    &.question-red {
-      .question-color(@panel-red);
-    }
-
-    &.question-green {
-      .question-color(@panel-green);
-    }
-
-    &.question-purple {
-      .question-color(@panel-purple);
-    }
-
-    &.question-orange {
-      .question-color(@panel-orange);
-    }
-
-    &.question-yellow {
-      .question-color(@panel-yellow);
-    }
-
-    &.question-gray {
-      .question-color(@panel-gray);
-    }
-
     font-size: xx-large;
-
-    .glyphicon {
-      margin-top: 15px;
-    }
   }
 
   .instrument-question {
-    //    border-left: 1px solid @border-color;
-    padding-left: 40px;
     margin-bottom: 20px;
 
     & > div {
+      //these are changed below for tablets.
       padding: 15px;
       border: 1px solid @border-color;
+      margin: 0 5%;
+
     }
 
     .header {
@@ -148,9 +174,20 @@
       font-size: x-large;
       font-weight: bold;
       margin-bottom: 10px;
+      position: relative;
+      padding-left: 40px;
+      padding-right: 40px;
 
-      .glyphicon {
-        float: right;
+      .question-status {
+        position: absolute;
+        left: 0;
+        top: -7px;
+      }
+
+      .question-editing {
+        position: absolute;
+        right: 0;
+        top: 0;
       }
     }
 
@@ -163,35 +200,134 @@
     textarea {
       height: 90px;
     }
-
-    &.question-blue {
-      .question-color(@panel-blue)
-    }
-
-    &.question-red {
-      .question-color(@panel-red)
-    }
-
-    &.question-green {
-      .question-color(@panel-green)
-    }
-
-    &.question-orange {
-      .question-color(@panel-orange)
-    }
-
-    &.question-purple {
-      .question-color(@panel-purple)
-    }
-
-    &.question-gray {
-      .question-color(@panel-gray)
-    }
-
   }
-
 }
 
 .instrument-footer {
-  margin-top: 20px;
+  .previous {
+    text-align: left;
+
+    .fa {
+      margin-right: 5px;
+    }
+  }
+
+  .middle {
+    text-align: center;
+  }
+
+  .next {
+    text-align: right;
+    .fa {
+      margin-left: 5px;
+    }
+  }
+
+  .question-list {
+    cursor: pointer;
+    position: relative;
+    z-index: 1000;
+    border: 1px solid @border-color;
+    border-radius: @border-radius-base;
+    color: @white;
+    line-height: 34px;
+    vertical-align: middle;
+
+    h4 {
+      line-height: 34px;
+      height: 34px;
+      vertical-align: middle;
+      color: @white;
+      padding: 0 15px;
+      font-size: small;
+      font-weight: normal;
+
+      .title {
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    ul {
+      .nav;
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      z-index: 1001;
+      border-radius: @border-radius-base;
+      border-color: @border-color;
+
+      li {
+        box-sizing: border-box;
+        border-left: 1px solid @border-color;
+        border-right: 1px solid @border-color;
+        border-bottom: 1px solid @border-color;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+        padding: 0 15px;
+
+        .title {
+          display: inline-block;
+          width: 75%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        //        ellipsis
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        .count {
+          .pull-right;
+        }
+      }
+
+      li:last-child {
+        border-bottom: none;
+      }
+
+      li:first-child {
+        border-top: 1px solid @border-color;
+      }
+    }
+
+    span.caret-down {
+      position: absolute;
+      top: 0;
+      right: 1em;
+    }
+  }
+}
+
+// TABLET IMPROVEMENTS TO UX
+body.tablet {
+
+  .instrument-question > div {
+    padding: 0 15px;
+    border: none;
+    margin: 0;
+  }
+
+  #content {
+    overflow: scroll;
+    //account for the footer;
+    padding-bottom: 63px !important;
+  }
+
+  .instrument-footer {
+    border-top: 1px solid @border-color;
+    padding: 1em;
+    background-color: @white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+
 }

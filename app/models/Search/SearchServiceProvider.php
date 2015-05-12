@@ -23,14 +23,14 @@ class SearchServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerClient();
+        $this->registerService();
 
         $this->app->bind('Search\SearchServiceInterface', 'Search\SearchService');
 
         $this->registerCommands();
     }
 
-    private function registerClient()
+    private function registerService()
     {
         $this->app['Search\SearchService'] = $this->app->share(function ($app) {
             $config = $app->make('config');

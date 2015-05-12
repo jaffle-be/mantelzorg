@@ -11,6 +11,11 @@
 |
 */
 
+App::missing(function($exception)
+{
+    Log::error('Missing URL was: ' . Request::fullUrl());
+});
+
 App::before(function ($request) {
     //
 });

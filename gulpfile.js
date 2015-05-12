@@ -26,7 +26,11 @@ gulp.task('master', function()
 gulp.task('js', function()
 {
     gulp.src([
+        //other plugins
+        'app/components/metisMenu/src/metisMenu.js',
+
         'app/frontend/js/plugins/boot.js',
+        'app/frontend/js/plugins/viewport.js',
         'app/frontend/js/plugins/organisations.js',
         'app/frontend/js/plugins/locations.js',
         'app/frontend/js/plugins/questionnaires.js',

@@ -104,6 +104,14 @@ class SearchService implements SearchServiceInterface
         $this->invertedTypes = $this->invertTypes($this->config['types']);
     }
 
+    /**
+     * This method will bind all events to the eloquent model created, updated or deleted events.
+     * Note the events are not the creating, updating or deleting events, as these would possibly
+     * index data that might change due to a model observer adjusting data.
+     *
+     * @param Searchable $type
+     * @param array      $with
+     */
     public function regularAutoIndex(Searchable $type, array $with)
     {
         /** @var Dispatcher $dispatcher */
@@ -112,9 +120,6 @@ class SearchService implements SearchServiceInterface
         $me = $this;
 
         foreach ($this->listeners as $event => $listener) {
-            if ($event == 'created') {
-                $type->load(array_keys($with));
-            }
 
             $trigger = $type->getSearchableEventname($event);
 
@@ -123,8 +128,8 @@ class SearchService implements SearchServiceInterface
             $type->setSearchableIndex($me->index);
 
             if ($trigger) {
-                $callback = function (Searchable $type) use ($me, $listener) {
-                    return $me->$listener($type);
+                $callback = function (Searchable $type) use ($me, $listener, $with) {
+                    return $me->$listener($type, array_keys($with));
                 };
 
                 $dispatcher->listen($trigger, $callback, 15);
@@ -156,14 +161,14 @@ class SearchService implements SearchServiceInterface
 
         $dispatcher->listen($event, function ($model) use ($parent, $relation, $key, $with) {
 
-            $result = $parent->with($with)->whereHas($relation, function ($query) use ($model, $key) {
+            $result = $parent->with($with)->whereHas($relation, function ($query) use ($model, $key, $with) {
                 $query->where($model->getKeyName(), '=', $model->getKey());
             });
 
             $documents = $result->get();
 
             foreach ($documents as $document) {
-                $this->update($document);
+                $this->update($document, $with);
             }
         });
     }
@@ -188,9 +193,9 @@ class SearchService implements SearchServiceInterface
 
         $me = $this;
 
-        $type->with($relations)->chunk(250, function ($documents) use ($me) {
+        $type->with($relations)->chunk(250, function ($documents) use ($me, $relations) {
             foreach ($documents as $document) {
-                $me->add($document);
+                $me->add($document, $relations, false);
             }
         });
     }
@@ -204,12 +209,21 @@ class SearchService implements SearchServiceInterface
         $this->refreshType($type);
     }
 
-    public function add(Searchable $type)
+    public function add(Searchable $type, array $with, $needsLoading = true)
     {
+        /*
+         * make sure the relations are initialised when creating a new object
+         * else searching might fail since some relations expect to be an array and it would be indexed as null
+         */
+        if($needsLoading)
+        {
+            $type->load(array_values($with));
+        }
+
         $this->client->index($this->data($type));
     }
 
-    public function delete(Searchable $type)
+    public function delete(Searchable $type, array $with)
     {
         $params = $this->data($type);
 
@@ -218,9 +232,11 @@ class SearchService implements SearchServiceInterface
         $this->client->delete($params);
     }
 
-    public function update(Searchable $type)
+    public function update(Searchable $type, array $with)
     {
         $params = $this->getBaseParams($type);
+
+        $type->load($with);
 
         $params = array_merge($params, [
             'id'   => $type->getSearchableId(),
@@ -278,9 +294,9 @@ class SearchService implements SearchServiceInterface
 
         $indices->putSettings($settings);
 
-        $indices->refresh($toggle);
-
         $indices->open($toggle);
+
+        $indices->refresh($toggle);
     }
 
     /**

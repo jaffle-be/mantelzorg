@@ -32,21 +32,21 @@ interface SearchServiceInterface
      *
      * @param Searchable $type
      */
-    public function add(Searchable $type);
+    public function add(Searchable $type, array $with, $needsLoading = true);
 
     /**
      * Delete from index.
      *
      * @param Searchable $type
      */
-    public function delete(Searchable $type);
+    public function delete(Searchable $type, array $with);
 
     /**
      * Update a document in the index.
      *
      * @param Searchable $type
      */
-    public function update(Searchable $type);
+    public function update(Searchable $type, array $with);
 
     /**
      * Search the index
@@ -88,4 +88,13 @@ interface SearchServiceInterface
      * @return mixed
      */
     public function updateMapping($type);
+
+    /**
+     * Boot the search service.
+     *
+     * This method should parse the configurations and set the auto indexing.
+     *
+     * @return mixed
+     */
+    public function boot();
 }

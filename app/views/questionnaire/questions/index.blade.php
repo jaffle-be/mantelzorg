@@ -78,7 +78,7 @@
                 <div class="choises col-md-6" <?= $question->multiple_choise === '0' ? 'style="display:none;"' : '' ?>>
                     <div class="header">
                         <span><?= Lang::get('questionnaires.choises') ?></span>
-                        <button class="pull-right btn btn-default add-choise"><i class="glyphicon glyphicon-plus"></i>
+                        <button class="pull-right btn btn-default add-choise"><i class="fa fa-plus"></i>
                         </button>
                     </div>
                     <div class="body">
@@ -87,7 +87,7 @@
                                 <li data-choise-id="<?= $choise->id ?>" id="choise-<?= $choise->id?>">
                                     <div class="input-group">
                                         <div class="input-group-addon handle">
-                                            <i class="glyphicon glyphicon-move"></i>
+                                            <i class="fa fa-arrows"></i>
                                         </div>
                                         <div class="input-group-addon"><?= Lang::get('questionnaires.choise-title') ?></div>
                                         <input class="form-control name" type="text" value="<?= $choise->title ?>"/>

@@ -35,7 +35,7 @@
 
                 <div class="input-group">
                     <?= Form::text('firstname', null, array('class' => 'form-control')) ?>
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
                 </div>
 
 
@@ -44,7 +44,7 @@
 
                 <div class="input-group">
                     <?= Form::text('lastname', null, array('class' => 'form-control')) ?>
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
                 </div>
 
 
@@ -53,12 +53,12 @@
                 <div>
                     <div class="radio-inline">
                         <label>
-                            <?= Form::radio('male', 1) ?><?= Lang::get('users.male') ?>&nbsp;<i class="glyphicons male"></i>
+                            <?= Form::radio('male', 1) ?><?= Lang::get('users.male') ?>&nbsp;<i class="fa fa-male"></i>
                         </label>
                     </div>
                     <div class="radio-inline">
                         <label>
-                            <?= Form::radio('male', 0) ?><?= Lang::get('users.female') ?>&nbsp;<i class="glyphicons female"></i>
+                            <?= Form::radio('male', 0) ?><?= Lang::get('users.female') ?>&nbsp;<i class="fa fa-female"></i>
                         </label>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
 
                 <div class="input-group">
                     <?= Form::text('phone', null, array('class' => 'form-control')) ?>
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
                 </div>
 
             </fieldset>
@@ -122,20 +122,20 @@
 
                         <div class="input-group">
                             <?= Form::text('email', null, array('class' => 'form-control')) ?>
-                            <span class="input-group-addon"><i class="glyphicons envelope"></i></span>
+                            <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
                         </div>
 
                     </div>
 
                     <div class="col-md-6">
-                        <div class="checkbox">
+                        <div>
                             <?= Form::checkbox('active', 1, null, array(
                             'id' => 'active',
                             )) ?>
                             <label for="active"><?= Lang::get('users.is_active') ?></label>
                         </div>
 
-                        <div class="checkbox">
+                        <div>
                             <?= Form::checkbox('admin', 1, null, array(
                             'id' => 'admin',
                             )) ?>

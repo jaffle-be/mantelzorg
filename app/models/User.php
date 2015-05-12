@@ -2,10 +2,12 @@
 
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
+use Questionnaire\Export\Exportable;
 use Search\Model\Searchable;
 use Search\Model\SearchableTrait;
+use System\Database\Eloquent\Model;
 
-class User extends Eloquent implements UserInterface, RemindableInterface, Searchable
+class User extends Model implements UserInterface, RemindableInterface, Searchable, Exportable
 {
 
     use SearchableTrait;
@@ -124,6 +126,23 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Searc
     public function getRememberTokenName()
     {
         return 'remember_token';
+    }
+
+    /**
+     * @return array
+     */
+    public function toExportArray()
+    {
+        return [
+            'hulpverlener-id' => isset($this->attributes['id']) ? $this->attributes['id'] : null,
+            'hulpverlener-email' => isset($this->attributes['email']) ? $this->attributes['email'] : null,
+            'hulpverlener-firstname' => isset($this->attributes['firstname']) ? $this->attributes['firstname'] : null,
+            'hulpverlener-lastname' => isset($this->attributes['lastname']) ? $this->attributes['lastname'] : null,
+            'hulpverlener-male' => isset($this->attributes['male']) ? $this->attributes['male'] : null,
+            'hulpverlener-phone' => !empty($this->attributes['phone']) ? $this->attributes['phone'] : '',
+            'hulpverlener-organisation_id' => isset($this->attributes['organisation_id']) ? $this->attributes['organisation_id'] : null,
+            'hulpverlener-organisation_location_id' => isset($this->attributes['organisation_location_id']) ? $this->attributes['organisation_location_id'] : null,
+        ];
     }
 
     public function getFullnameAttribute()

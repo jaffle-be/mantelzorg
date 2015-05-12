@@ -8,7 +8,6 @@
     <?= Template::crumb(array(
             array(
                     'text' => Lang::get('master.navs.instrument'),
-
             ),
             array(
                     'text' => Lang::get('master.navs.start'),
@@ -17,23 +16,38 @@
             array(
                     'text' => Lang::get('instrument.panel')
             )
-
     )) ?>
 @stop
 
 @section('content')
 
-    <?= Form::open(array(
-            'route' => array('instrument.panel.submit', $panel->id, $survey->id),
-            'id'    => 'panel-form'
-    )) ?>
+    <div class="instrument panel-{{ $panel->color }}">
 
-    <?= InstrumentTool::header($panel); ?>
+        <?= Form::open(array(
+                'route' => array('instrument.panel.submit', $panel->id, $survey->id),
+                'id'    => 'panel-form'
+        )) ?>
 
-    <?= InstrumentTool::questions($panel, $survey) ?>
+        @include('instrument.template.header', ['panel' => $panel])
 
-    <?= InstrumentTool::footer($panel) ?>
+        <?php $first = true ?>
 
-    <? Form::close() ?>
+        <div class="instrument-questions">
+
+            @foreach($panel->questions as $question)
+
+                @include('instrument.template.question', ['panel' => $panel, 'question' => $question, 'survey' => $survey, 'first' => $first])
+
+                <?php $first = false; ?>
+
+            @endforeach
+
+            @include('instrument.template.footer', [ 'panel' => $panel, 'next' => $panel->nextPanel() ])
+
+        </div>
+
+        <? Form::close() ?>
+
+    </div>
 
 @stop

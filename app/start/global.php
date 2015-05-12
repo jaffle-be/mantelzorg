@@ -93,9 +93,17 @@ View::composer('layout.messages', function ($view) {
 
     $error = Session::has('error') ? Session::get('error') : null;
 
-    $data = compact('message', 'error');
+    $success = Session::has('success') ? Session::get('success') : null;
 
-    $view->with(compact('message', 'error'));
+    $view->with(compact('message', 'error', 'success'));
+});
+
+View::composer('*', function($view)
+{
+    /** @var \Illuminate\Routing\Route $route */
+    $route = Route::getCurrentRoute();
+    //Add zero padding to the interface for better UX on tablets.
+    $view->with(['fullScreen' => UI::isMobile() || UI::isTablet() ]);
 });
 
 Validator::extend('passcheck', function ($attribute, $value, $parameters) {

@@ -2,7 +2,12 @@
 
 namespace Questionnaire;
 
+use Carbon\Carbon;
 use Questionnaire\Export\CsvExport;
+use Questionnaire\Export\DataHandler;
+use Questionnaire\Export\ExportLogger;
+use Questionnaire\Export\Repository;
+use Questionnaire\Jobs\ExportJob;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
@@ -30,8 +35,29 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
         $this->app['Questionnaire\Observer\Answer'] = new Observer\Answer($this->app['events']);
 
-        $this->app['Questionnaire\Export\Exporter'] = $this->app->share(function ($app) {
-            return new CsvExport($app['excel']);
+        $this->app['Questionnaire\Jobs\ExportJob'] = $this->app->share(function ($app) {
+
+            $logger = new ExportLogger($app['log'], $app['db']);
+
+            return new ExportJob(new Questionnaire(), $app['Questionnaire\Export\Exporter'], $logger, $app['events'], new \User());
         });
+
+        $this->app['Questionnaire\Export\Exporter'] = $this->app->share(function ($app) {
+
+            return new CsvExport($app['excel'], new Carbon(), $app['Questionnaire\Export\DataHandler']);
+        });
+
+        $this->app['Questionnaire\Export\DataHandler'] = $this->app->share(function($app)
+        {
+            $repo = new Repository(new Answer, new Choise, $app['db']->connection());
+
+            return new DataHandler($repo);
+        });
+
+        $commands = [
+            'Questionnaire\Console\Export'
+        ];
+
+        $this->commands($commands);
     }
 }
