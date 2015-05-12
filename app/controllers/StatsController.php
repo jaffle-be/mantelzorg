@@ -1,17 +1,25 @@
 <?php
 
+use Carbon\Carbon;
 use Mantelzorger\Oudere;
 use Meta\Context;
+use Questionnaire\Session;
 
 class StatsController extends AdminController{
 
     protected $ouderen;
 
-    public function __construct(Oudere $ouderen, Context $meta)
+    protected $meta;
+
+    protected $surveys;
+
+    public function __construct(Oudere $ouderen, Context $meta, Session $surveys)
     {
         $this->ouderen = $ouderen;
 
         $this->meta = $meta;
+
+        $this->surveys = $surveys;
     }
 
     public function index()
@@ -19,7 +27,7 @@ class StatsController extends AdminController{
         $this->layout->content = View::make('stats.index');
     }
 
-    public function stats()
+    public function ouderen()
     {
         $column = Input::get('field') . '_id';
 
@@ -48,6 +56,39 @@ class StatsController extends AdminController{
         }
 
         return $stats->toJson();
+    }
+
+    public function sessions()
+    {
+        $surveys = $this->surveys
+            ->groupBy('date')
+            ->select([DB::raw('count(id) as value'), DB::raw("date_format(created_at, '%j') as date")])
+            ->whereRaw('date_sub(now(), interval 1 month) < created_at')
+            ->lists('value', 'date');
+
+        $now = Carbon::now();
+
+        $start = clone $now;
+        $start->subMonth();
+
+        $stats = array();
+
+
+        while($start->dayOfYear < $now->dayOfYear)
+        {
+            $stamp = $start->dayOfYear;
+
+            $value = isset($surveys[$stamp]) ? $surveys[$stamp] : 0;
+
+            $stats[] = [
+                'day' => $start->format('Y-m-d'),
+                'value' => $value
+            ];
+
+            $start->addDay();
+        }
+
+        return json_encode($stats);
     }
 
 }

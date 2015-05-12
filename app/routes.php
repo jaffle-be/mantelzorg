@@ -48,8 +48,12 @@ Route::get('stats', [
     'as' => 'stats.index',
 ]);
 
-Route::post('stats', [
-    'uses' => 'StatsController@stats',
+Route::post('stats/ouderen', [
+    'uses' => 'StatsController@ouderen',
+]);
+
+Route::post('stats/sessions', [
+    'uses' => 'StatsController@sessions',
 ]);
 
 /**

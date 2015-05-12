@@ -6,6 +6,8 @@
 
     <div class="panel-body">
 
+        <div id="sessions"></div>
+
     </div>
 
 </div>

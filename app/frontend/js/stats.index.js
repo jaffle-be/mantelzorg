@@ -1,48 +1,46 @@
-(function ($, app, Morris, Raphael) {
+(function ($, app, Morris, moment) {
 
     'use strict';
 
-    var OuderenChart = function()
+    moment.locale('nl');
+
+    function getDonut(element)
     {
-        this.woonsituaties = Morris.Donut({
-            element: 'woonsituatie',
+        return Morris.Donut({
+            element: element,
             data: [{
                 label: 'loading',
                 value: ''
             }],
             resize: true
         });
+    }
 
-        this.relations = Morris.Donut({
-            element: 'mantelzorger_relation',
-            data: [{
-                label: 'loading',
-                value: ''
-            }],
-            resize: true
-        });
+    function getLine(element)
+    {
+        return new Morris.Line({
+            // ID of the element in which to draw the chart.
+            element: element,
+            // Chart data records -- each entry in this array corresponds to a point on
+            // the chart.
+            data: [],
+            // The name of the data record attribute that contains x-values.
+            xkey: 'day',
+            // A list of names of data record attributes that contain y-values.
+            ykeys: ['value'],
+            // Labels for the ykeys -- will be displayed when you hover over the
+            // chart.
+            labels: ['Sessies'],
 
-        this.bel_profiel = Morris.Donut({
-            element: 'bel_profiel',
-            data: [{
-                label: 'loading',
-                value: ''
-            }],
-            resize: true
+            dateFormat: function (x) {
+                return moment(x).format('d MMMM YYYY');
+            }
         });
-
-        this.oorzaak_hulpbehoefte = Morris.Donut({
-            element: 'oorzaak_hulpbehoefte',
-            data: [{
-                label: 'loading',
-                value: ''
-            }],
-            resize: true
-        });
-    };
+    }
 
     function load(stat, chart) {
         $.ajax({
+            url: '/stats/ouderen',
             type: 'POST',
             dataType: 'json',
             data: {
@@ -57,16 +55,38 @@
         });
     }
 
+    function loadSessions(chart)
+    {
+        $.ajax({
+            url: '/stats/sessions',
+            type: 'POST',
+            dataType: 'json',
+            success: function(response)
+            {
+                chart.setData(response);
+            },
+            error: function(){
+                chart.setData([]);
+            }
+        });
+    }
+
     $(document).ready(function () {
 
-        var ouderen = new OuderenChart();
+        var woonsituaties = getDonut('woonsituatie'),
+            relations = getDonut('mantelzorger_relation'),
+            bel_profiel = getDonut('bel_profiel'),
+            oorzaken = getDonut('oorzaak_hulpbehoefte');
 
-        load('woonsituatie', ouderen.woonsituaties);
-        load('mantelzorger_relation', ouderen.relations);
-        load('bel_profiel', ouderen.bel_profiel);
-        load('oorzaak_hulpbehoefte', ouderen.oorzaak_hulpbehoefte);
+        load('woonsituatie', woonsituaties);
+        load('mantelzorger_relation', relations);
+        load('bel_profiel', bel_profiel);
+        load('oorzaak_hulpbehoefte', oorzaken);
 
+        var sessions = getLine('sessions');
+
+        loadSessions(sessions);
     });
 
 
-})(window.jQuery, window.app, window.Morris, window.Raphael);
+})(window.jQuery, window.app, window.Morris, window.moment);
