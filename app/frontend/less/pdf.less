@@ -84,7 +84,33 @@ html.pdf{
       }
 
       .choises{
+        list-style: none;
         margin: .5em 0;
+
+        li:first-child{
+          margin-top: 1em;
+        }
+
+        .box:before{
+          .fa-icon();
+          content: @fa-var-square-o;
+          margin-right: .4em;
+        }
+
+        .box.checked:before{
+          content: @fa-var-check-square-o;
+        }
+
+        .radio:before{
+          .fa-icon();
+          content: @fa-var-circle-thin;
+          margin-right: .4em;
+        }
+
+        .radio.checked:before{
+          content:@fa-var-circle;
+        }
+
       }
 
     }
