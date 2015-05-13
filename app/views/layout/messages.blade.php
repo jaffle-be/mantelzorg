@@ -1,18 +1,26 @@
 @if($message)
-    <p class="alert alert-info">
+
+    <div class="alert alert-info">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         {{ $message }}
-    </p>
+    </div>
+
 @endif
 
+
 @if($success)
-    <p class="alert alert-success">
+
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         {{ $success }}
-    </p>
+    </div>
+
 @endif
 
 
 @if($error)
-    <p class="alert alert-danger">
-        {{ $error }}
-    </p>
+    <div class="alert alert-danger">
+    	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    	{{ $error }}
+    </div>
 @endif

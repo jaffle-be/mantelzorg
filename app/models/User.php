@@ -134,19 +134,24 @@ class User extends Model implements UserInterface, RemindableInterface, Searchab
     public function toExportArray()
     {
         return [
-            'hulpverlener-id' => isset($this->attributes['id']) ? $this->attributes['id'] : null,
-            'hulpverlener-email' => isset($this->attributes['email']) ? $this->attributes['email'] : null,
-            'hulpverlener-firstname' => isset($this->attributes['firstname']) ? $this->attributes['firstname'] : null,
-            'hulpverlener-lastname' => isset($this->attributes['lastname']) ? $this->attributes['lastname'] : null,
-            'hulpverlener-male' => isset($this->attributes['male']) ? $this->attributes['male'] : null,
-            'hulpverlener-phone' => !empty($this->attributes['phone']) ? $this->attributes['phone'] : '',
-            'hulpverlener-organisation_id' => isset($this->attributes['organisation_id']) ? $this->attributes['organisation_id'] : null,
-            'hulpverlener-organisation_location_id' => isset($this->attributes['organisation_location_id']) ? $this->attributes['organisation_location_id'] : null,
+            'hulpverlener-id'                    => isset($this->attributes['id']) ? $this->attributes['id'] : null,
+            'hulpverlener-email'                 => isset($this->attributes['email']) ? $this->attributes['email'] : null,
+            'hulpverlener-firstname'             => isset($this->attributes['firstname']) ? $this->attributes['firstname'] : null,
+            'hulpverlener-lastname'              => isset($this->attributes['lastname']) ? $this->attributes['lastname'] : null,
+            'hulpverlener-male'                  => isset($this->attributes['male']) ? $this->attributes['male'] : null,
+            'hulpverlener-phone'                 => !empty($this->attributes['phone']) ? $this->attributes['phone'] : '',
+            'hulpverlener-organisation'          => $this->organisation ? $this->organisation->name : null,
+            'hulpverlener-organisation_location' => $this->organisation_location ? $this->organisation_location->name : null
         ];
     }
 
     public function getFullnameAttribute()
     {
+        if(isset($this->attributes['fullname']))
+        {
+            return $this->attributes['fullname'];
+        }
+
         return $this->attributes['firstname'] . ' ' . $this->attributes['lastname'];
     }
 

@@ -1,0 +1,161 @@
+html.pdf{
+
+  @pdf-margin-columns: 0.3em;
+
+  background-color: transparent;
+
+  body{
+    background-color: transparent;
+  }
+
+
+  .survey-details{
+
+    h3{
+      .make-xs-column(12);
+      padding: 0;
+      margin-bottom: 0.5em;
+    }
+
+    position: relative;
+    .make-xs-column(6);
+    margin-bottom: 2em;
+
+    span, address{
+      .make-xs-column(7);
+      padding: 0;
+      margin-bottom: @pdf-margin-columns;
+    }
+
+    label.full{
+      .make-xs-column(12);
+      padding: 0;
+    }
+
+    label{
+      .make-xs-column(5);
+      padding: 0;
+      margin-bottom: @pdf-margin-columns;
+      clear:both;
+    }
+
+    label{
+      font-weight: bold;
+    }
+
+  }
+
+  .survey-panel{
+    .make-row();
+    margin-bottom: 2em;
+
+    .pdf-panel("purple", @panel-purple);
+    .pdf-panel("blue", @panel-blue);
+    .pdf-panel("green", @panel-green);
+    .pdf-panel("red", @panel-red);
+    .pdf-panel("orange", @panel-orange);
+    .pdf-panel("yellow", @panel-yellow);
+    .pdf-panel("gray", @panel-gray);
+
+    .title{
+      padding-bottom: .5em;
+      margin-bottom: 1em;
+    }
+
+    .question-wrapper, h3{
+      .make-xs-column(12);
+      margin-bottom: 1em;
+      padding-left: 30px;
+
+
+      .question{
+        display: inline;
+        text-indent: -30px;
+      }
+
+      .fa-quote-left{
+        margin-right: 5px;
+        font-size: large;
+      }
+
+      .explanation{
+        .well();
+        .well-sm();
+      }
+
+      .choises{
+        list-style: none;
+        margin: .5em 0;
+
+        li:first-child{
+          margin-top: 1em;
+        }
+
+        .box:before{
+          .fa-icon();
+          content: @fa-var-square-o;
+          margin-right: .4em;
+        }
+
+        .box.checked:before{
+          content: @fa-var-check-square-o;
+        }
+
+        .radio:before{
+          .fa-icon();
+          content: @fa-var-circle-thin;
+          margin-right: .4em;
+        }
+
+        .radio.checked:before{
+          content:@fa-var-circle;
+        }
+
+      }
+
+    }
+  }
+
+  .survey-personals{
+    margin-bottom: 2em;
+
+    .branding{
+      margin-bottom: 3em;
+    }
+  }
+
+}
+
+//rotate panel colors
+.pdf-panel(@name, @color){
+  @class: ~"panel-@{name}";
+
+  &.@{class} {
+
+    .title{
+      border-bottom: 5px solid @color;
+    }
+
+    .summary-question .explanation{
+      .well();
+      border-radius: 4px;
+
+      //make sure colors aren't to bright
+      //the percentage of the color is quite a guess,
+      //but i think the logic should be correct
+      & when(lightness(@color) < (35%))
+      {
+        background-color: lighten(@color, 40%);
+        border: 1px 1px 1px 5px solid lighten(@color, 35%);
+      }
+
+      & when(lightness(@color) > (35%))
+      {
+        background-color: lighten(@color, 20%);
+        border: 1px 1px 1px 5px solid lighten(@color, 15%);
+      }
+    }
+
+  }
+
+}

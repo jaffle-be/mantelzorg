@@ -1,6 +1,6 @@
 @import 'variables';
-@import 'bootstrap-variables';
-@import 'bootstrap-mixins';
+@import 'bootstrap/variables';
+@import 'bootstrap/mixins';
 
 .question-color(@c) {
   .header {
@@ -132,11 +132,12 @@
     margin: 0;
 
     li {
-      padding: 1em 2em;
+      padding:0;
       border-bottom: 1px solid @border-color;
 
       a {
         display: block;
+        padding: 1em 2em;
         color: @white;
         text-decoration: none;
       }

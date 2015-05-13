@@ -44,7 +44,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
         $this->app['Questionnaire\Export\Exporter'] = $this->app->share(function ($app) {
 
-            return new CsvExport($app['excel'], new Carbon(), $app['Questionnaire\Export\DataHandler']);
+            return new CsvExport($app['Questionnaire\Export\SessionFilter'], $app['excel'], new Carbon(), $app['Questionnaire\Export\DataHandler']);
         });
 
         $this->app['Questionnaire\Export\DataHandler'] = $this->app->share(function($app)

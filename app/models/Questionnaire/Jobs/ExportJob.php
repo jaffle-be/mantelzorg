@@ -43,20 +43,7 @@ class ExportJob {
 
             $user = $this->user->find($payload['userid']);
 
-            $survey->load([
-                'panels',
-                //make sure questions follow the order of the questionnaire to number them in the report. not so transparent
-                //but that is how they wanted it.
-                'panels.questions' => function($query){
-                    $query->orderBy('sort');
-                },
-                //same reasoning applies for the options available to a question.
-                'panels.questions.choises' => function($query){
-                    $query->orderBy('sort_weight');
-                }
-            ])->all();
-
-            $filename = $this->export->generate($survey);
+            $filename = $this->export->generate($survey, $payload['filters']);
 
             $this->logger->stop($survey);
 

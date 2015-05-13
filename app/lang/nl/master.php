@@ -23,6 +23,7 @@ return array(
         "instellingen"    => "Profiel",
         "instrument"      => "Instrument",
         "rapport"         => "Rapport",
+        "stats"           => "Statistieken",
         "gebruikers"      => "Gebruikers",
         "hulpverleners"   => "Hulpverleners",
         "inschrijvingen"  => "Inschrijvingen",
