@@ -26,7 +26,7 @@ return array(
     |
     */
 
-    'url'             => 'http://zichtopmantelzorg.be',
+    'url'             => 'http://app.zichtopmantelzorg.be',
 
     /*
     |--------------------------------------------------------------------------
