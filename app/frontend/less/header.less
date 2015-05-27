@@ -1,13 +1,57 @@
 @import "variables";
 
 //customisations for header height can be found in the navbar bootstrap-variables and their custom rules
-//bootstrap/navbar.less
 //navbar-tablet.less
 
-#brand {
-  font-size: 28px;
-  text-transform: uppercase;
+header{
+  #brand {
+    text-transform: uppercase;
+    padding: 25px 12px;
+
+    img{
+      padding-bottom: 5px;
+    }
+
+    span{
+      border-top: 1px solid @navbar-default-color;
+    }
+
+
+    @media(max-width: @screen-xs-max)
+    {
+      padding: 15px 12px;
+
+      img{
+        display: none;
+      }
+
+      span{
+        border-top:none;
+      }
+
+    }
+  }
+
+
+  @media(max-width: @screen-xs-max)
+  {
+
+    .navbar{
+      min-height: inherit;
+    }
+
+    .navbar-brand{
+      height: auto;
+    }
+
+    .navbar-toggle{
+      margin: 8px;
+      margin-bottom: 0;
+    }
+  }
 }
+
+
 
 header {
   h1 {
