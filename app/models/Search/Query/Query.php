@@ -255,9 +255,14 @@ class Query implements Queryable
         return !in_array($operator, $this->queryOperators);
     }
 
-    public function orderBy($field, $direction)
+    public function orderBy($field, $direction, $missing = null)
     {
-        $this->sort[$field] = $direction;
+        if($missing === null)
+        {
+            $missing = PHP_INT_MAX -1;
+        }
+
+        $this->sort[$field] = array('order' => $direction, 'missing' => $missing);
 
         return $this;
     }
