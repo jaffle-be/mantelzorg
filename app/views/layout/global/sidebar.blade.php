@@ -32,13 +32,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('stats.index') }}"><i class="fa fa-line-chart"></i>&nbsp;{{ Lang::get('master.navs.stats') }}</a>
+                    <a href="{{ route('rapport.index') }}"><span class="fa fa-folder-open"></span>&nbsp;{{ Lang::get('master.navs.rapport') }}</a>
                 </li>
 
                 @if($user->id == 1)
                     <li>
-                        <a href="{{ route('rapport.index') }}"><span class="fa fa-folder-open"></span>&nbsp;{{ Lang::get('master.navs.rapport') }}
-                        </a>
+                        <a href="{{ route('stats.index') }}"><i class="fa fa-line-chart"></i>&nbsp;{{ Lang::get('master.navs.stats') }}</a>
                     </li>
                 @endif
             @endif
