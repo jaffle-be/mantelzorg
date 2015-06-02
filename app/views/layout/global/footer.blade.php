@@ -22,7 +22,7 @@
                     <h3>@lang('master.navs.contact')</h3>
 
                     <p>
-                        @lang('master.navs.contact-text', array('url' => 'http://zichtopmantelzorg.be/contact'))
+                        @lang('master.navs.contact-text', array('url' => 'http://zichtopmantelzorg.be/expertise'))
                     </p>
                 </div>
             </div>
