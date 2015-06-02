@@ -35,12 +35,15 @@ class InschrijvingController extends AdminController
     {
         $query = Input::get('query');
 
+        $count = $this->registration->count();
+
         $search = $this->registration->search();
 
         $registrations = $search->filterMulti_match(['email', 'firstname', 'lastname'], $query)
             ->orderBy('created_at', 'asc')
             ->orderBy('firstname', 'asc')
             ->orderBy('lastname', 'asc')
+            ->paginate($count)
             ->get();
 
         $registrations->appends('query', $query);
