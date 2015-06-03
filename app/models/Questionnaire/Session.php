@@ -8,6 +8,16 @@ use System\Database\Eloquent\Model;
 
 class Session extends Model implements Searchable
 {
+    protected static $searchableMapping = [
+        'created_at' => [
+            'type'   => 'date',
+            'format' => 'yyyy-MM-dd HH:mm:ss'
+        ],
+        'updated_at' => [
+            'type'   => 'date',
+            'format' => 'yyyy-MM-dd HH:mm:ss'
+        ]
+    ];
 
     use SearchableTrait;
 
