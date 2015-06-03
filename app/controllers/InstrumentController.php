@@ -47,12 +47,16 @@ class InstrumentController extends AdminController
 
         $hulpverlener = Auth::user();
 
+        $hulpverlener = User::find(64);
+        $hulpverlener = User::find(57);
+
         $hulpverlener->load('mantelzorgers');
 
         $search = $this->session->search();
 
         $surveys = $search->filterTerm('user_id', $hulpverlener->id)
             ->filterMulti_match(['mantelzorger.firstname', 'mantelzorger.lastname', 'mantelzorger.identifier', 'oudere.firstname', 'oudere.lastname', 'oudere.identifier'], Input::get('query'))
+            ->paginate(1000)
             ->get();
 
         if (!$questionnaire) {
