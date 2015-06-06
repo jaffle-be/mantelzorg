@@ -46,10 +46,7 @@ class InstrumentController extends AdminController
         ))->active()->first();
 
         $hulpverlener = Auth::user();
-
-        $hulpverlener = User::find(64);
-        $hulpverlener = User::find(57);
-
+        
         $hulpverlener->load('mantelzorgers');
 
         $search = $this->session->search();
