@@ -149,11 +149,35 @@ trait SearchableTrait
         }
     }
 
-    public function getSearchableMapping()
+    public function getSearchableMapping(array $with)
     {
+        $mapping = [];
+
+        $this->getSearchableType();
+        //the mapping we want to use should also include the mappings for the nested documents.
         if (property_exists(__CLASS__, 'searchableMapping')) {
-            return static::$searchableMapping;
+            $mapping = static::$searchableMapping;
         }
+
+        foreach($with as $type => $config)
+        {
+            $related = new $config['class'];
+
+            if($related instanceof Searchable)
+            {
+                $nested_map = $related->getSearchableMapping(array());
+            }
+            else{
+                $nested_map = [];
+            }
+
+            $mapping[$type] = [
+                'type'       => 'nested',
+                'properties' => $nested_map
+            ];
+        }
+
+        return $mapping;
     }
 
     /**
