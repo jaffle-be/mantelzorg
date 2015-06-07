@@ -51,10 +51,30 @@ class InstrumentController extends AdminController
 
         $search = $this->session->search();
 
+        $bool['must'] = [
+            ['term' => ['user_id' => $hulpverlener->id]]
+        ];
+
+        if (Input::get('query')) {
+            $bool['should'] = [
+                ['nested' => [
+                    'path'  => 'mantelzorger',
+                    'query' => [
+                        'match' => ['mantelzorger.identifier.raw' => Input::get('query')]
+                    ]
+                ]],
+                ['nested' => [
+                    'path'  => 'oudere',
+                    'query' => [
+                        'match' => ['oudere.identifier.raw' => Input::get('query')]
+                    ]
+                ]]
+            ];
+        }
+
         $surveys = $search
             ->with(array('questionnaire', 'questionnaire.questions', 'answers', 'answers.choises'))
-            ->filterTerm('user_id', $hulpverlener->id)
-            ->filterMulti_match(['mantelzorger.firstname', 'mantelzorger.lastname', 'mantelzorger.identifier', 'oudere.firstname', 'oudere.lastname', 'oudere.identifier'], Input::get('query'))
+            ->filterBool($bool)
             ->orderBy('mantelzorger.identifier.raw', 'asc')
             ->paginate(1000)
             ->get();
