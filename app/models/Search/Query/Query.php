@@ -4,7 +4,7 @@
 namespace Search\Query;
 
 use Exception;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection;
 use Search\Model\Searchable;
 use Input;
 use Search\SearchServiceInterface;
@@ -21,6 +21,11 @@ class Query implements Queryable
      * @var Searchable
      */
     protected $searchable;
+
+    /**
+     * @var array
+     */
+    protected $with = array();
 
     /**
      * Legal/supported booleans.
@@ -87,6 +92,17 @@ class Query implements Queryable
         return $this->response($results);
     }
 
+    public function with($relations)
+    {
+        if(is_string($relations)){
+            $relations = array($relations);
+        }
+
+        $this->with = $relations;
+
+        return $this;
+    }
+
     public function all()
     {
         return $this->paginate(false)->get();
@@ -96,12 +112,34 @@ class Query implements Queryable
     {
         $collection = $this->asModels($results['hits']['hits']);
 
+        /*
+         * if we also want to lazy load relations, we'll create a collection and load them,
+         * pass them on to the paginator if needed
+         * heads up: i believe nested documents will always be loaded,
+         * so developer should only pass with relations that aren't being indexed by Elasticsearch
+         */
+        if($this->with)
+        {
+            $collection = new Collection($collection);
+
+            $collection->load($this->with);
+        }
+
         if ($this->needsPagination()) {
             /** @var \Illuminate\Pagination\Environment $paginator */
             $paginator = $this->service->getPaginator();
 
+            /**
+             * if we lazy loaded some relations, we need to get back an array to paginate.
+             * not an optimal way of doing this, but i believe there isn't a better way at this point,
+             * since the paginator only takes an array.
+             */
+            $collection = is_array($collection) ? $collection : $collection->all();
+
             $results = $paginator->make($collection, $results['hits']['total'], $this->pagination);
-        } else {
+
+            //only need transform into a collection when we didn't lazyload relations
+        } elseif(is_array($collection)) {
             $results = new Collection($collection);
         }
 
