@@ -151,6 +151,10 @@
 
             <input class="btn btn-primary" type="submit" value="<?= Lang::get('users.save') ?>"/>
 
+            @if(Auth::user()->admin)
+                <a class="btn btn-warning" href="{{ action('IndexController@getHijack', ['user' => $user->id]) }}">{{ Lang::get('master.hijack.do' )}}</a>
+            @endif
+
         </div>
 
     </div>

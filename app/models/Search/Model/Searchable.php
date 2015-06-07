@@ -92,5 +92,5 @@ interface Searchable
      *
      * @return mixed
      */
-    public function getSearchableMapping();
+    public function getSearchableMapping(array $config);
 }

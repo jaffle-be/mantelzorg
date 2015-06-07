@@ -15,4 +15,5 @@ return array(
     'previous-question'     => 'Vorige',
     'next-question'         => 'Volgende',
     'close'                 => 'Sluiten',
+    'afgewerkt'             => 'Afgewerkt',
 );

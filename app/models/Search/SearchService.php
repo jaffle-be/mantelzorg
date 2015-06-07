@@ -187,9 +187,11 @@ class SearchService implements SearchServiceInterface
     {
         $this->checkIndex();
 
+        $config = $this->types[$type];
+
         list($type, $relations) = $this->getSearchable($type);
 
-        $this->refreshType($type);
+        $this->refreshType($type, $config['with']);
 
         $me = $this;
 
@@ -200,13 +202,18 @@ class SearchService implements SearchServiceInterface
         });
     }
 
-    public function flush($type)
+    public function flush($type, $refresh = true)
     {
         $this->checkIndex();
 
+        $config = $this->types[$type];
+
         list($type) = $this->getSearchable($type);
 
-        $this->refreshType($type);
+        if($refresh)
+        {
+            $this->refreshType($type, $config['with']);
+        }
     }
 
     public function add(Searchable $type, array $with, $needsLoading = true)
@@ -308,18 +315,9 @@ class SearchService implements SearchServiceInterface
      */
     public function updateMapping($type)
     {
-        /** @var Searchable $type */
-        list($type) = $this->getSearchable($type);
+        $this->flush($type, true);
 
-        $mapping = [
-            'index' => $this->index,
-            'type'  => $type->getSearchableType(),
-            'body'  => [
-                $type->getSearchableType() => $type->getSearchableMapping(),
-            ]
-        ];
-
-        $this->client->indices()->putMapping($mapping);
+        $this->build($type);
     }
 
     /**
@@ -352,7 +350,7 @@ class SearchService implements SearchServiceInterface
         return $type;
     }
 
-    protected function refreshType(Searchable $type)
+    protected function refreshType(Searchable $type, array $with)
     {
         $params = $this->getBaseParams($type);
 
@@ -362,7 +360,7 @@ class SearchService implements SearchServiceInterface
             $this->client->delete($params);
         }
 
-        if ($mapping = $type->getSearchableMapping()) {
+        if ($mapping = $type->getSearchableMapping($with)) {
             $params = $this->getBaseParams($type);
 
             $mapping = array_merge($params, [

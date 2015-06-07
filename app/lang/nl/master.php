@@ -77,6 +77,11 @@ return array(
     "info"       => array(
         "no-right-to-section" => "U heeft geen bevoegdheid om de gevraagde pagina in te kijken.",
         "password_changed"    => "Wachtwoord succesvol veranderd.",
-    )
+    ),
+
+    "hijack"     => [
+        "do"   => "Sessie overnemen",
+        "undo" => "Sessie terugzetten",
+    ]
 
 );
