@@ -38,6 +38,31 @@
 
     }
 
+    function doExport(){
+
+        $(".actions").on('click', '.export', function(event){
+
+            var me = $(this);
+
+            ids = app.getIds(me);
+
+            if(ids.length > 0)
+            {
+                var idString = '';
+
+                for(var i = 0; i < ids.length; i++)
+                {
+                    idString += '&ids[]=' + ids[i];
+                }
+
+                window.location.href = "/instrument/export?" + idString;
+            }
+
+            event.preventDefault();
+        });
+
+    }
+
     function purge() {
 
         $('.actions').on('click', '.remove', function (event) {
@@ -64,6 +89,7 @@
     $(document).ready(function () {
         //allow purging
         purge();
+        doExport();
 
 
         mantelzorger = $("#mantelzorger-select");

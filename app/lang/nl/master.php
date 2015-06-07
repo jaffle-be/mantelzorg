@@ -52,6 +52,8 @@ return array(
         "select_none" => "Niets selecteren",
         "remove"      => "Verwijderen",
         "zoeken"      => "Zoeken",
+        "export"      => "Exporteren",
+        "import"      => "Importeren",
     ),
 
     "general"    => array(

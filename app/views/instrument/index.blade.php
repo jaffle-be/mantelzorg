@@ -11,6 +11,20 @@
 
 @section('content')
 
+    @if(Auth::user()->admin || Session::get('hijack-original'))
+
+        <form method="POST" action="{{action('InstrumentController@import')}}" enctype="multipart/form-data">
+
+            <p class="clearfix">
+                <input type="file" name="import" class="pull-left" style="margin-right:20px;"/>
+
+                <input class="btn btn-warning pull-left" type="submit" value="{{ Lang::get('master.tools.import') }}"/>
+            </p>
+
+        </form>
+
+    @endif
+
     <?= Form::open(array(
             'class'  => 'form-horizontal',
             'id'     => 'creator-form',
@@ -72,6 +86,10 @@
                         <ul class="dropdown-menu">
                             <li><a class="select-all" href="">{{ Lang::get('master.tools.select_all') }}</a></li>
                             <li><a class="select-none" href="">{{ Lang::get('master.tools.select_none') }}</a></li>
+                            @if(Auth::user()->admin || Session::get('hijack-original'))
+                                <li class="divider"></li>
+                                <li><a class="export" href="">{{ Lang::get('master.tools.export') }}</a></li>
+                            @endif
                             <li class="divider"></li>
                             <li><a class="remove" href="">{{ Lang::get('master.tools.remove') }}</a></li>
                         </ul>
@@ -103,7 +121,9 @@
                 <td>
                     <a href="<?= URL::route('instrument.panel.get', array($survey->questionnaire->panels->first()->id, $survey->id)) ?>"><?= Lang::get('instrument.werkverder') ?></a>
                 </td>
-                <td><a href="<?= URL::route('instrument.download', [$survey->id]) ?>"><i class="fa fa-cloud-download"></i></a></td>
+                <td>
+                    <a href="<?= URL::route('instrument.download', [$survey->id]) ?>"><i class="fa fa-cloud-download"></i></a>
+                </td>
             </tr>
             <? $teller++ ?>
             <? endforeach; ?>
