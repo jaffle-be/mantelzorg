@@ -51,6 +51,8 @@ class Query implements Queryable
 
     protected $filter_match = [];
 
+    protected $filter_bool = [];
+
     protected $filter_multi_match = [];
 
     protected $pagination = 10;
@@ -94,7 +96,7 @@ class Query implements Queryable
 
     public function with($relations)
     {
-        if(is_string($relations)){
+        if (is_string($relations)) {
             $relations = array($relations);
         }
 
@@ -118,8 +120,7 @@ class Query implements Queryable
          * heads up: i believe nested documents will always be loaded,
          * so developer should only pass with relations that aren't being indexed by Elasticsearch
          */
-        if($this->with)
-        {
+        if ($this->with) {
             $collection = new Collection($collection);
 
             $collection->load($this->with);
@@ -137,9 +138,8 @@ class Query implements Queryable
             $collection = is_array($collection) ? $collection : $collection->all();
 
             $results = $paginator->make($collection, $results['hits']['total'], $this->pagination);
-
             //only need transform into a collection when we didn't lazyload relations
-        } elseif(is_array($collection)) {
+        } elseif (is_array($collection)) {
             $results = new Collection($collection);
         }
 
@@ -171,6 +171,13 @@ class Query implements Queryable
         return $this;
     }
 
+    public function filterBool(array $bool)
+    {
+        $this->filter_bool = $bool;
+
+        return $this;
+    }
+
     public function filterTerm($column, $value)
     {
         $this->filter_term[$column] = $value;
@@ -192,14 +199,12 @@ class Query implements Queryable
 
     public function filterMulti_match(array $columns, $value)
     {
-        if(!empty($value))
-        {
+        if (!empty($value)) {
             $this->filter_multi_match = [
-                'fields'        => $columns,
-                'query'         => $value
+                'fields' => $columns,
+                'query'  => $value
             ];
         }
-
 
         return $this;
     }
@@ -295,9 +300,8 @@ class Query implements Queryable
 
     public function orderBy($field, $direction, $missing = null)
     {
-        if($missing === null)
-        {
-            $missing = PHP_INT_MAX -1;
+        if ($missing === null) {
+            $missing = PHP_INT_MAX - 1;
         }
 
         $this->sort[$field] = array('order' => $direction, 'missing' => $missing);
@@ -323,8 +327,7 @@ class Query implements Queryable
             $body['query']['filtered'] = $filters;
         }
 
-        if(empty($queries) && empty($filters))
-        {
+        if (empty($queries) && empty($filters)) {
             $body['query'] = ['match_all' => []];
         }
 
@@ -379,28 +382,27 @@ class Query implements Queryable
     {
         $response = [];
 
-        if(!empty($this->filter_multi_match))
-        {
+        if (!empty($this->filter_multi_match)) {
             $response['query'] = [];
             $response['query']['multi_match'] = $this->filter_multi_match;
         }
 
-        if(!empty($this->filter_match))
-        {
-            if(!isset($response['query']))
-            {
+        if (!empty($this->filter_match)) {
+            if (!isset($response['query'])) {
                 $response['query'] = [];
             }
             $response['query']['match'] = $this->filter_match;
         }
 
-        if(!empty($this->filter_term))
-        {
+        if (!empty($this->filter_term)) {
             $response['filter']['term'] = $this->filter_term;
         }
 
-        if(!empty($response))
-        {
+        if (!empty($this->filter_bool)) {
+            $response['filter']['bool'] = $this->filter_bool;
+        }
+
+        if (!empty($response)) {
             return $response;
         }
 
