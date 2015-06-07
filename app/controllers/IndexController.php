@@ -122,4 +122,42 @@ class IndexController extends BaseController
 
         return Redirect::back()->withMessage(Lang::get($message));
     }
+
+    public function getHijack($user)
+    {
+        $current = Auth::user();
+
+        if($current->admin)
+        {
+            $user = $this->user->find($user);
+
+            if($user)
+            {
+                Auth::login($user);
+
+                Session::set('hijack-original', $current->id);
+
+                return Redirect::route('dash');
+            }
+        }
+    }
+
+    public function getRejack()
+    {
+        $original = Session::get('hijack-original');
+
+        if($original)
+        {
+            $user = $this->user->find($original);
+
+            if($user->admin)
+            {
+                Auth::login($user);
+
+                Session::forget('hijack-original');
+
+                return Redirect::route('dash');
+            }
+        }
+    }
 }

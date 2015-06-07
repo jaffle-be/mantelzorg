@@ -79,6 +79,7 @@
                 </th>
                 <th><?= Lang::get('instrument.mantelzorger') ?></th>
                 <th><?= Lang::get('instrument.oudere') ?></th>
+                <th><?= Lang::get('instrument.afgewerkt') ?></th>
                 <th><?= Lang::get('instrument.created') ?></th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
@@ -93,6 +94,11 @@
                 </td>
                 <td><?= $survey->mantelzorger->displayName ?></td>
                 <td><?= $survey->oudere->displayName ?></td>
+                <td>
+                    @if($survey->isFinished())
+                        <i class="fa fa-check-square-o"></i>
+                    @endif
+                </td>
                 <td><?= $survey->created_at->format('d/m/Y') ?></td>
                 <td>
                     <a href="<?= URL::route('instrument.panel.get', array($survey->questionnaire->panels->first()->id, $survey->id)) ?>"><?= Lang::get('instrument.werkverder') ?></a>
