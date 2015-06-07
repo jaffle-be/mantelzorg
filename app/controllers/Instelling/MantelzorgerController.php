@@ -41,11 +41,25 @@ class MantelzorgerController extends \AdminController
 
         $search = $this->mantelzorger->search();
 
+        $bool['must'] = [
+            ['term' => ['hulpverlener_id' => $hulpverlener->id]]
+        ];
+
+        if (Input::get('query')) {
+            $bool['should'] = [
+                ['query' => ['match' => ['identifier.raw' => Input::get('query')]]],
+                ['nested' => [
+                    'path'  => 'oudere',
+                    'query' => [
+                        'match' => ['oudere.identifier.raw' => Input::get('query')]
+                    ]
+                ]]
+            ];
+        }
+
         $mantelzorgers = $search
-            ->filterTerm('hulpverlener_id', $hulpverlener->id)
-            ->filterMulti_match(['firstname', 'lastname', 'identifier', 'oudere.firstname', 'oudere.lastname', 'oudere.identifier'], Input::get('query'))
-            ->orderBy('lastname', 'asc')
-            ->orderBy('firstname', 'asc')
+            ->filterBool($bool)
+            ->orderBy('identifier.raw', 'asc')
             ->get();
 
         $mantelzorgers->appends('query', $query);
@@ -92,7 +106,7 @@ class MantelzorgerController extends \AdminController
             $input = Input::except('_token');
 
             $input['mantelzorger_id'] = $mantelzorger->id;
-            $input['hulpverlener_id'] =  $hulpverlener->id;
+            $input['hulpverlener_id'] = $hulpverlener->id;
 
             $validator = $this->mantelzorger->validator($input, [], ['hulpverlener' => $hulpverlener->id, 'mantelzorger' => $mantelzorger->id]);
 
