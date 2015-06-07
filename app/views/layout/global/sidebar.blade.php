@@ -59,6 +59,12 @@
                 </ul>
             </li>
 
+            @if(Session::get('hijack-original'))
+                <li class="rejack">
+                    <a class="btn btn-warning" href="{{ action('IndexController@getRejack') }}">{{ Lang::get('master.hijack.undo') }}</a>
+                </li>
+            @endif
+
         </ul>
     </div>
     <!-- /.sidebar-collapse -->
