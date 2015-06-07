@@ -66,6 +66,35 @@ class Session extends Model implements Searchable
         return $this->belongsTo('Questionnaire\Questionnaire');
     }
 
+    public function isFinished()
+    {
+        if($this->answers->count() < $this->questionnaire->questions->count())
+        {
+            return false;
+        }
+
+        /**
+         * if the counts are equal, we still may have empty records.
+         * we used to only save records for questions that were answered, but somewhere down the road
+         * this was causing problems, so we always save a record for each question.
+         * hence we need to manually check if the survey was completed
+         */
+
+        $status = true;
+
+        foreach($this->answers as $answer)
+        {
+            if(empty($answer->explanation) && $answer->choises->count() == 0)
+            {
+                $status = false;
+
+                break;
+            }
+        }
+
+        return $status;
+    }
+
     /**
      * Checks to see if the survey has an answer to the given question
      *

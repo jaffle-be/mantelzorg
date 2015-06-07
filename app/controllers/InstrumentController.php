@@ -51,7 +51,9 @@ class InstrumentController extends AdminController
 
         $search = $this->session->search();
 
-        $surveys = $search->filterTerm('user_id', $hulpverlener->id)
+        $surveys = $search
+            ->with(array('questionnaire', 'questionnaire.questions', 'answers', 'answers.choises'))
+            ->filterTerm('user_id', $hulpverlener->id)
             ->filterMulti_match(['mantelzorger.firstname', 'mantelzorger.lastname', 'mantelzorger.identifier', 'oudere.firstname', 'oudere.lastname', 'oudere.identifier'], Input::get('query'))
             ->orderBy('mantelzorger.identifier.raw', 'asc')
             ->paginate(1000)
