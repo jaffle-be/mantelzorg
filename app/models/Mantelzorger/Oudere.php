@@ -10,10 +10,40 @@ use Search\Model\SearchableTrait;
 use System\Database\Eloquent\Model;
 use Validator;
 
-class Oudere extends Model implements Exportable
+class Oudere extends Model implements Searchable, Exportable
 {
 
+    use SearchableTrait;
+
     protected $table = 'ouderen';
+
+    protected static $searchableMapping = [
+        'male'       => [
+            'type' => 'boolean',
+        ],
+        'email'      => [
+            'type'     => 'string',
+            'analyzer' => 'email'
+        ],
+        "identifier" => [
+            'type' => 'string',
+            'fields' => [
+                'raw' => [
+                    'type' => 'string',
+                    'index' => 'not_analyzed'
+                ]
+            ]
+        ],
+        'created_at' => [
+            'type'   => 'date',
+            'format' => 'yyyy-MM-dd HH:mm:ss'
+        ],
+        'updated_at' => [
+            'type'   => 'date',
+            'format' => 'yyyy-MM-dd HH:mm:ss'
+        ],
+    ];
+
 
     protected static $rules = array(
         'identifier'            => 'required|unique:ouderen,identifier,#oudere,id,mantelzorger_id,#mantelzorger',
