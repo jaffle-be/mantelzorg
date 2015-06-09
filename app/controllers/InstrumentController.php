@@ -472,9 +472,9 @@ class InstrumentController extends AdminController
             $relation = null;
         }
 
-        if($survey->oudere->woon_situatie_id)
+        if($survey->oudere->woonsituatie_id)
         {
-            $woonsituatie = $this->getMeta(Context::OUDEREN_WOONSITUATIE, $survey->oudere->woon_situatie_id, $survey->oudere->woon_situatie->value);
+            $woonsituatie = $this->getMeta(Context::OUDEREN_WOONSITUATIE, $survey->oudere->woonsituatie_id, $survey->oudere->woon_situatie->value);
         }
         else{
             $woonsituatie = null;
