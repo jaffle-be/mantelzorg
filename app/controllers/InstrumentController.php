@@ -466,10 +466,35 @@ class InstrumentController extends AdminController
 
     protected function getMetas($survey)
     {
-        $relation = $this->getMeta(Context::MANTELZORGER_RELATION, $survey->oudere->mantelzorger_relation_id, $survey->oudere->mantelzorger_relation->value);
-        $woonsituatie = $this->getMeta(Context::OUDEREN_WOONSITUATIE, $survey->oudere->woon_situatie_id, $survey->oudere->woon_situatie->value);
-        $hulpbehoefte = $this->getMeta(Context::OORZAAK_HULPBEHOEFTE, $survey->oudere->oorzaak_hulpbehoefte_id, $survey->oudere->oorzaak_hulpbehoefte->value);
-        $profiel = $this->getMeta(Context::BEL_PROFIEL, $survey->oudere->bel_profiel_id, $survey->oudere->bel_profiel->value);
+        if($survey->oudere->mantelzorger_relation_id)
+        {
+            $relation = $this->getMeta(Context::MANTELZORGER_RELATION, $survey->oudere->mantelzorger_relation_id, $survey->oudere->mantelzorger_relation->value);
+        }else{
+            $relation = null;
+        }
+
+        if($survey->oudere->woon_situatie_id)
+        {
+            $woonsituatie = $this->getMeta(Context::OUDEREN_WOONSITUATIE, $survey->oudere->woon_situatie_id, $survey->oudere->woon_situatie->value);
+        }
+        else{
+            $woonsituatie = null;
+        }
+
+
+        if($survey->oudere->oorzaak_hulpbehoefte_id){
+            $hulpbehoefte = $this->getMeta(Context::OORZAAK_HULPBEHOEFTE, $survey->oudere->oorzaak_hulpbehoefte_id, $survey->oudere->oorzaak_hulpbehoefte->value);
+        }
+        else{
+            $hulpbehoefte = null;
+        }
+
+        if($survey->oudere->bel_profiel_id)
+        {
+            $profiel = $this->getMeta(Context::BEL_PROFIEL, $survey->oudere->bel_profiel_id, $survey->oudere->bel_profiel->value);
+        }else {
+            $profiel = null;
+        }
 
         return array($relation, $woonsituatie, $hulpbehoefte, $profiel);
     }
