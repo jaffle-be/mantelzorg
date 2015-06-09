@@ -277,7 +277,7 @@ class InstrumentController extends AdminController
             $directory = storage_path('instruments/import');
 
             if (!File::isDirectory($directory)) {
-                File::makeDirectory($directory);
+                File::makeDirectory($directory, 0775, true);
             }
 
             $file->move($directory, $file->getClientOriginalName());
