@@ -505,9 +505,9 @@ class InstrumentController extends AdminController
      *
      * @return \Illuminate\Database\Eloquent\Collection|Model|static
      */
-    protected function getMeta($context, $survey, $actual)
+    protected function getMeta($context, $id, $actual)
     {
-        $value = Value::find($survey->oudere->mantelzorger_relation_id);
+        $value = Value::find($id);
 
         if (!$value || $actual != $value->value) {
 
