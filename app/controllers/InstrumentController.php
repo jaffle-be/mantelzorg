@@ -395,12 +395,12 @@ class InstrumentController extends AdminController
             "birthday"                 => $this->getBirthday($survey->oudere->birthday),
             "diagnose"                 => $survey->oudere->diagnose,
             "mantelzorger_id"          => $survey->mantelzorger_id,
-            "mantelzorger_relation_id" => $relation->id,
+            "mantelzorger_relation_id" => $relation ? $relation->id : null,
             "created_at"               => $survey->oudere->created_at,
             "updated_at"               => $survey->oudere->updated_at,
-            "woonsituatie_id"          => $woonsituatie->id,
-            "oorzaak_hulpbehoefte_id"  => $hulpbehoefte->id,
-            "bel_profiel_id"           => $profiel->id,
+            "woonsituatie_id"          => $woonsituatie ? $woonsituatie->id : null,
+            "oorzaak_hulpbehoefte_id"  => $hulpbehoefte ? $hulpbehoefte->id : null,
+            "bel_profiel_id"           => $profiel ? $profiel->id : null,
             "details_diagnose"         => $survey->oudere->details_diagnose,
         ]);
 
