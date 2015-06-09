@@ -247,7 +247,6 @@ class InstrumentController extends AdminController
         if ($hijacked = SessionStore::get('hijack-original')) {
             $userid = $hijacked;
         } else {
-            dd('test2');
             $userid = Auth::user()->id;
         }
 
