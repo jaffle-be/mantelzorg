@@ -4,6 +4,8 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Mantelzorger\Mantelzorger;
 use Mantelzorger\Oudere;
+use Meta\Context;
+use Meta\Value;
 use Questionnaire\Answer;
 use Questionnaire\Choise;
 use Session as SessionStore;
@@ -234,6 +236,10 @@ class InstrumentController extends AdminController
             'user',
             'mantelzorger',
             'oudere',
+            'oudere.mantelzorgerRelation',
+            'oudere.woonSituatie',
+            'oudere.oorzaakHulpbehoefte',
+            'oudere.belProfiel',
             'answers',
             'answers.choises',
         ]);
@@ -281,11 +287,11 @@ class InstrumentController extends AdminController
 
             foreach ($surveys as $survey) {
                 //check if all users, mantelzorgers and ouderen exist.
-                $user = $this->getImportingUser($survey);
+                $user = $this->setImportingUser($survey);
 
-                $mantelzorger = $this->getImportingMantelzorger($survey);
+                $mantelzorger = $this->setImportingMantelzorger($survey);
 
-                $oudere = $this->getImportingOudere($survey);
+                $oudere = $this->setImportingOudere($survey);
 
                 //all persons have been found.
                 //intrument is the same
@@ -309,11 +315,14 @@ class InstrumentController extends AdminController
         return Redirect::back();
     }
 
-    protected function getImportingUser($survey)
+    protected function setImportingUser($survey)
     {
         $userid = $survey->user_id;
 
         $user = User::find($userid);
+
+        $survey->user_id = $user->id;
+        $survey->user->id = $user->id;
 
         if ($user && $user->email == $survey->user->email) {
             return $user;
@@ -322,7 +331,7 @@ class InstrumentController extends AdminController
         throw new Exception('User not found');
     }
 
-    protected function getImportingMantelzorger($survey)
+    protected function setImportingMantelzorger($survey)
     {
         $mantelzorgerid = $survey->mantelzorger_id;
 
@@ -336,10 +345,29 @@ class InstrumentController extends AdminController
             return $mantelzorger;
         }
 
-        throw new Exception('Mantelzorger nog found');
+        $mantelzorger = Mantelzorger::create([
+            "identifier"      => $survey->mantelzorger->identifier,
+            "email"           => $survey->mantelzorger->email,
+            "firstname"       => $survey->mantelzorger->firstname,
+            "lastname"        => $survey->mantelzorger->lastname,
+            "male"            => $survey->mantelzorger->male,
+            "street"          => $survey->mantelzorger->street,
+            "postal"          => $survey->mantelzorger->postal,
+            "city"            => $survey->mantelzorger->city,
+            "phone"           => $survey->mantelzorger->phone,
+            "birthday"        => $this->getBirthday($survey->mantelzorger->birthday),
+            "hulpverlener_id" => $survey->user_id,
+            "created_at"      => $survey->mantelzorger->created_at,
+            "updated_at"      => $survey->mantelzorger->updated_at
+        ]);
+
+        $survey->mantelzorger_id = $mantelzorger->id;
+        $survey->mantelzorger->id = $mantelzorger->id;
+
+        return $mantelzorger;
     }
 
-    protected function getImportingOudere($survey)
+    protected function setImportingOudere($survey)
     {
         $oudereid = $survey->oudere_id;
 
@@ -353,7 +381,31 @@ class InstrumentController extends AdminController
             return $oudere;
         }
 
-        throw new Exception('Oudere not found');
+        list($relation, $woonsituatie, $hulpbehoefte, $profiel) = $this->getMetas($survey);
+
+        $oudere = Oudere::create([
+            "identifier"               => $survey->oudere->identifier,
+            "email"                    => $survey->oudere->email,
+            "firstname"                => $survey->oudere->firstname,
+            "lastname"                 => $survey->oudere->lastname,
+            "male"                     => $survey->oudere->male,
+            "street"                   => $survey->oudere->street,
+            "postal"                   => $survey->oudere->postal,
+            "city"                     => $survey->oudere->city,
+            "phone"                    => $survey->oudere->phone,
+            "birthday"                 => $this->getBirthday($survey->oudere->birthday),
+            "diagnose"                 => $survey->oudere->diagnose,
+            "mantelzorger_id"          => $survey->mantelzorger_id,
+            "mantelzorger_relation_id" => $relation->id,
+            "created_at"               => $survey->oudere->created_at,
+            "updated_at"               => $survey->oudere->updated_at,
+            "woonsituatie_id"          => $woonsituatie->id,
+            "oorzaak_hulpbehoefte_id"  => $hulpbehoefte->id,
+            "bel_profiel_id"           => $profiel->id,
+            "details_diagnose"         => $survey->oudere->details_diagnose,
+        ]);
+
+        return $oudere;
     }
 
     protected function importInsert($survey)
@@ -401,5 +453,53 @@ class InstrumentController extends AdminController
         }
 
         Model::reguard();
+    }
+
+    protected function getBirthday($birthday)
+    {
+        $birthday = str_replace(' 00:00:00', '', $birthday);
+
+        $birthday = Carbon::createFromFormat('Y-m-d', $birthday)->format('d/m/Y');
+
+        return $birthday;
+    }
+
+    protected function getMetas($survey)
+    {
+        $relation = $this->getMeta(Context::MANTELZORGER_RELATION, $survey->oudere->mantelzorger_relation_id, $survey->oudere->mantelzorger_relation->value);
+        $woonsituatie = $this->getMeta(Context::OUDEREN_WOONSITUATIE, $survey->oudere->woon_situatie_id, $survey->oudere->woon_situatie->value);
+        $hulpbehoefte = $this->getMeta(Context::OORZAAK_HULPBEHOEFTE, $survey->oudere->oorzaak_hulpbehoefte_id, $survey->oudere->oorzaak_hulpbehoefte->value);
+        $profiel = $this->getMeta(Context::BEL_PROFIEL, $survey->oudere->bel_profiel_id, $survey->oudere->bel_profiel->value);
+
+        return array($relation, $woonsituatie, $hulpbehoefte, $profiel);
+    }
+
+    /**
+     * @param $context
+     * @param $survey
+     * @param $actual
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|Model|static
+     */
+    protected function getMeta($context, $survey, $actual)
+    {
+        $value = Value::find($survey->oudere->mantelzorger_relation_id);
+
+        if (!$value || $actual != $value->value) {
+
+            $context = Context::where('context', $context)->first();
+
+            $value = Value::where('context_id', $context->id)
+                ->where('value', $actual)->first();
+
+            if (!$value) {
+                $value = Value::create(array(
+                    'context_id' => $context->id,
+                    'value'      => $actual
+                ));
+            }
+        }
+
+        return $value;
     }
 }
