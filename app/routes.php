@@ -88,6 +88,9 @@ Route::get('instrument', [
     'as'   => 'instrument'
 ]);
 
+Route::get('instrument/export', 'InstrumentController@export');
+Route::post('instrument/import', 'InstrumentController@import');
+
 Route::get('instrument/download/{id}', [
     'uses' => 'InstrumentController@download',
     'as'   => 'instrument.download',
