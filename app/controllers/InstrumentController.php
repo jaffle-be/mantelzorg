@@ -86,7 +86,7 @@ class InstrumentController extends AdminController
             ->with(array('questionnaire', 'questionnaire.questions', 'answers', 'answers.choises'))
             ->filterBool($bool)
             ->orderBy('mantelzorger.identifier.raw', 'asc')
-            ->paginate(1000)
+            ->paginate(15)
             ->get();
 
         if (!$questionnaire) {
