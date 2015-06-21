@@ -6,15 +6,17 @@ use App\Questionnaire\Export\Exportable;
 use App\Search\Model\Searchable;
 use App\Search\Model\SearchableTrait;
 use App\System\Database\Eloquent\Model;
-use Illuminate\Auth\Reminders\RemindableInterface;
-use Illuminate\Auth\UserInterface;
 use Input;
 use Validator;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements UserInterface, RemindableInterface, Searchable, Exportable
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract, Searchable, Exportable
 {
 
-    use SearchableTrait;
+    use Authenticatable, CanResetPassword, SearchableTrait;
 
     /**
      * The database table used by the model.
