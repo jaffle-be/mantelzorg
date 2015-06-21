@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Search\Model;
+namespace App\Search\Model;
 
-use Search\Query\Queryable;
-use Search\SearchServiceInterface;
+use App\Search\Query\Queryable;
+use App\Search\SearchServiceInterface;
 
 interface Searchable
 {

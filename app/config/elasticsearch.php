@@ -25,51 +25,51 @@ return [
     'types'    => [
 
         'mantelzorgers'      => [
-            'class' => 'Mantelzorger\Mantelzorger',
+            'class' => 'App\Mantelzorger\Mantelzorger',
             'with'  => [
                 'oudere'       => [
-                    'class' => 'Mantelzorger\Oudere',
+                    'class' => 'App\Mantelzorger\Oudere',
                     'key'   => 'oudere_id'
                 ],
                 'hulpverlener' => [
-                    'class' => 'User',
+                    'class' => 'App\User',
                     'key'   => 'hulpverlener_id'
                 ]
             ]
         ],
 
         'beta_registrations' => [
-            'class' => 'Beta\Registration',
+            'class' => 'App\Beta\Registration',
             'with'  => []
         ],
 
         'users'              => [
-            'class' => 'User',
+            'class' => 'App\User',
             'with'  => [
                 'organisation'          => [
-                    'class' => 'Organisation\Organisation',
+                    'class' => 'App\Organisation\Organisation',
                     'key'   => 'organisation_id'
                 ],
                 'organisation_location' => [
-                    'class' => 'Organisation\Location',
+                    'class' => 'App\Organisation\Location',
                     'key'   => 'organisation_location_id',
                 ],
             ]
         ],
 
         'surveys'            => [
-            'class' => 'Questionnaire\Session',
+            'class' => 'App\Questionnaire\Session',
             'with'  => [
                 'mantelzorger'         => [
-                    'class' => 'Mantelzorger\Mantelzorger',
+                    'class' => 'App\Mantelzorger\Mantelzorger',
                     'key'   => 'mantelzorger_id',
                 ],
                 'oudere'               => [
-                    'class' => 'Mantelzorger\Oudere',
+                    'class' => 'App\Mantelzorger\Oudere',
                     'key'   => 'oudere_id',
                 ],
                 'user'                 => [
-                    'class' => 'User',
+                    'class' => 'App\User',
                     'key'   => 'user_id'
                 ],
             ]

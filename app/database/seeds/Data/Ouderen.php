@@ -4,8 +4,8 @@
 // Composer: "fzaninotto/faker": "v1.3.0"
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
-use Mantelzorger\Mantelzorger;
-use Mantelzorger\Oudere;
+use \App\Mantelzorger\Mantelzorger;
+use \App\Mantelzorger\Oudere;
 
 class Ouderen extends Seeder
 {

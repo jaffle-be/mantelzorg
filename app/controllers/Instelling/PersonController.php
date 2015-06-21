@@ -2,9 +2,9 @@
 
 namespace Instelling;
 
-use Organisation\Organisation;
-use Organisation\Location;
-use User;
+use \App\Organisation\Organisation;
+use \App\Organisation\Location;
+use App\User;
 use Auth;
 use Input;
 use Lang;
@@ -17,17 +17,17 @@ class PersonController extends \AdminController
 {
 
     /**
-     * @var \User
+     * @var \App\User
      */
     protected $user;
 
     /**
-     * @var \Organisation\Organisation
+     * @var \App\Organisation\Organisation
      */
     protected $organisation;
 
     /**
-     * @var \Organisation\Location
+     * @var \App\Organisation\Location
      */
     protected $location;
 

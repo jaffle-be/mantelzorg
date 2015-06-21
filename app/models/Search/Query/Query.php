@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Search\Query;
+namespace App\Search\Query;
 
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
-use Search\Model\Searchable;
+use App\Search\Model\Searchable;
 use Input;
-use Search\SearchServiceInterface;
+use App\Search\SearchServiceInterface;
 
 class Query implements Queryable
 {

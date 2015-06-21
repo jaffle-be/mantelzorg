@@ -1,5 +1,5 @@
 <?php
-namespace Organisation;
+namespace App\Organisation;
 
 use AdminController;
 use Input;
@@ -8,13 +8,13 @@ class LocationController extends AdminController
 {
 
     /**
-     * @var \Organisation\Location
+     * @var \App\Organisation\Location
      */
     protected $location;
 
     protected $organisation;
 
-    public function __construct(\Organisation\Organisation $organisation, \Organisation\Location $location)
+    public function __construct(\App\Organisation\Organisation $organisation, \App\Organisation\Location $location)
     {
         $this->organisation = $organisation;
 

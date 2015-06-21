@@ -1,6 +1,6 @@
 <?php
 
-namespace Template;
+namespace App\Template;
 
 class Breadcrumb
 {

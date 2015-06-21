@@ -1,11 +1,11 @@
 <?php
-use Organisation\Organisation;
+use \App\Organisation\Organisation;
 
 class OrganisationController extends AdminController
 {
 
     /**
-     * @var Organisation\Organisation
+     * @var \App\Organisation\Organisation
      */
     protected $organisation;
 

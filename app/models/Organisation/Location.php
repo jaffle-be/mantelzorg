@@ -1,9 +1,9 @@
 <?php
 
-namespace Organisation;
+namespace App\Organisation;
 
 use Input;
-use System\Database\Eloquent\Model;
+use App\System\Database\Eloquent\Model;
 use Validator;
 
 class Location extends Model
@@ -37,6 +37,6 @@ class Location extends Model
 
     public function organisation()
     {
-        return $this->belongsTo('Organisation\\Organisation');
+        return $this->belongsTo('App\Organisation\Organisation');
     }
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace Questionnaire;
+namespace App\Questionnaire;
 
 use Carbon\Carbon;
-use Questionnaire\Export\CsvExport;
-use Questionnaire\Export\DataHandler;
-use Questionnaire\Export\ExportLogger;
-use Questionnaire\Export\Repository;
-use Questionnaire\Jobs\ExportJob;
+use App\Questionnaire\Export\CsvExport;
+use App\Questionnaire\Export\DataHandler;
+use App\Questionnaire\Export\ExportLogger;
+use App\Questionnaire\Export\Repository;
+use App\Questionnaire\Jobs\ExportJob;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
@@ -16,38 +16,38 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     {
         $this->app['events']->subscribe(new EventSubscriber(new Questionnaire, new Panel, new Question, new Choise, new Answer));
 
-        Questionnaire::observe($this->app['Questionnaire\Observer\Questionnaire']);
+        Questionnaire::observe($this->app['App\Questionnaire\Observer\App\Questionnaire']);
 
-        Question::observe($this->app['Questionnaire\Observer\Question']);
+        Question::observe($this->app['App\Questionnaire\Observer\Question']);
 
-        Session::observe($this->app['Questionnaire\Observer\Session']);
+        Session::observe($this->app['App\Questionnaire\Observer\Session']);
 
-        Answer::observe($this->app['Questionnaire\Observer\Answer']);
+        Answer::observe($this->app['App\Questionnaire\Observer\Answer']);
     }
 
     public function register()
     {
-        $this->app['Questionnaire\Observer\Questionnaire'] = new Observer\Questionnaire($this->app['events']);
+        $this->app['App\Questionnaire\Observer\App\Questionnaire'] = new Observer\Questionnaire($this->app['events']);
 
-        $this->app['Questionnaire\Observer\Question'] = new Observer\Question($this->app['events'], new Question());
+        $this->app['App\Questionnaire\Observer\Question'] = new Observer\Question($this->app['events'], new Question());
 
-        $this->app['Questionnaire\Observer\Session'] = new Observer\Session($this->app['events']);
+        $this->app['App\Questionnaire\Observer\Session'] = new Observer\Session($this->app['events']);
 
-        $this->app['Questionnaire\Observer\Answer'] = new Observer\Answer($this->app['events']);
+        $this->app['App\Questionnaire\Observer\Answer'] = new Observer\Answer($this->app['events']);
 
-        $this->app['Questionnaire\Jobs\ExportJob'] = $this->app->share(function ($app) {
+        $this->app['App\Questionnaire\Jobs\ExportJob'] = $this->app->share(function ($app) {
 
             $logger = new ExportLogger($app['log'], $app['db']);
 
-            return new ExportJob(new Questionnaire(), $app['Questionnaire\Export\Exporter'], $logger, $app['events'], new \User());
+            return new ExportJob(new Questionnaire(), $app['App\Questionnaire\Export\Exporter'], $logger, $app['events'], new \App\User());
         });
 
-        $this->app['Questionnaire\Export\Exporter'] = $this->app->share(function ($app) {
+        $this->app['App\Questionnaire\Export\Exporter'] = $this->app->share(function ($app) {
 
-            return new CsvExport($app['Questionnaire\Export\SessionFilter'], $app['excel'], new Carbon(), $app['Questionnaire\Export\DataHandler']);
+            return new CsvExport($app['App\Questionnaire\Export\SessionFilter'], $app['excel'], new Carbon(), $app['App\Questionnaire\Export\DataHandler']);
         });
 
-        $this->app['Questionnaire\Export\DataHandler'] = $this->app->share(function($app)
+        $this->app['App\Questionnaire\Export\DataHandler'] = $this->app->share(function($app)
         {
             $repo = new Repository(new Answer, new Choise, $app['db']->connection());
 
@@ -55,7 +55,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         });
 
         $commands = [
-            'Questionnaire\Console\Export'
+            'App\Questionnaire\Console\Export'
         ];
 
         $this->commands($commands);

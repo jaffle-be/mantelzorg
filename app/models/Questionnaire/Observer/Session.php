@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Questionnaire\Observer;
+namespace App\Questionnaire\Observer;
 
 use Illuminate\Events\Dispatcher;
-use Questionnaire\Session as Model;
+use App\Questionnaire\Session as Model;
 
 class Session
 {

@@ -1,4 +1,4 @@
-<?php namespace System\Database\Eloquent;
+<?php namespace App\System\Database\Eloquent;
 
 class Model extends \Illuminate\Database\Eloquent\Model
 {

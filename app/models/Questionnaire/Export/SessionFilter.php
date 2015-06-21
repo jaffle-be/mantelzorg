@@ -1,9 +1,9 @@
-<?php namespace Questionnaire\Export;
+<?php namespace App\Questionnaire\Export;
 
 use Illuminate\Database\Query\JoinClause;
-use Organisation\OrganisationRepositoryInterface;
-use Questionnaire\Questionnaire;
-use UserRepositoryInterface;
+use App\Organisation\OrganisationRepositoryInterface;
+use \App\Questionnaire\Questionnaire;
+use App\UserRepositoryInterface;
 
 class SessionFilter {
 

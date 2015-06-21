@@ -1,12 +1,13 @@
 <?php
-use Organisation\Organisation;
-use Beta\Registration;
+use \App\Organisation\Organisation;
+use App\Beta\Registration;
+use App\User;
 
 class InschrijvingController extends AdminController
 {
 
     /**
-     * @var Beta\Registration
+     * @var App\Beta\Registration
      */
     protected $registration;
 

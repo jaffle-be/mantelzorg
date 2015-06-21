@@ -1,16 +1,16 @@
 <?php
-namespace Search\Model;
+namespace App\Search\Model;
 
 use App;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Search\Query\Query;
-use Search\SearchServiceInterface;
+use App\Search\Query\Query;
+use App\Search\SearchServiceInterface;
 
 /**
  * Class SearchableTrait
  *
- * @package Search\Model
+ * @package App\Search\Model
  */
 trait SearchableTrait
 {

@@ -1,9 +1,9 @@
 <?php
 
 use Carbon\Carbon;
-use Mantelzorger\Oudere;
-use Meta\Context;
-use Questionnaire\Session;
+use App\Mantelzorger\Oudere;
+use App\Meta\Context;
+use App\Questionnaire\Session;
 
 class StatsController extends AdminController{
 

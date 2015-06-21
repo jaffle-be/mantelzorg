@@ -1,7 +1,7 @@
-<?php namespace Questionnaire\Export;
+<?php namespace App\Questionnaire\Export;
 
 use Illuminate\Support\Collection;
-use Questionnaire\Questionnaire;
+use \App\Questionnaire\Questionnaire;
 
 interface Exporter {
 

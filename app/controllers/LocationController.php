@@ -4,11 +4,11 @@ class LocationController extends AdminController
 {
 
     /**
-     * @var Organisation\Location
+     * @var App\Organisation\Location
      */
     protected $location;
 
-    public function __construct(\Organisation\Location $location)
+    public function __construct(\App\Organisation\Location $location)
     {
         $this->location = $location;
 

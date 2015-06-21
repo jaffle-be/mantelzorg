@@ -14,7 +14,7 @@ class QuestionSeeder extends Seeder
 
     protected function panel1()
     {
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 1,
             'title'                  => 'Taken mantelzorger',
@@ -24,7 +24,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 1,
             'title'                  => 'Intensiteit van de mantelzorg',
@@ -33,7 +33,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 1,
             'title'                  => 'Duur van de mantelzorg',
@@ -41,7 +41,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 1,
             'title'                  => 'Andere mantelzorgers of vrijwilligers',
@@ -50,7 +50,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 1,
             'title'                  => 'Professionele hulp aanwezig',
@@ -59,7 +59,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 1,
             'title'                  => 'Relatie met professionele hulp (samenwerking)',
@@ -68,7 +68,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 1,
             'title'                  => 'Relatie met professionele hulp (ondersteuning)',
@@ -77,7 +77,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 1,
             'title'                  => 'Relatie met professionele hulp (faciliteren relatie)',
@@ -86,7 +86,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 1,
             'title'                  => 'Overzicht belastende factoren',
@@ -95,7 +95,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 1,
             'title'                  => 'Overzicht ondersteunende factoren',
@@ -104,7 +104,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 1,
             'title'                  => 'Gewenste verandering / ondersteuning',
@@ -113,7 +113,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 1,
             'title'                  => 'Mate van tevredenheid over zorgverlening',
@@ -123,7 +123,7 @@ class QuestionSeeder extends Seeder
 
     protected function panel2()
     {
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 2,
             'title'                  => 'Andere aandachtsgebieden',
@@ -133,7 +133,7 @@ class QuestionSeeder extends Seeder
             'multiple_answer'        => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 2,
             'title'                  => 'Voldoende tijd voor zichzelf',
@@ -142,7 +142,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 2,
             'title'                  => 'Impact zorg op eigen welbevinden',
@@ -152,7 +152,7 @@ class QuestionSeeder extends Seeder
             'multiple_answer'        => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 2,
             'title'                  => 'Omgang met zorgsituatie (acceptatie) ',
@@ -161,7 +161,7 @@ class QuestionSeeder extends Seeder
             'multiple_choise'        => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 2,
             'title'                  => 'Omgang met zorgsituatie (hantering) ',
@@ -170,7 +170,7 @@ class QuestionSeeder extends Seeder
             'multiple_choise'        => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 2,
             'title'                  => 'Omgang met zorgsituatie (motivatie) ',
@@ -179,7 +179,7 @@ class QuestionSeeder extends Seeder
             'multiple_choise'        => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 2,
             'title'                  => 'Toekomstperespectief: grenzen aan zorg',
@@ -188,7 +188,7 @@ class QuestionSeeder extends Seeder
             'multiple_choise'        => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 2,
             'title'                  => 'Toekomstperespectief: houding t.o.v woonzorgcentrum',
@@ -198,7 +198,7 @@ class QuestionSeeder extends Seeder
         ));
 
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 2,
             'title'                  => 'Overzicht belastende factoren',
@@ -206,7 +206,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 2,
             'title'                  => 'Overzicht ondersteunende factoren',
@@ -214,7 +214,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 2,
             'title'                  => 'Gewenste verandering / ondersteuning',
@@ -222,7 +222,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 2,
             'title'                  => 'Mate van tevredenheid over zorgverlening',
@@ -234,7 +234,7 @@ class QuestionSeeder extends Seeder
 
     protected function panel3()
     {
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 3,
             'title'                  => 'Situatie oudere',
@@ -244,7 +244,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 3,
             'title'                  => 'Aanvaarden hulp',
@@ -253,7 +253,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 3,
             'title'                  => 'Veranderingen in relatie met oudere: taakpatronen en rollen',
@@ -262,7 +262,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 3,
             'title'                  => 'Veranderingen in relatie met oudere: activiteiten samen',
@@ -271,7 +271,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 3,
             'title'                  => 'Kwaliteit relatie met oudere: wederkerigheid',
@@ -280,7 +280,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 3,
             'title'                  => 'Kwaliteit relatie met oudere: mate van conflict',
@@ -289,7 +289,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 3,
             'title'                  => 'Kwaliteit relatie met oudere: mate van affectie',
@@ -298,7 +298,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 3,
             'title'                  => 'Sociaal netwerk: veranderingen in sociale relaties',
@@ -307,7 +307,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 3,
             'title'                  => 'Sociaal netwerk: sociale steun',
@@ -316,7 +316,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 3,
             'title'                  => 'Sociaal netwerk: mate van conflict',
@@ -325,7 +325,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 3,
             'title'                  => 'Overzicht belastende factoren',
@@ -334,7 +334,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 3,
             'title'                  => 'Overzicht ondersteunende factoren',
@@ -343,7 +343,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 3,
             'title'                  => 'Gewenste verandering/ondersteuning',
@@ -352,7 +352,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 3,
             'title'                  => 'Mate van tevredenheid over de relaties',
@@ -363,7 +363,7 @@ class QuestionSeeder extends Seeder
 
     public function panel4()
     {
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 4,
             'title'                  => 'Huisvesting: aangepaste woning',
@@ -371,7 +371,7 @@ class QuestionSeeder extends Seeder
             'multiple_choise'        => 1,
             'explainable'            => 1
         ));
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 4,
             'title'                  => 'Huisvesting: woning voldoende veilig',
@@ -379,7 +379,7 @@ class QuestionSeeder extends Seeder
             'multiple_choise'        => 1,
             'explainable'            => 1
         ));
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 4,
             'title'                  => 'Mobiliteit: eigen verplaatsing voor zorg',
@@ -387,7 +387,7 @@ class QuestionSeeder extends Seeder
             'multiple_choise'        => 1,
             'explainable'            => 1
         ));
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 4,
             'title'                  => 'Mobiliteit: problemen verplaatsen binnenshuis',
@@ -395,7 +395,7 @@ class QuestionSeeder extends Seeder
             'multiple_choise'        => 1,
             'explainable'            => 1
         ));
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 4,
             'title'                  => 'Mobiliteit: problemen verplaatsen buitenshuis',
@@ -403,7 +403,7 @@ class QuestionSeeder extends Seeder
             'multiple_choise'        => 1,
             'explainable'            => 1
         ));
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 4,
             'title'                  => 'Hulpmiddelen',
@@ -412,7 +412,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1,
             'multiple_answer'        => 1,
         ));
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 4,
             'title'                  => 'Financiële situatie: inkomensverlies',
@@ -420,7 +420,7 @@ class QuestionSeeder extends Seeder
             'multiple_choise'        => 1,
             'explainable'            => 1
         ));
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 4,
             'title'                  => 'Financiële situatie: kosten door zorg',
@@ -428,7 +428,7 @@ class QuestionSeeder extends Seeder
             'multiple_choise'        => 1,
             'explainable'            => 1
         ));
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 4,
             'title'                  => 'Financiële situatie: gebruik tegemoetkomingen',
@@ -437,7 +437,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 4,
             'title'                  => 'Overzicht belastende factoren',
@@ -445,7 +445,7 @@ class QuestionSeeder extends Seeder
             'summary_question'       => 1,
             'explainable'            => 1
         ));
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 4,
             'title'                  => 'Overzicht ondersteunende factoren',
@@ -453,7 +453,7 @@ class QuestionSeeder extends Seeder
             'summary_question'       => 1,
             'explainable'            => 1
         ));
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 4,
             'title'                  => 'Gewenste verandering / ondersteuning',
@@ -462,7 +462,7 @@ class QuestionSeeder extends Seeder
             'explainable'            => 1
         ));
 
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 4,
             'title'                  => 'Mate van tevredenheid over omgevingsfactoren',
@@ -475,7 +475,7 @@ class QuestionSeeder extends Seeder
 
     public function panel5()
     {
-        \Questionnaire\Question::create(array(
+        \App\Questionnaire\Question::create(array(
             'questionnaire_id'       => 1,
             'questionnaire_panel_id' => 5,
             'title'                  => 'Algemene inschatting beleving zorgsituatie',

@@ -2,29 +2,29 @@
 
 namespace Instelling;
 
-use Mantelzorger\Oudere;
+use App\Mantelzorger\Oudere;
 use View;
 use Input;
 use Redirect;
-use Meta\Context;
-use Meta\Value;
+use App\Meta\Context;
+use App\Meta\Value;
 use Lang;
 
 class OudereController extends \AdminController
 {
 
     /**
-     * @var \Mantelzorger\Oudere
+     * @var \App\Mantelzorger\Oudere
      */
     protected $oudere;
 
     /**
-     * @var \Meta\Context
+     * @var \App\Meta\Context
      */
     protected $metaContext;
 
     /**
-     * @var \Meta\Value
+     * @var \App\Meta\Value
      */
     protected $metaValue;
 

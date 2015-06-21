@@ -1,13 +1,13 @@
 <?php
 
-namespace Mantelzorger\Observer;
+namespace App\Mantelzorger\Observer;
 
 use Illuminate\Events\Dispatcher;
 
 /**
- * Class Mantelzorger
+ * Class App\Mantelzorger
  *
- * @package Mantelzorger\Observer
+ * @package App\Mantelzorger\Observer
  */
 class Oudere
 {

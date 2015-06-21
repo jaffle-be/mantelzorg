@@ -1,7 +1,7 @@
 <?php namespace Data;
 
 // Composer: "fzaninotto/faker": "v1.3.0"
-use Beta\Registration;
+use App\Beta\Registration;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 

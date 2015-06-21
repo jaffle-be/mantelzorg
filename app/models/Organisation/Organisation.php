@@ -1,8 +1,8 @@
 <?php
-namespace Organisation;
+namespace App\Organisation;
 
 use Input;
-use System\Database\Eloquent\Model;
+use App\System\Database\Eloquent\Model;
 use Validator;
 
 class Organisation extends Model
@@ -32,6 +32,6 @@ class Organisation extends Model
 
     public function locations()
     {
-        return $this->hasMany('Organisation\\Location');
+        return $this->hasMany('App\Organisation\Location');
     }
 }

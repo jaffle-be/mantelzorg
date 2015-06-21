@@ -1,9 +1,9 @@
-<?php namespace Notifications;
+<?php namespace App\Notifications;
 
 use Illuminate\Mail\Mailer;
 use Illuminate\Mail\Message;
 use Illuminate\Translation\Translator;
-use User;
+use App\User;
 
 class EmailNotifier
 {

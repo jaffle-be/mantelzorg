@@ -1,8 +1,8 @@
-<?php namespace Questionnaire\Console;
+<?php namespace App\Questionnaire\Console;
 
 use Illuminate\Console\Command;
-use Questionnaire\Export\Exporter;
-use Questionnaire\Questionnaire;
+use \App\Questionnaire\Export\Exporter;
+use \App\Questionnaire\Questionnaire;
 use Symfony\Component\Console\Input\InputArgument;
 
 class Export extends Command

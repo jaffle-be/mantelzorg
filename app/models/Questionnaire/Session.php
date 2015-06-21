@@ -1,10 +1,10 @@
 <?php
 
-namespace Questionnaire;
+namespace App\Questionnaire;
 
-use Search\Model\Searchable;
-use Search\Model\SearchableTrait;
-use System\Database\Eloquent\Model;
+use App\Search\Model\Searchable;
+use App\Search\Model\SearchableTrait;
+use App\System\Database\Eloquent\Model;
 
 class Session extends Model implements Searchable
 {
@@ -43,27 +43,27 @@ class Session extends Model implements Searchable
 
     public function user()
     {
-        return $this->belongsTo('User');
+        return $this->belongsTo('App\User');
     }
 
     public function mantelzorger()
     {
-        return $this->belongsTo('Mantelzorger\Mantelzorger');
+        return $this->belongsTo('App\Mantelzorger\Mantelzorger');
     }
 
     public function oudere()
     {
-        return $this->belongsTo('Mantelzorger\Oudere');
+        return $this->belongsTo('App\Mantelzorger\Oudere');
     }
 
     public function answers()
     {
-        return $this->hasMany('Questionnaire\Answer');
+        return $this->hasMany('App\Questionnaire\Answer');
     }
 
     public function questionnaire()
     {
-        return $this->belongsTo('Questionnaire\Questionnaire');
+        return $this->belongsTo('App\Questionnaire\Questionnaire');
     }
 
     public function isFinished()

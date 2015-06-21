@@ -2,7 +2,7 @@
 
 namespace Instelling;
 
-use Mantelzorger\Mantelzorger;
+use \App\Mantelzorger\Mantelzorger;
 use View;
 use Redirect;
 use Input;
@@ -17,7 +17,7 @@ class MantelzorgerController extends \AdminController
 {
 
     /**
-     * @var \Mantelzorger\Mantelzorger
+     * @var \App\Mantelzorger\Mantelzorger
      */
     protected $mantelzorger;
 

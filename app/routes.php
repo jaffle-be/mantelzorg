@@ -14,22 +14,22 @@
 Route::pattern('id', '\d+');
 
 Route::pattern('hulpverlener', '\d+');
-Route::model('hulpverlener', 'User');
+Route::model('hulpverlener', 'App\User');
 
 Route::pattern('mantelzorger', '\d+');
-Route::model('mantelzorger', 'Mantelzorger\Mantelzorger');
+Route::model('mantelzorger', 'App\Mantelzorger\Mantelzorger');
 
 Route::pattern('questionnaire', '\d+');
-Route::model('questionnaire', 'Questionnaire\Questionnaire');
+Route::model('questionnaire', 'App\Questionnaire\Questionnaire');
 
 Route::pattern('panel', '\d+');
-Route::model('panel', 'Questionnaire\Panel');
+Route::model('panel', 'App\Questionnaire\Panel');
 
 Route::pattern('question', '\d+');
-Route::model('question', 'Questionnaire\Question');
+Route::model('question', 'App\Questionnaire\Question');
 
 Route::pattern('survey', '\d+');
-Route::model('survey', 'Questionnaire\Session');
+Route::model('survey', 'App\Questionnaire\Session');
 
 /**
  * INSTELLINGEN
@@ -129,7 +129,7 @@ Route::post('inschrijvingen/destroy', [
 /**
  * ORGANISATIONS
  */
-Route::resource('organisations/{id}/locations', 'Organisation\LocationController', ['only' => ['index', 'store']]);
+Route::resource('organisations/{id}/locations', 'App\Organisation\LocationController', ['only' => ['index', 'store']]);
 
 Route::resource('organisations', 'OrganisationController', ['only' => ['store']]);
 
@@ -146,17 +146,17 @@ Route::post('hulpverleners/destroy', ['uses' => 'HulpverlenerController@destroy'
  * QUESTIONAIRES
  */
 
-Route::resource('questionnaires', 'Questionnaire\QuestionnaireController', ['only' => ['index', 'store', 'update']]);
+Route::resource('questionnaires', 'App\Questionnaire\QuestionnaireController', ['only' => ['index', 'store', 'update']]);
 
-Route::resource('questionnaires/{questionnaire}/panels', 'Questionnaire\PanelController', ['only' => ['store', 'update']]);
+Route::resource('questionnaires/{questionnaire}/panels', 'App\Questionnaire\PanelController', ['only' => ['store', 'update']]);
 
-Route::post('questionnaires/{questionnaire}/panels/sort', 'Questionnaire\PanelController@sort');
+Route::post('questionnaires/{questionnaire}/panels/sort', 'App\Questionnaire\PanelController@sort');
 
-Route::resource('panels/{panel}/questions', 'Questionnaire\QuestionController', ['only' => ['index', 'store', 'update']]);
+Route::resource('panels/{panel}/questions', 'App\Questionnaire\QuestionController', ['only' => ['index', 'store', 'update']]);
 
-Route::resource('questions/{question}/choises', 'Questionnaire\ChoiseController', ['only' => ['store', 'update']]);
+Route::resource('questions/{question}/choises', 'App\Questionnaire\ChoiseController', ['only' => ['store', 'update']]);
 
-Route::post('questions/{question}/choises/sort', 'Questionnaire\ChoiseController@sort');
+Route::post('questions/{question}/choises/sort', 'App\Questionnaire\ChoiseController@sort');
 
 /**
  * API ROUTES

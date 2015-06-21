@@ -1,9 +1,9 @@
 <?php
 
-namespace Meta;
+namespace App\Meta;
 
 
-use System\Database\Eloquent\Model;
+use App\System\Database\Eloquent\Model;
 
 class Context extends Model
 {
@@ -19,6 +19,6 @@ class Context extends Model
 
     public function values()
     {
-        return $this->hasMany('Meta\Value', 'context_id');
+        return $this->hasMany('App\Meta\Value', 'context_id');
     }
 }

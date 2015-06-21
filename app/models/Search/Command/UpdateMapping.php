@@ -1,7 +1,7 @@
-<?php namespace Search\Command;
+<?php namespace App\Search\Command;
 
 use Illuminate\Console\Command;
-use Search\SearchServiceInterface;
+use App\Search\SearchServiceInterface;
 use Symfony\Component\Console\Input\InputArgument;
 
 class UpdateMapping extends Command

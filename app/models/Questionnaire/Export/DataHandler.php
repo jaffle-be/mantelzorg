@@ -1,8 +1,8 @@
-<?php namespace Questionnaire\Export;
+<?php namespace App\Questionnaire\Export;
 
 use Illuminate\Database\Eloquent\Collection;
 use Maatwebsite\Excel\Classes\LaravelExcelWorksheet;
-use Questionnaire\Session;
+use App\Questionnaire\Session;
 
 class DataHandler
 {

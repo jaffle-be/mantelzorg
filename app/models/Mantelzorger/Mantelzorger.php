@@ -1,12 +1,12 @@
 <?php
 
-namespace Mantelzorger;
+namespace App\Mantelzorger;
 
 use Carbon\Carbon;
-use Questionnaire\Export\Exportable;
-use Search\Model\Searchable;
-use Search\Model\SearchableTrait;
-use System\Database\Eloquent\Model;
+use App\Questionnaire\Export\Exportable;
+use App\Search\Model\Searchable;
+use App\Search\Model\SearchableTrait;
+use App\System\Database\Eloquent\Model;
 use Validator;
 use Input;
 
@@ -132,17 +132,17 @@ class Mantelzorger extends Model implements Searchable, Exportable
 
     public function oudere()
     {
-        return $this->hasMany('Mantelzorger\Oudere', 'mantelzorger_id');
+        return $this->hasMany('App\Mantelzorger\Oudere', 'mantelzorger_id');
     }
 
     public function hulpverlener()
     {
-        return $this->belongsTo('User', 'hulpverlener_id');
+        return $this->belongsTo('App\User', 'hulpverlener_id');
     }
 
     public function surveys()
     {
-        return $this->hasMany('Questionnaire\\Session', 'mantelzorger_id');
+        return $this->hasMany('App\Questionnaire\Session', 'mantelzorger_id');
     }
 
     public function getDates()

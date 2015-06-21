@@ -1,14 +1,14 @@
 <?php
 
-namespace Instrument\Memorize;
+namespace App\Instrument\Memorize;
 
-use Mantelzorger\Mantelzorger;
+use \App\Mantelzorger\Mantelzorger;
 use Auth;
-use Mantelzorger\Oudere;
-use Questionnaire\Question;
-use Questionnaire\Answer;
+use \App\Mantelzorger\Oudere;
+use \App\Questionnaire\Question;
+use \App\Questionnaire\Answer;
 use Input;
-use Questionnaire\Session;
+use \App\Questionnaire\Session;
 
 class Questionnaire
 {

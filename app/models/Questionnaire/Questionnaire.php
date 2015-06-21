@@ -1,7 +1,7 @@
 <?php
-namespace Questionnaire;
+namespace App\Questionnaire;
 
-use System\Database\Eloquent\Model;
+use App\System\Database\Eloquent\Model;
 use Validator;
 use Input;
 
@@ -39,17 +39,17 @@ class Questionnaire extends Model
 
     public function questions()
     {
-        return $this->hasManyThrough('Questionnaire\Question', 'Questionnaire\Panel', 'questionnaire_id', 'questionnaire_panel_id');
+        return $this->hasManyThrough('App\Questionnaire\Question', 'App\Questionnaire\Panel', 'questionnaire_id', 'questionnaire_panel_id');
     }
 
     public function panels()
     {
-        return $this->hasMany('Questionnaire\Panel', 'questionnaire_id');
+        return $this->hasMany('App\Questionnaire\Panel', 'questionnaire_id');
     }
 
     public function sessions()
     {
-        return $this->hasMany('Questionnaire\Session');
+        return $this->hasMany('App\Questionnaire\Session');
     }
 
     public function nextPanel(Panel $panel)

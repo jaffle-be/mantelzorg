@@ -1,7 +1,8 @@
 <?php
 
-use Organisation\Organisation;
-use Organisation\Location;
+use \App\Organisation\Organisation;
+use \App\Organisation\Location;
+use App\User;
 
 class HulpverlenerController extends AdminController
 {

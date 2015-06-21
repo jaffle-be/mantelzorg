@@ -1,6 +1,6 @@
 <?php
 
-namespace Questionnaire;
+namespace App\Questionnaire;
 
 use View;
 use Input;

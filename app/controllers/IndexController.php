@@ -1,6 +1,7 @@
 <?php
 
-use \Beta\Registration;
+use App\Beta\Registration;
+use App\User;
 
 class IndexController extends BaseController
 {
@@ -8,7 +9,7 @@ class IndexController extends BaseController
     protected $layout = 'layout.front.master';
 
     /**
-     * @var Beta\Registration
+     * @var App\Beta\Registration
      */
     protected $registration;
 
