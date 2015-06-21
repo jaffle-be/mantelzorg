@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9057fa64ea7c56e82529772cc69397a4",
+    "hash": "1138d26a428532a9578945201fefcde4",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1308,27 +1308,27 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v4.2.0",
+            "version": "v4.2.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "80cc5fd606afc2afd3d89f6e1636c5fc2e0dd296"
+                "reference": "3359de6d6cd322e8a1b251c2f8d9dd42a3e4e232"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/80cc5fd606afc2afd3d89f6e1636c5fc2e0dd296",
-                "reference": "80cc5fd606afc2afd3d89f6e1636c5fc2e0dd296",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/3359de6d6cd322e8a1b251c2f8d9dd42a3e4e232",
+                "reference": "3359de6d6cd322e8a1b251c2f8d9dd42a3e4e232",
                 "shasum": ""
             },
             "require": {
-                "classpreloader/classpreloader": "~1.0",
+                "classpreloader/classpreloader": "~1.0.2",
                 "d11wtq/boris": "~1.0",
                 "filp/whoops": "1.1.*",
                 "ircmaxell/password-compat": "~1.0",
-                "jeremeamia/superclosure": "~1.0",
+                "jeremeamia/superclosure": "~1.0.1",
                 "monolog/monolog": "~1.6",
                 "nesbot/carbon": "~1.0",
-                "patchwork/utf8": "1.1.*",
+                "patchwork/utf8": "~1.1",
                 "php": ">=5.4.0",
                 "phpseclib/phpseclib": "0.3.*",
                 "predis/predis": "0.8.*",
@@ -1411,9 +1411,7 @@
             "authors": [
                 {
                     "name": "Taylor Otwell",
-                    "email": "taylorotwell@gmail.com",
-                    "homepage": "https://github.com/taylorotwell",
-                    "role": "Creator of Laravel"
+                    "email": "taylorotwell@gmail.com"
                 }
             ],
             "description": "The Laravel Framework.",
@@ -1421,7 +1419,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2014-06-01 02:01:51"
+            "time": "2015-02-11 20:37:15"
         },
         {
             "name": "maatwebsite/excel",
@@ -1713,16 +1711,16 @@
         },
         {
             "name": "patchwork/utf8",
-            "version": "v1.1.29",
+            "version": "v1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tchwork/utf8.git",
-                "reference": "65b19607048351f767a034d4cc709db8b136d2c5"
+                "reference": "7287a6fb2c46a66ac6bfbaf0e4975229b27efcba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tchwork/utf8/zipball/65b19607048351f767a034d4cc709db8b136d2c5",
-                "reference": "65b19607048351f767a034d4cc709db8b136d2c5",
+                "url": "https://api.github.com/repos/tchwork/utf8/zipball/7287a6fb2c46a66ac6bfbaf0e4975229b27efcba",
+                "reference": "7287a6fb2c46a66ac6bfbaf0e4975229b27efcba",
                 "shasum": ""
             },
             "require": {
@@ -1732,9 +1730,15 @@
             "suggest": {
                 "ext-iconv": "Use iconv for best performance",
                 "ext-intl": "Use Intl for best performance",
-                "ext-mbstring": "Use Mbstring for best performance"
+                "ext-mbstring": "Use Mbstring for best performance",
+                "ext-wfio": "Use WFIO for UTF-8 filesystem access on Windows"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "Patchwork": "class/",
@@ -1760,7 +1764,7 @@
                 "utf-8",
                 "utf8"
             ],
-            "time": "2015-04-26 09:48:22"
+            "time": "2015-04-26 09:51:43"
         },
         {
             "name": "phpoffice/phpexcel",
