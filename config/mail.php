@@ -54,7 +54,7 @@ return [
 	|
 	*/
 
-	'from' => ['address' => null, 'name' => null],
+	'from' => ['address' => 'systeem@zichtopmantelzorg.be', 'name' => 'Zicht op mantelzorg'],
 
 	/*
 	|--------------------------------------------------------------------------
