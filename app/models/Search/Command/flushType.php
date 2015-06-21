@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputArgument;
 class FlushType extends Command
 {
 
+    
     /**
      * The console command name.
      *
