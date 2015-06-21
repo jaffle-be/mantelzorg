@@ -1,19 +1,19 @@
 <?php
 
-namespace Instelling;
+namespace App\Http\Controllers\Instelling;
 
-use \App\Mantelzorger\Mantelzorger;
-use View;
-use Redirect;
-use Input;
+use App\Mantelzorger\Mantelzorger;
 use Auth;
+use Input;
+use Redirect;
+use View;
 
 /**
  * Class MantelzorgerController
  *
- * @package Instelling
+ * @package App\Http\Controllers\Instelling
  */
-class MantelzorgerController extends \AdminController
+class MantelzorgerController extends \App\Http\Controllers\AdminController
 {
 
     /**
@@ -86,7 +86,7 @@ class MantelzorgerController extends \AdminController
 
         $mantelzorger = $this->mantelzorger->create($input);
 
-        return Redirect::action('Instelling\MantelzorgerController@index', array($hulpverlener->id));
+        return Redirect::route('instellingen.{hulpverlener}.mantelzorgers.index', array($hulpverlener->id));
     }
 
     public function edit($hulpverlener, $mantelzorger)
@@ -118,7 +118,7 @@ class MantelzorgerController extends \AdminController
             }
         }
 
-        return Redirect::action('Instelling\MantelzorgerController@index', $hulpverlener->id);
+        return Redirect::route('instellingen.{hulpverlener}.mantelzorgers.index', $hulpverlener->id);
     }
 
     public function delete()

@@ -3,11 +3,11 @@
 
 namespace App\Search\Query;
 
+use App\Search\Model\Searchable;
+use App\Search\SearchServiceInterface;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
-use App\Search\Model\Searchable;
 use Input;
-use App\Search\SearchServiceInterface;
 
 class Query implements Queryable
 {

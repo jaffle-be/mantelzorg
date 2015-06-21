@@ -2,13 +2,13 @@
 
 namespace App\Instrument\Memorize;
 
-use \App\Mantelzorger\Mantelzorger;
+use App\Mantelzorger\Mantelzorger;
+use App\Mantelzorger\Oudere;
+use App\Questionnaire\Answer;
+use App\Questionnaire\Question;
+use App\Questionnaire\Session;
 use Auth;
-use \App\Mantelzorger\Oudere;
-use \App\Questionnaire\Question;
-use \App\Questionnaire\Answer;
 use Input;
-use \App\Questionnaire\Session;
 
 class Questionnaire
 {

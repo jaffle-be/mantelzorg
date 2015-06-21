@@ -3,12 +3,11 @@
 
 namespace App\Search;
 
+use App\Search\Model\Searchable;
 use Elasticsearch\Client;
 use Exception;
 use Illuminate\Container\Container;
-use Illuminate\Database\QueryException;
 use Illuminate\Events\Dispatcher;
-use App\Search\Model\Searchable;
 
 class SearchService implements SearchServiceInterface
 {

@@ -1,9 +1,9 @@
 <?php namespace App\Questionnaire\Export;
 
+use App\Questionnaire\Questionnaire;
 use Exception;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Log\Writer;
-use \App\Questionnaire\Questionnaire;
 
 class ExportLogger {
 

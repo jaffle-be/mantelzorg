@@ -7,6 +7,8 @@
             </div>
             <div class="modal-body">
 
+                <?= Form::open(['method' => 'post']) ?>
+
                 <label><?= Lang::get('questionnaires.title') ?></label>
                 @if($errors->has('title'))
                     <span class="errors">{{ $errors->first('title') }}</span>

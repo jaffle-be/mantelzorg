@@ -22,6 +22,13 @@
                 that.open();
                 event.preventDefault();
             });
+
+            this.$creator.on('submit', function(event)
+            {
+                event.preventDefault();
+                that.create();
+            });
+
             this.$creator.on('click', '.btn-primary', function () {
                 that.create();
             });

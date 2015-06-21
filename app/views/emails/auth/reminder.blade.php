@@ -7,6 +7,6 @@
 @section('content')
     <p>
         {{ Lang::get('reminders.email.body') }}
-        <br/>{{ URL::action('IndexController@getReset', array($token)) }}
+        <br/>{{ URL::route('reset', array($token)) }}
     </p>
 @stop

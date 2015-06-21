@@ -2,8 +2,8 @@
 namespace App\Questionnaire;
 
 use App\System\Database\Eloquent\Model;
-use Validator;
 use Input;
+use Validator;
 
 class Questionnaire extends Model
 {

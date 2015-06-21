@@ -2,8 +2,8 @@
 
 namespace App\Organisation;
 
-use Input;
 use App\System\Database\Eloquent\Model;
+use Input;
 use Validator;
 
 class Location extends Model

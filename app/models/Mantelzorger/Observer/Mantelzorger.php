@@ -2,8 +2,8 @@
 
 namespace App\Mantelzorger\Observer;
 
+use App\Mantelzorger\Mantelzorger as Model;
 use Illuminate\Events\Dispatcher;
-use \App\Mantelzorger\Mantelzorger as Model;
 
 /**
  * Class App\Mantelzorger

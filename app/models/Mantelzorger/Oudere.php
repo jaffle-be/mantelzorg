@@ -2,12 +2,12 @@
 
 namespace App\Mantelzorger;
 
-use Carbon\Carbon;
-use Input;
 use App\Questionnaire\Export\Exportable;
 use App\Search\Model\Searchable;
 use App\Search\Model\SearchableTrait;
 use App\System\Database\Eloquent\Model;
+use Carbon\Carbon;
+use Input;
 use Validator;
 
 class Oudere extends Model implements Searchable, Exportable

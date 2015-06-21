@@ -1,19 +1,19 @@
 <?php
 
-namespace Instelling;
+namespace App\Http\Controllers\Instelling;
 
-use \App\Organisation\Organisation;
-use \App\Organisation\Location;
+use App\Organisation\Location;
+use App\Organisation\Organisation;
 use App\User;
 use Auth;
+use Hash;
 use Input;
 use Lang;
-use View;
 use Redirect;
-use Hash;
 use Session;
+use View;
 
-class PersonController extends \AdminController
+class PersonController extends \App\Http\Controllers\AdminController
 {
 
     /**

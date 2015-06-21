@@ -2,10 +2,6 @@
 
 namespace App;
 
-use App\Search\SearchServiceInterface;
-use App\User;
-use App\UserMailer;
-
 class UserServiceProvider extends \Illuminate\Support\ServiceProvider
 {
 

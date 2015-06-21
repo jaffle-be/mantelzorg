@@ -2,13 +2,13 @@
 
 namespace App\Mantelzorger;
 
-use Carbon\Carbon;
 use App\Questionnaire\Export\Exportable;
 use App\Search\Model\Searchable;
 use App\Search\Model\SearchableTrait;
 use App\System\Database\Eloquent\Model;
-use Validator;
+use Carbon\Carbon;
 use Input;
+use Validator;
 
 class Mantelzorger extends Model implements Searchable, Exportable
 {

@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\User;
 use Illuminate\Events\Dispatcher;
 
 class UserObserver

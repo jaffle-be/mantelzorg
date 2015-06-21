@@ -1,5 +1,9 @@
 <?php
-use \App\Organisation\Organisation;
+
+namespace App\Http\Controllers;
+
+use App\Organisation\Organisation;
+use Input;
 
 class OrganisationController extends AdminController
 {

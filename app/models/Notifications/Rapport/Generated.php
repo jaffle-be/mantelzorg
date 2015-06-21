@@ -1,9 +1,9 @@
 <?php namespace App\Notifications\Rapport;
 
-use Illuminate\Log\Writer;
 use App\Notifications\EmailNotifier;
-use \App\Questionnaire\Questionnaire;
+use App\Questionnaire\Questionnaire;
 use App\User;
+use Illuminate\Log\Writer;
 
 class Generated
 {

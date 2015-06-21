@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Questionnaire;
+namespace App\Http\Controllers\Questionnaire;
 
+use App\Questionnaire\Choise;
 use Input;
 
-class ChoiseController extends \AdminController
+class ChoiseController extends \App\Http\Controllers\AdminController
 {
 
     /**

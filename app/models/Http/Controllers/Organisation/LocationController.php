@@ -1,7 +1,7 @@
 <?php
-namespace App\Organisation;
+namespace App\Http\Controllers\Organisation;
 
-use AdminController;
+use App\Http\Controllers\AdminController;
 use Input;
 
 class LocationController extends AdminController

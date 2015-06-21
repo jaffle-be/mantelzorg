@@ -1,16 +1,16 @@
 <?php
 
-namespace Instelling;
+namespace App\Http\Controllers\Instelling;
 
 use App\Mantelzorger\Oudere;
-use View;
-use Input;
-use Redirect;
 use App\Meta\Context;
 use App\Meta\Value;
+use Input;
 use Lang;
+use Redirect;
+use View;
 
-class OudereController extends \AdminController
+class OudereController extends \App\Http\Controllers\AdminController
 {
 
     /**
@@ -72,7 +72,7 @@ class OudereController extends \AdminController
 
             $this->oudere->create($input);
 
-            return Redirect::action('Instelling\MantelzorgerController@index', $mantelzorger->hulpverlener->id);
+            return Redirect::route('instellingen.{hulpverlener}.mantelzorgers.index', $mantelzorger->hulpverlener->id);
         }
     }
 

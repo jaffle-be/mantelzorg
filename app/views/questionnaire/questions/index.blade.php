@@ -75,7 +75,7 @@
 
                 <div class="clearfix"></div>
 
-                <div class="choises col-md-6" <?= $question->multiple_choise === '0' ? 'style="display:none;"' : '' ?>>
+                <div class="choises col-md-6" <?= $question->multiple_choise === 0 ? 'style="display:none;"' : '' ?>>
                     <div class="header">
                         <span><?= Lang::get('questionnaires.choises') ?></span>
                         <button class="pull-right btn btn-default add-choise"><i class="fa fa-plus"></i>

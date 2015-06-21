@@ -50,7 +50,7 @@
                         {{ $teller }} <input type="checkbox" value="{{ $registration->id }}"/>
                     </td>
                     <td>
-                        <a href="<?= URL::action('InschrijvingController@edit', array($registration->id)) ?>">{{ $registration->firstname . ' ' . $registration->lastname}}</a>
+                        <a href="<?= URL::route('inschrijvingen.edit', array($registration->id)) ?>">{{ $registration->firstname . ' ' . $registration->lastname}}</a>
                     </td>
                     <td>{{ $registration->email }}</td>
                     <td>{{ $registration->organisation }}</td>

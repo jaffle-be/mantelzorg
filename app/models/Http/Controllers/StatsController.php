@@ -1,9 +1,10 @@
-<?php
+<?php namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use App\Mantelzorger\Oudere;
 use App\Meta\Context;
 use App\Questionnaire\Session;
+use Carbon\Carbon;
+use View, Input, DB, Lang;
 
 class StatsController extends AdminController{
 

@@ -1,10 +1,14 @@
 <?php
 
+namespace App\Http\Controllers;
+
+use Input;
+
 class LocationController extends AdminController
 {
 
     /**
-     * @var App\Organisation\Location
+     * @var \App\Organisation\Location
      */
     protected $location;
 

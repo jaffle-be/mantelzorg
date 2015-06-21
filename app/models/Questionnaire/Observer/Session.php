@@ -3,8 +3,8 @@
 
 namespace App\Questionnaire\Observer;
 
-use Illuminate\Events\Dispatcher;
 use App\Questionnaire\Session as Model;
+use Illuminate\Events\Dispatcher;
 
 class Session
 {

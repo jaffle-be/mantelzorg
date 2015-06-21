@@ -38,19 +38,19 @@ App::after(function ($request, $response) {
 
 Route::filter('auth', function () {
     if (Auth::guest()) {
-        return Redirect::action('IndexController@getLogin');
+        return Redirect::route('login');
     }
 
     $user = Auth::user();
 
     if ($user->active === '0') {
-        return Redirect::action('IndexController@getLogout');
+        return Redirect::route('logout');
     }
 });
 
 Route::filter('auth.admin', function () {
     if (Auth::guest()) {
-        return Redirect::action('IndexController@getLogin');
+        return Redirect::route('login');
     }
 
     $user = Auth::user();

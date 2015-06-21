@@ -2,8 +2,8 @@
 
 namespace App\Questionnaire\Observer;
 
-use Illuminate\Events\Dispatcher;
 use App\Questionnaire\Question as QuestionModel;
+use Illuminate\Events\Dispatcher;
 
 class Question
 {

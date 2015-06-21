@@ -3,7 +3,6 @@
 namespace App\Mantelzorger;
 
 use Illuminate\Support\ServiceProvider;
-use App\Search\SearchServiceInterface;
 
 class MantelzorgerServiceProvider extends ServiceProvider
 {

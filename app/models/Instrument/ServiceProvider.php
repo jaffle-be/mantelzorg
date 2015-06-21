@@ -1,8 +1,8 @@
 <?php
 namespace App\Instrument;
 
-use \App\Mantelzorger\Mantelzorger;
-use \App\Mantelzorger\Oudere;
+use App\Mantelzorger\Mantelzorger;
+use App\Mantelzorger\Oudere;
 use App\Questionnaire\Answer;
 use App\Questionnaire\Question;
 use App\Questionnaire\Session;

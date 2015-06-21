@@ -1,17 +1,21 @@
 <?php
-use App\User;
-use Barryvdh\Snappy\PdfWrapper;
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
-use \App\Mantelzorger\Mantelzorger;
-use \App\Mantelzorger\Oudere;
+namespace App\Http\Controllers;
+
+use App\Mantelzorger\Mantelzorger;
+use App\Mantelzorger\Oudere;
 use App\Meta\Context;
 use App\Meta\Value;
 use App\Questionnaire\Answer;
 use App\Questionnaire\Choise;
-use Session as SessionStore;
 use App\Questionnaire\Session;
+use App\User;
+use Barryvdh\Snappy\PdfWrapper;
+use Carbon\Carbon;
+use Exception;
+use Illuminate\Database\Eloquent\Model;
+use Session as SessionStore;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use View, Input, Auth, Memorize, Redirect, App, File, Response, DB;
 
 /**
  * Class InstrumentController
@@ -20,7 +24,7 @@ class InstrumentController extends AdminController
 {
 
     /**
-     * @var App\Questionnaire\Questionnaire
+     * @var \App\Questionnaire\Questionnaire
      */
     protected $questionnaire;
 
@@ -30,7 +34,7 @@ class InstrumentController extends AdminController
     protected $hulpverlener;
 
     /**
-     * @var App\Questionnaire\Session
+     * @var \App\Questionnaire\Session
      */
     protected $session;
 

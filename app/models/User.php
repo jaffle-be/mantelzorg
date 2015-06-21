@@ -2,12 +2,12 @@
 
 namespace App;
 
-use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableInterface;
 use App\Questionnaire\Export\Exportable;
 use App\Search\Model\Searchable;
 use App\Search\Model\SearchableTrait;
 use App\System\Database\Eloquent\Model;
+use Illuminate\Auth\Reminders\RemindableInterface;
+use Illuminate\Auth\UserInterface;
 use Input;
 use Validator;
 
