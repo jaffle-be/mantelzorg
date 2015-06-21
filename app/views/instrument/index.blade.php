@@ -13,7 +13,7 @@
 
     @if(Auth::user()->admin || Session::get('hijack-original'))
 
-        <form method="POST" action="{{action('InstrumentController@import')}}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('import') }}" enctype="multipart/form-data">
 
             <p class="clearfix">
                 <input type="file" name="import" class="pull-left" style="margin-right:20px;"/>

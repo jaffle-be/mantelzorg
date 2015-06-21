@@ -9,6 +9,7 @@
 
                 <?= Form::open(array(
                         'method' => 'post',
+                        'id'     => 'panel-creator-form',
                         'class'  => 'form-horizontal',
                 )) ?>
 

@@ -131,17 +131,17 @@ return array(
 //        'LeroyMerlin\LaraSniffer\ServiceProvider',
 //        'Way\Generators\GeneratorsServiceProvider',
 
-        'System\UIServiceProvider',
+        'App\System\UIServiceProvider',
 
-        'Template\TemplateServiceProvider',
-        'Questionnaire\ServiceProvider',
-        'Instrument\ServiceProvider',
-        'Mantelzorger\MantelzorgerServiceProvider',
-        'UserServiceProvider',
-        'Organisation\OrganisationServiceProvider',
+        'App\Template\TemplateServiceProvider',
+        'App\Questionnaire\ServiceProvider',
+        'App\Instrument\ServiceProvider',
+        'App\Mantelzorger\MantelzorgerServiceProvider',
+        'App\UserServiceProvider',
+        'App\Organisation\OrganisationServiceProvider',
 
-        'Search\SearchServiceProvider',
-        'Notifications\NotificationServiceProvider',
+        'App\Search\SearchServiceProvider',
+        'App\Notifications\NotificationServiceProvider',
     ),
 
     /*
@@ -208,10 +208,10 @@ return array(
         'URL'               => 'Illuminate\Support\Facades\URL',
         'Validator'         => 'Illuminate\Support\Facades\Validator',
         'View'              => 'Illuminate\Support\Facades\View',
-        'Template'          => 'Template\TemplateFacade',
-        'Memorize'          => 'Instrument\Memorize\Facade',
+        'Template'          => 'App\Template\TemplateFacade',
+        'Memorize'          => 'App\Instrument\Memorize\Facade',
         'Newrelic'          => 'Intouch\LaravelNewrelic\Facades\Newrelic',
-        'UI'                => 'System\UIFacade'
+        'UI'                => 'App\System\UIFacade'
     ),
 
 );

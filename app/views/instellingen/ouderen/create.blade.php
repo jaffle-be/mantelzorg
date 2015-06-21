@@ -6,7 +6,7 @@
     <?= Template::crumb(array(
             array(
                     'text' => Lang::get('master.navs.instellingen'),
-                    'href' => URL::action('Instelling\PersonController@index')
+                    'href' => URL::route('instellingen.index')
     ),
     array(
     'text' => Lang::get('master.navs.mantelzorgers'),

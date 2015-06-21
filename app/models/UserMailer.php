@@ -1,6 +1,9 @@
 <?php
 
+namespace App;
+
 use Illuminate\Mail\Mailer;
+use Lang;
 
 class UserMailer
 {

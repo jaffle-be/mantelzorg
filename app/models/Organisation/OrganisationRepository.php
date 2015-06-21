@@ -1,4 +1,4 @@
-<?php namespace Organisation;
+<?php namespace App\Organisation;
 
 class OrganisationRepository implements OrganisationRepositoryInterface{
 

@@ -1,14 +1,12 @@
-<?php namespace Questionnaire\Jobs;
+<?php namespace App\Questionnaire\Jobs;
 
+use App\Questionnaire\Export\Exporter;
+use App\Questionnaire\Export\ExportLogger;
+use App\Questionnaire\Questionnaire;
+use App\User;
 use Exception;
-use Illuminate\Auth\AuthManager;
 use Illuminate\Events\Dispatcher;
-use Illuminate\Log\Writer;
 use Illuminate\Queue\Jobs\Job;
-use Questionnaire\Export\Exporter;
-use Questionnaire\Export\ExportLogger;
-use Questionnaire\Questionnaire;
-use User;
 
 class ExportJob {
 

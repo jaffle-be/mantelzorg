@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Search\Query;
+namespace App\Search\Query;
 
 interface Queryable
 {

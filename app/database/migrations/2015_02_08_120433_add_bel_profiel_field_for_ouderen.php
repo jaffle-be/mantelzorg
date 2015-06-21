@@ -18,8 +18,8 @@ class AddBelProfielFieldForOuderen extends Migration {
 			$table->foreign('bel_profiel', 'bel_profiel_to_meta_value')->references('id')->on('meta_values');
 		});
 
-		$context = Meta\Context::create([
-			'context' => Meta\Context::BEL_PROFIEL
+		$context = App\Meta\Context::create([
+			'context' => App\Meta\Context::BEL_PROFIEL
 		]);
 
 		$values = [
@@ -30,7 +30,7 @@ class AddBelProfielFieldForOuderen extends Migration {
 
 		foreach($values as $value)
 		{
-			Meta\Value::create(array_merge($value, ['context_id' => $context->id]));
+			App\Meta\Value::create(array_merge($value, ['context_id' => $context->id]));
 		}
 	}
 
@@ -47,9 +47,9 @@ class AddBelProfielFieldForOuderen extends Migration {
 			$table->dropColumn('bel_profiel');
 		});
 
-		$context = Meta\Context::where('context', Meta\Context::BEL_PROFIEL)->first();
+		$context = App\Meta\Context::where('context', App\Meta\Context::BEL_PROFIEL)->first();
 
-		Meta\Value::where('context_id', $context->id)->delete();
+		App\Meta\Value::where('context_id', $context->id)->delete();
 		$context->delete();
 	}
 

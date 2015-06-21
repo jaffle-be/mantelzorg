@@ -1,6 +1,10 @@
 <?php
 
-use \Beta\Registration;
+namespace App\Http\Controllers;
+
+use App\Beta\Registration;
+use App\User;
+use View, Input, Password, Redirect, Lang, Session, Hash, Auth;
 
 class IndexController extends BaseController
 {
@@ -8,7 +12,7 @@ class IndexController extends BaseController
     protected $layout = 'layout.front.master';
 
     /**
-     * @var Beta\Registration
+     * @var App\Beta\Registration
      */
     protected $registration;
 
@@ -72,7 +76,7 @@ class IndexController extends BaseController
                 }
             }
 
-            return Redirect::action('IndexController@getLogin')->withError($error);
+            return Redirect::route('login')->withError($error);
         }
     }
 
@@ -80,7 +84,7 @@ class IndexController extends BaseController
     {
         Auth::logout();
 
-        return Redirect::action('IndexController@getIndex');
+        return Redirect::route('home');
     }
 
     public function getReminder()

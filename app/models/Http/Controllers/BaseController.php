@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Http\Controllers;
+use Illuminate\Routing\Controller;
+use App;
+use View;
+
 class BaseController extends Controller
 {
 

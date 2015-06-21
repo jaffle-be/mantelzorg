@@ -1,14 +1,13 @@
 <?php
 
 
-namespace Search;
+namespace App\Search;
 
+use App\Search\Model\Searchable;
 use Elasticsearch\Client;
 use Exception;
 use Illuminate\Container\Container;
-use Illuminate\Database\QueryException;
 use Illuminate\Events\Dispatcher;
-use Search\Model\Searchable;
 
 class SearchService implements SearchServiceInterface
 {
@@ -344,7 +343,7 @@ class SearchService implements SearchServiceInterface
         }
 
         if (!is_object($type) || !($type instanceof Searchable)) {
-            throw new Exception('Invalid searchable provided, expecting something Search\\Searchable');
+            throw new Exception('Invalid searchable provided, expecting something App\Search\\Searchable');
         }
 
         return $type;

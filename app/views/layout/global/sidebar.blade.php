@@ -1,17 +1,6 @@
 <div class="navbar-default sidebar" role="navigation">
     <div class="sidebar-nav navbar-collapse collapse" id="sidebar">
         <ul class="nav" id="side-menu">
-            {{--<li class="sidebar-search">--}}
-                {{--<div class="input-group custom-search-form">--}}
-                    {{--<input type="text" class="form-control" placeholder="Search...">--}}
-                                {{--<span class="input-group-btn">--}}
-                                {{--<button class="btn btn-default" type="button">--}}
-                                    {{--<i class="fa fa-search"></i>--}}
-                                {{--</button>--}}
-                            {{--</span>--}}
-                {{--</div>--}}
-                {{--<!-- /input-group -->--}}
-            {{--</li>--}}
 
             @if($user->admin == 1)
                 <li>
@@ -43,7 +32,7 @@
             @endif
 
             <li>
-                <a href="{{ action('InstrumentController@index') }}"><span class="fa fa-list-alt"></span>&nbsp;{{ Lang::get('master.navs.instrument') }}
+                <a href="{{ route('dash') }}"><span class="fa fa-list-alt"></span>&nbsp;{{ Lang::get('master.navs.instrument') }}
                 </a>
             </li>
             <li>
@@ -51,7 +40,7 @@
 
                 <ul class="nav nav-second-level  collapse">
                     <li>
-                        <a href="{{ action('Instelling\PersonController@index') }}">{{ Lang::get('master.navs.profiel') }}</a>
+                        <a href="{{ route('instellingen.index') }}">{{ Lang::get('master.navs.profiel') }}</a>
                     </li>
                     <li>
                         <a href="{{ route('instellingen.{hulpverlener}.mantelzorgers.index', array($user->id)) }}">{{ Lang::get('master.navs.mantelzorgers') }}</a>
@@ -61,7 +50,7 @@
 
             @if(Session::get('hijack-original'))
                 <li class="rejack">
-                    <a class="btn btn-warning" href="{{ action('IndexController@getRejack') }}">{{ Lang::get('master.hijack.undo') }}</a>
+                    <a class="btn btn-warning" href="{{ route('rejack') }}">{{ Lang::get('master.hijack.undo') }}</a>
                 </li>
             @endif
 

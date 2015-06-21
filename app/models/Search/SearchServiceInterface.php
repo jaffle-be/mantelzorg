@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Search;
+namespace App\Search;
 
-use Search\Model\Searchable;
+use App\Search\Model\Searchable;
 
 interface SearchServiceInterface
 {

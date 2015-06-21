@@ -1,6 +1,11 @@
 <?php
 
-class UserRepository implements UserRepositoryInterface{
+namespace App;
+
+use DB;
+
+class UserRepository implements UserRepositoryInterface
+{
 
     protected $user;
 

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Questionnaire\Observer;
+namespace App\Questionnaire\Observer;
 
 use Illuminate\Events\Dispatcher;
 

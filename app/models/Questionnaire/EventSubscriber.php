@@ -1,6 +1,6 @@
 <?php
 
-namespace Questionnaire;
+namespace App\Questionnaire;
 
 class EventSubscriber
 {
@@ -55,6 +55,6 @@ class EventSubscriber
 
     public function subscribe($events)
     {
-        $events->listen('questionnaire.activation', 'Questionnaire\EventSubscriber@activation');
+        $events->listen('questionnaire.activation', 'App\Questionnaire\EventSubscriber@activation');
     }
 }

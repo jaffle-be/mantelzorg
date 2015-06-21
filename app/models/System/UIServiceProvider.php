@@ -1,4 +1,4 @@
-<?php namespace System;
+<?php namespace App\System;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -11,7 +11,7 @@ class UIServiceProvider extends ServiceProvider{
 
     public function register()
     {
-        $this->app->bind('ui', 'System\UI');
+        $this->app->bind('ui', 'App\System\UI');
     }
 
 }

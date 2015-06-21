@@ -1,7 +1,8 @@
 <?php
 
-interface UserRepositoryInterface {
+namespace App;
+interface UserRepositoryInterface
+{
 
     public function findByOrganisation($organisation);
-
 }

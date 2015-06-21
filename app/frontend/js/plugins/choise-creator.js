@@ -16,6 +16,11 @@
         events: function () {
             var that = this;
 
+            this.$creator.on('submit', function(event){
+                event.preventDefault();
+                that.create();
+            });
+
             this.$trigger.on('click', function (event) {
                 that.open($(this).closest('.question').data('question-id'));
                 event.preventDefault();

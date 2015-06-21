@@ -2,7 +2,7 @@
     <?= Template::crumb(array(
             array(
                     'text' => Lang::get('master.navs.instellingen'),
-                    'href' => URL::action('Instelling\PersonController@index')
+                    'href' => URL::route('instellingen.index')
     ),
     array(
     'text' => Lang::get('master.navs.mantelzorgers'),
@@ -40,7 +40,7 @@
                         <div>
                             <div class="header clearfix">
                                 <span class="pull-left"><i class="fa fa-users">&nbsp;</i>{{ Lang::get('users.ouderen') }}</span>
-                                <a class="btn btn-default pull-right" href="<?= URL::action('Instelling\OudereController@create', array($mantelzorger->id)) ?>"><i class="fa fa-plus"></i></a>
+                                <a class="btn btn-default pull-right" href="<?= URL::route('instellingen.{mantelzorger}.oudere.create', array($mantelzorger->id)) ?>"><i class="fa fa-plus"></i></a>
                             </div>
 
                             <div class="body">

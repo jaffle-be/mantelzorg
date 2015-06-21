@@ -1,9 +1,9 @@
 <?php
 
-namespace Questionnaire;
+namespace App\Questionnaire;
 
+use App\System\Database\Eloquent\Model;
 use Input;
-use System\Database\Eloquent\Model;
 use Validator;
 
 class Question extends Model
@@ -41,21 +41,21 @@ class Question extends Model
 
     public function answers()
     {
-        return $this->hasMany('Questionnaire\Answer', 'question_id');
+        return $this->hasMany('App\Questionnaire\Answer', 'question_id');
     }
 
     public function panel()
     {
-        return $this->belongsTo('Questionnaire\Panel', 'questionnaire_panel_id');
+        return $this->belongsTo('App\Questionnaire\Panel', 'questionnaire_panel_id');
     }
 
     public function questionnaire()
     {
-        return $this->belongsTo('Questionnaire\Questionnaire', 'questionnaire_id');
+        return $this->belongsTo('App\Questionnaire\Questionnaire', 'questionnaire_id');
     }
 
     public function choises()
     {
-        return $this->hasMany('Questionnaire\Choise', 'question_id');
+        return $this->hasMany('App\Questionnaire\Choise', 'question_id');
     }
 }

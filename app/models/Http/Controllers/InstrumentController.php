@@ -1,16 +1,21 @@
 <?php
+namespace App\Http\Controllers;
+
+use App\Mantelzorger\Mantelzorger;
+use App\Mantelzorger\Oudere;
+use App\Meta\Context;
+use App\Meta\Value;
+use App\Questionnaire\Answer;
+use App\Questionnaire\Choise;
+use App\Questionnaire\Session;
+use App\User;
 use Barryvdh\Snappy\PdfWrapper;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
-use Mantelzorger\Mantelzorger;
-use Mantelzorger\Oudere;
-use Meta\Context;
-use Meta\Value;
-use Questionnaire\Answer;
-use Questionnaire\Choise;
 use Session as SessionStore;
-use Questionnaire\Session;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use View, Input, Auth, Memorize, Redirect, App, File, Response, DB;
 
 /**
  * Class InstrumentController
@@ -19,7 +24,7 @@ class InstrumentController extends AdminController
 {
 
     /**
-     * @var Questionnaire\Questionnaire
+     * @var \App\Questionnaire\Questionnaire
      */
     protected $questionnaire;
 
@@ -29,14 +34,14 @@ class InstrumentController extends AdminController
     protected $hulpverlener;
 
     /**
-     * @var Questionnaire\Session
+     * @var \App\Questionnaire\Session
      */
     protected $session;
 
     /**
-     * @param \Questionnaire\Questionnaire $questionnaire
+     * @param \App\Questionnaire\Questionnaire $questionnaire
      */
-    public function __construct(\Questionnaire\Questionnaire $questionnaire, User $hulpverlener, \Questionnaire\Session $session)
+    public function __construct(\App\Questionnaire\Questionnaire $questionnaire, User $hulpverlener, \App\Questionnaire\Session $session)
     {
         $this->questionnaire = $questionnaire;
 

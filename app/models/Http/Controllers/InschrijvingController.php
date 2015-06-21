@@ -1,12 +1,18 @@
 <?php
-use Organisation\Organisation;
-use Beta\Registration;
+
+namespace App\Http\Controllers;
+
+use App\Beta\Registration;
+use App\Organisation\Organisation;
+use App\User;
+use Input, View, Lang, Redirect, Event, Hash;
+
 
 class InschrijvingController extends AdminController
 {
 
     /**
-     * @var Beta\Registration
+     * @var \App\Beta\Registration
      */
     protected $registration;
 
@@ -111,7 +117,7 @@ class InschrijvingController extends AdminController
 
             $inschrijving->delete();
 
-            return Redirect::action('InschrijvingController@index');
+            return Redirect::route('inschrijvingen.index');
         }
     }
 
