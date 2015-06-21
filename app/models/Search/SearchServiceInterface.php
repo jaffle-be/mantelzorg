@@ -58,7 +58,7 @@ interface SearchServiceInterface
     public function search(array $params);
 
     /**
-     * @return \Illuminate\Pagination\Environment
+     * @return \Illuminate\Pagination\Factory
      */
     public function getPaginator();
 

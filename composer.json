@@ -1,7 +1,7 @@
 {
   "name": "jaffle-be/mantelzorg",
   "require": {
-    "laravel/framework": "4.1.*",
+    "laravel/framework": "4.2",
     "intouch/laravel-newrelic": "*",
     "schickling/backup": "dev-master",
     "elasticsearch/elasticsearch": "*",

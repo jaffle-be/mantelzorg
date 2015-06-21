@@ -127,7 +127,7 @@ class Query implements Queryable
         }
 
         if ($this->needsPagination()) {
-            /** @var \Illuminate\Pagination\Environment $paginator */
+            /** @var \Illuminate\Pagination\Factory $paginator */
             $paginator = $this->service->getPaginator();
 
             /**
