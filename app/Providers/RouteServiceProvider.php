@@ -22,7 +22,25 @@ class RouteServiceProvider extends ServiceProvider {
 	 */
 	public function boot(Router $router)
 	{
-		//
+		Route::pattern('id', '\d+');
+
+		Route::pattern('hulpverlener', '\d+');
+		Route::model('hulpverlener', 'App\User');
+
+		Route::pattern('mantelzorger', '\d+');
+		Route::model('mantelzorger', 'App\Mantelzorger\Mantelzorger');
+
+		Route::pattern('questionnaire', '\d+');
+		Route::model('questionnaire', 'App\Questionnaire\Questionnaire');
+
+		Route::pattern('panel', '\d+');
+		Route::model('panel', 'App\Questionnaire\Panel');
+
+		Route::pattern('question', '\d+');
+		Route::model('question', 'App\Questionnaire\Question');
+
+		Route::pattern('survey', '\d+');
+		Route::model('survey', 'App\Questionnaire\Session');
 		
 		parent::boot($router);
 	}
