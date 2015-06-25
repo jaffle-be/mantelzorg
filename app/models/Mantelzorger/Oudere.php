@@ -1,13 +1,13 @@
 <?php
 
-namespace Mantelzorger;
+namespace App\Mantelzorger;
 
+use App\Questionnaire\Export\Exportable;
+use App\Search\Model\Searchable;
+use App\Search\Model\SearchableTrait;
+use App\System\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Input;
-use Questionnaire\Export\Exportable;
-use Search\Model\Searchable;
-use Search\Model\SearchableTrait;
-use System\Database\Eloquent\Model;
 use Validator;
 
 class Oudere extends Model implements Searchable, Exportable
@@ -179,26 +179,26 @@ class Oudere extends Model implements Searchable, Exportable
 
     public function mantelzorger()
     {
-        return $this->belongsTo('Mantelzorger\Mantelzorger');
+        return $this->belongsTo('App\Mantelzorger\Mantelzorger');
     }
 
     public function mantelzorgerRelation()
     {
-        return $this->belongsTo('Meta\Value', 'mantelzorger_relation_id');
+        return $this->belongsTo('App\Meta\Value', 'mantelzorger_relation_id');
     }
 
     public function oorzaakHulpbehoefte()
     {
-        return $this->belongsTo('Meta\Value', 'oorzaak_hulpbehoefte_id');
+        return $this->belongsTo('App\Meta\Value', 'oorzaak_hulpbehoefte_id');
     }
 
     public function belProfiel(){
-        return $this->belongsTo('Meta\Value', 'bel_profiel_id');
+        return $this->belongsTo('App\Meta\Value', 'bel_profiel_id');
     }
 
     public function woonSituatie()
     {
-        return $this->belongsTo('Meta\Value', 'woonsituatie_id');
+        return $this->belongsTo('App\Meta\Value', 'woonsituatie_id');
     }
 
     public function getDates()

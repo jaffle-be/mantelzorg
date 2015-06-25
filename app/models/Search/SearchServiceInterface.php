@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Search;
+namespace App\Search;
 
-use Search\Model\Searchable;
+use App\Search\Model\Searchable;
 
 interface SearchServiceInterface
 {
@@ -58,7 +58,7 @@ interface SearchServiceInterface
     public function search(array $params);
 
     /**
-     * @return \Illuminate\Pagination\Environment
+     * @return \Illuminate\Pagination\Factory
      */
     public function getPaginator();
 

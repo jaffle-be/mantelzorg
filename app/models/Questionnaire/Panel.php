@@ -1,9 +1,9 @@
 <?php
 
-namespace Questionnaire;
+namespace App\Questionnaire;
 
+use App\System\Database\Eloquent\Model;
 use Input;
-use System\Database\Eloquent\Model;
 use Validator;
 
 class Panel extends Model
@@ -33,12 +33,12 @@ class Panel extends Model
 
     public function questions()
     {
-        return $this->hasMany('Questionnaire\Question', 'questionnaire_panel_id');
+        return $this->hasMany('App\Questionnaire\Question', 'questionnaire_panel_id');
     }
 
     public function questionnaire()
     {
-        return $this->belongsTo('Questionnaire\Questionnaire', 'questionnaire_id');
+        return $this->belongsTo('App\Questionnaire\Questionnaire', 'questionnaire_id');
     }
 
     public function nextPanel()

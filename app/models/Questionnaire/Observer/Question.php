@@ -1,9 +1,9 @@
 <?php
 
-namespace Questionnaire\Observer;
+namespace App\Questionnaire\Observer;
 
+use App\Questionnaire\Question as QuestionModel;
 use Illuminate\Events\Dispatcher;
-use Questionnaire\Question as QuestionModel;
 
 class Question
 {

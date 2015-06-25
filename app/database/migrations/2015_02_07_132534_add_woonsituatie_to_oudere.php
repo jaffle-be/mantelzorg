@@ -17,7 +17,7 @@ class AddWoonsituatieToOudere extends Migration {
 			$table->foreign('woonsituatie', 'woonsituatie_ouderen')->references('id')->on('meta_values');
 		});
 
-		$context = Meta\Context::create([
+		$context = App\Meta\Context::create([
 			'context' => 'ouderen_woonsituatie'
 		]);
 
@@ -29,7 +29,7 @@ class AddWoonsituatieToOudere extends Migration {
 
 		foreach($values as $value)
 		{
-			$value = new Meta\Value($value);
+			$value = new App\Meta\Value($value);
 			$context->values()->save($value);
 		}
 	}
@@ -46,9 +46,9 @@ class AddWoonsituatieToOudere extends Migration {
 			$table->dropColumn('woonsituatie');
 		});
 
-		$context = Meta\Context::where('context', Meta\Context::OUDEREN_WOONSITUATIE)->first();
+		$context = App\Meta\Context::where('context', App\Meta\Context::OUDEREN_WOONSITUATIE)->first();
 
-		Meta\Value::where('context_id', $context->id)->delete();
+		App\Meta\Value::where('context_id', $context->id)->delete();
 		$context->delete();
 	}
 

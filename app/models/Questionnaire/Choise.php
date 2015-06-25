@@ -1,9 +1,9 @@
 <?php
 
-namespace Questionnaire;
+namespace App\Questionnaire;
 
+use App\System\Database\Eloquent\Model;
 use Input;
-use System\Database\Eloquent\Model;
 use Validator;
 
 class Choise extends Model
@@ -36,6 +36,6 @@ class Choise extends Model
 
     public function question()
     {
-        return $this->belongsTo('Questionnaire\Question', 'question_id');
+        return $this->belongsTo('App\Questionnaire\Question', 'question_id');
     }
 }

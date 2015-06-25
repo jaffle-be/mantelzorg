@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 use Illuminate\Events\Dispatcher;
 
 class UserObserver

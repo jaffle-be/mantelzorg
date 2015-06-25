@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Search\Query;
+namespace App\Search\Query;
 
+use App\Search\Model\Searchable;
+use App\Search\SearchServiceInterface;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
-use Search\Model\Searchable;
 use Input;
-use Search\SearchServiceInterface;
 
 class Query implements Queryable
 {
@@ -127,7 +127,7 @@ class Query implements Queryable
         }
 
         if ($this->needsPagination()) {
-            /** @var \Illuminate\Pagination\Environment $paginator */
+            /** @var \Illuminate\Pagination\Factory $paginator */
             $paginator = $this->service->getPaginator();
 
             /**

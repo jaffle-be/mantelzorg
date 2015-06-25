@@ -22,7 +22,7 @@
 
 @section('content')
 
-    <?= Form::open(array('action' => array('InschrijvingController@update', $inschrijving->id), 'method' => 'put')) ?>
+    <?= Form::open(array('route' => array('inschrijvingen.update', $inschrijving->id), 'method' => 'put')) ?>
 
     <div class="row">
 

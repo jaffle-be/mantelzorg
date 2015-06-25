@@ -20,7 +20,7 @@ class AddSortFieldToQuestions extends Migration
         //auto add start sorting.
         $current = null;
         $teller = 0;
-        \Questionnaire\Question::orderBy('questionnaire_panel_id')->orderBy('id')->chunk(250, function($questions) use (&$current, &$teller){
+        \App\Questionnaire\Question::orderBy('questionnaire_panel_id')->orderBy('id')->chunk(250, function($questions) use (&$current, &$teller){
 
             foreach($questions as $question){
                 if($current != $question->questionnaire_panel_id)

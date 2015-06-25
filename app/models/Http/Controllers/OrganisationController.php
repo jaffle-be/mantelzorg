@@ -1,11 +1,15 @@
 <?php
-use Organisation\Organisation;
+
+namespace App\Http\Controllers;
+
+use App\Organisation\Organisation;
+use Input;
 
 class OrganisationController extends AdminController
 {
 
     /**
-     * @var Organisation\Organisation
+     * @var \App\Organisation\Organisation
      */
     protected $organisation;
 

@@ -1,7 +1,11 @@
 <?php
 
-use Organisation\Organisation;
-use Organisation\Location;
+namespace App\Http\Controllers;
+
+use View, Input, Hash, Session, Event, Redirect, Lang;
+use App\Organisation\Location;
+use App\Organisation\Organisation;
+use App\User;
 
 class HulpverlenerController extends AdminController
 {
@@ -97,7 +101,7 @@ class HulpverlenerController extends AdminController
                 ->nest('creatorOrganisations', 'modals.organisation-creator', compact(array('inschrijving')))
                 ->nest('creatorLocations', 'modals.location-creator', compact(array('inschrijving')));
         } else {
-            return Redirect::action('HulpverlenerController@index');
+            return Redirect::route('hulpverleners.index');
         }
     }
 
@@ -106,7 +110,7 @@ class HulpverlenerController extends AdminController
         $user = $this->user->find($id);
 
         if (!$user) {
-            return Redirect::action('HulpverlenerController@index');
+            return Redirect::route('hulpverleners.index');
         }
 
         $input = Input::all();
@@ -134,7 +138,7 @@ class HulpverlenerController extends AdminController
         } else {
             $user->update($input);
 
-            return Redirect::action('HulpverlenerController@index');
+            return Redirect::route('hulpverleners.index');
         }
     }
 

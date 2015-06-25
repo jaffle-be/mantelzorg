@@ -5,7 +5,7 @@ class OudereSeeder extends Seeder
 
     public function run()
     {
-        \Mantelzorger\Oudere::create(array(
+        \App\Mantelzorger\Oudere::create(array(
             'firstname'       => 'Rudy',
             'lastname'        => 'Ruudski',
             'male'            => 1,

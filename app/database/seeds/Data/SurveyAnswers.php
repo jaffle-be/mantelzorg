@@ -4,9 +4,9 @@
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
-use Questionnaire\Answer;
-use Questionnaire\Questionnaire;
-use Questionnaire\Session;
+use \App\Questionnaire\Answer;
+use \App\Questionnaire\Questionnaire;
+use \App\Questionnaire\Session;
 
 class SurveyAnswers extends Seeder
 {

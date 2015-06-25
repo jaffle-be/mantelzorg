@@ -1,7 +1,7 @@
-<?php namespace Search\Command;
+<?php namespace App\Search\Command;
 
+use App\Search\SearchServiceInterface;
 use Illuminate\Console\Command;
-use Search\SearchServiceInterface;
 
 class UpdateSettings extends Command
 {

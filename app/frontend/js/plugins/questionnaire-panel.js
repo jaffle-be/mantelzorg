@@ -26,6 +26,11 @@
             this.$creator.on('click', '.btn-primary', function () {
                 that.create();
             });
+            this.$creator.on('submit', function(event){
+                //prevent submitting to the actual form, or we'd create a questionnaire and see json response
+                event.preventDefault();
+                that.create();
+            });
         },
         create: function () {
             var that = this;

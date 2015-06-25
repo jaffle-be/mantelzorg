@@ -1,4 +1,4 @@
-<?php namespace Organisation;
+<?php namespace App\Organisation;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -6,7 +6,7 @@ class OrganisationServiceProvider extends ServiceProvider{
 
     public function register()
     {
-        $this->app->bind('Organisation\OrganisationRepositoryInterface', 'Organisation\OrganisationRepository');
+        $this->app->bind('App\Organisation\OrganisationRepositoryInterface', 'App\Organisation\OrganisationRepository');
     }
 
 }

@@ -18,7 +18,7 @@
 @section('content')
 
     <?= Form::model($user, array(
-            'action' => array('Instelling\PersonController@update', $user->id),
+            'action' => array('App\Http\Controllers\Instelling\PersonController@update', $user->id),
     'method' => 'put',
     )) ?>
 

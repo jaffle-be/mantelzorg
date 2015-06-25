@@ -54,7 +54,7 @@
                 <tr>
                     <td>{{ $teller }} <input type="checkbox" value="{{$user->id}}"/></td>
                     <td>
-                        <a href="<?= URL::action('HulpverlenerController@edit', array($user->id)) ?>">{{ $user->firstname . ' ' . $user->lastname}}</a>
+                        <a href="<?= URL::route('hulpverleners.edit', array($user->id)) ?>">{{ $user->firstname . ' ' . $user->lastname}}</a>
                     </td>
                     <td>{{ $user->email }}</td>
                     <td>

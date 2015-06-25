@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Search;
+namespace App\Search;
 
 use Elasticsearch\Client;
 use Illuminate\Support\ServiceProvider;
@@ -13,7 +13,7 @@ class SearchServiceProvider extends ServiceProvider
     public function boot()
     {
         //keep this in the boot section so we bind to the event dispatcher actually used in the eloquent model instances.
-        $this->app['Search\SearchServiceInterface']->boot();
+        $this->app['App\Search\SearchServiceInterface']->boot();
     }
 
     /**
@@ -25,14 +25,14 @@ class SearchServiceProvider extends ServiceProvider
     {
         $this->registerService();
 
-        $this->app->bind('Search\SearchServiceInterface', 'Search\SearchService');
+        $this->app->bind('App\Search\SearchServiceInterface', 'App\Search\SearchService');
 
         $this->registerCommands();
     }
 
     private function registerService()
     {
-        $this->app['Search\SearchService'] = $this->app->share(function ($app) {
+        $this->app['App\Search\SearchService'] = $this->app->share(function ($app) {
             $config = $app->make('config');
 
             $config = $config->get('elasticsearch');
@@ -47,6 +47,6 @@ class SearchServiceProvider extends ServiceProvider
 
     private function registerCommands()
     {
-        $this->commands(['Search\Command\BuildIndexes', 'Search\Command\FlushType', 'Search\Command\UpdateSettings', 'Search\Command\UpdateMapping']);
+        $this->commands(['App\Search\Command\BuildIndexes', 'App\Search\Command\FlushType', 'App\Search\Command\UpdateSettings', 'App\Search\Command\UpdateMapping']);
     }
 }

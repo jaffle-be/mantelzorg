@@ -1,30 +1,30 @@
 <?php
 
-namespace Instelling;
+namespace App\Http\Controllers\Instelling;
 
-use Mantelzorger\Oudere;
-use View;
+use App\Mantelzorger\Oudere;
+use App\Meta\Context;
+use App\Meta\Value;
 use Input;
-use Redirect;
-use Meta\Context;
-use Meta\Value;
 use Lang;
+use Redirect;
+use View;
 
-class OudereController extends \AdminController
+class OudereController extends \App\Http\Controllers\AdminController
 {
 
     /**
-     * @var \Mantelzorger\Oudere
+     * @var \App\Mantelzorger\Oudere
      */
     protected $oudere;
 
     /**
-     * @var \Meta\Context
+     * @var \App\Meta\Context
      */
     protected $metaContext;
 
     /**
-     * @var \Meta\Value
+     * @var \App\Meta\Value
      */
     protected $metaValue;
 
@@ -72,7 +72,7 @@ class OudereController extends \AdminController
 
             $this->oudere->create($input);
 
-            return Redirect::action('Instelling\MantelzorgerController@index', $mantelzorger->hulpverlener->id);
+            return Redirect::route('instellingen.{hulpverlener}.mantelzorgers.index', $mantelzorger->hulpverlener->id);
         }
     }
 

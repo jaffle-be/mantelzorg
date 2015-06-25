@@ -1,15 +1,15 @@
-<?php namespace Questionnaire\Export;
+<?php namespace App\Questionnaire\Export;
 
+use App\Mantelzorger\Mantelzorger;
+use App\Mantelzorger\Oudere;
+use App\Questionnaire\Panel;
+use App\Questionnaire\Question;
+use App\Questionnaire\Questionnaire;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Classes\LaravelExcelWorksheet;
 use Maatwebsite\Excel\Excel;
-use Mantelzorger\Mantelzorger;
-use Mantelzorger\Oudere;
-use Questionnaire\Panel;
-use Questionnaire\Question;
-use Questionnaire\Questionnaire;
-use User;
 
 class CsvExport implements Exporter
 {

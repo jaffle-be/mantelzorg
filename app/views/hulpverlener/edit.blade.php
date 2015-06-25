@@ -22,7 +22,7 @@
 
 @section('content')
 
-    <?= Form::model($user, array('action' => array('HulpverlenerController@update', $user->id), 'method' => 'put')) ?>
+    <?= Form::model($user, array('route' => array('hulpverleners.update', $user->id), 'method' => 'put')) ?>
     <div class="row">
         <div class="col-md-6">
 
@@ -152,7 +152,7 @@
             <input class="btn btn-primary" type="submit" value="<?= Lang::get('users.save') ?>"/>
 
             @if(Auth::user()->admin)
-                <a class="btn btn-warning" href="{{ action('IndexController@getHijack', ['user' => $user->id]) }}">{{ Lang::get('master.hijack.do' )}}</a>
+                <a class="btn btn-warning" href="{{ route('hijack', ['user' => $user->id]) }}">{{ Lang::get('master.hijack.do' )}}</a>
             @endif
 
         </div>

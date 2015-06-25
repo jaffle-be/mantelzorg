@@ -1,11 +1,15 @@
 <?php
 
-use Illuminate\Auth\UserInterface;
+namespace App;
+
+use App\Questionnaire\Export\Exportable;
+use App\Search\Model\Searchable;
+use App\Search\Model\SearchableTrait;
+use App\System\Database\Eloquent\Model;
 use Illuminate\Auth\Reminders\RemindableInterface;
-use Questionnaire\Export\Exportable;
-use Search\Model\Searchable;
-use Search\Model\SearchableTrait;
-use System\Database\Eloquent\Model;
+use Illuminate\Auth\UserInterface;
+use Input;
+use Validator;
 
 class User extends Model implements UserInterface, RemindableInterface, Searchable, Exportable
 {
@@ -147,8 +151,7 @@ class User extends Model implements UserInterface, RemindableInterface, Searchab
 
     public function getFullnameAttribute()
     {
-        if(isset($this->attributes['fullname']))
-        {
+        if (isset($this->attributes['fullname'])) {
             return $this->attributes['fullname'];
         }
 
@@ -208,21 +211,21 @@ class User extends Model implements UserInterface, RemindableInterface, Searchab
 
     public function organisation()
     {
-        return $this->belongsTo('Organisation\\Organisation', 'organisation_id');
+        return $this->belongsTo('App\Organisation\Organisation', 'organisation_id');
     }
 
     public function mantelzorgers()
     {
-        return $this->hasMany('Mantelzorger\\Mantelzorger', 'hulpverlener_id');
+        return $this->hasMany('App\Mantelzorger\Mantelzorger', 'hulpverlener_id');
     }
 
     public function organisation_location()
     {
-        return $this->belongsTo('Organisation\\Location', 'organisation_location_id');
+        return $this->belongsTo('App\Organisation\Location', 'organisation_location_id');
     }
 
     public function surveys()
     {
-        return $this->hasMany('Questionnaire\\Session', 'user_id');
+        return $this->hasMany('App\Questionnaire\Session', 'user_id');
     }
 }

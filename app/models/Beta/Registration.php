@@ -1,11 +1,12 @@
 <?php
 
-namespace Beta;
+namespace App\Beta;
 
-use Input, Validator;
-use Search\Model\Searchable;
-use Search\Model\SearchableTrait;
-use System\Database\Eloquent\Model;
+use App\Search\Model\Searchable;
+use App\Search\Model\SearchableTrait;
+use App\System\Database\Eloquent\Model;
+use Input;
+use Validator;
 
 class Registration extends Model implements Searchable
 {

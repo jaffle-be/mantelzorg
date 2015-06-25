@@ -1,4 +1,4 @@
-<?php namespace Questionnaire\Export;
+<?php namespace App\Questionnaire\Export;
 
 interface Exportable {
 

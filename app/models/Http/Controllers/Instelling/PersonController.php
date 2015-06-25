@@ -1,33 +1,33 @@
 <?php
 
-namespace Instelling;
+namespace App\Http\Controllers\Instelling;
 
-use Organisation\Organisation;
-use Organisation\Location;
-use User;
+use App\Organisation\Location;
+use App\Organisation\Organisation;
+use App\User;
 use Auth;
+use Hash;
 use Input;
 use Lang;
-use View;
 use Redirect;
-use Hash;
 use Session;
+use View;
 
-class PersonController extends \AdminController
+class PersonController extends \App\Http\Controllers\AdminController
 {
 
     /**
-     * @var \User
+     * @var \App\User
      */
     protected $user;
 
     /**
-     * @var \Organisation\Organisation
+     * @var \App\Organisation\Organisation
      */
     protected $organisation;
 
     /**
-     * @var \Organisation\Location
+     * @var \App\Organisation\Location
      */
     protected $location;
 

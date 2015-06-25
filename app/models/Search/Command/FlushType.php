@@ -1,12 +1,13 @@
-<?php namespace Search\Command;
+<?php namespace App\Search\Command;
 
+use App\Search\SearchServiceInterface;
 use Illuminate\Console\Command;
-use Search\SearchServiceInterface;
 use Symfony\Component\Console\Input\InputArgument;
 
 class FlushType extends Command
 {
 
+    
     /**
      * The console command name.
      *

@@ -8,7 +8,7 @@
             app.confirm(function () {
                 var ids = [];
 
-                $('.actions').closest('table').find('tbody td:first-child label input:checked').each(function () {
+                $('.actions').closest('table').find('tbody td:first-child input:checked').each(function () {
                     ids.push($(this).val())
                 });
 

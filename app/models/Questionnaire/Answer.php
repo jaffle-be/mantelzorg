@@ -1,9 +1,9 @@
 <?php
 
-namespace Questionnaire;
+namespace App\Questionnaire;
 
+use App\System\Database\Eloquent\Model;
 use Input;
-use System\Database\Eloquent\Model;
 use Validator;
 
 class Answer extends Model
@@ -26,17 +26,17 @@ class Answer extends Model
 
     public function session()
     {
-        return $this->belongsTo('Questionnaire\Session', 'session_id');
+        return $this->belongsTo('App\Questionnaire\Session', 'session_id');
     }
 
     public function question()
     {
-        return $this->belongsTo('Questionnaire\Question', 'question_id');
+        return $this->belongsTo('App\Questionnaire\Question', 'question_id');
     }
 
     public function choises()
     {
-        return $this->belongsToMany('Questionnaire\Choise', 'questionnaire_answer_choises', 'answer_id', 'choise_id')->withTimestamps();
+        return $this->belongsToMany('App\Questionnaire\Choise', 'questionnaire_answer_choises', 'answer_id', 'choise_id')->withTimestamps();
     }
 
     public function wasFilledIn()

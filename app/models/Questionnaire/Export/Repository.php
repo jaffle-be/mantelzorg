@@ -1,8 +1,8 @@
-<?php namespace Questionnaire\Export;
+<?php namespace App\Questionnaire\Export;
 
+use App\Questionnaire\Answer;
+use App\Questionnaire\Choise;
 use Illuminate\Database\Connection;
-use Questionnaire\Answer;
-use Questionnaire\Choise;
 
 class Repository
 {

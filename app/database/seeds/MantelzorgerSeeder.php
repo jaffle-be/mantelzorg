@@ -5,7 +5,7 @@ class MantelzorgerSeeder extends Seeder
 
     public function run()
     {
-        \Mantelzorger\Mantelzorger::create(array(
+        \App\Mantelzorger\Mantelzorger::create(array(
             'firstname'       => 'Ruud',
             'lastname'        => 'vdh',
             'male'            => 1,

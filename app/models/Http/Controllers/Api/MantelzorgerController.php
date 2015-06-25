@@ -1,9 +1,9 @@
 <?php
-namespace Api;
+namespace App\Http\Controllers\Api;
 
 use Lang;
 
-class MantelzorgerController extends \AdminController
+class MantelzorgerController extends \App\Http\Controllers\AdminController
 {
 
     public function ouderen($mantelzorger)

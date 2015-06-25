@@ -1,11 +1,11 @@
 <?php
-namespace Instrument;
+namespace App\Instrument;
 
-use Mantelzorger\Mantelzorger;
-use Mantelzorger\Oudere;
-use Questionnaire\Answer;
-use Questionnaire\Question;
-use Questionnaire\Session;
+use App\Mantelzorger\Mantelzorger;
+use App\Mantelzorger\Oudere;
+use App\Questionnaire\Answer;
+use App\Questionnaire\Question;
+use App\Questionnaire\Session;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {

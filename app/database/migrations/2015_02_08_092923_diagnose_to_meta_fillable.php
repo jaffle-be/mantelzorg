@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Meta\Context;
-use Meta\Value;
+use App\Meta\Context;
+use App\Meta\Value;
 
 class DiagnoseToMetaFillable extends Migration
 {
@@ -117,7 +117,7 @@ class DiagnoseToMetaFillable extends Migration
     protected function batchValues($diagnoses, $context)
     {
 //foreach value already defined in diagnose field -> insert it into the values table.
-        \Mantelzorger\Oudere::chunk(250, function ($batch) use ($diagnoses, $context) {
+        \App\Mantelzorger\Oudere::chunk(250, function ($batch) use ($diagnoses, $context) {
             foreach ($batch as $oudere) {
                 if (!empty($oudere->diagnose)) {
                     if (!isset($diagnoses[$oudere->diagnose])) {

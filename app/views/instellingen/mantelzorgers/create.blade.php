@@ -6,7 +6,7 @@
     <?= Template::crumb(array(
             array(
                     'text' => Lang::get('master.navs.instellingen'),
-                    'href' => action('Instelling\PersonController@index')
+                    'href' => route('instellingen.index')
     ),
     array(
     'text' => Lang::get('master.navs.mantelzorgers'),
@@ -21,7 +21,7 @@
 
 @section('content')
 
-    <?= Form::open(array('action' => array('Instelling\MantelzorgerController@store', $hulpverlener->id), 'method' => 'post')) ?>
+    <?= Form::open(array('action' => array('App\Http\Controllers\Instelling\MantelzorgerController@store', $hulpverlener->id), 'method' => 'post')) ?>
 
     <div class="row">
 

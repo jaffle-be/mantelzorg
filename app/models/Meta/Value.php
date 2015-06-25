@@ -1,9 +1,9 @@
 <?php
 
-namespace Meta;
+namespace App\Meta;
 
 
-use System\Database\Eloquent\Model;
+use App\System\Database\Eloquent\Model;
 
 class Value extends Model
 {
@@ -14,6 +14,6 @@ class Value extends Model
 
     public function context()
     {
-        return $this->belongsTo('Meta\Context', 'context_id');
+        return $this->belongsTo('App\Meta\Context', 'context_id');
     }
 }

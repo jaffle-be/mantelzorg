@@ -3,8 +3,8 @@
 // Composer: "fzaninotto/faker": "v1.3.0"
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
-use Mantelzorger\Oudere;
-use Questionnaire\Session;
+use App\Mantelzorger\Oudere;
+use App\Questionnaire\Session;
 
 class SurveySessions extends Seeder
 {

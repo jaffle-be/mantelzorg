@@ -1,23 +1,23 @@
 <?php
 
-use Search\SearchServiceInterface;
+namespace App;
 
 class UserServiceProvider extends \Illuminate\Support\ServiceProvider
 {
 
     public function register()
     {
-        $this->app['UserMailer'] = $this->app->share(function ($app) {
+        $this->app['App\UserMailer'] = $this->app->share(function ($app) {
             return new UserMailer($app['mailer']);
         });
 
-        $this->app['events']->listen('user.password-generated', 'UserMailer@passwordGenerated');
+        $this->app['events']->listen('user.password-generated', 'App\UserMailer@passwordGenerated');
 
-        $this->app->bind('UserRepositoryInterface', 'UserRepository');
+        $this->app->bind('App\UserRepositoryInterface', 'App\UserRepository');
     }
 
     public function boot()
     {
-        User::observe($this->app->make('UserObserver'));
+        User::observe($this->app->make('App\UserObserver'));
     }
 }

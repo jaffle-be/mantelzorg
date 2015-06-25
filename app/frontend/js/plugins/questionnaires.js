@@ -25,6 +25,11 @@
                 that.create();
             });
 
+            this.$creator.on('submit', function(event){
+                event.preventDefault();
+                that.create();
+            });
+
             this.$creator.on('click', '[data-dismiss="modal"]', function () {
                 that.reset()
             });
