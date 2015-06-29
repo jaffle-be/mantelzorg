@@ -8,7 +8,6 @@ use App\Meta\Value;
 use Input;
 use Lang;
 use Redirect;
-use View;
 
 class OudereController extends \App\Http\Controllers\AdminController
 {
@@ -36,9 +35,9 @@ class OudereController extends \App\Http\Controllers\AdminController
 
         $this->metaValue = $value;
 
-        $this->beforeFilter('auth');
+        $this->middleware('auth');
 
-        $this->beforeFilter('ouderen');
+        $this->middleware('lock');
     }
 
     public function create($mantelzorger)
@@ -51,7 +50,7 @@ class OudereController extends \App\Http\Controllers\AdminController
 
         $belprofielen = $this->getBelprofielen();
 
-        $this->layout->content = View::make('instellingen.ouderen.create', compact('mantelzorger', 'relations_mantelzorger', 'woonsituaties', 'hulpbehoeftes', 'belprofielen'));
+        return view('instellingen.ouderen.create', compact('mantelzorger', 'relations_mantelzorger', 'woonsituaties', 'hulpbehoeftes', 'belprofielen'));
     }
 
     public function store($mantelzorger)
@@ -89,7 +88,7 @@ class OudereController extends \App\Http\Controllers\AdminController
 
             $belprofielen = $this->getBelprofielen();
 
-            $this->layout->content = View::make('instellingen.ouderen.edit', compact('mantelzorger', 'oudere', 'relations_mantelzorger', 'woonsituaties', 'hulpbehoeftes', 'belprofielen'));
+            return view('instellingen.ouderen.edit', compact('mantelzorger', 'oudere', 'relations_mantelzorger', 'woonsituaties', 'hulpbehoeftes', 'belprofielen'));
         } else {
             return Redirect::route('instellingen.{hulpverlener}.mantelzorgers.index', array($mantelzorger->hulpverlener_id));
         }
@@ -108,7 +107,7 @@ class OudereController extends \App\Http\Controllers\AdminController
             $input = $this->processValue($input, Context::MANTELZORGER_RELATION);
 
             $validator = $this->oudere->validator($input, [], [
-                'oudere' => $oudere->id,
+                'oudere'       => $oudere->id,
                 'mantelzorger' => $mantelzorger->id
             ]);
 
@@ -147,8 +146,7 @@ class OudereController extends \App\Http\Controllers\AdminController
                 $value = $this->metaValue->where('context_id', $context->id)
                     ->where('value', $input[$alternate])->first();
 
-                if(!$value)
-                {
+                if (!$value) {
                     $value = $this->metaValue->create(array(
                         'context_id' => $context->id,
                         'value'      => $input[$alternate]
@@ -190,5 +188,4 @@ class OudereController extends \App\Http\Controllers\AdminController
 
         return array('' => Lang::get('users.pick_bel_profiel')) + $values;
     }
-
 }

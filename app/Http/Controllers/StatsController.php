@@ -4,9 +4,12 @@ use App\Mantelzorger\Oudere;
 use App\Meta\Context;
 use App\Questionnaire\Session;
 use Carbon\Carbon;
-use View, Input, DB, Lang;
+use DB;
+use Input;
+use Lang;
 
-class StatsController extends AdminController{
+class StatsController extends AdminController
+{
 
     protected $ouderen;
 
@@ -25,7 +28,7 @@ class StatsController extends AdminController{
 
     public function index()
     {
-        $this->layout->content = View::make('stats.index');
+        return view('stats.index');
     }
 
     public function ouderen()
@@ -44,14 +47,10 @@ class StatsController extends AdminController{
 
         $labels = $context->values->lists('value', 'id');
 
-        foreach($stats as $stat)
-        {
-            if($stat->label)
-            {
+        foreach ($stats as $stat) {
+            if ($stat->label) {
                 $stat->label = $labels[$stat->label];
-            }
-            else
-            {
+            } else {
                 $stat->label = Lang::get("stats.unanswered");
             }
         }
@@ -74,15 +73,13 @@ class StatsController extends AdminController{
 
         $stats = array();
 
-
-        while($start->dayOfYear < $now->dayOfYear)
-        {
+        while ($start->dayOfYear < $now->dayOfYear) {
             $stamp = $start->dayOfYear;
 
             $value = isset($surveys[$stamp]) ? $surveys[$stamp] : 0;
 
             $stats[] = [
-                'day' => $start->format('Y-m-d'),
+                'day'   => $start->format('Y-m-d'),
                 'value' => $value
             ];
 
@@ -91,5 +88,4 @@ class StatsController extends AdminController{
 
         return json_encode($stats);
     }
-
 }

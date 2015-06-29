@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Questionnaire;
 
 use App\Questionnaire\Question;
 use Input;
-use View;
 
 class QuestionController extends \App\Http\Controllers\AdminController
 {
@@ -18,20 +17,21 @@ class QuestionController extends \App\Http\Controllers\AdminController
     {
         $this->question = $question;
 
-        $this->beforeFilter('auth.admin');
+        $this->middleware('auth.admin');
     }
 
     public function index($panel)
     {
         $panel->load(array(
-            'questions' => function($query){
+            'questions'         => function ($query) {
                 $query->orderBy('sort');
             },
             'questions.choises' => function ($query) {
                 $query->orderBy('sort_weight');
             }
         ));
-        $this->layout->content = View::make('questionnaire.questions.index', compact(array('panel')))
+
+        return view('questionnaire.questions.index', compact(array('panel')))
             ->nest('questionCreator', 'modals.question-creator', compact(array()))
             ->nest('choiseCreator', 'modals.choise-creator', compact(array()));
     }

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App;
 use App\Mantelzorger\Mantelzorger;
 use App\Mantelzorger\Oudere;
 use App\Meta\Context;
@@ -9,13 +10,19 @@ use App\Questionnaire\Answer;
 use App\Questionnaire\Choise;
 use App\Questionnaire\Session;
 use App\User;
+use Auth;
 use Barryvdh\Snappy\PdfWrapper;
 use Carbon\Carbon;
+use DB;
 use Exception;
+use File;
 use Illuminate\Database\Eloquent\Model;
+use Input;
+use Memorize;
+use Redirect;
+use Response;
 use Session as SessionStore;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use View, Input, Auth, Memorize, Redirect, App, File, Response, DB;
 
 /**
  * Class InstrumentController
@@ -49,7 +56,7 @@ class InstrumentController extends AdminController
 
         $this->session = $session;
 
-        $this->beforeFilter('auth');
+        $this->middleware('auth');
     }
 
     public function index()
@@ -98,7 +105,7 @@ class InstrumentController extends AdminController
             return Redirect::route('home');
         }
 
-        $this->layout->content = View::make('instrument.index', compact(array('questionnaire', 'hulpverlener', 'surveys')));
+        return view('instrument.index', compact(array('questionnaire', 'hulpverlener', 'surveys')));
     }
 
     public function download($id)
@@ -197,7 +204,7 @@ class InstrumentController extends AdminController
             'zeroPadding' => true,
         ], compact(array('panel', 'questionnaire', 'survey')));
 
-        $this->layout->content = View::make('instrument.panel', $arguments);
+        return view('instrument.panel', $arguments);
     }
 
     /**
@@ -470,33 +477,27 @@ class InstrumentController extends AdminController
 
     protected function getMetas($survey)
     {
-        if($survey->oudere->mantelzorger_relation_id)
-        {
+        if ($survey->oudere->mantelzorger_relation_id) {
             $relation = $this->getMeta(Context::MANTELZORGER_RELATION, $survey->oudere->mantelzorger_relation_id, $survey->oudere->mantelzorger_relation->value);
-        }else{
+        } else {
             $relation = null;
         }
 
-        if($survey->oudere->woonsituatie_id)
-        {
+        if ($survey->oudere->woonsituatie_id) {
             $woonsituatie = $this->getMeta(Context::OUDEREN_WOONSITUATIE, $survey->oudere->woonsituatie_id, $survey->oudere->woon_situatie->value);
-        }
-        else{
+        } else {
             $woonsituatie = null;
         }
 
-
-        if($survey->oudere->oorzaak_hulpbehoefte_id){
+        if ($survey->oudere->oorzaak_hulpbehoefte_id) {
             $hulpbehoefte = $this->getMeta(Context::OORZAAK_HULPBEHOEFTE, $survey->oudere->oorzaak_hulpbehoefte_id, $survey->oudere->oorzaak_hulpbehoefte->value);
-        }
-        else{
+        } else {
             $hulpbehoefte = null;
         }
 
-        if($survey->oudere->bel_profiel_id)
-        {
+        if ($survey->oudere->bel_profiel_id) {
             $profiel = $this->getMeta(Context::BEL_PROFIEL, $survey->oudere->bel_profiel_id, $survey->oudere->bel_profiel->value);
-        }else {
+        } else {
             $profiel = null;
         }
 

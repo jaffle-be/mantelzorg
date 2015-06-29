@@ -4,7 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Beta\Registration;
 use App\User;
-use View, Input, Password, Redirect, Lang, Session, Hash, Auth;
+use Auth;
+use Hash;
+use Input;
+use Lang;
+use Password;
+use Redirect;
+use Session;
 
 class IndexController extends BaseController
 {
@@ -12,7 +18,7 @@ class IndexController extends BaseController
     protected $layout = 'layout.front.master';
 
     /**
-     * @var App\Beta\Registration
+     * @var \App\Beta\Registration
      */
     protected $registration;
 
@@ -30,7 +36,7 @@ class IndexController extends BaseController
 
     public function getIndex()
     {
-        $this->layout->content = View::make('beta');
+        return view('beta');
     }
 
     public function postIndex()
@@ -48,7 +54,7 @@ class IndexController extends BaseController
 
     public function getLogin()
     {
-        $this->layout->content = View::make('login');
+        return view('login');
     }
 
     public function postLogin()
@@ -89,7 +95,7 @@ class IndexController extends BaseController
 
     public function getReminder()
     {
-        $this->layout->content = View::make('reminder');
+        return view('reminder');
     }
 
     public function postReminder()
@@ -106,7 +112,7 @@ class IndexController extends BaseController
 
     public function getReset($token)
     {
-        $this->layout->content = View::make('reset')->withToken($token);
+        return view('reset')->withToken($token);
     }
 
     public function postReset()
@@ -131,12 +137,10 @@ class IndexController extends BaseController
     {
         $current = Auth::user();
 
-        if($current->admin)
-        {
+        if ($current->admin) {
             $user = $this->user->find($user);
 
-            if($user)
-            {
+            if ($user) {
                 Auth::login($user);
 
                 Session::set('hijack-original', $current->id);
@@ -150,12 +154,10 @@ class IndexController extends BaseController
     {
         $original = Session::get('hijack-original');
 
-        if($original)
-        {
+        if ($original) {
             $user = $this->user->find($original);
 
-            if($user->admin)
-            {
+            if ($user->admin) {
                 Auth::login($user);
 
                 Session::forget('hijack-original');

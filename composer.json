@@ -9,6 +9,7 @@
   "type": "project",
   "require": {
 	"laravel/framework": "5.0.*",
+	"laravelcollective/html": "~5.0",
 	"intouch/laravel-newrelic": "~2.0",
 	"elasticsearch/elasticsearch": "*",
 	"maatwebsite/excel": "~2.0",
@@ -16,7 +17,10 @@
 	"doctrine/dbal": "~2.5",
 	"h4cc/wkhtmltopdf-amd64": "0.12.x",
 	"h4cc/wkhtmltoimage-amd64": "0.12.x",
-	"barryvdh/laravel-snappy": "0.2.x"
+	"barryvdh/laravel-snappy": "0.2.x",
+	"h4cc/wkhtmltopdf-i386": "0.12.x",
+	"h4cc/wkhtmltoimage-i386": "0.12.x",
+	"guzzlehttp/guzzle": "~5.0"
   },
   "require-dev": {
 	"phpunit/phpunit": "~4.0",

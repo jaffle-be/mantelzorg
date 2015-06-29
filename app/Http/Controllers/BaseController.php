@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Routing\Controller;
+
 use App;
-use View;
+use Illuminate\Routing\Controller;
 
 class BaseController extends Controller
 {
@@ -16,7 +16,7 @@ class BaseController extends Controller
     protected function setupLayout()
     {
         if (!is_null($this->layout)) {
-            $this->layout = View::make($this->layout);
+            $this->layout = view($this->layout);
         }
     }
 }

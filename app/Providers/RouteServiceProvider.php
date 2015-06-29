@@ -22,25 +22,25 @@ class RouteServiceProvider extends ServiceProvider {
 	 */
 	public function boot(Router $router)
 	{
-		Route::pattern('id', '\d+');
+		$router->pattern('id', '\d+');
 
-		Route::pattern('hulpverlener', '\d+');
-		Route::model('hulpverlener', 'App\User');
+		$router->pattern('hulpverlener', '\d+');
+		$router->model('hulpverlener', 'App\User');
 
-		Route::pattern('mantelzorger', '\d+');
-		Route::model('mantelzorger', 'App\Mantelzorger\Mantelzorger');
+		$router->pattern('mantelzorger', '\d+');
+		$router->model('mantelzorger', 'App\Mantelzorger\Mantelzorger');
 
-		Route::pattern('questionnaire', '\d+');
-		Route::model('questionnaire', 'App\Questionnaire\Questionnaire');
+		$router->pattern('questionnaire', '\d+');
+		$router->model('questionnaire', 'App\Questionnaire\Questionnaire');
 
-		Route::pattern('panel', '\d+');
-		Route::model('panel', 'App\Questionnaire\Panel');
+		$router->pattern('panel', '\d+');
+		$router->model('panel', 'App\Questionnaire\Panel');
 
-		Route::pattern('question', '\d+');
-		Route::model('question', 'App\Questionnaire\Question');
+		$router->pattern('question', '\d+');
+		$router->model('question', 'App\Questionnaire\Question');
 
-		Route::pattern('survey', '\d+');
-		Route::model('survey', 'App\Questionnaire\Session');
+		$router->pattern('survey', '\d+');
+		$router->model('survey', 'App\Questionnaire\Session');
 		
 		parent::boot($router);
 	}

@@ -17,7 +17,7 @@ class ChoiseController extends \App\Http\Controllers\AdminController
     {
         $this->choise = $choise;
 
-        $this->beforeFilter('auth.admin');
+        $this->middleware('auth.admin');
     }
 
     public function store($question)

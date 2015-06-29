@@ -7,6 +7,8 @@ use App\Search\Model\Searchable;
 use App\Search\SearchServiceInterface;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Input;
 
 class Query implements Queryable
@@ -127,8 +129,6 @@ class Query implements Queryable
         }
 
         if ($this->needsPagination()) {
-            /** @var \Illuminate\Pagination\Factory $paginator */
-            $paginator = $this->service->getPaginator();
 
             /**
              * if we lazy loaded some relations, we need to get back an array to paginate.
@@ -137,7 +137,13 @@ class Query implements Queryable
              */
             $collection = is_array($collection) ? $collection : $collection->all();
 
-            $results = $paginator->make($collection, $results['hits']['total'], $this->pagination);
+            $path = Paginator::resolveCurrentPath();
+
+            //for some reason things do not work when passing in the options as an array like so
+//            $results = new LengthAwarePaginator($collection, $results['hits']['total'], $this->pagination, ['path' => $path]);
+            $results = new LengthAwarePaginator($collection, $results['hits']['total'], $this->pagination);
+            $results->setPath($path);
+
             //only need transform into a collection when we didn't lazyload relations
         } elseif (is_array($collection)) {
             $results = new Collection($collection);

@@ -6,7 +6,6 @@ use App\Mantelzorger\Mantelzorger;
 use Auth;
 use Input;
 use Redirect;
-use View;
 
 /**
  * Class MantelzorgerController
@@ -28,11 +27,8 @@ class MantelzorgerController extends \App\Http\Controllers\AdminController
     {
         $this->mantelzorger = $mantelzorger;
 
-        $this->beforeFilter('auth');
-
-        $this->beforeFilter('csrf', array('only' => array('store')));
-
-        $this->beforeFilter('mantelzorgers');
+        $this->middleware('auth');
+        $this->middleware('lock');
     }
 
     public function index($hulpverlener)
@@ -62,14 +58,14 @@ class MantelzorgerController extends \App\Http\Controllers\AdminController
             ->orderBy('identifier.raw', 'asc')
             ->get();
 
-        $mantelzorgers->appends('query', $query);
+        $mantelzorgers->addQuery('query', $query);
 
-        $this->layout->content = View::make('instellingen.mantelzorgers.index', compact(array('hulpverlener', 'mantelzorgers')));
+        return view('instellingen.mantelzorgers.index', compact(array('hulpverlener', 'mantelzorgers')));
     }
 
     public function create($hulpverlener)
     {
-        $this->layout->content = View::make('instellingen.mantelzorgers.create', compact(array('hulpverlener')));
+        return view('instellingen.mantelzorgers.create', compact(array('hulpverlener')));
     }
 
     public function store($hulpverlener)
@@ -94,7 +90,7 @@ class MantelzorgerController extends \App\Http\Controllers\AdminController
         $mantelzorger = $this->mantelzorger->find($mantelzorger);
 
         if ($mantelzorger) {
-            $this->layout->content = View::make('instellingen.mantelzorgers.edit', compact(array('hulpverlener', 'mantelzorger')));
+            return view('instellingen.mantelzorgers.edit', compact(array('hulpverlener', 'mantelzorger')));
         }
     }
 

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Questionnaire;
 
 use App\Questionnaire\Panel;
 use Input;
-use View;
 
 class PanelController extends \App\Http\Controllers\AdminController
 {
@@ -18,7 +17,7 @@ class PanelController extends \App\Http\Controllers\AdminController
     {
         $this->panel = $panel;
 
-        $this->beforeFilter('auth.admin');
+        $this->middleware('auth.admin');
     }
 
     public function store($questionnaire)

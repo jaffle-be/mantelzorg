@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Beta\Registration;
 use App\Organisation\Organisation;
 use App\User;
-use Input, View, Lang, Redirect, Event, Hash;
-
+use Event;
+use Hash;
+use Input;
+use Lang;
+use Redirect;
 
 class InschrijvingController extends AdminController
 {
@@ -34,7 +37,7 @@ class InschrijvingController extends AdminController
 
         $this->user = $user;
 
-        $this->beforeFilter('auth.admin');
+        $this->middleware('auth.admin');
     }
 
     public function index()
@@ -52,9 +55,9 @@ class InschrijvingController extends AdminController
             ->paginate($count)
             ->get();
 
-        $registrations->appends('query', $query);
+        $registrations->addQuery('query', $query);
 
-        $this->layout->content = View::make('inschrijving.index', compact(array('registrations')));
+        return view('inschrijving.index', compact(array('registrations')));
     }
 
     public function edit($id)
@@ -82,7 +85,7 @@ class InschrijvingController extends AdminController
                 + $locations
                 + array('new' => Lang::get('users.new_location'));
 
-            $this->layout->content = View::make('inschrijving.edit', compact('inschrijving', 'organisations', 'locations'))
+            return view('inschrijving.edit', compact('inschrijving', 'organisations', 'locations'))
                 ->nest('creatorOrganisations', 'modals.organisation-creator', compact(array('inschrijving')))
                 ->nest('creatorLocations', 'modals.location-creator', compact(array('inschrijving')));
         } else {

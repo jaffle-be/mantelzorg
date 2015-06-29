@@ -11,7 +11,6 @@ use Input;
 use Lang;
 use Redirect;
 use Session;
-use View;
 
 class PersonController extends \App\Http\Controllers\AdminController
 {
@@ -39,7 +38,7 @@ class PersonController extends \App\Http\Controllers\AdminController
 
         $this->location = $location;
 
-        $this->beforeFilter('auth');
+        $this->middleware('auth');
     }
 
     public function index()
@@ -68,7 +67,7 @@ class PersonController extends \App\Http\Controllers\AdminController
 
         $locations = array('' => Lang::get('users.pick_location')) + $locations;
 
-        $this->layout->content = View::make('instellingen.index', compact(array('user', 'organisations', 'locations')));
+        return view('instellingen.index', compact(array('user', 'organisations', 'locations')));
     }
 
     public function update()

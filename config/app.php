@@ -136,6 +136,11 @@ return [
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 
+		/**
+		 * Extra laravel components
+		 */
+		'Collective\Html\HtmlServiceProvider',
+
 		/*
 		 * Application Service Providers...
 		 */
@@ -144,6 +149,25 @@ return [
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
+
+
+		'Intouch\LaravelNewrelic\NewrelicServiceProvider',
+		'Maatwebsite\Excel\ExcelServiceProvider',
+//		'Schickling\Backup\BackupServiceProvider',
+		'Jenssegers\Agent\AgentServiceProvider',
+		'Barryvdh\Snappy\ServiceProvider',
+
+		'App\System\SystemServiceProvider',
+
+		'App\Template\TemplateServiceProvider',
+		'App\Questionnaire\ServiceProvider',
+		'App\Instrument\ServiceProvider',
+		'App\Mantelzorger\MantelzorgerServiceProvider',
+		'App\UserServiceProvider',
+		'App\Organisation\OrganisationServiceProvider',
+
+		'App\Search\SearchServiceProvider',
+		'App\Notifications\NotificationServiceProvider',
 
 	],
 
@@ -193,6 +217,21 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 
+		/**
+		 * Extra laravel components facades
+		 */
+
+		'Form' => 'Collective\Html\FormFacade',
+		'Html' => 'Collective\Html\HtmlFacade',
+
+
+		/**
+		 * App facades
+		 */
+		'Template'          => 'App\Template\TemplateFacade',
+		'Memorize'          => 'App\Instrument\Memorize\Facade',
+		'Newrelic'          => 'Intouch\LaravelNewrelic\Facades\Newrelic',
+		'UI'                => 'App\System\UIFacade'
 	],
 
 ];

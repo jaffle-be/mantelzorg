@@ -16,7 +16,7 @@ class LocationController extends AdminController
     {
         $this->location = $location;
 
-        $this->beforeFilter('auth.admin');
+        $this->middleware('auth.admin');
     }
 
     public function store()

@@ -7,7 +7,12 @@ use App\Questionnaire\Export\Exporter;
 use App\Questionnaire\Export\FileManager;
 use App\Questionnaire\Questionnaire;
 use App\UserRepositoryInterface;
-use View, Input, Validator, Response, Redirect, Queue, Lang;
+use Input;
+use Lang;
+use Queue;
+use Redirect;
+use Response;
+use Validator;
 
 class RapportController extends AdminController
 {
@@ -30,11 +35,11 @@ class RapportController extends AdminController
 
     public function __construct(Questionnaire $questionnaire, FileManager $files, UserRepositoryInterface $users, OrganisationRepositoryInterface $organisations)
     {
-        $this->beforeFilter('auth.admin');
+        $this->middleware('auth.admin');
 
         $this->questionnaire = $questionnaire;
         $this->files = $files;
-        $this->users =$users;
+        $this->users = $users;
         $this->organisations = $organisations;
     }
 
@@ -50,7 +55,7 @@ class RapportController extends AdminController
 
         $files = $this->files->listFiles();
 
-        $this->layout->content = View::make('rapport.index', compact('questionnaires', 'files', 'hulpverleners', 'organisations'));
+        return view('rapport.index', compact('questionnaires', 'files', 'hulpverleners', 'organisations'));
     }
 
     public function generate()
@@ -74,15 +79,11 @@ class RapportController extends AdminController
 
     public function download($filename)
     {
-        if($this->files->exists($filename))
-        {
+        if ($this->files->exists($filename)) {
             return Response::download(app_path('storage') . '/exports/' . $filename);
-        }
-        else
-        {
+        } else {
             return Redirect::route('rapport.index');
         }
-
     }
 
     public function delete($filename)

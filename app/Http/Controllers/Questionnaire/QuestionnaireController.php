@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Questionnaire;
 
 use App\Questionnaire\Questionnaire;
 use Input;
-use View;
 
 class QuestionnaireController extends \App\Http\Controllers\AdminController
 {
@@ -18,7 +17,7 @@ class QuestionnaireController extends \App\Http\Controllers\AdminController
     {
         $this->questionnaire = $questionnaire;
 
-        $this->beforeFilter('auth.admin');
+        $this->middleware('auth.admin');
     }
 
     public function index()
@@ -29,7 +28,7 @@ class QuestionnaireController extends \App\Http\Controllers\AdminController
             }
         ))->get();
 
-        $this->layout->content = View::make('questionnaire.index', compact(array('questionnaires')))
+        return view('questionnaire.index', compact(array('questionnaires')))
             ->nest('questionnaireCreator', 'modals.questionnaire-creator')
             ->nest('panelCreator', 'modals.panel-creator');
     }

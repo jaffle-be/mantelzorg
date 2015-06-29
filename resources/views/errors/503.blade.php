@@ -1,41 +1,19 @@
-<html>
-	<head>
-		<link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
+@extends('layout.front.master')
 
-		<style>
-			body {
-				margin: 0;
-				padding: 0;
-				width: 100%;
-				height: 100%;
-				color: #B0BEC5;
-				display: table;
-				font-weight: 100;
-				font-family: 'Lato';
-			}
+@section('styles')
+@stop
 
-			.container {
-				text-align: center;
-				display: table-cell;
-				vertical-align: middle;
-			}
+@section('scripts')
+@stop
 
-			.content {
-				text-align: center;
-				display: inline-block;
-			}
+@section('page-header')
+    <h2>{{ Lang::get('errors.503.title') }}</h2>
+@stop
 
-			.title {
-				font-size: 72px;
-				margin-bottom: 40px;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="container">
-			<div class="content">
-				<div class="title">Be right back.</div>
-			</div>
-		</div>
-	</body>
-</html>
+@section('content')
+
+    <div class="container">
+        <em>{{ Lang::get('errors.503.content') }}</em>
+    </div>
+
+@stop

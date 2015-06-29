@@ -268,7 +268,7 @@ class SearchService implements SearchServiceInterface
 
     public function getPaginator()
     {
-        return $this->container->make('paginator');
+        return $this->container->make('Illuminate\Contracts\Pagination\Paginator');
     }
 
     public function getConfig(Searchable $type)

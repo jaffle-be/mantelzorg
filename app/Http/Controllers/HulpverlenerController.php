@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use View, Input, Hash, Session, Event, Redirect, Lang;
 use App\Organisation\Location;
 use App\Organisation\Organisation;
 use App\User;
+use Event;
+use Hash;
+use Input;
+use Lang;
+use Redirect;
+use Session;
+use Auth;
 
 class HulpverlenerController extends AdminController
 {
@@ -33,7 +39,7 @@ class HulpverlenerController extends AdminController
 
         $this->location = $location;
 
-        $this->beforeFilter('auth.admin');
+        $this->middleware('auth.admin');
     }
 
     public function index()
@@ -48,9 +54,9 @@ class HulpverlenerController extends AdminController
             ->orderBy('organisation.name', 'asc')
             ->get();
 
-        $users->appends('query', $query);
+        $users->addQuery('query', $query);
 
-        $this->layout->content = View::make('hulpverlener.index', compact(array('users')));
+        return view('hulpverlener.index', compact(array('users')));
     }
 
     protected function finishIndexQuery($query)
@@ -97,7 +103,7 @@ class HulpverlenerController extends AdminController
              */
             $locations = $locations + array('new' => Lang::get('users.new_location'));
 
-            $this->layout->content = View::make('hulpverlener.edit', compact(array('user', 'organisations', 'locations')))
+            return view('hulpverlener.edit', compact(array('user', 'organisations', 'locations')))
                 ->nest('creatorOrganisations', 'modals.organisation-creator', compact(array('inschrijving')))
                 ->nest('creatorLocations', 'modals.location-creator', compact(array('inschrijving')));
         } else {

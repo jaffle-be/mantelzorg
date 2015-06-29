@@ -15,7 +15,7 @@ class FileManager
     {
         $this->files = $files;
 
-        $this->path = app_path('storage') . '/exports';
+        $this->path = storage_path('exports');
     }
 
     public function listFiles()

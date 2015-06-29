@@ -17,7 +17,7 @@ class OrganisationController extends AdminController
     {
         $this->organisation = $organisation;
 
-        $this->beforeFilter('auth.admin');
+        $this->middleware('auth.admin');
     }
 
     public function store()
