@@ -154,6 +154,7 @@ return [
 		'Intouch\LaravelNewrelic\NewrelicServiceProvider',
 		'Maatwebsite\Excel\ExcelServiceProvider',
 //		'Schickling\Backup\BackupServiceProvider',
+		'Spatie\Backup\BackupServiceProvider',
 		'Jenssegers\Agent\AgentServiceProvider',
 		'Barryvdh\Snappy\ServiceProvider',
 
