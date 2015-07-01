@@ -57,7 +57,7 @@ class InschrijvingController extends AdminController
 
         $registrations->addQuery('query', $query);
 
-        return view('inschrijving.index', compact(array('registrations')));
+        return view('inschrijving.index', compact('registrations'));
     }
 
     public function edit($id)
@@ -86,8 +86,8 @@ class InschrijvingController extends AdminController
                 + array('new' => Lang::get('users.new_location'));
 
             return view('inschrijving.edit', compact('inschrijving', 'organisations', 'locations'))
-                ->nest('creatorOrganisations', 'modals.organisation-creator', compact(array('inschrijving')))
-                ->nest('creatorLocations', 'modals.location-creator', compact(array('inschrijving')));
+                ->nest('creatorOrganisations', 'modals.organisation-creator', compact('inschrijving'))
+                ->nest('creatorLocations', 'modals.location-creator', compact('inschrijving'));
         } else {
             return Redirect::back();
         }

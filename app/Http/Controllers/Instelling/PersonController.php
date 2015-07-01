@@ -67,7 +67,7 @@ class PersonController extends \App\Http\Controllers\AdminController
 
         $locations = array('' => Lang::get('users.pick_location')) + $locations;
 
-        return view('instellingen.index', compact(array('user', 'organisations', 'locations')));
+        return view('instellingen.index', compact('user', 'organisations', 'locations'));
     }
 
     public function update()

@@ -105,7 +105,7 @@ class InstrumentController extends AdminController
             return Redirect::route('home');
         }
 
-        return view('instrument.index', compact(array('questionnaire', 'hulpverlener', 'surveys')));
+        return view('instrument.index', compact('questionnaire', 'hulpverlener', 'surveys'));
     }
 
     public function download($id)
@@ -202,7 +202,7 @@ class InstrumentController extends AdminController
 
         $arguments = array_merge([
             'zeroPadding' => true,
-        ], compact(array('panel', 'questionnaire', 'survey')));
+        ], compact('panel', 'questionnaire', 'survey'));
 
         return view('instrument.panel', $arguments);
     }

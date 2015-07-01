@@ -31,9 +31,9 @@ class QuestionController extends \App\Http\Controllers\AdminController
             }
         ));
 
-        return view('questionnaire.questions.index', compact(array('panel')))
-            ->nest('questionCreator', 'modals.question-creator', compact(array()))
-            ->nest('choiseCreator', 'modals.choise-creator', compact(array()));
+        return view('questionnaire.questions.index', compact('panel'))
+            ->nest('questionCreator', 'modals.question-creator', compact())
+            ->nest('choiseCreator', 'modals.choise-creator', compact());
     }
 
     public function store($panel)

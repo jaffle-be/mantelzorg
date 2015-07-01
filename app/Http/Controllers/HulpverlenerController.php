@@ -56,7 +56,7 @@ class HulpverlenerController extends AdminController
 
         $users->addQuery('query', $query);
 
-        return view('hulpverlener.index', compact(array('users')));
+        return view('hulpverlener.index', compact('users'));
     }
 
     protected function finishIndexQuery($query)
@@ -103,9 +103,9 @@ class HulpverlenerController extends AdminController
              */
             $locations = $locations + array('new' => Lang::get('users.new_location'));
 
-            return view('hulpverlener.edit', compact(array('user', 'organisations', 'locations')))
-                ->nest('creatorOrganisations', 'modals.organisation-creator', compact(array('inschrijving')))
-                ->nest('creatorLocations', 'modals.location-creator', compact(array('inschrijving')));
+            return view('hulpverlener.edit', compact('user', 'organisations', 'locations'))
+                ->nest('creatorOrganisations', 'modals.organisation-creator', compact('inschrijving'))
+                ->nest('creatorLocations', 'modals.location-creator', compact('inschrijving'));
         } else {
             return Redirect::route('hulpverleners.index');
         }

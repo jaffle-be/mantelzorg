@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers\Instelling;
 
+use App\Mantelzorger\Commands\NewMantelzorger;
+use App\Mantelzorger\Commands\SearchMantelzorgers;
+use App\Mantelzorger\Commands\UpdateMantelzorger;
 use App\Mantelzorger\Mantelzorger;
+use App\Mantelzorger\Request\NewMantelzorgerRequest;
+use App\Mantelzorger\Request\UpdateMantelzorgerRequest;
+use App\User;
 use Auth;
+use Illuminate\Foundation\Bus\DispatchesCommands;
 use Input;
 use Redirect;
 
@@ -15,109 +22,56 @@ use Redirect;
 class MantelzorgerController extends \App\Http\Controllers\AdminController
 {
 
-    /**
-     * @var \App\Mantelzorger\Mantelzorger
-     */
-    protected $mantelzorger;
+    use DispatchesCommands;
 
-    /**
-     * @param Mantelzorger $mantelzorger
-     */
-    public function __construct(Mantelzorger $mantelzorger)
+    public function __construct()
     {
-        $this->mantelzorger = $mantelzorger;
-
         $this->middleware('auth');
         $this->middleware('lock');
     }
 
-    public function index($hulpverlener)
+    public function index(User $hulpverlener)
     {
-        $query = Input::get('query');
+        $mantelzorgers = $this->dispatchFromArray(SearchMantelzorgers::class, [
+            'user'  => $hulpverlener,
+            'query' => Input::get('query')
+        ]);
 
-        $search = $this->mantelzorger->search();
-
-        $bool['must'] = [
-            ['term' => ['hulpverlener_id' => $hulpverlener->id]]
-        ];
-
-        if (Input::get('query')) {
-            $bool['should'] = [
-                ['query' => ['match' => ['identifier.raw' => Input::get('query')]]],
-                ['nested' => [
-                    'path'  => 'oudere',
-                    'query' => [
-                        'match' => ['oudere.identifier.raw' => Input::get('query')]
-                    ]
-                ]]
-            ];
-        }
-
-        $mantelzorgers = $search
-            ->filterBool($bool)
-            ->orderBy('identifier.raw', 'asc')
-            ->get();
-
-        $mantelzorgers->addQuery('query', $query);
-
-        return view('instellingen.mantelzorgers.index', compact(array('hulpverlener', 'mantelzorgers')));
+        return view('instellingen.mantelzorgers.index', compact('hulpverlener', 'mantelzorgers'));
     }
 
-    public function create($hulpverlener)
+    public function create(User $hulpverlener)
     {
-        return view('instellingen.mantelzorgers.create', compact(array('hulpverlener')));
+        return view('instellingen.mantelzorgers.create', compact('hulpverlener'));
     }
 
-    public function store($hulpverlener)
+    public function store(User $hulpverlener, NewMantelzorgerRequest $request)
     {
-        $input = Input::except('_token');
-
-        $input['hulpverlener_id'] = $hulpverlener->id;
-
-        $validator = $this->mantelzorger->validator($input, [], ['hulpverlener' => $hulpverlener->id]);
-
-        if ($validator->fails()) {
-            return Redirect::back()->withInput()->withErrors($validator->messages());
-        }
-
-        $mantelzorger = $this->mantelzorger->create($input);
-
-        return Redirect::route('instellingen.{hulpverlener}.mantelzorgers.index', array($hulpverlener->id));
-    }
-
-    public function edit($hulpverlener, $mantelzorger)
-    {
-        $mantelzorger = $this->mantelzorger->find($mantelzorger);
+        $mantelzorger = $this->dispatchFromArray(NewMantelzorger::class, [
+            'user'  => $hulpverlener,
+            'input' => $request->except('_token'),
+        ]);
 
         if ($mantelzorger) {
-            return view('instellingen.mantelzorgers.edit', compact(array('hulpverlener', 'mantelzorger')));
+            return Redirect::route('instellingen.{hulpverlener}.mantelzorgers.index', array($hulpverlener->id));
+        } else {
+            return redirect()->back();
         }
     }
 
-    public function update($hulpverlener, $mantelzorger)
+    public function edit(User $hulpverlener, Mantelzorger $mantelzorger)
     {
-        $mantelzorger = $this->mantelzorger->find($mantelzorger);
+        return view('instellingen.mantelzorgers.edit', compact('hulpverlener', 'mantelzorger'));
+    }
 
-        if ($mantelzorger) {
-            $input = Input::except('_token');
-
-            $input['mantelzorger_id'] = $mantelzorger->id;
-            $input['hulpverlener_id'] = $hulpverlener->id;
-
-            $validator = $this->mantelzorger->validator($input, [], ['hulpverlener' => $hulpverlener->id, 'mantelzorger' => $mantelzorger->id]);
-
-            if ($validator->fails()) {
-                return Redirect::back()->withInput()->withErrors($validator->messages());
-            } else {
-
-                $mantelzorger->update($input);
-            }
-        }
+    public function update(User $hulpverlener, Mantelzorger $mantelzorger, UpdateMantelzorgerRequest $request)
+    {
+        $this->dispatchFromArray(UpdateMantelzorger::class, [
+            'mantelzorger' => $mantelzorger,
+            'hulpverlener' => $hulpverlener,
+            'input' => $request->except('_token', '_method')
+        ]);
 
         return Redirect::route('instellingen.{hulpverlener}.mantelzorgers.index', $hulpverlener->id);
-    }
-
-    public function delete()
-    {
     }
 }

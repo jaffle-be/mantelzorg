@@ -28,7 +28,7 @@ class QuestionnaireController extends \App\Http\Controllers\AdminController
             }
         ))->get();
 
-        return view('questionnaire.index', compact(array('questionnaires')))
+        return view('questionnaire.index', compact('questionnaires'))
             ->nest('questionnaireCreator', 'modals.questionnaire-creator')
             ->nest('panelCreator', 'modals.panel-creator');
     }
