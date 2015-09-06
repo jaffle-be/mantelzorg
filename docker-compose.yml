@@ -1,0 +1,43 @@
+web:
+    image: web
+    ports:
+        - "80:80" # web
+        - "2222:22" # ssh
+        - "35729:35729" # live reload
+        - "9876:9876" # karma server
+    volumes:
+        - ~/.composer:/home/homestead/.composer # composer caching
+        - ~/.gitconfig:/home/homestead/.gitconfig # Git configuration ( access alias && config )
+        - ~/.ssh:/home/homestead/.ssh # Ssh keys for easy deployment inside the container
+        - ./:/app # all apps
+        - ./sites-available:/etc/nginx/sites-available # nginx sites ( in case you recreate the container )
+        - ./sites-enabled:/etc/nginx/sites-enabled # nginx sites ( in case you recreate the container )
+    links:
+        - mysql
+        - redis
+        - elasticsearch
+
+mysql:
+    image: tutum/mysql
+    ports:
+        - "3306:3306"
+    environment:
+        MYSQL_USER: admin # cannot be changed ( for info. only )
+        MYSQL_PASS: secret
+    volumes_from: # still cant get mounted folders to work, because of file permissions... fpff!
+        - db_vol # database files
+
+redis:
+    image: tutum/redis
+    ports:
+        - "6379:6379"
+    environment:
+        REDIS_PASS: "pass"
+    volumes_from:
+        - redis_vol
+
+elasticsearch:
+    image: digiredo/elasticsearch
+    ports:
+        - "9200:9200"
+        - "9300:9300"
