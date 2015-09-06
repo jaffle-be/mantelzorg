@@ -10,7 +10,6 @@ use App\Mantelzorger\Request\NewMantelzorgerRequest;
 use App\Mantelzorger\Request\UpdateMantelzorgerRequest;
 use App\User;
 use Auth;
-use Illuminate\Foundation\Bus\DispatchesCommands;
 use Input;
 use Redirect;
 
@@ -21,8 +20,6 @@ use Redirect;
  */
 class MantelzorgerController extends \App\Http\Controllers\AdminController
 {
-
-    use DispatchesCommands;
 
     public function __construct()
     {

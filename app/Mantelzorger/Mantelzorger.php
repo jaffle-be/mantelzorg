@@ -6,6 +6,7 @@ use App\Questionnaire\Export\Exportable;
 use App\Search\Model\Searchable;
 use App\Search\Model\SearchableTrait;
 use App\System\Database\Eloquent\Model;
+use App\System\Database\Eloquent\ValidationRules;
 use Carbon\Carbon;
 use Input;
 use Validator;
@@ -15,6 +16,7 @@ class Mantelzorger extends Model implements Searchable, Exportable
 
     use SearchableTrait;
     use MantelzorgerSkills;
+    use ValidationRules;
 
     protected static $searchableMapping = [
         'male'       => [
@@ -129,28 +131,6 @@ class Mantelzorger extends Model implements Searchable, Exportable
         });
 
         return Validator::make($input, $rules);
-    }
-
-    public function rules(array $rules = [], array $placeholders = [])
-    {
-        $rules = array_merge($rules, static::$rules);
-
-        array_walk($rules, function (&$rule) use ($placeholders) {
-            foreach ($placeholders as $placeholder => $value) {
-                $rule = str_replace('#' . $placeholder, $value, $rule);
-            }
-        });
-
-        array_walk($rules, function (&$rule) {
-            $rule = preg_replace('/#[^,]+/', 'NULL', $rule);
-        });
-
-        //unset hulpverlener_id, we will set it in the command
-        //instead from getting it from the input
-        //more hassle, more security
-        unset($rules['hulpverlener_id']);
-
-        return $rules;
     }
 
     public function oudere()

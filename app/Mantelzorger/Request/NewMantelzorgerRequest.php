@@ -9,7 +9,7 @@ class NewMantelzorgerRequest extends Request{
     {
         $hulpverlener = $this->route()->parameter('hulpverlener');
 
-        return $mantelzorger->rules([], ['hulpverlener' => $hulpverlener->id]);
+        return $mantelzorger->rules([], ['hulpverlener' => $hulpverlener->id], ['hulpverlener_id']);
     }
 
     public function authorize()

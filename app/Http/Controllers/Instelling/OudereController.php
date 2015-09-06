@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers\Instelling;
 
+use App\Mantelzorger\Commands\NewOudere;
+use App\Mantelzorger\Commands\UpdateOudere;
+use App\Mantelzorger\Mantelzorger;
 use App\Mantelzorger\Oudere;
+use App\Mantelzorger\Request\NewOudereRequest;
+use App\Mantelzorger\Request\UpdateOudereRequest;
 use App\Meta\Context;
 use App\Meta\Value;
 use Input;
@@ -11,7 +16,6 @@ use Redirect;
 
 class OudereController extends \App\Http\Controllers\AdminController
 {
-
     /**
      * @var \App\Mantelzorger\Oudere
      */
@@ -42,6 +46,10 @@ class OudereController extends \App\Http\Controllers\AdminController
 
     public function create($mantelzorger)
     {
+        //this should be a trait loaded onto the model.
+        //the trait should be a generic one placed into to the meta module namespace.
+        //this would allow easy reuse of the meta component.
+        //this is easily something which can be reused in any project.
         $relations_mantelzorger = $this->getRelationsMantelzorger();
 
         $woonsituaties = $this->getWoonsituaties();
@@ -53,26 +61,16 @@ class OudereController extends \App\Http\Controllers\AdminController
         return view('instellingen.ouderen.create', compact('mantelzorger', 'relations_mantelzorger', 'woonsituaties', 'hulpbehoeftes', 'belprofielen'));
     }
 
-    public function store($mantelzorger)
+    public function store(Mantelzorger $mantelzorger, NewOudereRequest $request)
     {
-        $input = Input::except('_token');
+        $input = $this->processValue($request->except('_token'), Context::MANTELZORGER_RELATION);
 
-        $input['mantelzorger_id'] = $mantelzorger->id;
-
-        $input = $this->processValue($input, Context::MANTELZORGER_RELATION);
-
-        $validator = $this->oudere->validator($input, [], [
-            'mantelzorger' => $mantelzorger->id
+        $this->dispatchFromArray(NewOudere::class, [
+            'mantelzorger' => $mantelzorger,
+            'input' => $input
         ]);
 
-        if ($validator->fails()) {
-            return Redirect::back()->withErrors($validator->messages())->withInput();
-        } else {
-
-            $this->oudere->create($input);
-
-            return Redirect::route('instellingen.{hulpverlener}.mantelzorgers.index', $mantelzorger->hulpverlener->id);
-        }
+        return Redirect::route('instellingen.{hulpverlener}.mantelzorgers.index', $mantelzorger->hulpverlener->id);
     }
 
     public function edit($mantelzorger, $oudere)
@@ -94,29 +92,11 @@ class OudereController extends \App\Http\Controllers\AdminController
         }
     }
 
-    public function update($mantelzorger, $oudere)
+    public function update(UpdateOudereRequest $request, Mantelzorger $mantelzorger, Oudere $oudere)
     {
-        $oudere = $this->oudere->find($oudere);
+        $input = $this->processValue($request->except('_token'), Context::MANTELZORGER_RELATION);
 
-        if ($oudere) {
-
-            $input = Input::except('_token');
-
-            $input['mantelzorger_id'] = $mantelzorger->id;
-
-            $input = $this->processValue($input, Context::MANTELZORGER_RELATION);
-
-            $validator = $this->oudere->validator($input, [], [
-                'oudere'       => $oudere->id,
-                'mantelzorger' => $mantelzorger->id
-            ]);
-
-            if ($validator->fails()) {
-                return Redirect::back()->withInput()->withErrors($validator->messages());
-            } else {
-                $oudere->update($input);
-            }
-        }
+        $this->dispatchFromArray(UpdateOudere::class , ['mantelzorger' => $mantelzorger, 'oudere' => $oudere, 'input' => $input]);
 
         return Redirect::route('instellingen.{hulpverlener}.mantelzorgers.index', $mantelzorger->hulpverlener_id);
     }
