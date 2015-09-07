@@ -207,4 +207,8 @@ class Oudere extends Model implements Searchable, Exportable
     {
         return array_merge(parent::getDates(), array('birthday'));
     }
+
+    public function scopeByName($query){
+        $query->orderBy('identifier');
+    }
 }

@@ -49,7 +49,7 @@
                                 <ul>
                                     @foreach($mantelzorger->oudere as $oudere)
                                         <li>
-                                            <a href="<?= URL::route('instellingen.{mantelzorger}.oudere.edit', array($mantelzorger->id, $oudere->id)) ?>">
+                                            <a href="<?= route('instellingen.{mantelzorger}.oudere.edit', array($mantelzorger->id, $oudere->id)) ?>">
                                                 <?= Form::text('name', $oudere->displayName, array('class' => 'form-control')) ?>
                                             </a>
                                         </li>
