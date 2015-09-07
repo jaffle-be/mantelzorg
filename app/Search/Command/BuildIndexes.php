@@ -48,7 +48,7 @@ class BuildIndexes extends Command
         $types = $this->argument('types');
 
         if (empty($types)) {
-            $types = $this->laravel->make('config')->get('elasticsearch.types');
+            $types = config('search.types');
 
             $types = array_keys($types);
         }

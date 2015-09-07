@@ -1,18 +1,16 @@
 <?php
 
-
 namespace App\Search\Query;
 
 use App\Search\Model\Searchable;
+use App\Search\SearchResponder;
 use App\Search\SearchServiceInterface;
 use Exception;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
 use Input;
 
 class Query implements Queryable
 {
+    use SearchResponder;
 
     /**
      * @var SearchServiceInterface
@@ -27,7 +25,7 @@ class Query implements Queryable
     /**
      * @var array
      */
-    protected $with = array();
+    protected $with = [];
 
     /**
      * Legal/supported booleans.
@@ -89,11 +87,13 @@ class Query implements Queryable
         if ($needsPagination = $this->needsPagination()) {
             $params['from'] = $this->skip();
             $params['size'] = $this->take();
+        } else {
+            $params['size'] = 9999;
         }
 
         $results = $this->service->search($params);
 
-        return $this->response($results);
+        return $this->response($results, $this->with, $this->pagination);
     }
 
     public function with($relations)
@@ -110,64 +110,6 @@ class Query implements Queryable
     public function all()
     {
         return $this->paginate(false)->get();
-    }
-
-    protected function response($results)
-    {
-        $collection = $this->asModels($results['hits']['hits']);
-
-        /*
-         * if we also want to lazy load relations, we'll create a collection and load them,
-         * pass them on to the paginator if needed
-         * heads up: i believe nested documents will always be loaded,
-         * so developer should only pass with relations that aren't being indexed by Elasticsearch
-         */
-        if ($this->with) {
-            $collection = new Collection($collection);
-
-            $collection->load($this->with);
-        }
-
-        if ($this->needsPagination()) {
-
-            /**
-             * if we lazy loaded some relations, we need to get back an array to paginate.
-             * not an optimal way of doing this, but i believe there isn't a better way at this point,
-             * since the paginator only takes an array.
-             */
-            $collection = is_array($collection) ? $collection : $collection->all();
-
-            $path = Paginator::resolveCurrentPath();
-
-            //for some reason things do not work when passing in the options as an array like so
-//            $results = new LengthAwarePaginator($collection, $results['hits']['total'], $this->pagination, ['path' => $path]);
-            $results = new LengthAwarePaginator($collection, $results['hits']['total'], $this->pagination);
-            $results->setPath($path);
-
-            //only need transform into a collection when we didn't lazyload relations
-        } elseif (is_array($collection)) {
-            $results = new Collection($collection);
-        }
-
-        return $results;
-    }
-
-    protected function asModels(array $results)
-    {
-        $items = [];
-
-        $config = $this->service->getConfig($this->searchable);
-
-        $with = $config['with'];
-
-        foreach ($results as $result) {
-            //need to also match the related models, which are for now specified into the config file.
-            $model = $this->searchable->getSearchableNewModel($result['_source'], $with);
-
-            $items[] = $model;
-        }
-
-        return $items;
     }
 
     public function paginate($amount = 10)
@@ -323,7 +265,7 @@ class Query implements Queryable
         ];
     }
 
-    protected function body()
+    public function body()
     {
         $body = [];
 

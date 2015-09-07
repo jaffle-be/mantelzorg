@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Search;
 
 use App\Search\Model\Searchable;
@@ -11,6 +10,7 @@ use Illuminate\Events\Dispatcher;
 
 class SearchService implements SearchServiceInterface
 {
+    use SearchResponder;
 
     /**
      * @var Container
@@ -24,16 +24,11 @@ class SearchService implements SearchServiceInterface
     protected $client;
 
     /**
-     * @var array
+     * @var Config
      */
     protected $config;
 
-    /**
-     * The name of the index to use.
-     *
-     * @var string
-     */
-    protected $index;
+    protected $service;
 
     /**
      * @var array
@@ -60,47 +55,40 @@ class SearchService implements SearchServiceInterface
      * @param array     $config
      *
      */
-    public function __construct(Container $container, Client $client, array $config)
+    public function __construct(Container $container, Client $client, Config $config)
     {
         $this->container = $container;
 
         $this->client = $client;
 
         $this->config = $config;
+
+        $this->service = $this;
     }
 
     public function boot()
     {
-        $this->parseConfig();
+        $this->config->boot();
 
         $this->autoIndex();
     }
 
     protected function autoIndex()
     {
-        foreach ($this->types as $type => $config) {
+        foreach ($this->config->getTypes() as $type) {
 
-            $class = $config['class'];
+            $class = $this->config->getClass($type);
 
             $class = new $class;
 
             $class->setSearchableService($this);
 
-            $this->regularAutoIndex($class, $config['with']);
+            $this->regularAutoIndex($class, $this->config->getWith($type));
         }
 
-        foreach ($this->invertedTypes as $updated => $config) {
+        foreach ($this->config->getInvertedTypes() as $updated => $config) {
             $this->invertedAutoIndex($updated, $config);
         }
-    }
-
-    protected function parseConfig()
-    {
-        $this->index = $this->config['index'];
-
-        $this->types = $this->config['types'];
-
-        $this->invertedTypes = $this->invertTypes($this->config['types']);
     }
 
     /**
@@ -124,11 +112,11 @@ class SearchService implements SearchServiceInterface
 
             $type->setSearchableService($me);
 
-            $type->setSearchableIndex($me->index);
+            $type->setSearchableIndex($me->config->getIndex());
 
             if ($trigger) {
                 $callback = function (Searchable $type) use ($me, $listener, $with) {
-                    return $me->$listener($type, array_keys($with));
+                    return $me->$listener($type);
                 };
 
                 $dispatcher->listen($trigger, $callback, 15);
@@ -167,7 +155,7 @@ class SearchService implements SearchServiceInterface
             $documents = $result->get();
 
             foreach ($documents as $document) {
-                $this->update($document, $with);
+                $this->update($document);
             }
         });
     }
@@ -176,7 +164,7 @@ class SearchService implements SearchServiceInterface
     {
         $class = new $parent();
 
-        return $this->types[$class->getSearchableType()]['with'];
+        return $this->config->getWith($class->getSearchableType());
     }
 
     /**
@@ -186,17 +174,15 @@ class SearchService implements SearchServiceInterface
     {
         $this->checkIndex();
 
-        $config = $this->types[$type];
-
         list($type, $relations) = $this->getSearchable($type);
 
-        $this->refreshType($type, $config['with']);
+        $this->refreshType($type, $this->config->getWith($type->getSearchableType()));
 
         $me = $this;
 
         $type->with($relations)->chunk(250, function ($documents) use ($me, $relations) {
             foreach ($documents as $document) {
-                $me->add($document, $relations, false);
+                $me->add($document, false);
             }
         });
     }
@@ -205,31 +191,34 @@ class SearchService implements SearchServiceInterface
     {
         $this->checkIndex();
 
-        $config = $this->types[$type];
+        $config = $this->config->getType($type);
 
         list($type) = $this->getSearchable($type);
 
-        if($refresh)
-        {
+        if ($refresh) {
             $this->refreshType($type, $config['with']);
         }
     }
 
-    public function add(Searchable $type, array $with, $needsLoading = true)
+    public function add(Searchable $type, $needsLoading = true)
     {
+        //clone object so we do not touch original one.
+        //this was messing with translatable library.
+        //since the parent model saves before the translations,
+        //translations wouldn't be in database and we overwrite them here by loading those translations
+        $type = clone $type;
         /*
          * make sure the relations are initialised when creating a new object
          * else searching might fail since some relations expect to be an array and it would be indexed as null
          */
-        if($needsLoading)
-        {
-            $type->load(array_values($with));
+        if ($needsLoading) {
+            $type->load(array_keys($this->config->getWith($type->getSearchableType())));
         }
 
         $this->client->index($this->data($type));
     }
 
-    public function delete(Searchable $type, array $with)
+    public function delete(Searchable $type)
     {
         $params = $this->data($type);
 
@@ -238,11 +227,17 @@ class SearchService implements SearchServiceInterface
         $this->client->delete($params);
     }
 
-    public function update(Searchable $type, array $with)
+    public function update(Searchable $type)
     {
-        $params = $this->getBaseParams($type);
+        //clone object so we do not touch original one.
+        //this was messing with translatable library.
+        //since the parent model saves before the translations,
+        //translations wouldn't be in database and we overwrite them here by loading those translations
+        $type = clone $type;
 
-        $type->load($with);
+        $params = $this->getBaseParams($type);
+        
+        $type->load(array_keys($this->config->getWith($type->getSearchableType())));
 
         $params = array_merge($params, [
             'id'   => $type->getSearchableId(),
@@ -261,9 +256,17 @@ class SearchService implements SearchServiceInterface
      *
      * @return mixed
      */
-    public function search(array $params)
+    public function search($type, array $params, $with = [], $paginated = 15)
     {
-        return $this->client->search($params);
+        if($paginated)
+        {
+            $params['from'] = (app('request')->get('page', 1) - 1) * $paginated;
+            $params['size'] = $paginated;
+        }
+
+        $result = $this->client->search($params);
+
+        return $this->response($result, $with, $paginated, $this->container->make($this->config->getClass($type)));
     }
 
     public function getPaginator()
@@ -273,7 +276,7 @@ class SearchService implements SearchServiceInterface
 
     public function getConfig(Searchable $type)
     {
-        return $this->types[$type->getSearchableType()];
+        return $this->config->getType($type->getSearchableType());
     }
 
     /**
@@ -289,12 +292,12 @@ class SearchService implements SearchServiceInterface
 
         $indices = $this->client->indices();
 
-        $toggle = ['index' => $this->index];
+        $toggle = ['index' => $this->config->getIndex()];
 
         $indices->close($toggle);
 
         $settings = [
-            'index' => $this->index,
+            'index' => $this->config->getIndex(),
             'body'  => $settings,
         ];
 
@@ -331,11 +334,9 @@ class SearchService implements SearchServiceInterface
     protected function getSearchable($type)
     {
         if (is_string($type)) {
-            $config = $this->types[$type];
+            $classname = $this->config->getClass($type);
 
-            $classname = $this->getClassname($config);
-
-            $with = $this->getWith($config);
+            $with = $this->config->getWith($type);
 
             $type = $this->container->make($classname);
 
@@ -380,14 +381,14 @@ class SearchService implements SearchServiceInterface
     protected function getBaseParams(Searchable $type)
     {
         return [
-            'index' => $this->index,
+            'index' => $this->config->getIndex(),
             'type'  => $type->getSearchableType()
         ];
     }
 
     protected function checkIndex()
     {
-        $params = ['index' => $this->index];
+        $params = ['index' => $this->config->getIndex()];
 
         $indices = $this->client->indices();
 
@@ -404,60 +405,11 @@ class SearchService implements SearchServiceInterface
     protected function data(Searchable $type)
     {
         return [
-            'index' => $this->index,
+            'index' => $this->config->getIndex(),
             'type'  => $type->getSearchableType(),
             'id'    => $type->getSearchableId(),
             'body'  => $type->getSearchableDocument(),
         ];
     }
 
-    protected function getClassname($config)
-    {
-        if (!is_array($config)) {
-            return $config;
-        }
-
-        return $config['class'];
-    }
-
-    protected function getWith($config)
-    {
-        if (!is_array($config)) {
-            return array();
-        }
-
-        return isset($config['with']) ? $config['with'] : [];
-    }
-
-    /**
-     * This method will save an inverted array of relations.
-     * We can then use it to trigger nested document changes.
-     *
-     * @param $types
-     *
-     * @return array
-     */
-    private function invertTypes($types)
-    {
-        $inverted = [];
-
-        foreach ($types as $type => $config) {
-            foreach ($config['with'] as $relation => $class) {
-
-                $key = $class['class'];
-
-                if (!array_key_exists($key, $inverted)) {
-                    $inverted[$key] = [];
-                }
-
-                $inverted[$key][] = [
-                    'class'    => $config['class'],
-                    'key'      => $class['key'],
-                    'relation' => $relation
-                ];
-            }
-        }
-
-        return $inverted;
-    }
 }

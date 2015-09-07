@@ -100,7 +100,9 @@ trait SearchableTrait
      */
     public function search()
     {
-        return new Query(static::$searchableService, $this);
+        $this->getSearchableService();
+
+//        return new Search();
     }
 
     /**
@@ -109,12 +111,17 @@ trait SearchableTrait
     public function getSearchableNewModel($data, array $with)
     {
         $base = array_except($data, array_keys($with));
+        $base = $this->searchableShiftTranslations($base);
 
         $relations = array_only($data, array_keys($with));
+        $relations = $this->searchableShiftTranslations($relations);
 
         unset($data);
 
-        $model = $this->newFromBuilder($base);
+        $this->unguard();
+        $model = $this->newInstance();
+        $model->fill($base);
+        $this->reguard();
 
         //need to setup relations too :-)
         foreach ($with as $relation => $build) {
@@ -130,10 +137,8 @@ trait SearchableTrait
                 }
 
                 $model->setRelation($relation, $relation_data);
-            }
-            else{
-                if($this->relationNeedsLooping($type))
-                {
+            } else {
+                if ($this->relationNeedsLooping($type)) {
                     $model->setRelation($relation, array());
                 }
             }
@@ -153,27 +158,35 @@ trait SearchableTrait
     {
         $mapping = [];
 
-        $this->getSearchableType();
         //the mapping we want to use should also include the mappings for the nested documents.
         if (property_exists(__CLASS__, 'searchableMapping')) {
             $mapping = static::$searchableMapping;
         }
 
-        foreach($with as $type => $config)
-        {
+        foreach ($with as $type => $config) {
             $related = new $config['class'];
 
-            if($related instanceof Searchable)
-            {
+            if ($type == 'translations') {
+
+                if (!$related instanceof Searchable) {
+                    throw new \Exception(sprintf('Translation model %s needs to be searchable', get_class($related)));
+                }
+
+                $locale_map = $related->getSearchableMapping([]);
+
+                foreach (config('system.locales') as $locale) {
+                    $nested_map[$locale] = [
+                        'type'       => 'nested',
+                        'properties' => $locale_map
+                    ];
+                }
+            } else if ($related instanceof Searchable) {
                 $nested_map = $related->getSearchableMapping(array());
-            }
-            else{
-                $nested_map = [];
             }
 
             $mapping[$type] = [
                 'type'       => 'nested',
-                'properties' => $nested_map
+                'properties' => isset($nested_map) ? $nested_map : []
             ];
         }
 
@@ -186,7 +199,7 @@ trait SearchableTrait
      *
      * @return array
      */
-    private function getRelationType($relation, $model)
+    protected function getRelationType($relation, $model)
     {
         /** @var Relation $foreign */
         $foreign = $model->$relation();
@@ -201,9 +214,9 @@ trait SearchableTrait
      *
      * @return array|bool
      */
-    private function relationNeedsLooping($type)
+    protected function relationNeedsLooping($type)
     {
-        $needsLoop = ['HasMany', 'BelongsToMany'];
+        $needsLoop = ['HasMany', 'BelongsToMany', 'MorphToMany'];
 
         foreach ($needsLoop as $loop) {
             if (ends_with($type, $loop)) {
@@ -220,11 +233,20 @@ trait SearchableTrait
      *
      * @return Collection
      */
-    private function getLoopedRelationData($build, $relation_data)
+    protected function getLoopedRelationData($build, $relation_data)
     {
         $class = $build['class'];
 
-        return $class::hydrate($relation_data);
+        $class = new $class();
+
+        $collection = $class->newCollection();
+
+        foreach($relation_data as $data)
+        {
+            $collection->push($this->getSimpleRelationData($build, $data));
+        }
+
+        return $collection;
     }
 
     /**
@@ -233,12 +255,39 @@ trait SearchableTrait
      *
      * @return mixed
      */
-    private function getSimpleRelationData($build, $relation_data)
+    protected function getSimpleRelationData($build, $relation_data)
     {
         $class = $build['class'];
 
-        $result = $class::hydrate([$relation_data]);
+        $class = new $class();
 
-        return $result->first();
+        $class->unguard();
+
+        $instance = $class->newInstance();
+
+        $instance->fill($relation_data);
+
+        $class->reguard();
+
+        return $instance;
+    }
+
+    protected function searchableShiftTranslations(array $data)
+    {
+        foreach($data as $key => &$value)
+        {
+            if(is_array($value))
+            {
+                $value = $this->searchableShiftTranslations($value);
+            }
+        }
+
+        if(isset($data['translations']))
+        {
+            $data = array_merge($data, $data['translations']);
+            unset($data['translations']);
+        }
+
+        return $data;
     }
 }

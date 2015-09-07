@@ -1,16 +1,21 @@
 <?php
 
-
 namespace App\Search;
 
+use App\System\ServiceProvider;
 use Elasticsearch\Client;
-use Illuminate\Support\ServiceProvider;
-use Mustache_Engine;
+use Elasticsearch\ClientBuilder;
 
 class SearchServiceProvider extends ServiceProvider
 {
 
-    public function boot()
+    protected $namespace = 'search';
+
+    protected function observers()
+    {
+    }
+
+    protected function listeners()
     {
         //keep this in the boot section so we bind to the event dispatcher actually used in the eloquent model instances.
         $this->app['App\Search\SearchServiceInterface']->boot();
@@ -30,14 +35,15 @@ class SearchServiceProvider extends ServiceProvider
         $this->registerCommands();
     }
 
-    private function registerService()
+    protected function registerService()
     {
         $this->app['App\Search\SearchService'] = $this->app->share(function ($app) {
-            $config = $app->make('config');
 
-            $config = $config->get('elasticsearch');
+            $config = new Config(config('search'));
 
-            $client = new Client(array_only($config, ['hosts']));
+            $client = ClientBuilder::create()
+                ->setHosts(config('search.hosts'))
+                ->build();
 
             $service = new SearchService($app, $client, $config);
 
@@ -45,8 +51,9 @@ class SearchServiceProvider extends ServiceProvider
         });
     }
 
-    private function registerCommands()
+    protected function registerCommands()
     {
         $this->commands(['App\Search\Command\BuildIndexes', 'App\Search\Command\FlushType', 'App\Search\Command\UpdateSettings', 'App\Search\Command\UpdateMapping']);
     }
+
 }

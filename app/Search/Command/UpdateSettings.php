@@ -44,9 +44,7 @@ class UpdateSettings extends Command
      */
     public function fire()
     {
-        $config = $this->laravel->make('config');
-
-        $settings = $config->get('elasticsearch.settings');
+        $settings = config('search.settings');
 
         $this->service->updateSettings($settings);
     }
