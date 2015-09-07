@@ -175,7 +175,14 @@ class Oudere extends Model implements Searchable, Exportable
     public function setBirthdayAttribute($value)
     {
         if (!empty($value)) {
-            $this->attributes['birthday'] = Carbon::createFromFormat('d/m/Y', $value);
+
+            if(preg_match('/(\d{1,2}\/){2}\d{4}/', $value))
+            {
+                $this->attributes['birthday'] = Carbon::createFromFormat('d/m/Y', $value);
+            }
+            else{
+                $this->attributes['birtday'] = Carbon::createFromFormat('Y-m-d H:i:s', $value);
+            }
         }
     }
 

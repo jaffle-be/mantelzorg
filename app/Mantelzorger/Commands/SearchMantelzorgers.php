@@ -2,6 +2,7 @@
 
 use App\Commands\Command;
 use App\Mantelzorger\Mantelzorger;
+use App\Search\SearchServiceInterface;
 use App\User;
 use Illuminate\Contracts\Bus\SelfHandling;
 
@@ -18,10 +19,17 @@ class SearchMantelzorgers extends Command implements SelfHandling
         $this->query = $query;
     }
 
-    public function handle(Mantelzorger $mantelzorger)
+    public function handle(SearchServiceInterface $search)
     {
-        $search = $mantelzorger->search();
+        $mantelzorgers = $search->search('mantelzorgers', $this->query());
 
+        $mantelzorgers->addQuery('query', $this->query);
+
+        return $mantelzorgers;
+    }
+
+    protected function query()
+    {
         $bool['must'] = [
             ['term' => ['hulpverlener_id' => $this->user->id]]
         ];
@@ -38,13 +46,50 @@ class SearchMantelzorgers extends Command implements SelfHandling
             ];
         }
 
-        $mantelzorgers = $search
-            ->filterBool($bool)
-            ->orderBy('identifier.raw', 'asc')
-            ->get();
+        $query = [
+            'index' => env('ES_INDEX'),
+            'type' => 'mantelzorgers',
+            'body' => [
+                'query' => [
+                    'filtered' => [
+                        'query' => [
+                            'match_all' => []
+                        ],
+                        'filter' => [
+                            'bool' => [
+                                'must' => [
+                                    [
+                                        'term' => ['hulpverlener_id' => $this->user->id]
+                                    ]
+                                ],
+                                'should' => [
+                                    [
+                                        'query' => ['match' => ['identifier.raw' => $this->query]],
+                                    ],
+                                    [
+                                        'nested' => [
+                                            'path' => 'oudere',
+                                            'query' => [
+                                                'match' => ['oudere.identifier' => $this->query]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+                'sort' => [
+                    ['identifier.raw' => 'asc']
+                ]
+            ]
+        ];
 
-        $mantelzorgers->addQuery('query', $this->query);
+        if(empty($this->query))
+        {
+            unset($query['body']['query']['filtered']['filter']['bool']['should']);
+        }
 
-        return $mantelzorgers;
+        return $query;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Organisation\Location;
 use App\Organisation\Organisation;
+use App\Search\SearchServiceInterface;
 use App\User;
 use Event;
 use Hash;
@@ -42,21 +43,47 @@ class HulpverlenerController extends AdminController
         $this->middleware('auth.admin');
     }
 
-    public function index()
+    public function index(SearchServiceInterface $search)
     {
-        $search = $this->user->search();
+        $users = $search->search('users', $this->searchQuery());
 
-        $query = Input::get('query');
-
-        $users = $search
-            ->filterMulti_match(['firstname', 'lastname', 'email', 'organisation.name'], $query)
-            ->orderBy('created_at', 'asc')
-            ->orderBy('organisation.name', 'asc')
-            ->get();
-
-        $users->addQuery('query', $query);
+        $users->addQuery('query', Input::get('query'));
 
         return view('hulpverlener.index', compact('users'));
+    }
+
+    protected function searchQuery()
+    {
+        $input = Input::get('query');
+
+        $query = [
+            'index' => env('ES_INDEX'),
+            'type' => 'users',
+            'body' => [
+                'query' => [
+                    'filtered' => [
+                        'query' => [
+                            'multi_match' => [
+                                'fields' => ['firstname', 'lastname', 'email', 'organisation.name'],
+                                'query' => $input
+                            ]
+                        ],
+                        'filter' => []
+                    ]
+                ],
+                'sort' => [
+                    ['created_at' => 'asc'],
+                    ['organisation.name' => 'asc'],
+                ]
+            ]
+        ];
+
+        if(empty($input))
+        {
+            $query['body']['query']['filtered']['query'] = ['match_all' => []];
+        }
+
+        return $query;
     }
 
     protected function finishIndexQuery($query)

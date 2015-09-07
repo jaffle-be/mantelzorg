@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Beta\Registration;
 use App\Organisation\Organisation;
+use App\Search\SearchServiceInterface;
 use App\User;
 use Event;
 use Hash;
@@ -40,24 +41,54 @@ class InschrijvingController extends AdminController
         $this->middleware('auth.admin');
     }
 
-    public function index()
+    public function index(SearchServiceInterface $search)
     {
         $query = Input::get('query');
 
         $count = $this->registration->count();
 
-        $search = $this->registration->search();
-
-        $registrations = $search->filterMulti_match(['email', 'firstname', 'lastname'], $query)
-            ->orderBy('created_at', 'asc')
-            ->orderBy('firstname', 'asc')
-            ->orderBy('lastname', 'asc')
-            ->paginate($count)
-            ->get();
+        $registrations = $search->search('beta_registrations', $this->searchQuery(), [], $count);
 
         $registrations->addQuery('query', $query);
 
         return view('inschrijving.index', compact('registrations'));
+    }
+
+    protected function searchQuery()
+    {
+        $input = Input::get('query');
+
+        $query = [
+            'index' => env('ES_INDEX'),
+            'type' => 'beta_registrations',
+            'body' => [
+                'query' => [
+                    'filtered' => [
+                        'query' => [
+                            'multi_match' => [
+                                'fields' => ['email', 'firstname', 'lastname'],
+                                'query' => $input
+                            ]
+                        ],
+                        'filter' => [
+
+                        ]
+                    ]
+                ],
+                'sort' => [
+                    ['created_at' => 'asc'],
+                    ['firstname' => 'asc'],
+                    ['lastname' => 'asc'],
+                ]
+            ]
+        ];
+
+        if(empty($input))
+        {
+            $query['body']['query']['filtered']['query'] = ['match_all' => []];
+        }
+
+        return $query;
     }
 
     public function edit($id)

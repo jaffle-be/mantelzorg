@@ -9,6 +9,7 @@ use App\Meta\Value;
 use App\Questionnaire\Answer;
 use App\Questionnaire\Choise;
 use App\Questionnaire\Session;
+use App\Search\SearchServiceInterface;
 use App\User;
 use Auth;
 use Barryvdh\Snappy\PdfWrapper;
@@ -59,7 +60,7 @@ class InstrumentController extends AdminController
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(SearchServiceInterface $search)
     {
         $questionnaire = $this->questionnaire->with(array(
             'panels' => function ($query) {
@@ -71,41 +72,78 @@ class InstrumentController extends AdminController
 
         $hulpverlener->load('mantelzorgers');
 
-        $search = $this->session->search();
+        $surveys = $search->search('surveys', $this->searchQuery($hulpverlener));
 
-        $bool['must'] = [
-            ['term' => ['user_id' => $hulpverlener->id]]
-        ];
-
-        if (Input::get('query')) {
-            $bool['should'] = [
-                ['nested' => [
-                    'path'  => 'mantelzorger',
-                    'query' => [
-                        'match' => ['mantelzorger.identifier.raw' => Input::get('query')]
-                    ]
-                ]],
-                ['nested' => [
-                    'path'  => 'oudere',
-                    'query' => [
-                        'match' => ['oudere.identifier.raw' => Input::get('query')]
-                    ]
-                ]]
-            ];
-        }
-
-        $surveys = $search
-            ->with(array('questionnaire', 'questionnaire.questions', 'answers', 'answers.choises'))
-            ->filterBool($bool)
-            ->orderBy('mantelzorger.identifier.raw', 'asc')
-            ->paginate(15)
-            ->get();
+        $surveys->addQuery('query', Input::get('query'));
 
         if (!$questionnaire) {
             return Redirect::route('home');
         }
 
         return view('instrument.index', compact('questionnaire', 'hulpverlener', 'surveys'));
+    }
+
+    protected function searchQuery(User $hulpverlener)
+    {
+        $input = Input::get('query');
+
+        $query = [
+            "index" => env('ES_INDEX'),
+            "type" => "surveys",
+            "body" => [
+                "query"=> [
+                    "filtered"=> [
+                        "query"=> [
+                            "bool"=> [
+                                "should"=> [
+                                    [
+                                        "nested"=> [
+                                            "path"=> "mantelzorger",
+                                            "query"=> [
+                                                "match"=> [
+                                                    "mantelzorger.identifier"=> "$input"
+                                                ]
+                                            ]
+                                        ]
+                                    ],
+                                    [
+                                        "nested"=> [
+                                            "path"=> "oudere",
+                                            "query"=> [
+                                                "match"=> [
+                                                    "oudere.identifier"=> "$input"
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "filter"=> [
+                            "bool"=> [
+                                "must"=> [
+                                    [
+                                        "term"=> [
+                                            "user_id"=> $hulpverlener->id
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+                "sort" => [
+                    ['mantelzorger.identifier' => 'asc']
+                ]
+            ],
+        ];
+
+        if(empty($input))
+        {
+            $query['body']['query']['filtered']['query'] = ['match_all'=> []];
+        }
+
+        return $query;
     }
 
     public function download($id)
