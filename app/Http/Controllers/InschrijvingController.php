@@ -47,6 +47,12 @@ class InschrijvingController extends AdminController
 
         $count = $this->registration->count();
 
+        if($count == 0)
+        {
+            //put count to 1 to force a pagination result, instead of a regular collection.
+            $count = 1;
+        }
+
         $registrations = $search->search('beta_registrations', $this->searchQuery(), [], $count);
 
         $registrations->addQuery('query', $query);
