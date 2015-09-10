@@ -27,7 +27,7 @@ class AdminAuthenticate
                 return response('Unauthorized.', 401);
             }
             else{
-                return redirect()->route('login');
+                return redirect()->route('login')->with('error', Lang::get('master.info.not-logged-in'));
             }
         }
 

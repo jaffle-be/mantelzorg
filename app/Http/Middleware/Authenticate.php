@@ -2,6 +2,7 @@
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use Lang;
 
 class Authenticate {
 
@@ -40,7 +41,7 @@ class Authenticate {
 			}
 			else
 			{
-				return redirect()->guest('login');
+				return redirect()->guest('login')->with('error', Lang::get('master.info.not-logged-in'));
 			}
 		}
 
