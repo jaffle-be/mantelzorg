@@ -12,8 +12,8 @@
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">{{ Lang::get('master.general.cancel') }}</button>
-                <button type="button" class="btn btn-primary btn-confirm">{{ Lang::get('master.general.confirm') }}</button>
+                <a id="cancel" type="button" class="btn btn-default" data-dismiss="modal">{{ Lang::get('master.general.cancel') }}</a>
+                <a id="confirm" class="btn btn-primary btn-confirm">{{ Lang::get('master.general.confirm') }}</a>
             </div>
         </div>
     </div>

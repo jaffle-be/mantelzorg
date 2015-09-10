@@ -84,7 +84,7 @@
             <tr>
                 <th>
                     <div class="dropdown actions">
-                        <a class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" href="#">{{ Lang::get('master.tools.acties') }}&nbsp;<span class="caret">&nbsp;</span></a>
+                        <a id="actions" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" href="#">{{ Lang::get('master.tools.acties') }}&nbsp;<span class="caret">&nbsp;</span></a>
                         <ul class="dropdown-menu">
                             <li><a class="select-all" href="">{{ Lang::get('master.tools.select_all') }}</a></li>
                             <li><a class="select-none" href="">{{ Lang::get('master.tools.select_none') }}</a></li>
@@ -93,7 +93,7 @@
                                 <li><a class="export" href="">{{ Lang::get('master.tools.export') }}</a></li>
                             @endif
                             <li class="divider"></li>
-                            <li><a class="remove" href="">{{ Lang::get('master.tools.remove') }}</a></li>
+                            <li><a id="remove" class="remove" href="#">{{ Lang::get('master.tools.remove') }}</a></li>
                         </ul>
                     </div>
                 </th>

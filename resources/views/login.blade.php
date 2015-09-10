@@ -36,7 +36,7 @@
                                 @include('layout.messages')
 
                             <p class="text-center">
-                                <input class="btn btn-lg btn-primary pull-left" type="submit" value="<?= Lang::get('front.login.sign-in') ?>"/>
+                                <input class="btn btn-lg btn-primary pull-left" type="submit" id="sign-in" value="<?= Lang::get('front.login.sign-in') ?>"/>
                                 <a class='pull-right' href="<?= URL::route('reminder') ?>"><?= Lang::get('front.login.reminder') ?></a>
                             </p>
 

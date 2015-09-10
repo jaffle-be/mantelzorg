@@ -12,7 +12,7 @@
 
                 <h1>
                     <a class="navbar-brand" href="<?= $user ? route('dash') : route('home') ?>" id="brand">
-                        <img src="{{ asset('images/logo-footer.png') }}" alt="Hogent"/>
+                        <img src="{{ asset('images/logo-footer.png') }}" alt="Hogent" id="logo"/>
                         <span>Zicht op mantelzorg</span>
                     </a>
                 </h1>
@@ -21,14 +21,14 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navigation">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="http://zichtopmantelzorg.be">@lang('master.navs.blog')</a></li>
+                    <li class="active"><a href="http://zichtopmantelzorg.be" id="main-nav-blog">@lang('master.navs.blog')</a></li>
 
                     @if(!$user || $forceShowLogin)
                         <li>
                             <a id="log-in" href="{{ route('login') }}">{{ Lang::get('master.footer.login') }}</a>
                         </li>
                     @else
-                        <li><a href="<?= route('dash') ?>">@lang('master.navs.instrument')</a></li>
+                        <li><a href="<?= route('dash') ?>" id="main-nav-instrument">@lang('master.navs.instrument')</a></li>
                         <li>
                             <a id="log-out" href="{{ route('logout') }}">{{ Lang::get('master.footer.logout') }}</a>
                         </li>
