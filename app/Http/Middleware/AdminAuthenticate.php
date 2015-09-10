@@ -33,7 +33,7 @@ class AdminAuthenticate
 
         $user = $this->auth->user();
 
-        if ($user->admin == '0') {
+        if (!$user->admin) {
             return redirect()->route('dash')->with('message', Lang::get('master.info.no-right-to-section'));
         }
 
