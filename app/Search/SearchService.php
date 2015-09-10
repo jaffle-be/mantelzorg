@@ -418,6 +418,11 @@ class SearchService implements SearchServiceInterface
         ];
     }
 
+    public function getClient()
+    {
+        return $this->client;
+    }
+
     protected function cleanSort($params)
     {
         //sorts best have a unmapped_type parameter, so queries won't fail for empty document sets.

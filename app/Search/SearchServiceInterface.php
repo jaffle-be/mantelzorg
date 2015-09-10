@@ -97,4 +97,9 @@ interface SearchServiceInterface
      * @return mixed
      */
     public function boot();
+
+    /**
+     * @return mixed
+     */
+    public function getClient();
 }
