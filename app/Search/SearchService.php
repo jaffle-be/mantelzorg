@@ -258,6 +258,12 @@ class SearchService implements SearchServiceInterface
      */
     public function search($type, array $params, $with = [], $paginated = 15)
     {
+        if(isset($params['body']['sort']))
+        {
+            $params = $this->cleanSort($params);
+        }
+
+
         if($paginated)
         {
             $params['from'] = (app('request')->get('page', 1) - 1) * $paginated;
@@ -410,6 +416,52 @@ class SearchService implements SearchServiceInterface
             'id'    => $type->getSearchableId(),
             'body'  => $type->getSearchableDocument(),
         ];
+    }
+
+    protected function cleanSort($params)
+    {
+        //sorts best have a unmapped_type parameter, so queries won't fail for empty document sets.
+        $sort = $params['body']['sort'];
+
+        foreach($sort as $key => $sorting)
+        {
+            //the initial value of sorting is always an array
+            //either
+            //['column_name' => 'sort_order']
+            //or a complex one
+            //['column_name' => [array]]
+
+            $value_keys = array_keys($sorting);
+
+            $column = array_pop($value_keys);
+
+            if(is_array($sorting[$column]))
+            {
+                //the sorting is already set up as a object/array value (depends if you look at it from json or php)
+                //so we only need to verify the existence of the unmapped_type parameter.
+                if(!isset($sorting[$column]['unmapped_type']))
+                {
+                    //lets take boolean, as its probably one of the fastest.
+                    $sorting[$column]['unmapped_type'] = 'boolean';
+                }
+            }
+            else{
+                //the value represents the order in which to sort.
+                $sorting[$column] = [
+                    "order" => $sorting[$column],
+                    "unmapped_type" => 'boolean'
+                ];
+            }
+
+            //update the original array
+            $sort[$key] = $sorting;
+        }
+
+        //put the local reference back into the complete array
+        $params['body']['sort'] = $sort;
+
+        //return the entire array as a result.
+        return $params;
     }
 
 }
