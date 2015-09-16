@@ -28,7 +28,6 @@ abstract class FunctionalTest extends TestCase
         }
     }
 
-
     /**
      * Creates the application.
      *

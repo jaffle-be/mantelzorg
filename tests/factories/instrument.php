@@ -10,7 +10,7 @@ use Laracasts\TestDummy\Factory;
 
 $factory(Questionnaire::class, 'survey', function (Faker\Generator $faker) {
     return [
-        'title'  => $faker->sentence(),
+        'title'  => substr($faker->sentence(), 0, 30),
         'active' => 0
     ];
 });
