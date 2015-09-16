@@ -1,0 +1,57 @@
+@import 'variables';
+
+.mantelzorgers .mantelzorger {
+
+  padding: 15px 0 15px 0;
+  border-bottom: 1px solid @border-color;
+
+  &:nth-child(even) {
+    background-color: @table-stripe-color;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+
+  .ouderen .body {
+    padding: 0;
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        margin-top: 5px;
+      }
+    }
+  }
+
+  .header {
+    padding-bottom: 5px;
+    line-height: 26px;
+  }
+
+  .body {
+    padding: 5px 0;
+
+    a:hover, a:active {
+      text-decoration: none;
+    }
+  }
+
+  .btn-default {
+    top: -5px;
+    font-size: 8px;
+  }
+
+}
+
+.page-actions {
+  margin-bottom: 15px;
+
+  .btn-primary .glyphicon {
+    color: white;
+    margin-right: 5px;
+  }
+}

@@ -1,0 +1,76 @@
+@import "bootstrap";
+@import "../plugins/components-font-awesome/less/font-awesome";
+@import "../plugins/metisMenu/dist/metisMenu.css";
+
+@import '../less/bootstrap/variables';
+@import '../less/bootstrap/mixins';
+@import '../less/bootstrap/buttons';
+
+@import '../less/variables';
+@import '../less/datepicker';
+@import '../less/mixins';
+@import '../less/breadcrumb';
+@import '../less/forms';
+@import '../less/mantelzorger';
+@import '../less/questionnaire';
+@import '../less/instrument';
+@import '../less/header';
+@import '../less/footer';
+@import '../less/pagination';
+@import "../less/mixins";
+@import "../less/wrapper";
+@import "../less/topbar";
+@import "../less/sidebar";
+@import "../less/tablet";
+@import "../less/panels";
+@import "../less/rapport";
+@import "../less/pdf";
+@import "../less/charts";
+
+@import "../less/navbar-tablet";
+
+//global message holder
+#global-messages .alert{
+  margin-top: 0;
+}
+
+
+html {
+  background-color: #1a1a1a;
+}
+
+p {
+  margin: 1.3em 0;
+}
+
+label {
+  color: @gray;
+  font-weight: 400;
+}
+
+a {
+  transition: all 0.15s ease-out;
+}
+
+a:active, a:hover {
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #333;
+  margin: 0;
+}
+
+#content, #beta-wrapper{
+  padding: 1.5em 0;
+}
+
+#content{
+  position: relative;
+}
+
+//this avoids drop-downs being clipped when the table doesn't contain enough rows.
+//you should set this to the height of the biggest drop-down in our app that's within a table.
+.table-responsive{
+  min-height: 300px;
+}

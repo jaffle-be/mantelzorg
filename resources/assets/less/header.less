@@ -1,0 +1,109 @@
+@import "variables";
+
+//customisations for header height can be found in the navbar bootstrap-variables and their custom rules
+//navbar-tablet.less
+
+header{
+  #brand {
+    text-transform: uppercase;
+    padding: 25px 12px;
+
+    img{
+      padding-bottom: 5px;
+    }
+
+    span{
+      border-top: 1px solid @navbar-default-color;
+    }
+
+
+    @media(max-width: @screen-xs-max)
+    {
+      padding: 15px 12px;
+
+      img{
+        display: none;
+      }
+
+      span{
+        border-top:none;
+      }
+
+    }
+  }
+
+
+  @media(max-width: @screen-xs-max)
+  {
+
+    .navbar{
+      min-height: inherit;
+    }
+
+    .navbar-brand{
+      height: auto;
+    }
+
+    .navbar-toggle{
+      margin: 8px;
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+
+header {
+  h1 {
+    font-weight: 400;
+  }
+
+  a {
+    text-transform: uppercase;
+  }
+}
+
+#page-header {
+  background-color: @brand-primary;
+  padding: 1.5em;
+
+  @media (max-width: @grid-float-breakpoint) {
+    padding: 1em;
+  }
+
+  &::after{
+    content: ' ';
+    clear:both;
+    display:block;
+  }
+
+  .left {
+    float: left;
+  }
+
+  .right {
+    float: right;
+
+    .alert {
+      font-size: 14px;
+      padding: 0.5em;
+      margin: 0;
+    }
+  }
+
+  h2 {
+    font-size: 22px;
+    line-height: 1.5em;
+    font-weight: normal;
+    text-transform: none;
+    color: @white;
+  }
+}
+
+
+@media(max-width: 767px)
+{
+  #brand{
+    font-size: 18px;
+  }
+}
