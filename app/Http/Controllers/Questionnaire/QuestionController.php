@@ -33,9 +33,7 @@ class QuestionController extends \App\Http\Controllers\AdminController
             }
         ));
 
-        return view('questionnaire.questions.index', compact('panel'))
-            ->nest('questionCreator', 'modals.question-creator', compact())
-            ->nest('choiseCreator', 'modals.choise-creator', compact());
+        return view('questionnaire.questions.index', compact('panel'));
     }
 
     public function store(Panel $panel, Factory $validator)

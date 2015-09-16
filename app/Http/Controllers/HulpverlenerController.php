@@ -126,9 +126,7 @@ class HulpverlenerController extends AdminController
              */
             $locations = $locations + array('new' => Lang::get('users.new_location'));
 
-            return view('hulpverlener.edit', compact('user', 'organisations', 'locations'))
-                ->nest('creatorOrganisations', 'modals.organisation-creator', compact('inschrijving'))
-                ->nest('creatorLocations', 'modals.location-creator', compact('inschrijving'));
+            return view('hulpverlener.edit', compact('user', 'organisations', 'locations', 'inschrijving'));
         } else {
             return Redirect::route('hulpverleners.index');
         }

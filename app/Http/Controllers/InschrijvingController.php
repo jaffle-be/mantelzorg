@@ -123,9 +123,7 @@ class InschrijvingController extends AdminController
                 + $locations
                 + array('new' => Lang::get('users.new_location'));
 
-            return view('inschrijving.edit', compact('inschrijving', 'organisations', 'locations'))
-                ->nest('creatorOrganisations', 'modals.organisation-creator', compact('inschrijving'))
-                ->nest('creatorLocations', 'modals.location-creator', compact('inschrijving'));
+            return view('inschrijving.edit', compact('inschrijving', 'organisations', 'locations', 'inschrijving'));
         } else {
             return Redirect::back();
         }

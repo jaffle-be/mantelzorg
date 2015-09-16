@@ -108,8 +108,8 @@
         <a class="btn btn-primary question-creator-trigger" href=""><?= Lang::get('questionnaires.new_question') ?></a>
     </div>
 
-    <?= $questionCreator ?>
+    @include('modals.question-creator')
 
-    <?= $choiseCreator ?>
+    @include('modals.choise-creator')
 
 @stop

@@ -103,8 +103,8 @@
     </div>
 
 
-    <?= $questionnaireCreator ?>
+    @include('modals.questionnaire-creator')
 
-    <?= $panelCreator ?>
+    @include('modals.panel-creator')
 
 @stop

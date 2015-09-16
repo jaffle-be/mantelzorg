@@ -161,14 +161,10 @@
 
     </div>
 
-
-
-
     </form>
 
+    @include('modals.organisation-creator')
 
-    <?= $creatorOrganisations ?>
-
-    <?= $creatorLocations ?>
+    @include('modals.location-creator')
 
 @stop
