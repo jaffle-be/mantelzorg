@@ -7,10 +7,10 @@ use App\Questionnaire\Questionnaire;
 use App\User;
 use Exception;
 use Illuminate\Contracts\Bus\SelfHandling;
-use Illuminate\Contracts\Queue\ShouldBeQueued;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Events\Dispatcher;
 
-class ExportJob extends Command implements ShouldBeQueued, SelfHandling{
+class ExportJob extends Command implements ShouldQueue, SelfHandling{
 
     protected $id;
 
