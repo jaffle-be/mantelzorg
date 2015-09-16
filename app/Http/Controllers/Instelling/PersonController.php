@@ -7,6 +7,7 @@ use App\Organisation\Organisation;
 use App\User;
 use Auth;
 use Hash;
+use Illuminate\Contracts\Validation\Factory;
 use Input;
 use Lang;
 use Redirect;
@@ -70,15 +71,13 @@ class PersonController extends \App\Http\Controllers\AdminController
         return view('instellingen.index', compact('user', 'organisations', 'locations'));
     }
 
-    public function update()
+    public function update(Factory $validator)
     {
         $user = Auth::user();
 
-        $validator = $this->user->validator(array('firstname', 'lastname', 'male', 'phone', 'organisation_id', 'organisation_location_id'));
-
-        $validator->sometimes('email', 'required|email|unique:users', function ($input) use ($user) {
-            return $user->email !== $input->email;
-        });
+        $validator = $validator->make(Input::all(), $this->user->rules(array_keys(Input::all()), [
+            'user' => $user->id
+        ]));
 
         /**
          * If the user has entered a new password, the current-password needs to match the existing password

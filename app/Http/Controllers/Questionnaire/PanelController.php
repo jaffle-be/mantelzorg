@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Questionnaire;
 
 use App\Questionnaire\Panel;
+use App\Questionnaire\Questionnaire;
+use Illuminate\Contracts\Validation\Factory;
 use Input;
 
 class PanelController extends \App\Http\Controllers\AdminController
@@ -20,14 +22,14 @@ class PanelController extends \App\Http\Controllers\AdminController
         $this->middleware('auth.admin');
     }
 
-    public function store($questionnaire)
+    public function store(Questionnaire $survey, Factory $validator)
     {
         $input = Input::all();
 
-        $input['questionnaire_id'] = $questionnaire->id;
+        $input['questionnaire_id'] = $survey->id;
 
         //find heighest weight, add 10 to it, if no records -> start with 0;
-        $panels = $questionnaire->panels->sortBy(function ($panel) {
+        $panels = $survey->panels->sortBy(function ($panel) {
             return $panel->panel_weight;
         }, SORT_REGULAR, true);
 
@@ -35,11 +37,14 @@ class PanelController extends \App\Http\Controllers\AdminController
 
         $input['panel_weight'] = $heighestPanel ? $heighestPanel->panel_weight + 10 : 0;
 
-        $validator = $this->panel->validator($input);
+        $validator = $validator->make($input, $this->panel->rules([], [
+            'questionnaire' => $survey->id
+        ]));
 
         if ($validator->fails()) {
             return json_encode(array(
-                'status' => 'error'
+                'status' => 'error',
+                'errors' => $validator->messages()->toArray()
             ));
         } else {
             $this->panel->create($input);
@@ -50,22 +55,25 @@ class PanelController extends \App\Http\Controllers\AdminController
         }
     }
 
-    public function update($questionnaire, $panel)
+    public function update(Questionnaire $survey, Panel $panel, Factory $validator)
     {
         $panel = $this->panel->find($panel);
 
-        $validator = $this->panel->validator();
+        $validator = $validator->make(Input::all(), $this->panel->rules(array_keys(Input::all()), [
+            'questionnaire' => $survey->id,
+            'panel' => $panel->id
+        ]));
 
         if ($validator->fails()) {
             return $validator->messages();
         } else {
-            $panel->update(Input::all());
+            $panel->update(array_except(Input::all(), '_method'));
 
             return json_encode(array('status' => 'oke'));
         }
     }
 
-    public function sort($questionnaire)
+    public function sort($survey)
     {
         $positions = Input::get('positions');
 

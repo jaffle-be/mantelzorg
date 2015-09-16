@@ -3,11 +3,13 @@
 namespace App\Questionnaire;
 
 use App\System\Database\Eloquent\Model;
+use App\System\Database\Eloquent\ValidationRules;
 use Input;
 use Validator;
 
 class Question extends Model
 {
+    use ValidationRules;
 
     protected $table = 'questionnaire_questions';
 
@@ -23,21 +25,6 @@ class Question extends Model
         'summary_question'       => 'in:0,1',
         'explainable'            => 'in:0,1',
     );
-
-    public function validator($input = null, $rules = array())
-    {
-        if (empty($input)) {
-            $input = Input::all();
-        }
-
-        if (is_string($rules)) {
-            $rules = array($rules);
-        }
-
-        $rules = array_intersect_key(static::$rules, array_flip($rules));
-
-        return Validator::make($input, $rules);
-    }
 
     public function answers()
     {

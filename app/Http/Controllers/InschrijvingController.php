@@ -8,6 +8,7 @@ use App\Search\SearchServiceInterface;
 use App\User;
 use Event;
 use Hash;
+use Illuminate\Contracts\Validation\Factory;
 use Input;
 use Lang;
 use Redirect;
@@ -130,13 +131,15 @@ class InschrijvingController extends AdminController
         }
     }
 
-    public function update()
+    public function update(Factory $validator)
     {
         $paswoord = $this->user->generateNewPassword();
 
         $input = array_merge(Input::all(), array('password' => $paswoord));
 
-        $validator = $this->user->validator(null, $input);
+        $validator = $validator->make($input, $this->user->rules(array_keys($input), [
+            'user' => $input['id']
+        ]));
 
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator->messages())->withInput();

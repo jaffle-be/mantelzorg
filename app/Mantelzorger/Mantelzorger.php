@@ -119,27 +119,6 @@ class Mantelzorger extends Model implements Searchable, Exportable
         }
     }
 
-    public function validator(array $input = [], array $rules = [], array $placeholders = [])
-    {
-        if (empty($input)) {
-            $input = Input::all();
-        }
-
-        $rules = array_merge($rules, static::$rules);
-
-        array_walk($rules, function (&$rule) use ($placeholders) {
-            foreach ($placeholders as $placeholder => $value) {
-                $rule = str_replace('#' . $placeholder, $value, $rule);
-            }
-        });
-
-        array_walk($rules, function (&$rule) {
-            $rule = preg_replace('/#[^,]+/', 'NULL', $rule);
-        });
-
-        return Validator::make($input, $rules);
-    }
-
     public function oudere()
     {
         return $this->hasMany('App\Mantelzorger\Oudere', 'mantelzorger_id');

@@ -2,8 +2,16 @@
 namespace App\Http\Controllers\Organisation;
 
 use App\Http\Controllers\AdminController;
+use Illuminate\Contracts\Validation\Factory;
 use Input;
 
+/**
+ * @todo move this controller to the hulpverleners controller, as these are actually more like resource methods
+ *       to the user instead of a actual resource on itself.
+ * Class LocationController
+ *
+ * @package App\Http\Controllers\Organisation
+ */
 class LocationController extends AdminController
 {
 
@@ -28,13 +36,13 @@ class LocationController extends AdminController
         return $organisation->locations->toJson();
     }
 
-    public function store($organisationid)
+    public function store($organisationid, Factory $validator)
     {
         $input = Input::all();
 
         $input['organisation_id'] = $organisationid;
 
-        $validator = $this->location->validator(null, $input);
+        $validator = $validator->make($input, $this->location->rules());
 
         if ($validator->fails()) {
             return array(

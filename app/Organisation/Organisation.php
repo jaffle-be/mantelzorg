@@ -2,11 +2,13 @@
 namespace App\Organisation;
 
 use App\System\Database\Eloquent\Model;
+use App\System\Database\Eloquent\ValidationRules;
 use Input;
 use Validator;
 
 class Organisation extends Model
 {
+    use ValidationRules;
 
     protected $table = 'organisations';
 
@@ -17,18 +19,6 @@ class Organisation extends Model
     protected static $rules = array(
         'name' => 'required|unique:organisations'
     );
-
-    public function validator($rules = null, $input = null)
-    {
-        if (empty($rules)) {
-            $rules = static::$rules;
-        }
-        if (empty($input)) {
-            $input = Input::all();
-        }
-
-        return Validator::make($input, $rules);
-    }
 
     public function locations()
     {

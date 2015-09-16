@@ -6,6 +6,7 @@ use App\Questionnaire\Export\Exportable;
 use App\Search\Model\Searchable;
 use App\Search\Model\SearchableTrait;
 use App\System\Database\Eloquent\Model;
+use App\System\Database\Eloquent\ValidationRules;
 use Input;
 use Validator;
 use Illuminate\Auth\Authenticatable;
@@ -17,7 +18,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 {
 
     use Authenticatable, CanResetPassword, SearchableTrait;
-
+    use ValidationRules;
     /**
      * The database table used by the model.
      *
@@ -50,7 +51,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     ];
 
     protected static $rules = array(
-        'email'                    => 'required|email|unique:users',
+        'email'                    => 'required|email|unique:users,id,#user',
         'firstname'                => 'required',
         'lastname'                 => 'required',
         'male'                     => 'required|',
@@ -158,25 +159,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
 
         return $this->attributes['firstname'] . ' ' . $this->attributes['lastname'];
-    }
-
-    public function validator($fields = null, $input = null)
-    {
-        $rules = static::$rules;
-
-        if (!empty($fields)) {
-            if (!is_array($fields)) {
-                $fields = array($fields);
-            }
-
-            $rules = array_intersect_key($rules, array_flip($fields));
-        }
-
-        if (empty($input)) {
-            $input = Input::all();
-        }
-
-        return Validator::make($input, $rules);
     }
 
     public function generateNewPassword($length = 8, $strength = 4)

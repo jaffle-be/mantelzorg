@@ -6,6 +6,7 @@ use App\Beta\Registration;
 use App\User;
 use Auth;
 use Hash;
+use Illuminate\Contracts\Validation\Factory;
 use Input;
 use Lang;
 use Password;
@@ -39,9 +40,9 @@ class IndexController extends BaseController
         return view('beta');
     }
 
-    public function postIndex()
+    public function postIndex(Factory $validator)
     {
-        $validator = $this->registration->validator();
+        $validator = $validator->make(Input::all(), $this->registration->rules());
 
         if ($validator->fails()) {
             return Redirect::to('/')->with('errors', $validator->messages())->withInput();

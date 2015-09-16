@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Questionnaire;
 
 use App\Questionnaire\Choise;
+use App\Questionnaire\Question;
+use Illuminate\Contracts\Validation\Factory;
 use Input;
 
 class ChoiseController extends \App\Http\Controllers\AdminController
@@ -20,7 +22,7 @@ class ChoiseController extends \App\Http\Controllers\AdminController
         $this->middleware('auth.admin');
     }
 
-    public function store($question)
+    public function store($question, Factory $validator)
     {
         $choises = $question->choises;
         $sort = count($choises) * 10;
@@ -30,7 +32,7 @@ class ChoiseController extends \App\Http\Controllers\AdminController
             'sort_weight' => $sort,
         ));
 
-        $validator = $this->choise->validator($input, array('title', 'question_id'));
+        $validator = $validator->make($input, $this->choise->rules());
 
         if ($validator->fails()) {
             return json_encode(array(
@@ -46,16 +48,12 @@ class ChoiseController extends \App\Http\Controllers\AdminController
         ));
     }
 
-    public function update($question, $choise)
+    public function update(Question $question, Choise $choise, Factory $validator)
     {
-        $choise = $this->choise->find($choise);
-
         if ($choise) {
-            $field = $this->field();
-
             $input = Input::all();
 
-            $validator = $this->choise->validator($input, $field);
+            $validator = $validator->make($input, $this->choise->rules(array_keys($input)));
 
             if ($validator->fails()) {
                 return json_encode(array(
@@ -64,7 +62,7 @@ class ChoiseController extends \App\Http\Controllers\AdminController
                 ));
             }
 
-            $choise->update($input);
+            $choise->update(array_except($input, '_method'));
 
             return json_encode(array(
                 'status' => 'oke'

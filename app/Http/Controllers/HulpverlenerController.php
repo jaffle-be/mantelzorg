@@ -8,6 +8,7 @@ use App\Search\SearchServiceInterface;
 use App\User;
 use Event;
 use Hash;
+use Illuminate\Contracts\Validation\Factory;
 use Input;
 use Lang;
 use Redirect;
@@ -86,11 +87,6 @@ class HulpverlenerController extends AdminController
         return $query;
     }
 
-    protected function finishIndexQuery($query)
-    {
-        return $query->with('organisation')->paginate();
-    }
-
     public function edit($id)
     {
         $user = $this->user->find($id);
@@ -138,7 +134,7 @@ class HulpverlenerController extends AdminController
         }
     }
 
-    public function update($id)
+    public function update($id, Factory $validator)
     {
         $user = $this->user->find($id);
 
@@ -155,16 +151,7 @@ class HulpverlenerController extends AdminController
             $input['admin'] = '0';
         }
 
-        $validator = $this->user->validator(array(
-            'firstname', 'lastname', 'male', 'phone',
-            'organisation_id', 'organisation_location_id',
-            'admin', 'active'
-        ), $input);
-
-        //validation rule if email was changed
-        $validator->sometimes('email', 'required|email|unique:users', function ($input) use ($user) {
-            return $user->email !== $input->email;
-        });
+        $validator = $validator->make(Input::all(), $user->rules(array_keys(Input::all()), ['user' => $user->id]));
 
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator->messages())->withInput($input);

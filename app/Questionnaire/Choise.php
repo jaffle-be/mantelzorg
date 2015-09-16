@@ -3,11 +3,13 @@
 namespace App\Questionnaire;
 
 use App\System\Database\Eloquent\Model;
+use App\System\Database\Eloquent\ValidationRules;
 use Input;
 use Validator;
 
 class Choise extends Model
 {
+    use ValidationRules;
 
     protected $table = 'questionnaire_choises';
 
@@ -18,21 +20,6 @@ class Choise extends Model
         'title'       => 'required',
         'sort_weight' => 'required|integer'
     );
-
-    public function validator($input = null, $rules = null)
-    {
-        if (empty($input)) {
-            $input = Input::all();
-        }
-
-        if (is_string($rules)) {
-            $rules = array($rules);
-        }
-
-        $rules = array_intersect(static::$rules, array_flip($rules));
-
-        return Validator::make($input, $rules);
-    }
 
     public function question()
     {

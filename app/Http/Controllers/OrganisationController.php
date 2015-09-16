@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Organisation\Organisation;
+use Illuminate\Contracts\Validation\Factory;
 use Input;
 
 class OrganisationController extends AdminController
@@ -20,11 +21,11 @@ class OrganisationController extends AdminController
         $this->middleware('auth.admin');
     }
 
-    public function store()
+    public function store(Factory $validator)
     {
         $name = Input::get('name');
 
-        $validator = $this->organisation->validator();
+        $validator = $validator->make(Input::all(), $this->organisation->rules());
 
         if ($validator->fails()) {
             return array(

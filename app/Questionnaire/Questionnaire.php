@@ -2,11 +2,13 @@
 namespace App\Questionnaire;
 
 use App\System\Database\Eloquent\Model;
+use App\System\Database\Eloquent\ValidationRules;
 use Input;
 use Validator;
 
 class Questionnaire extends Model
 {
+    use ValidationRules;
 
     protected $table = 'questionnaires';
 
@@ -20,21 +22,6 @@ class Questionnaire extends Model
     public function scopeActive($query)
     {
         $query->where('active', '1');
-    }
-
-    public function validator($input = null, $fields = array())
-    {
-        if (empty($input)) {
-            $input = Input::all();
-        }
-
-        if (is_string($fields)) {
-            $fields = array($fields);
-        }
-
-        $rules = array_intersect_key(static::$rules, array_flip($fields));
-
-        return Validator::make($input, $rules);
     }
 
     public function questions()

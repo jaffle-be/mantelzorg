@@ -150,28 +150,6 @@ class Oudere extends Model implements Searchable, Exportable
     {
         return $this->firstname . ' ' . $this->lastname;
     }
-
-    public function validator($input = array(), $rules = array(), array $placeholders = [])
-    {
-        if (empty($input)) {
-            $input = Input::all();
-        }
-
-        $rules = array_merge($rules, static::$rules);
-
-        array_walk($rules, function (&$rule) use ($placeholders) {
-            foreach ($placeholders as $placeholder => $value) {
-                $rule = str_replace('#' . $placeholder, $value, $rule);
-            }
-        });
-
-        array_walk($rules, function (&$rule) {
-            $rule = preg_replace('/#[^,]+/', 'NULL', $rule);
-        });
-
-        return Validator::make($input, $rules);
-    }
-
     public function setBirthdayAttribute($value)
     {
         if (!empty($value)) {

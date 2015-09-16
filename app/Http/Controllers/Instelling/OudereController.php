@@ -96,7 +96,9 @@ class OudereController extends \App\Http\Controllers\AdminController
     {
         $input = $this->processValue($request->except('_token'), Context::MANTELZORGER_RELATION);
 
-        $this->dispatchFromArray(UpdateOudere::class , ['mantelzorger' => $mantelzorger, 'oudere' => $oudere, 'input' => $input]);
+        $input = array_except($input, ['_method']);
+
+        $status = $this->dispatchFromArray(UpdateOudere::class , ['mantelzorger' => $mantelzorger, 'oudere' => $oudere, 'input' => $input]);
 
         return Redirect::route('instellingen.{hulpverlener}.mantelzorgers.index', $mantelzorger->hulpverlener_id);
     }

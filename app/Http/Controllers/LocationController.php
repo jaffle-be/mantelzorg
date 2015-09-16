@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Validation\Factory;
 use Input;
 
 class LocationController extends AdminController
@@ -19,9 +20,9 @@ class LocationController extends AdminController
         $this->middleware('auth.admin');
     }
 
-    public function store()
+    public function store(Factory $validator)
     {
-        $validator = $this->location->validator();
+        $validator = $validator->make(Input::all(), $this->location->rules());
 
         if ($validator->fails()) {
             return array(

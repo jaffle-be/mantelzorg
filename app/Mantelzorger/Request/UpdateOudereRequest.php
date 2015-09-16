@@ -18,9 +18,9 @@ class UpdateOudereRequest extends Request{
     public function rules(Oudere $oudere, Mantelzorger $mantelzorger)
     {
         return $oudere->rules([], [
-            'oudere'       => $oudere->id,
-            'mantelzorger' => $mantelzorger->id
-        ]);
+            'oudere'       => $this->route()->parameter('oudere')->id,
+            'mantelzorger' => $this->route()->parameter('mantelzorger')->id
+        ], ['oudere_id', 'mantelzorger_id']);
     }
 
     public function authorize()

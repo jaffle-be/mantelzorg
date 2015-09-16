@@ -9,7 +9,13 @@ trait ValidationRules
         //certain rules which were necessary in the first implementation of validation.
         //when we were still at laravel 4.0 when validation
         //was done in the controller using Validator::make()
-        $rules = array_merge($rules, static::$rules);
+        if(empty($rules))
+        {
+            $rules = static::$rules;
+        }
+        else{
+            $rules = array_intersect_key(static::$rules, array_flip($rules));
+        }
 
         array_walk($rules, function (&$rule) use ($placeholders) {
             foreach ($placeholders as $placeholder => $value) {
@@ -17,6 +23,7 @@ trait ValidationRules
             }
         });
 
+        //replace any pattern that's not been changed yet.
         array_walk($rules, function (&$rule) {
             $rule = preg_replace('/#[^,]+/', 'NULL', $rule);
         });

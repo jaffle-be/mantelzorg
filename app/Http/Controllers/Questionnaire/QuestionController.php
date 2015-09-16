@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Questionnaire;
 
+use App\Questionnaire\Panel;
 use App\Questionnaire\Question;
+use Illuminate\Validation\Factory;
 use Input;
 
 class QuestionController extends \App\Http\Controllers\AdminController
@@ -36,16 +38,19 @@ class QuestionController extends \App\Http\Controllers\AdminController
             ->nest('choiseCreator', 'modals.choise-creator', compact());
     }
 
-    public function store($panel)
+    public function store(Panel $panel, Factory $validator)
     {
+        $validator = $validator->make(Input::all(), $this->question->rules(array_keys(Input::all()), [
+            'questionnaire_id'       => $panel->questionnaire->id,
+            'questionnaire_panel_id' => $panel->id,
+        ]));
 
         $input = Input::all();
+
         $input = array_merge($input, array(
             'questionnaire_id'       => $panel->questionnaire->id,
             'questionnaire_panel_id' => $panel->id,
         ));
-
-        $validator = $this->question->validator($input);
 
         if ($validator->fails()) {
             return json_encode(array(
@@ -61,13 +66,11 @@ class QuestionController extends \App\Http\Controllers\AdminController
         }
     }
 
-    public function update($panel, $question)
+    public function update(Panel $panel, Question $question, Factory $validator)
     {
         $question = $this->question->find($question);
 
-        $fields = $this->fields();
-
-        $validator = $this->question->validator(null, $fields);
+        $validator = $validator->make(Input::all(), $question->rules(array_keys(Input::all())));
 
         if ($validator->fails()) {
             return json_encode(array(
@@ -83,15 +86,4 @@ class QuestionController extends \App\Http\Controllers\AdminController
         ));
     }
 
-    /**
-     * since all updates only update 1 field, we can retrieve it by return the first key
-     */
-    protected function fields()
-    {
-        $input = Input::all();
-
-        $input = array_keys($input);
-
-        return array_pop($input);
-    }
 }

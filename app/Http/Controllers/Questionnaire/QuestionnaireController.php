@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Questionnaire;
 
 use App\Questionnaire\Questionnaire;
+use Illuminate\Contracts\Validation\Factory;
 use Input;
 
 class QuestionnaireController extends \App\Http\Controllers\AdminController
@@ -33,29 +34,27 @@ class QuestionnaireController extends \App\Http\Controllers\AdminController
             ->nest('panelCreator', 'modals.panel-creator');
     }
 
-    public function store()
+    public function store(Factory $validator)
     {
-        $validator = $this->questionnaire->validator();
+        $validator = $validator->make(Input::all(), $this->questionnaire->rules());
 
         if ($validator->fails()) {
             return json_encode(array('status' => 'error', 'errors' => $validator->messages()->toArray()));
         }
 
-        $questionnaire = $this->questionnaire->create(Input::all());
+        $this->questionnaire->create(Input::all());
 
         return json_encode(array('status' => 'oke'));
     }
 
-    public function update($questionnaire)
+    public function update(Questionnaire $survey, Factory $validator)
     {
-        $questionnaire = $this->questionnaire->find($questionnaire);
-
-        $validator = $this->questionnaire->validator(null, Input::has('title') ? 'title' : 'active');
+        $validator = $validator->make(Input::all(), $survey->rules(array_keys(Input::all()), []));
 
         if ($validator->fails()) {
             return $validator->messages();
         } else {
-            $questionnaire->update(Input::all());
+            $survey->update(Input::all());
 
             return json_encode(array('status' => 'oke'));
         }

@@ -5,13 +5,14 @@ namespace App\Beta;
 use App\Search\Model\Searchable;
 use App\Search\Model\SearchableTrait;
 use App\System\Database\Eloquent\Model;
+use App\System\Database\Eloquent\ValidationRules;
 use Input;
 use Validator;
 
 class Registration extends Model implements Searchable
 {
 
-    use SearchableTrait;
+    use SearchableTrait, ValidationRules;
 
     protected $table = 'beta_registrations';
 
@@ -32,24 +33,11 @@ class Registration extends Model implements Searchable
 
     protected $fillable = array('firstname', 'lastname', 'email', 'organisation');
 
-    public function validator(array $input = array(), array $rules = array())
-    {
-        if (empty($input)) {
-            $input = Input::all();
-        }
-
-        if (empty($rules)) {
-            $rules = static::$rules;
-        }
-
-        return Validator::make($input, $rules);
-    }
-
     protected static $rules = array(
         'firstname'    => 'required',
         'lastname'     => 'required',
         'email'        => 'required|email|unique:beta_registrations',
-        'organisation' => array('required', 'firm-name' => 'regex:/^[a-zA-Z09 -\.]+$/')
+        'organisation' => ['required', 'firm-name' => 'regex:/^[a-zA-Z09 -\.]+$/']
     );
 
 }
