@@ -2,12 +2,12 @@
 
 namespace App\Mantelzorger;
 
+use App\HandleBirthdayTrait;
 use App\Questionnaire\Export\Exportable;
 use App\Search\Model\Searchable;
 use App\Search\Model\SearchableTrait;
 use App\System\Database\Eloquent\Model;
 use App\System\Database\Eloquent\ValidationRules;
-use Carbon\Carbon;
 use Input;
 use Validator;
 
@@ -17,6 +17,7 @@ class Mantelzorger extends Model implements Searchable, Exportable
     use SearchableTrait;
     use MantelzorgerSkills;
     use ValidationRules;
+    use HandleBirthDayTrait;
 
     protected static $searchableMapping = [
         'male'       => [
@@ -103,20 +104,6 @@ class Mantelzorger extends Model implements Searchable, Exportable
     public function getFullnameAttribute()
     {
         return $this->firstname . ' ' . $this->lastname;
-    }
-
-    public function setBirthdayAttribute($value)
-    {
-        if (!empty($value)) {
-
-            if(preg_match('/(\d{1,2}\/){2}\d{4}/', $value))
-            {
-                $this->attributes['birthday'] = Carbon::createFromFormat('d/m/Y', $value);
-            }
-            else{
-                $this->attributes['birtday'] = Carbon::createFromFormat('Y-m-d H:i:s', $value);
-            }
-        }
     }
 
     public function oudere()
