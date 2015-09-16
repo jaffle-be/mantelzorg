@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Organisation\OrganisationRepositoryInterface;
 use App\Questionnaire\Export\Exporter;
 use App\Questionnaire\Export\FileManager;
+use App\Questionnaire\Jobs\ExportJob;
 use App\Questionnaire\Questionnaire;
 use App\UserRepositoryInterface;
 use Input;
@@ -72,7 +73,7 @@ class RapportController extends AdminController
             return Redirect::back()->with('errors', $validator->messages())->withInput();
         }
 
-        $this->dispatchFromArray('App\Questionnaire\Jobs\ExportJob', ['id' => $id, 'userid' => $user->id, 'filters' => $filters]);
+        $this->dispatchFromArray(ExportJob::class, ['id' => $id, 'userid' => $user->id, 'filters' => $filters]);
 
         return Redirect::back()->with('success', \Lang::get('rapport.success'));
     }
