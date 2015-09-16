@@ -26,7 +26,7 @@ return [
 	|
 	*/
 
-	'url' => env('APP_URL'),
+	'url' => env('APP_ENV') == 'testing' ? 'http://testing.local:8000' : env('APP_URL'),
 
 	/*
 	|--------------------------------------------------------------------------
