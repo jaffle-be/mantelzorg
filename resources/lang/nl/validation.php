@@ -75,9 +75,8 @@ return [
     "unique"               => ":attribute is al in gebruik.",
     "url"                  => ":attribute is geen geldige URL.",
 
-
-    "captcha"       => ":attribute komt niet overeen.",
-    "passcheck"     => ":attribute is niet correct.",
+    "captcha"              => ":attribute komt niet overeen.",
+    "passcheck"            => ":attribute is niet correct.",
 
     /*
     |--------------------------------------------------------------------------
@@ -107,7 +106,7 @@ return [
     |
     */
 
-    'attributes'    => [
+    'attributes'           => [
         'title'                    => 'titel',
         'message'                  => 'boodschap',
         'captcha'                  => 'anti-spam',
@@ -134,6 +133,7 @@ return [
         'oorzaak_hulpbehoefte_id'  => 'oorzaak hulpbehoefte',
         'bel_profiel_id'           => 'bel profiel',
         'mantelzorger_relation_id' => 'relatie met mantelzorger',
+        'question'                 => 'vraagstelling',
     ],
 
 ];
