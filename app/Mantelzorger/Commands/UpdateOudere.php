@@ -24,15 +24,14 @@ class UpdateOudere extends Command implements SelfHandling{
 
     public function __construct(Mantelzorger $mantelzorger, Oudere $oudere, array $input)
     {
-
         $this->mantelzorger = $mantelzorger;
         $this->oudere = $oudere;
         $this->input = $input;
     }
 
-    public function handle(Oudere $oudere)
+    public function handle()
     {
-        return $oudere->update($this->input);
+        return $this->oudere->update($this->input);
     }
 
 }
