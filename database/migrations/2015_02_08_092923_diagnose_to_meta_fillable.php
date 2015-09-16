@@ -47,8 +47,11 @@ class DiagnoseToMetaFillable extends Migration
 
         $context = Context::where('context', Context::OORZAAK_HULPBEHOEFTE)->first();
 
-        Value::where('context_id', $context->id)->delete();
-        $context->delete();
+        if($context)
+        {
+            Value::where('context_id', $context->id)->delete();
+            $context->delete();
+        }
 
         Context::where('context', Context::MANTELZORGER_RELATION)
             ->update(['context' => 'relation_mantelzorger_oudere']);
