@@ -16,7 +16,7 @@ class UserRepository implements UserRepositoryInterface
 
     public function getForSelect()
     {
-        return $this->user->newQuery()->select([DB::raw("concat(`firstname`, ' ', `lastname`) as fullname"), 'id', 'firstname', 'lastname'])->orderBy('firstname')->orderBy('lastname')->lists('fullname', 'id');
+        return $this->user->newQuery()->select([DB::raw("concat(`firstname`, ' ', `lastname`) as fullname"), 'id', 'firstname', 'lastname'])->orderBy('firstname')->orderBy('lastname')->lists('fullname', 'id')->all();
     }
 
     public function findByOrganisation($organisation)

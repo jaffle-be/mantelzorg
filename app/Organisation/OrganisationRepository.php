@@ -11,6 +11,6 @@ class OrganisationRepository implements OrganisationRepositoryInterface{
 
     public function getForSelect()
     {
-        return $this->organisation->orderBy('name')->lists('name', 'id');
+        return $this->organisation->orderBy('name')->lists('name', 'id')->all();
     }
 }

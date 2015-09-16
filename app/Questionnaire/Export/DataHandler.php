@@ -220,7 +220,7 @@ class DataHandler
     {
         $sessions->load($this->relations);
 
-        $sessionIds = $sessions->lists('id');
+        $sessionIds = $sessions->lists('id')->all();
 
         $answers = $this->repository->getAnswers($sessionIds);
         $choises = $this->repository->getChoises($sessionIds);

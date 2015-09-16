@@ -47,7 +47,7 @@ class RapportController extends AdminController
     {
         $questionnaires = $this->questionnaire->orderBy('title')->get();
 
-        $questionnaires = ['' => Lang::get('rapport.select_survey')] + $questionnaires->lists('title', 'id');
+        $questionnaires = ['' => Lang::get('rapport.select_survey')] + $questionnaires->lists('title', 'id')->all();
 
         $hulpverleners = $this->users->getForSelect();
 
@@ -80,7 +80,7 @@ class RapportController extends AdminController
     public function download($filename)
     {
         if ($this->files->exists($filename)) {
-            return Response::download(app_path('storage') . '/exports/' . $filename);
+            return Response::download(storage_path('exports/' . $filename));
         } else {
             return Redirect::route('rapport.index');
         }

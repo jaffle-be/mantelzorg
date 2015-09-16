@@ -45,7 +45,7 @@ class StatsController extends AdminController
             ->where('context', $column)
             ->first();
 
-        $labels = $context->values->lists('value', 'id');
+        $labels = $context->values->lists('value', 'id')->all();
 
         foreach ($stats as $stat) {
             if ($stat->label) {
@@ -64,7 +64,7 @@ class StatsController extends AdminController
             ->groupBy('date')
             ->select([DB::raw('count(id) as value'), DB::raw("date_format(created_at, '%j') as date")])
             ->whereRaw('date_sub(now(), interval 1 month) < created_at')
-            ->lists('value', 'date');
+            ->lists('value', 'date')->all();
 
         $now = Carbon::now();
 

@@ -43,7 +43,7 @@
             <?= Form::select(
                     'mantelzorger', array('' => Lang::get('instrument.kies_mantelzorger')) + $hulpverlener->mantelzorgers->sortBy(function ($item) {
                         return $item->displayName;
-                    })->lists('displayName', 'id'), null, array(
+                    })->lists('displayName', 'id')->all(), null, array(
                             'id'    => 'mantelzorger-select',
                             'class' => 'form-control'
                     )
