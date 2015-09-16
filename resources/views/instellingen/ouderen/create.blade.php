@@ -45,7 +45,7 @@
 
                         <label for="identifier"><?= Lang::get('users.identifier') ?></label>
                         @if($errors->has('identifier'))
-                            <span class="errors">{{ $errors->first('identifier') }}</span>
+                            <span class="errors error-identifier">{{ $errors->first('identifier') }}</span>
                         @endif
                         <div class="input-group">
                             <?= Form::text('identifier', null, array('class' => 'form-control')) ?>
@@ -54,7 +54,7 @@
 
                         <label for="firstname"><?= Lang::get('users.firstname') ?></label>
                         @if($errors->has('firstname'))
-                            <span class="errors">{{ $errors->first('firstname') }}</span>
+                            <span class="errors error-firstname">{{ $errors->first('firstname') }}</span>
                         @endif
                         <div class="input-group">
                             <?= Form::text('firstname', null, array('class' => 'form-control')) ?>
@@ -63,7 +63,7 @@
 
                         <label for="lastname"><?= Lang::get('users.lastname') ?></label>
                         @if($errors->has('lastname'))
-                            <span class="errors">{{ $errors->first('lastname') }}</span>
+                            <span class="errors error-lastname">{{ $errors->first('lastname') }}</span>
                         @endif
                         <div class="input-group">
                             <?= Form::text('lastname', null, array('class' => 'form-control')) ?>
@@ -82,7 +82,7 @@
                                 </div>
 
                                 @if($errors->has('birthday'))
-                                    <span class="errors">
+                                    <span class="errors error-birthday">
                                 {{ $errors->first('birthday') }}
                             </span>
                                 @endif
@@ -103,7 +103,7 @@
                                     </div>
                                 </div>
 
-                                <span class="block errors"><?= $errors->first('male') ?></span>
+                                <span class="block errors error-male"><?= $errors->first('male') ?></span>
                             </div>
 
                         </div>
@@ -115,7 +115,7 @@
 
                         <label for="street"><?= Lang::get('users.street') ?></label>
                         @if($errors->has('street'))
-                            <span class="errors">{{ $errors->first('street') }}</span>
+                            <span class="errors error-street">{{ $errors->first('street') }}</span>
                         @endif
                         <div class="input-group">
                             <?= Form::text('street', null, array('class' => 'form-control')) ?>
@@ -132,7 +132,7 @@
                                     <span class="input-group-addon"><i class="fa fa-road"></i></span>
                                 </div>
                                 @if($errors->has('postal'))
-                                    <span class="errors">{{ $errors->first('postal') }}</span>
+                                    <span class="errors error-postal">{{ $errors->first('postal') }}</span>
                                 @endif
 
                             </div>
@@ -146,7 +146,7 @@
                                     <span class="input-group-addon"><i class="fa fa-road"></i></span>
                                 </div>
                                 @if($errors->has('city'))
-                                    <span class="errors">{{ $errors->first('city') }}</span>
+                                    <span class="errors error-city">{{ $errors->first('city') }}</span>
                                 @endif
 
                             </div>
@@ -154,7 +154,7 @@
 
                         <label for="email"><?= Lang::get('users.email') ?></label>
                         @if($errors->has('email'))
-                            <span class="errors">{{ $errors->first('email') }}</span>
+                            <span class="errors error-">{{ $errors->first('email') }}</span>
                         @endif
                         <div class="input-group">
                             <?= Form::text('email', null, array('class' => 'form-control')) ?>
@@ -164,7 +164,7 @@
                         <label for="phone"><?= Lang::get('users.phone') ?></label>
 
                         @if($errors->has('phone'))
-                            <span class="errors">{{ $errors->first('phone') }}</span>
+                            <span class="errors error-phone">{{ $errors->first('phone') }}</span>
                         @endif
 
                         <div class="input-group">
@@ -187,7 +187,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
 
-                        <span class="block errors"><?= $errors->first('mantelzorger_relation') ?></span>
+                        <span class="block errors error-mantelzorger-relation"><?= $errors->first('mantelzorger_relation') ?></span>
 
                         <label for="mantelzorger_relation_id"><?= Lang::get('users.relatie_mantelzorger') ?></label>
 
@@ -206,7 +206,7 @@
 
                         <?= Form::select('woonsituatie_id', $woonsituaties, null, array('id' => 'woonsituatie_id', 'class' => 'form-control')) ?>
 
-                        <span class="errors">{{$errors->first('woonsituatie_id')}}</span>
+                        <span class="errors error-woonsituatie">{{$errors->first('woonsituatie_id')}}</span>
                     </div>
 
                     <div class="col-xs-12 col-md-6">
@@ -214,7 +214,7 @@
 
                         <?= Form::select('oorzaak_hulpbehoefte_id', $hulpbehoeftes, null, array('id' => 'oorzaak_hulpbehoefte_id', 'class' => 'form-control')) ?>
 
-                        <span class="errors">{{$errors->first('oorzaak_hulpbehoefte_id')}}</span>
+                        <span class="errors error-oorzaak-hulpbehoefte">{{$errors->first('oorzaak_hulpbehoefte_id')}}</span>
                     </div>
 
                     <div class="col-xs-12 col-md-6">

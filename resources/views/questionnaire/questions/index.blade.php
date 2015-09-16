@@ -25,15 +25,15 @@
         @foreach($panel->questions as $question)
             <div class="question row" data-question-id="<?= $question->id ?>">
                 <div class="left col-md-6">
-                    <label for="title">
+                    <label for="title{{$question->id}}">
                         <?= Lang::get('questionnaires.title') ?>
                     </label>
-                    <input class="form-control" type="text" name="title" id="title" value="<?= $question->title ?>"/>
+                    <input class="form-control" type="text" name="title" id="title{{$question->id}}" value="<?= $question->title ?>"/>
 
-                    <label for="question">
+                    <label for="question{{$question->id}}">
                         <?= Lang::get('questionnaires.question') ?>
                     </label>
-                    <textarea class="form-control" type="text" name="question" id="question"><?= $question->question ?></textarea>
+                    <textarea class="form-control" type="text" name="question" id="question{{$question->id}}"><?= $question->question ?></textarea>
                 </div>
                 <div class="right col-md-offset-1 col-md-5">
                     <div class="header">
@@ -66,11 +66,11 @@
                     </div>
 
                     <div>
-                        <label for="extra_info<?= $question->id ?>">
+                        <label for="meta<?= $question->id ?>">
                             <?= Lang::get('questionnaires.meta') ?>
                         </label>
 
-                        <textarea class="form-control meta" type="text" name="meta" id="question"><?= $question->meta ?></textarea>
+                        <textarea class="form-control meta" type="text" name="meta" id="meta{{$question->id}}"><?= $question->meta ?></textarea>
 
                     </div>
                 </div>

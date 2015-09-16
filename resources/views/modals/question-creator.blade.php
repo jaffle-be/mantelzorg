@@ -10,20 +10,19 @@
                 <?= Form::open(['method' => 'post']) ?>
 
                 <label><?= Lang::get('questionnaires.title') ?></label>
-                @if($errors->has('title'))
-                    <span class="errors">{{ $errors->first('title') }}</span>
-                @endif
+
                 <div class="input-group">
                     <?= Form::text('title', null, array('class' => 'form-control')) ?>
                     <span class="input-group-addon"><i class="fa fa-tag"></i></span>
                 </div>
 
+                    <div id="error-title" class="alert alert-danger hide" data-target="title"></div>
+
 
                 <label><?= Lang::get('questionnaires.question') ?></label>
-                @if($errors->has('question'))
-                    <span class="errors">{{ $errors->first('question') }}</span>
-                @endif
-                <?= Form::textarea('question', null, array('class' => 'form-control')) ?>
+                <?= Form::textarea('question', null, array('class' => 'form-control', 'style' => "margin-bottom:10px;")) ?>
+
+                    <div id="error-question" class="alert alert-danger hide" data-target="question"></div>
 
                 <div class="checkbox">
                     <label>

@@ -37,7 +37,9 @@
 
                     <div class="col-md-6">
                         <label for="identifier"><?= Lang::get('users.identifier') ?></label>
-                        <span class="errors">{{ $errors->first('identifier') }}</span>
+                        @if($errors->has('identifier'))
+                        <span class="error-identifier errors">{{ $errors->first('identifier') }}</span>
+                        @endif
 
                         <div class="input-group">
                             <?= Form::text('identifier', null, array('class' => 'form-control')) ?>
@@ -45,7 +47,10 @@
                         </div>
 
                         <label for="firstname"><?= Lang::get('users.firstname') ?></label>
-                        <span class="errors"><?= $errors->first('firstname') ?></span>
+
+                        @if($errors->has('firstname'))
+                            <span class="error-firstname errors">{{ $errors->first('firstname') }}</span>
+                        @endif
 
                         <div class="input-group">
                             <?= Form::text('firstname', null, array('class' => 'form-control')) ?>
@@ -53,7 +58,9 @@
                         </div>
 
                         <label for="lastname"><?= Lang::get('users.lastname') ?></label>
-                        <span class="errors"><?= $errors->first('lastname') ?></span>
+                        @if($errors->has('lastname'))
+                            <span class="error-lastname errors">{{ $errors->first('lastname') }}</span>
+                        @endif
 
                         <div class="input-group">
                             <?= Form::text('lastname', null , array('class' => 'form-control')) ?>
@@ -66,7 +73,9 @@
                             <div class="col-md-6">
                                 <label for="birthday"><?= Lang::get('users.birthday') ?></label>
 
-                                <span class="block errors"><?= $errors->first('birthday') ?></span>
+                                @if($errors->has('birthday'))
+                                    <span class="block error-birthday errors">{{ $errors->first('birthday') }}</span>
+                                @endif
 
                                 <div class="input-group">
                                     <?= Form::text('birthday', null, array('class' => 'form-control datepicker')) ?>
@@ -76,7 +85,9 @@
 
                             <div class="col-md-6 gender">
 
-                                <span class="block errors"><?= $errors->first('male') ?></span>
+                                @if($errors->has('male'))
+                                    <span class="block error-male errors">{{ $errors->first('male') }}</span>
+                                @endif
 
                                 <div>
                                     <div class="radio-inline">
@@ -98,7 +109,9 @@
                     <div class="col-md-6">
 
                         <label for="street"><?= Lang::get('users.street') ?></label>
-                        <span class="errors"><?= $errors->first('street') ?></span>
+                        @if($errors->has('street'))
+                            <span class="error-street errors">{{ $errors->first('street') }}</span>
+                        @endif
 
                         <div class="input-group">
                             <?= Form::text('street', null, array('class' => 'form-control')) ?>
@@ -113,7 +126,9 @@
                                     <?= Form::text('postal', null, array('class' => 'form-control')) ?>
                                     <span class="input-group-addon"><i class="fa fa-road"></i></span>
                                 </div>
-                                <span class="block errors"><?= $errors->first('postal') ?></span>
+                                @if($errors->has('postal'))
+                                    <span class="block error-postal errors">{{ $errors->first('postal') }}</span>
+                                @endif
                             </div>
 
                             <div class="col-md-8">
@@ -123,12 +138,16 @@
                                     <?= Form::text('city', null, array('class' => 'form-control')) ?>
                                     <span class="input-group-addon"><i class="fa fa-road"></i></span>
                                 </div>
-                                <span class="block errors"><?= $errors->first('city') ?></span>
+                                @if($errors->has('city'))
+                                    <span class="block error-city errors">{{ $errors->first('city') }}</span>
+                                @endif
                             </div>
                         </div>
 
                         <label for="email"><?= Lang::get('users.email') ?></label>
-                        <span class="errors"><?= $errors->first('email') ?></span>
+                        @if($errors->has('email'))
+                            <span class="error-email errors">{{ $errors->first('email') }}</span>
+                        @endif
 
                         <div class="input-group">
                             <?= Form::text('email', null, array('class' => 'form-control')) ?>
@@ -136,7 +155,9 @@
                         </div>
 
                         <label for="phone"><?= Lang::get('users.phone') ?></label>
-                        <span class="errors"><?= $errors->first('phone') ?></span>
+                        @if($errors->has('phone'))
+                            <span class="error-phone errors">{{ $errors->first('phone') }}</span>
+                        @endif
 
                         <div class="input-group">
                             <?= Form::text('phone', null, array('class' => 'form-control')) ?>

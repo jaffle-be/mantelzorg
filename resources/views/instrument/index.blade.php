@@ -108,7 +108,7 @@
             <tbody>
             <? $teller = 1; ?>
             <? foreach($surveys as $survey): ?>
-            <tr>
+            <tr data-session-id="{{$survey->id}}">
                 <td>
                     {{$teller}} <input type="checkbox" value="{{$survey->id}}"/>
                 </td>

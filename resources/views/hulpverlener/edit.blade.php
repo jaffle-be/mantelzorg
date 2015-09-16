@@ -33,7 +33,7 @@
                 <legend><?= Lang::get('users.persoonlijk') ?></legend>
 
                 <label for="firstname"><?= Lang::get('users.firstname') ?></label>
-                <span class="errors"><?= $errors->first('firstname') ?></span>
+                <span class="errors error-firstname"><?= $errors->first('firstname') ?></span>
 
                 <div class="input-group">
                     <?= Form::text('firstname', null, array('class' => 'form-control')) ?>
@@ -42,7 +42,7 @@
 
 
                 <label for="lastname"><?= Lang::get('users.lastname') ?></label>
-                <span class="errors"><?= $errors->first('lastname') ?></span>
+                <span class="errors error-lastname"><?= $errors->first('lastname') ?></span>
 
                 <div class="input-group">
                     <?= Form::text('lastname', null, array('class' => 'form-control')) ?>
@@ -50,24 +50,24 @@
                 </div>
 
 
-                <span class="errors"><?= $errors->first('male') ?></span>
+                <span class="errors error-male"><?= $errors->first('male') ?></span>
 
                 <div>
                     <div class="radio-inline">
                         <label>
-                            <?= Form::radio('male', 1) ?><?= Lang::get('users.male') ?>&nbsp;<i class="fa fa-male"></i>
+                            <?= Form::radio('male', 1, ['id' => 'male']) ?><?= Lang::get('users.male') ?>&nbsp;<i class="fa fa-male"></i>
                         </label>
                     </div>
                     <div class="radio-inline">
                         <label>
-                            <?= Form::radio('male', 0) ?><?= Lang::get('users.female') ?>&nbsp;<i class="fa fa-female"></i>
+                            <?= Form::radio('male', 0, ['id' => 'female']) ?><?= Lang::get('users.female') ?>&nbsp;<i class="fa fa-female"></i>
                         </label>
                     </div>
                 </div>
 
 
                 <label for="phone"><?= Lang::get('users.phone') ?></label>
-                <span class="errors"><?= $errors->first('phone') ?></span>
+                <span class="errors error-phone"><?= $errors->first('phone') ?></span>
 
                 <div class="input-group">
                     <?= Form::text('phone', null, array('class' => 'form-control')) ?>
@@ -85,7 +85,7 @@
                 <label for="organisation">
                     <?= Lang::get('users.organisatie') ?>
                 </label>
-                <span class="errors"><?= $errors->first('organisation_id') ?></span>
+                <span class="errors error-organisation_id"><?= $errors->first('organisation_id') ?></span>
 
                 <div class="input-select">
                     <?= Form::select('organisation_id', $organisations, null, array(
@@ -96,7 +96,7 @@
                 </div>
 
                 <label for="locations"><?= Lang::get('users.locations') ?></label>
-                <span class="errors"><?= $errors->first('organisation_location_id') ?></span>
+                <span class="errors error-organisation_location_id"><?= $errors->first('organisation_location_id') ?></span>
                 <?= Form::select('organisation_location_id', $locations, null, array(
                         'id'            => 'location',
                         'class'         => 'form-control',
@@ -120,7 +120,7 @@
                     <div class="col-md-6">
 
                         <label for="email"><?= Lang::get('users.email') ?></label>
-                        <span class="errors"><?= $errors->first('email') ?></span>
+                        <span class="errors error-email"><?= $errors->first('email') ?></span>
 
                         <div class="input-group">
                             <?= Form::text('email', null, array('class' => 'form-control')) ?>
