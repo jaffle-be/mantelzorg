@@ -1,57 +1,50 @@
 <?php namespace App\Questionnaire\Jobs;
 
+use App\Commands\Command;
 use App\Questionnaire\Export\Exporter;
 use App\Questionnaire\Export\ExportLogger;
 use App\Questionnaire\Questionnaire;
 use App\User;
 use Exception;
+use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Contracts\Queue\ShouldBeQueued;
 use Illuminate\Events\Dispatcher;
-use Illuminate\Queue\Jobs\Job;
 
-class ExportJob {
+class ExportJob extends Command implements ShouldBeQueued, SelfHandling{
 
-    /**
-     * @var Exporter
-     */
-    protected $export;
+    protected $id;
 
-    protected $questionnaire;
+    protected $userid;
 
-    protected $logger;
+    protected $filters;
 
-    protected $events;
-
-    protected $user;
-
-    public function __construct(Questionnaire $questionnaire, Exporter $export, ExportLogger $logger, Dispatcher $events, User $user)
+    public function __construct($id, $userid, $filters)
     {
-        $this->questionnaire = $questionnaire;
-        $this->export = $export;
-        $this->logger = $logger;
-        $this->events = $events;
-        $this->user = $user;
+        $this->id = $id;
+        $this->userid = $userid;
+        $this->filters = $filters;
     }
 
-    public function fire(Job $job, $payload)
+    public function handle(Questionnaire $questionnaire, Exporter $export, ExportLogger $logger, Dispatcher $events, User $user)
     {
         try{
-            $this->logger->start($payload['id']);
+            $logger->start($this->id);
 
-            $survey = $this->questionnaire->find($payload['id']);
+            $survey = $questionnaire->find($this->id);
 
-            $user = $this->user->find($payload['userid']);
+            $user = $user->find($this->userid);
 
-            $filename = $this->export->generate($survey, $payload['filters']);
+            $filename = $export->generate($survey, $this->filters);
 
-            $this->logger->stop($survey);
+            $logger->stop($survey);
 
             \Event::fire('rapport.generated', [$user, $survey, $filename]);
 
-            $job->delete();
+            $this->job->delete();
         }
         catch(Exception $e)
         {
-            $this->logger->error($e);
+            $logger->error($e);
 
             \Event::fire('rapport.failed', [$user, $survey]);
         }

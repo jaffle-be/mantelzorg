@@ -72,7 +72,7 @@ class RapportController extends AdminController
             return Redirect::back()->with('errors', $validator->messages())->withInput();
         }
 
-        Queue::push('App\Questionnaire\Jobs\ExportJob@fire', ['id' => $id, 'userid' => $user->id, 'filters' => $filters]);
+        $this->dispatchFromArray('App\Questionnaire\Jobs\ExportJob', ['id' => $id, 'userid' => $user->id, 'filters' => $filters]);
 
         return Redirect::back()->with('success', \Lang::get('rapport.success'));
     }
