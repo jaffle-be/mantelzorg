@@ -9,7 +9,7 @@
 
                 <?= Form::open(array(
                         'method' => 'post',
-                        'route'  => 'questionnaires.store',
+                        'route'  => 'survey.store',
                         'class'  => 'form-horizontal',
                 )) ?>
 

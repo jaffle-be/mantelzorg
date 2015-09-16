@@ -4,7 +4,7 @@
     <?= Template::crumb(array(
             array(
                     'text' => Lang::get('master.navs.questionnaires'),
-                    'href' => URL::route('questionnaires.index')
+                    'href' => route('survey.index')
             ),
             array(
                     'text' => Lang::get('master.navs.panels'),

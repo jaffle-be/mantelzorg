@@ -66,8 +66,6 @@ class QuestionController extends \App\Http\Controllers\AdminController
 
     public function update(Panel $panel, Question $question, Factory $validator)
     {
-        $question = $this->question->find($question);
-
         $validator = $validator->make(Input::all(), $question->rules(array_keys(Input::all())));
 
         if ($validator->fails()) {

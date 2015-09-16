@@ -57,8 +57,6 @@ class PanelController extends \App\Http\Controllers\AdminController
 
     public function update(Questionnaire $survey, Panel $panel, Factory $validator)
     {
-        $panel = $this->panel->find($panel);
-
         $validator = $validator->make(Input::all(), $this->panel->rules(array_keys(Input::all()), [
             'questionnaire' => $survey->id,
             'panel' => $panel->id

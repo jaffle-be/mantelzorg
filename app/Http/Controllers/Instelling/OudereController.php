@@ -75,8 +75,6 @@ class OudereController extends \App\Http\Controllers\AdminController
 
     public function edit($mantelzorger, $oudere)
     {
-        $oudere = $this->oudere->find($oudere);
-
         if ($oudere) {
             $relations_mantelzorger = $this->getRelationsMantelzorger();
 

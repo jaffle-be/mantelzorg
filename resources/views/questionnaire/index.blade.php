@@ -68,7 +68,7 @@
                                             </ul>
                                         </div>
                                         <div class="input-group-btn">
-                                            <a href="<?= URL::route('panels.{panel}.questions.index', array($panel->id)) ?>" class="btn btn-default">
+                                            <a href="<?= URL::route('panel.{panel}.question.index', array($panel->id)) ?>" class="btn btn-default">
                                                 <i class="fa fa-tag"></i>
                                             </a>
                                         </div>

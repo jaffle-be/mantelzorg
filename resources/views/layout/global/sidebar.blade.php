@@ -17,7 +17,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="{{ route('questionnaires.index') }}" id="nav-surveys"><span class="fa fa-file-text-o"></span>&nbsp;{{ Lang::get('master.navs.questionnaires') }}
+                    <a href="{{ route('survey.index') }}" id="nav-surveys"><span class="fa fa-file-text-o"></span>&nbsp;{{ Lang::get('master.navs.questionnaires') }}
                     </a>
                 </li>
                 <li>

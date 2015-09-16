@@ -35,8 +35,11 @@ class RouteServiceProvider extends ServiceProvider
         $router->pattern('mantelzorgers', '\d+');
         $router->model('mantelzorgers', 'App\Mantelzorger\Mantelzorger');
 
-        $router->pattern('questionnaire', '\d+');
-        $router->model('questionnaire', 'App\Questionnaire\Questionnaire');
+        $router->pattern('oudere', '\d+');
+        $router->model('oudere', 'App\Mantelzorger\Oudere');
+
+        $router->pattern('survey', '\d+');
+        $router->model('survey', 'App\Questionnaire\Questionnaire');
 
         $router->pattern('panel', '\d+');
         $router->model('panel', 'App\Questionnaire\Panel');
@@ -44,8 +47,11 @@ class RouteServiceProvider extends ServiceProvider
         $router->pattern('question', '\d+');
         $router->model('question', 'App\Questionnaire\Question');
 
-        $router->pattern('survey', '\d+');
-        $router->model('survey', 'App\Questionnaire\Session');
+        $router->pattern('session', '\d+');
+        $router->model('session', 'App\Questionnaire\Session');
+
+        $router->pattern('choise', '\d+');
+        $router->model('choise', 'App\Questionnaire\Choise');
 
         parent::boot($router);
     }

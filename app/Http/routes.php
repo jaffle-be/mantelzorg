@@ -81,12 +81,12 @@ Route::post('instrument/destroy', [
     'as'   => 'instrument.destroy'
 ]);
 
-Route::post('instrument/{panel}/{survey}', [
+Route::post('instrument/{panel}/{session}', [
     'uses' => 'InstrumentController@postPanel',
     'as'   => 'instrument.panel.submit'
 ]);
 
-Route::get('instrument/{panel}/{survey}', [
+Route::get('instrument/{panel}/{session}', [
     'uses' => 'InstrumentController@getPanel',
     'as'   => 'instrument.panel.get'
 ]);
@@ -121,17 +121,17 @@ Route::post('hulpverleners/destroy', ['uses' => 'HulpverlenerController@destroy'
  * QUESTIONAIRES
  */
 
-Route::resource('questionnaires', 'Questionnaire\QuestionnaireController', ['only' => ['index', 'store', 'update']]);
+Route::resource('survey', 'Questionnaire\QuestionnaireController', ['only' => ['index', 'store', 'update']]);
 
-Route::resource('questionnaires/{questionnaire}/panels', 'Questionnaire\PanelController', ['only' => ['store', 'update']]);
+Route::resource('survey/{survey}/panel', 'Questionnaire\PanelController', ['only' => ['store', 'update']]);
 
-Route::post('questionnaires/{questionnaire}/panels/sort', 'Questionnaire\PanelController@sort');
+Route::post('survey/{survey}/panel/sort', 'Questionnaire\PanelController@sort');
 
-Route::resource('panels/{panel}/questions', 'Questionnaire\QuestionController', ['only' => ['index', 'store', 'update']]);
+Route::resource('panel/{panel}/question', 'Questionnaire\QuestionController', ['only' => ['index', 'store', 'update']]);
 
-Route::resource('questions/{question}/choises', 'Questionnaire\ChoiseController', ['only' => ['store', 'update']]);
+Route::resource('question/{question}/choise', 'Questionnaire\ChoiseController', ['only' => ['store', 'update']]);
 
-Route::post('questions/{question}/choises/sort', 'Questionnaire\ChoiseController@sort');
+Route::post('question/{question}/choise/sort', 'Questionnaire\ChoiseController@sort');
 
 /**
  * API ROUTES
