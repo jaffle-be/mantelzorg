@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App;
-use Illuminate\Foundation\Bus\DispatchesCommands;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller;
 
 class BaseController extends Controller
 {
-    use DispatchesCommands;
+    use DispatchesJobs;
 
 //    /**
 //     * Setup the layout used by the controller.
