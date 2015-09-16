@@ -1,9 +1,11 @@
-<?php
+<?php namespace Test;
 
+use App\Organisation\Organisation;
 use App\User;
+use Hash;
 use Integrated\AnnotationReader;
-use Integrated\DatabaseTransactions;
-use Laracasts\Integrated\Extensions\Selenium;
+use Integrated\Selenium;
+use Laracasts\Integrated\Extensions\Traits\WorksWithDatabase;
 use Laracasts\Integrated\Services\Laravel\Application;
 use Laracasts\TestDummy\Factory;
 
@@ -11,10 +13,11 @@ abstract class AcceptanceTest extends Selenium
 {
 
     use Application;
-    use DatabaseTransactions;
-    use TestingTrait;
+    use WorksWithDatabase;
 
     protected $baseUrl;
+
+    protected $user;
 
     /**
      * We want to use our own AnnotationReader
@@ -32,22 +35,56 @@ abstract class AcceptanceTest extends Selenium
     }
 
     /**
+     * Do not merge with acceptance reset elasticsearch,
+     * they will fire at wrong times and bug our tests.
      * @setUp
+     * @priority 1
+     */
+    protected function resetElasticsearch()
+    {
+        $search = app('App\Search\SearchServiceInterface');
+
+        $types = config('search.types');
+
+        $types = array_keys($types);
+
+        foreach ($types as $type) {
+            $search->flush($type);
+        }
+    }
+
+    /**
+     * @setUp
+     * @priority 2
      */
     public function login()
     {
-        $user = Factory::create('admin', ['password' => Hash::make('password')]);
+        $this->user = Factory::create('user', [
+            'email' => 'thomas@digiredo.be',
+            'password' => Hash::make('password')
+        ]);
 
         $this->visit(route('login'))
-            ->submitForm('Aanmelden', ['email' => $user->email, 'password' => 'password']);
+            ->submitForm('Aanmelden', ['email' => $this->user->email, 'password' => 'password']);
     }
 
     /**
      * @tearDown
+     * @priority 2
      */
     public function logoutUser()
     {
         User::whereNotNull('id')->delete();
+    }
+
+
+    /**
+     * @tearDown
+     * @priority 3
+     */
+    public function cleanDb()
+    {
+        Organisation::whereNotNull('id')->delete();
     }
 
     /**
@@ -58,17 +95,18 @@ abstract class AcceptanceTest extends Selenium
         $this->baseUrl = env('APP_URL');
     }
 
+    public function visit($uri)
+    {
+        usleep(50);
+
+        return parent::visit($uri);
+    }
+
     protected function open($uri)
     {
-        if (!$this->session) {
-            throw new Exception('Need to call visit before using the open method. as we need an open browser');
-        }
+        usleep(50);
 
-        $this->session->open($uri);
-
-        $this->updateCurrentUrl();
-
-        return $this;
+        return parent::open($uri);
     }
 
 }

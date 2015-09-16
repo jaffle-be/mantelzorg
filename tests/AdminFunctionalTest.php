@@ -1,8 +1,8 @@
-<?php
+<?php namespace Test;
 
 use Laracasts\TestDummy\Factory;
 
-class AdminFunctionalTest extends FunctionalTest
+abstract class AdminFunctionalTest extends FunctionalTest
 {
     protected function login(array $payload = [])
     {
