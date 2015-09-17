@@ -16,10 +16,10 @@ var gulp = require('gulp'),
 
 gulp.task('master', function()
 {
-    gulp.src('app/frontend/css/**/*.less', {base:'app/frontend/css'})
+    gulp.src('resources/assets/css/**/*.less', {base:'resources/assets/css'})
         .pipe(plumb())
         .pipe(less())
-        .pipe(autoprefixer())
+        //.pipe(autoprefixer())
         .pipe(minify())
         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest('public/css'));
@@ -29,28 +29,28 @@ gulp.task('js', function()
 {
     gulp.src([
         //other plugins
-        'app/components/metisMenu/src/metisMenu.js',
-        'app/components/moment/min/moment-with-locales.js',
+        'resources/assets/plugins/metisMenu/dist/metisMenu.js',
+        'resources/assets/plugins/moment/min/moment-with-locales.js',
 
-        'app/frontend/js/plugins/boot.js',
-        'app/frontend/js/plugins/viewport.js',
-        'app/frontend/js/plugins/organisations.js',
-        'app/frontend/js/plugins/locations.js',
-        'app/frontend/js/plugins/questionnaires.js',
-        'app/frontend/js/plugins/questionnaire-panel.js',
-        'app/frontend/js/plugins/questionnaire-saver.js',
-        'app/frontend/js/plugins/question-creator.js',
-        'app/frontend/js/plugins/choise-creator.js',
-        'app/frontend/js/plugins/question-saver.js',
-        'app/frontend/js/plugins/bootstrap-datepicker.js',
-        'app/frontend/js/plugins/start.js'
+        'resources/assets/js/plugins/boot.js',
+        'resources/assets/js/plugins/viewport.js',
+        'resources/assets/js/plugins/organisations.js',
+        'resources/assets/js/plugins/locations.js',
+        'resources/assets/js/plugins/questionnaires.js',
+        'resources/assets/js/plugins/questionnaire-panel.js',
+        'resources/assets/js/plugins/questionnaire-saver.js',
+        'resources/assets/js/plugins/question-creator.js',
+        'resources/assets/js/plugins/choise-creator.js',
+        'resources/assets/js/plugins/question-saver.js',
+        'resources/assets/js/plugins/bootstrap-datepicker.js',
+        'resources/assets/js/plugins/start.js'
     ])
         .pipe(plumb())
         .pipe(concat('master.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('public/js'));
 
-    gulp.src('app/frontend/js/*.js')
+    gulp.src('resources/assets/js/*.js')
         .pipe(uglify())
         .pipe(rename({suffix:'.min'}))
         .pipe(gulp.dest('public/js'));
@@ -62,31 +62,31 @@ gulp.task('js', function()
  */
 gulp.task('libs', function()
 {
-    gulp.src('app/components/modernizr/modernizr.js')
+    gulp.src('resources/assets/plugins/modernizr/modernizr.js')
         .pipe(plumb())
         .pipe(uglify())
         .pipe(rename('modernizr.min.js'))
         .pipe(gulp.dest('public/js'));
 
     gulp.src([
-        'app/components/jquery/dist/jquery.min.js',
-        'app/components/bootstrap/dist/js/bootstrap.min.js',
+        'resources/assets/plugins/jquery/dist/jquery.min.js',
+        'resources/assets/plugins/bootstrap/dist/js/bootstrap.min.js',
     ])
         .pipe(plumb())
         .pipe(gulp.dest('public/js'));
 
     gulp.src(
-        'app/components/bootstrap/dist/fonts/*'
+        'resources/assets/plugins/bootstrap/dist/fonts/*'
     )
         .pipe(plumb())
         .pipe(gulp.dest('public/fonts'));
 
     gulp.src([
-        'app/components/jquery-ui/ui/core.js',
-        'app/components/jquery-ui/ui/widget.js',
-        'app/components/jquery-ui/ui/mouse.js',
-        'app/components/jquery-ui/ui/position.js',
-        'app/components/jquery-ui/ui/sortable.js'
+        'resources/assets/plugins/jquery-ui/ui/core.js',
+        'resources/assets/plugins/jquery-ui/ui/widget.js',
+        'resources/assets/plugins/jquery-ui/ui/mouse.js',
+        'resources/assets/plugins/jquery-ui/ui/position.js',
+        'resources/assets/plugins/jquery-ui/ui/sortable.js'
     ])
         .pipe(plumb())
         .pipe(concat('jquery-ui.custom.min.js'))
@@ -95,10 +95,11 @@ gulp.task('libs', function()
 });
 
 gulp.task('default', ['watch']);
+gulp.task('compile', ['master', 'js', 'libs']);
 
 gulp.task('watch', function()
 {
-    gulp.watch('app/frontend/css/*.less', ['master']);
-    gulp.watch('app/frontend/less/**/*.less', ['master']);
-    gulp.watch('app/frontend/js/**/*.js', ['js'])
+    gulp.watch('resources/assets/css/*.less', ['master']);
+    gulp.watch('resources/assets/less/**/*.less', ['master']);
+    gulp.watch('resources/assets/js/**/*.js', ['js'])
 });
