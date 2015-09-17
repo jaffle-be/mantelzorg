@@ -21,6 +21,8 @@ return [
             'exclude' => [
                 storage_path(),
                 base_path('vendor'),
+                base_path('node_modules'),
+                base_path('resources/assets/plugins'),
             ],
         ],
 
@@ -54,7 +56,7 @@ return [
          * timestamp as the filename. With these options You can
          * specify a prefix and a suffix for the filename.
          */
-        'prefix' => '',
+        'prefix' => 'auto-backup-',
         'suffix' => '',
     ],
 
