@@ -10,15 +10,18 @@ use App\System\Database\Eloquent\ValidationRules;
 use Input;
 use Validator;
 use Illuminate\Auth\Authenticatable;
+use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract, Searchable, Exportable
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract, Searchable, Exportable, AuthorizableContract
 {
 
     use Authenticatable, CanResetPassword, SearchableTrait;
     use ValidationRules;
+    use Authorizable;
     /**
      * The database table used by the model.
      *

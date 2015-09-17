@@ -150,6 +150,7 @@ return [
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
+		'App\Providers\AuthServiceProvider',
 
 
 		'Intouch\LaravelNewrelic\NewrelicServiceProvider',
@@ -218,6 +219,7 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+		'Gate' => Illuminate\Support\Facades\Gate::class,
 
 		/**
 		 * Extra laravel components facades
