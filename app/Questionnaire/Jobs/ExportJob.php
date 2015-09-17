@@ -9,8 +9,11 @@ use Exception;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Events\Dispatcher;
+use Illuminate\Queue\InteractsWithQueue;
 
 class ExportJob extends Command implements ShouldQueue, SelfHandling{
+
+    use InteractsWithQueue;
 
     protected $id;
 
