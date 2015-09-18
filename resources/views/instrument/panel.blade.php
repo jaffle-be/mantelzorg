@@ -13,7 +13,7 @@
             ),
             array(
                     'text' => Lang::get('master.navs.start'),
-                    'href' => URL::route('instrument')
+                    'href' => URL::route('dash')
             ),
             array(
                     'text' => Lang::get('instrument.panel')
@@ -25,10 +25,10 @@
 
     <div class="instrument panel-{{ $panel->color }}">
 
-        <?= Form::open(array(
-                'route' => array('instrument.panel.submit', $panel->id, $survey->id),
+        <?= Form::open([
+                'route' => ['instrument.panel.submit', $panel->id, $survey->id],
                 'id'    => 'panel-form'
-        )) ?>
+        ]) ?>
 
         @include('instrument.template.header', ['panel' => $panel])
 
