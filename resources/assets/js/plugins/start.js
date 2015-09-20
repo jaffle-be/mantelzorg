@@ -1,6 +1,8 @@
 (function ($, app) {
     $(document).ready()
     {
+        $.material.init();
+
         app.datepickers();
 
         app.getIds = function ($element) {

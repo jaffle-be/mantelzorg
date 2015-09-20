@@ -21,7 +21,9 @@ class HomePageTest extends FunctionalTest
 
         $this->visit(route('home'))
             ->submitForm('Meld je aan', $user)
-            ->seeInDatabase('beta_registrations', $user);
+            ->seeInDatabase('beta_registrations', $user)
+            ->seePageIs(route('home'))
+            ->see('alert alert-success');
     }
 
     public function testLoginLink()

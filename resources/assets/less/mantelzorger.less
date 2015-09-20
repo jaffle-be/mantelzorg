@@ -1,48 +1,61 @@
 @import 'variables';
 
-.mantelzorgers .mantelzorger {
+.mantelzorgers{
 
-  padding: 15px 0 15px 0;
-  border-bottom: 1px solid @border-color;
-
-  &:nth-child(even) {
-    background-color: @table-stripe-color;
+  .card{
+    max-height: 450px;
   }
 
-  &:last-child {
-    border-bottom: none;
-  }
+  .mantelzorger {
+    border-bottom: 1px solid @border-color;
 
+    &:nth-child(even) {
+      background-color: @table-stripe-color;
+    }
 
-  .ouderen .body {
-    padding: 0;
+    &:last-child {
+      border-bottom: none;
+    }
 
-    ul {
-      list-style: none;
-      padding: 0;
+    .ouderen {
+      margin-top: 1.5em;
 
-      li {
-        margin-top: 5px;
+      .body {
+        padding: 0;
+
+        ul {
+          list-style: none;
+          padding: 0;
+
+          li {
+            margin-top: 5px;
+          }
+        }
       }
     }
-  }
 
-  .header {
-    padding-bottom: 5px;
-    line-height: 26px;
-  }
+    .header {
+      padding-bottom: 5px;
 
-  .body {
-    padding: 5px 0;
 
-    a:hover, a:active {
-      text-decoration: none;
+      h5
+      {
+        line-height: 36px;
+      }
+
+      .btn{
+        margin:0;
+      }
     }
-  }
 
-  .btn-default {
-    top: -5px;
-    font-size: 8px;
+    .body {
+      padding: 5px 0;
+
+      a:hover, a:active {
+        text-decoration: none;
+      }
+    }
+
   }
 
 }

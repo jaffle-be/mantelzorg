@@ -20,3 +20,11 @@ function simple_paginator($data)
 
     echo $presenter->render();
 }
+
+
+function br2nl($text)
+{
+    $breaks = ["<br />","<br>","<br/>","<br />","&lt;br /&gt;","&lt;br/&gt;","&lt;br&gt;"];
+    $text = str_ireplace($breaks, "\r\n", $text);
+    return $text;
+}

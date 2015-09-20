@@ -37,7 +37,7 @@ class Registration extends Model implements Searchable
         'firstname'    => 'required',
         'lastname'     => 'required',
         'email'        => 'required|email|unique:beta_registrations',
-        'organisation' => ['required', 'firm-name' => 'regex:/^[a-zA-Z09 -\.]+$/']
+        'organisation' => 'required',
     );
 
 }

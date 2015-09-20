@@ -44,9 +44,9 @@
 
             @endforeach
 
-            @include('instrument.template.footer', [ 'panel' => $panel, 'next' => $panel->nextPanel() ])
-
         </div>
+
+            @include('instrument.template.footer', [ 'panel' => $panel, 'next' => $panel->nextPanel() ])
 
         <? Form::close() ?>
 

@@ -13,66 +13,64 @@
 
 @section('content')
 
-    @if(Auth::user()->admin || Session::get('hijack-original'))
+    <div class="card shadow-z-1">
+        <div class="card-body">
 
-        <form method="POST" action="{{ route('import') }}" enctype="multipart/form-data">
+            @if(Auth::user()->admin || Session::get('hijack-original'))
 
-            <p class="clearfix">
-                <input type="file" name="import" class="pull-left" style="margin-right:20px;"/>
+                <form method="POST" action="{{ route('import') }}" enctype="multipart/form-data">
 
-                <input class="btn btn-warning pull-left" type="submit" value="{{ Lang::get('master.tools.import') }}"/>
-            </p>
+                    <p class="clearfix">
+                        <input type="file" name="import" class="pull-left" style="margin-right:20px;"/>
 
-        </form>
+                        <button class="btn btn-warning pull-left" type="submit">{{ Lang::get('master.tools.import') }}</button>
+                    </p>
 
-    @endif
+                </form>
 
-    <?= Form::open(array(
-            'class'  => 'form-horizontal',
-            'id'     => 'creator-form',
-            'name'   => 'instrument-persons',
-            'method' => 'POST',
-            'route'  => 'instrument.submit'
-    )); ?>
+            @endif
 
-    <div class="well">{{ Lang::get('instrument.introduction') }}</div>
+            <?= Form::open(array(
+                    'class'  => '',
+                    'id'     => 'creator-form',
+                    'name'   => 'instrument-persons',
+                    'method' => 'POST',
+                    'route'  => 'instrument.submit'
+            )); ?>
 
-    <div class="row">
+            <div class="alert alert-info">{{ Lang::get('instrument.introduction') }}</div>
 
-        <div class="col-md-6">
-            <?= Form::select(
-                    'mantelzorger', array('' => Lang::get('instrument.kies_mantelzorger')) + $hulpverlener->mantelzorgers->sortBy(function ($item) {
-                        return $item->displayName;
-                    })->lists('displayName', 'id')->all(), null, array(
-                            'id'    => 'mantelzorger-select',
-                            'class' => 'form-control'
-                    )
-            ) ?>
+            <div class="row">
 
-        </div>
+                    <div class="form-group col-md-6">
+                    <?= Form::select(
+                            'mantelzorger', array('' => Lang::get('instrument.kies_mantelzorger')) + $hulpverlener->mantelzorgers->sortBy(function ($item) {
+                                return $item->displayName;
+                            })->lists('displayName', 'id')->all(), null, array(
+                                    'id'    => 'mantelzorger-select',
+                                    'class' => 'form-control col-md-6'
+                            )
+                    ) ?>
+                    </div>
 
-        <div class="col-md-6">
-            <?= Form::select('oudere', array(), null, array(
-                    'class' => 'form-control hide',
-                    'id'    => 'ouderen-select'
-            )) ?>
-        </div>
 
-    </div>
+                <div class="form-group col-md-6">
+                    <?= Form::select('oudere', array(), null, array(
+                            'class' => 'form-control hide col-md-6',
+                            'id'    => 'ouderen-select'
+                    )) ?>
+                </div>
 
-    <div class="row page-actions">
-        <div class="col-md-12">
+            </div>
+
             <div class="alert alert-danger" style="display:none;"><?= Lang::get('instrument.need_persons_selected') ?></div>
+
+            <button class="btn btn-primary" type="submit"><?= Lang::get('master.general.confirm') ?></button>
+
+            <?= Form::close() ?>
+
         </div>
     </div>
-
-    <div class="row page-actions">
-        <div class="col-md-12">
-            <input class="btn btn-primary" type="submit" value="<?= Lang::get('master.general.confirm') ?>"/>
-        </div>
-    </div>
-
-    <?= Form::close() ?>
 
     <? if(count($surveys)): ?>
 
@@ -110,7 +108,13 @@
             <? foreach($surveys as $survey): ?>
             <tr data-session-id="{{$survey->id}}">
                 <td>
-                    {{$teller}} <input type="checkbox" value="{{$survey->id}}"/>
+                    <div class="checkbox">
+                        <label class="control-label" for="row{{$teller}}">
+                            <input type="checkbox" id="row{{$teller}}" value="{{$survey->id}}"/>
+                            {{$teller}}
+                        </label>
+                    </div>
+
                 </td>
                 <td><?= $survey->mantelzorger->displayName ?></td>
                 <td><?= $survey->oudere->displayName ?></td>

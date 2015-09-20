@@ -54,7 +54,15 @@
             @foreach($users as $user)
 
                 <tr>
-                    <td>{{ $teller }} <input type="checkbox" id="row{{$teller}}" value="{{$user->id}}"/></td>
+                    <td>
+                        <div class="checkbox">
+                            <label class="control-label" for="row{{$teller}}">
+                                <input type="checkbox" id="row{{$teller}}" value="{{$user->id}}"/>
+                                {{ $teller }}
+                            </label>
+                        </div>
+
+                    </td>
                     <td>
                         <a href="<?= URL::route('hulpverleners.edit', array($user->id)) ?>">{{ $user->firstname . ' ' . $user->lastname}}</a>
                     </td>

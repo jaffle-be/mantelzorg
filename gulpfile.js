@@ -71,13 +71,16 @@ gulp.task('libs', function()
     gulp.src([
         'resources/assets/plugins/jquery/dist/jquery.min.js',
         'resources/assets/plugins/bootstrap/dist/js/bootstrap.min.js',
+        'resources/assets/plugins/bootstrap-material-design/dist/js/material.min.js',
+        'resources/assets/plugins/bootstrap-material-design/dist/js/ripples.min.js',
     ])
         .pipe(plumb())
         .pipe(gulp.dest('public/js'));
 
-    gulp.src(
-        'resources/assets/plugins/bootstrap/dist/fonts/*'
-    )
+    gulp.src([
+        'resources/assets/plugins/bootstrap/dist/fonts/*',
+        'resources/assets/plugins/bootstrap-material-design/dist/fonts/*'
+    ])
         .pipe(plumb())
         .pipe(gulp.dest('public/fonts'));
 

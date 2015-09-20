@@ -48,7 +48,7 @@
             this.$container.on('change', '.name', function () {
                 that.name($(this));
             });
-            this.$right.on('change', '.meta', function () {
+            this.$container.on('change', '.meta', function () {
                 that.meta($(this));
             });
         },

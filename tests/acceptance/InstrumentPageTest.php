@@ -129,15 +129,23 @@ class InstrumentPageTest extends AcceptanceTest
         $this->updateCurrentUrl();
 
         //we should now have been redirected to the dash, and the session should be finished
-        $this->wait(1)
+        $this->wait(1000)
+            ->snap()
             ->seePageIs(route('dash'))
             ->assertSame(1, $this->crawler->filter("tr[data-session-id='$session->id'] .fa-check-square-o")->count());
     }
 
     protected function fillPanel($panel)
     {
+        //the first question on the page is open,
+        //the others arent -> so we'll first need to click the header.
+        //
         foreach($panel->questions as $question)
         {
+            if(!$this->isOpen($question))
+            {
+                $this->toggle($question);
+            }
 
             if($question->multiple_choise && !$question->multiple_answer)
             {
@@ -149,14 +157,14 @@ class InstrumentPageTest extends AcceptanceTest
             {
                 //fill 1 mc-ma question
                 $choise = $question->choises->first();
-                $this->findCss(sprintf("[data-question-id='%d'] [value='%d']", $question->id, $choise->id))->click();
+                $this->find('choise' . $choise->id)->click();
                 $choise = $question->choises->last();
-                $this->findCss(sprintf("[data-question-id='%d'] [value='%d']", $question->id, $choise->id))->click();
+                $this->find('choise' . $choise->id)->click();
             }
             else if($question->explainable)
             {
                 //fill 1 explainable question
-                $this->typeWrapped("[data-question-id='$question->id']", "explanation$question->id", 'some new explanation');
+                $this->typeWrapped($this->wrapper($question), "explanation$question->id", 'some new explanation');
             }
 
             //summary question can be either explainable and/or (mc or mc-ma)
@@ -164,5 +172,25 @@ class InstrumentPageTest extends AcceptanceTest
         }
     }
 
+    protected function isOpen($question)
+    {
+        return $this->findWrapped($this->wrapper($question), '.fa-comment')->displayed();
+    }
+
+    protected function toggle($question)
+    {
+        $this->findWrapped($this->wrapper($question), '.header')->click();
+        $this->wait(1500);
+    }
+
+    /**
+     * @param $question
+     *
+     * @return string
+     */
+    protected function wrapper($question)
+    {
+        return "[data-question-id='$question->id']";
+    }
 
 }

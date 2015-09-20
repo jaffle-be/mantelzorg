@@ -62,7 +62,7 @@ abstract class FunctionalTest extends TestCase
         return $this;
     }
 
-    public function isChecked($name, $value)
+    public function myChecked($name, $value)
     {
         $checked = $this->crawler->filter("input[name=$name]:checked")->attr('value');
 

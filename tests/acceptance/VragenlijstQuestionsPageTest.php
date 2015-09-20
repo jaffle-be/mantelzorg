@@ -62,15 +62,15 @@ class VragenlijstQuestionsPageTest extends AdminAcceptanceTest
         $this->typeWrapped($wrapper, "title$question->id", "some new title");
         $this->typeWrapped($wrapper, "question$question->id", "some new question");
         $this->typeWrapped($wrapper, "meta$question->id", "some new meta");
-        $this->findWrapped($wrapper, ".summary_question")->click();
-        $this->findWrapped($wrapper, ".explainable")->click();
-        $this->findWrapped($wrapper, ".multiple_choise")->click();
+        $this->findWrapped($wrapper, ".summary_question_control")->click();
+        $this->findWrapped($wrapper, ".explainable_control")->click();
+        $this->findWrapped($wrapper, ".multiple_choise_control")->click();
         $this->wait(1000);
-        $this->findWrapped($wrapper, ".multiple_answer")->click();
+        $this->findWrapped($wrapper, ".multiple_answer_control")->click();
 
         //unfocus to trigger save
         $this->click('page-header');
-        $this->wait(1000)
+        $this->wait(1500)
             ->seeInDatabase('questionnaire_questions', [
                 'id' => $question->id,
                 'questionnaire_id' => $panel->questionnaire_id,

@@ -19,99 +19,113 @@ $show = ($first && $tabletOrMobile) || !$tabletOrMobile ? '' : 'display:none';
 
 ?>
 
-<div class="instrument-question question-{{$panel->color}}" data-question-id="{{ $question->id }}" style="{{ $show }}">
+<div class="card shadow-z-1 instrument-question question-{{$panel->color}}" data-question-id="{{ $question->id }}" style="{{ $show }}">
 
-    {{--wrapper for borders on desktops--}}
-    <div>
-        {{--question header--}}
-        <div class="header">
+    <div class="card-body">
 
-            {{--question status--}}
-            <span class="question-status">
+        <div>
 
-                    <i class="fa fa-question-circle" style="{{ $mark }}"></i>
-                    <i class="fa fa-check" style="{{ $check }}"></i>
+            {{--wrapper for borders on desktops--}}
+            <div>
+                {{--question header--}}
+                <div class="header">
 
-                </span>
+                    {{--question status--}}
+                    <span class="question-status">
 
-            <h3>{{$question->title}}</h3>
+                        <i class="fa fa-question-circle" style="{{ $mark }}"></i>
+                        <i class="fa fa-check" style="{{ $check }}"></i>
 
-            {{--question editing--}}
+                    </span>
 
-            <span class="question-editing">
-                    <i data-show-on="not-editing" class="fa fa-pencil-square-o" {{ $first ? 'style="display:none"' : '' }}></i>
-                    <i data-show-on="editing" data-trigger="toggle-comment" title="{{ Lang::get('questionnaires.meta') }}" class="fa fa-comment" {{ $first ? '' : 'style="display:none"' }}></i>
-                </span>
-        </div>
+                    <h3>{{$question->title}}</h3>
 
-        {{--question body--}}
-        <div class="body" {{ $first ? '' : 'style="display:none"' }}>
+                    {{--question editing--}}
+                    <span class="question-editing">
+                        <i data-show-on="not-editing" class="fa fa-pencil-square-o" style="{{ $first ? 'display:none;' : '' }}"></i>
+                        <i data-show-on="editing" data-trigger="toggle-comment" title="{{ Lang::get('questionnaires.meta') }}" class="fa fa-comment" style="{{ $first ? '' : 'display:none;' }}"></i>
+                    </span>
+                </div>
 
-            <div class="question">{!! $question->question !!}</div>
+                {{--question body--}}
+                <div class="body" style="{{ $first ? '' : 'display:none' }}">
 
-            @if($question->meta)
+                    <div class="question"><p>{!! $question->question !!}</p></div>
 
-                <div class="well well-sm" style="display:none">{{ $question->meta }}</div>
+                    @if($question->meta)
 
-            @endif
-
-            {{--multiple choise--}}
-            @if($question->multiple_choise == '1')
-
-                <ul class="choises">
-
-                    @if($question->multiple_answer == '1')
-                        {{--checkboxes--}}
-
-                        <? $identifier = 'question' . $question->id ?>
-
-                        @foreach($question->choises as $choise)
-
-                            <? $checked = $answer && $answer->wasChecked($choise) ? 'checked="checked"' : null ?>
-
-                            <li class="checkbox">
-                                <label>
-                                    <input class="" type="checkbox" {{$checked}} name="{{$identifier}}[]" value="{{ $choise->id }}"/>
-                                    {{$choise->title}}
-                                </label>
-                            </li>
-
-                        @endforeach
-
-                    @else
-                        {{--radios--}}
-
-                        <? $identifier = 'question' . $question->id ?>
-
-                        @foreach($question->choises as $choise)
-
-                            <? $checked = $answer && $answer->wasChecked($choise) ? 'checked="checked"' : null?>
-
-                            <li class="radio">
-                                <label>
-                                    <input class="" type="radio" {{$checked}} name="{{$identifier}}" value="{{$choise->id}}"/>
-                                    {{$choise->title}}
-                                </label>
-                            </li>
-
-                        @endforeach
+                        <div class="meta alert alert-info" style="display:none">{!! $question->meta !!}</div>
 
                     @endif
 
-                </ul>
+                    {{--multiple choise--}}
+                    @if($question->multiple_choise == '1')
 
-            @endif
+                        <div class="form-group">
+
+                            <ul class="choises">
+
+                                @if($question->multiple_answer == '1')
+                                    {{--checkboxes--}}
+
+                                    <? $identifier = 'question' . $question->id ?>
+
+                                    @foreach($question->choises as $choise)
+
+                                        <? $checked = $answer && $answer->wasChecked($choise) ? 'checked="checked"' : null ?>
+
+                                        <li class="checkbox">
+                                            <label class="control-label" id="choise{{$choise->id}}">
+                                                <input class="" type="checkbox" {{$checked}} name="{{$identifier}}[]" value="{{ $choise->id }}"/>
+                                                {{$choise->title}}
+                                            </label>
+                                        </li>
+
+                                    @endforeach
+
+                                @else
+                                    {{--radios--}}
+
+                                    <? $identifier = 'question' . $question->id ?>
+
+                                    @foreach($question->choises as $choise)
+
+                                        <? $checked = $answer && $answer->wasChecked($choise) ? 'checked="checked"' : null?>
+
+                                        <li class="radio">
+                                            <label class="control-label" id="choise{{$choise->id}}">
+                                                <input class="" type="radio" {{$checked}} name="{{$identifier}}" value="{{$choise->id}}"/>
+                                                {{$choise->title}}
+                                            </label>
+                                        </li>
+
+                                    @endforeach
+
+                                @endif
+
+                            </ul>
+
+                        </div>
+
+                    @endif
 
 
-            @if($question->explainable == '1')
+                    @if($question->explainable == '1')
 
-                <div class="explanation">
+                        <div class="form-group">
+                            <div class="explanation">
 
-                    <textarea name="explanation{{$question->id}}" class="form-control" placeholder="{{Lang::get('instrument.toelichting')}}">{{$answer ? $answer->explanation : null}}</textarea>
+                                <textarea name="explanation{{$question->id}}" class="form-control" placeholder="{{Lang::get('instrument.toelichting')}}">{{$answer ? $answer->explanation : null}}</textarea>
+
+                            </div>
+
+                        </div>
+
+                    @endif
 
                 </div>
 
-            @endif
+            </div>
 
         </div>
 

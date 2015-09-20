@@ -266,7 +266,7 @@ class InstrumentController extends AdminController
         if ($next) {
             return Redirect::route('instrument.panel.get', array($next->id, $survey->id));
         } else {
-            return Redirect::route('instrument');
+            return Redirect::route('dash');
         }
     }
 

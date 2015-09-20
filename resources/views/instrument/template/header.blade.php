@@ -4,7 +4,7 @@
         @parent
     @endif
 
-    <div class="instrument-header  {{ 'panel-' . $panel->color }}">
+    <div class="instrument-header shadow-z-1 {{ 'panel-' . $panel->color }}">
 
         <div class="heading">
             <h3 class="active-panel">{{ $panel->title }} <i class="pull-right fa fa-caret-down"></i></h3>

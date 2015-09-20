@@ -43,7 +43,7 @@ class OuderenPageTest extends FunctionalTest
         $this->seeInDatabase('ouderen', array_merge(['mantelzorger_id' => $mantelzorger->id], $payload));
     }
 
-    public function test_creating_with_specified_mantelzorger_relation()
+    public function test_creating_with_custom_specified_mantelzorger_relation()
     {
         $user = $this->login();
 
@@ -91,8 +91,8 @@ class OuderenPageTest extends FunctionalTest
             'oorzaak_hulpbehoefte_id' => '',
         ])
             ->see('error-identifier')
-            ->see('error-woonsituatie')
-            ->see('error-oorzaak-hulpbehoefte');
+            ->see('error-woonsituatie-id')
+            ->see('error-oorzaak-hulpbehoefte-id');
     }
 
     public function test_editing()

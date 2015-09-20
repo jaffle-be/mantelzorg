@@ -32,13 +32,13 @@
                             <p>
                                 <input name="token" type="hidden" value="<?= $token ?>"/>
 
-                                <label for="email"><?= Lang::get('front.reset.email') ?></label>
+                                <label class="control-label" for="email"><?= Lang::get('front.reset.email') ?></label>
                                 <?= Form::text('email', null, array('class' => 'form-control'))?>
 
-                                <label for="password"><?= Lang::get('front.reset.password') ?></label>
+                                <label class="control-label" for="password"><?= Lang::get('front.reset.password') ?></label>
                                 <input type="password" name="password" id="password" class="form-control"/>
 
-                                <label for="password_confirmation"><?= Lang::get('front.reset.confirmation') ?></label>
+                                <label class="control-label" for="password_confirmation"><?= Lang::get('front.reset.confirmation') ?></label>
                                 <input type="password" name="password_confirmation" id="password_confirmation" class="form-control"/>
 
                                 @include('layout.messages')
@@ -46,7 +46,7 @@
                             </p>
 
                             <p class="text-center">
-                                <input class="btn btn-lg btn-primary" type="submit" value="<?= Lang::get('front.reset.do') ?>"/>
+                                <button class="btn btn-lg btn-primary" type="submit"><?= Lang::get('front.reset.do') ?></button>
                             </p>
 
                         </form>

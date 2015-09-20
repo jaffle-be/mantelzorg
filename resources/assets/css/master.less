@@ -1,10 +1,7 @@
-@import "bootstrap";
+@import "../less/bootstrap";
+@import "../less/material";
 @import "../plugins/components-font-awesome/less/font-awesome";
 @import "../plugins/metisMenu/dist/metisMenu.css";
-
-@import '../less/bootstrap/variables';
-@import '../less/bootstrap/mixins';
-@import '../less/bootstrap/buttons';
 
 @import '../less/variables';
 @import '../less/datepicker';
@@ -29,11 +26,20 @@
 
 @import "../less/navbar-tablet";
 
+//beta
+.beta-wrapper{
+
+  h3{
+
+    margin-bottom: 15px;
+  }
+
+}
+
 //global message holder
 #global-messages .alert{
   margin-top: 0;
 }
-
 
 html {
   background-color: #1a1a1a;
@@ -73,4 +79,9 @@ h1, h2, h3, h4, h5, h6 {
 //you should set this to the height of the biggest drop-down in our app that's within a table.
 .table-responsive{
   min-height: 300px;
+}
+
+.table tbody tr td
+{
+  vertical-align: middle;
 }

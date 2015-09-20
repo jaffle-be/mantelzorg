@@ -4,7 +4,7 @@
     var RegularNavigator = function () {
         this.wrapper = $(".instrument-questions");
         this.questions = $(".instrument-question");
-        this.listQuestions = $(".question-list")
+        this.listQuestions = $(".question-list");
         //are we on tablet or mobile?
         this.isMobileOrTablet = $("body").hasClass('tablet');
 
@@ -41,7 +41,7 @@
             });
 
             this.wrapper.on('click', '[data-trigger="toggle-comment"]', function (event) {
-                that.toggleWell($(this));
+                that.toggleMeta($(this));
                 return false;
             });
         },
@@ -85,10 +85,10 @@
             $el.find('.header [data-show-on="not-editing"]').hide();
             $el.find('.header [data-show-on="editing"]').show();
         },
-        toggleWell: function ($el) {
-            var well = $el.closest('.instrument-question').find('.well');
+        toggleMeta: function ($el) {
+            var holder = $el.closest('.instrument-question').find('.meta');
 
-            well.css('display') == 'none' ? well.show() : well.hide();
+            holder.css('display') == 'none' ? holder.show() : holder.hide();
         },
         scrollTo: function ($element) {
             $('html,body').animate({
@@ -146,7 +146,7 @@
         //navigation list of questions in the footer
         this.listQuestions = $(".instrument-footer .question-list ul li");
         this.trigger = $(".instrument-footer h4");
-        this.switcher = $(".instrument-questions .question-list ul");
+        this.switcher = $(".instrument-footer .question-list ul");
         this.title = $(".instrument-footer h4 .title");
         this.current = 1;
         this.events();
@@ -309,6 +309,7 @@
 
     $(document).ready(function () {
 
+        //actions for header navigation through panels
         $(".instrument-header").on('click', function () {
             $(this).find('ul').slideToggle();
         });

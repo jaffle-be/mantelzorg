@@ -14,14 +14,14 @@
                 )) ?>
 
 
-                <label for="title"><?= Lang::get('questionnaires.name') ?></label>
-                @if($errors->has('title'))
-                    <span class="errors">{{ $errors->first('title') }}</span>
-                @endif
+                <label class="control-label" for="title"><?= Lang::get('questionnaires.name') ?></label>
+
                 <div class="input-group">
                     <?= Form::text('title', null, array('class' => 'form-control')) ?>
                     <span class="input-group-addon"><i class="fa fa-tag"></i></span>
                 </div>
+
+                @error('title')
 
                 <?= Form::close() ?>
 

@@ -27,16 +27,16 @@
                             <h3><?= Lang::get('front.login.intro') ?></h3>
 
                             <p>
-                                <label for="email"><?= Lang::get('front.login.email') ?></label>
+                                <label class="control-label" for="email"><?= Lang::get('front.login.email') ?></label>
                                 <?= Form::text('email', null, array('class' => 'form-control'))?>
 
-                                <label for="password"><?= Lang::get('front.login.password') ?></label>
+                                <label class="control-label" for="password"><?= Lang::get('front.login.password') ?></label>
                                 <input type="password" name="password" id="password" class="form-control"/>
 
                                 @include('layout.messages')
 
                             <p class="text-center">
-                                <input class="btn btn-lg btn-primary pull-left" type="submit" id="sign-in" value="<?= Lang::get('front.login.sign-in') ?>"/>
+                                <button class="btn btn-lg btn-primary pull-left" type="submit" id="sign-in"><?= Lang::get('front.login.sign-in') ?></button>
                                 <a class='pull-right' href="<?= URL::route('reminder') ?>"><?= Lang::get('front.login.reminder') ?></a>
                             </p>
 

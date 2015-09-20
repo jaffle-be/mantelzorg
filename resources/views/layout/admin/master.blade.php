@@ -7,8 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="/css/master.min.css"/>
-    <link href='//fonts.googleapis.com/css?family=Didact+Gothic' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic' rel='stylesheet' type='text/css'>
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     @yield('styles')
 
@@ -49,7 +48,7 @@
 
         {{--added this so we can clear it with an @overwrite on the instrument page --}}
         @section('page-header-wrapper')
-            <section id="page-header">
+            <section id="page-header" class="shadow-z-1">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sidebar">
                     <span class="sr-only">{{ Lang::get('dash/general.toggle_nav') }}</span>
                     <span class="icon-bar"></span>
@@ -90,6 +89,8 @@
 <script type="text/javascript" src="/js/jquery.min.js"></script>
 <script type="text/javascript" src="/js/jquery-ui.custom.min.js"></script>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/material.min.js"></script>
+<script type="text/javascript" src="/js/ripples.min.js"></script>
 <script type="text/javascript" src="/js/master.min.js"></script>
 
 @yield('scripts')

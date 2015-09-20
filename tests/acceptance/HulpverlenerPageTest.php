@@ -18,10 +18,10 @@ class HulpverlenerPageTest extends AdminAcceptanceTest
 
     public function test_deleting_some_hulpverleners()
     {
-        $this->open(route('hulpverleners.index'))
-            ->check('row1')
-            ->check('row2')
-            ->check('row3');
+        $this->open(route('hulpverleners.index'));
+        $this->find('[for="row1"]')->click();
+        $this->find('[for="row2"]')->click();
+        $this->find('[for="row3"]')->click();
 
         //this sometimes gave an error, when the first 3 records showed, contained our user record.
         //since we sort according to created at, we'll check if we're in the first few rows

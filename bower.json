@@ -2,6 +2,8 @@
   "name": "mantelzorg",
   "dependencies": {
     "bootstrap": "~3.3.0",
+    "bootstrap-material-datetimepicker": "~2.0.0",
+    "bootstrap-material-design": "~0.3.0",
     "components-font-awesome": "*",
     "jquery-ui": "~1.11.4",
     "metisMenu": "~2.1.0",

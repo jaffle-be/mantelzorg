@@ -18,16 +18,16 @@
 
             <h3>{{ Lang::get('pdf.overzicht') }}</h3>
 
-            <label>{{ Lang::get('pdf.identifier') }}</label>
+            <label class="control-label">{{ Lang::get('pdf.identifier') }}</label>
             <span>{{ $session->getIdentifier() }}</span>
 
-            <label>{{ Lang::get('pdf.created') }}</label>
+            <label class="control-label">{{ Lang::get('pdf.created') }}</label>
             <span>{{ $session->created_at->format('d/m/Y') }}</span>
 
-            <label>{{ Lang::get('pdf.updated') }}</label>
+            <label class="control-label">{{ Lang::get('pdf.updated') }}</label>
             <span>{{ $session->updated_at->format('d/m/Y') }}</span>
 
-            <label>{{ Lang::get('pdf.answered') }}</label>
+            <label class="control-label">{{ Lang::get('pdf.answered') }}</label>
             <span>{{ $session->answers->filter(function($item){
                 return $item->wasFilledIn();
             })->count()  }} / {{ $session->questionnaire->questions->count() }}</span>
@@ -42,13 +42,13 @@
 
                 <h3>{{ Lang::get('pdf.hulpverlener') }}</h3>
 
-                <label>{{ Lang::get('pdf.fullname') }}</label>
+                <label class="control-label">{{ Lang::get('pdf.fullname') }}</label>
                 <span>{{ $user->fullname ? : '&nbsp;' }}</span>
 
-                <label>{{ Lang::get('pdf.organisation') }}</label>
+                <label class="control-label">{{ Lang::get('pdf.organisation') }}</label>
                 <span>{{ $user->organisation && $user->organisation->name ? $user->organisation->name : '&nbsp;'}}</span>
 
-                <label>{{ Lang::get('pdf.location') }}</label>
+                <label class="control-label">{{ Lang::get('pdf.location') }}</label>
                 <span>{{ $user->organisation_location && $user->organisation_location->name ? $user->organisation_location->name : '&nbsp;'}}</span>
 
             </div>
@@ -66,26 +66,26 @@
 
                 <h3>{{ Lang::get('pdf.mantelzorger') }}</h3>
 
-                <label>{{ Lang::get('pdf.identifier') }}</label>
+                <label class="control-label">{{ Lang::get('pdf.identifier') }}</label>
                 <span>{{ $mantelzorger->identifier ? : '&nbsp;'}}</span>
 
-                <label>{{ Lang::get('pdf.email') }}</label>
+                <label class="control-label">{{ Lang::get('pdf.email') }}</label>
                 <span>{{ $mantelzorger->email ? : '&nbsp;' }}</span>
 
-                <label>{{ Lang::get('pdf.fullname') }}</label>
+                <label class="control-label">{{ Lang::get('pdf.fullname') }}</label>
                 <span>{{ $mantelzorger->fullname ? : '&nbsp;' }}
                     <i class="fa {{ $mantelzorger->male ? 'fa-male' : 'fa-female' }}"></i></span>
 
-                <label>{{ Lang::get('pdf.address') }}</label>
+                <label class="control-label">{{ Lang::get('pdf.address') }}</label>
                 <address>
                     {{ $mantelzorger->street  ? : '&nbsp;'}}<br/>
                     {{ $mantelzorger->postal . ' ' . $mantelzorger->city }}
                 </address>
 
-                <label>{{ Lang::get('pdf.birthday') }}</label>
+                <label class="control-label">{{ Lang::get('pdf.birthday') }}</label>
                 <span>{{ $mantelzorger->birthday ? $mantelzorger->birthday->format('d/m/Y') : '&nbsp;' }}</span>
 
-                <label>{{ Lang::get('pdf.phone') }}</label>
+                <label class="control-label">{{ Lang::get('pdf.phone') }}</label>
                 <span>{{ $mantelzorger->phone ? : '&nbsp;' }}</span>
 
             </div>
@@ -99,38 +99,38 @@
 
                 <h3>{{ Lang::get('pdf.hulpbehoevende') }}</h3>
 
-                <label>{{ Lang::get('pdf.identifier') }}</label>
+                <label class="control-label">{{ Lang::get('pdf.identifier') }}</label>
                 <span>{{ $oudere->identifier ? : '&nbps;' }}</span>
 
-                <label>{{ Lang::get('pdf.fullname') }}</label>
+                <label class="control-label">{{ Lang::get('pdf.fullname') }}</label>
                 <span>{{ $oudere->fullname ? : '&nbps;' }}
                     <i class="fa {{ $oudere->male ? 'fa-male' : 'fa-female' }}"></i></span>
 
-                <label>{{ Lang::get('pdf.address') }}</label>
+                <label class="control-label">{{ Lang::get('pdf.address') }}</label>
                 <address>
                     {{ $oudere->street ? : '&nbsp;' }} <br/>
                     {{ $oudere->postal . ' ' . $oudere->city }}
                 </address>
 
-                <label>{{ Lang::get('pdf.birthday') }}</label>
+                <label class="control-label">{{ Lang::get('pdf.birthday') }}</label>
                 <span>{{ $oudere->birthday ? $oudere->birthday->format('d/m/Y')  : '&nbsp;'}}</span>
 
-                <label>{{ Lang::get('pdf.email') }}</label>
+                <label class="control-label">{{ Lang::get('pdf.email') }}</label>
                 <span>{{ $oudere->email ? : '&nbsp;' }}</span>
 
-                <label>{{ Lang::get('pdf.phone') }}</label>
+                <label class="control-label">{{ Lang::get('pdf.phone') }}</label>
                 <span>{{ $oudere->phone ? : '&nbsp;' }}</span>
 
-                <label>{{ Lang::get('pdf.bel_profiel') }}</label>
+                <label class="control-label">{{ Lang::get('pdf.bel_profiel') }}</label>
                 <span>{{ $oudere->bel_profiel ? $oudere->bel_profiel->value : '&nbsp;' }}</span>
 
-                <label>{{ Lang::get('pdf.woonsituatie') }}</label>
+                <label class="control-label">{{ Lang::get('pdf.woonsituatie') }}</label>
                 <span>{{ $oudere->woon_situatie ? $oudere->woon_situatie->value : '&nbsp;' }}</span>
 
-                <label>{{ Lang::get('pdf.mantelzorger_relation') }}</label>
+                <label class="control-label">{{ Lang::get('pdf.mantelzorger_relation') }}</label>
                 <span>{{ $oudere->mantelzorger_relation ? $oudere->mantelzorger_relation->value : '&nbsp;' }}</span>
 
-                <label>{{ Lang::get('pdf.oorzaak_hulpbehoefte') }}</label>
+                <label class="control-label">{{ Lang::get('pdf.oorzaak_hulpbehoefte') }}</label>
                 <span>{{ $oudere->oorzaak_hulpbehoefte ? $oudere->oorzaak_hulpbehoefte->value : '&nbsp;' }}</span>
 
                 <label class="full">{{ Lang::get('pdf.diagnose') }}</label>
