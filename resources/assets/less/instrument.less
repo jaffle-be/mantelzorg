@@ -41,18 +41,18 @@
       li{
         background-color: @c;
 
-        //&:hover{
-        //  .shadow-z-1;
-        //}
-        //
-        //&:active{
-        //  .shadow-z-1-hover;
-        //}
-        //
-        //&:active, &:focus, &:hover, &.active {
-        //  background-color: darken(@c, 7%);
-        //  transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-        //}
+        &:hover{
+          .shadow-z-1;
+        }
+
+        &:active{
+          .shadow-z-1-hover;
+        }
+
+        &:active, &:focus, &:hover, &.active {
+          background-color: darken(@c, 7%);
+          transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
       }
     }
@@ -67,13 +67,13 @@
     background-color: darken(@c, 7%);
   }
 
-  //li:hover{
-  //  .shadow-z-1;
-  //}
-  //
-  //li:active{
-  //  .shadow-z-1-hover;
-  //}
+  li:hover{
+    .shadow-z-1;
+  }
+
+  li:active{
+    .shadow-z-1-hover;
+  }
 
 }
 
@@ -258,10 +258,6 @@
     color: @white;
     vertical-align: middle;
     
-    span{
-      line-height: 34px;
-    }
-
     h4 {
       line-height: 34px;
       height: 34px;
@@ -297,6 +293,7 @@
         text-overflow: ellipsis;
         width: 100%;
         white-space: nowrap;
+        line-height: 34px;
         overflow: hidden;
 
 
