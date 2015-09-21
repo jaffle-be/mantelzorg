@@ -9,6 +9,15 @@ class SystemServiceProvider extends ServiceProvider{
         include_once(__DIR__ . '/helpers.php');
 
         $this->bladeDirectives();
+
+        if(env('APP_ENV') == 'production')
+        {
+            $this->app['newrelic']->setAppName('app.zichtopmantelzorg.be');
+        }
+        else{
+            $this->app['newrelic']->setAppName(env('APP_ENV') . 'zichtopmantelzorg.be');
+        }
+
     }
 
     public function bladeDirectives()
