@@ -22,7 +22,7 @@
                 $filled = $answer && $answer->wasFilledIn();
                 ?>
                 <h4>
-                    <span class="title">{{ $question->title }}</span><span class="pull-right"><i class="fa fa-caret-down">&nbsp;</i></span>
+                    <span class="title">{{ $question->title }}</span><span class="pull-right">&nbsp;<i class="fa fa-caret-down"></i></span>
                 </h4>
 
                 <ul style="display:none">
