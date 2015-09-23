@@ -4,18 +4,6 @@
 
     moment.locale('nl');
 
-    function getDonut(element)
-    {
-        return Morris.Donut({
-            element: element,
-            data: [{
-                label: 'loading',
-                value: ''
-            }],
-            resize: true
-        });
-    }
-
     function getLine(element)
     {
         return new Morris.Line({
@@ -33,32 +21,27 @@
             labels: ['Sessies'],
 
             dateFormat: function (x) {
-                return moment(x).format('d MMMM YYYY');
+                return moment(x).format('DD/MM/YYYY');
             }
         });
     }
 
-    function load(stat, chart) {
-        $.ajax({
-            url: '/stats/ouderen',
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                field: stat
-            },
-            success: function (response) {
-                chart.setData(response);
-            },
-            error: function (response) {
-                chart.setData([]);
-            }
+    function getBar(element)
+    {
+        return new Morris.Bar({
+             element: element,
+
+            data: [],
+            xkey: 'name',
+            ykeys: ['count'],
+            labels: ['Sessies'],
         });
     }
 
     function loadSessions(chart)
     {
         $.ajax({
-            url: '/stats/sessions',
+            url: '/stats/activity/sessions',
             type: 'POST',
             dataType: 'json',
             success: function(response)
@@ -71,21 +54,30 @@
         });
     }
 
+    function loadOrganisations(chart)
+    {
+        $.ajax({
+            url: '/stats/activity/organisation-sessions',
+            type: 'POST',
+            dataType: 'json',
+            success: function(response)
+            {
+                chart.setData(response);
+            },
+            error: function()
+            {
+                chart.setData([]);
+            }
+        })
+    }
+
     $(document).ready(function () {
 
-        var woonsituaties = getDonut('woonsituatie'),
-            relations = getDonut('mantelzorger_relation'),
-            bel_profiel = getDonut('bel_profiel'),
-            oorzaken = getDonut('oorzaak_hulpbehoefte');
-
-        load('woonsituatie', woonsituaties);
-        load('mantelzorger_relation', relations);
-        load('bel_profiel', bel_profiel);
-        load('oorzaak_hulpbehoefte', oorzaken);
-
         var sessions = getLine('sessions');
+        var organisationSessions = getBar('organisations');
 
         loadSessions(sessions);
+        loadOrganisations(organisationSessions);
     });
 
 

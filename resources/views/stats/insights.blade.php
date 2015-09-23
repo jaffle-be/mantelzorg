@@ -3,7 +3,7 @@
 @section('scripts')
     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-    <script src="/js/stats.index.min.js"></script>
+    <script src="/js/stats.insights.min.js"></script>
 @stop
 
 @section('styles')
@@ -19,18 +19,12 @@
 
 @section('content')
 
+    @include('stats.tabs', ['active' => 'insights'])
+
     <div class="row">
 
         <div class="col-xs-12 col-lg-6">
             @include('stats.ouderen')
-        </div>
-
-        <div class="col-xs-12 col-lg-6">
-            @include('stats.sessions')
-        </div>
-
-        <div class="col-xs-12 col-lg-6">
-            @include('stats.organisations')
         </div>
 
     </div>

@@ -59,7 +59,7 @@ class NavigationTest extends FunctionalTest
         $this->visit(route('dash'));
 
         $this->click('nav-stats')
-            ->seePageIs(route('stats.index'));
+            ->seePageIs(route('stats.insights'));
     }
 
     public function testClickingLogo()
