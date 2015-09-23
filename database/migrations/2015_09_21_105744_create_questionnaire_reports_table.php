@@ -56,19 +56,23 @@ class CreateQuestionnaireReportsTable extends Migration
     {
         $survey = Questionnaire::active()->first();
 
-        foreach($this->files() as $file)
+        if($survey)
         {
-            $date = $this->parseDate($file);
+            foreach($this->files() as $file)
+            {
+                $date = $this->parseDate($file);
 
-            $report = new Report([
-                'filename' => $file,
-                'survey_count' => -1,
-                'questionnaire_id' => $survey->id,
-                'created_at' => $date,
-                'updated_at' => $date,
-            ]);
+                $report = new Report([
+                    'filename' => $file,
+                    'survey_count' => -1,
+                    'questionnaire_id' => $survey->id,
+                    'created_at' => $date,
+                    'updated_at' => $date,
+                ]);
 
-            $report->save(['timestamps' => false]);
+                $report->save(['timestamps' => false]);
+            }
+
         }
     }
 
