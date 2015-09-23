@@ -53,6 +53,9 @@ class RouteServiceProvider extends ServiceProvider
         $router->pattern('choise', '\d+');
         $router->model('choise', 'App\Questionnaire\Choise');
 
+        $router->pattern('report', '\d+');
+        $router->model('report', 'App\Questionnaire\Export\Report');
+
         parent::boot($router);
     }
 

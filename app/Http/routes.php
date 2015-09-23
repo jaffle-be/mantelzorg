@@ -28,25 +28,9 @@ Route::post('stats/sessions', [
 /**
  * RAPPORT
  */
-Route::get('rapport', [
-    'uses' => 'RapportController@index',
-    'as'   => 'rapport.index'
-]);
+Route::resource('report', 'RapportController', ['only' => ['index', 'store', 'destroy', 'show']]);
 
-Route::post('rapport', [
-    'uses' => 'RapportController@generate',
-    'as'   => 'rapport.generate'
-]);
-
-Route::get('rapport/download/{filename}', [
-    'uses' => 'RapportController@download',
-    'as'   => 'rapport.download'
-]);
-
-Route::get('rapport/delete/{filename}', [
-    'uses' => 'RapportController@delete',
-    'as'   => 'rapport.delete',
-]);
+Route::post('report/destroy', 'RapportController@destroyBatch');
 
 /**
  * INSTRUMENT

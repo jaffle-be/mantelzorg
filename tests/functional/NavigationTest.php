@@ -48,7 +48,7 @@ class NavigationTest extends FunctionalTest
             ->seePageIs(route('survey.index'));
 
         $this->click('nav-rapport')
-            ->seePageIs(route('rapport.index'));
+            ->seePageIs(route('report.index'));
 
         $user = app('auth')->user();
 

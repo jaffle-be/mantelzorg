@@ -37,11 +37,11 @@ class ExportJob extends Command implements ShouldQueue, SelfHandling{
 
             $user = $user->find($this->userid);
 
-            $filename = $export->generate($survey, $this->filters);
+            $report = $export->generate($survey, $this->filters);
 
             $logger->stop($survey);
 
-            \Event::fire('rapport.generated', [$user, $survey, $filename]);
+            $events->fire('rapport.generated', [$user, $survey, $report]);
 
             $this->job->delete();
         }
@@ -49,7 +49,7 @@ class ExportJob extends Command implements ShouldQueue, SelfHandling{
         {
             $logger->error($e);
 
-            \Event::fire('rapport.failed', [$user, $survey]);
+            $events->fire('rapport.failed', [$user, $survey]);
         }
     }
 

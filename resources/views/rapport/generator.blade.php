@@ -7,7 +7,7 @@
 
     <div class="panel-body" id="rapport-generator">
 
-        <?= Form::open(['route' => 'rapport.generate', 'class' => 'form-horizontal']) ?>
+        <?= Form::open(['route' => 'report.store', 'class' => 'form-horizontal']) ?>
 
         <div class="form-group">
             <label for="survey" class="control-label col-xs-12 col-sm-4">{{ Lang::get('rapport.survey') }}</label>

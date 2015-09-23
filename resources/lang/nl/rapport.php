@@ -12,5 +12,9 @@ return [
     'select-hulpverlener' => 'Kies een hulpverlener (optioneel)',
     'select-organisation' => 'Kies een organisatie (optioneel)',
     'hulpverlener'        => 'Hulpverlener',
-    'organisation'        => 'Organisatie'
+    'organisation'        => 'Organisatie',
+    'filename'            => 'File',
+    'survey-count'        => 'Sessies',
+    'user'                => 'Hulpverlener',
+    'created'             => 'Aangemaakt',
 ];

@@ -21,7 +21,19 @@ class CsvExport implements Exporter
      */
     protected $excel;
 
-    public function __construct(SessionFilter $filter, Excel $excel, Carbon $carbon, DataHandler $handler)
+    protected $carbon;
+
+    protected $handler;
+
+    protected $report;
+
+    /**
+     * The amount of sessions exported.
+     * @var int
+     */
+    protected $count = 0;
+
+    public function __construct(SessionFilter $filter, Excel $excel, Carbon $carbon, DataHandler $handler, Report $report)
     {
         ini_set('max_execution_time', 300);
 
@@ -32,6 +44,8 @@ class CsvExport implements Exporter
         $this->carbon = $carbon;
 
         $this->handler = $handler;
+
+        $this->report = $report;
     }
 
     /**
@@ -67,10 +81,11 @@ class CsvExport implements Exporter
             });
         });
 
-        //do not change the value of the extension to xls, since that will only allow 256 columns
+        //do not change the value of the extension to xls
+        //since that would only allow 256 columns
         $excel->store('xlsx');
 
-        return $excel->getFileName() . '.xlsx';
+        return $this->createReport($survey, $filters, $excel);
     }
 
     protected function headers(Questionnaire $survey)
@@ -140,9 +155,9 @@ class CsvExport implements Exporter
         $query = $this->filter->filter($survey, $filters);
 
         $query->chunk(100, function ($sessions) use ($panels, $sheet) {
-
             $this->handler->handle($sessions, $panels, $sheet);
 
+            $this->count += $sessions->count();
         });
     }
 
@@ -202,5 +217,31 @@ class CsvExport implements Exporter
                 $query->orderBy('sort_weight');
             }
         ])->all();
+    }
+
+    /**
+     * @param Questionnaire $survey
+     * @param array         $filters
+     * @param               $excel
+     *
+     * @return Report
+     */
+    protected function createReport(Questionnaire $survey, array $filters, $excel)
+    {
+        $this->report->filename = $excel->getFileName() . '.xlsx';
+
+        $this->report->questionnaire()->associate($survey);
+
+        if(isset($filters['hulpverlener_id']) && !empty($filters['hulpverlener_id']))
+        {
+            $this->report->user_id = $filters['hulpverlener_id'];
+            $this->report->organisation_id = $filters['organisation_id'];
+        }
+
+        $this->report->survey_count = $this->count;
+
+        $this->report->save();
+
+        return $this->report;
     }
 }
