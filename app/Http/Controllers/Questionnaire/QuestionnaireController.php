@@ -23,11 +23,7 @@ class QuestionnaireController extends \App\Http\Controllers\AdminController
 
     public function index()
     {
-        $questionnaires = $this->questionnaire->with(array(
-            'panels' => function ($query) {
-                $query->orderBy('panel_weight');
-            }
-        ))->get();
+        $questionnaires = $this->questionnaire->with(['panels'])->get();
 
         return view('questionnaire.index', compact('questionnaires'));
     }

@@ -1,12 +1,17 @@
 <?php namespace App\Questionnaire\Export;
 
 use App\System\Database\Eloquent\Model;
+use App\System\Scopes\ModelAutoSort;
 
 class Report extends Model
 {
+    use ModelAutoSort;
+
     protected $table = "questionnaire_reports";
 
     protected $fillable = ['filename', 'survey_count', 'questionnaire_id', 'organisation_id', 'user_id', 'created_at', 'updated_at'];
+
+    public $autosort = 'created_at';
 
     public function questionnaire()
     {

@@ -22,7 +22,7 @@ class FileManager
 
     public function listFiles()
     {
-        return $this->report->orderBy('created_at')->get();
+        return $this->report->get();
     }
 
     public function delete($filename)

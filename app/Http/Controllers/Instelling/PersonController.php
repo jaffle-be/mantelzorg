@@ -46,7 +46,7 @@ class PersonController extends \App\Http\Controllers\AdminController
     {
         $user = Auth::user();
 
-        $organisations = $this->organisation->orderBy('name')->get();
+        $organisations = $this->organisation->get();
 
         $organisations = array('' => Lang::get('users.pick_organisation')) + $organisations->lists('name', 'id')->all();
 
@@ -57,11 +57,10 @@ class PersonController extends \App\Http\Controllers\AdminController
 
         if (Input::old() && $user->organisation_id !== Input::old('organisation_id')) {
             $locations = $this->location->where('organisation_id', Input::old('organisation_id'))
-                ->orderBy('name')
                 ->get()
                 ->lists('name', 'id')->all();
         } else if ($user->organisation) {
-            $locations = $user->organisation->locations()->orderBy('name')->get()->lists('name', 'id')->all();
+            $locations = $user->organisation->locations()->get()->lists('name', 'id')->all();
         } else {
             $locations = array();
         }

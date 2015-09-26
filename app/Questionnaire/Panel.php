@@ -4,16 +4,19 @@ namespace App\Questionnaire;
 
 use App\System\Database\Eloquent\Model;
 use App\System\Database\Eloquent\ValidationRules;
+use App\System\Scopes\ModelAutoSort;
 use Input;
 use Validator;
 
 class Panel extends Model
 {
-    use ValidationRules;
+    use ValidationRules, ModelAutoSort;
 
     protected $table = 'questionnaire_panels';
 
     protected $fillable = array('questionnaire_id', 'title', 'color', 'panel_weight');
+
+    public $autosort = 'panel_weight';
 
     protected static $rules = array(
         'questionnaire_id' => 'required|exists:questionnaires,id',
