@@ -31,8 +31,8 @@
                 chart.setData([]);
             }
         });
-
     }
+
 
 
     $(document).ready(function () {

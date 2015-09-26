@@ -12,18 +12,34 @@ Route::resource('instellingen/{mantelzorger}/oudere', 'Instelling\OudereControll
 /**
  * STATS
  */
-Route::get('stats/activity', [
-    'uses' => 'Stats\ActivityController@index',
-    'as'   => 'stats.activity',
-]);
 
-Route::get('stats/insights', [
-    'uses' => 'Stats\InsightsController@index',
-    'as'   => 'stats.insights',
+//insights
+Route::get('stats/insights/ouderen', [
+    'uses' => 'Stats\InsightsOuderenController@index',
+    'as'   => 'stats.insights.ouderen',
 ]);
 
 Route::post('stats/insights/ouderen', [
-    'uses' => 'Stats\InsightsController@ouderen',
+    'uses' => 'Stats\InsightsOuderenController@ouderen',
+]);
+
+Route::get('stats/insights/answers', [
+    'uses' => 'Stats\InsightsQuestionController@index',
+    'as'   => 'stats.insights.answers',
+]);
+
+Route::post('stats/insights/question', [
+    'uses' => 'Stats\InsightsQuestionController@question',
+]);
+
+Route::post('stats/insights/term', [
+    'uses' => 'Stats\InsightsQuestionController@term',
+]);
+
+//activity
+Route::get('stats/activity', [
+    'uses' => 'Stats\ActivityController@index',
+    'as'   => 'stats.activity',
 ]);
 
 Route::post('stats/activity/sessions', [

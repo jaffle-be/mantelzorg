@@ -10,6 +10,11 @@ use DB;
 class ActivityController extends AdminController
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth.admin');
+    }
+
     public function index()
     {
         return view('stats.activity');
@@ -20,13 +25,13 @@ class ActivityController extends AdminController
         $surveys = $surveys
             ->groupBy('date')
             ->select([DB::raw('count(id) as value'), DB::raw("date_format(created_at, '%j') as date")])
-            ->whereRaw('date_sub(now(), interval 1 month) < created_at')
+            ->whereRaw('date_sub(now(), interval 6 month) < created_at')
             ->lists('value', 'date')->all();
 
         $now = Carbon::now();
 
         $start = clone $now;
-        $start->subMonth();
+        $start->subMonth(6);
 
         $stats = array();
 

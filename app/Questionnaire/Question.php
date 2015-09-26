@@ -27,6 +27,11 @@ class Question extends Model
         'explainable'            => 'in:0,1',
     );
 
+    public function getDisplayNameAttribute()
+    {
+        return 'Vraagstelling ' . $this->sort;
+    }
+
     public function answers()
     {
         return $this->hasMany('App\Questionnaire\Answer', 'question_id');

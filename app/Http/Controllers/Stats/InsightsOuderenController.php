@@ -3,16 +3,22 @@
 use App\Http\Controllers\AdminController;
 use App\Mantelzorger\Oudere;
 use App\Meta\Context;
-use Input;
-Use Lang;
 use DB;
+use Input;
+use Lang;
 
-class InsightsController extends AdminController
+class InsightsOuderenController extends AdminController
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth.admin');
+    }
+
 
     public function index()
     {
-        return view('stats.insights');
+        return view('stats.insights-ouderen');
     }
 
     public function ouderen(Oudere $ouderen, Context $meta)
@@ -41,5 +47,4 @@ class InsightsController extends AdminController
 
         return $stats->toJson();
     }
-
 }

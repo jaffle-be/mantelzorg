@@ -58,6 +58,15 @@ interface SearchServiceInterface
     public function search($type, array $params, $paginated = 15);
 
     /**
+     * Aggregate an index
+     *
+     * @param array $params
+     *
+     * @return mixed
+     */
+    public function aggregate(array $params);
+
+    /**
      * @return \Illuminate\Pagination\Factory
      */
     public function getPaginator();

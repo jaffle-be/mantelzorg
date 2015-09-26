@@ -26,7 +26,7 @@
 
                 @if($user->id == 1)
                     <li>
-                        <a class="btn btn-default" href="{{ route('stats.insights') }}" id="nav-stats"><i class="fa fa-line-chart"></i>&nbsp;{{ Lang::get('master.navs.stats') }}</a>
+                        <a class="btn btn-default" href="{{ route('stats.insights.ouderen') }}" id="nav-stats"><i class="fa fa-line-chart"></i>&nbsp;{{ Lang::get('master.navs.stats') }}</a>
                     </li>
                 @endif
             @endif

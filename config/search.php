@@ -73,6 +73,12 @@ return [
                     'key'   => 'user_id'
                 ],
             ]
+        ],
+        'answers' => [
+            'class' => 'App\Questionnaire\Answer',
+            'with' => [
+
+            ]
         ]
     ],
 

@@ -38,12 +38,12 @@ class RapportController extends AdminController
 
     public function __construct(Questionnaire $questionnaire, FileManager $files, UserRepositoryInterface $users, OrganisationRepositoryInterface $organisations)
     {
-        $this->middleware('auth.admin');
-
         $this->questionnaire = $questionnaire;
         $this->files = $files;
         $this->users = $users;
         $this->organisations = $organisations;
+
+        $this->middleware('auth.admin');
     }
 
     public function index()

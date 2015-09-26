@@ -24,11 +24,39 @@
     <div class="row">
 
         <div class="col-xs-12 col-lg-6">
-            @include('stats.sessions')
+
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ Lang::get('stats.titles.sessions') }}</h3>
+                </div>
+
+                <div class="panel-body">
+
+                    <div id="sessions"></div>
+
+                </div>
+
+            </div>
+
         </div>
 
         <div class="col-xs-12 col-lg-6">
-            @include('stats.organisations')
+
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ Lang::get('stats.titles.organisations') }}</h3>
+                </div>
+
+                <div class="panel-body">
+
+                    <div id="organisations"></div>
+
+                </div>
+
+            </div>
+
         </div>
 
     </div>
