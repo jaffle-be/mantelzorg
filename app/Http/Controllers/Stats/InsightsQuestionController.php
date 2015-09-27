@@ -69,7 +69,7 @@ class InsightsQuestionController extends AdminController
         $search = $answer->search();
 
         return $search->search('answers', [
-            'index' => 'mantelzorg',
+            'index' => env('ES_INDEX'),
             'type'  => 'answers',
             'body'  => [
                 "query"     => [
@@ -183,7 +183,7 @@ class InsightsQuestionController extends AdminController
     protected function mostSignificantTerms(Answer $answers, Question $question)
     {
         $result = $answers->search()->aggregate([
-            'index' => 'mantelzorg',
+            'index' => env('ES_INDEX'),
             'type'  => 'answers',
             'body'  => [
                 "aggs" => [
