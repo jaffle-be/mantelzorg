@@ -103,7 +103,7 @@ class Mantelzorger extends Model implements Searchable, Exportable
 
     public function getFullnameAttribute()
     {
-        return $this->firstname . ' ' . $this->lastname;
+        return trim($this->firstname . ' ' . $this->lastname);
     }
 
     public function oudere()

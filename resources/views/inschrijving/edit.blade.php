@@ -13,7 +13,7 @@
             array(
                     'text' => Lang::get('master.navs.inschrijvingen'),
 
-                    'href' => URL::route('inschrijvingen.index'),
+                    'href' => route('inschrijvingen.index'),
             ),
 
             array(
