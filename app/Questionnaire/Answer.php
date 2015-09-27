@@ -54,6 +54,11 @@ class Answer extends Model implements Searchable
         return $this->belongsTo('App\Questionnaire\Question', 'question_id');
     }
 
+    public function selectedChoises()
+    {
+        return $this->hasMany('App\Questionnaire\SelectedChoise', 'answer_id');
+    }
+
     public function choises()
     {
         return $this->belongsToMany('App\Questionnaire\Choise', 'questionnaire_answer_choises', 'answer_id', 'choise_id')->withTimestamps();

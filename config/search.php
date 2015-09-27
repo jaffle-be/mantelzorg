@@ -77,9 +77,12 @@ return [
         'answers' => [
             'class' => 'App\Questionnaire\Answer',
             'with' => [
-
+                'choises' => [
+                    'class' => 'App\Questionnaire\Choise',
+                    'key' => 'answer_id',
+                ]
             ]
-        ]
+        ],
     ],
 
     'settings' => [

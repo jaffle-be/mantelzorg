@@ -16,36 +16,29 @@
         });
     }
 
-    function load(stat, chart) {
+    function load() {
         $.ajax({
             url: '/stats/insights/ouderen',
             type: 'POST',
             dataType: 'json',
-            data: {
-                field: stat
-            },
             success: function (response) {
-                chart.setData(response);
+                setData(response);
             },
-            error: function (response) {
-                chart.setData([]);
-            }
         });
     }
 
+    function setData(response)
+    {
+        var chars = ['mantelzorger_relation', 'ouderen_woonsituatie', 'oorzaak_hulpbehoefte', 'bel_profiel'];
 
+        _.each(chars, function(item){
+            getDonut(item).setData(response[item].buckets);
+        });
+    }
 
     $(document).ready(function () {
 
-        var woonsituaties = getDonut('woonsituatie'),
-            relations = getDonut('mantelzorger_relation'),
-            bel_profiel = getDonut('bel_profiel'),
-            oorzaken = getDonut('oorzaak_hulpbehoefte');
-
-        load('woonsituatie', woonsituaties);
-        load('mantelzorger_relation', relations);
-        load('bel_profiel', bel_profiel);
-        load('oorzaak_hulpbehoefte', oorzaken);
+        load();
 
     });
 

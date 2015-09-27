@@ -39,7 +39,7 @@
 
                     <div class="chart">
                         <h4>{{ Lang::get('stats.titles.woonsituatie') }}</h4>
-                        <div id="woonsituatie"></div>
+                        <div id="ouderen_woonsituatie"></div>
                     </div>
 
                     <div class="chart">

@@ -111,18 +111,55 @@ class InsightsQuestionController extends AdminController
 
     protected function handleMultipleChoise(Answer $answers, Question $question, Choise $choises)
     {
-        $results = $choises->join('questionnaire_answer_choises', 'questionnaire_answer_choises.choise_id', '=', 'questionnaire_choises.id')
-            ->where('question_id', $question->id)
-            ->groupBy('questionnaire_choises.id')
-            ->get([
-                'questionnaire_choises.title as label', DB::raw('count(questionnaire_answer_choises.answer_id) as value')
-            ]);
+        //change to selected chooise, we stopped here because the attention was completely gone :(
+        $aggregations = $answers->search()->aggregate([
+            "index" => env('ES_INDEX'),
+            "type"  => "answers",
+            "body"  => [
+                "aggs" => [
+                    "choises" => [
+                        "nested" => [
+                            "path" => "choises"
+                        ],
+                        "aggs"   => [
+                            "question" => [
+                                "filter" => [
+                                    "term" => [
+                                        "choises.question_id" => $question->id
+                                    ]
+                                ],
+                                "aggs"   => [
+                                    "choises" => [
+                                        "terms" => [
+                                            "field" => "choises.id",
+                                            "size"  => 100
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+                "size" => 0
+            ]
+        ], true);
+
+        $choises = $choises->where('question_id', $question->id)->lists('title', 'id');
+
+        $buckets = ($aggregations['choises']['question']['choises']['buckets']);
+
+        $buckets = array_map(function($item) use ($choises){
+            return [
+                'label' => $choises[$item['key']],
+                'value' => $item['doc_count']
+            ];
+        }, $buckets);
 
         $terms = $this->mostSignificantTerms($answers, $question);
 
         return [
             'multiple_choise' => true,
-            'answers'         => $results->toArray(),
+            'answers'         => $buckets,
             'terms'           => $terms,
         ];
     }
@@ -133,7 +170,7 @@ class InsightsQuestionController extends AdminController
 
         return [
             'multiple_choise' => false,
-            'terms'           => $result->toArray(),
+            'terms'           => $result,
         ];
     }
 
@@ -170,7 +207,8 @@ class InsightsQuestionController extends AdminController
             ]
         ]);
 
-        return $result;
+        return $result['top_terms']['top_terms'];
+
     }
 
 }

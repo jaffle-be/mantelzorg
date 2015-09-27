@@ -297,27 +297,7 @@ class SearchService implements SearchServiceInterface
         //but its always an array, so we can implement the same logic at first
         $aggregations = $result['aggregations'];
 
-        $collection = new Collection();
-
-        foreach ($aggregations as $name => $aggregation) {
-            //we can expect either a nested aggregation or a none nested.
-            //f.e if we add a filter to the aggregation, there will be 'nesting'
-            //if we just do an aggregation on all data of the index,
-            //we might end up with a none nested aggregation
-            //if we do not have a buckets entry, we need to "get down again!"
-            if(!isset($aggregation['buckets']))
-            {
-                $aggregation = $aggregation[$name];
-            }
-
-            $collection->push(new AggregationResult($aggregation['buckets'], $aggregation['doc_count']));
-        }
-
-        if (count($aggregations) > 1) {
-            return $collection;
-        }
-
-        return $collection->first();
+        return $aggregations;
     }
 
     public function getPaginator()
@@ -508,10 +488,6 @@ class SearchService implements SearchServiceInterface
 
         //return the entire array as a result.
         return $params;
-    }
-
-    protected function aggregatedResponse()
-    {
     }
 
 }
