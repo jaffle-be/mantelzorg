@@ -2,6 +2,7 @@
     $(document).ready()
     {
         $.material.init();
+        $('[data-toggle="tooltip"]').tooltip();
 
         app.datepickers();
 

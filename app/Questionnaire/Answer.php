@@ -2,12 +2,15 @@
 
 namespace App\Questionnaire;
 
+use App\Search\Model\Searchable;
+use App\Search\Model\SearchableTrait;
 use App\System\Database\Eloquent\Model;
 use Input;
 use Validator;
 
-class Answer extends Model
+class Answer extends Model implements Searchable
 {
+    use SearchableTrait;
 
     protected $table = 'questionnaire_answers';
 
@@ -18,6 +21,23 @@ class Answer extends Model
         'question_id' => 'required|exists:questionnaire_questions,id',
         'explanation'
     );
+
+    protected static $searchableMapping = [
+        'explanation' => [
+            'type' => 'string',
+            'fields' => [
+                'dutch' => [
+                    'type' => 'string',
+                    'analyzer' => 'dutch',
+                ]
+            ]
+        ]
+    ];
+
+    public function getSearchableType()
+    {
+        return 'answers';
+    }
 
     public function validator()
     {
@@ -32,6 +52,11 @@ class Answer extends Model
     public function question()
     {
         return $this->belongsTo('App\Questionnaire\Question', 'question_id');
+    }
+
+    public function selectedChoises()
+    {
+        return $this->hasMany('App\Questionnaire\SelectedChoise', 'answer_id');
     }
 
     public function choises()

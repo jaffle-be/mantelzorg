@@ -84,7 +84,7 @@
                                                     </ul>
                                                 </div>
                                                 <div class="input-group-btn">
-                                                    <a href="<?= URL::route('panel.{panel}.question.index', array($panel->id)) ?>" class="btn btn-default">
+                                                    <a href="<?= route('panel.{panel}.question.index', array($panel->id)) ?>" class="btn btn-default">
                                                         <i class="fa fa-tag"></i>
                                                     </a>
                                                 </div>
@@ -115,15 +115,9 @@
 
         @endforeach
 
-    </div>
+            <button class="btn btn-fab btn-primary" data-toggle="tooltip" data-original-title="<?= Lang::get('questionnaires.new') ?>"><i class="fa fa-plus"></i></button>
 
-    <div class="page-actions">
-        <p>
-            <button class="btn btn-primary"><i class="fa fa-plus"></i><?= Lang::get('questionnaires.new') ?>
-            </button>
-        </p>
     </div>
-
 
     @include('modals.questionnaire-creator')
 

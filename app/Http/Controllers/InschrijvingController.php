@@ -103,7 +103,7 @@ class InschrijvingController extends AdminController
         $inschrijving = $this->registration->find($id);
 
         if ($inschrijving) {
-            $organisations = $this->organisation->orderBy('name')->get();
+            $organisations = $this->organisation->get();
 
             //create an array that has has en empty first value, then all the organisations, then a 'create new' option
             //empty has no value, organisations have their id as value, new has 'new' as value

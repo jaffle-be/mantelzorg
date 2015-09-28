@@ -96,13 +96,11 @@ trait SearchableTrait
     }
 
     /**
-     * @return Query
+     * @return SearchServiceInterface
      */
     public function search()
     {
-        $this->getSearchableService();
-
-//        return new Search();
+        return $this->getSearchableService();
     }
 
     /**

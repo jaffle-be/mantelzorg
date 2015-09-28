@@ -4,12 +4,13 @@ namespace App\Questionnaire;
 
 use App\System\Database\Eloquent\Model;
 use App\System\Database\Eloquent\ValidationRules;
+use App\System\Scopes\ModelAutoSort;
 use Input;
 use Validator;
 
 class Question extends Model
 {
-    use ValidationRules;
+    use ValidationRules, ModelAutoSort;
 
     protected $table = 'questionnaire_questions';
 
@@ -25,6 +26,11 @@ class Question extends Model
         'summary_question'       => 'in:0,1',
         'explainable'            => 'in:0,1',
     );
+
+    public function getDisplayNameAttribute()
+    {
+        return 'Vraagstelling ' . $this->sort;
+    }
 
     public function answers()
     {

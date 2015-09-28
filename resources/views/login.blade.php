@@ -37,7 +37,7 @@
 
                             <p class="text-center">
                                 <button class="btn btn-lg btn-primary pull-left" type="submit" id="sign-in"><?= Lang::get('front.login.sign-in') ?></button>
-                                <a class='pull-right' href="<?= URL::route('reminder') ?>"><?= Lang::get('front.login.reminder') ?></a>
+                                <a class='pull-right' href="<?= route('reminder') ?>"><?= Lang::get('front.login.reminder') ?></a>
                             </p>
 
                             </p>

@@ -11,30 +11,18 @@ class FileManager
      */
     protected $files;
 
-    public function __construct(Filesystem $files)
+    public function __construct(Filesystem $files, Report $report)
     {
         $this->files = $files;
+
+        $this->report = $report;
 
         $this->path = storage_path('exports');
     }
 
     public function listFiles()
     {
-        if(!$this->files->isDirectory($this->path))
-        {
-            return [];
-        }
-
-        $exports = $this->files->allFiles($this->path);
-
-        $files = [];
-
-        while ($file = array_shift($exports)) {
-            /** @var SplFileInfo $file */
-            array_push($files, $file->getFilename());
-        }
-
-        return $files;
+        return $this->report->get();
     }
 
     public function delete($filename)

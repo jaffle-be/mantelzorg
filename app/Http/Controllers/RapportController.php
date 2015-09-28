@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Organisation\OrganisationRepositoryInterface;
 use App\Questionnaire\Export\Exporter;
 use App\Questionnaire\Export\FileManager;
+use App\Questionnaire\Export\Report;
 use App\Questionnaire\Jobs\ExportJob;
 use App\Questionnaire\Questionnaire;
 use App\UserRepositoryInterface;
+use Illuminate\Http\Request;
 use Input;
 use Lang;
 use Queue;
@@ -36,17 +38,17 @@ class RapportController extends AdminController
 
     public function __construct(Questionnaire $questionnaire, FileManager $files, UserRepositoryInterface $users, OrganisationRepositoryInterface $organisations)
     {
-        $this->middleware('auth.admin');
-
         $this->questionnaire = $questionnaire;
         $this->files = $files;
         $this->users = $users;
         $this->organisations = $organisations;
+
+        $this->middleware('auth.admin');
     }
 
     public function index()
     {
-        $questionnaires = $this->questionnaire->orderBy('title')->get();
+        $questionnaires = $this->questionnaire->orderBy('created_at')->get();
 
         $questionnaires = ['' => Lang::get('rapport.select_survey')] + $questionnaires->lists('title', 'id')->all();
 
@@ -54,12 +56,12 @@ class RapportController extends AdminController
 
         $organisations = $this->organisations->getForSelect();
 
-        $files = $this->files->listFiles();
+        $reports = $this->files->listFiles();
 
-        return view('rapport.index', compact('questionnaires', 'files', 'hulpverleners', 'organisations'));
+        return view('rapport.index', compact('questionnaires', 'reports', 'hulpverleners', 'organisations'));
     }
 
-    public function generate()
+    public function store(Request $request)
     {
         $id = Input::get('survey');
 
@@ -67,30 +69,51 @@ class RapportController extends AdminController
 
         $user = \Auth::user();
 
-        $validator = Validator::make(Input::except('_token'), ['survey' => 'required|exists:questionnaires,id']);
-
-        if ($validator->fails()) {
-            return Redirect::back()->with('errors', $validator->messages())->withInput();
-        }
+        $this->validate($request, ['survey' => 'required|exists:questionnaires,id']);
 
         $this->dispatchFromArray(ExportJob::class, ['id' => $id, 'userid' => $user->id, 'filters' => $filters]);
 
-        return Redirect::back()->with('success', \Lang::get('rapport.success'));
+        return redirect()->back()->with('success', \Lang::get('rapport.success'));
     }
 
-    public function download($filename)
+    public function show(Report $report)
     {
-        if ($this->files->exists($filename)) {
-            return Response::download(storage_path('exports/' . $filename));
+        if ($this->files->exists($report->filename)) {
+            return Response::download(storage_path('exports/' . $report->filename));
         } else {
-            return Redirect::route('rapport.index');
+            return redirect()->route('report.index');
         }
     }
 
-    public function delete($filename)
+    public function destroy(Report $report)
     {
-        $this->files->delete($filename);
+        $this->files->delete($report->filename);
 
-        return Redirect::back();
+        $report->delete();
+
+        return json_encode(array(
+            'status' => 'oke'
+        ));
+    }
+
+    public function destroyBatch(Report $report, Request $request)
+    {
+        $ids = $request->get('ids', []);
+
+        if(!empty($ids))
+        {
+            $reports = Report::whereIn('id', $ids)->get();
+
+            foreach($reports as $report)
+            {
+                $this->files->delete($report->filename);
+
+                $report->delete();
+            }
+        }
+
+        return json_encode(array(
+            'status' => 'oke'
+        ));
     }
 }

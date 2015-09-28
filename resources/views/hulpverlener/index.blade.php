@@ -64,7 +64,7 @@
 
                     </td>
                     <td>
-                        <a href="<?= URL::route('hulpverleners.edit', array($user->id)) ?>">{{ $user->firstname . ' ' . $user->lastname}}</a>
+                        <a href="<?= route('hulpverleners.edit', array($user->id)) ?>">{{ $user->firstname . ' ' . $user->lastname}}</a>
                     </td>
                     <td>{{ $user->email }}</td>
                     <td>

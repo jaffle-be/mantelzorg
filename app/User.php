@@ -161,7 +161,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             return $this->attributes['fullname'];
         }
 
-        return $this->attributes['firstname'] . ' ' . $this->attributes['lastname'];
+        return trim($this->attributes['firstname'] . ' ' . $this->attributes['lastname']);
     }
 
     public function generateNewPassword($length = 8, $strength = 4)

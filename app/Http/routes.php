@@ -12,41 +12,50 @@ Route::resource('instellingen/{mantelzorger}/oudere', 'Instelling\OudereControll
 /**
  * STATS
  */
-Route::get('stats', [
-    'uses' => 'StatsController@index',
-    'as'   => 'stats.index',
+
+//insights
+Route::get('stats/insights/ouderen', [
+    'uses' => 'Stats\InsightsOuderenController@index',
+    'as'   => 'stats.insights.ouderen',
 ]);
 
-Route::post('stats/ouderen', [
-    'uses' => 'StatsController@ouderen',
+Route::post('stats/insights/ouderen', [
+    'uses' => 'Stats\InsightsOuderenController@ouderen',
 ]);
 
-Route::post('stats/sessions', [
-    'uses' => 'StatsController@sessions',
+Route::get('stats/insights/answers', [
+    'uses' => 'Stats\InsightsQuestionController@index',
+    'as'   => 'stats.insights.answers',
+]);
+
+Route::post('stats/insights/question', [
+    'uses' => 'Stats\InsightsQuestionController@question',
+]);
+
+Route::post('stats/insights/term', [
+    'uses' => 'Stats\InsightsQuestionController@term',
+]);
+
+//activity
+Route::get('stats/activity', [
+    'uses' => 'Stats\ActivityController@index',
+    'as'   => 'stats.activity',
+]);
+
+Route::post('stats/activity/sessions', [
+    'uses' => 'Stats\ActivityController@sessions',
+]);
+
+Route::post('stats/activity/organisation-sessions', [
+    'uses' => 'Stats\ActivityController@organisations'
 ]);
 
 /**
  * RAPPORT
  */
-Route::get('rapport', [
-    'uses' => 'RapportController@index',
-    'as'   => 'rapport.index'
-]);
+Route::resource('report', 'RapportController', ['only' => ['index', 'store', 'destroy', 'show']]);
 
-Route::post('rapport', [
-    'uses' => 'RapportController@generate',
-    'as'   => 'rapport.generate'
-]);
-
-Route::get('rapport/download/{filename}', [
-    'uses' => 'RapportController@download',
-    'as'   => 'rapport.download'
-]);
-
-Route::get('rapport/delete/{filename}', [
-    'uses' => 'RapportController@delete',
-    'as'   => 'rapport.delete',
-]);
+Route::post('report/destroy', 'RapportController@destroyBatch');
 
 /**
  * INSTRUMENT

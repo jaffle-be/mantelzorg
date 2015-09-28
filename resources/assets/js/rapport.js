@@ -4,16 +4,22 @@
 
     $(document).ready(function () {
 
-        //prevent accidental deletion of files.
-        $("[data-trigger='rapport-list']").on('click', 'a[data-trigger="confirm"]', function()
-        {
-            var link = $(this).attr('href');
+        $(".actions").on('click', '.remove', function (event) {
+            var $me = $(this);
+            app.confirm(function () {
+                var ids = app.getIds($me);
 
-            app.confirm(function(){
-                window.location = link;
+                $.ajax({
+                    url: '/report/destroy',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {'ids': ids},
+                    success: function () {
+                        window.location.reload();
+                    }
+                });
             });
-
-            return false;
+            event.preventDefault();
         });
 
 

@@ -62,7 +62,7 @@
 
                     </td>
                     <td>
-                        <a href="<?= URL::route('inschrijvingen.edit', array($registration->id)) ?>">{{ $registration->firstname . ' ' . $registration->lastname}}</a>
+                        <a href="<?= route('inschrijvingen.edit', array($registration->id)) ?>">{{ $registration->firstname . ' ' . $registration->lastname}}</a>
                     </td>
                     <td>{{ $registration->email }}</td>
                     <td>{{ $registration->organisation }}</td>

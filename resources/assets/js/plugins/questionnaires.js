@@ -6,7 +6,7 @@
 
     function Creator() {
         this.$creator = $("#questionnaire-creator");
-        this.$trigger = $(".page-actions .btn-primary");
+        this.$trigger = $(".btn-fab.btn-primary");
         this.init();
     }
 

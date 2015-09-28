@@ -29,6 +29,7 @@ gulp.task('js', function()
 {
     gulp.src([
         //other plugins
+        'resources/assets/plugins/lodash/lodash.js',
         'resources/assets/plugins/metisMenu/dist/metisMenu.js',
         'resources/assets/plugins/moment/min/moment-with-locales.js',
 
@@ -51,6 +52,7 @@ gulp.task('js', function()
         .pipe(gulp.dest('public/js'));
 
     gulp.src('resources/assets/js/*.js')
+        .pipe(plumb())
         .pipe(uglify())
         .pipe(rename({suffix:'.min'}))
         .pipe(gulp.dest('public/js'));

@@ -13,7 +13,7 @@
             ),
             array(
                     'text' => Lang::get('master.navs.start'),
-                    'href' => URL::route('dash')
+                    'href' => route('dash')
             ),
             array(
                     'text' => Lang::get('instrument.panel')

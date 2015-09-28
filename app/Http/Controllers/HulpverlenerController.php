@@ -92,7 +92,7 @@ class HulpverlenerController extends AdminController
         $user = $this->user->find($id);
 
         if ($user) {
-            $organisations = $this->organisation->orderBy('name')->get();
+            $organisations = $this->organisation->get();
 
             /**
              * create an array that has has en empty first value, then all the organisations, then a 'create new' option
@@ -109,12 +109,10 @@ class HulpverlenerController extends AdminController
 
             if (Input::old('organisation_id') && $user->organisation_id !== Input::old('organisation_id')) {
                 $locations = $this->location->where('organisation_id', Input::old('organisation_id'))
-                    ->orderBy('name')
                     ->get()
                     ->lists('name', 'id')->all();
             } else if ($user->organisation) {
                 $locations = $user->organisation->locations()
-                    ->orderBy('name')
                     ->get()
                     ->lists('name', 'id')->all();
             } else {

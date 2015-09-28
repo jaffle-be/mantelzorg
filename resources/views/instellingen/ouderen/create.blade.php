@@ -8,11 +8,11 @@
     <?= Template::crumb(array(
             array(
                     'text' => Lang::get('master.navs.instellingen'),
-                    'href' => URL::route('instellingen.index')
+                    'href' => route('instellingen.index')
     ),
     array(
     'text' => Lang::get('master.navs.mantelzorgers'),
-    'href' => URL::route('instellingen.{hulpverlener}.mantelzorgers.index', array(Auth::user()->id))
+    'href' => route('instellingen.{hulpverlener}.mantelzorgers.index', array(Auth::user()->id))
     ),
     array(
     'text' => Lang::get('master.navs.ouderen')

@@ -62,11 +62,7 @@ class InstrumentController extends AdminController
 
     public function index(SearchServiceInterface $search)
     {
-        $questionnaire = $this->questionnaire->with(array(
-            'panels' => function ($query) {
-                $query->orderBy('panel_weight');
-            }
-        ))->active()->first();
+        $questionnaire = $this->questionnaire->with(['panels'])->active()->first();
 
         $hulpverlener = Auth::user();
 
@@ -188,11 +184,7 @@ class InstrumentController extends AdminController
             return Redirect::back();
         }
 
-        $questionnaire = $this->questionnaire->with(array(
-            'panels' => function ($query) {
-                $query->orderBy('panel_weight');
-            }
-        ))->active()->first();
+        $questionnaire = $this->questionnaire->with(['panels'])->active()->first();
 
         $survey = Memorize::newSurvey($mantelzorger, $oudere, $questionnaire);
 
@@ -226,12 +218,8 @@ class InstrumentController extends AdminController
         $panel->load([
             'questionnaire',
             'questionnaire.panels',
-            'questions'         => function ($query) {
-                $query->orderBy('sort');
-            },
-            'questions.choises' => function ($query) {
-                $query->orderBy('sort_weight');
-            }
+            'questions',
+            'questions.choises'
         ]);
 
         $survey->load(array('answers', 'answers.choises'));

@@ -72,9 +72,9 @@
         </div>
     </div>
 
-    <? if(count($surveys)): ?>
-
     @include('layout.easy-search-top', ['view' => 'instrument.search', 'data' => $surveys])
+
+    <? if(count($surveys)): ?>
 
     <div class="table-responsive">
         <table class="table table-striped table-hover">
@@ -125,10 +125,10 @@
                 </td>
                 <td><?= $survey->created_at->format('d/m/Y') ?></td>
                 <td>
-                    <a href="<?= URL::route('instrument.panel.get', array($survey->questionnaire->panels->first()->id, $survey->id)) ?>"><?= Lang::get('instrument.werkverder') ?></a>
+                    <a href="<?= route('instrument.panel.get', array($survey->questionnaire->panels->first()->id, $survey->id)) ?>"><?= Lang::get('instrument.werkverder') ?></a>
                 </td>
                 <td>
-                    <a href="<?= URL::route('instrument.download', [$survey->id]) ?>"><i class="fa fa-cloud-download"></i></a>
+                    <a href="<?= route('instrument.download', [$survey->id]) ?>"><i class="fa fa-cloud-download"></i></a>
                 </td>
             </tr>
             <? $teller++ ?>

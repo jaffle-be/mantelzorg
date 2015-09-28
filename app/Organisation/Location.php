@@ -4,12 +4,13 @@ namespace App\Organisation;
 
 use App\System\Database\Eloquent\Model;
 use App\System\Database\Eloquent\ValidationRules;
+use App\System\Scopes\ModelAutoSort;
 use Input;
 use Validator;
 
 class Location extends Model
 {
-    use ValidationRules;
+    use ValidationRules, ModelAutoSort;
 
     protected $table = 'locations';
 
@@ -20,6 +21,8 @@ class Location extends Model
         'city'            => 'required',
         'organisation_id' => 'required|exists:organisations,id'
     );
+
+    public $autosort = 'name';
 
     protected $fillable = array(
         'name', 'street', 'postal', 'city', 'country', 'organisation_id'

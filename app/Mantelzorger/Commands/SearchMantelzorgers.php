@@ -1,10 +1,10 @@
 <?php namespace App\Mantelzorger\Commands;
 
 use App\Commands\Command;
-use App\Mantelzorger\Mantelzorger;
 use App\Search\SearchServiceInterface;
 use App\User;
 use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Support\Arr;
 
 class SearchMantelzorgers extends Command implements SelfHandling
 {
@@ -21,7 +21,15 @@ class SearchMantelzorgers extends Command implements SelfHandling
 
     public function handle(SearchServiceInterface $search)
     {
-        $mantelzorgers = $search->search('mantelzorgers', $this->query());
+        $mantelzorgers = $search->search('mantelzorgers', $this->query(), [], 15, function ($source, $highlight) {
+
+            foreach($highlight as $light => $value)
+            {
+                Arr::set($source, $light, $value[0]);
+            }
+
+            return $source;
+        });
 
         $mantelzorgers->addQuery('query', $this->query);
 
@@ -30,64 +38,66 @@ class SearchMantelzorgers extends Command implements SelfHandling
 
     protected function query()
     {
-        $bool['must'] = [
-            ['term' => ['hulpverlener_id' => $this->user->id]]
-        ];
-
-        if ($this->query) {
-            $bool['should'] = [
-                ['query' => ['match' => ['identifier.raw' => $this->query]]],
-                ['nested' => [
-                    'path'  => 'oudere',
-                    'query' => [
-                        'match' => ['oudere.identifier.raw' => $this->query]
-                    ]
-                ]]
-            ];
-        }
-
         $query = [
             'index' => env('ES_INDEX'),
-            'type' => 'mantelzorgers',
-            'body' => [
-                'query' => [
-                    'filtered' => [
-                        'query' => [
-                            'match_all' => []
-                        ],
-                        'filter' => [
-                            'bool' => [
-                                'must' => [
+            'type'  => 'mantelzorgers',
+            'body'  => [
+                "query"     => [
+                    "filtered" => [
+                        "query"  => [
+                            "bool" => [
+                                "should" => [
                                     [
-                                        'term' => ['hulpverlener_id' => $this->user->id]
-                                    ]
-                                ],
-                                'should' => [
-                                    [
-                                        'query' => ['match' => ['identifier.raw' => $this->query]],
+                                        "nested" => [
+                                            "path"  => "oudere",
+                                            "query" => [
+                                                "multi_match" => [
+                                                    "query"  => $this->query,
+                                                    "fields" => ["oudere.firstname", "oudere.lastname", "oudere.identifier.raw"]
+                                                ]
+                                            ]
+                                        ]
                                     ],
                                     [
-                                        'nested' => [
-                                            'path' => 'oudere',
-                                            'query' => [
-                                                'match' => ['oudere.identifier' => $this->query]
-                                            ]
+                                        "multi_match" => [
+                                            "query"  => $this->query,
+                                            "fields" => ["firstname", "lastname", "identifier.raw"]
                                         ]
                                     ]
                                 ]
                             ]
+                        ],
+                        "filter" => [
+                            "bool" => [
+                                "must" => [
+                                    [
+                                        "term" => [
+                                            "hulpverlener_id" => $this->user->id
+                                        ]
+                                    ]
+                                ],
+                            ]
                         ]
                     ]
                 ],
-                'sort' => [
+                'sort'      => [
                     ['identifier.raw' => 'asc']
+                ]
+                ,
+                "highlight" => [
+                    "pre_tags"  => ["<strong>"],
+                    "post_tags" => ["</strong>"],
+                    "fields"    => [
+                        "identifier" => new \StdClass,
+                        "firstname" => new \StdClass,
+                        "lastname" => new \StdClass,
+                    ]
                 ]
             ]
         ];
 
-        if(empty($this->query))
-        {
-            unset($query['body']['query']['filtered']['filter']['bool']['should']);
+        if (empty($this->query)) {
+            $query['body']['query']['filtered']['query'] = ['match_all' => []];
         }
 
         return $query;

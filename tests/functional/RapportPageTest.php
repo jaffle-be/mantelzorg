@@ -21,7 +21,7 @@ class RapportPageTest extends AdminFunctionalTest
     public function test_required_fields()
     {
         $this->login();
-        $this->visit(route('rapport.index'));
+        $this->visit(route('report.index'));
         $this->submitForm('Aanmaken', []);
         $this->see('vragenlijst is verplicht');
     }
@@ -32,7 +32,7 @@ class RapportPageTest extends AdminFunctionalTest
 
         $this->baseData();
 
-        $this->visit(route('rapport.index'));
+        $this->visit(route('report.index'));
 
         $this->submitForm('Aanmaken', [
             'survey' => $this->survey->id,
@@ -47,7 +47,7 @@ class RapportPageTest extends AdminFunctionalTest
 
         $this->baseData();
 
-        $this->visit(route('rapport.index'));
+        $this->visit(route('report.index'));
 
         $this->submitForm('Aanmaken', [
             'survey' => $this->survey->id,
@@ -63,7 +63,7 @@ class RapportPageTest extends AdminFunctionalTest
 
         $this->baseData();
 
-        $this->visit(route('rapport.index'));
+        $this->visit(route('report.index'));
 
         $this->submitForm('Aanmaken', [
             'survey' => $this->survey->id,
@@ -71,6 +71,39 @@ class RapportPageTest extends AdminFunctionalTest
         ]);
 
         $this->see('alert alert-success');
+    }
+
+    public function test_seeing_existing_reports()
+    {
+        $user = $this->login();
+
+        $this->baseData();
+
+        $surveys = [];
+
+        array_push($surveys, Factory::create('report'));
+        array_push($surveys, Factory::create('user-report'));
+        array_push($surveys, Factory::create('organisation-report'));
+
+        $this->visit(route('report.index'));
+
+        foreach($surveys as $survey)
+        {
+            $this->see($survey->filename);
+            $this->see($survey->survey_count);
+            $this->see($survey->created_at->format('d/m/Y H:i:s'));
+
+            if($survey->user)
+            {
+                $this->see($survey->user->fullname);
+            }
+
+            if($survey->organisation)
+            {
+                $this->see($survey->organisation->name);
+            }
+        }
+
     }
 
 }

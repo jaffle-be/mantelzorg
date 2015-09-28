@@ -13,7 +13,7 @@
             array(
                     'text' => Lang::get('master.navs.hulpverleners'),
 
-                    'href' => URL::route('hulpverleners.index'),
+                    'href' => route('hulpverleners.index'),
             ),
 
             array(
