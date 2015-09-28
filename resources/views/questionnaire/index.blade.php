@@ -115,15 +115,9 @@
 
         @endforeach
 
-    </div>
+            <button class="btn btn-fab btn-primary" data-toggle="tooltip" data-original-title="<?= Lang::get('questionnaires.new') ?>"><i class="fa fa-plus"></i></button>
 
-    <div class="page-actions">
-        <p>
-            <button class="btn btn-primary"><i class="fa fa-plus"></i><?= Lang::get('questionnaires.new') ?>
-            </button>
-        </p>
     </div>
-
 
     @include('modals.questionnaire-creator')
 

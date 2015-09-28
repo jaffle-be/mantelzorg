@@ -119,13 +119,12 @@
                 </div>
             </div>
 
-
         @endforeach
+
+        <a class="btn btn-fab btn-primary question-creator-trigger" data-toggle="tooltip" data-original-title="<?= Lang::get('questionnaires.new_question') ?>" href=""><i class="fa fa-plus"></i></a>
+
     </div>
 
-    <div class="page-actions">
-        <a class="btn btn-primary question-creator-trigger" href=""><?= Lang::get('questionnaires.new_question') ?></a>
-    </div>
 
     @include('modals.question-creator')
 
