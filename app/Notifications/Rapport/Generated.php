@@ -22,7 +22,7 @@ class Generated
         $this->email->notify($user, 'rapport.generated', [
             'user'     => $user,
             'survey'   => $survey,
-            'filename' => $report
+            'report' => $report
         ]);
     }
 }
