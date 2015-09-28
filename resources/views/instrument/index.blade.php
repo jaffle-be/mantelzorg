@@ -72,9 +72,9 @@
         </div>
     </div>
 
-    <? if(count($surveys)): ?>
-
     @include('layout.easy-search-top', ['view' => 'instrument.search', 'data' => $surveys])
+
+    <? if(count($surveys)): ?>
 
     <div class="table-responsive">
         <table class="table table-striped table-hover">
