@@ -55,7 +55,7 @@
 
                         </td>
                         <td>{{ $report->filename }}</td>
-                        <td>{{ $report->survey_count }}</td>
+                        <td>{{ $report->survey_count == -1 ? '?' : $report->survey_count }}</td>
                         <td>{{ $report->questionnaire->title }}</td>
                         <td>
                             @if($report->organisation)
