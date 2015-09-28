@@ -276,11 +276,13 @@ class SearchService implements SearchServiceInterface
             //if we have a highlighter, we simply loop through the results and overwrite the original field.
             //this is dangerous though, a dev should not be using Elasticsearch results to manipulate data.
             //data should always be manipulated through your relational database.
-            //there is an option "force_source" => true when highlighting in elasticsearch. but that doesnt seem to
-            //work in my case, since we have a mapping set up as dutch for our explanation fields.
             foreach($result['hits']['hits'] as &$hit)
             {
-                $hit["_source"]["explanation"] = $hit['highlight']['explanation.dutch'][0];
+                if(isset($hit['highlight']))
+                {
+                    $hit["_source"] = $highlighter($hit['_source'], $hit['highlight']);
+                }
+
             }
         }
 

@@ -103,9 +103,9 @@ class InsightsQuestionController extends AdminController
                     ]
                 ]
             ]
-        ], [], 15, function ($answer, $highlighting) {
-
-            $answer->explanation = $highlighting['explanation.dutch'];
+        ], [], 15, function ($source, $highlight) {
+            $source["explanation"] = $highlight['explanation.dutch'][0];
+            return $source;
         });
     }
 

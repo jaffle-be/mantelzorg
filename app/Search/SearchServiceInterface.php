@@ -51,11 +51,15 @@ interface SearchServiceInterface
     /**
      * Search the index
      *
-     * @param array $params
+     * @param               $type
+     * @param array         $params
+     * @param array         $with
+     * @param int           $paginated
+     * @param \Closure|null $highlighter
      *
      * @return mixed
      */
-    public function search($type, array $params, $paginated = 15);
+    public function search($type, array $params, $with = [], $paginated = 15, \Closure $highlighter = null);
 
     /**
      * Aggregate an index
