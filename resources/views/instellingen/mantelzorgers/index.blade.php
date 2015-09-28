@@ -43,9 +43,9 @@
 
                                             <dl>
                                                 <dt for="identifier">{{ Lang::get('users.identifier') }}</dt>
-                                                <dd>{{ $mantelzorger->identifier ? : '/' }}</dd>
+                                                <dd>{!! $mantelzorger->identifier ? : '/'  !!} </dd>
                                                 <dt for="name">{{ Lang::get('users.fullname') }}</dt>
-                                                <dd>{{ $mantelzorger->fullname ? : '/' }}</dd>
+                                                <dd>{!! $mantelzorger->fullname ? : '/'  !!} </dd>
                                             </dl>
 
                                         </div>
