@@ -52,8 +52,6 @@ class ModelAutoSortScope implements ScopeInterface
     public function remove(Builder $builder, Model $model)
     {
         $query = $builder->getQuery();
-
-        dd($query->orders);
     }
 
 }
