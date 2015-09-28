@@ -224,20 +224,26 @@ class CsvExport implements Exporter
      */
     protected function createReport(Questionnaire $survey, array $filters, $excel)
     {
-        $this->report->filename = $excel->getFileName() . '.xlsx';
+        $report = $this->report->newInstance();
 
-        $this->report->questionnaire()->associate($survey);
+        $report->filename = $excel->getFileName() . '.xlsx';
+
+        $report->questionnaire()->associate($survey);
 
         if(isset($filters['hulpverlener_id']) && !empty($filters['hulpverlener_id']))
         {
-            $this->report->user_id = $filters['hulpverlener_id'];
-            $this->report->organisation_id = $filters['organisation_id'];
+            $report->user_id = $filters['hulpverlener_id'];
         }
 
-        $this->report->survey_count = $this->count;
+        if(isset($filters['organisation_id']) && !empty($filters['organisation_id']))
+        {
+            $report->organisation_id = $filters['organisation_id'];
+        }
 
-        $this->report->save();
+        $report->survey_count = $this->count;
 
-        return $this->report;
+        $report->save();
+
+        return $report;
     }
 }
