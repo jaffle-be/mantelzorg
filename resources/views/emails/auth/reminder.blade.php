@@ -5,8 +5,11 @@
 @stop
 
 @section('content')
-    <p>
-        {{ Lang::get('reminders.email.body') }}
-        <br/>{{ route('reset', array($token)) }}
-    </p>
+
+    <div class="container">
+        <p>
+            {{ Lang::get('reminders.email.body') }}
+            <br/>{{ route('reset', array($token)) }}
+        </p>
+    </div>
 @stop
