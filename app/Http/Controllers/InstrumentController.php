@@ -96,8 +96,9 @@ class InstrumentController extends AdminController
                                         "nested"=> [
                                             "path"=> "mantelzorger",
                                             "query"=> [
-                                                "match"=> [
-                                                    "mantelzorger.identifier"=> "$input"
+                                                "multi_match"=> [
+                                                    "query" => $input,
+                                                    "fields" => ["mantelzorger.identifier", "mantelzorger.firstname", "mantelzorger.lastname"]
                                                 ]
                                             ]
                                         ]
@@ -106,8 +107,9 @@ class InstrumentController extends AdminController
                                         "nested"=> [
                                             "path"=> "oudere",
                                             "query"=> [
-                                                "match"=> [
-                                                    "oudere.identifier"=> "$input"
+                                                "multi_match"=> [
+                                                    "query" => $input,
+                                                    "fields" => ["oudere.identifier", "oudere.firstname", "oudere.lastname"]
                                                 ]
                                             ]
                                         ]
