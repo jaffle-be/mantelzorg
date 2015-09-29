@@ -21,14 +21,14 @@
                     </a>
                 </li>
                 <li>
-                    <a class="btn btn-default" href="{{ route('report.index') }}" id="nav-rapport"><span class="fa fa-folder-open"></span>&nbsp;{{ Lang::get('master.navs.rapport') }}</a>
+                    <a class="btn btn-default" href="{{ route('report.index') }}" id="nav-rapport"><span class="fa fa-folder-open"></span>&nbsp;{{ Lang::get('master.navs.rapport') }}
+                    </a>
                 </li>
 
-                @if($user->id == 1)
-                    <li>
-                        <a class="btn btn-default" href="{{ route('stats.insights.ouderen') }}" id="nav-stats"><i class="fa fa-line-chart"></i>&nbsp;{{ Lang::get('master.navs.stats') }}</a>
-                    </li>
-                @endif
+                <li>
+                    <a class="btn btn-default" href="{{ route('stats.insights.ouderen') }}" id="nav-stats"><i class="fa fa-line-chart"></i>&nbsp;{{ Lang::get('master.navs.stats') }}
+                    </a>
+                </li>
             @endif
 
             <li>
@@ -36,7 +36,8 @@
                 </a>
             </li>
             <li>
-                <a class="btn btn-default" href="#"><span class="fa fa-wrench"></span>&nbsp;{{ Lang::get('master.navs.instellingen') }}<span class="fa arrow"></span></a>
+                <a class="btn btn-default" href="#"><span class="fa fa-wrench"></span>&nbsp;{{ Lang::get('master.navs.instellingen') }}
+                    <span class="fa arrow"></span></a>
 
                 <ul class="nav nav-second-level  collapse">
                     <li>
