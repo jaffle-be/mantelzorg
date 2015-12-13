@@ -157,9 +157,28 @@ class InstrumentController extends AdminController
 
         /** @var PdfWrapper $snappy */
         $snappy = App::make('snappy.pdf.wrapper');
+        $now = new Carbon();
+        $now = $now->format('Y-m-d');
+
+        $format = '%s-%s-%s.pdf';
+
+        if($session->user->fullname && $session->oudere->fullname)
+        {
+            $name = sprintf($format, $session->user->fullname, $session->oudere->fullname, $now);
+        }
+        elseif($session->user->fullname)
+        {
+            $name = sprintf($format, $session->user->fullname, $session->oudere->identifier, $now);
+        }
+        else if($session->oudere->fullname){
+            $name = sprintf($format, $session->user->identifier, $session->oudere->fullname, $now);
+        }
+        else{
+            $name = sprintf($format, $session->user->identifier, $session->oudere->identifier, $now);
+        }
 
         return $snappy->loadView('instrument.pdf', ['session' => $session])
-            ->download($session->questionnaire->title . '.pdf');
+            ->download($name);
     }
 
     public function newSurvey()
@@ -210,6 +229,8 @@ class InstrumentController extends AdminController
 
     /**
      * @param $panel
+     *
+     * @return \Illuminate\View\View
      */
     public function getPanel($panel, $survey)
     {
