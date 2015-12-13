@@ -86,6 +86,8 @@
                         <ul class="dropdown-menu">
                             <li><a class="select-all" href="">{{ Lang::get('master.tools.select_all') }}</a></li>
                             <li><a class="select-none" href="">{{ Lang::get('master.tools.select_none') }}</a></li>
+                            <li class="divider"></li>
+                            <li><a class="batch-pdf" href="">{{ Lang::get('instrument.download') }}</a></li>
                             @if(Auth::user()->admin || Session::get('hijack-original'))
                                 <li class="divider"></li>
                                 <li><a class="export" href="">{{ Lang::get('master.tools.export') }}</a></li>

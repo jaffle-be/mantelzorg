@@ -80,6 +80,11 @@ Route::get('instrument/download/{id}', [
     'as'   => 'instrument.download',
 ]);
 
+Route::get('instrument/batch-download', [
+    'uses' => 'InstrumentController@batchDownload',
+    'as'   => 'instrument.batch-download',
+]);
+
 Route::get('instrument/view/{id}', [
     'uses' => 'InstrumentController@view',
     'as'   => 'instrument.view',

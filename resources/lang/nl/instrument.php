@@ -17,4 +17,5 @@ return array(
     'close'                 => 'Sluiten',
     'afgewerkt'             => 'Afgewerkt',
     'view'                  => 'Quickview',
+    'download'              => "Pdf's downloaden",
 );
