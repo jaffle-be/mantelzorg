@@ -94,7 +94,7 @@ class InstrumentPageTest extends FunctionalTest
 
         //add extra sleep, rather large elasticsearch indexing just happened,
         //might need more time then default sleeps
-        usleep(500);
+        $this->sleep();
     }
 
     //the following test fails, probably due to the fact we're testing through

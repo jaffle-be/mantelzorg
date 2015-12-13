@@ -19,7 +19,7 @@ class MantelzorgersPageTest extends FunctionalTest
         $this->assertSame(2, Mantelzorger::count());
 
         //sleep to avoid elasticsearch delay bug.
-        usleep(500);
+        $this->sleep();
 
         $this->visit(route('instellingen.{hulpverlener}.mantelzorgers.index', [$user]));
 

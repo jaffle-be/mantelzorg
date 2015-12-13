@@ -97,16 +97,21 @@ abstract class AcceptanceTest extends Selenium
 
     public function visit($uri)
     {
-        usleep(50);
+        $this->sleep();
 
         return parent::visit($uri);
     }
 
     protected function open($uri)
     {
-        usleep(50);
+        $this->sleep();
 
         return parent::open($uri);
+    }
+
+    protected function sleep()
+    {
+        usleep(100000);
     }
 
 }

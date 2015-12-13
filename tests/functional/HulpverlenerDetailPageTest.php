@@ -12,6 +12,8 @@ class HulpverlenerDetailPageTest extends AdminFunctionalTest
 
         $user = Factory::create('user');
 
+        $this->sleep();
+
         $this->visit(route('hulpverleners.index'))
             ->click($user->fullname)
             ->seePageIs(route('hulpverleners.edit', [$user]));
