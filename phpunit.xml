@@ -22,9 +22,9 @@
         <env name="ES_HOST" value="localhost"/>
         <env name="REDIS_HOST" value="localhost"/>
         <env name="DB_HOST" value="localhost"/>
-        <env name="DB_DATABASE" value="mantelzorg-local"/>
+        <env name="DB_DATABASE" value="mantelzorg"/>
         <env name="DB_USERNAME" value="root"/>
         <env name="DB_PASSWORD" value=""/>
-        <env name="APP_URL" value="http://testing.local:8000"/>
+        <env name="APP_URL" value="http://mantelzorg.testing:8080"/>
     </php>
 </phpunit>

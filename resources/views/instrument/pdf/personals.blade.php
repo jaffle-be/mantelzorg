@@ -122,16 +122,16 @@
                 <span>{{ $oudere->phone ? : '&nbsp;' }}</span>
 
                 <label class="control-label">{{ Lang::get('pdf.bel_profiel') }}</label>
-                <span>{{ $oudere->bel_profiel ? $oudere->bel_profiel->value : '&nbsp;' }}</span>
+                <span>{{ $oudere->belProfiel ? $oudere->belProfiel->value : '&nbsp;' }}</span>
 
                 <label class="control-label">{{ Lang::get('pdf.woonsituatie') }}</label>
-                <span>{{ $oudere->woon_situatie ? $oudere->woon_situatie->value : '&nbsp;' }}</span>
+                <span>{{ $oudere->woonSituatie ? $oudere->woonSituatie->value : '&nbsp;' }}</span>
 
                 <label class="control-label">{{ Lang::get('pdf.mantelzorger_relation') }}</label>
-                <span>{{ $oudere->mantelzorger_relation ? $oudere->mantelzorger_relation->value : '&nbsp;' }}</span>
+                <span>{{ $oudere->mantelzorgerRelation ? $oudere->mantelzorgerRelation->value : '&nbsp;' }}</span>
 
                 <label class="control-label">{{ Lang::get('pdf.oorzaak_hulpbehoefte') }}</label>
-                <span>{{ $oudere->oorzaak_hulpbehoefte ? $oudere->oorzaak_hulpbehoefte->value : '&nbsp;' }}</span>
+                <span>{{ $oudere->oorzaakHulpbehoefte ? $oudere->oorzaakHulpbehoefte->value : '&nbsp;' }}</span>
 
                 <label class="full">{{ Lang::get('pdf.diagnose') }}</label>
                 <span>{{ $oudere->details_diagnose }}</span>

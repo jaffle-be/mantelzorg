@@ -1,6 +1,6 @@
-html.pdf{
+@pdf-margin-columns: 0.3em;
 
-  @pdf-margin-columns: 0.3em;
+html.pdf{
 
   background-color: transparent;
 
@@ -8,122 +8,121 @@ html.pdf{
     background-color: transparent;
   }
 
+}
 
-  .survey-details{
+.survey-details{
 
-    h3{
-      .make-xs-column(12);
-      padding: 0;
-      margin-bottom: 0.5em;
+  h3{
+    .make-xs-column(12);
+    padding: 0;
+    margin-bottom: 0.5em;
+  }
+
+  position: relative;
+  .make-xs-column(6);
+  margin-bottom: 2em;
+
+  span, address{
+    .make-xs-column(7);
+    padding: 0;
+    margin-bottom: @pdf-margin-columns;
+  }
+
+  label.full{
+    .make-xs-column(12);
+    padding: 0;
+  }
+
+  label{
+    .make-xs-column(5);
+    padding: 0;
+    margin-bottom: @pdf-margin-columns;
+    clear:both;
+  }
+
+  label{
+    font-weight: bold;
+  }
+
+}
+
+.survey-panel{
+  .make-row();
+  margin-bottom: 2em;
+
+  .pdf-panel("purple", @panel-purple);
+  .pdf-panel("blue", @panel-blue);
+  .pdf-panel("green", @panel-green);
+  .pdf-panel("red", @panel-red);
+  .pdf-panel("orange", @panel-orange);
+  .pdf-panel("yellow", @panel-yellow);
+  .pdf-panel("gray", @panel-gray);
+
+  .title{
+    padding-bottom: .5em;
+    margin-bottom: 1em;
+  }
+
+  .question-wrapper, h3{
+    .make-xs-column(12);
+    margin-bottom: 1em;
+    padding-left: 30px;
+
+
+    .question{
+      display: inline;
+      text-indent: -30px;
     }
 
-    position: relative;
-    .make-xs-column(6);
-    margin-bottom: 2em;
-
-    span, address{
-      .make-xs-column(7);
-      padding: 0;
-      margin-bottom: @pdf-margin-columns;
+    .fa-quote-left{
+      margin-right: 5px;
+      font-size: large;
     }
 
-    label.full{
-      .make-xs-column(12);
-      padding: 0;
+    .explanation{
+      .well();
+      .well-sm();
     }
 
-    label{
-      .make-xs-column(5);
-      padding: 0;
-      margin-bottom: @pdf-margin-columns;
-      clear:both;
-    }
+    .choises{
+      list-style: none;
+      margin: .5em 0;
 
-    label{
-      font-weight: bold;
+      li:first-child{
+        margin-top: 1em;
+      }
+
+      .box:before{
+        .fa-icon();
+        content: @fa-var-square-o;
+        margin-right: .4em;
+      }
+
+      .box.checked:before{
+        content: @fa-var-check-square-o;
+      }
+
+      .radio:before{
+        .fa-icon();
+        content: @fa-var-circle-thin;
+        margin-right: .4em;
+      }
+
+      .radio.checked:before{
+        content:@fa-var-circle;
+      }
+
     }
 
   }
+}
 
-  .survey-panel{
-    .make-row();
-    margin-bottom: 2em;
+.survey-personals{
+  margin-bottom: 2em;
 
-    .pdf-panel("purple", @panel-purple);
-    .pdf-panel("blue", @panel-blue);
-    .pdf-panel("green", @panel-green);
-    .pdf-panel("red", @panel-red);
-    .pdf-panel("orange", @panel-orange);
-    .pdf-panel("yellow", @panel-yellow);
-    .pdf-panel("gray", @panel-gray);
-
-    .title{
-      padding-bottom: .5em;
-      margin-bottom: 1em;
-    }
-
-    .question-wrapper, h3{
-      .make-xs-column(12);
-      margin-bottom: 1em;
-      padding-left: 30px;
-
-
-      .question{
-        display: inline;
-        text-indent: -30px;
-      }
-
-      .fa-quote-left{
-        margin-right: 5px;
-        font-size: large;
-      }
-
-      .explanation{
-        .well();
-        .well-sm();
-      }
-
-      .choises{
-        list-style: none;
-        margin: .5em 0;
-
-        li:first-child{
-          margin-top: 1em;
-        }
-
-        .box:before{
-          .fa-icon();
-          content: @fa-var-square-o;
-          margin-right: .4em;
-        }
-
-        .box.checked:before{
-          content: @fa-var-check-square-o;
-        }
-
-        .radio:before{
-          .fa-icon();
-          content: @fa-var-circle-thin;
-          margin-right: .4em;
-        }
-
-        .radio.checked:before{
-          content:@fa-var-circle;
-        }
-
-      }
-
-    }
+  .branding{
+    margin-bottom: 3em;
   }
-
-  .survey-personals{
-    margin-bottom: 2em;
-
-    .branding{
-      margin-bottom: 3em;
-    }
-  }
-
 }
 
 //rotate panel colors

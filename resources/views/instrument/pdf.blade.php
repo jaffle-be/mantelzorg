@@ -11,17 +11,9 @@
 </head>
 <body>
 
-<div class="container">
 
-    @include('instrument.pdf.personals', ['session' => $session])
+@include('instrument.pdf.template')
 
-    @foreach($session->questionnaire->panels as $panel)
-
-        @include('instrument.pdf.panel')
-
-    @endforeach
-
-</div>
 
 </body>
 </html>
