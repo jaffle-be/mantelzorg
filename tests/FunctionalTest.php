@@ -8,7 +8,7 @@ abstract class FunctionalTest extends TestCase
 {
     use DatabaseTransactions;
 
-    protected $baseUrl = 'http://testing.local:8000';
+    protected $baseUrl = 'http://mantelzorg.testing:8080';
 
     /**
      * Do not merge with acceptance reset elasticsearch,
