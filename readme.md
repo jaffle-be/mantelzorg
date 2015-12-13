@@ -15,3 +15,7 @@ run this through marvel, so we can run tests faster.
     "index.refresh_interval":"5ms"
 }
 `
+
+if you're getting errors when downloading pdf, make sure to
+ 
+`sudo apt-get install libxrender1`
