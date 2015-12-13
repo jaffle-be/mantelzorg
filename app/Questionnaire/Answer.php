@@ -31,7 +31,15 @@ class Answer extends Model implements Searchable
                     'analyzer' => 'dutch',
                 ]
             ]
-        ]
+        ],
+        'created_at' => [
+            'type'   => 'date',
+            'format' => 'yyyy-MM-dd HH:mm:ss'
+        ],
+        'updated_at' => [
+            'type'   => 'date',
+            'format' => 'yyyy-MM-dd HH:mm:ss'
+        ],
     ];
 
     public function getSearchableType()
