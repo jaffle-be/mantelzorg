@@ -16,4 +16,5 @@ return array(
     'next-question'         => 'Volgende',
     'close'                 => 'Sluiten',
     'afgewerkt'             => 'Afgewerkt',
+    'view'                  => 'Quickview',
 );

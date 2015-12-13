@@ -101,6 +101,7 @@
                 <th><?= Lang::get('instrument.created') ?></th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
+                <th>&nbsp;</th>
             </tr>
             </thead>
             <tbody>
@@ -126,6 +127,9 @@
                 <td><?= $survey->created_at->format('d/m/Y') ?></td>
                 <td>
                     <a href="<?= route('instrument.panel.get', array($survey->questionnaire->panels->first()->id, $survey->id)) ?>"><?= Lang::get('instrument.werkverder') ?></a>
+                </td>
+                <td>
+                    <a href="<?= route('instrument.view', [$survey->id]) ?>"><i class="fa fa-eye"></i></a>
                 </td>
                 <td>
                     <a href="<?= route('instrument.download', [$survey->id]) ?>"><i class="fa fa-cloud-download"></i></a>

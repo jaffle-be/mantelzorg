@@ -144,20 +144,16 @@ class InstrumentController extends AdminController
         return $query;
     }
 
+    public function view($id)
+    {
+        $session = $this->sessionDetails($id);
+
+        return view('instrument.view', ['session' => $session]);
+    }
+
     public function download($id)
     {
-        $session = $this->session->with([
-            'questionnaire',
-            'user',
-            'answers',
-            'answers.choises',
-            'mantelzorger',
-            'oudere',
-            'oudere.woonSituatie',
-            'oudere.oorzaakHulpbehoefte',
-            'oudere.mantelzorgerRelation',
-            'oudere.belProfiel',
-        ])->find($id);
+        $session = $this->sessionDetails($id);
 
         /** @var PdfWrapper $snappy */
         $snappy = App::make('snappy.pdf.wrapper');
@@ -559,5 +555,28 @@ class InstrumentController extends AdminController
         }
 
         return $value;
+    }
+
+    /**
+     * @param $id
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|Model|null
+     */
+    protected function sessionDetails($id)
+    {
+        $session = $this->session->with([
+            'questionnaire',
+            'user',
+            'answers',
+            'answers.choises',
+            'mantelzorger',
+            'oudere',
+            'oudere.woonSituatie',
+            'oudere.oorzaakHulpbehoefte',
+            'oudere.mantelzorgerRelation',
+            'oudere.belProfiel',
+        ])->find($id);
+
+        return $session;
     }
 }
