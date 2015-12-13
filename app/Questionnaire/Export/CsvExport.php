@@ -97,7 +97,7 @@ class CsvExport implements Exporter
         //add columns for people related info
         $headers = $this->headersHulpverlener($headers);
         $headers = $this->headersMantelzorger($headers);
-        $headers = $this->headersOuders($headers);
+        $headers = $this->headersOuderen($headers);
 
         $counter = 1;
 
@@ -194,7 +194,7 @@ class CsvExport implements Exporter
      *
      * @return mixed
      */
-    protected function headersOuders($headers)
+    protected function headersOuderen($headers)
     {
         $oudere = new Oudere();
 
