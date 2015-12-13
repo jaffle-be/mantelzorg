@@ -60,7 +60,30 @@
 
             event.preventDefault();
         });
+    }
 
+    function batchPdf()
+    {
+        $(".actions").on('click', '.batch-pdf', function(event){
+
+            var me = $(this);
+
+            var ids = app.getIds(me);
+
+            if(ids.length > 0)
+            {
+                var idString = '';
+
+                for(var i = 0; i < ids.length; i++)
+                {
+                    idString += '&ids[]=' + ids[i];
+                }
+
+                window.location.href = "/instrument/batch-download?" + idString;
+            }
+
+            event.preventDefault();
+        });
     }
 
     function purge() {
@@ -90,6 +113,7 @@
         //allow purging
         purge();
         doExport();
+        batchPdf();
 
 
         mantelzorger = $("#mantelzorger-select");

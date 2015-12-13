@@ -8,16 +8,20 @@ use App\Meta\Context;
 use App\Meta\Value;
 use App\Questionnaire\Answer;
 use App\Questionnaire\Choise;
+use App\Questionnaire\Questionnaire;
 use App\Questionnaire\Session;
 use App\Search\SearchServiceInterface;
 use App\User;
 use Auth;
 use Barryvdh\Snappy\PdfWrapper;
 use Carbon\Carbon;
+use Chumper\Zipper\Zipper;
 use DB;
 use Exception;
 use File;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Input;
 use Memorize;
 use Redirect;
@@ -146,39 +150,55 @@ class InstrumentController extends AdminController
 
     public function view($id)
     {
-        $session = $this->sessionDetails($id);
+        $session = $this->sessionDetail($id);
 
         return view('instrument.view', ['session' => $session]);
     }
 
     public function download($id)
     {
-        $session = $this->sessionDetails($id);
+        $session = $this->sessionDetail($id);
 
-        /** @var PdfWrapper $snappy */
-        $snappy = App::make('snappy.pdf.wrapper');
-        $now = new Carbon();
-        $now = $now->format('Y-m-d');
+        $now = $this->pdfTimestamp();
 
-        $format = '%s-%s-%s.pdf';
+        $name = $this->pdfName($session, $now);
 
-        if($session->user->fullname && $session->oudere->fullname)
+        $document = $this->pdfDocument($session);
+
+        return $document->download($name);
+    }
+
+    public function batchDownload(Request $request, Zipper $zipper)
+    {
+        $survey = Questionnaire::active()->first();
+
+        $ids = $request->get('ids');
+
+        $sessions = $this->sessionDetails($ids);
+
+        $time = new Carbon();
+        $time = $time->timestamp;
+        $files = [];
+        $now = $this->pdfTimestamp();
+
+        foreach($sessions as $session)
         {
-            $name = sprintf($format, $session->user->fullname, $session->oudere->fullname, $now);
-        }
-        elseif($session->user->fullname)
-        {
-            $name = sprintf($format, $session->user->fullname, $session->oudere->identifier, $now);
-        }
-        else if($session->oudere->fullname){
-            $name = sprintf($format, $session->user->identifier, $session->oudere->fullname, $now);
-        }
-        else{
-            $name = sprintf($format, $session->user->identifier, $session->oudere->identifier, $now);
+            $name = $this->pdfName($session, $now);
+
+            $document = $this->pdfDocument($session);
+
+            $path = storage_path("app/tmp/$time/$name");
+
+            $document->save($path);
+
+            $files[] = $path;
         }
 
-        return $snappy->loadView('instrument.pdf', ['session' => $session])
-            ->download($name);
+        $zip = storage_path("app/tmp/$time/{$survey->title}-$now.zip");
+
+        $zipper->make($zip)->add($files)->close();
+
+        return response()->download($zip);
     }
 
     public function newSurvey()
@@ -583,9 +603,36 @@ class InstrumentController extends AdminController
      *
      * @return \Illuminate\Database\Eloquent\Collection|Model|null
      */
-    protected function sessionDetails($id)
+    protected function sessionDetail($id)
     {
-        $session = $this->session->with([
+        $session = $this->session->with($this->pdfRelations())->find($id);
+
+        return $session;
+    }
+
+    /**
+     * @param $id
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|Model|null
+     */
+    protected function sessionDetails($ids)
+    {
+        if(empty($ids))
+        {
+            return new Collection();
+        }
+
+        $session = $this->session->with($this->pdfRelations())->whereIn('id', $ids)->get();
+
+        return $session;
+    }
+
+    /**
+     * @return array
+     */
+    protected function pdfRelations()
+    {
+        return [
             'questionnaire',
             'user',
             'answers',
@@ -596,8 +643,61 @@ class InstrumentController extends AdminController
             'oudere.oorzaakHulpbehoefte',
             'oudere.mantelzorgerRelation',
             'oudere.belProfiel',
-        ])->find($id);
+        ];
+    }
 
-        return $session;
+    /**
+     * @param $session
+     *
+     * @return static
+     */
+    protected function pdfDocument($session)
+    {
+        /** @var PdfWrapper $snappy */
+        $snappy = App::make('snappy.pdf.wrapper');
+
+        $document = $snappy->loadView('instrument.pdf', ['session' => $session]);
+
+        return $document;
+    }
+
+    /**
+     * @param $session
+     * @param $now
+     *
+     * @return string
+     */
+    protected function pdfName($session, $now)
+    {
+        $format = '%s-%s-%s.pdf';
+
+        if ($session->user->fullname && $session->oudere->fullname) {
+            $name = sprintf($format, $session->user->fullname, $session->oudere->fullname, $now);
+
+            return $name;
+        } elseif ($session->user->fullname) {
+            $name = sprintf($format, $session->user->fullname, $session->oudere->identifier, $now);
+
+            return $name;
+        } else if ($session->oudere->fullname) {
+            $name = sprintf($format, $session->user->identifier, $session->oudere->fullname, $now);
+
+            return $name;
+        } else {
+            $name = sprintf($format, $session->user->identifier, $session->oudere->identifier, $now);
+
+            return $name;
+        }
+    }
+
+    /**
+     * @return Carbon|string
+     */
+    protected function pdfTimestamp()
+    {
+        $now = new Carbon();
+        $now = $now->format('Y-m-d');
+
+        return $now;
     }
 }
