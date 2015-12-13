@@ -83,10 +83,14 @@ class Oudere extends Model implements Searchable, Exportable
             'hulpbehoevende-phone' => isset($this->attributes['phone']) ? $this->attributes['phone'] : null,
             'hulpbehoevende-birthday' => isset($this->attributes['birthday']) ? $this->attributes['birthday'] : null,
             'hulpbehoevende-diagnose' => isset($this->attributes['diagnose']) ? $this->attributes['diagnose'] : null,
-            'hulpbehoevende-mantelzorger_relation' => $this->mantelzorger_relation ? $this->mantelzorger_relation->value : null,
-            'hulpbehoevende-woonsituatie' => $this->woon_situatie ? $this->woon_situatie->value : null,
-            'hulpbehoevende-oorzaak_hulpbehoefte' => $this->oorzaak_hulpbehoefte ? $this->oorzaak_hulpbehoefte->value : null,
-            'hulpbehoevende-bel_profiel' => $this->bel_profiel ? $this->bel_profiel->value : null,
+            'hulpbehoevende-mantelzorger_relation' => $this->mantelzorger_relation_id ? $this->mantelzorgerRelation->value : null,
+            'hulpbehoevende-mantelzorger_relation_id' => $this->mantelzorger_relation_id ? $this->mantelzorger_relation_id : null,
+            'hulpbehoevende-woonsituatie' => $this->woonsituatie_id ? $this->woonSituatie->value : null,
+            'hulpbehoevende-woonsituatie_id' => $this->woonsituatie_id ? $this->woonsituatie_id : null,
+            'hulpbehoevende-oorzaak_hulpbehoefte' => $this->oorzaak_hulpbehoefte_id ? $this->oorzaakHulpbehoefte->value : null,
+            'hulpbehoevende-oorzaak_hulpbehoefte_id' => $this->oorzaak_hulpbehoefte_id ? $this->oorzaak_hulpbehoefte_id : null,
+            'hulpbehoevende-bel_profiel' => $this->bel_profiel_id ? $this->belProfiel->value : null,
+            'hulpbehoevende-bel_profiel_id' => $this->bel_profiel_id ? $this->bel_profiel_id : null,
             'hulpbehoevende-details_diagnose' => isset($this->attributes['details_diagnose']) ? $this->attributes['details_diagnose'] : null
         ];
     }
