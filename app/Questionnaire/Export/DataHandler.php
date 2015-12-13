@@ -181,12 +181,43 @@ class DataHandler
             $data[] = $answer->explanation;
         }
 
-        foreach ($question['choises'] as $choise) {
-            if ($this->wasChecked($chosen, $choise['id'], $answer->id)) {
-                $data[] = 1;
-            } else {
-                $data[] = 0;
+        if ($question['multiple_answer']) {
+            foreach ($question['choises'] as $choise) {
+                if ($this->wasChecked($chosen, $choise['id'], $answer->id)) {
+                    $data[] = 1;
+                } else {
+                    $data[] = 0;
+                }
             }
+        } elseif ($question['multiple_choise']) {
+            //find answered
+
+            $found = false;
+            $counter = 0;
+
+            while(!$found && $counter < count($question['choises']))
+            {
+                $choise = $question['choises'][$counter];
+
+                if($this->wasChecked($chosen, $choise['id'], $answer->id))
+                {
+                    $found = $choise;
+                }
+
+                $counter++;
+            }
+
+            if($found)
+            {
+                //first add the value then the corresponding id
+                $data[] = $found['title'];
+                $data[] = $found['id'];
+            }
+            else{
+                $data[] = null;
+                $data[] = null;
+            }
+
         }
 
         return $data;
@@ -204,8 +235,17 @@ class DataHandler
             $data[] = '';
         }
 
-        foreach ($question['choises'] as $choise) {
-            $data[] = 0;
+        if($question['multiple_answer'])
+        {
+            //checkboxed question
+            foreach ($question['choises'] as $choise) {
+                $data[] = 0;
+            }
+        }
+        elseif($question['multiple_choise']){
+            //radio question needs 2 columns
+            $data[] = null;
+            $data[] = null;
         }
 
         return $data;

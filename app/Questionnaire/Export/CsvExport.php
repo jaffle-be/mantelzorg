@@ -125,11 +125,20 @@ class CsvExport implements Exporter
 
     protected function choises(Collection $headers, Question $question, $counter)
     {
-        $options = 1;
+        //checkboxed questions will have a column for each value
+        if($question->multiple_answer)
+        {
+            $options = 1;
 
-        foreach ($question->choises as $choise) {
-            $headers->push($counter . 'option' . $options);
-            $options++;
+            foreach ($question->choises as $choise) {
+                $headers->push($counter . 'option' . $options);
+                $options++;
+            }
+        }
+        //radios will have only 2 columns, one for the value, one for the id of that value
+        else{
+            $headers->push($counter . 'option');
+            $headers->push($counter . 'option_id');
         }
     }
 
