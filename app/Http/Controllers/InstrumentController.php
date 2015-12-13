@@ -187,16 +187,23 @@ class InstrumentController extends AdminController
 
             $document = $this->pdfDocument($session);
 
-            $path = storage_path("app/tmp/$time/$name");
+            $path = storage_path("app/batch-pdf/$time/$name");
 
             $document->save($path);
 
             $files[] = $path;
         }
 
-        $zip = storage_path("app/tmp/$time/{$survey->title}-$now.zip");
+        $zip = storage_path("app/batch-pdf/$time/{$survey->title}-$now.zip");
 
         $zipper->make($zip)->add($files)->close();
+
+        $filesystem = app('files');
+
+        foreach($files as $file)
+        {
+            $filesystem->delete($file);
+        }
 
         return response()->download($zip);
     }
