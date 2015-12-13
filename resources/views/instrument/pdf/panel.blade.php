@@ -18,8 +18,9 @@
 
                         <ul class="choises">
                             @foreach($answer->question->choises as $choise)
-
-                                <li class="box {{ $answer->wasChecked($choise) ? 'checked': null }}">{{ $choise->title }}</li>
+                                @if($answer->wasChecked($choise))
+                                <li class="box checked">{{ $choise->title }}</li>
+                                @endif
 
                             @endforeach
                         </ul>
