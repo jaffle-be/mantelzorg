@@ -12,6 +12,10 @@ addons:
     access_key:
       secure: "PsZCY8wX7dY9KhFaYgPNCxbr2fSKqA6BWBpbI+xCTbQsxhXyqXMjEERUWvHXge/aUo+tkcc21jFH8qiXYJEdO/iqyeT+58w3fX5GUiwn4W3d+zHAziszy4/PdJ9gEnK5H+fnS0SVLM/No6tETO7mA1ys8o+vFLuWmDkftkRUALI="
 
+services:
+  - redis-server
+  - elasticsearch
+
 before_script:
   - cp .env.travis .env
   - mysql -e 'create database testdb;'
@@ -27,12 +31,4 @@ before_script:
   - sleep 10
 
 script:
-  - ./vendor/bin/phpunit
-
-services:
-  - redis-server
-  - elasticsearch
-
-before_script:
-  # sleep added to allow elasticsearch to boot
-  - sleep 10
+  - vendor/bin/phpunit
