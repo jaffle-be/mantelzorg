@@ -15,6 +15,7 @@ addons:
 services:
   - redis-server
   - elasticsearch
+  - mysql
 
 before_script:
   - cp .env.travis .env
