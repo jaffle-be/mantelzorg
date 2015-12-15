@@ -16,8 +16,10 @@ services:
   - mysql
 
 before_script:
+  # need this here to run artisan commands properly?
+  - export APP_ENV=testing
   - cp .env.travis .env
-  - mysql -e 'create database testdb;'
+  - mysql -e 'create database mantelzorg-testing;'
   - composer self-update
   - composer install --no-interaction
   - npm install -g bower
@@ -33,3 +35,5 @@ script:
   - vendor/bin/phpunit --testsuite application
 #  - vendor/bin/phpunit --testsuite acceptance --stop-on-failure
 
+matrix:
+ fast_finish: true
