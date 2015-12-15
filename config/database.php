@@ -1,6 +1,6 @@
 <?php
 
-dd(env('DB_HOST', 'not found'));
+dd('testing');
 
 return [
 
