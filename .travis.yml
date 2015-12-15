@@ -24,6 +24,8 @@ before_script:
   - php artisan migrate --force
   - php artisan db:seed --class=MetaContextValueSeeder
   - php artisan serve --host=0.0.0.0 > /dev/null 2>&1 &
+  - php artisan search:settings
+  - php artisan search:build
   - sleep 10
 
 script:
