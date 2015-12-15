@@ -17,11 +17,9 @@ services:
 
 before_script:
   # need this here to run artisan commands properly?
-  - export APP_ENV=testing
   - cp .env.travis .env
   - mysql -e 'create database `mantelzorg-testing;`'
   - composer self-update
-  - cat .env
   - composer install --no-interaction
   - npm install -g bower
   - npm install
