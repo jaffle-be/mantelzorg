@@ -30,4 +30,6 @@ before_script:
   - sleep 10
 
 script:
-  - vendor/bin/phpunit tests/functional
+  - vendor/bin/phpunit --testsuite application
+  - vendor/bin/phpunit --testsuite acceptance --stop-on-failure
+
