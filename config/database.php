@@ -1,7 +1,5 @@
 <?php
 
-dd(env('APP_ENV'));
-
 return [
 
 	/*
