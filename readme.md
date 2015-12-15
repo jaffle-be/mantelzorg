@@ -8,14 +8,6 @@ whenever you do a migrate:refresh or setup a new instance, don't forget to seed 
 php artisan db:seed --class=MetaContextValueSeeder
 `
 
-run this through marvel, so we can run tests faster.
-
-`PUT mantelzorg/_settings
-{
-    "index.refresh_interval":"5ms"
-}
-`
-
 if you're getting errors when downloading pdf, make sure to
  
 `sudo apt-get install libxrender1`
