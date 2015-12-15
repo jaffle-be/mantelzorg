@@ -8,6 +8,7 @@ use Integrated\Selenium;
 use Laracasts\Integrated\Extensions\Traits\WorksWithDatabase;
 use Laracasts\Integrated\Services\Laravel\Application;
 use Laracasts\TestDummy\Factory;
+use WebDriver\WebDriver;
 
 abstract class AcceptanceTest extends Selenium
 {
@@ -87,12 +88,34 @@ abstract class AcceptanceTest extends Selenium
         Organisation::whereNotNull('id')->delete();
     }
 
+    protected function newSession()
+    {
+        $host = 'http://localhost:4444/wd/hub';
+
+        if(env('TRAVIS'))
+        {
+            $host = 'ondemand.saucelabs.com:80';
+        }
+
+        $this->webDriver = new WebDriver($host);
+        $capabilities = [];
+
+        return $this->session = $this->webDriver->session($this->getBrowserName(), $capabilities);
+    }
+
+
     /**
      * @setUp
      */
     protected function setBaseUrl()
     {
-        $this->baseUrl = env('APP_URL');
+        if(!env('TRAVIS'))
+        {
+            $this->baseUrl = env('APP_URL');
+        }
+        else{
+            $this->baseUrl = 'http://localhost';
+        }
     }
 
     public function visit($uri)
