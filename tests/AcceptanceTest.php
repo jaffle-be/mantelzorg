@@ -109,7 +109,13 @@ abstract class AcceptanceTest extends Selenium
      */
     protected function setBaseUrl()
     {
-        $this->baseUrl = config('app.url');
+        if(!env('TRAVIS'))
+        {
+            $this->baseUrl = env('APP_URL');
+        }
+        else{
+            $this->baseUrl = 'http://localhost';
+        }
     }
 
     public function visit($uri)

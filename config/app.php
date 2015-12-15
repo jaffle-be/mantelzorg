@@ -26,7 +26,7 @@ return [
 	|
 	*/
 
-	'url' => env('TRAVIS', false) ? 'http://localhost' : env('APP_URL'),
+	'url' => env('APP_URL'),
 
 	/*
 	|--------------------------------------------------------------------------
