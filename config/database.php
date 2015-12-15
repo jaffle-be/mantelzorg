@@ -1,16 +1,6 @@
 <?php
 
-echo env('APP_ENV');
-echo env('DB_HOST', '127.0.0.1');
-echo env('DB_DATABASE', 'forge');
-echo env('APP_ENV');
-echo env('DB_USERNAME', 'forge');
-echo env('DB_PASSWORD', '');
-echo env('DB_DATABASE');
-echo env('APP_ENV');
-echo env('REDIS_HOST', '127.0.0.1');
-echo env('APP_ENV');
-echo env('REDIS_PASS');
+echo env('DB_HOST', 'localhost');
 exit();
 
 return [
