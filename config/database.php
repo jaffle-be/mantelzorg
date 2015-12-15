@@ -1,5 +1,7 @@
 <?php
 
+dd(env('DB_HOST', 'not found'));
+
 return [
 
 	/*
