@@ -16,7 +16,6 @@ services:
   - mysql
 
 before_script:
-  # need this here to run artisan commands properly?
   - cp .env.travis .env
   - mysql -e 'create database `testing`;'
   - composer self-update
@@ -29,7 +28,7 @@ before_script:
   - sleep 10
 
 script:
-#  - vendor/bin/phpunit --testsuite application
+  - vendor/bin/phpunit --testsuite application
   - vendor/bin/phpunit --testsuite acceptance --stop-on-failure
 
 matrix:
