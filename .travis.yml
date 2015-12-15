@@ -17,8 +17,6 @@ services:
 
 before_script:
   - cp .env.travis .env
-  # docs say mysql isnt always started, so we do it manually here.
-  - service mysql start
   - mysql -e 'create database testdb;'
   - composer self-update
   - composer install --no-interaction
