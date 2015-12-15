@@ -2,7 +2,7 @@
     <div class="text-center">
 
         @if(UI::isMobile())
-            <? simple_paginator($data) ?>
+            <?php simple_paginator($data) ?>
         @else
             <?= $data->render() ?>
         @endif

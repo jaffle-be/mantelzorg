@@ -12,7 +12,7 @@
 
             [
                     'text' => Lang::get('master.navs.inschrijvingen'),
-            ]
+            ],
 
     ]) ?>
 @stop
@@ -48,7 +48,7 @@
             </thead>
 
             <tbody>
-            <? $teller = 1 ?>
+            <?php $teller = 1 ?>
             @foreach($registrations as $registration)
 
                 <tr>
@@ -69,7 +69,7 @@
                     <td>{{ $registration->created_at->format('d/m/Y') }}</td>
                 </tr>
 
-                <? $teller++ ?>
+                <?php $teller++ ?>
             @endforeach
             </tbody>
         </table>

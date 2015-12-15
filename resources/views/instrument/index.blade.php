@@ -7,7 +7,7 @@
 @section('page-header')
     <?= Template::crumb(array(
             array('text' => Lang::get('master.navs.instrument')),
-            array('text' => Lang::get('master.navs.start'))
+            array('text' => Lang::get('master.navs.start')),
     )) ?>
 @stop
 
@@ -31,11 +31,11 @@
             @endif
 
             <?= Form::open(array(
-                    'class'  => '',
-                    'id'     => 'creator-form',
-                    'name'   => 'instrument-persons',
+                    'class' => '',
+                    'id' => 'creator-form',
+                    'name' => 'instrument-persons',
                     'method' => 'POST',
-                    'route'  => 'instrument.submit'
+                    'route' => 'instrument.submit',
             )); ?>
 
             <div class="alert alert-info">{{ Lang::get('instrument.introduction') }}</div>
@@ -47,8 +47,8 @@
                             'mantelzorger', array('' => Lang::get('instrument.kies_mantelzorger')) + $hulpverlener->mantelzorgers->sortBy(function ($item) {
                                 return $item->displayName;
                             })->lists('displayName', 'id')->all(), null, array(
-                                    'id'    => 'mantelzorger-select',
-                                    'class' => 'form-control col-md-6'
+                                    'id' => 'mantelzorger-select',
+                                    'class' => 'form-control col-md-6',
                             )
                     ) ?>
                     </div>
@@ -57,7 +57,7 @@
                 <div class="form-group col-md-6">
                     <?= Form::select('oudere', array(), null, array(
                             'class' => 'form-control hide col-md-6',
-                            'id'    => 'ouderen-select'
+                            'id' => 'ouderen-select',
                     )) ?>
                 </div>
 
@@ -74,7 +74,7 @@
 
     @include('layout.easy-search-top', ['view' => 'instrument.search', 'data' => $surveys])
 
-    <? if(count($surveys)): ?>
+    <?php if (count($surveys)): ?>
 
     <div class="table-responsive">
         <table class="table table-striped table-hover">
@@ -107,8 +107,8 @@
             </tr>
             </thead>
             <tbody>
-            <? $teller = 1; ?>
-            <? foreach($surveys as $survey): ?>
+            <?php $teller = 1; ?>
+            <?php foreach ($surveys as $survey): ?>
             <tr data-session-id="{{$survey->id}}">
                 <td>
                     <div class="checkbox">
@@ -137,14 +137,14 @@
                     <a href="<?= route('instrument.download', [$survey->id]) ?>"><i class="fa fa-cloud-download"></i></a>
                 </td>
             </tr>
-            <? $teller++ ?>
-            <? endforeach; ?>
+            <?php $teller++ ?>
+            <?php endforeach; ?>
             </tbody>
         </table>
     </div>
 
     @include('layout.easy-search-bottom', ['data' => $surveys])
 
-    <? endif ?>
+    <?php endif ?>
 
 @stop

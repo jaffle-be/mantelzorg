@@ -14,7 +14,7 @@
 
         @if(UI::isTablet())
             <div class="question-list">
-                <?
+                <?php
                 $question = $panel->questions->first();
 
                 $answer = $survey->getAnswered($question);
@@ -26,12 +26,12 @@
                 </h4>
 
                 <ul style="display:none">
-                    <?
+                    <?php
                     $counter = 1;
                     $count = $panel->questions->count();
                     ?>
                     @foreach($panel->questions as $question)
-                        <?
+                        <?php
                         $answer = $survey->getAnswered($question);
 
                         $filled = $answer && $answer->wasFilledIn();
@@ -52,9 +52,9 @@
                                 </span>
                         </li>
 
-                        <?
+                        <?php
                         $first = false;
-                        $counter++;
+                        ++$counter;
                         ?>
                     @endforeach
 

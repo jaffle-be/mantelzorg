@@ -37,7 +37,7 @@
             <div class="row">
 
                 <p class="col-xs-6">
-                    <? $date = new DateTime() ?>
+                    <?php $date = new DateTime() ?>
                     @if($date->format('Y') === '2013')
                         {{ 'Copyright &copy; 2013'}}
                     @else

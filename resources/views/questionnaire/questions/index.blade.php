@@ -4,15 +4,15 @@
     <?= Template::crumb(array(
             array(
                     'text' => Lang::get('master.navs.questionnaires'),
-                    'href' => route('survey.index')
+                    'href' => route('survey.index'),
             ),
             array(
                     'text' => Lang::get('master.navs.panels'),
 
             ),
             array(
-                    'text' => Lang::get('master.navs.questions')
-            )
+                    'text' => Lang::get('master.navs.questions'),
+            ),
     ))?>
 
 @stop

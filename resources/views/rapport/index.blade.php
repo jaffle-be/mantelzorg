@@ -11,7 +11,7 @@
                     'text' => Lang::get('master.navs.rapport'),
             ),
 
-            array('text' => Lang::get('master.navs.downloaden'))
+            array('text' => Lang::get('master.navs.downloaden')),
     )) ?>
 
 @stop

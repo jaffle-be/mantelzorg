@@ -1,10 +1,10 @@
 @if($mode == 'create')
-    <? $mantelzorger = new App\Mantelzorger\Mantelzorger(); ?>
+    <?php $mantelzorger = new App\Mantelzorger\Mantelzorger(); ?>
     <?= Form::open(array('route' => array('instellingen.{hulpverlener}.mantelzorgers.store', $hulpverlener->id), 'method' => 'post')) ?>
 @else
     <?= Form::model($mantelzorger, array(
-            'route'  => array('instellingen.{hulpverlener}.mantelzorgers.update', $hulpverlener->id, $mantelzorger->id),
-            'method' => 'put'
+            'route' => array('instellingen.{hulpverlener}.mantelzorgers.update', $hulpverlener->id, $mantelzorger->id),
+            'method' => 'put',
     )) ?>
 @endif
 
@@ -71,7 +71,7 @@
                                         <label class="control-label" for="birthday"><?= Lang::get('users.birthday') ?></label>
 
                                         <div class="input-group">
-                                            <?= Form::text('birthday', $mantelzorger->birthday ? $mantelzorger->birthday->format('d/m/Y'): null, array('class' => 'form-control datepicker')) ?>
+                                            <?= Form::text('birthday', $mantelzorger->birthday ? $mantelzorger->birthday->format('d/m/Y') : null, array('class' => 'form-control datepicker')) ?>
                                             <span class="input-group-addon"><i class="fa fa-birthday-cake"></i></span>
                                         </div>
 

@@ -41,7 +41,7 @@
 
 
                 <tbody>
-                <? $teller = 1 ?>
+                <?php $teller = 1 ?>
                 @foreach($reports as $report)
 
                     <tr>
@@ -75,7 +75,7 @@
                         </td>
                     </tr>
 
-                    <? $teller++ ?>
+                    <?php $teller++ ?>
                 @endforeach
                 </tbody>
             </table>

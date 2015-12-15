@@ -8,7 +8,7 @@ $mark = $filled ? 'display:none' : null;
 
 $check = $filled ? null : 'display:none';
 
-/**
+/*
  * first part: for mobiles or tablets, only show the first element
  * second part: for anything else then mobiles or tablets show the elements
  */
@@ -68,11 +68,11 @@ $show = ($first && $tabletOrMobile) || !$tabletOrMobile ? '' : 'display:none';
                                 @if($question->multiple_answer == '1')
                                     {{--checkboxes--}}
 
-                                    <? $identifier = 'question' . $question->id ?>
+                                    <?php $identifier = 'question'.$question->id ?>
 
                                     @foreach($question->choises as $choise)
 
-                                        <? $checked = $answer && $answer->wasChecked($choise) ? 'checked="checked"' : null ?>
+                                        <?php $checked = $answer && $answer->wasChecked($choise) ? 'checked="checked"' : null ?>
 
                                         <li class="checkbox">
                                             <label class="control-label" id="choise{{$choise->id}}">
@@ -86,11 +86,11 @@ $show = ($first && $tabletOrMobile) || !$tabletOrMobile ? '' : 'display:none';
                                 @else
                                     {{--radios--}}
 
-                                    <? $identifier = 'question' . $question->id ?>
+                                    <?php $identifier = 'question'.$question->id ?>
 
                                     @foreach($question->choises as $choise)
 
-                                        <? $checked = $answer && $answer->wasChecked($choise) ? 'checked="checked"' : null?>
+                                        <?php $checked = $answer && $answer->wasChecked($choise) ? 'checked="checked"' : null?>
 
                                         <li class="radio">
                                             <label class="control-label" id="choise{{$choise->id}}">

@@ -30,11 +30,11 @@
 
     @error('organisation')
 
-    <? if (Session::has('message')): ?>
+    <?php if (Session::has('message')): ?>
     <div class="alert alert-success">
         {{ Lang::get('front.beta.registration-thanks') }}
     </div>
-    <? endif; ?>
+    <?php endif; ?>
 
     <div class="text-center">
         <button class="btn btn-lg btn-primary" type="submit"><?= Lang::get('front.beta.register') ?></button>

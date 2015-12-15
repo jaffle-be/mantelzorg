@@ -1,12 +1,12 @@
 @if($mode == 'create')
-    <? $oudere = new App\Mantelzorger\Oudere(); ?>
+    <?php $oudere = new App\Mantelzorger\Oudere(); ?>
     <?= Form::open(array(
-            'route'  => array('instellingen.{mantelzorger}.oudere.store', $mantelzorger->id),
+            'route' => array('instellingen.{mantelzorger}.oudere.store', $mantelzorger->id),
             'method' => 'post',
     )) ?>
 @else
     <?= Form::model($oudere, array(
-            'route'  => array('instellingen.{mantelzorger}.oudere.update', $mantelzorger->id, $oudere->id),
+            'route' => array('instellingen.{mantelzorger}.oudere.update', $mantelzorger->id, $oudere->id),
             'method' => 'put',
     )) ?>
 @endif
@@ -210,8 +210,8 @@
                                 <label class="control-label" for="mantelzorger_relation_id_alternate"><?= Lang::get('users.relatie_mantelzorger_alternate') ?></label>
 
                                 <?= Form::text('mantelzorger_relation_id_alternate', null, array(
-                                        'id'    => 'mantelzorger_relation_id_alternate',
-                                        'class' => 'form-control'
+                                        'id' => 'mantelzorger_relation_id_alternate',
+                                        'class' => 'form-control',
                                 )) ?>
                             </div>
 

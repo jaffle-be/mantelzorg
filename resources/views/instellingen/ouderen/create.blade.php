@@ -8,18 +8,18 @@
     <?= Template::crumb(array(
             array(
                     'text' => Lang::get('master.navs.instellingen'),
-                    'href' => route('instellingen.index')
+                    'href' => route('instellingen.index'),
     ),
     array(
     'text' => Lang::get('master.navs.mantelzorgers'),
-    'href' => route('instellingen.{hulpverlener}.mantelzorgers.index', array(Auth::user()->id))
+    'href' => route('instellingen.{hulpverlener}.mantelzorgers.index', array(Auth::user()->id)),
     ),
     array(
-    'text' => Lang::get('master.navs.ouderen')
+    'text' => Lang::get('master.navs.ouderen'),
     ),
     array(
-    'text' => Lang::get('master.navs.nieuw')
-    )
+    'text' => Lang::get('master.navs.nieuw'),
+    ),
 
     )) ?>
 @stop

@@ -20,7 +20,7 @@
 
 
                 <label class="control-label"><?= Lang::get('questionnaires.question') ?></label>
-                <?= Form::textarea('question', null, array('class' => 'form-control', 'style' => "margin-bottom:10px;")) ?>
+                <?= Form::textarea('question', null, array('class' => 'form-control', 'style' => 'margin-bottom:10px;')) ?>
 
                     <div id="error-question" class="alert alert-danger hide" data-target="question"></div>
 

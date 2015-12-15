@@ -9,7 +9,7 @@
 
                 <?= Form::open(array(
                         'method' => 'post',
-                        'class'  => 'form-horizontal',
+                        'class' => 'form-horizontal',
                 )) ?>
 
                 <input id="question-id" type="hidden"/>

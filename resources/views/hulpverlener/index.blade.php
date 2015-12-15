@@ -50,7 +50,7 @@
 
 
             <tbody>
-            <? $teller = 1 ?>
+            <?php $teller = 1 ?>
             @foreach($users as $user)
 
                 <tr>
@@ -75,7 +75,7 @@
                     <td>{{ $user->created_at->format('d/m/Y') }}</td>
                 </tr>
 
-                <? $teller++ ?>
+                <?php $teller++ ?>
             @endforeach
             </tbody>
         </table>

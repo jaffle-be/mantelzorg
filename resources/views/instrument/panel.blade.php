@@ -13,11 +13,11 @@
             ),
             array(
                     'text' => Lang::get('master.navs.start'),
-                    'href' => route('dash')
+                    'href' => route('dash'),
             ),
             array(
-                    'text' => Lang::get('instrument.panel')
-            )
+                    'text' => Lang::get('instrument.panel'),
+            ),
     )) ?>
 @stop
 
@@ -27,7 +27,7 @@
 
         <?= Form::open([
                 'route' => ['instrument.panel.submit', $panel->id, $survey->id],
-                'id'    => 'panel-form'
+                'id' => 'panel-form',
         ]) ?>
 
         @include('instrument.template.header', ['panel' => $panel])
@@ -48,7 +48,7 @@
 
             @include('instrument.template.footer', [ 'panel' => $panel, 'next' => $panel->nextPanel() ])
 
-        <? Form::close() ?>
+        <?php Form::close() ?>
 
     </div>
 

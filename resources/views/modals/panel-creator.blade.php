@@ -9,8 +9,8 @@
 
                 <?= Form::open(array(
                         'method' => 'post',
-                        'id'     => 'panel-creator-form',
-                        'class'  => 'form-horizontal',
+                        'id' => 'panel-creator-form',
+                        'class' => 'form-horizontal',
                 )) ?>
 
                 <input id="questionnaire-id" type="hidden"/>

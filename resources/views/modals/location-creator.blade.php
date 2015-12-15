@@ -16,7 +16,7 @@
                     <div id="error-name" class="alert alert-danger hide" data-target="name"></div>
                     <div class="input-group">
                         <?= Form::text('name', null, array(
-                                'class' => 'form-control'
+                                'class' => 'form-control',
                         )) ?>
                         <span class="input-group-addon"><i class="fa fa-tag"></i></span>
                     </div>
@@ -26,7 +26,7 @@
                     <div id="error-street" class="alert alert-danger hide" data-target="street"></div>
                     <div class="input-group">
                         <?= Form::text('street', null, array(
-                                'class' => 'form-control'
+                                'class' => 'form-control',
                         )) ?>
                         <span class="input-group-addon"><i class="fa fa-road"></i></span>
                     </div>
@@ -41,7 +41,7 @@
 
                             <div class="input-group">
                                 <?= Form::text('postal', null, array(
-                                        'class' => 'form-control'
+                                        'class' => 'form-control',
                                 )) ?>
                                 <span class="input-group-addon"><i class="fa fa-road"></i></span>
                             </div>
@@ -55,7 +55,7 @@
                             <div id="error-city" class="alert alert-danger hide" data-target="city"></div>
                             <div class="input-group">
                                 <?= Form::text('city', null, array(
-                                        'class' => 'form-control'
+                                        'class' => 'form-control',
 
                                 )) ?>
                                 <span class="input-group-addon"><i class="fa fa-road"></i></span>

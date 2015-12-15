@@ -6,7 +6,7 @@
                     'text' => Lang::get('master.navs.questionnaires'),
             ),
 
-            array('text' => Lang::get('master.navs.overzicht'))
+            array('text' => Lang::get('master.navs.overzicht')),
     )) ?>
 
 @stop
@@ -65,13 +65,13 @@
                                             <div class="input-group">
                                                 <div class="input-group-addon"><i class="fa fa-arrows"></i></div>
                                                 <?= Form::text('title', $panel->title, array(
-                                                        'class'             => 'form-control questionnaire-panel-title',
-                                                        'data-panel-weight' => $panel->panel_weight
+                                                        'class' => 'form-control questionnaire-panel-title',
+                                                        'data-panel-weight' => $panel->panel_weight,
                                                 )) ?>
 
                                                 <div class="input-group-btn colors">
                                                     <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle" href="">
-                                                        <i class="panel-color <?= $panel->color ? 'panel-' . $panel->color : '' ?>">&nbsp;</i>&nbsp;<i class="caret"></i>
+                                                        <i class="panel-color <?= $panel->color ? 'panel-'.$panel->color : '' ?>">&nbsp;</i>&nbsp;<i class="caret"></i>
                                                     </button>
                                                     <ul class="dropdown-menu">
                                                         <li><a href="#" class="panel-color panel-purple">&nbsp;</a></li>
@@ -98,10 +98,10 @@
                             <div class="header">&nbsp;</div>
                             <div class="body">
                                 <ul>
-                                    <? $teller = 1; ?>
+                                    <?php $teller = 1; ?>
                                     @while($teller <= count($questionnaire->panels))
                                         <li><i class="fa fa-cloud-upload fade"></i></li>
-                                        <? $teller++; ?>
+                                        <?php ++$teller; ?>
                                     @endwhile
                                 </ul>
                             </div>

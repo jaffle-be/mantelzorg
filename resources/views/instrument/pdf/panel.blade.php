@@ -7,7 +7,7 @@
 
             <div class="question"><i class="fa fa-quote-left"></i>{{ $question->title }}</div>
 
-            <? $answer = $session->getAnswered($question) ?>
+            <?php $answer = $session->getAnswered($question) ?>
 
             @if($answer && $answer->wasFilledIn())
 

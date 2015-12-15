@@ -95,9 +95,9 @@
 
                         <div class="input-select">
                             <?= Form::select('organisation_id', $organisations, null, array(
-                                    'id'            => 'organisation',
-                                    'class'         => 'form-control',
-                                    'data-original' => $user->organisation_id ? $user->organisation_id : null
+                                    'id' => 'organisation',
+                                    'class' => 'form-control',
+                                    'data-original' => $user->organisation_id ? $user->organisation_id : null,
                             )) ?>
                         </div>
 
@@ -108,8 +108,8 @@
                     <div class="form-group">
                         <label class="control-label" for="locations"><?= Lang::get('users.locations') ?></label>
                         <?= Form::select('organisation_location_id', $locations, null, array(
-                                'id'            => 'location',
-                                'class'         => 'form-control',
+                                'id' => 'location',
+                                'class' => 'form-control',
                                 'data-original' => $user->organisation_location_id ? $user->organisation_location_id : null,
                         )) ?>
                     </div>

@@ -1,5 +1,5 @@
 <?= Form::model($user, array(
-        'route'  => array('instellingen.update', $user->id),
+        'route' => array('instellingen.update', $user->id),
         'method' => 'put',
 )) ?>
 
@@ -156,8 +156,8 @@
                             </label>
 
                             <?= Form::select('organisation_id', $organisations, null, array(
-                                            'id'    => 'organisation',
-                                            'class' => 'form-control')
+                                            'id' => 'organisation',
+                                            'class' => 'form-control', )
                             )?>
                         </div>
                     </div>
@@ -168,7 +168,7 @@
                         <div class="input-select">
                             <label class="control-label" for="locations"><?= Lang::get('users.locations') ?></label>
                             <?= Form::select('organisation_location_id', $locations, null, array(
-                                    'id'    => 'location',
+                                    'id' => 'location',
                                     'class' => 'form-control',
                             )) ?>
                         </div>

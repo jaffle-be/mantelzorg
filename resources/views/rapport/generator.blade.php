@@ -15,7 +15,7 @@
             <div class="col-xs-12 col-sm-8">
                     <?= Form::select('survey', $questionnaires, null, [
                             'class' => 'form-control',
-                            'id'    => 'survey',
+                            'id' => 'survey',
                     ]) ?>
 
             </div>

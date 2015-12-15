@@ -9,8 +9,8 @@
 
                 <?= Form::open(array(
                         'method' => 'post',
-                        'route'  => 'survey.store',
-                        'class'  => 'form-horizontal',
+                        'route' => 'survey.store',
+                        'class' => 'form-horizontal',
                 )) ?>
 
 

@@ -13,7 +13,7 @@
 @section('page-header')
     <?= Template::crumb(array(
             array('text' => Lang::get('master.navs.stats')),
-            array('text' => Lang::get('master.navs.stats'))
+            array('text' => Lang::get('master.navs.stats')),
     )) ?>
 @stop
 

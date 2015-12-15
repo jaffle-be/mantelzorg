@@ -4,11 +4,11 @@
     <?= Template::crumb(array(
             array(
                     'text' => Lang::get('master.navs.instellingen'),
-                    'href' => route('instellingen.index')
+                    'href' => route('instellingen.index'),
             ),
             array(
                     'text' => Lang::get('master.navs.mantelzorgers'),
-            )
+            ),
 
     )) ?>
 @stop

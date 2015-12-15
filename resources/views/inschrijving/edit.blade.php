@@ -17,8 +17,8 @@
             ),
 
             array(
-                    'text' => Lang::get('master.navs.wijzig')
-            )
+                    'text' => Lang::get('master.navs.wijzig'),
+            ),
     )) ?>
 @stop
 

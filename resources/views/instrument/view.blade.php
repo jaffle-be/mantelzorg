@@ -7,11 +7,11 @@
             ),
             array(
                     'text' => Lang::get('master.navs.start'),
-                    'href' => route('dash')
+                    'href' => route('dash'),
             ),
             array(
-                    'text' => Lang::get('instrument.view')
-            )
+                    'text' => Lang::get('instrument.view'),
+            ),
     )) ?>
 @stop
 

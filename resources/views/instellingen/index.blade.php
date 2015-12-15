@@ -11,7 +11,7 @@
                     'text' => Lang::get('master.navs.instellingen'),
             ),
 
-            array('text' => Lang::get('master.navs.profiel'))
+            array('text' => Lang::get('master.navs.profiel')),
 
     )) ?>
 
