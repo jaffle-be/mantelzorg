@@ -32,4 +32,4 @@ before_script:
   - sleep 10
 
 script:
-  - vendor/bin/phpunit
+  - vendor/bin/phpunit tests/functional
