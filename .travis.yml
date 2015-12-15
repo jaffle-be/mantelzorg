@@ -21,6 +21,7 @@ before_script:
   - cp .env.travis .env
   - mysql -e 'create database `mantelzorg-testing;`'
   - composer self-update
+  - cat .env
   - composer install --no-interaction
   - npm install -g bower
   - npm install
