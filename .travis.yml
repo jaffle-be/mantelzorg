@@ -30,7 +30,7 @@ before_script:
 
 script:
   - vendor/bin/phpunit --testsuite application
-#  - vendor/bin/phpunit --testsuite acceptance --stop-on-failure
+  - vendor/bin/phpunit --testsuite acceptance --stop-on-failure
 
 matrix:
  fast_finish: true
