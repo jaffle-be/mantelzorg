@@ -1,6 +1,6 @@
 <?php
 
-dd('testing');
+dd(env('APP_ENV'));
 
 return [
 
