@@ -61,7 +61,7 @@ return [
 		'testing' => [
 			'driver'    => 'mysql',
 			'host'      => '127.0.0.1',
-			'database'  => env('DB_DATABASE') . '-testing',
+			'database'  => env('TRAVIS', false) ? 'testing' : env('DB_DATABASE') . '-testing',
 			'username'  => 'root',
 			'password'  => env('TRAVIS', false) ? '' : 'secret',
 			'charset'   => 'utf8',

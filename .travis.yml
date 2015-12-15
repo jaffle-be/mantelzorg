@@ -18,7 +18,7 @@ services:
 before_script:
   # need this here to run artisan commands properly?
   - cp .env.travis .env
-  - mysql -e 'create database `mantelzorg-testing;`'
+  - mysql -e 'create database `testing`;'
   - composer self-update
   - composer install --no-interaction
   - npm install -g bower
