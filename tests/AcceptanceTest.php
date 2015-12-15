@@ -95,7 +95,7 @@ abstract class AcceptanceTest extends Selenium
 
         if(env('TRAVIS'))
         {
-            $host = sprintf('%s:%s@ondemand.saucelabs.com:80', env('SAUCE_USERNAME'), ENV('SAUCE_ACCESS_KEY'));
+            $host = 'ondemand.saucelabs.com:80';
         }
 
         $this->webDriver = new WebDriver($host);
