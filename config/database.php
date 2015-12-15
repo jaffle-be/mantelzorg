@@ -60,7 +60,7 @@ return [
 
 		'testing' => [
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
+			'host'      => '127.0.0.1',
 			'database'  => env('DB_DATABASE') . '-testing',
 			'username'  => 'root',
 			'password'  => 'secret',
@@ -101,7 +101,7 @@ return [
 		'cluster' => false,
 
 		'default' => [
-			'host'     => env('APP_ENV') == 'testing' ? 'localhost' : env('REDIS_HOST', '127.0.0.1'),
+			'host'     => env('APP_ENV') == 'testing' ? '127.0.0.1' : env('REDIS_HOST', '127.0.0.1'),
 			'port'     => 6379,
 			'database' => 0,
 			'password' => env('APP_ENV') == 'testing' ? null :env('REDIS_PASS'),

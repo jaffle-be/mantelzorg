@@ -4,11 +4,11 @@ php:
 - 5.6
 
 addons:
-  sauce_connect:
-    username:
-      secure: "SrwumxTd9BGuU+8GRWPwXHZYpyuojqed1NNhzWbpG0/GiWAH1tDw0WNbDlq5p0wqzhfMOkOBS6V0JLrbUedXlicx824jI2631JDyQ7IJhwlXZtWwGTqrkc0IhdCXrOsHMGQdimq1KVOWdkR+QM8LsqCtATDfCboxH2SLZAjJ7M8="
-    access_key:
-      secure: "PsZCY8wX7dY9KhFaYgPNCxbr2fSKqA6BWBpbI+xCTbQsxhXyqXMjEERUWvHXge/aUo+tkcc21jFH8qiXYJEdO/iqyeT+58w3fX5GUiwn4W3d+zHAziszy4/PdJ9gEnK5H+fnS0SVLM/No6tETO7mA1ys8o+vFLuWmDkftkRUALI="
+#  sauce_connect:
+#    username:
+#      secure: "SrwumxTd9BGuU+8GRWPwXHZYpyuojqed1NNhzWbpG0/GiWAH1tDw0WNbDlq5p0wqzhfMOkOBS6V0JLrbUedXlicx824jI2631JDyQ7IJhwlXZtWwGTqrkc0IhdCXrOsHMGQdimq1KVOWdkR+QM8LsqCtATDfCboxH2SLZAjJ7M8="
+#    access_key:
+#      secure: "PsZCY8wX7dY9KhFaYgPNCxbr2fSKqA6BWBpbI+xCTbQsxhXyqXMjEERUWvHXge/aUo+tkcc21jFH8qiXYJEdO/iqyeT+58w3fX5GUiwn4W3d+zHAziszy4/PdJ9gEnK5H+fnS0SVLM/No6tETO7mA1ys8o+vFLuWmDkftkRUALI="
 
 services:
   - redis-server
@@ -31,5 +31,5 @@ before_script:
 
 script:
   - vendor/bin/phpunit --testsuite application
-  - vendor/bin/phpunit --testsuite acceptance --stop-on-failure
+#  - vendor/bin/phpunit --testsuite acceptance --stop-on-failure
 

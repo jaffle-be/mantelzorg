@@ -12,7 +12,7 @@ return [
      * All the hosts that are in the cluster.
      */
     'hosts'    => [
-        env('APP_ENV') == 'testing' ? 'localhost' : env('ES_HOST'),
+        env('APP_ENV') == 'testing' ? '127.0.0.1' : env('ES_HOST'),
     ],
 
     /**
