@@ -22,9 +22,9 @@ before_script:
   - composer self-update
   - composer install --no-interaction
   - php artisan search:settings
-  - php artisan search:build
   - php artisan migrate --force
   - php artisan db:seed --class=MetaContextValueSeeder
+  - php artisan search:build
   - php artisan serve --host=0.0.0.0 > /dev/null 2>&1 &
   - sleep 10
 
