@@ -1,8 +1,5 @@
 <?php
 
-echo env('DB_HOST', 'localhost');
-exit();
-
 return [
 
 	/*
