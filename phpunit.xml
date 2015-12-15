@@ -35,9 +35,6 @@
         <env name="QUEUE_DRIVER" value="sync"/>
         <env name="ES_HOST" value="127.0.0.1"/>
         <env name="REDIS_HOST" value="127.0.0.1"/>
-        <env name="DB_DATABASE" value="mantelzorg"/>
-        <env name="DB_USERNAME" value="root"/>
-        <env name="DB_PASSWORD" value=""/>
         <env name="APP_URL" value="http://localhost"/>
     </php>
 </phpunit>
