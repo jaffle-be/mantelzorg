@@ -321,8 +321,6 @@ class SearchService implements SearchServiceInterface
 
         $indices->close($toggle);
 
-        sleep(2);
-
         $settings = [
             'index' => $this->config->getIndex(),
             'body' => $settings,
@@ -330,15 +328,9 @@ class SearchService implements SearchServiceInterface
 
         $indices->putSettings($settings);
 
-        sleep(2);
-
         $indices->open($toggle);
 
-        sleep(2);
-
         $indices->refresh($toggle);
-
-        sleep(2);
     }
 
     /**
