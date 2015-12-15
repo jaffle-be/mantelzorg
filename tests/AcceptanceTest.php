@@ -91,14 +91,14 @@ abstract class AcceptanceTest extends Selenium
     protected function newSession()
     {
         $host = 'http://localhost:4444/wd/hub';
+        $capabilities = [];
 
         if(env('TRAVIS'))
         {
-            $host = 'ondemand.saucelabs.com:80';
+            $host = sprintf('%s:%s@ondemand.saucelabs.com:80', env('SAUCE_USERNAME'), ENV('SAUCE_ACCESS_KEY'));
         }
 
         $this->webDriver = new WebDriver($host);
-        $capabilities = [];
 
         return $this->session = $this->webDriver->session($this->getBrowserName(), $capabilities);
     }
