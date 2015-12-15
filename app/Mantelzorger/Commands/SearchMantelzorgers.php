@@ -1,4 +1,6 @@
-<?php namespace App\Mantelzorger\Commands;
+<?php
+
+namespace App\Mantelzorger\Commands;
 
 use App\Commands\Command;
 use App\Search\SearchServiceInterface;
@@ -8,7 +10,6 @@ use Illuminate\Support\Arr;
 
 class SearchMantelzorgers extends Command implements SelfHandling
 {
-
     protected $user;
 
     protected $query;
@@ -23,8 +24,7 @@ class SearchMantelzorgers extends Command implements SelfHandling
     {
         $mantelzorgers = $search->search('mantelzorgers', $this->query(), [], 15, function ($source, $highlight) {
 
-            foreach($highlight as $light => $value)
-            {
+            foreach ($highlight as $light => $value) {
                 Arr::set($source, $light, $value[0]);
             }
 
@@ -40,60 +40,60 @@ class SearchMantelzorgers extends Command implements SelfHandling
     {
         $query = [
             'index' => env('ES_INDEX'),
-            'type'  => 'mantelzorgers',
-            'body'  => [
-                "query"     => [
-                    "filtered" => [
-                        "query"  => [
-                            "bool" => [
-                                "should" => [
+            'type' => 'mantelzorgers',
+            'body' => [
+                'query' => [
+                    'filtered' => [
+                        'query' => [
+                            'bool' => [
+                                'should' => [
                                     [
-                                        "nested" => [
-                                            "path"  => "oudere",
-                                            "query" => [
-                                                "multi_match" => [
-                                                    "query"  => $this->query,
-                                                    "fields" => ["oudere.firstname", "oudere.lastname", "oudere.identifier.raw"]
-                                                ]
-                                            ]
-                                        ]
+                                        'nested' => [
+                                            'path' => 'oudere',
+                                            'query' => [
+                                                'multi_match' => [
+                                                    'query' => $this->query,
+                                                    'fields' => ['oudere.firstname', 'oudere.lastname', 'oudere.identifier.raw'],
+                                                ],
+                                            ],
+                                        ],
                                     ],
                                     [
-                                        "multi_match" => [
-                                            "query"  => $this->query,
-                                            "fields" => ["firstname", "lastname", "identifier.raw"]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        "filter" => [
-                            "bool" => [
-                                "must" => [
-                                    [
-                                        "term" => [
-                                            "hulpverlener_id" => $this->user->id
-                                        ]
-                                    ]
+                                        'multi_match' => [
+                                            'query' => $this->query,
+                                            'fields' => ['firstname', 'lastname', 'identifier.raw'],
+                                        ],
+                                    ],
                                 ],
-                            ]
-                        ]
-                    ]
+                            ],
+                        ],
+                        'filter' => [
+                            'bool' => [
+                                'must' => [
+                                    [
+                                        'term' => [
+                                            'hulpverlener_id' => $this->user->id,
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
                 ],
-                'sort'      => [
-                    ['identifier.raw' => 'asc']
+                'sort' => [
+                    ['identifier.raw' => 'asc'],
                 ]
                 ,
-                "highlight" => [
-                    "pre_tags"  => ["<strong>"],
-                    "post_tags" => ["</strong>"],
-                    "fields"    => [
-                        "identifier" => new \StdClass,
-                        "firstname" => new \StdClass,
-                        "lastname" => new \StdClass,
-                    ]
-                ]
-            ]
+                'highlight' => [
+                    'pre_tags' => ['<strong>'],
+                    'post_tags' => ['</strong>'],
+                    'fields' => [
+                        'identifier' => new \StdClass(),
+                        'firstname' => new \StdClass(),
+                        'lastname' => new \StdClass(),
+                    ],
+                ],
+            ],
         ];
 
         if (empty($this->query)) {

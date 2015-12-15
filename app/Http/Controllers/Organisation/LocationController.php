@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Organisation;
 
 use App\Http\Controllers\AdminController;
@@ -9,12 +10,9 @@ use Input;
  * @todo move this controller to the hulpverleners controller, as these are actually more like resource methods
  *       to the user instead of a actual resource on itself.
  * Class LocationController
- *
- * @package App\Http\Controllers\Organisation
  */
 class LocationController extends AdminController
 {
-
     /**
      * @var \App\Organisation\Location
      */
@@ -47,14 +45,14 @@ class LocationController extends AdminController
         if ($validator->fails()) {
             return array(
                 'status' => 'error',
-                'errors' => $validator->messages()->toArray()
+                'errors' => $validator->messages()->toArray(),
             );
         } else {
             $location = $this->location->create($input);
 
             return array(
-                'status'   => 'oke',
-                'location' => $location->toArray()
+                'status' => 'oke',
+                'location' => $location->toArray(),
             );
         }
     }

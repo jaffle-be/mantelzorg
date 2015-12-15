@@ -1,11 +1,11 @@
-<?php namespace App\Search;
+<?php
+
+namespace App\Search;
 
 use App\System\Translatable\Translatable;
-use Exception;
 
 class Config
 {
-
     protected $index;
 
     protected $types = [];
@@ -45,13 +45,12 @@ class Config
     {
         $with = isset($this->types[$type]['with']) ? $this->types[$type]['with'] : [];
 
-        if($this->usesTranslations($type))
-        {
+        if ($this->usesTranslations($type)) {
             $instance = $this->getInstance($type);
 
             $with = array_merge($with, ['translations' => [
                 'class' => $instance->getTranslationModelName(),
-                'key'   => $instance->translations()->getForeignKey(),
+                'key' => $instance->translations()->getForeignKey(),
             ]]);
         }
 
@@ -79,11 +78,9 @@ class Config
     protected function invertTypes()
     {
         foreach ($this->types as $type => $config) {
-
             $parent = $config['class'];
 
             foreach ($this->getWith($type) as $relation => $nestedConfig) {
-
                 $nested = $nestedConfig['class'];
 
                 $key = $nestedConfig['key'];
@@ -123,9 +120,9 @@ class Config
         }
 
         $this->inverted[$nested][] = [
-            'class'    => $parent,
-            'key'      => $key,
-            'relation' => $relation
+            'class' => $parent,
+            'key' => $key,
+            'relation' => $relation,
         ];
     }
 
@@ -138,9 +135,8 @@ class Config
     {
         $class = $this->getClass($type);
 
-        $object = new $class;
+        $object = new $class();
 
         return $object;
     }
-
 }

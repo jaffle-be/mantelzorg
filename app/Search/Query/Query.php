@@ -35,7 +35,7 @@ class Query implements Queryable
     protected $booleans = ['and', 'or'];
 
     /**
-     * Legal/supported operators
+     * Legal/supported operators.
      *
      * @var array
      */
@@ -136,10 +136,10 @@ class Query implements Queryable
     public function filterMatch($column, $value, $fuzziness = 0, $prefix_length = 2, $analyzer = 'standard')
     {
         $this->filter_match[$column] = [
-            'query'         => $value,
-            'fuzziness'     => $fuzziness,
+            'query' => $value,
+            'fuzziness' => $fuzziness,
             'prefix_length' => $prefix_length,
-            'analyzer'      => $analyzer,
+            'analyzer' => $analyzer,
         ];
 
         return $this;
@@ -150,7 +150,7 @@ class Query implements Queryable
         if (!empty($value)) {
             $this->filter_multi_match = [
                 'fields' => $columns,
-                'query'  => $value
+                'query' => $value,
             ];
         }
 
@@ -171,7 +171,7 @@ class Query implements Queryable
             throw new Exception("Invalid operator for search clause. If it's, not supported. Use the gateway method.");
         }
 
-        $method = 'where' . ucfirst($operator);
+        $method = 'where'.ucfirst($operator);
 
         if (method_exists($this, $method)) {
             call_user_func_array([$this, $method], [$column, $value, $boolean]);
@@ -184,10 +184,10 @@ class Query implements Queryable
     {
         if (!empty($value)) {
             $this->match[$column] = [
-                'query'         => $value,
-                'fuzziness'     => $fuzziness,
+                'query' => $value,
+                'fuzziness' => $fuzziness,
                 'prefix_length' => $prefix_length,
-                'analyzer'      => $analyzer,
+                'analyzer' => $analyzer,
             ];
         }
 
@@ -199,11 +199,11 @@ class Query implements Queryable
         //if the value is empty, it wouldn't return a resultset when querying. which is quite weird to be honest.
         if (!empty($value)) {
             $this->multi_match[] = [
-                'fields'        => $columns,
-                'query'         => $value,
-                'fuzziness'     => $fuzziness,
+                'fields' => $columns,
+                'query' => $value,
+                'fuzziness' => $fuzziness,
                 'prefix_length' => $prefix_length,
-                'analyzer'      => $analyzer
+                'analyzer' => $analyzer,
             ];
         }
 
@@ -213,9 +213,9 @@ class Query implements Queryable
     public function whereFuzzyLikeThis($fields, $value, $fuzziness = 2, $prefixLength = 1)
     {
         $this->fuzzy_like_this[] = [
-            'fields'        => (array)$fields,
-            'like_text'     => $value,
-            'fuzziness'     => $fuzziness,
+            'fields' => (array) $fields,
+            'like_text' => $value,
+            'fuzziness' => $fuzziness,
             'prefix_length' => $prefixLength,
         ];
 
@@ -261,7 +261,7 @@ class Query implements Queryable
     {
         return [
             'index' => $this->searchable->getSearchableIndex(),
-            'type'  => $this->searchable->getSearchableType()
+            'type' => $this->searchable->getSearchableType(),
         ];
     }
 

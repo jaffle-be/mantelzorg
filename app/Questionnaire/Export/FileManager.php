@@ -1,11 +1,11 @@
-<?php namespace App\Questionnaire\Export;
+<?php
+
+namespace App\Questionnaire\Export;
 
 use Illuminate\Filesystem\Filesystem;
-use Symfony\Component\Finder\SplFileInfo;
 
 class FileManager
 {
-
     /**
      * @var Filesystem
      */
@@ -27,19 +27,17 @@ class FileManager
 
     public function delete($filename)
     {
-        $filepath = $this->path . '/' . $filename;
+        $filepath = $this->path.'/'.$filename;
 
-        if($this->files->exists($filepath, false))
-        {
+        if ($this->files->exists($filepath, false)) {
             $this->files->delete($filepath);
         }
     }
 
     public function exists($filename, $buildPath = true)
     {
-        if($buildPath)
-        {
-            $path = $this->path . '/' . $filename;
+        if ($buildPath) {
+            $path = $this->path.'/'.$filename;
         }
 
         return $this->files->exists($path);

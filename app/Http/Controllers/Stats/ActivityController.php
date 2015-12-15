@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers\Stats;
+<?php
+
+namespace App\Http\Controllers\Stats;
 
 use App\Http\Controllers\AdminController;
 use App\Organisation\Organisation;
@@ -9,7 +11,6 @@ use DB;
 
 class ActivityController extends AdminController
 {
-
     public function __construct()
     {
         $this->middleware('auth.admin');
@@ -41,8 +42,8 @@ class ActivityController extends AdminController
             $value = isset($surveys[$stamp]) ? $surveys[$stamp] : 0;
 
             $stats[] = [
-                'day'   => $start->format('Y-m-d'),
-                'value' => $value
+                'day' => $start->format('Y-m-d'),
+                'value' => $value,
             ];
 
             $start->addDay();
@@ -62,8 +63,7 @@ class ActivityController extends AdminController
             ->where('questionnaire_id', $survey->id)
             ->groupBy('organisations.id')
             ->get([
-                'organisations.id', 'organisations.name', DB::raw('count(questionnaire_survey_sessions.id) as count')
+                'organisations.id', 'organisations.name', DB::raw('count(questionnaire_survey_sessions.id) as count'),
             ]);
     }
-
 }

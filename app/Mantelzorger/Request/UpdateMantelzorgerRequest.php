@@ -1,11 +1,12 @@
-<?php namespace App\Mantelzorger\Request;
+<?php
+
+namespace App\Mantelzorger\Request;
 
 use App\Http\Requests\Request;
 use App\Mantelzorger\Mantelzorger;
 
 class UpdateMantelzorgerRequest extends Request
 {
-
     public function rules()
     {
         $mantelzorger = $this->route()->parameter('mantelzorgers');
@@ -19,5 +20,4 @@ class UpdateMantelzorgerRequest extends Request
     {
         return true;
     }
-
 }

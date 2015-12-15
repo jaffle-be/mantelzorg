@@ -1,11 +1,9 @@
 <?php
 
-
 namespace App\Search\Query;
 
 interface Queryable
 {
-
     public function get();
 
     /**
@@ -21,7 +19,7 @@ interface Queryable
     public function where($column, $operator, $value = null, $boolean = 'and');
 
     /**
-     * Return self
+     * Return self.
      *
      * @param string $column
      * @param string $value

@@ -1,12 +1,14 @@
-<?php namespace App\Questionnaire\Export;
+<?php
+
+namespace App\Questionnaire\Export;
 
 use App\Questionnaire\Questionnaire;
 use Exception;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Log\Writer;
 
-class ExportLogger {
-
+class ExportLogger
+{
     protected $log;
 
     protected $start;
@@ -22,7 +24,7 @@ class ExportLogger {
 
     public function start($id)
     {
-        $this->log->info('job started for ' . $id);
+        $this->log->info('job started for '.$id);
 
         $this->db->connection()->enableQueryLog();
 
@@ -45,5 +47,4 @@ class ExportLogger {
 
         $this->log->error($message);
     }
-
 }

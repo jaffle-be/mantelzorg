@@ -1,15 +1,16 @@
-<?php namespace App\System;
+<?php
+
+namespace App\System;
 
 use Illuminate\Support\ServiceProvider as Provider;
 use ReflectionClass;
 
 abstract class ServiceProvider extends Provider
 {
-
     protected $namespace = false;
 
     protected $setups = [
-        'helpers', 'publish', 'config', 'routes', 'views', 'lang'
+        'helpers', 'publish', 'config', 'routes', 'views', 'lang',
     ];
 
     protected $publishing = [
@@ -35,31 +36,29 @@ abstract class ServiceProvider extends Provider
         $this->listeners();
     }
 
-    protected abstract function observers();
+    abstract protected function observers();
 
-    protected abstract function listeners();
+    abstract protected function listeners();
 
     /**
      * @param $dir
      */
     protected function routes($dir)
     {
-        $routes = $dir . '/Http/routes.php';
+        $routes = $dir.'/Http/routes.php';
         if (file_exists($routes)) {
             include $routes;
         }
 
-        /**
+        /*
          * we bind the loading of the breadcrumbs to the bootstrapped event, just after all providers have been booted.
          * why? we need to make sure that our breadcrumbs use the config value fetched from the database.
          * In the boot method, the connection isn't available yet.
          */
-        $this->app->booted(function() use ($dir)
-        {
-            $breadcrumbs = $dir . '/Http/breadcrumbs.php';
+        $this->app->booted(function () use ($dir) {
+            $breadcrumbs = $dir.'/Http/breadcrumbs.php';
 
-            if(file_exists($breadcrumbs))
-            {
+            if (file_exists($breadcrumbs)) {
                 include $breadcrumbs;
             }
         });
@@ -74,7 +73,7 @@ abstract class ServiceProvider extends Provider
 
         array_walk($this->publishing, function ($value) use ($dir, &$publish) {
 
-            $key = $dir . $value;
+            $key = $dir.$value;
 
             if (file_exists($key) || is_dir($key)) {
                 $value = base_path(ltrim($value, '/'));
@@ -90,7 +89,7 @@ abstract class ServiceProvider extends Provider
      */
     protected function views($dir)
     {
-        $views = $dir . '/resources/views/';
+        $views = $dir.'/resources/views/';
         if (file_exists($views)) {
             $this->loadViewsFrom($views, $this->namespace);
         }
@@ -101,7 +100,7 @@ abstract class ServiceProvider extends Provider
      */
     protected function lang($dir)
     {
-        $lang = $dir . '/resources/lang';
+        $lang = $dir.'/resources/lang';
         if (file_exists($lang)) {
             $this->loadTranslationsFrom($lang, $this->namespace);
         }
@@ -112,7 +111,7 @@ abstract class ServiceProvider extends Provider
      */
     protected function config($dir)
     {
-        $config = $dir . '/config/' . $this->namespace . '.php';
+        $config = $dir.'/config/'.$this->namespace.'.php';
 
         if (file_exists($config)) {
             $this->mergeConfigFrom($config, $this->namespace);
@@ -132,7 +131,7 @@ abstract class ServiceProvider extends Provider
 
     protected function helpers($dir)
     {
-        $helpers = $dir . '/helpers.php';
+        $helpers = $dir.'/helpers.php';
 
         if (file_exists($helpers)) {
             include_once $helpers;

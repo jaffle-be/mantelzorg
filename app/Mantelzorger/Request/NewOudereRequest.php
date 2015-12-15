@@ -1,11 +1,12 @@
-<?php namespace App\Mantelzorger\Request;
+<?php
+
+namespace App\Mantelzorger\Request;
 
 use App\Http\Requests\Request;
 use App\Mantelzorger\Oudere;
 
 class NewOudereRequest extends Request
 {
-
     public function rules(Oudere $oudere)
     {
         return $oudere->rules([], [], ['mantelzorger_id']);
@@ -15,5 +16,4 @@ class NewOudereRequest extends Request
     {
         return true;
     }
-
 }

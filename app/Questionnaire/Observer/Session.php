@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Questionnaire\Observer;
 
 use App\Questionnaire\Session as Model;
@@ -8,7 +7,6 @@ use Illuminate\Events\Dispatcher;
 
 class Session
 {
-
     /**
      * @var Dispatcher
      */

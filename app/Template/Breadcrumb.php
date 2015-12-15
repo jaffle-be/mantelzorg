@@ -4,10 +4,8 @@ namespace App\Template;
 
 class Breadcrumb
 {
-
     public function render($items)
     {
-
         $output = $this->open();
 
         $teller = 1;
@@ -19,7 +17,7 @@ class Breadcrumb
                 $output .= $this->regular($items[$teller - 1]);
             }
 
-            $teller++;
+            ++$teller;
         }
 
         $output .= $this->close();

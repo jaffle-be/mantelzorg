@@ -1,10 +1,11 @@
-<?php namespace App\Search;
+<?php
+
+namespace App\Search;
 
 use Illuminate\Support\Collection;
 
 class AggregationResult extends Collection
 {
-
     protected $document_count;
 
     public function __construct($items = [], $document_count)
@@ -20,7 +21,7 @@ class AggregationResult extends Collection
 
         return [
             'document_count' => $this->document_count,
-            'buckets' => $items
+            'buckets' => $items,
         ];
     }
 
@@ -32,5 +33,4 @@ class AggregationResult extends Collection
 
         return new static(array_combine($keys, $items), $this->document_count);
     }
-
 }

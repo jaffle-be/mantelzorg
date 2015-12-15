@@ -67,7 +67,7 @@ class OudereController extends \App\Http\Controllers\AdminController
 
         $this->dispatchFromArray(NewOudere::class, [
             'mantelzorger' => $mantelzorger,
-            'input' => $input
+            'input' => $input,
         ]);
 
         return Redirect::route('instellingen.{hulpverlener}.mantelzorgers.index', $mantelzorger->hulpverlener->id);
@@ -96,7 +96,7 @@ class OudereController extends \App\Http\Controllers\AdminController
 
         $input = array_except($input, ['_method']);
 
-        $status = $this->dispatchFromArray(UpdateOudere::class , ['mantelzorger' => $mantelzorger, 'oudere' => $oudere, 'input' => $input]);
+        $status = $this->dispatchFromArray(UpdateOudere::class, ['mantelzorger' => $mantelzorger, 'oudere' => $oudere, 'input' => $input]);
 
         return Redirect::route('instellingen.{hulpverlener}.mantelzorgers.index', $mantelzorger->hulpverlener_id);
     }
@@ -116,20 +116,19 @@ class OudereController extends \App\Http\Controllers\AdminController
         //find the meta value by the id, if none exists... we need to create it
         $value = $this->metaValue->find($input[$context->context]);
 
-        $alternate = $context->context . '_alternate';
+        $alternate = $context->context.'_alternate';
 
         if (!$value) {
 
             //need to create a new one? -> check for existing, or create.
             if ($input[$context->context] == '*new*' && $input[$alternate]) {
-
                 $value = $this->metaValue->where('context_id', $context->id)
                     ->where('value', $input[$alternate])->first();
 
                 if (!$value) {
                     $value = $this->metaValue->create(array(
                         'context_id' => $context->id,
-                        'value'      => $input[$alternate]
+                        'value' => $input[$alternate],
                     ));
                 }
             }

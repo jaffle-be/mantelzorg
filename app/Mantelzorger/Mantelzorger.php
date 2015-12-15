@@ -8,57 +8,54 @@ use App\Search\Model\Searchable;
 use App\Search\Model\SearchableTrait;
 use App\System\Database\Eloquent\Model;
 use App\System\Database\Eloquent\ValidationRules;
-use Input;
-use Validator;
 
 class Mantelzorger extends Model implements Searchable, Exportable
 {
-
     use SearchableTrait;
     use MantelzorgerSkills;
     use ValidationRules;
     use HandleBirthDayTrait;
 
     protected static $searchableMapping = [
-        'male'       => [
+        'male' => [
             'type' => 'boolean',
         ],
-        'email'      => [
-            'type'     => 'string',
-            'analyzer' => 'email'
+        'email' => [
+            'type' => 'string',
+            'analyzer' => 'email',
         ],
-        "identifier" => [
+        'identifier' => [
             'type' => 'string',
             'fields' => [
                 'raw' => [
                     'type' => 'string',
-                    'index' => 'not_analyzed'
-                ]
-            ]
+                    'index' => 'not_analyzed',
+                ],
+            ],
         ],
         'created_at' => [
-            'type'   => 'date',
-            'format' => 'yyyy-MM-dd HH:mm:ss'
+            'type' => 'date',
+            'format' => 'yyyy-MM-dd HH:mm:ss',
         ],
         'updated_at' => [
-            'type'   => 'date',
-            'format' => 'yyyy-MM-dd HH:mm:ss'
+            'type' => 'date',
+            'format' => 'yyyy-MM-dd HH:mm:ss',
         ],
     ];
 
     protected $table = 'mantelzorgers';
 
     protected static $rules = array(
-        'identifier'      => 'required|unique:mantelzorgers,identifier,#mantelzorger,id,hulpverlener_id,#hulpverlener',
-        'male'            => 'required|in:0,1',
-        'email'           => 'email|unique:mantelzorgers,email,#mantelzorger,id,hulpverlener_id,#hulpverlener',
-        'birthday'        => 'required|date_format:d/m/Y',
-        'hulpverlener_id' => 'required|exists:users,id'
+        'identifier' => 'required|unique:mantelzorgers,identifier,#mantelzorger,id,hulpverlener_id,#hulpverlener',
+        'male' => 'required|in:0,1',
+        'email' => 'email|unique:mantelzorgers,email,#mantelzorger,id,hulpverlener_id,#hulpverlener',
+        'birthday' => 'required|date_format:d/m/Y',
+        'hulpverlener_id' => 'required|exists:users,id',
     );
 
     protected $fillable = array(
         'identifier', 'email', 'firstname', 'lastname', 'male', 'street', 'postal',
-        'city', 'birthday', 'phone', 'hulpverlener_id'
+        'city', 'birthday', 'phone', 'hulpverlener_id',
     );
 
     /**
@@ -67,17 +64,17 @@ class Mantelzorger extends Model implements Searchable, Exportable
     public function toExportArray()
     {
         return [
-            'mantelzorger-id'         => isset($this->attributes['id']) ? $this->attributes['id'] : null,
+            'mantelzorger-id' => isset($this->attributes['id']) ? $this->attributes['id'] : null,
             'mantelzorger-identifier' => isset($this->attributes['identifier']) ? $this->attributes['identifier'] : null,
-            'mantelzorger-email'      => isset($this->attributes['email']) ? $this->attributes['email'] : null,
-            'mantelzorger-firstname'  => isset($this->attributes['firstname']) ? $this->attributes['firstname'] : null,
-            'mantelzorger-lastname'   => isset($this->attributes['lastname']) ? $this->attributes['lastname'] : null,
-            'mantelzorger-male'       => isset($this->attributes['male']) ? $this->attributes['male'] : null,
-            'mantelzorger-street'     => isset($this->attributes['street']) ? $this->attributes['street'] : null,
-            'mantelzorger-postal'     => isset($this->attributes['postal']) ? $this->attributes['postal'] : null,
-            'mantelzorger-city'       => isset($this->attributes['city']) ? $this->attributes['city'] : null,
-            'mantelzorger-phone'      => isset($this->attributes['phone']) ? $this->attributes['phone'] : null,
-            'mantelzorger-birthday'   => isset($this->attributes['birthday']) ? $this->attributes['birthday'] : null,
+            'mantelzorger-email' => isset($this->attributes['email']) ? $this->attributes['email'] : null,
+            'mantelzorger-firstname' => isset($this->attributes['firstname']) ? $this->attributes['firstname'] : null,
+            'mantelzorger-lastname' => isset($this->attributes['lastname']) ? $this->attributes['lastname'] : null,
+            'mantelzorger-male' => isset($this->attributes['male']) ? $this->attributes['male'] : null,
+            'mantelzorger-street' => isset($this->attributes['street']) ? $this->attributes['street'] : null,
+            'mantelzorger-postal' => isset($this->attributes['postal']) ? $this->attributes['postal'] : null,
+            'mantelzorger-city' => isset($this->attributes['city']) ? $this->attributes['city'] : null,
+            'mantelzorger-phone' => isset($this->attributes['phone']) ? $this->attributes['phone'] : null,
+            'mantelzorger-birthday' => isset($this->attributes['birthday']) ? $this->attributes['birthday'] : null,
         ];
     }
 
@@ -85,10 +82,10 @@ class Mantelzorger extends Model implements Searchable, Exportable
     {
         if (!empty($this->firstname) || !empty($this->lastname)) {
             return trim($this->getFullnameAttribute());
-        } else if (!empty($this->identifier)) {
+        } elseif (!empty($this->identifier)) {
             return $this->identifier;
         } else {
-            return '#ID#' . $this->id;
+            return '#ID#'.$this->id;
         }
     }
 
@@ -103,7 +100,7 @@ class Mantelzorger extends Model implements Searchable, Exportable
 
     public function getFullnameAttribute()
     {
-        return trim($this->firstname . ' ' . $this->lastname);
+        return trim($this->firstname.' '.$this->lastname);
     }
 
     public function oudere()

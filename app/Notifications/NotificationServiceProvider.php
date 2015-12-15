@@ -1,9 +1,11 @@
-<?php namespace App\Notifications;
+<?php
+
+namespace App\Notifications;
 
 use Illuminate\Support\ServiceProvider;
 
-class NotificationServiceProvider extends ServiceProvider{
-
+class NotificationServiceProvider extends ServiceProvider
+{
     public function boot()
     {
         $this->app['events']->listen('rapport.generated', 'App\Notifications\Rapport\Generated');
@@ -11,12 +13,10 @@ class NotificationServiceProvider extends ServiceProvider{
 
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     public function register()
     {
-        $this->app['App\Notifications\EmailNotifier'] = $this->app->share(function($app){
+        $this->app['App\Notifications\EmailNotifier'] = $this->app->share(function ($app) {
             return new EmailNotifier($app['mailer'], $app['translator']);
         });
     }

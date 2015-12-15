@@ -1,4 +1,6 @@
-<?php namespace App\Http\Middleware;
+<?php
+
+namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
@@ -7,7 +9,6 @@ use Lang;
 
 class AdminAuthenticate
 {
-
     /**
      * @var Guard
      */
@@ -21,12 +22,9 @@ class AdminAuthenticate
     public function handle(Request $request, Closure $next)
     {
         if ($this->auth->guest()) {
-
-            if($request->ajax())
-            {
+            if ($request->ajax()) {
                 return response('Unauthorized.', 401);
-            }
-            else{
+            } else {
                 return redirect()->route('login')->with('error', Lang::get('master.info.not-logged-in'));
             }
         }

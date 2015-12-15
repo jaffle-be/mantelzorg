@@ -1,11 +1,10 @@
 <?php
+
 namespace App\Organisation;
 
 use App\System\Database\Eloquent\Model;
 use App\System\Database\Eloquent\ValidationRules;
 use App\System\Scopes\ModelAutoSort;
-use Input;
-use Validator;
 
 class Organisation extends Model
 {
@@ -14,11 +13,11 @@ class Organisation extends Model
     protected $table = 'organisations';
 
     protected $fillable = array(
-        'name'
+        'name',
     );
 
     protected static $rules = array(
-        'name' => 'required|unique:organisations'
+        'name' => 'required|unique:organisations',
     );
 
     public $autosort = 'name';

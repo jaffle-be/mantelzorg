@@ -4,7 +4,6 @@ namespace App\Questionnaire;
 
 class EventSubscriber
 {
-
     /**
      * @var Questionnaire
      */

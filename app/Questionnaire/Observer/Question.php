@@ -7,7 +7,6 @@ use Illuminate\Events\Dispatcher;
 
 class Question
 {
-
     /**
      * @var \Illuminate\Events\Dispatcher
      */
@@ -29,7 +28,7 @@ class Question
         //because we had to rearrange questions, we added a sort field, but it needs autoupdating per panel.
         $sort = $model->where('questionnaire_panel_id', $model->questionnaire_panel_id)->max('sort');
 
-        if($sort == null){
+        if ($sort == null) {
             $sort = 0;
         }
 

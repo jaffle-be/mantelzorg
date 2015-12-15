@@ -1,4 +1,6 @@
-<?php namespace App\Questionnaire\Export;
+<?php
+
+namespace App\Questionnaire\Export;
 
 use App\Mantelzorger\Mantelzorger;
 use App\Mantelzorger\Oudere;
@@ -13,7 +15,6 @@ use Maatwebsite\Excel\Excel;
 
 class CsvExport implements Exporter
 {
-
     protected $filter;
 
     /**
@@ -29,6 +30,7 @@ class CsvExport implements Exporter
 
     /**
      * The amount of sessions exported.
+     *
      * @var int
      */
     protected $count = 0;
@@ -61,7 +63,7 @@ class CsvExport implements Exporter
     {
         $this->boot($survey);
 
-        $filename = $survey->title . '-' . $this->carbon->now()->format('y-m-d H:i:s');
+        $filename = $survey->title.'-'.$this->carbon->now()->format('y-m-d H:i:s');
 
         $excel = $this->excel->create($filename, function ($excel) use ($survey, $filters) {
 
@@ -111,34 +113,31 @@ class CsvExport implements Exporter
     protected function panel(Panel $panel, Collection $headers, &$counter)
     {
         foreach ($panel->questions as $question) {
-
-            if($question->getAttribute('explainable'))
-            {
-                $headers->push($counter . 'explanation');
+            if ($question->getAttribute('explainable')) {
+                $headers->push($counter.'explanation');
             }
 
             $this->choises($headers, $question, $counter);
 
-            $counter++;
+            ++$counter;
         }
     }
 
     protected function choises(Collection $headers, Question $question, $counter)
     {
         //checkboxed questions will have a column for each value
-        if($question->multiple_answer)
-        {
+        if ($question->multiple_answer) {
             $options = 1;
 
             foreach ($question->choises as $choise) {
-                $headers->push($counter . 'option' . $options);
-                $options++;
+                $headers->push($counter.'option'.$options);
+                ++$options;
             }
         }
         //radios will have only 2 columns, one for the value, one for the id of that value
-        else{
-            $headers->push($counter . 'option');
-            $headers->push($counter . 'option_id');
+        else {
+            $headers->push($counter.'option');
+            $headers->push($counter.'option_id');
         }
     }
 
@@ -220,7 +219,7 @@ class CsvExport implements Exporter
             //but that is how they wanted it.
             'panels.questions',
             //same reasoning applies for the options available to a question.
-            'panels.questions.choises'
+            'panels.questions.choises',
         ])->all();
     }
 
@@ -235,17 +234,15 @@ class CsvExport implements Exporter
     {
         $report = $this->report->newInstance();
 
-        $report->filename = $excel->getFileName() . '.xlsx';
+        $report->filename = $excel->getFileName().'.xlsx';
 
         $report->questionnaire()->associate($survey);
 
-        if(isset($filters['hulpverlener_id']) && !empty($filters['hulpverlener_id']))
-        {
+        if (isset($filters['hulpverlener_id']) && !empty($filters['hulpverlener_id'])) {
             $report->user_id = $filters['hulpverlener_id'];
         }
 
-        if(isset($filters['organisation_id']) && !empty($filters['organisation_id']))
-        {
+        if (isset($filters['organisation_id']) && !empty($filters['organisation_id'])) {
             $report->organisation_id = $filters['organisation_id'];
         }
 

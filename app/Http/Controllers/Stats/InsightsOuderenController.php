@@ -1,15 +1,13 @@
-<?php namespace App\Http\Controllers\Stats;
+<?php
+
+namespace App\Http\Controllers\Stats;
 
 use App\Http\Controllers\AdminController;
 use App\Meta\Context;
 use App\Search\SearchServiceInterface;
-use DB;
-use Input;
-use Lang;
 
 class InsightsOuderenController extends AdminController
 {
-
     public function __construct()
     {
         $this->middleware('auth.admin');
@@ -23,44 +21,44 @@ class InsightsOuderenController extends AdminController
     public function ouderen(SearchServiceInterface $search)
     {
         $results = $search->aggregate([
-            "index" => env('ES_INDEX'),
-            "type" => "mantelzorgers",
-            "body" => [
-                "aggs" => [
-                    "ouderen" => [
-                        "nested" => [
-                            "path" => "oudere"
+            'index' => env('ES_INDEX'),
+            'type' => 'mantelzorgers',
+            'body' => [
+                'aggs' => [
+                    'ouderen' => [
+                        'nested' => [
+                            'path' => 'oudere',
                         ],
-                        "aggs"   => [
-                            "mantelzorger_relation" => [
-                                "terms" => [
-                                    "field" => "oudere.mantelzorger_relation_id",
-                                    "size"  => 100
-                                ]
+                        'aggs' => [
+                            'mantelzorger_relation' => [
+                                'terms' => [
+                                    'field' => 'oudere.mantelzorger_relation_id',
+                                    'size' => 100,
+                                ],
                             ],
-                            "ouderen_woonsituatie"         => [
-                                "terms" => [
-                                    "field" => "oudere.woonsituatie_id",
-                                    "size"  => 100
-                                ]
+                            'ouderen_woonsituatie' => [
+                                'terms' => [
+                                    'field' => 'oudere.woonsituatie_id',
+                                    'size' => 100,
+                                ],
                             ],
-                            "oorzaak_hulpbehoefte" => [
-                                "terms" => [
-                                    "field" => "oudere.oorzaak_hulpbehoefte_id",
-                                    "size"  => 100
-                                ]
+                            'oorzaak_hulpbehoefte' => [
+                                'terms' => [
+                                    'field' => 'oudere.oorzaak_hulpbehoefte_id',
+                                    'size' => 100,
+                                ],
                             ],
-                            "bel_profiel"           => [
-                                "terms" => [
-                                    "field" => "oudere.bel_profiel_id",
-                                    "size"  => 100
-                                ]
-                            ]
-                        ]
-                    ]
+                            'bel_profiel' => [
+                                'terms' => [
+                                    'field' => 'oudere.bel_profiel_id',
+                                    'size' => 100,
+                                ],
+                            ],
+                        ],
+                    ],
                 ],
-                "size" => 0
-            ]
+                'size' => 0,
+            ],
         ]);
 
         $results = $results['ouderen'];
@@ -77,15 +75,13 @@ class InsightsOuderenController extends AdminController
     {
         $values = Context::where('context', $name)->first()->values->lists('value', 'id');
 
-        foreach($results['buckets'] as $index => $result)
-        {
+        foreach ($results['buckets'] as $index => $result) {
             $result['key'] = $values->get($result['key']);
 
             $results['buckets'][$index] = [
                 'value' => $result['doc_count'],
-                'label' => $result['key']
+                'label' => $result['key'],
             ];
         }
     }
-
 }

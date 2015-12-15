@@ -4,7 +4,6 @@ namespace App;
 
 class UserServiceProvider extends \Illuminate\Support\ServiceProvider
 {
-
     public function register()
     {
         $this->app['App\UserMailer'] = $this->app->share(function ($app) {

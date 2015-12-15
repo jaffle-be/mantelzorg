@@ -12,14 +12,11 @@ use App\UserRepositoryInterface;
 use Illuminate\Http\Request;
 use Input;
 use Lang;
-use Queue;
 use Redirect;
 use Response;
-use Validator;
 
 class RapportController extends AdminController
 {
-
     protected $search;
 
     /**
@@ -79,7 +76,7 @@ class RapportController extends AdminController
     public function show(Report $report)
     {
         if ($this->files->exists($report->filename)) {
-            return Response::download(storage_path('exports/' . $report->filename));
+            return Response::download(storage_path('exports/'.$report->filename));
         } else {
             return redirect()->route('report.index');
         }
@@ -92,7 +89,7 @@ class RapportController extends AdminController
         $report->delete();
 
         return json_encode(array(
-            'status' => 'oke'
+            'status' => 'oke',
         ));
     }
 
@@ -100,12 +97,10 @@ class RapportController extends AdminController
     {
         $ids = $request->get('ids', []);
 
-        if(!empty($ids))
-        {
+        if (!empty($ids)) {
             $reports = Report::whereIn('id', $ids)->get();
 
-            foreach($reports as $report)
-            {
+            foreach ($reports as $report) {
                 $this->files->delete($report->filename);
 
                 $report->delete();
@@ -113,7 +108,7 @@ class RapportController extends AdminController
         }
 
         return json_encode(array(
-            'status' => 'oke'
+            'status' => 'oke',
         ));
     }
 }

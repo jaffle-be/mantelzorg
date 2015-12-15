@@ -1,7 +1,8 @@
-<?php namespace App\Organisation;
+<?php
 
-interface OrganisationRepositoryInterface {
+namespace App\Organisation;
 
+interface OrganisationRepositoryInterface
+{
     public function getForSelect();
-
 }

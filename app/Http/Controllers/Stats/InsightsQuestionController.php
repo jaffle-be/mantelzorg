@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers\Stats;
+<?php
+
+namespace App\Http\Controllers\Stats;
 
 use App\Http\Controllers\AdminController;
 use App\Questionnaire\Answer;
@@ -6,12 +8,10 @@ use App\Questionnaire\Choise;
 use App\Questionnaire\Panel;
 use App\Questionnaire\Question;
 use App\Questionnaire\Questionnaire;
-use DB;
 use Illuminate\Http\Request;
 
 class InsightsQuestionController extends AdminController
 {
-
     public function __construct()
     {
         $this->middleware('auth.admin');
@@ -27,12 +27,11 @@ class InsightsQuestionController extends AdminController
     public function question(Panel $panel, Question $question, Request $request, Choise $choises, Answer $answers)
     {
         $this->validate($request, [
-            'panel'    => 'required|exists:questionnaire_panels,id',
-            'question' => 'exists:questionnaire_questions,id,questionnaire_panel_id,' . $request->get('panel')
+            'panel' => 'required|exists:questionnaire_panels,id',
+            'question' => 'exists:questionnaire_questions,id,questionnaire_panel_id,'.$request->get('panel'),
         ]);
 
         if (!$request->get('question')) {
-
             $questions = $panel->find($request->get('panel'))->questions()->get();
 
             $question = $questions->first();
@@ -70,41 +69,42 @@ class InsightsQuestionController extends AdminController
 
         return $search->search('answers', [
             'index' => env('ES_INDEX'),
-            'type'  => 'answers',
-            'body'  => [
-                "query"     => [
-                    "bool" => [
-                        "minimum_number_should_match" => 1,
-                        "must"                        => [
+            'type' => 'answers',
+            'body' => [
+                'query' => [
+                    'bool' => [
+                        'minimum_number_should_match' => 1,
+                        'must' => [
                             [
-                                "term" => [
-                                    "question_id" => [
-                                        "value" => $question->id
-                                    ]
-                                ]
-                            ]
+                                'term' => [
+                                    'question_id' => [
+                                        'value' => $question->id,
+                                    ],
+                                ],
+                            ],
                         ],
-                        "should"                      => [
+                        'should' => [
                             [
-                                "term" => [
-                                    "explanation.dutch" => [
-                                        "value" => $request->get('term')
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
+                                'term' => [
+                                    'explanation.dutch' => [
+                                        'value' => $request->get('term'),
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
                 ],
-                "highlight" => [
-                    "pre_tags"  => ["<strong>"],
-                    "post_tags" => ["</strong>"],
-                    "fields"    => [
-                        "explanation.dutch" => new \StdClass()
-                    ]
-                ]
-            ]
+                'highlight' => [
+                    'pre_tags' => ['<strong>'],
+                    'post_tags' => ['</strong>'],
+                    'fields' => [
+                        'explanation.dutch' => new \StdClass(),
+                    ],
+                ],
+            ],
         ], [], 15, function ($source, $highlight) {
-            $source["explanation"] = $highlight['explanation.dutch'][0];
+            $source['explanation'] = $highlight['explanation.dutch'][0];
+
             return $source;
         });
     }
@@ -113,45 +113,45 @@ class InsightsQuestionController extends AdminController
     {
         //change to selected chooise, we stopped here because the attention was completely gone :(
         $aggregations = $answers->search()->aggregate([
-            "index" => env('ES_INDEX'),
-            "type"  => "answers",
-            "body"  => [
-                "aggs" => [
-                    "choises" => [
-                        "nested" => [
-                            "path" => "choises"
+            'index' => env('ES_INDEX'),
+            'type' => 'answers',
+            'body' => [
+                'aggs' => [
+                    'choises' => [
+                        'nested' => [
+                            'path' => 'choises',
                         ],
-                        "aggs"   => [
-                            "question" => [
-                                "filter" => [
-                                    "term" => [
-                                        "choises.question_id" => $question->id
-                                    ]
+                        'aggs' => [
+                            'question' => [
+                                'filter' => [
+                                    'term' => [
+                                        'choises.question_id' => $question->id,
+                                    ],
                                 ],
-                                "aggs"   => [
-                                    "choises" => [
-                                        "terms" => [
-                                            "field" => "choises.id",
-                                            "size"  => 100
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
+                                'aggs' => [
+                                    'choises' => [
+                                        'terms' => [
+                                            'field' => 'choises.id',
+                                            'size' => 100,
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
                 ],
-                "size" => 0
-            ]
+                'size' => 0,
+            ],
         ], true);
 
         $choises = $choises->where('question_id', $question->id)->lists('title', 'id');
 
         $buckets = ($aggregations['choises']['question']['choises']['buckets']);
 
-        $buckets = array_map(function($item) use ($choises){
+        $buckets = array_map(function ($item) use ($choises) {
             return [
                 'label' => $choises[$item['key']],
-                'value' => $item['doc_count']
+                'value' => $item['doc_count'],
             ];
         }, $buckets);
 
@@ -159,8 +159,8 @@ class InsightsQuestionController extends AdminController
 
         return [
             'multiple_choise' => true,
-            'answers'         => $buckets,
-            'terms'           => $terms,
+            'answers' => $buckets,
+            'terms' => $terms,
         ];
     }
 
@@ -170,7 +170,7 @@ class InsightsQuestionController extends AdminController
 
         return [
             'multiple_choise' => false,
-            'terms'           => $result,
+            'terms' => $result,
         ];
     }
 
@@ -184,31 +184,29 @@ class InsightsQuestionController extends AdminController
     {
         $result = $answers->search()->aggregate([
             'index' => env('ES_INDEX'),
-            'type'  => 'answers',
-            'body'  => [
-                "aggs" => [
-                    "top_terms" => [
-                        "filter" => [
-                            "term" => [
-                                "question_id" => $question->id
-                            ]
+            'type' => 'answers',
+            'body' => [
+                'aggs' => [
+                    'top_terms' => [
+                        'filter' => [
+                            'term' => [
+                                'question_id' => $question->id,
+                            ],
                         ],
-                        "aggs"   => [
-                            "top_terms" => [
-                                "significant_terms" => [
-                                    "field" => "explanation.dutch",
-                                    "size"  => 20,
-                                ]
-                            ]
-                        ]
-                    ]
+                        'aggs' => [
+                            'top_terms' => [
+                                'significant_terms' => [
+                                    'field' => 'explanation.dutch',
+                                    'size' => 20,
+                                ],
+                            ],
+                        ],
+                    ],
                 ],
-                "size" => 0
-            ]
+                'size' => 0,
+            ],
         ]);
 
         return $result['top_terms']['top_terms'];
-
     }
-
 }

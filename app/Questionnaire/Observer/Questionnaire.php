@@ -6,7 +6,6 @@ use Illuminate\Events\Dispatcher;
 
 class Questionnaire
 {
-
     /**
      * @var \Illuminate\Events\Dispatcher
      */

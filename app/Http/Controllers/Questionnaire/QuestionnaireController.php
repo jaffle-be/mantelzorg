@@ -8,7 +8,6 @@ use Input;
 
 class QuestionnaireController extends \App\Http\Controllers\AdminController
 {
-
     /**
      * @var Questionnaire
      */

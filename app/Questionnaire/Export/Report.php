@@ -1,4 +1,6 @@
-<?php namespace App\Questionnaire\Export;
+<?php
+
+namespace App\Questionnaire\Export;
 
 use App\System\Database\Eloquent\Model;
 use App\System\Scopes\ModelAutoSort;
@@ -7,7 +9,7 @@ class Report extends Model
 {
     use ModelAutoSort;
 
-    protected $table = "questionnaire_reports";
+    protected $table = 'questionnaire_reports';
 
     protected $fillable = ['filename', 'survey_count', 'questionnaire_id', 'organisation_id', 'user_id', 'created_at', 'updated_at'];
 
@@ -27,5 +29,4 @@ class Report extends Model
     {
         return $this->belongsTo('App\User');
     }
-
 }

@@ -17,9 +17,9 @@ class Answer extends Model implements Searchable
     protected $fillable = array('question_id', 'explanation', 'session_id');
 
     protected static $rules = array(
-        'session_id'  => 'required|exists:questionnaire_survey_sessions,id',
+        'session_id' => 'required|exists:questionnaire_survey_sessions,id',
         'question_id' => 'required|exists:questionnaire_questions,id',
-        'explanation'
+        'explanation',
     );
 
     protected static $searchableMapping = [
@@ -29,16 +29,16 @@ class Answer extends Model implements Searchable
                 'dutch' => [
                     'type' => 'string',
                     'analyzer' => 'dutch',
-                ]
-            ]
+                ],
+            ],
         ],
         'created_at' => [
-            'type'   => 'date',
-            'format' => 'yyyy-MM-dd HH:mm:ss'
+            'type' => 'date',
+            'format' => 'yyyy-MM-dd HH:mm:ss',
         ],
         'updated_at' => [
-            'type'   => 'date',
-            'format' => 'yyyy-MM-dd HH:mm:ss'
+            'type' => 'date',
+            'format' => 'yyyy-MM-dd HH:mm:ss',
         ],
     ];
 

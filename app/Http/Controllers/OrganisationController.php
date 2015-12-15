@@ -8,7 +8,6 @@ use Input;
 
 class OrganisationController extends AdminController
 {
-
     /**
      * @var \App\Organisation\Organisation
      */
@@ -30,16 +29,16 @@ class OrganisationController extends AdminController
         if ($validator->fails()) {
             return array(
                 'status' => 'failed',
-                'errors' => $validator->messages()->toArray()
+                'errors' => $validator->messages()->toArray(),
             );
         } else {
             $organisation = $this->organisation->create(array(
-                'name' => $name
+                'name' => $name,
             ));
 
             return array(
-                'status'       => 'oke',
-                'organisation' => $organisation->toArray()
+                'status' => 'oke',
+                'organisation' => $organisation->toArray(),
             );
         }
     }

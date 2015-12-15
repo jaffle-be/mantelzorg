@@ -5,8 +5,6 @@ namespace App\Questionnaire;
 use App\System\Database\Eloquent\Model;
 use App\System\Database\Eloquent\ValidationRules;
 use App\System\Scopes\ModelAutoSort;
-use Input;
-use Validator;
 
 class Panel extends Model
 {
@@ -20,9 +18,9 @@ class Panel extends Model
 
     protected static $rules = array(
         'questionnaire_id' => 'required|exists:questionnaires,id',
-        'panel_weight'     => 'required|integer',
-        'color'            => 'in:blue,red,green,gray,purple,yellow,green,orange',
-        'title'            => 'required|unique:questionnaire_panels,title,#panel,id,questionnaire_id,#questionnaire'
+        'panel_weight' => 'required|integer',
+        'color' => 'in:blue,red,green,gray,purple,yellow,green,orange',
+        'title' => 'required|unique:questionnaire_panels,title,#panel,id,questionnaire_id,#questionnaire',
     );
 
     public function questions()

@@ -1,13 +1,11 @@
 <?php
 
-
 namespace App\Search;
 
 use App\Search\Model\Searchable;
 
 interface SearchServiceInterface
 {
-
     /**
      * Register the regular listeners for the given type.
      *
@@ -49,7 +47,7 @@ interface SearchServiceInterface
     public function update(Searchable $type);
 
     /**
-     * Search the index
+     * Search the index.
      *
      * @param               $type
      * @param array         $params
@@ -62,7 +60,7 @@ interface SearchServiceInterface
     public function search($type, array $params, $with = [], $paginated = 15, \Closure $highlighter = null);
 
     /**
-     * Aggregate an index
+     * Aggregate an index.
      *
      * @param array $params
      *

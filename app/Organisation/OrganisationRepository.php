@@ -1,7 +1,9 @@
-<?php namespace App\Organisation;
+<?php
 
-class OrganisationRepository implements OrganisationRepositoryInterface{
+namespace App\Organisation;
 
+class OrganisationRepository implements OrganisationRepositoryInterface
+{
     protected $organisation;
 
     public function __construct(Organisation $organisation)

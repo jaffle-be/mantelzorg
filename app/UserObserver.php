@@ -6,7 +6,6 @@ use Illuminate\Events\Dispatcher;
 
 class UserObserver
 {
-
     /**
      * @var Dispatcher
      */

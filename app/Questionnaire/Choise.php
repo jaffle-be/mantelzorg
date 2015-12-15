@@ -5,8 +5,6 @@ namespace App\Questionnaire;
 use App\System\Database\Eloquent\Model;
 use App\System\Database\Eloquent\ValidationRules;
 use App\System\Scopes\ModelAutoSort;
-use Input;
-use Validator;
 
 class Choise extends Model
 {
@@ -18,8 +16,8 @@ class Choise extends Model
 
     protected static $rules = array(
         'question_id' => 'required|exists:questionnaire_questions,id',
-        'title'       => 'required',
-        'sort_weight' => 'required|integer'
+        'title' => 'required',
+        'sort_weight' => 'required|integer',
     );
 
     public $autosort = 'sort_weight';

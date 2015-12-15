@@ -1,4 +1,6 @@
-<?php namespace App\Questionnaire\Export;
+<?php
+
+namespace App\Questionnaire\Export;
 
 use App\Questionnaire\Session;
 use Illuminate\Database\Eloquent\Collection;
@@ -6,7 +8,6 @@ use Maatwebsite\Excel\Classes\LaravelExcelWorksheet;
 
 class DataHandler
 {
-
     /**
      * @var Repository
      */
@@ -24,7 +25,7 @@ class DataHandler
         'oudere.oorzaakHulpbehoefte',
         'oudere.woonSituatie',
         'oudere.belProfiel',
-        'mantelzorger'
+        'mantelzorger',
     ];
 
     /**
@@ -45,7 +46,6 @@ class DataHandler
         list($answers, $choises) = $this->boot($sessions);
 
         foreach ($sessions as $session) {
-
             $sessionAnswers = isset($answers[$session['id']]) ? $answers[$session['id']] : [];
 
             $sessionData = $this->getBaseData($session);
@@ -53,7 +53,6 @@ class DataHandler
             $session = $session->toArray();
 
             foreach ($panels as $panelid => $questions) {
-
                 $sessionData = $this->answers($sessionData, $questions, $session, $sessionAnswers, $choises);
             }
 
@@ -195,29 +194,24 @@ class DataHandler
             $found = false;
             $counter = 0;
 
-            while(!$found && $counter < count($question['choises']))
-            {
+            while (!$found && $counter < count($question['choises'])) {
                 $choise = $question['choises'][$counter];
 
-                if($this->wasChecked($chosen, $choise['id'], $answer->id))
-                {
+                if ($this->wasChecked($chosen, $choise['id'], $answer->id)) {
                     $found = $choise;
                 }
 
-                $counter++;
+                ++$counter;
             }
 
-            if($found)
-            {
+            if ($found) {
                 //first add the value then the corresponding id
                 $data[] = $found['title'];
                 $data[] = $found['id'];
-            }
-            else{
+            } else {
                 $data[] = null;
                 $data[] = null;
             }
-
         }
 
         return $data;
@@ -235,14 +229,12 @@ class DataHandler
             $data[] = '';
         }
 
-        if($question['multiple_answer'])
-        {
+        if ($question['multiple_answer']) {
             //checkboxed question
             foreach ($question['choises'] as $choise) {
                 $data[] = 0;
             }
-        }
-        elseif($question['multiple_choise']){
+        } elseif ($question['multiple_choise']) {
             //radio question needs 2 columns
             $data[] = null;
             $data[] = null;

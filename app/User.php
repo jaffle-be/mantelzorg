@@ -7,8 +7,6 @@ use App\Search\Model\Searchable;
 use App\Search\Model\SearchableTrait;
 use App\System\Database\Eloquent\Model;
 use App\System\Database\Eloquent\ValidationRules;
-use Input;
-use Validator;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -18,7 +16,6 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract, Searchable, Exportable, AuthorizableContract
 {
-
     use Authenticatable, CanResetPassword, SearchableTrait;
     use ValidationRules;
     use Authorizable;
@@ -30,43 +27,43 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $table = 'users';
 
     protected static $searchableMapping = [
-        'male'       => [
+        'male' => [
             'type' => 'boolean',
         ],
-        'admin'      => [
+        'admin' => [
             'type' => 'boolean',
         ],
-        'active'     => [
+        'active' => [
             'type' => 'boolean',
         ],
         'created_at' => [
-            'type'   => 'date',
-            'format' => 'yyyy-MM-dd HH:mm:ss'
+            'type' => 'date',
+            'format' => 'yyyy-MM-dd HH:mm:ss',
         ],
         'updated_at' => [
-            'type'   => 'date',
-            'format' => 'yyyy-MM-dd HH:mm:ss'
+            'type' => 'date',
+            'format' => 'yyyy-MM-dd HH:mm:ss',
         ],
-        'email'      => [
-            'type'     => 'string',
-            'analyzer' => 'email'
-        ]
+        'email' => [
+            'type' => 'string',
+            'analyzer' => 'email',
+        ],
     ];
 
     protected static $rules = array(
-        'email'                    => 'required|email|unique:users,id,#user',
-        'firstname'                => 'required',
-        'lastname'                 => 'required',
-        'male'                     => 'required|',
-        'admin'                    => 'in:0,1',
-        'active'                   => 'in:0,1',
-        'password'                 => 'required',
-        'organisation_id'          => 'required|exists:organisations,id',
+        'email' => 'required|email|unique:users,id,#user',
+        'firstname' => 'required',
+        'lastname' => 'required',
+        'male' => 'required|',
+        'admin' => 'in:0,1',
+        'active' => 'in:0,1',
+        'password' => 'required',
+        'organisation_id' => 'required|exists:organisations,id',
         'organisation_location_id' => 'required|exists:locations,id',
     );
 
     protected $fillable = array(
-        'email', 'firstname', 'lastname', 'male', 'admin', 'active', 'password', 'phone', 'organisation_id', 'organisation_location_id'
+        'email', 'firstname', 'lastname', 'male', 'admin', 'active', 'password', 'phone', 'organisation_id', 'organisation_location_id',
     );
 
     /**
@@ -119,9 +116,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Set the token value for the "remember me" session.
      *
-     * @param  string $value
-     *
-     * @return void
+     * @param string $value
      */
     public function setRememberToken($value)
     {
@@ -144,14 +139,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function toExportArray()
     {
         return [
-            'hulpverlener-id'                    => isset($this->attributes['id']) ? $this->attributes['id'] : null,
-            'hulpverlener-email'                 => isset($this->attributes['email']) ? $this->attributes['email'] : null,
-            'hulpverlener-firstname'             => isset($this->attributes['firstname']) ? $this->attributes['firstname'] : null,
-            'hulpverlener-lastname'              => isset($this->attributes['lastname']) ? $this->attributes['lastname'] : null,
-            'hulpverlener-male'                  => isset($this->attributes['male']) ? $this->attributes['male'] : null,
-            'hulpverlener-phone'                 => !empty($this->attributes['phone']) ? $this->attributes['phone'] : '',
-            'hulpverlener-organisation'          => $this->organisation ? $this->organisation->name : null,
-            'hulpverlener-organisation_location' => $this->organisation_location ? $this->organisation_location->name : null
+            'hulpverlener-id' => isset($this->attributes['id']) ? $this->attributes['id'] : null,
+            'hulpverlener-email' => isset($this->attributes['email']) ? $this->attributes['email'] : null,
+            'hulpverlener-firstname' => isset($this->attributes['firstname']) ? $this->attributes['firstname'] : null,
+            'hulpverlener-lastname' => isset($this->attributes['lastname']) ? $this->attributes['lastname'] : null,
+            'hulpverlener-male' => isset($this->attributes['male']) ? $this->attributes['male'] : null,
+            'hulpverlener-phone' => !empty($this->attributes['phone']) ? $this->attributes['phone'] : '',
+            'hulpverlener-organisation' => $this->organisation ? $this->organisation->name : null,
+            'hulpverlener-organisation_location' => $this->organisation_location ? $this->organisation_location->name : null,
         ];
     }
 
@@ -161,7 +156,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             return $this->attributes['fullname'];
         }
 
-        return trim($this->attributes['firstname'] . ' ' . $this->attributes['lastname']);
+        return trim($this->attributes['firstname'].' '.$this->attributes['lastname']);
     }
 
     public function generateNewPassword($length = 8, $strength = 4)
@@ -172,7 +167,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             $consonants .= 'BCDFGHJKLMNPQRSTVWXZ';
         }
         if ($strength & 2) {
-            $vowels .= "AEIOUY";
+            $vowels .= 'AEIOUY';
         }
         if ($strength & 4) {
             $consonants .= '23456789';
@@ -183,7 +178,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         $password = '';
         $alt = time() % 2;
-        for ($i = 0; $i < $length; $i++) {
+        for ($i = 0; $i < $length; ++$i) {
             if ($alt == 1) {
                 $password .= $consonants[(rand() % strlen($consonants))];
                 $alt = 0;

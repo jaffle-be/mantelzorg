@@ -15,7 +15,6 @@ use Redirect;
 
 class InschrijvingController extends AdminController
 {
-
     /**
      * @var \App\Beta\Registration
      */
@@ -48,8 +47,7 @@ class InschrijvingController extends AdminController
 
         $count = $this->registration->count();
 
-        if($count == 0)
-        {
+        if ($count == 0) {
             //put count to 1 to force a pagination result, instead of a regular collection.
             $count = 1;
         }
@@ -74,24 +72,23 @@ class InschrijvingController extends AdminController
                         'query' => [
                             'multi_match' => [
                                 'fields' => ['email', 'firstname', 'lastname'],
-                                'query' => $input
-                            ]
+                                'query' => $input,
+                            ],
                         ],
                         'filter' => [
 
-                        ]
-                    ]
+                        ],
+                    ],
                 ],
                 'sort' => [
                     ['created_at' => 'asc'],
                     ['firstname' => 'asc'],
                     ['lastname' => 'asc'],
-                ]
-            ]
+                ],
+            ],
         ];
 
-        if(empty($input))
-        {
+        if (empty($input)) {
             $query['body']['query']['filtered']['query'] = ['match_all' => []];
         }
 
@@ -136,7 +133,7 @@ class InschrijvingController extends AdminController
         $input = array_merge(Input::all(), array('password' => $paswoord));
 
         $validator = $validator->make($input, $this->user->rules(array_keys($input), [
-            'user' => $input['id']
+            'user' => $input['id'],
         ]));
 
         if ($validator->fails()) {

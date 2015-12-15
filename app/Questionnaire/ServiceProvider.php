@@ -12,10 +12,9 @@ use Carbon\Carbon;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
-
     public function boot()
     {
-        $this->app['events']->subscribe(new EventSubscriber(new Questionnaire, new Panel, new Question, new Choise, new Answer));
+        $this->app['events']->subscribe(new EventSubscriber(new Questionnaire(), new Panel(), new Question(), new Choise(), new Answer()));
 
         Questionnaire::observe($this->app['App\Questionnaire\Observer\App\Questionnaire']);
 
@@ -48,15 +47,14 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
             return new CsvExport($app['App\Questionnaire\Export\SessionFilter'], $app['excel'], new Carbon(), $app['App\Questionnaire\Export\DataHandler'], new Report());
         });
 
-        $this->app['App\Questionnaire\Export\DataHandler'] = $this->app->share(function($app)
-        {
-            $repo = new Repository(new Answer, new Choise, $app['db']->connection());
+        $this->app['App\Questionnaire\Export\DataHandler'] = $this->app->share(function ($app) {
+            $repo = new Repository(new Answer(), new Choise(), $app['db']->connection());
 
             return new DataHandler($repo);
         });
 
         $commands = [
-            'App\Questionnaire\Console\Export'
+            'App\Questionnaire\Console\Export',
         ];
 
         $this->commands($commands);

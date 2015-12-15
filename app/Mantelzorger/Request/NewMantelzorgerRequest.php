@@ -1,10 +1,12 @@
-<?php namespace App\Mantelzorger\Request;
+<?php
+
+namespace App\Mantelzorger\Request;
 
 use App\Http\Requests\Request;
 use App\Mantelzorger\Mantelzorger;
 
-class NewMantelzorgerRequest extends Request{
-
+class NewMantelzorgerRequest extends Request
+{
     public function rules(Mantelzorger $mantelzorger)
     {
         $hulpverlener = $this->route()->parameter('hulpverlener');
@@ -16,5 +18,4 @@ class NewMantelzorgerRequest extends Request{
     {
         return true;
     }
-
 }

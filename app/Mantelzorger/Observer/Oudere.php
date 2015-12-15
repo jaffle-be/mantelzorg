@@ -5,13 +5,10 @@ namespace App\Mantelzorger\Observer;
 use Illuminate\Events\Dispatcher;
 
 /**
- * Class App\Mantelzorger
- *
- * @package App\Mantelzorger\Observer
+ * Class App\Mantelzorger.
  */
 class Oudere
 {
-
     /**
      * @var \Illuminate\Events\Dispatcher
      */

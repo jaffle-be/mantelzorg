@@ -1,4 +1,6 @@
-<?php namespace App\Notifications\Rapport;
+<?php
+
+namespace App\Notifications\Rapport;
 
 use App\Notifications\EmailNotifier;
 use App\Questionnaire\Export\Report;
@@ -8,7 +10,6 @@ use Illuminate\Log\Writer;
 
 class Generated
 {
-
     protected $email;
 
     public function __construct(EmailNotifier $email, Writer $log)
@@ -20,9 +21,9 @@ class Generated
     public function handle(User $user, Questionnaire $survey, Report $report)
     {
         $this->email->notify($user, 'rapport.generated', [
-            'user'     => $user,
-            'survey'   => $survey,
-            'report' => $report
+            'user' => $user,
+            'survey' => $survey,
+            'report' => $report,
         ]);
     }
 }

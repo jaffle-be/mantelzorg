@@ -1,9 +1,11 @@
-<?php namespace App\System;
+<?php
+
+namespace App\System;
 
 use Jenssegers\Agent\Agent;
 
-class UI {
-
+class UI
+{
     /**
      * @var bool
      */
@@ -21,8 +23,7 @@ class UI {
 
     public function isMobile()
     {
-        if(!is_bool($this->mobile))
-        {
+        if (!is_bool($this->mobile)) {
             $this->mobile = $this->agent->isMobile();
         }
 
@@ -31,12 +32,10 @@ class UI {
 
     public function isTablet()
     {
-        if(!is_bool($this->tablet))
-        {
+        if (!is_bool($this->tablet)) {
             $this->tablet = $this->agent->isTablet();
         }
 
         return $this->tablet;
     }
-
 }

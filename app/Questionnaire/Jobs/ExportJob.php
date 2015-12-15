@@ -1,4 +1,6 @@
-<?php namespace App\Questionnaire\Jobs;
+<?php
+
+namespace App\Questionnaire\Jobs;
 
 use App\Commands\Command;
 use App\Questionnaire\Export\Exporter;
@@ -11,8 +13,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Queue\InteractsWithQueue;
 
-class ExportJob extends Command implements ShouldQueue, SelfHandling{
-
+class ExportJob extends Command implements ShouldQueue, SelfHandling
+{
     use InteractsWithQueue;
 
     protected $id;
@@ -30,7 +32,7 @@ class ExportJob extends Command implements ShouldQueue, SelfHandling{
 
     public function handle(Questionnaire $questionnaire, Exporter $export, ExportLogger $logger, Dispatcher $events, User $user)
     {
-        try{
+        try {
             $logger->start($this->id);
 
             $survey = $questionnaire->find($this->id);
@@ -44,13 +46,10 @@ class ExportJob extends Command implements ShouldQueue, SelfHandling{
             $events->fire('rapport.generated', [$user, $survey, $report]);
 
             $this->job->delete();
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $logger->error($e);
 
             $events->fire('rapport.failed', [$user, $survey]);
         }
     }
-
 }

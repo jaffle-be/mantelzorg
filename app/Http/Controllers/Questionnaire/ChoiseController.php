@@ -9,7 +9,6 @@ use Input;
 
 class ChoiseController extends \App\Http\Controllers\AdminController
 {
-
     /**
      * @var Choise
      */
@@ -37,14 +36,14 @@ class ChoiseController extends \App\Http\Controllers\AdminController
         if ($validator->fails()) {
             return json_encode(array(
                 'status' => 'noke',
-                'errors' => $validator->messages()->toArray()
+                'errors' => $validator->messages()->toArray(),
             ));
         }
 
         $this->choise->create($input);
 
         return json_encode(array(
-            'status' => 'oke'
+            'status' => 'oke',
         ));
     }
 
@@ -58,14 +57,14 @@ class ChoiseController extends \App\Http\Controllers\AdminController
             if ($validator->fails()) {
                 return json_encode(array(
                     'status' => 'noke',
-                    'errors' => $validator->messages()->toArray()
+                    'errors' => $validator->messages()->toArray(),
                 ));
             }
 
             $choise->update(array_except($input, '_method'));
 
             return json_encode(array(
-                'status' => 'oke'
+                'status' => 'oke',
             ));
         }
     }
@@ -89,7 +88,7 @@ class ChoiseController extends \App\Http\Controllers\AdminController
         }
 
         return json_encode(array(
-            'status' => 'oke'
+            'status' => 'oke',
         ));
     }
 
