@@ -93,7 +93,7 @@ abstract class AcceptanceTest extends Selenium
         $host = 'http://localhost:4444/wd/hub';
         $capabilities = [];
 
-        if(env('TRAVIS'))
+        if(env('TRAVIS') || env('SAUCED'))
         {
             $host = sprintf('http://%s:%s@ondemand.saucelabs.com:80/wd/hub', env('SAUCE_USERNAME'), env('SAUCE_API_KEY'));
         }
