@@ -10,6 +10,7 @@ use App\Questionnaire\Export\Report;
 use App\Questionnaire\Jobs\ExportJob;
 use App\Questionnaire\Questionnaire;
 use App\UserRepositoryInterface;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Input;
 use Lang;
@@ -129,6 +130,10 @@ class RapportController extends AdminController
 
         $document = $snappy->loadView('rapport.legend', ['metas' => $metas]);
 
-        return $document;
+        $now = new Carbon();
+
+        $name = sprintf('instrument_legende_%s.pdf', $now->format('Y-m-d_H:i:s'));
+
+        return $document->download($name);
     }
 }
