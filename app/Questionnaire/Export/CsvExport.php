@@ -95,6 +95,7 @@ class CsvExport implements Exporter
         $headers = new Collection();
 
         $headers->push('id');
+        $headers->push('created');
 
         //add columns for people related info
         $headers = $this->headersHulpverlener($headers);
