@@ -25,7 +25,7 @@
 <body>
 
 
-<h1>{{ Lang::get('report.legend') }}</h1>
+<h1>{{ Lang::get('rapport.legend') }}</h1>
 
 
 @foreach($metas as $meta)
