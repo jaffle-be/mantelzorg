@@ -117,7 +117,7 @@ class RapportController extends AdminController
 
     public function legend(Context $metas)
     {
-        $metas = $metas->orderBy('context')->all();
+        $metas = $metas->orderBy('context')->get();
 
         $metas->load(['values' => function($query)
         {
