@@ -73,8 +73,10 @@
                 <span>{{ $mantelzorger->email ? : ' ' }}</span>
 
                 <label class="control-label">{{ Lang::get('pdf.fullname') }}</label>
-                <span>{{ $mantelzorger->fullname ? : ' ' }}
-                    <i class="fa {{ $mantelzorger->male ? 'fa-male' : 'fa-female' }}"></i></span>
+                <span>{{ $mantelzorger->fullname ? : ' ' }}</span>
+
+                <label class="control-label">{{ Lang::get('pdf.geslacht') }}</label>
+                <span><i class="fa {{ $mantelzorger->male ? 'fa-male' : 'fa-female' }}"></i></span>
 
                 <label class="control-label">{{ Lang::get('pdf.address') }}</label>
                 <address>
