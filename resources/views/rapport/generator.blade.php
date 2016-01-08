@@ -56,6 +56,8 @@
                 @error('survey')
 
                 <button class="btn btn-primary" type="submit">{{ Lang::get('rapport.generate') }}</button>
+
+                <a href="{{ route('report.legend') }}" class="btn btn-info" type="button">{{ Lang::get('rapport.legend') }}</a>
             </div>
         </div>
 

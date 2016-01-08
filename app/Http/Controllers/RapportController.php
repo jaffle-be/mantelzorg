@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Meta\Context;
 use App\Organisation\OrganisationRepositoryInterface;
 use App\Questionnaire\Export\Exporter;
 use App\Questionnaire\Export\FileManager;
@@ -14,6 +15,8 @@ use Input;
 use Lang;
 use Redirect;
 use Response;
+use App;
+use Barryvdh\Snappy\PdfWrapper;
 
 class RapportController extends AdminController
 {
@@ -110,5 +113,22 @@ class RapportController extends AdminController
         return json_encode(array(
             'status' => 'oke',
         ));
+    }
+
+    public function legend(Context $metas)
+    {
+        $metas = $metas->orderBy('context')->all();
+
+        $metas->load(['values' => function($query)
+        {
+            $query->orderBy('value');
+        }]);
+
+        /** @var PdfWrapper $snappy */
+        $snappy = App::make('snappy.pdf.wrapper');
+
+        $document = $snappy->loadView('rapport.legend', ['metas' => $metas]);
+
+        return $document;
     }
 }
