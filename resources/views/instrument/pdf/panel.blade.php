@@ -19,12 +19,14 @@
                         <ul class="choises">
                             @foreach($answer->question->choises as $choise)
                                 @if($answer->wasChecked($choise))
-                                <li class="box checked">{{ $choise->title }}</li>
+                                    <li class="box checked">{{ $choise->title }}</li>
+                                @else
+                                    <li class="box unchecked">{{ $choise->title }}</li>
                                 @endif
 
                             @endforeach
                         </ul>
-                    {{--radios: show all--}}
+                        {{--radios: show all--}}
                     @else
 
                         <ul class="choises">
