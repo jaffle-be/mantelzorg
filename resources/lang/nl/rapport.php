@@ -17,4 +17,5 @@ return [
     'survey-count' => 'Sessies',
     'user' => 'Hulpverlener',
     'created' => 'Aangemaakt',
+    'legend' => 'Legende',
 ];
