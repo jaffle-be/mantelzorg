@@ -75,7 +75,7 @@
                 <label class="control-label">{{ Lang::get('pdf.fullname') }}</label>
                 <span>{{ $mantelzorger->fullname ? : ' ' }}</span>
 
-                <label class="control-label">{{ Lang::get('pdf.geslacht') }}</label>
+                <label class="control-label">{{ Lang::get('pdf.gender') }}</label>
                 <span><i class="fa {{ $mantelzorger->male ? 'fa-male' : 'fa-female' }}"></i></span>
 
                 <label class="control-label">{{ Lang::get('pdf.address') }}</label>
@@ -105,8 +105,10 @@
                 <span>{{ $oudere->identifier ? : '&nbps;' }}</span>
 
                 <label class="control-label">{{ Lang::get('pdf.fullname') }}</label>
-                <span>{{ $oudere->fullname ? : '&nbps;' }}
-                    <i class="fa {{ $oudere->male ? 'fa-male' : 'fa-female' }}"></i></span>
+                <span>{{ $oudere->fullname ? : '&nbps;' }}</span>
+
+                <label class="control-label">{{ Lang::get('pdf.gender') }}</label>
+                <span><i class="fa {{ $oudere->male ? 'fa-male' : 'fa-female' }}"></i></span>
 
                 <label class="control-label">{{ Lang::get('pdf.address') }}</label>
                 <address>

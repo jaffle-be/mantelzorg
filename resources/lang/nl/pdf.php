@@ -27,4 +27,6 @@ return [
 
     'diagnose' => 'Diagnose',
 
+    'gender' => 'Geslacht',
+
 ];
