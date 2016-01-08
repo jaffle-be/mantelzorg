@@ -77,7 +77,7 @@ class Oudere extends Model implements Searchable, Exportable
             'hulpbehoevende-city' => isset($this->attributes['city']) ? $this->attributes['city'] : null,
             'hulpbehoevende-phone' => isset($this->attributes['phone']) ? $this->attributes['phone'] : null,
             'hulpbehoevende-birthday' => isset($this->attributes['birthday']) ? $this->attributes['birthday'] : null,
-            'hulpbehoevende-birthday-year' => isset($this->attributes['birthday']) ? $this->attributes['birthday']->format('Y') : null,
+            'hulpbehoevende-birthday-year' => isset($this->attributes['birthday']) ? $this->birthday->format('Y') : null,
             'hulpbehoevende-diagnose' => isset($this->attributes['diagnose']) ? $this->attributes['diagnose'] : null,
             'hulpbehoevende-mantelzorger_relation' => $this->mantelzorger_relation_id ? $this->mantelzorgerRelation->value : null,
             'hulpbehoevende-mantelzorger_relation_id' => $this->mantelzorger_relation_id ? $this->mantelzorger_relation_id : null,
