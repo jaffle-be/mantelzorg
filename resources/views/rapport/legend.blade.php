@@ -32,7 +32,7 @@
 
     <div class="page">
 
-        <h3>{{ str_replace_array(['_id', '_'], ['', ' '], $meta->context) }}</h3>
+        <h3>{{ str_replace(['_id', '_'], ['', ' '], $meta->context) }}</h3>
 
         <table class="table table-hover table-striped table-responsive">
             <thead>
