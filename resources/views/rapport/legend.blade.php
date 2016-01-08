@@ -9,6 +9,13 @@
     <link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic' rel='stylesheet'
           type='text/css'>
 
+    <style type="text/css">
+        .page {
+            overflow: hidden;
+            page-break-after: always;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -18,30 +25,34 @@
 
 @foreach($metas as $meta)
 
-    <h3>{{ str_replace('_id', '', $meta->context) }}</h3>
+    <div class="page">
 
-    <table class="table table-hover table-striped table-responsive">
-        <thead>
-        <tr>
-            <th>
-                {{ Lang::get('report.context-value') }}
-            </th>
-            <th>{{ Lang::get('report.context-value-code') }}</th>
-        </tr>
-        </thead>
+        <h3>{{ str_replace('_id', '', $meta->context) }}</h3>
 
-        <tbody>
-
-        @foreach($meta->values as $value)
+        <table class="table table-hover table-striped table-responsive">
+            <thead>
             <tr>
-                <td>{{ $value->value }}</td>
-                <td>{{ $value->id }}</td>
+                <th>
+                    {{ Lang::get('report.context-value') }}
+                </th>
+                <th>{{ Lang::get('report.context-value-code') }}</th>
             </tr>
+            </thead>
 
-        @endforeach
-        </tbody>
+            <tbody>
 
-    </table>
+            @foreach($meta->values as $value)
+                <tr>
+                    <td>{{ $value->value }}</td>
+                    <td>{{ $value->id }}</td>
+                </tr>
+
+            @endforeach
+            </tbody>
+
+        </table>
+
+    </div>
 @endforeach
 
 
