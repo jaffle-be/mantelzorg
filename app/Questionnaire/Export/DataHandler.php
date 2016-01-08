@@ -159,7 +159,7 @@ class DataHandler
         //add the session id as first column.
         //the created_at date as the second column.
         $sessionData[] = $session->getAttribute('id');
-        $sessionData[] = $session->created_at->format('d/m/Y H:i:s');
+        $sessionData[] = $session->created_at->format('Y-m-d H:i:s');
 
         $sessionData = $this->getUserData($session, $sessionData);
         $sessionData = $this->getMantelzorgerData($session, $sessionData);
