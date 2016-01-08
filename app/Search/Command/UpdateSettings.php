@@ -52,7 +52,7 @@ class UpdateSettings extends Command
         if(env('APP_ENV') == 'testing')
         {
             $client = $this->service->getClient();
-            
+
             $params = [
                 'index' => config('search.index'),
                 'body' => [
@@ -61,8 +61,10 @@ class UpdateSettings extends Command
                     ]
                 ]
             ];
+
+            $response = $client->indices()->putSettings($params);
         }
 
-        $response = $client->indices()->putSettings($params);
+
     }
 }
