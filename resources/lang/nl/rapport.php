@@ -19,5 +19,5 @@ return [
     'created' => 'Aangemaakt',
     'legend' => 'Legende',
     'context-value' => 'Tekst waarde',
-    'context-value-id' => 'Numerieke waarde',
+    'context-value-code' => 'Numerieke waarde',
 ];
