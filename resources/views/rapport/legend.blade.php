@@ -10,6 +10,11 @@
           type='text/css'>
 
     <style type="text/css">
+
+        h1, h3{
+            margin-bottom: 15px;
+        }
+
         .page {
             overflow: hidden;
             page-break-after: always;
