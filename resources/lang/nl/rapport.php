@@ -18,4 +18,6 @@ return [
     'user' => 'Hulpverlener',
     'created' => 'Aangemaakt',
     'legend' => 'Legende',
+    'context-value' => 'Tekst waarde',
+    'context-value-id' => 'Numerieke waarde',
 ];

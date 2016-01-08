@@ -38,9 +38,9 @@
             <thead>
             <tr>
                 <th>
-                    {{ Lang::get('report.context-value') }}
+                    {{ Lang::get('rapport.context-value') }}
                 </th>
-                <th>{{ Lang::get('report.context-value-code') }}</th>
+                <th>{{ Lang::get('rapport.context-value-code') }}</th>
             </tr>
             </thead>
 
