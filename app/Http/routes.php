@@ -57,7 +57,10 @@ Route::resource('report', 'RapportController', ['only' => ['index', 'store', 'de
 
 Route::post('report/destroy', 'RapportController@destroyBatch');
 
-Route::get('report/legend', 'RapportController@legend', ['as' => 'report.legend']);
+Route::get('report/legend', [
+    'uses' => 'RapportController@legend',
+    'as' => 'report.legend'
+]);
 
 /*
  * INSTRUMENT
