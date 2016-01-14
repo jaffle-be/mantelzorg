@@ -102,10 +102,10 @@
                 <h3>{{ Lang::get('pdf.hulpbehoevende') }}</h3>
 
                 <label class="control-label">{{ Lang::get('pdf.identifier') }}</label>
-                <span>{{ $oudere->identifier ? : '&nbps;' }}</span>
+                <span>{{ $oudere->identifier ? : ' ' }}</span>
 
                 <label class="control-label">{{ Lang::get('pdf.fullname') }}</label>
-                <span>{{ $oudere->fullname ? : '&nbps;' }}</span>
+                <span>{{ $oudere->fullname ? : ' ' }}</span>
 
                 <label class="control-label">{{ Lang::get('pdf.gender') }}</label>
                 <span><i class="fa {{ $oudere->male ? 'fa-male' : 'fa-female' }}"></i></span>
