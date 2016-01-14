@@ -142,7 +142,7 @@ class RapportController extends AdminController
         /** @var PdfWrapper $snappy */
         $snappy = App::make('snappy.pdf.wrapper');
 
-        $document = $snappy->loadView('rapport.legend', ['metas' => $metas, 'panels' => $questionaire->panels]);
+        $document = $snappy->loadView('rapport.legend', ['metas' => $metas, 'panels' => $questionnaire->panels]);
 
         $now = new Carbon();
 
