@@ -131,7 +131,7 @@ class CsvExport implements Exporter
             $options = 1;
 
             foreach ($question->choises as $choise) {
-                $headers->push($counter.'option'.$options);
+                $headers->push($counter.'option'.$options . ' (id: ' . $choise->id . ')');
                 ++$options;
             }
         }
