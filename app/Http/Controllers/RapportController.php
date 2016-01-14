@@ -116,7 +116,7 @@ class RapportController extends AdminController
         ));
     }
 
-    public function legend(Context $metas)
+    public function legend(Context $metas, Questionnaire $questionnaire)
     {
         $metas = $metas->orderBy('context')->get();
 
@@ -125,10 +125,16 @@ class RapportController extends AdminController
             $query->orderBy('value');
         }]);
 
+        $questionnaire = $questionnaire->active()->first();
+
+        $questions = $questionnaire->questions;
+
+        $questions->load('choises');
+
         /** @var PdfWrapper $snappy */
         $snappy = App::make('snappy.pdf.wrapper');
 
-        $document = $snappy->loadView('rapport.legend', ['metas' => $metas]);
+        $document = $snappy->loadView('rapport.legend', ['metas' => $metas, 'questions' => $questions]);
 
         $now = new Carbon();
 
