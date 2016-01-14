@@ -11,7 +11,7 @@
 
     <style type="text/css">
 
-        h1, h3{
+        h1, h3 {
             margin-bottom: 15px;
         }
 
@@ -58,6 +58,37 @@
         </table>
 
     </div>
+@endforeach
+
+
+@foreach($questions as $question)
+
+    <h3>{{ $question->title }}</h3>
+
+    <table class="table table-hover table-striped table-responsive">
+        <thead>
+        <tr>
+            <th>
+                {{ Lang::get('rapport.question-value') }}
+            </th>
+            <th>{{ Lang::get('rapport.question-value-code') }}</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        @foreach($question->choises as $choise)
+            <tr>
+                <td>{{ $choise->title }}</td>
+                <td>{{ $choise->id }}</td>
+            </tr>
+
+        @endforeach
+        </tbody>
+
+    </table>
+
+
 @endforeach
 
 
