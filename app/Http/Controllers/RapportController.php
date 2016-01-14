@@ -127,14 +127,22 @@ class RapportController extends AdminController
 
         $questionnaire = $questionnaire->active()->first();
 
-        $questions = $questionnaire->questions;
-
-        $questions->load('choises');
+        $questionnaire->load([
+            'panels' => function($query){
+                $query->orderBy('sort');
+            },
+            'panels.questions' => function($query){
+                $query->orderBy('sort');
+            },
+            'panels.questions.choises' => function($query){
+                $query->orderBy('sort');
+            }
+        ]);
 
         /** @var PdfWrapper $snappy */
         $snappy = App::make('snappy.pdf.wrapper');
 
-        $document = $snappy->loadView('rapport.legend', ['metas' => $metas, 'questions' => $questions]);
+        $document = $snappy->loadView('rapport.legend', ['metas' => $metas, 'panels' => $questionaire->panels]);
 
         $now = new Carbon();
 

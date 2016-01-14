@@ -63,42 +63,45 @@
 
 <? $teller = 0 ?>
 
-@foreach($questions as $question)
+@foreach($panels as $panel)
+    @foreach($panel->questions as $question)
 
-    @if($teller % 2 == 0)
-        <div class="page">
-    @endif
+        @if($teller % 2 == 0)
+            <div class="page">
+                @endif
 
-    <h3>{{ $question->title }}</h3>
+                <h3>{{ $question->title }}</h3>
 
-    <table class="table table-hover table-striped table-responsive">
-        <thead>
-            <tr>
-                <th>
-                    {{ Lang::get('rapport.question-value') }}
-                </th>
-                <th>{{ Lang::get('rapport.question-value-code') }}</th>
-            </tr>
-        </thead>
+                <table class="table table-hover table-striped table-responsive">
+                    <thead>
+                    <tr>
+                        <th>
+                            {{ Lang::get('rapport.question-value') }}
+                        </th>
+                        <th>{{ Lang::get('rapport.question-value-code') }}</th>
+                    </tr>
+                    </thead>
 
-        <tbody>
+                    <tbody>
 
-        @foreach($question->choises as $choise)
-            <tr>
-                <td>{{ $choise->title }}</td>
-                <td>{{ $choise->id }}</td>
-            </tr>
+                    @foreach($question->choises as $choise)
+                        <tr>
+                            <td>{{ $choise->title }}</td>
+                            <td>{{ $choise->id }}</td>
+                        </tr>
 
-        @endforeach
-        </tbody>
+                    @endforeach
+                    </tbody>
 
-    </table>
+                </table>
 
-    @if($teller % 2 == 1)
-        </div>
-    @endif
+                @if($teller % 2 == 1)
+            </div>
+        @endif
 
-    <? $teller++ ?>
+        <? $teller++ ?>
+
+    @endforeach
 
 @endforeach
 
