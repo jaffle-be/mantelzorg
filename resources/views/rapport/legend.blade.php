@@ -61,18 +61,24 @@
 @endforeach
 
 
+<? $teller = 0 ?>
+
 @foreach($questions as $question)
+
+    @if($teller %3 == 0)
+        <div class="page">
+    @endif
 
     <h3>{{ $question->title }}</h3>
 
     <table class="table table-hover table-striped table-responsive">
         <thead>
-        <tr>
-            <th>
-                {{ Lang::get('rapport.question-value') }}
-            </th>
-            <th>{{ Lang::get('rapport.question-value-code') }}</th>
-        </tr>
+            <tr>
+                <th>
+                    {{ Lang::get('rapport.question-value') }}
+                </th>
+                <th>{{ Lang::get('rapport.question-value-code') }}</th>
+            </tr>
         </thead>
 
         <tbody>
@@ -88,6 +94,11 @@
 
     </table>
 
+    @if($teller % 3 == 0)
+        </div>
+    @endif
+
+    <? $teller++ ?>
 
 @endforeach
 
