@@ -129,7 +129,7 @@ class RapportController extends AdminController
 
         $questionnaire->load([
             'panels' => function($query){
-                $query->orderBy('sort');
+                $query->orderBy('panel_weight');
             },
             'panels.questions' => function($query){
                 $query->orderBy('sort');
