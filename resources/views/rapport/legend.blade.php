@@ -65,7 +65,7 @@
 
 @foreach($questions as $question)
 
-    @if($teller % 2 == 0 && $teller !== 0)
+    @if($teller % 2 == 0)
         <div class="page">
     @endif
 
