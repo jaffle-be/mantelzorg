@@ -58,6 +58,18 @@ return [
 			'strict'    => false,
 		],
 
+		'dev' => [
+			'driver'    => 'mysql',
+			'host'      => env('DB_HOST', 'localhost'),
+			'database'  => env('DB_DATABASE', 'forge') . '-' . env('APP_ENV'),
+			'username'  => env('DB_USERNAME', 'forge'),
+			'password'  => env('DB_PASSWORD', ''),
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+			'strict'    => false,
+		],
+
 		'local' => [
 			'driver'    => 'mysql',
 			'host'      => env('DB_HOST', 'localhost'),
