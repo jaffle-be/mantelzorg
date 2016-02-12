@@ -28,13 +28,6 @@ class CsvExport implements Exporter
 
     protected $report;
 
-    /**
-     * The amount of sessions exported.
-     *
-     * @var int
-     */
-    protected $count = 0;
-
     public function __construct(SessionFilter $filter, Excel $excel, Carbon $carbon, DataHandler $handler, Report $report)
     {
         ini_set('max_execution_time', 300);
@@ -165,8 +158,6 @@ class CsvExport implements Exporter
 
         $query->chunk(100, function ($sessions) use ($panels, $sheet) {
             $this->handler->handle($sessions, $panels, $sheet);
-
-            $this->count += $sessions->count();
         });
     }
 
@@ -247,10 +238,17 @@ class CsvExport implements Exporter
             $report->organisation_id = $filters['organisation_id'];
         }
 
-        $report->survey_count = $this->count;
+        $report->survey_count = $this->sessionCount($survey, $filters);
 
         $report->save();
 
         return $report;
+    }
+
+    protected function sessionCount(Questionnaire $survey, array $filters)
+    {
+        $query = $this->filter->filter($survey, $filters);
+
+        return $query->count();
     }
 }
