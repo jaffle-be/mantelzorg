@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Instrument;
 
 use App\Mantelzorger\Mantelzorger;
@@ -9,7 +10,6 @@ use App\Questionnaire\Session;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
-
     public function register()
     {
         $this->app['instrument.memorize'] = $this->app->share(function () {

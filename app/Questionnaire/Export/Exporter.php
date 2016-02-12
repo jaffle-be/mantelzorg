@@ -1,9 +1,11 @@
-<?php namespace App\Questionnaire\Export;
+<?php
+
+namespace App\Questionnaire\Export;
 
 use App\Questionnaire\Questionnaire;
 
-interface Exporter {
-
+interface Exporter
+{
     /**
      * Generate the file for the survey that needs exporting.
      *
@@ -13,5 +15,4 @@ interface Exporter {
      * @return string The filename
      */
     public function generate(Questionnaire $survey, array $filters = []);
-
 }

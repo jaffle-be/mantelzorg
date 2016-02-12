@@ -12,7 +12,7 @@ return [
      * All the hosts that are in the cluster.
      */
     'hosts'    => [
-        env('APP_ENV') == 'testing' ? 'localhost' : env('ES_HOST'),
+        env('APP_ENV') == 'testing' ? '127.0.0.1' : env('ES_HOST'),
     ],
 
     /**
@@ -73,7 +73,16 @@ return [
                     'key'   => 'user_id'
                 ],
             ]
-        ]
+        ],
+        'answers' => [
+            'class' => 'App\Questionnaire\Answer',
+            'with' => [
+                'choises' => [
+                    'class' => 'App\Questionnaire\Choise',
+                    'key' => 'answer_id',
+                ]
+            ]
+        ],
     ],
 
     'settings' => [

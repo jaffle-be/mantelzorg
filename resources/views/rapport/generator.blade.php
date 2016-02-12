@@ -7,28 +7,20 @@
 
     <div class="panel-body" id="rapport-generator">
 
-        <?= Form::open(['route' => 'rapport.generate', 'class' => 'form-horizontal']) ?>
+        <?= Form::open(['route' => 'report.store', 'class' => 'form-horizontal']) ?>
 
         <div class="form-group">
             <label for="survey" class="control-label col-xs-12 col-sm-4">{{ Lang::get('rapport.survey') }}</label>
 
             <div class="col-xs-12 col-sm-8">
-                <?= Form::select('survey', $questionnaires, null, [
-                    'class' => 'form-control',
-                    'id' => 'survey',
-                ]) ?>
+                    <?= Form::select('survey', $questionnaires, null, [
+                            'class' => 'form-control',
+                            'id' => 'survey',
+                    ]) ?>
+
             </div>
 
         </div>
-
-        @if($errors->has('survey'))
-            <div class="form-group">
-                <div class="col-xs-12 col-sm-offset-4 col-sm-8">
-                    <div class="alert alert-danger">{{$errors->first('survey')}}</div>
-                </div>
-            </div>
-        @endif
-
 
         <div class="form-group">
             <label for="organisation_id" class="control-label col-xs-12 col-sm-4">{{ Lang::get('rapport.organisation') }}</label>
@@ -50,7 +42,7 @@
 
                 <select class="form-control" name="hulpverlener_id" id="hulpverlener_id">
                     <option value="">{{ Lang::get('rapport.select-hulpverlener') }}</option>
-                @foreach($hulpverleners as $id => $name)
+                    @foreach($hulpverleners as $id => $name)
                         <option {{ Input::old('hulpverlener_id') == $id ? 'selected': '' }} value="{{ $id }}">{{ $name }}</option>
                     @endforeach
                 </select>
@@ -60,7 +52,12 @@
 
         <div class="form-group">
             <div class="col-sm-offset-4 col-sm-8">
-                <input class="btn btn-primary" type="submit" value="{{ Lang::get('rapport.generate') }}"/>
+
+                @error('survey')
+
+                <button class="btn btn-primary" type="submit">{{ Lang::get('rapport.generate') }}</button>
+
+                <a href="{{ route('report.legend') }}" class="btn btn-info" type="button">{{ Lang::get('rapport.legend') }}</a>
             </div>
         </div>
 

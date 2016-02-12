@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App;
@@ -8,16 +9,20 @@ use App\Meta\Context;
 use App\Meta\Value;
 use App\Questionnaire\Answer;
 use App\Questionnaire\Choise;
+use App\Questionnaire\Questionnaire;
 use App\Questionnaire\Session;
 use App\Search\SearchServiceInterface;
 use App\User;
 use Auth;
 use Barryvdh\Snappy\PdfWrapper;
 use Carbon\Carbon;
+use Chumper\Zipper\Zipper;
 use DB;
 use Exception;
 use File;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Input;
 use Memorize;
 use Redirect;
@@ -26,11 +31,10 @@ use Session as SessionStore;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * Class InstrumentController
+ * Class InstrumentController.
  */
 class InstrumentController extends AdminController
 {
-
     /**
      * @var \App\Questionnaire\Questionnaire
      */
@@ -62,11 +66,7 @@ class InstrumentController extends AdminController
 
     public function index(SearchServiceInterface $search)
     {
-        $questionnaire = $this->questionnaire->with(array(
-            'panels' => function ($query) {
-                $query->orderBy('panel_weight');
-            }
-        ))->active()->first();
+        $questionnaire = $this->questionnaire->with(['panels'])->active()->first();
 
         $hulpverlener = Auth::user();
 
@@ -88,84 +88,121 @@ class InstrumentController extends AdminController
         $input = Input::get('query');
 
         $query = [
-            "index" => env('ES_INDEX'),
-            "type" => "surveys",
-            "body" => [
-                "query"=> [
-                    "filtered"=> [
-                        "query"=> [
-                            "bool"=> [
-                                "should"=> [
+            'index' => env('ES_INDEX'),
+            'type' => 'surveys',
+            'body' => [
+                'query' => [
+                    'filtered' => [
+                        'query' => [
+                            'bool' => [
+                                'should' => [
                                     [
-                                        "nested"=> [
-                                            "path"=> "mantelzorger",
-                                            "query"=> [
-                                                "match"=> [
-                                                    "mantelzorger.identifier"=> "$input"
-                                                ]
-                                            ]
-                                        ]
+                                        'nested' => [
+                                            'path' => 'mantelzorger',
+                                            'query' => [
+                                                'multi_match' => [
+                                                    'query' => $input,
+                                                    'fields' => ['mantelzorger.identifier', 'mantelzorger.firstname', 'mantelzorger.lastname'],
+                                                ],
+                                            ],
+                                        ],
                                     ],
                                     [
-                                        "nested"=> [
-                                            "path"=> "oudere",
-                                            "query"=> [
-                                                "match"=> [
-                                                    "oudere.identifier"=> "$input"
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
+                                        'nested' => [
+                                            'path' => 'oudere',
+                                            'query' => [
+                                                'multi_match' => [
+                                                    'query' => $input,
+                                                    'fields' => ['oudere.identifier', 'oudere.firstname', 'oudere.lastname'],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
                         ],
-                        "filter"=> [
-                            "bool"=> [
-                                "must"=> [
+                        'filter' => [
+                            'bool' => [
+                                'must' => [
                                     [
-                                        "term"=> [
-                                            "user_id"=> $hulpverlener->id
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
+                                        'term' => [
+                                            'user_id' => $hulpverlener->id,
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
                 ],
-                "sort" => [
-                    ['mantelzorger.identifier' => 'asc']
-                ]
+                'sort' => [
+                    ['mantelzorger.identifier' => 'asc'],
+                ],
             ],
         ];
 
-        if(empty($input))
-        {
-            $query['body']['query']['filtered']['query'] = ['match_all'=> []];
+        if (empty($input)) {
+            $query['body']['query']['filtered']['query'] = ['match_all' => []];
         }
 
         return $query;
     }
 
+    public function view($id)
+    {
+        $session = $this->sessionDetail($id);
+
+        return view('instrument.view', ['session' => $session]);
+    }
+
     public function download($id)
     {
-        $session = $this->session->with([
-            'questionnaire',
-            'user',
-            'answers',
-            'answers.choises',
-            'mantelzorger',
-            'oudere',
-            'oudere.woonSituatie',
-            'oudere.oorzaakHulpbehoefte',
-            'oudere.mantelzorgerRelation',
-            'oudere.belProfiel',
-        ])->find($id);
+        $session = $this->sessionDetail($id);
 
-        /** @var PdfWrapper $snappy */
-        $snappy = App::make('snappy.pdf.wrapper');
+        $now = $this->pdfTimestamp();
 
-        return $snappy->loadView('instrument.pdf', ['session' => $session])
-            ->download($session->questionnaire->title . '.pdf');
+        $name = $this->pdfName($session, $now);
+
+        $document = $this->pdfDocument($session);
+
+        return $document->download($name);
+    }
+
+    public function batchDownload(Request $request, Zipper $zipper)
+    {
+        $survey = Questionnaire::active()->first();
+
+        $ids = $request->get('ids');
+
+        $sessions = $this->sessionDetails($ids);
+
+        $time = new Carbon();
+        $time = $time->timestamp;
+        $files = [];
+        $now = $this->pdfTimestamp();
+
+        foreach ($sessions as $session) {
+            $name = $this->pdfName($session, $now);
+
+            $document = $this->pdfDocument($session);
+
+            $path = storage_path("app/batch-pdf/$time/$name");
+
+            $document->save($path);
+
+            $files[] = $path;
+        }
+
+        $zip = storage_path("app/batch-pdf/$time/{$survey->title}-$now.zip");
+
+        $zipper->make($zip)->add($files)->close();
+
+        $filesystem = app('files');
+
+        foreach ($files as $file) {
+            $filesystem->delete($file);
+        }
+
+        return response()->download($zip);
     }
 
     public function newSurvey()
@@ -173,7 +210,7 @@ class InstrumentController extends AdminController
         $input = Input::except('token');
 
         $hulpverlener = $this->hulpverlener->with(array(
-            'mantelzorgers', 'mantelzorgers.oudere'
+            'mantelzorgers', 'mantelzorgers.oudere',
         ))->find(Auth::user()->id);
 
         $mantelzorger = $hulpverlener->mantelzorgers->find($input['mantelzorger']);
@@ -188,11 +225,7 @@ class InstrumentController extends AdminController
             return Redirect::back();
         }
 
-        $questionnaire = $this->questionnaire->with(array(
-            'panels' => function ($query) {
-                $query->orderBy('panel_weight');
-            }
-        ))->active()->first();
+        $questionnaire = $this->questionnaire->with(['panels'])->active()->first();
 
         $survey = Memorize::newSurvey($mantelzorger, $oudere, $questionnaire);
 
@@ -207,7 +240,7 @@ class InstrumentController extends AdminController
             $hulpverlener = Auth::user();
 
             $surveys = $this->session->where('user_id', $hulpverlener->id)->whereIn('id', $ids)->with([
-                'answers'
+                'answers',
             ])->get();
 
             foreach ($surveys as $survey) {
@@ -220,18 +253,16 @@ class InstrumentController extends AdminController
 
     /**
      * @param $panel
+     *
+     * @return \Illuminate\View\View
      */
     public function getPanel($panel, $survey)
     {
         $panel->load([
             'questionnaire',
             'questionnaire.panels',
-            'questions'         => function ($query) {
-                $query->orderBy('sort');
-            },
-            'questions.choises' => function ($query) {
-                $query->orderBy('sort_weight');
-            }
+            'questions',
+            'questions.choises',
         ]);
 
         $survey->load(array('answers', 'answers.choises'));
@@ -266,7 +297,7 @@ class InstrumentController extends AdminController
         if ($next) {
             return Redirect::route('instrument.panel.get', array($next->id, $survey->id));
         } else {
-            return Redirect::route('instrument');
+            return Redirect::route('dash');
         }
     }
 
@@ -306,9 +337,9 @@ class InstrumentController extends AdminController
             File::makeDirectory($directory, 0755);
         }
 
-        $filename = Carbon::now()->timestamp . '-' . $userid . '.json';
+        $filename = Carbon::now()->timestamp.'-'.$userid.'.json';
 
-        $path = $directory . '/' . $filename;
+        $path = $directory.'/'.$filename;
 
         File::put($path, $sessions->toJson());
 
@@ -321,7 +352,6 @@ class InstrumentController extends AdminController
 
         try {
             /** @var UploadedFile $file */
-
             $file = Input::file('import');
 
             $directory = storage_path('instruments/import');
@@ -332,7 +362,7 @@ class InstrumentController extends AdminController
 
             $file->move($directory, $file->getClientOriginalName());
 
-            $surveys = json_decode(File::get($directory . '/' . $file->getClientOriginalName()));
+            $surveys = json_decode(File::get($directory.'/'.$file->getClientOriginalName()));
 
             foreach ($surveys as $survey) {
                 //check if all users, mantelzorgers and ouderen exist.
@@ -355,8 +385,7 @@ class InstrumentController extends AdminController
                 $this->importInsert($survey);
             }
             DB::commit();
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             DB::rollback();
             throw $e;
         }
@@ -395,19 +424,19 @@ class InstrumentController extends AdminController
         }
 
         $mantelzorger = Mantelzorger::create([
-            "identifier"      => $survey->mantelzorger->identifier,
-            "email"           => $survey->mantelzorger->email,
-            "firstname"       => $survey->mantelzorger->firstname,
-            "lastname"        => $survey->mantelzorger->lastname,
-            "male"            => $survey->mantelzorger->male,
-            "street"          => $survey->mantelzorger->street,
-            "postal"          => $survey->mantelzorger->postal,
-            "city"            => $survey->mantelzorger->city,
-            "phone"           => $survey->mantelzorger->phone,
-            "birthday"        => $this->getBirthday($survey->mantelzorger->birthday),
-            "hulpverlener_id" => $survey->user_id,
-            "created_at"      => $survey->mantelzorger->created_at,
-            "updated_at"      => $survey->mantelzorger->updated_at
+            'identifier' => $survey->mantelzorger->identifier,
+            'email' => $survey->mantelzorger->email,
+            'firstname' => $survey->mantelzorger->firstname,
+            'lastname' => $survey->mantelzorger->lastname,
+            'male' => $survey->mantelzorger->male,
+            'street' => $survey->mantelzorger->street,
+            'postal' => $survey->mantelzorger->postal,
+            'city' => $survey->mantelzorger->city,
+            'phone' => $survey->mantelzorger->phone,
+            'birthday' => $this->getBirthday($survey->mantelzorger->birthday),
+            'hulpverlener_id' => $survey->user_id,
+            'created_at' => $survey->mantelzorger->created_at,
+            'updated_at' => $survey->mantelzorger->updated_at,
         ]);
 
         $survey->mantelzorger_id = $mantelzorger->id;
@@ -433,25 +462,25 @@ class InstrumentController extends AdminController
         list($relation, $woonsituatie, $hulpbehoefte, $profiel) = $this->getMetas($survey);
 
         $oudere = Oudere::create([
-            "identifier"               => $survey->oudere->identifier,
-            "email"                    => $survey->oudere->email,
-            "firstname"                => $survey->oudere->firstname,
-            "lastname"                 => $survey->oudere->lastname,
-            "male"                     => $survey->oudere->male,
-            "street"                   => $survey->oudere->street,
-            "postal"                   => $survey->oudere->postal,
-            "city"                     => $survey->oudere->city,
-            "phone"                    => $survey->oudere->phone,
-            "birthday"                 => $this->getBirthday($survey->oudere->birthday),
-            "diagnose"                 => $survey->oudere->diagnose,
-            "mantelzorger_id"          => $survey->mantelzorger_id,
-            "mantelzorger_relation_id" => $relation ? $relation->id : null,
-            "created_at"               => $survey->oudere->created_at,
-            "updated_at"               => $survey->oudere->updated_at,
-            "woonsituatie_id"          => $woonsituatie ? $woonsituatie->id : null,
-            "oorzaak_hulpbehoefte_id"  => $hulpbehoefte ? $hulpbehoefte->id : null,
-            "bel_profiel_id"           => $profiel ? $profiel->id : null,
-            "details_diagnose"         => $survey->oudere->details_diagnose,
+            'identifier' => $survey->oudere->identifier,
+            'email' => $survey->oudere->email,
+            'firstname' => $survey->oudere->firstname,
+            'lastname' => $survey->oudere->lastname,
+            'male' => $survey->oudere->male,
+            'street' => $survey->oudere->street,
+            'postal' => $survey->oudere->postal,
+            'city' => $survey->oudere->city,
+            'phone' => $survey->oudere->phone,
+            'birthday' => $this->getBirthday($survey->oudere->birthday),
+            'diagnose' => $survey->oudere->diagnose,
+            'mantelzorger_id' => $survey->mantelzorger_id,
+            'mantelzorger_relation_id' => $relation ? $relation->id : null,
+            'created_at' => $survey->oudere->created_at,
+            'updated_at' => $survey->oudere->updated_at,
+            'woonsituatie_id' => $woonsituatie ? $woonsituatie->id : null,
+            'oorzaak_hulpbehoefte_id' => $hulpbehoefte ? $hulpbehoefte->id : null,
+            'bel_profiel_id' => $profiel ? $profiel->id : null,
+            'details_diagnose' => $survey->oudere->details_diagnose,
         ]);
 
         return $oudere;
@@ -467,24 +496,23 @@ class InstrumentController extends AdminController
         Model::unguard();
 
         $created_survey = Session::create([
-            'user_id'          => $survey->user_id,
-            'mantelzorger_id'  => $survey->mantelzorger_id,
-            'oudere_id'        => $survey->oudere_id,
+            'user_id' => $survey->user_id,
+            'mantelzorger_id' => $survey->mantelzorger_id,
+            'oudere_id' => $survey->oudere_id,
             'questionnaire_id' => $survey->questionnaire_id,
-            'created_at'       => $survey->created_at,
-            'updated_at'       => $survey->updated_at
+            'created_at' => $survey->created_at,
+            'updated_at' => $survey->updated_at,
         ]);
 
         $id = $created_survey->id;
 
         foreach ($survey->answers as $answer) {
-
             $created_answer = Answer::create([
-                "session_id"  => $id,
-                "question_id" => $answer->question_id,
-                "explanation" => $answer->explanation,
-                "created_at"  => $answer->created_at,
-                "updated_at"  => $answer->updated_at,
+                'session_id' => $id,
+                'question_id' => $answer->question_id,
+                'explanation' => $answer->explanation,
+                'created_at' => $answer->created_at,
+                'updated_at' => $answer->updated_at,
             ]);
 
             foreach ($answer->choises as $choise) {
@@ -496,7 +524,7 @@ class InstrumentController extends AdminController
 
                 $created_answer->choises()->attach($choise->id, [
                     'created_at' => $choise->pivot->created_at,
-                    'updated_at' => $choise->pivot->updated_at
+                    'updated_at' => $choise->pivot->updated_at,
                 ]);
             }
         }
@@ -554,7 +582,6 @@ class InstrumentController extends AdminController
         $value = Value::find($id);
 
         if (!$value || $actual != $value->value) {
-
             $context = Context::where('context', $context)->first();
 
             $value = Value::where('context_id', $context->id)
@@ -563,11 +590,113 @@ class InstrumentController extends AdminController
             if (!$value) {
                 $value = Value::create(array(
                     'context_id' => $context->id,
-                    'value'      => $actual
+                    'value' => $actual,
                 ));
             }
         }
 
         return $value;
+    }
+
+    /**
+     * @param $id
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|Model|null
+     */
+    protected function sessionDetail($id)
+    {
+        $session = $this->session->with($this->pdfRelations())->find($id);
+
+        return $session;
+    }
+
+    /**
+     * @param $id
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|Model|null
+     */
+    protected function sessionDetails($ids)
+    {
+        if (empty($ids)) {
+            return new Collection();
+        }
+
+        $session = $this->session->with($this->pdfRelations())->whereIn('id', $ids)->get();
+
+        return $session;
+    }
+
+    /**
+     * @return array
+     */
+    protected function pdfRelations()
+    {
+        return [
+            'questionnaire',
+            'user',
+            'answers',
+            'answers.choises',
+            'mantelzorger',
+            'oudere',
+            'oudere.woonSituatie',
+            'oudere.oorzaakHulpbehoefte',
+            'oudere.mantelzorgerRelation',
+            'oudere.belProfiel',
+        ];
+    }
+
+    /**
+     * @param $session
+     *
+     * @return static
+     */
+    protected function pdfDocument($session)
+    {
+        /** @var PdfWrapper $snappy */
+        $snappy = App::make('snappy.pdf.wrapper');
+
+        $document = $snappy->loadView('instrument.pdf', ['session' => $session]);
+
+        return $document;
+    }
+
+    /**
+     * @param $session
+     * @param $now
+     *
+     * @return string
+     */
+    protected function pdfName($session, $now)
+    {
+        $format = '%s-%s-%s.pdf';
+
+        if ($session->user->fullname && $session->oudere->fullname) {
+            $name = sprintf($format, $session->user->fullname, $session->oudere->fullname, $now);
+
+            return $name;
+        } elseif ($session->user->fullname) {
+            $name = sprintf($format, $session->user->fullname, $session->oudere->identifier, $now);
+
+            return $name;
+        } elseif ($session->oudere->fullname) {
+            $name = sprintf($format, $session->user->identifier, $session->oudere->fullname, $now);
+
+            return $name;
+        } else {
+            $name = sprintf($format, $session->user->identifier, $session->oudere->identifier, $now);
+
+            return $name;
+        }
+    }
+
+    /**
+     * @return Carbon|string
+     */
+    protected function pdfTimestamp()
+    {
+        $now = new Carbon();
+        $now = $now->format('Y-m-d');
+
+        return $now;
     }
 }

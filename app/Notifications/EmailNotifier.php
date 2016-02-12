@@ -1,4 +1,6 @@
-<?php namespace App\Notifications;
+<?php
+
+namespace App\Notifications;
 
 use App\User;
 use Illuminate\Mail\Mailer;
@@ -7,7 +9,6 @@ use Illuminate\Translation\Translator;
 
 class EmailNotifier
 {
-
     /**
      * @var Mailer
      */
@@ -26,9 +27,9 @@ class EmailNotifier
 
     public function notify(User $user, $view, array $data)
     {
-        $subject = $this->lang->get('notifications.' . $view . '.subject');
+        $subject = $this->lang->get('notifications.'.$view.'.subject');
 
-        $view = 'emails.notifications.' . $view;
+        $view = 'emails.notifications.'.$view;
 
         $this->mail->send($view, $data, function (Message $message) use ($user, $subject) {
             $message->to($user->getAttribute('email'));

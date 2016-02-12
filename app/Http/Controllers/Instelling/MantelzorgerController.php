@@ -14,13 +14,10 @@ use Input;
 use Redirect;
 
 /**
- * Class MantelzorgerController
- *
- * @package App\Http\Controllers\Instelling
+ * Class MantelzorgerController.
  */
 class MantelzorgerController extends \App\Http\Controllers\AdminController
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -30,8 +27,8 @@ class MantelzorgerController extends \App\Http\Controllers\AdminController
     public function index(User $hulpverlener)
     {
         $mantelzorgers = $this->dispatchFromArray(SearchMantelzorgers::class, [
-            'user'  => $hulpverlener,
-            'query' => Input::get('query')
+            'user' => $hulpverlener,
+            'query' => Input::get('query'),
         ]);
 
         return view('instellingen.mantelzorgers.index', compact('hulpverlener', 'mantelzorgers'));
@@ -45,7 +42,7 @@ class MantelzorgerController extends \App\Http\Controllers\AdminController
     public function store(User $hulpverlener, NewMantelzorgerRequest $request)
     {
         $mantelzorger = $this->dispatchFromArray(NewMantelzorger::class, [
-            'user'  => $hulpverlener,
+            'user' => $hulpverlener,
             'input' => $request->except('_token'),
         ]);
 
@@ -66,7 +63,7 @@ class MantelzorgerController extends \App\Http\Controllers\AdminController
         $this->dispatchFromArray(UpdateMantelzorger::class, [
             'mantelzorger' => $mantelzorger,
             'hulpverlener' => $hulpverlener,
-            'input' => $request->except('_token', '_method')
+            'input' => $request->except('_token', '_method'),
         ]);
 
         return Redirect::route('instellingen.{hulpverlener}.mantelzorgers.index', $hulpverlener->id);

@@ -4,12 +4,11 @@ namespace App\Questionnaire;
 
 use App\System\Database\Eloquent\Model;
 use App\System\Database\Eloquent\ValidationRules;
-use Input;
-use Validator;
+use App\System\Scopes\ModelAutoSort;
 
 class Choise extends Model
 {
-    use ValidationRules;
+    use ValidationRules, ModelAutoSort;
 
     protected $table = 'questionnaire_choises';
 
@@ -17,9 +16,11 @@ class Choise extends Model
 
     protected static $rules = array(
         'question_id' => 'required|exists:questionnaire_questions,id',
-        'title'       => 'required',
-        'sort_weight' => 'required|integer'
+        'title' => 'required',
+        'sort_weight' => 'required|integer',
     );
+
+    public $autosort = 'sort_weight';
 
     public function question()
     {

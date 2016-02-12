@@ -15,7 +15,6 @@ use Session;
 
 class IndexController extends BaseController
 {
-
     protected $layout = 'layout.front.master';
 
     /**
@@ -61,9 +60,9 @@ class IndexController extends BaseController
     public function postLogin()
     {
         $credentials = array(
-            'email'    => Input::get('email'),
+            'email' => Input::get('email'),
             'password' => Input::get('password'),
-            'active'   => true
+            'active' => true,
         );
 
         if (Auth::attempt($credentials)) {
@@ -119,10 +118,10 @@ class IndexController extends BaseController
     public function postReset()
     {
         $credentials = array(
-            'email'                 => Input::get('email'),
-            'password'              => Input::get('password'),
+            'email' => Input::get('email'),
+            'password' => Input::get('password'),
             'password_confirmation' => Input::get('password_confirmation'),
-            'token'                 => Input::get('token')
+            'token' => Input::get('token'),
         );
 
         $message = Password::reset($credentials, function ($user, $password) {

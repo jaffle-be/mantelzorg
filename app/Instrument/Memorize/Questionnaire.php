@@ -12,7 +12,6 @@ use Input;
 
 class Questionnaire
 {
-
     protected $auth;
 
     protected $answer;
@@ -39,9 +38,9 @@ class Questionnaire
     public function newSurvey($mantelzorger, $oudere, $questionnaire)
     {
         return $this->survey->create(array(
-            'user_id'          => Auth::user()->id,
-            'mantelzorger_id'  => $mantelzorger->id,
-            'oudere_id'        => $oudere->id,
+            'user_id' => Auth::user()->id,
+            'mantelzorger_id' => $mantelzorger->id,
+            'oudere_id' => $oudere->id,
             'questionnaire_id' => $questionnaire->id,
         ));
     }
@@ -61,12 +60,12 @@ class Questionnaire
 
     protected function explanation($question)
     {
-        return Input::get('explanation' . $question->id);
+        return Input::get('explanation'.$question->id);
     }
 
     protected function choise($question)
     {
-        return Input::get('question' . $question->id);
+        return Input::get('question'.$question->id);
     }
 
     protected function persist($question, $session, $explanation = null, $choises = null)
@@ -82,7 +81,7 @@ class Questionnaire
 
         if (!$answer) {
             $answer = $this->answer->create(array(
-                'session_id'  => $session->id,
+                'session_id' => $session->id,
                 'question_id' => $question->id,
                 'explanation' => $explanation,
             ));
@@ -97,7 +96,7 @@ class Questionnaire
             $answer->choises()->sync($choises);
 
             $answer->touch();
-        } else if ($choises) {
+        } elseif ($choises) {
             $answer->choises()->sync(array($choises));
 
             $answer->touch();

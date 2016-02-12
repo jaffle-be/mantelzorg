@@ -29,4 +29,4 @@ class MetaContextValueSeeder extends \Illuminate\Database\Seeder
         ]));
     }
 
-} 
+}

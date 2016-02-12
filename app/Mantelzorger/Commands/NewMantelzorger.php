@@ -1,4 +1,6 @@
-<?php namespace App\Mantelzorger\Commands;
+<?php
+
+namespace App\Mantelzorger\Commands;
 
 use App\Commands\Command;
 use App\Mantelzorger\Mantelzorger;
@@ -8,7 +10,6 @@ use Illuminate\Contracts\Validation\Factory;
 
 class NewMantelzorger extends Command implements SelfHandling
 {
-
     public function __construct(User $user, $input)
     {
         $this->user = $user;

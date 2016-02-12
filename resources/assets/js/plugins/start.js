@@ -1,6 +1,9 @@
 (function ($, app) {
     $(document).ready()
     {
+        $.material.init();
+        $('[data-toggle="tooltip"]').tooltip();
+
         app.datepickers();
 
         app.getIds = function ($element) {

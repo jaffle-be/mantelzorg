@@ -1,20 +1,16 @@
 <?php
+
 namespace App\Search\Model;
 
-use App;
-use App\Search\Query\Query;
 use App\Search\SearchServiceInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 /**
- * Class SearchableTrait
- *
- * @package App\Search\Model
+ * Class SearchableTrait.
  */
 trait SearchableTrait
 {
-
     /**
      * @var SearchServiceInterface
      */
@@ -92,21 +88,19 @@ trait SearchableTrait
      */
     public function getSearchableEventname($event)
     {
-        return "eloquent.{$event}: " . get_class($this);
+        return "eloquent.{$event}: ".get_class($this);
     }
 
     /**
-     * @return Query
+     * @return SearchServiceInterface
      */
     public function search()
     {
-        $this->getSearchableService();
-
-//        return new Search();
+        return $this->getSearchableService();
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getSearchableNewModel($data, array $with)
     {
@@ -125,11 +119,9 @@ trait SearchableTrait
 
         //need to setup relations too :-)
         foreach ($with as $relation => $build) {
-
             $type = $this->getRelationType($relation, $model);
 
             if ($relation_data = $this->getSearchableNestedDocument($relations, $relation)) {
-
                 if ($needsLoop = $this->relationNeedsLooping($type)) {
                     $relation_data = $this->getLoopedRelationData($build, $relation_data);
                 } else {
@@ -164,10 +156,9 @@ trait SearchableTrait
         }
 
         foreach ($with as $type => $config) {
-            $related = new $config['class'];
+            $related = new $config['class']();
 
             if ($type == 'translations') {
-
                 if (!$related instanceof Searchable) {
                     throw new \Exception(sprintf('Translation model %s needs to be searchable', get_class($related)));
                 }
@@ -176,17 +167,17 @@ trait SearchableTrait
 
                 foreach (config('system.locales') as $locale) {
                     $nested_map[$locale] = [
-                        'type'       => 'nested',
-                        'properties' => $locale_map
+                        'type' => 'nested',
+                        'properties' => $locale_map,
                     ];
                 }
-            } else if ($related instanceof Searchable) {
+            } elseif ($related instanceof Searchable) {
                 $nested_map = $related->getSearchableMapping(array());
             }
 
             $mapping[$type] = [
-                'type'       => 'nested',
-                'properties' => isset($nested_map) ? $nested_map : []
+                'type' => 'nested',
+                'properties' => isset($nested_map) ? $nested_map : [],
             ];
         }
 
@@ -241,8 +232,7 @@ trait SearchableTrait
 
         $collection = $class->newCollection();
 
-        foreach($relation_data as $data)
-        {
+        foreach ($relation_data as $data) {
             $collection->push($this->getSimpleRelationData($build, $data));
         }
 
@@ -274,16 +264,13 @@ trait SearchableTrait
 
     protected function searchableShiftTranslations(array $data)
     {
-        foreach($data as $key => &$value)
-        {
-            if(is_array($value))
-            {
+        foreach ($data as $key => &$value) {
+            if (is_array($value)) {
                 $value = $this->searchableShiftTranslations($value);
             }
         }
 
-        if(isset($data['translations']))
-        {
+        if (isset($data['translations'])) {
             $data = array_merge($data, $data['translations']);
             unset($data['translations']);
         }

@@ -1,24 +1,26 @@
 <?php
+
 namespace App\Organisation;
 
 use App\System\Database\Eloquent\Model;
 use App\System\Database\Eloquent\ValidationRules;
-use Input;
-use Validator;
+use App\System\Scopes\ModelAutoSort;
 
 class Organisation extends Model
 {
-    use ValidationRules;
+    use ValidationRules, ModelAutoSort;
 
     protected $table = 'organisations';
 
     protected $fillable = array(
-        'name'
+        'name',
     );
 
     protected static $rules = array(
-        'name' => 'required|unique:organisations'
+        'name' => 'required|unique:organisations',
     );
+
+    public $autosort = 'name';
 
     public function locations()
     {

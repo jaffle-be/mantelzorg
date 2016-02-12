@@ -7,7 +7,7 @@
 
             <div class="question"><i class="fa fa-quote-left"></i>{{ $question->title }}</div>
 
-            <? $answer = $session->getAnswered($question) ?>
+            <?php $answer = $session->getAnswered($question) ?>
 
             @if($answer && $answer->wasFilledIn())
 
@@ -18,12 +18,15 @@
 
                         <ul class="choises">
                             @foreach($answer->question->choises as $choise)
-
-                                <li class="box {{ $answer->wasChecked($choise) ? 'checked': null }}">{{ $choise->title }}</li>
+                                @if($answer->wasChecked($choise))
+                                    <li class="box checked">{{ $choise->title }}</li>
+                                @else
+                                    <li class="box unchecked">{{ $choise->title }}</li>
+                                @endif
 
                             @endforeach
                         </ul>
-                    {{--radios: show all--}}
+                        {{--radios: show all--}}
                     @else
 
                         <ul class="choises">

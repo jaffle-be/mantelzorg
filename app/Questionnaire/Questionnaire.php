@@ -1,10 +1,9 @@
 <?php
+
 namespace App\Questionnaire;
 
 use App\System\Database\Eloquent\Model;
 use App\System\Database\Eloquent\ValidationRules;
-use Input;
-use Validator;
 
 class Questionnaire extends Model
 {
@@ -15,7 +14,7 @@ class Questionnaire extends Model
     protected $fillable = array('title', 'active');
 
     protected static $rules = array(
-        'title'  => 'required|unique:questionnaires,title',
+        'title' => 'required|unique:questionnaires,title',
         'active' => 'in:0,1',
     );
 
@@ -44,7 +43,7 @@ class Questionnaire extends Model
         $weight = $panel->panel_weight + 10;
 
         $panels = $this->panels->filter(function ($item) use ($weight) {
-            return (int)$item->panel_weight == $weight;
+            return (int) $item->panel_weight == $weight;
         });
 
         if (count($panels)) {

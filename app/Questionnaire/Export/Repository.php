@@ -1,4 +1,6 @@
-<?php namespace App\Questionnaire\Export;
+<?php
+
+namespace App\Questionnaire\Export;
 
 use App\Questionnaire\Answer;
 use App\Questionnaire\Choise;
@@ -6,7 +8,6 @@ use Illuminate\Database\Connection;
 
 class Repository
 {
-
     /**
      * @var Answer
      */
@@ -59,8 +60,9 @@ class Repository
 
     public function getChoises($sessions)
     {
-        if(empty($sessions))
+        if (empty($sessions)) {
             return array();
+        }
 
         $query = $this->tableChoise();
 

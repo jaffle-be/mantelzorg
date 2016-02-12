@@ -1,4 +1,6 @@
-<?php namespace App\Questionnaire\Export;
+<?php
+
+namespace App\Questionnaire\Export;
 
 use App\Questionnaire\Session;
 use Illuminate\Database\Eloquent\Collection;
@@ -6,7 +8,6 @@ use Maatwebsite\Excel\Classes\LaravelExcelWorksheet;
 
 class DataHandler
 {
-
     /**
      * @var Repository
      */
@@ -24,7 +25,7 @@ class DataHandler
         'oudere.oorzaakHulpbehoefte',
         'oudere.woonSituatie',
         'oudere.belProfiel',
-        'mantelzorger'
+        'mantelzorger',
     ];
 
     /**
@@ -45,7 +46,6 @@ class DataHandler
         list($answers, $choises) = $this->boot($sessions);
 
         foreach ($sessions as $session) {
-
             $sessionAnswers = isset($answers[$session['id']]) ? $answers[$session['id']] : [];
 
             $sessionData = $this->getBaseData($session);
@@ -53,7 +53,6 @@ class DataHandler
             $session = $session->toArray();
 
             foreach ($panels as $panelid => $questions) {
-
                 $sessionData = $this->answers($sessionData, $questions, $session, $sessionAnswers, $choises);
             }
 
@@ -158,7 +157,9 @@ class DataHandler
     {
         $sessionData = [];
         //add the session id as first column.
+        //the created_at date as the second column.
         $sessionData[] = $session->getAttribute('id');
+        $sessionData[] = $session->created_at->format('Y-m-d H:i:s');
 
         $sessionData = $this->getUserData($session, $sessionData);
         $sessionData = $this->getMantelzorgerData($session, $sessionData);
@@ -181,11 +182,37 @@ class DataHandler
             $data[] = $answer->explanation;
         }
 
-        foreach ($question['choises'] as $choise) {
-            if ($this->wasChecked($chosen, $choise['id'], $answer->id)) {
-                $data[] = 1;
+        if ($question['multiple_answer']) {
+            foreach ($question['choises'] as $choise) {
+                if ($this->wasChecked($chosen, $choise['id'], $answer->id)) {
+                    $data[] = 1;
+                } else {
+                    $data[] = 0;
+                }
+            }
+        } elseif ($question['multiple_choise']) {
+            //find answered
+
+            $found = false;
+            $counter = 0;
+
+            while (!$found && $counter < count($question['choises'])) {
+                $choise = $question['choises'][$counter];
+
+                if ($this->wasChecked($chosen, $choise['id'], $answer->id)) {
+                    $found = $choise;
+                }
+
+                ++$counter;
+            }
+
+            if ($found) {
+                //first add the value then the corresponding id
+                $data[] = $found['title'];
+                $data[] = $found['id'];
             } else {
-                $data[] = 0;
+                $data[] = null;
+                $data[] = null;
             }
         }
 
@@ -204,8 +231,15 @@ class DataHandler
             $data[] = '';
         }
 
-        foreach ($question['choises'] as $choise) {
-            $data[] = 0;
+        if ($question['multiple_answer']) {
+            //checkboxed question
+            foreach ($question['choises'] as $choise) {
+                $data[] = 0;
+            }
+        } elseif ($question['multiple_choise']) {
+            //radio question needs 2 columns
+            $data[] = null;
+            $data[] = null;
         }
 
         return $data;

@@ -12,7 +12,7 @@
 
             [
                     'text' => Lang::get('master.navs.inschrijvingen'),
-            ]
+            ],
 
     ]) ?>
 @stop
@@ -29,8 +29,12 @@
                     <div class="dropdown actions">
                         <a id="actions" class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">{{ Lang::get('master.tools.acties') }}&nbsp;<span class="caret">&nbsp;</span></a>
                         <ul class="dropdown-menu">
-                            <li><a id="select-all" class="select-all" href="">{{ Lang::get('master.tools.select_all') }}</a></li>
-                            <li><a id="select-none" class="select-none" href="">{{ Lang::get('master.tools.select_none') }}</a></li>
+                            <li>
+                                <a id="select-all" class="select-all" href="">{{ Lang::get('master.tools.select_all') }}</a>
+                            </li>
+                            <li>
+                                <a id="select-none" class="select-none" href="">{{ Lang::get('master.tools.select_none') }}</a>
+                            </li>
                             <li class="divider"></li>
                             <li><a id="remove" class="remove" href="#">{{ Lang::get('master.tools.remove') }}</a></li>
                         </ul>
@@ -44,22 +48,28 @@
             </thead>
 
             <tbody>
-            <? $teller = 1 ?>
+            <?php $teller = 1 ?>
             @foreach($registrations as $registration)
 
                 <tr>
                     <td>
-                        {{ $teller }} <input type="checkbox" id="row{{$teller}}" value="{{ $registration->id }}"/>
+                        <div class="checkbox">
+                            <label class="control-label" for="row{{$teller}}">
+                                <input type="checkbox" id="row{{$teller}}" value="{{ $registration->id }}"/>
+                                {{ $teller }}
+                            </label>
+                        </div>
+
                     </td>
                     <td>
-                        <a href="<?= URL::route('inschrijvingen.edit', array($registration->id)) ?>">{{ $registration->firstname . ' ' . $registration->lastname}}</a>
+                        <a href="<?= route('inschrijvingen.edit', array($registration->id)) ?>">{{ $registration->firstname . ' ' . $registration->lastname}}</a>
                     </td>
                     <td>{{ $registration->email }}</td>
                     <td>{{ $registration->organisation }}</td>
                     <td>{{ $registration->created_at->format('d/m/Y') }}</td>
                 </tr>
 
-                <? $teller++ ?>
+                <?php $teller++ ?>
             @endforeach
             </tbody>
         </table>

@@ -2,8 +2,11 @@
   "name": "mantelzorg",
   "dependencies": {
     "bootstrap": "~3.3.0",
-    "components-font-awesome": "*",
+    "bootstrap-material-datetimepicker": "~2.0.0",
+    "bootstrap-material-design": "~0.3.0",
+    "font-awesome": "fontawesome#~4.4.0",
     "jquery-ui": "~1.11.4",
+    "lodash": "~3.10.1",
     "metisMenu": "~2.1.0",
     "modernizr": "~2.8.3",
     "moment": "~2.10.2"

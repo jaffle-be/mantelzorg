@@ -30,7 +30,7 @@ class UserOrganisations extends Migration
         Schema::table('users', function ($t) {
             $t->dropForeign('users_organisation_id_foreign');
             $t->dropColumn('organisation_id');
-            $t->dropForeign('users_organisation_location_id_foreign	');
+            $t->dropForeign('users_organisation_location_id_foreign');
             $t->dropColumn('organisation_location_id');
         });
     }

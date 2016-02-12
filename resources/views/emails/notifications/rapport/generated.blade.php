@@ -3,7 +3,10 @@
 
 @section('content')
 
-    <?= Lang::get('notifications.rapport.generated.body',  ['url' => route('rapport.download', [$filename]), 'title' => $survey->title]) ?>
+    <div class="container">
+
+        <?= Lang::get('notifications.rapport.generated.body',  ['url' => route('report.show', [$report]), 'title' => $survey->title]) ?>
+
+    </div>
 
 @stop
-

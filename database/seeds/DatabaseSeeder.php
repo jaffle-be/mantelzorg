@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Database\Seeder;
+
 class DatabaseSeeder extends Seeder
 {
 
@@ -12,17 +14,17 @@ class DatabaseSeeder extends Seeder
     {
         Eloquent::unguard();
 
-//        $this->call('UserTableSeeder');
+        $this->call('UserTableSeeder');
 
-//        $this->call('MantelzorgerSeeder');
-//        $this->call('OudereSeeder');
+        $this->call('MantelzorgerSeeder');
+        $this->call('OudereSeeder');
 
-//        $this->call('QuestionnaireSeeder');
-//        $this->call('PanelSeeder');
-//        $this->call('QuestionSeeder');
-//        $this->call('ChoiseSeeder');
+        $this->call('QuestionnaireSeeder');
+        $this->call('PanelSeeder');
+        $this->call('QuestionSeeder');
+        $this->call('ChoiseSeeder');
 
-//        $this->call('MetaContextValueSeeder');
+        $this->call('MetaContextValueSeeder');
     }
 
 }

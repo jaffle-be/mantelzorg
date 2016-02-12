@@ -1,7 +1,9 @@
-<?php namespace App\Questionnaire\Export;
+<?php
 
-interface Exportable {
+namespace App\Questionnaire\Export;
 
+interface Exportable
+{
     /**
      * @return array
      */

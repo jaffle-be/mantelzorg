@@ -1,6 +1,7 @@
 <?php namespace Data;
 
 // Composer: "fzaninotto/faker": "v1.3.0"
+use App\Questionnaire\Choise;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
@@ -39,19 +40,17 @@ class SurveyAnswers extends Seeder
                 if ($question->multiple_choise) {
                     if ($question->multiple_answer) {
                         $picked = $choises->random(rand(1, $choises->count()));
-
-                        if (!is_array($picked)) {
-                            $picked = array($picked);
-                        }
                     } else {
-                        $picked = array($choises->random(1));
+                        $picked = $choises->random(1);
                     }
 
-                    $picked = new Collection($picked);
+                    if($picked instanceof Choise)
+                    {
+                        $picked = new Collection([$picked]);
+                    }
 
-                    $answer->choises()->sync($picked->lists('id'));
+                    $answer->choises()->sync($picked->lists('id')->toArray());
                 }
-
             }
         }
     }

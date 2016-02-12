@@ -31,7 +31,7 @@
 
                             @include('layout.messages')
 
-                            <label for="email"><?= Lang::get('front.reminder.email') ?></label>
+                            <label class="control-label" for="email"><?= Lang::get('front.reminder.email') ?></label>
 
                             <?= Form::text('email', null, array('class' => 'form-control')) ?>
 
@@ -42,7 +42,7 @@
                             @endif
 
                             <p class="text-center">
-                                <input class="btn btn-lg btn-primary" type="submit" value="<?= Lang::get('front.reminder.send') ?>"/>
+                                <button class="btn btn-lg btn-primary" type="submit"><?= Lang::get('front.reminder.send') ?></button>
                             </p>
 
                         </form>

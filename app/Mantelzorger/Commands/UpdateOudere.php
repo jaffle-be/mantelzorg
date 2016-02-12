@@ -7,8 +7,8 @@ use App\Mantelzorger\Mantelzorger;
 use App\Mantelzorger\Oudere;
 use Illuminate\Contracts\Bus\SelfHandling;
 
-class UpdateOudere extends Command implements SelfHandling{
-
+class UpdateOudere extends Command implements SelfHandling
+{
     /**
      * @var Mantelzorger
      */
@@ -33,5 +33,4 @@ class UpdateOudere extends Command implements SelfHandling{
     {
         return $this->oudere->update($this->input);
     }
-
 }

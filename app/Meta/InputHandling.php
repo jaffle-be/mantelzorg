@@ -1,6 +1,7 @@
-<?php namespace App\Meta;
+<?php
+
+namespace App\Meta;
 
 trait InputHandling
 {
-
 }

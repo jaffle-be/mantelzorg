@@ -3,12 +3,10 @@
 namespace App\Search;
 
 use App\System\ServiceProvider;
-use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
 
 class SearchServiceProvider extends ServiceProvider
 {
-
     protected $namespace = 'search';
 
     protected function observers()
@@ -23,8 +21,6 @@ class SearchServiceProvider extends ServiceProvider
 
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     public function register()
     {
@@ -55,5 +51,4 @@ class SearchServiceProvider extends ServiceProvider
     {
         $this->commands(['App\Search\Command\BuildIndexes', 'App\Search\Command\FlushType', 'App\Search\Command\UpdateSettings', 'App\Search\Command\UpdateMapping']);
     }
-
 }

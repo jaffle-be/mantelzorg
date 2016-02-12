@@ -7,7 +7,6 @@ use Input;
 
 class LocationController extends AdminController
 {
-
     /**
      * @var \App\Organisation\Location
      */
@@ -27,14 +26,14 @@ class LocationController extends AdminController
         if ($validator->fails()) {
             return array(
                 'status' => 'error',
-                'errors' => $validator->messages()->toArray()
+                'errors' => $validator->messages()->toArray(),
             );
         } else {
             $location = $this->location->create(Input::all());
 
             return array(
-                'status'   => 'oke',
-                'location' => $location->toArray()
+                'status' => 'oke',
+                'location' => $location->toArray(),
             );
         }
     }

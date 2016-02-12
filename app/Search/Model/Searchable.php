@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Search\Model;
 
 use App\Search\Query\Queryable;
@@ -8,7 +7,6 @@ use App\Search\SearchServiceInterface;
 
 interface Searchable
 {
-
     /**
      * Set the client for searching.
      *

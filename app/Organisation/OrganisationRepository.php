@@ -1,7 +1,9 @@
-<?php namespace App\Organisation;
+<?php
 
-class OrganisationRepository implements OrganisationRepositoryInterface{
+namespace App\Organisation;
 
+class OrganisationRepository implements OrganisationRepositoryInterface
+{
     protected $organisation;
 
     public function __construct(Organisation $organisation)
@@ -11,6 +13,6 @@ class OrganisationRepository implements OrganisationRepositoryInterface{
 
     public function getForSelect()
     {
-        return $this->organisation->orderBy('name')->lists('name', 'id')->all();
+        return $this->organisation->lists('name', 'id')->all();
     }
 }

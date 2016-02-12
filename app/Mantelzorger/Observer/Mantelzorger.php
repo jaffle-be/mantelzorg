@@ -6,13 +6,10 @@ use App\Mantelzorger\Mantelzorger as Model;
 use Illuminate\Events\Dispatcher;
 
 /**
- * Class App\Mantelzorger
- *
- * @package App\Mantelzorger\Observer
+ * Class App\Mantelzorger.
  */
 class Mantelzorger
 {
-
     /**
      * @var \Illuminate\Events\Dispatcher
      */

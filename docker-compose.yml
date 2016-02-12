@@ -1,24 +1,24 @@
 web:
-    image: web
+    image: twarlop/web
     ports:
         - "80:80" # web
         - "2222:22" # ssh
         - "35729:35729" # live reload
         - "9876:9876" # karma server
     volumes:
-        - ~/.composer:/home/homestead/.composer # composer caching
-        - ~/.gitconfig:/home/homestead/.gitconfig # Git configuration ( access alias && config )
-        - ~/.ssh:/home/homestead/.ssh # Ssh keys for easy deployment inside the container
-        - ./:/app # all apps
+        - ~/.composer:~/.composer # composer caching
+        - ~/.gitconfig:~/.gitconfig # Git configuration ( access alias && config )
+        - ~/.ssh:~/.ssh # Ssh keys for easy deployment inside the container
+        - ~/Sites/laravel/mantelzorg5.0:/app # all apps
         - ./sites-available:/etc/nginx/sites-available # nginx sites ( in case you recreate the container )
         - ./sites-enabled:/etc/nginx/sites-enabled # nginx sites ( in case you recreate the container )
     links:
         - mysql
-        - redis
         - elasticsearch
+        - redis
 
 mysql:
-    image: tutum/mysql
+    image: twarlop/mysql
     ports:
         - "3306:3306"
     environment:
@@ -28,7 +28,7 @@ mysql:
         - db_vol # database files
 
 redis:
-    image: tutum/redis
+    image: twarlop/redis
     ports:
         - "6379:6379"
     environment:
@@ -37,7 +37,34 @@ redis:
         - redis_vol
 
 elasticsearch:
-    image: digiredo/elasticsearch
+    image: twarlop/elasticsearch
+    command: elasticsearch -Des.network.host=0.0.0.0
     ports:
         - "9200:9200"
         - "9300:9300"
+
+logstash:
+    image: twarlop/logstash
+    command: logstash -f /etc/logstash/conf.d/logstash.conf
+    volumes:
+        - ./logstash/config:/etc/logstash/conf.d
+    ports:
+        - "5000:5000"
+    links:
+        - elasticsearch
+kibana:
+    image: twarlop/kibana
+    ports:
+      - "5601:5601"
+    links:
+      - elasticsearch
+
+redis_vol:
+    image: twarlop/redis_vol
+    volumes:
+        - ~/databases/redis:/databases/redis
+
+db_vol:
+    image: twarlop/db_vol
+    volumes:
+        - ~/databases/mysql:/databases/mysql

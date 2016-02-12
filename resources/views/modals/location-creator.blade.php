@@ -11,22 +11,22 @@
                 <div class="modal-body">
 
 
-                    <label for=""><?= Lang::get('users.location_name') ?></label>
+                    <label class="control-label" for=""><?= Lang::get('users.location_name') ?></label>
 
                     <div id="error-name" class="alert alert-danger hide" data-target="name"></div>
                     <div class="input-group">
                         <?= Form::text('name', null, array(
-                                'class' => 'form-control'
+                                'class' => 'form-control',
                         )) ?>
                         <span class="input-group-addon"><i class="fa fa-tag"></i></span>
                     </div>
 
-                    <label for=""><?= Lang::get('users.street') ?></label>
+                    <label class="control-label" for=""><?= Lang::get('users.street') ?></label>
 
                     <div id="error-street" class="alert alert-danger hide" data-target="street"></div>
                     <div class="input-group">
                         <?= Form::text('street', null, array(
-                                'class' => 'form-control'
+                                'class' => 'form-control',
                         )) ?>
                         <span class="input-group-addon"><i class="fa fa-road"></i></span>
                     </div>
@@ -35,13 +35,13 @@
 
                         <div class="col-md-4">
 
-                            <label for=""><?= Lang::get('users.postal') ?></label>
+                            <label class="control-label" for=""><?= Lang::get('users.postal') ?></label>
 
                             <div id="error-postal" class="alert alert-danger hide" data-target="postal"></div>
 
                             <div class="input-group">
                                 <?= Form::text('postal', null, array(
-                                        'class' => 'form-control'
+                                        'class' => 'form-control',
                                 )) ?>
                                 <span class="input-group-addon"><i class="fa fa-road"></i></span>
                             </div>
@@ -50,12 +50,12 @@
 
                         <div class="col-md-8">
 
-                            <label for=""><?= Lang::get('users.city') ?></label>
+                            <label class="control-label" for=""><?= Lang::get('users.city') ?></label>
 
                             <div id="error-city" class="alert alert-danger hide" data-target="city"></div>
                             <div class="input-group">
                                 <?= Form::text('city', null, array(
-                                        'class' => 'form-control'
+                                        'class' => 'form-control',
 
                                 )) ?>
                                 <span class="input-group-addon"><i class="fa fa-road"></i></span>

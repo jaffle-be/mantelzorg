@@ -48,7 +48,7 @@ class NavigationTest extends FunctionalTest
             ->seePageIs(route('survey.index'));
 
         $this->click('nav-rapport')
-            ->seePageIs(route('rapport.index'));
+            ->seePageIs(route('report.index'));
 
         $user = app('auth')->user();
 
@@ -59,7 +59,7 @@ class NavigationTest extends FunctionalTest
         $this->visit(route('dash'));
 
         $this->click('nav-stats')
-            ->seePageIs(route('stats.index'));
+            ->seePageIs(route('stats.insights.ouderen'));
     }
 
     public function testClickingLogo()

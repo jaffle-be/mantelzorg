@@ -1,4 +1,6 @@
-<?php namespace App\Http\Middleware;
+<?php
+
+namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
@@ -7,7 +9,6 @@ use Illuminate\Routing\Route;
 
 class Lock
 {
-
     protected $route;
 
     protected $auth;
@@ -23,8 +24,7 @@ class Lock
         $user = $this->auth->user();
 
         //if the user is an admin, we skip all checks
-        if($user->admin == 1)
-        {
+        if ($user->admin == 1) {
             return $next($request);
         }
 
@@ -33,8 +33,7 @@ class Lock
 
         $hulpverlener = $this->route->getParameter('hulpverlener');
 
-        if($hulpverlener)
-        {
+        if ($hulpverlener) {
             $user = $this->auth->user();
 
             if ($user->admin == 0 && $user->id != $hulpverlener->id) {

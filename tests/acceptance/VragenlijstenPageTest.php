@@ -101,7 +101,7 @@ class VragenlijstenPageTest extends AdminAcceptanceTest
     public function test_creating_survey()
     {
         $this->open(route('survey.index'))
-            ->findWrapped('page-actions', 'btn-primary')->click();
+            ->find('.btn-primary.btn-fab')->click();
 
         $this->notSee('titel is verplicht');
         $this->submitFormWrapped('questionnaire-creator', 'btn-primary', []);
@@ -111,7 +111,7 @@ class VragenlijstenPageTest extends AdminAcceptanceTest
             ->wait(1000)
             ->seePageIs(route('survey.index'))
             ->open(route('survey.index'))
-            ->findWrapped('page-actions', 'btn-primary')->click();
+            ->find('.btn-primary.btn-fab')->click();
 
         $this->submitFormWrapped('questionnaire-creator', 'btn-primary', ['title' => 'Some title'])
             ->see('titel is al in gebruik');

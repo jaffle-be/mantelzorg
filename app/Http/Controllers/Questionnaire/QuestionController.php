@@ -9,7 +9,6 @@ use Input;
 
 class QuestionController extends \App\Http\Controllers\AdminController
 {
-
     /**
      * @var Question
      */
@@ -25,12 +24,8 @@ class QuestionController extends \App\Http\Controllers\AdminController
     public function index($panel)
     {
         $panel->load(array(
-            'questions'         => function ($query) {
-                $query->orderBy('sort');
-            },
-            'questions.choises' => function ($query) {
-                $query->orderBy('sort_weight');
-            }
+            'questions',
+            'questions.choises',
         ));
 
         return view('questionnaire.questions.index', compact('panel'));
@@ -39,27 +34,27 @@ class QuestionController extends \App\Http\Controllers\AdminController
     public function store(Panel $panel, Factory $validator)
     {
         $validator = $validator->make(Input::all(), $this->question->rules(array_keys(Input::all()), [
-            'questionnaire_id'       => $panel->questionnaire->id,
+            'questionnaire_id' => $panel->questionnaire->id,
             'questionnaire_panel_id' => $panel->id,
         ]));
 
         $input = Input::all();
 
         $input = array_merge($input, array(
-            'questionnaire_id'       => $panel->questionnaire->id,
+            'questionnaire_id' => $panel->questionnaire->id,
             'questionnaire_panel_id' => $panel->id,
         ));
 
         if ($validator->fails()) {
             return json_encode(array(
                 'status' => 'noke',
-                'errors' => $validator->messages()->toArray()
+                'errors' => $validator->messages()->toArray(),
             ));
         } else {
             $this->question->create($input);
 
             return json_encode(array(
-                'status' => 'oke'
+                'status' => 'oke',
             ));
         }
     }
@@ -71,15 +66,14 @@ class QuestionController extends \App\Http\Controllers\AdminController
         if ($validator->fails()) {
             return json_encode(array(
                 'status' => 'noke',
-                'errors' => $validator->messages()->toArray()
+                'errors' => $validator->messages()->toArray(),
             ));
         }
 
         $question->update(Input::all());
 
         return json_encode(array(
-            'status' => 'oke'
+            'status' => 'oke',
         ));
     }
-
 }

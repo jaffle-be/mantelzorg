@@ -15,7 +15,7 @@ class HulpverlenersPageTest extends AdminFunctionalTest
         //so this is certainly smaller then the rows per page
         $users = Factory::times(9)->create('user');
 
-        sleep(1);
+        $this->sleep();
 
         $this->visit(route('hulpverleners.index'));
 

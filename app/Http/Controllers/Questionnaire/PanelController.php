@@ -9,7 +9,6 @@ use Input;
 
 class PanelController extends \App\Http\Controllers\AdminController
 {
-
     /**
      * @var Panel
      */
@@ -38,19 +37,19 @@ class PanelController extends \App\Http\Controllers\AdminController
         $input['panel_weight'] = $heighestPanel ? $heighestPanel->panel_weight + 10 : 0;
 
         $validator = $validator->make($input, $this->panel->rules([], [
-            'questionnaire' => $survey->id
+            'questionnaire' => $survey->id,
         ]));
 
         if ($validator->fails()) {
             return json_encode(array(
                 'status' => 'error',
-                'errors' => $validator->messages()->toArray()
+                'errors' => $validator->messages()->toArray(),
             ));
         } else {
             $this->panel->create($input);
 
             return json_encode(array(
-                'status' => 'oke'
+                'status' => 'oke',
             ));
         }
     }
@@ -59,7 +58,7 @@ class PanelController extends \App\Http\Controllers\AdminController
     {
         $validator = $validator->make(Input::all(), $this->panel->rules(array_keys(Input::all()), [
             'questionnaire' => $survey->id,
-            'panel' => $panel->id
+            'panel' => $panel->id,
         ]));
 
         if ($validator->fails()) {

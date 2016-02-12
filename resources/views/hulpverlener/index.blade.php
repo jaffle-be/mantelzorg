@@ -50,13 +50,21 @@
 
 
             <tbody>
-            <? $teller = 1 ?>
+            <?php $teller = 1 ?>
             @foreach($users as $user)
 
                 <tr>
-                    <td>{{ $teller }} <input type="checkbox" id="row{{$teller}}" value="{{$user->id}}"/></td>
                     <td>
-                        <a href="<?= URL::route('hulpverleners.edit', array($user->id)) ?>">{{ $user->firstname . ' ' . $user->lastname}}</a>
+                        <div class="checkbox">
+                            <label class="control-label" for="row{{$teller}}">
+                                <input type="checkbox" id="row{{$teller}}" value="{{$user->id}}"/>
+                                {{ $teller }}
+                            </label>
+                        </div>
+
+                    </td>
+                    <td>
+                        <a href="<?= route('hulpverleners.edit', array($user->id)) ?>">{{ $user->firstname . ' ' . $user->lastname}}</a>
                     </td>
                     <td>{{ $user->email }}</td>
                     <td>
@@ -67,7 +75,7 @@
                     <td>{{ $user->created_at->format('d/m/Y') }}</td>
                 </tr>
 
-                <? $teller++ ?>
+                <?php $teller++ ?>
             @endforeach
             </tbody>
         </table>

@@ -7,6 +7,7 @@ use Elasticsearch\Client;
 use Exception;
 use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
+use Illuminate\Support\Collection;
 
 class SearchService implements SearchServiceInterface
 {
@@ -18,7 +19,6 @@ class SearchService implements SearchServiceInterface
     protected $container;
 
     /**
-     *
      * @var Client
      */
     protected $client;
@@ -53,7 +53,6 @@ class SearchService implements SearchServiceInterface
      * @param Container $container
      * @param Client    $client
      * @param array     $config
-     *
      */
     public function __construct(Container $container, Client $client, Config $config)
     {
@@ -76,10 +75,9 @@ class SearchService implements SearchServiceInterface
     protected function autoIndex()
     {
         foreach ($this->config->getTypes() as $type) {
-
             $class = $this->config->getClass($type);
 
-            $class = new $class;
+            $class = new $class();
 
             $class->setSearchableService($this);
 
@@ -107,7 +105,6 @@ class SearchService implements SearchServiceInterface
         $me = $this;
 
         foreach ($this->listeners as $event => $listener) {
-
             $trigger = $type->getSearchableEventname($event);
 
             $type->setSearchableService($me);
@@ -127,7 +124,6 @@ class SearchService implements SearchServiceInterface
     protected function invertedAutoIndex($updated, $inverted)
     {
         foreach ($inverted as $invert) {
-
             $parent = new $invert['class']();
 
             $relation = $invert['relation'];
@@ -144,7 +140,7 @@ class SearchService implements SearchServiceInterface
     {
         $dispatcher = $this->container->make('events');
 
-        $event = 'eloquent.saved: ' . $updated;
+        $event = 'eloquent.saved: '.$updated;
 
         $dispatcher->listen($event, function ($model) use ($parent, $relation, $key, $with) {
 
@@ -168,7 +164,7 @@ class SearchService implements SearchServiceInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function build($type)
     {
@@ -236,43 +232,64 @@ class SearchService implements SearchServiceInterface
         $type = clone $type;
 
         $params = $this->getBaseParams($type);
-        
+
         $type->load(array_keys($this->config->getWith($type->getSearchableType())));
 
         $params = array_merge($params, [
-            'id'   => $type->getSearchableId(),
+            'id' => $type->getSearchableId(),
             'body' => [
-                'doc' => $type->getSearchableDocument()
-            ]
+                'doc' => $type->getSearchableDocument(),
+            ],
         ]);
 
         $this->client->update($params);
     }
 
     /**
-     * Search the index
+     * Search the index.
      *
      * @param array $params
      *
      * @return mixed
      */
-    public function search($type, array $params, $with = [], $paginated = 15)
+    public function search($type, array $params, $with = [], $paginated = 15, \Closure $highlighter = null)
     {
-        if(isset($params['body']['sort']))
-        {
+        if (isset($params['body']['sort'])) {
             $params = $this->cleanSort($params);
         }
 
-
-        if($paginated)
-        {
+        if ($paginated) {
             $params['from'] = (app('request')->get('page', 1) - 1) * $paginated;
             $params['size'] = $paginated;
         }
 
         $result = $this->client->search($params);
 
+        if ($highlighter) {
+            //if we have a highlighter, we simply loop through the results and overwrite the original field.
+            //this is dangerous though, a dev should not be using Elasticsearch results to manipulate data.
+            //data should always be manipulated through your relational database.
+            foreach ($result['hits']['hits'] as &$hit) {
+                if (isset($hit['highlight'])) {
+                    $hit['_source'] = $highlighter($hit['_source'], $hit['highlight']);
+                }
+            }
+        }
+
         return $this->response($result, $with, $paginated, $this->container->make($this->config->getClass($type)));
+    }
+
+    public function aggregate(array $params)
+    {
+        $result = $this->client->search($params);
+
+        //the resultset contains an array of aggregations.
+        //if we only have one aggregation, we return an aggregation result,
+        //if we have multiple, we'll return a collection of aggregation results.
+        //but its always an array, so we can implement the same logic at first
+        $aggregations = $result['aggregations'];
+
+        return $aggregations;
     }
 
     public function getPaginator()
@@ -296,6 +313,8 @@ class SearchService implements SearchServiceInterface
     {
         $this->checkIndex();
 
+        sleep(2);
+
         $indices = $this->client->indices();
 
         $toggle = ['index' => $this->config->getIndex()];
@@ -304,7 +323,7 @@ class SearchService implements SearchServiceInterface
 
         $settings = [
             'index' => $this->config->getIndex(),
-            'body'  => $settings,
+            'body' => $settings,
         ];
 
         $indices->putSettings($settings);
@@ -335,6 +354,7 @@ class SearchService implements SearchServiceInterface
      * @param $type
      *
      * @return array|mixed
+     *
      * @throws Exception
      */
     protected function getSearchable($type)
@@ -371,8 +391,8 @@ class SearchService implements SearchServiceInterface
 
             $mapping = array_merge($params, [
                 'body' => [
-                    'properties' => $mapping
-                ]
+                    'properties' => $mapping,
+                ],
             ]);
 
             $this->client->indices()->putMapping($mapping);
@@ -388,7 +408,7 @@ class SearchService implements SearchServiceInterface
     {
         return [
             'index' => $this->config->getIndex(),
-            'type'  => $type->getSearchableType()
+            'type' => $type->getSearchableType(),
         ];
     }
 
@@ -412,9 +432,9 @@ class SearchService implements SearchServiceInterface
     {
         return [
             'index' => $this->config->getIndex(),
-            'type'  => $type->getSearchableType(),
-            'id'    => $type->getSearchableId(),
-            'body'  => $type->getSearchableDocument(),
+            'type' => $type->getSearchableType(),
+            'id' => $type->getSearchableId(),
+            'body' => $type->getSearchableDocument(),
         ];
     }
 
@@ -428,8 +448,7 @@ class SearchService implements SearchServiceInterface
         //sorts best have a unmapped_type parameter, so queries won't fail for empty document sets.
         $sort = $params['body']['sort'];
 
-        foreach($sort as $key => $sorting)
-        {
+        foreach ($sort as $key => $sorting) {
             //the initial value of sorting is always an array
             //either
             //['column_name' => 'sort_order']
@@ -440,21 +459,18 @@ class SearchService implements SearchServiceInterface
 
             $column = array_pop($value_keys);
 
-            if(is_array($sorting[$column]))
-            {
+            if (is_array($sorting[$column])) {
                 //the sorting is already set up as a object/array value (depends if you look at it from json or php)
                 //so we only need to verify the existence of the unmapped_type parameter.
-                if(!isset($sorting[$column]['unmapped_type']))
-                {
+                if (!isset($sorting[$column]['unmapped_type'])) {
                     //lets take boolean, as its probably one of the fastest.
                     $sorting[$column]['unmapped_type'] = 'boolean';
                 }
-            }
-            else{
+            } else {
                 //the value represents the order in which to sort.
                 $sorting[$column] = [
-                    "order" => $sorting[$column],
-                    "unmapped_type" => 'boolean'
+                    'order' => $sorting[$column],
+                    'unmapped_type' => 'boolean',
                 ];
             }
 
@@ -468,5 +484,4 @@ class SearchService implements SearchServiceInterface
         //return the entire array as a result.
         return $params;
     }
-
 }

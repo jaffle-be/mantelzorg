@@ -8,7 +8,7 @@
             <div class="modal-body">
 
                 <form action="">
-                    <label for="organisation_name"><?= Lang::get('users.organisation_name') ?></label>
+                    <label class="control-label" for="organisation_name"><?= Lang::get('users.organisation_name') ?></label>
 
                     <div class="alert alert-danger hide"></div>
                     <div class="input-group">

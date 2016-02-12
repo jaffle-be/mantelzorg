@@ -26,7 +26,7 @@ return [
 	|
 	*/
 
-	'default' => 'mysql',
+	'default' => env('APP_ENV') == 'testing' ? 'testing' : 'mysql',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -48,10 +48,22 @@ return [
 
 		'mysql' => [
 			'driver'    => 'mysql',
-			'host'      => env('APP_ENV') == 'testing' ? 'localhost' : env('DB_HOST', 'localhost'),
-			'database'  => env('DB_DATABASE', 'forge'),
-			'username'  => env('APP_ENV') == 'testing' ? 'root' : env('DB_USERNAME', 'forge'),
-			'password'  => env('APP_ENV') == 'testing' ? '' : env('DB_PASSWORD', ''),
+			'host'      => env('DB_HOST', 'localhost'),
+			'database'  => env('DB_DATABASE', 'forge') . '-' . env('APP_ENV'),
+			'username'  => env('DB_USERNAME', 'forge'),
+			'password'  => env('DB_PASSWORD', ''),
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+			'strict'    => false,
+		],
+
+		'testing' => [
+			'driver'    => 'mysql',
+			'host'      => '127.0.0.1',
+			'database'  => env('TRAVIS', false) ? 'testing' : env('DB_DATABASE') . '-testing',
+			'username'  => 'root',
+			'password'  => env('TRAVIS', false) ? '' : 'secret',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
@@ -89,9 +101,10 @@ return [
 		'cluster' => false,
 
 		'default' => [
-			'host'     => '127.0.0.1',
+			'host'     => env('APP_ENV') == 'testing' ? '127.0.0.1' : env('REDIS_HOST', '127.0.0.1'),
 			'port'     => 6379,
 			'database' => 0,
+			'password' => env('APP_ENV') == 'testing' ? null :env('REDIS_PASS'),
 		],
 
 	],

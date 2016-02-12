@@ -13,14 +13,14 @@ return [
     |
     */
 
-    "password" => "Wachtwoord moet minimaal zes tekens lang zijn en de wachtwoorden moeten overeenkomen.",
+    'password' => 'Wachtwoord moet minimaal zes tekens lang zijn en de wachtwoorden moeten overeenkomen.',
 
-    "user"     => "Geen gebruiker bekend met dat e-mailadres.",
+    'user' => 'Geen gebruiker bekend met dat e-mailadres.',
 
-    "token"    => "Deze wachtwoord reset token is niet geldig.",
+    'token' => 'Deze wachtwoord reset token is niet geldig.',
 
-    "sent"     => "Wachtwoord herinnering verzonden!",
+    'sent' => 'Wachtwoord herinnering verzonden!',
 
-    "reset"    => "Wachtwoord is veranderd!",
+    'reset' => 'Wachtwoord is veranderd!',
 
 ];

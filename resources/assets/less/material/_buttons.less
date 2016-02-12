@@ -1,0 +1,12 @@
+.btn{
+
+  .generic-variations(~":not(.btn-link):not(.btn-flat)", @btn-default, {
+    color: @darkbg-text;
+  });
+}
+
+//make sure default button has dark color
+.btn-default:not(.btn-link):not(.btn-flat)
+{
+  color: @lightbg-text;
+}

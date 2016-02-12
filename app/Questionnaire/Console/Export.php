@@ -1,4 +1,6 @@
-<?php namespace App\Questionnaire\Console;
+<?php
+
+namespace App\Questionnaire\Console;
 
 use App\Questionnaire\Export\Exporter;
 use App\Questionnaire\Questionnaire;
@@ -7,7 +9,6 @@ use Symfony\Component\Console\Input\InputArgument;
 
 class Export extends Command
 {
-
     protected $name = 'instrument:export';
 
     /**
@@ -40,7 +41,7 @@ class Export extends Command
     protected function getArguments()
     {
         return [
-            ['id', InputArgument::REQUIRED, 'the id of the survey to export']
+            ['id', InputArgument::REQUIRED, 'the id of the survey to export'],
         ];
     }
 }

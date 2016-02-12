@@ -9,12 +9,12 @@ class DataSeeder extends Seeder
 
     public function run()
     {
-//        $this->call('Data\Registrations');
-//        $this->call('Data\Users');
-//        $this->call('Data\Mantelzorgers');
-//        $this->call('Data\Ouderen');
-//        $this->call('Data\SurveySessions');
-//        $this->call('Data\SurveyAnswers');
+        $this->call('Data\Registrations');
+        $this->call('Data\Users');
+        $this->call('Data\Mantelzorgers');
+        $this->call('Data\Ouderen');
+        $this->call('Data\SurveySessions');
+        $this->call('Data\SurveyAnswers');
     }
 
 }

@@ -1,13 +1,11 @@
 <?php
 
-
 namespace App\Questionnaire\Observer;
 
 use Illuminate\Events\Dispatcher;
 
 class Answer
 {
-
     /**
      * @var Dispatcher
      */

@@ -1,12 +1,16 @@
-@import "bootstrap";
-@import "../plugins/components-font-awesome/less/font-awesome";
+@import "../less/bootstrap";
+@import "../less/material";
+@import "../plugins/font-awesome/less/font-awesome";
 @import "../plugins/metisMenu/dist/metisMenu.css";
 
-@import '../less/bootstrap/variables';
-@import '../less/bootstrap/mixins';
-@import '../less/bootstrap/buttons';
-
 @import '../less/variables';
+@import '../less/header';
+@import '../less/footer';
+@import "../less/wrapper";
+@import "../less/topbar";
+@import "../less/sidebar";
+@import "../less/tablet";
+@import "../less/navbar-tablet";
 @import '../less/datepicker';
 @import '../less/mixins';
 @import '../less/breadcrumb';
@@ -14,26 +18,33 @@
 @import '../less/mantelzorger';
 @import '../less/questionnaire';
 @import '../less/instrument';
-@import '../less/header';
-@import '../less/footer';
+
 @import '../less/pagination';
 @import "../less/mixins";
-@import "../less/wrapper";
-@import "../less/topbar";
-@import "../less/sidebar";
-@import "../less/tablet";
+
 @import "../less/panels";
 @import "../less/rapport";
 @import "../less/pdf";
 @import "../less/charts";
 
-@import "../less/navbar-tablet";
+.card > .card-body{
+  height: auto;
+}
+
+//beta
+.beta-wrapper{
+
+  h3{
+
+    margin-bottom: 15px;
+  }
+
+}
 
 //global message holder
 #global-messages .alert{
   margin-top: 0;
 }
-
 
 html {
   background-color: #1a1a1a;
@@ -73,4 +84,9 @@ h1, h2, h3, h4, h5, h6 {
 //you should set this to the height of the biggest drop-down in our app that's within a table.
 .table-responsive{
   min-height: 300px;
+}
+
+.table tbody tr td
+{
+  vertical-align: middle;
 }

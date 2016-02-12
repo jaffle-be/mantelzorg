@@ -22,20 +22,18 @@ class InschrijvingenPageTest extends AdminAcceptanceTest
      */
     protected function removeInschrijvingen()
     {
-        app('log')->notice('removing');
         Registration::whereNotNull('id')->delete();
     }
 
     public function test_deleting_some_inschrijvingen()
     {
-        app('log')->notice('testing');
         $this->open(route('inschrijvingen.index'));
         $this->snap();
 
-        $this->check('row1')
-            ->check('row2')
-            ->check('row3')
-            ->click('actions')
+        $this->find('[for="row1"]')->click();
+        $this->find('[for="row2"]')->click();
+        $this->find('[for="row3"]')->click();
+        $this->click('actions')
             ->click('remove')
             ->click('confirm')
             ->seePageIs(route('inschrijvingen.index'))
@@ -45,16 +43,16 @@ class InschrijvingenPageTest extends AdminAcceptanceTest
             ->notSee('row20');
     }
 
-//    public function test_deleting_all_registrations()
-//    {
-//        $this->open(route('inschrijvingen.index'))
-//            ->click('actions')
-//            ->click('select-all')
-//            ->click('actions')
-//            ->click('remove')
-//            ->click('confirm')
-//            ->seePageIs(route('inschrijvingen.index'))
-//            ->notSee('row1');
-//    }
+    public function test_deleting_all_registrations()
+    {
+        $this->open(route('inschrijvingen.index'))
+            ->click('actions')
+            ->click('select-all')
+            ->click('actions')
+            ->click('remove')
+            ->click('confirm')
+            ->seePageIs(route('inschrijvingen.index'))
+            ->notSee('row1');
+    }
 
 }

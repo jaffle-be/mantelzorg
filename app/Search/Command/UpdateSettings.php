@@ -1,11 +1,12 @@
-<?php namespace App\Search\Command;
+<?php
+
+namespace App\Search\Command;
 
 use App\Search\SearchServiceInterface;
 use Illuminate\Console\Command;
 
 class UpdateSettings extends Command
 {
-
     /**
      * The console command name.
      *
@@ -47,5 +48,23 @@ class UpdateSettings extends Command
         $settings = config('search.settings');
 
         $this->service->updateSettings($settings);
+
+        if(env('APP_ENV') == 'testing')
+        {
+            $client = $this->service->getClient();
+
+            $params = [
+                'index' => config('search.index'),
+                'body' => [
+                    'settings' => [
+                        'refresh_interval' => "5ms"
+                    ]
+                ]
+            ];
+
+            $response = $client->indices()->putSettings($params);
+        }
+
+
     }
 }

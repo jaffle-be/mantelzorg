@@ -1,4 +1,6 @@
-<?php namespace App\Mantelzorger\Commands;
+<?php
+
+namespace App\Mantelzorger\Commands;
 
 use App\Commands\Command;
 use App\Mantelzorger\Mantelzorger;
@@ -7,7 +9,6 @@ use Illuminate\Contracts\Bus\SelfHandling;
 
 class UpdateMantelzorger extends Command implements SelfHandling
 {
-
     /**
      * @var User
      */
@@ -35,5 +36,4 @@ class UpdateMantelzorger extends Command implements SelfHandling
 
         $this->mantelzorger->update($this->input);
     }
-
 }

@@ -34,12 +34,27 @@
   }
 
   .instrument-footer {
-    .question-list, ul li {
-      background-color: @c;
-    }
 
-    li:active, li:focus, li.active {
-      background-color: darken(@c, 7%);
+    .question-list {
+      background-color: @c;
+
+      li{
+        background-color: @c;
+
+        &:hover{
+          .shadow-z-1;
+        }
+
+        &:active{
+          .shadow-z-1-hover;
+        }
+
+        &:active, &:focus, &:hover, &.active {
+          background-color: darken(@c, 7%);
+          transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+      }
     }
   }
 }
@@ -48,8 +63,18 @@
   background-color: @c;
 
   li:active, li:focus, li:hover, li.active {
+    transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
     background-color: darken(@c, 7%);
   }
+
+  li:hover{
+    .shadow-z-1;
+  }
+
+  li:active{
+    .shadow-z-1-hover;
+  }
+
 }
 
 .instrument.panel-gray {
@@ -133,7 +158,6 @@
 
     li {
       padding:0;
-      border-bottom: 1px solid @border-color;
 
       a {
         display: block;
@@ -141,14 +165,6 @@
         color: @white;
         text-decoration: none;
       }
-    }
-
-    li:first-child {
-      border-top: 1px solid @border-color;
-    }
-
-    li:last-child {
-      border-bottom: none;
     }
   }
 }
@@ -165,7 +181,6 @@
     & > div {
       //these are changed below for tablets.
       padding: 15px;
-      border: 1px solid @border-color;
       margin: 0 5%;
 
     }
@@ -205,6 +220,17 @@
 }
 
 .instrument-footer {
+
+  .wrapper{
+    position:relative;
+    width: 100%;
+  }
+
+  .btn{
+    margin:0;
+    padding: 8px 20px;
+  }
+
   .previous {
     text-align: left;
 
@@ -228,12 +254,10 @@
     cursor: pointer;
     position: relative;
     z-index: 1000;
-    border: 1px solid @border-color;
     border-radius: @border-radius-base;
     color: @white;
-    line-height: 34px;
     vertical-align: middle;
-
+    
     h4 {
       line-height: 34px;
       height: 34px;
@@ -263,12 +287,15 @@
 
       li {
         box-sizing: border-box;
-        border-left: 1px solid @border-color;
-        border-right: 1px solid @border-color;
-        border-bottom: 1px solid @border-color;
-        text-overflow: ellipsis;
         vertical-align: middle;
         padding: 0 15px;
+        //ellipsis
+        text-overflow: ellipsis;
+        width: 100%;
+        white-space: nowrap;
+        line-height: 34px;
+        overflow: hidden;
+
 
         .title {
           display: inline-block;
@@ -278,30 +305,16 @@
           text-overflow: ellipsis;
         }
 
-        //        ellipsis
-        width: 100%;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-
         .count {
           .pull-right;
         }
+
+        &:last-child{
+          border-bottom-left-radius: 4px;
+          border-bottom-right-radius: 4px;
+        }
       }
 
-      li:last-child {
-        border-bottom: none;
-      }
-
-      li:first-child {
-        border-top: 1px solid @border-color;
-      }
-    }
-
-    span.caret-down {
-      position: absolute;
-      top: 0;
-      right: 1em;
     }
   }
 }
@@ -310,9 +323,7 @@
 body.tablet {
 
   .instrument-question > div {
-    padding: 0 15px;
     border: none;
-    margin: 0;
   }
 
   #content {
@@ -323,7 +334,7 @@ body.tablet {
 
   .instrument-footer {
     border-top: 1px solid @border-color;
-    padding: 1em;
+    padding: 1em 0;
     background-color: @white;
     position: fixed;
     bottom: 0;

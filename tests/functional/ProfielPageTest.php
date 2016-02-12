@@ -15,7 +15,7 @@ class ProfielPageTest extends FunctionalTest
             ->see($user->email)
             ->see($user->phone);
 
-        $this->isChecked('male', $user->male);
+        $this->myChecked('male', $user->male);
         $this->isSelected('organisation_id', $user->organisation_id);
         $this->isSelected('organisation_location_id', $user->organisation_location_id);
     }

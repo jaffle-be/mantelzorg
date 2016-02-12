@@ -17,7 +17,6 @@ use Auth;
 
 class HulpverlenerController extends AdminController
 {
-
     /**
      * @var User
      */
@@ -66,21 +65,20 @@ class HulpverlenerController extends AdminController
                         'query' => [
                             'multi_match' => [
                                 'fields' => ['firstname', 'lastname', 'email', 'organisation.name'],
-                                'query' => $input
-                            ]
+                                'query' => $input,
+                            ],
                         ],
-                        'filter' => []
-                    ]
+                        'filter' => [],
+                    ],
                 ],
                 'sort' => [
                     ['created_at' => 'asc'],
                     ['organisation.name' => 'asc'],
-                ]
-            ]
+                ],
+            ],
         ];
 
-        if(empty($input))
-        {
+        if (empty($input)) {
             $query['body']['query']['filtered']['query'] = ['match_all' => []];
         }
 
@@ -92,9 +90,9 @@ class HulpverlenerController extends AdminController
         $user = $this->user->find($id);
 
         if ($user) {
-            $organisations = $this->organisation->orderBy('name')->get();
+            $organisations = $this->organisation->get();
 
-            /**
+            /*
              * create an array that has has en empty first value, then all the organisations, then a 'create new' option
              * organisations have their id as value, new has 'new' as value
              * organisation is mandatory, so no need to add option 'kies organisation'
@@ -102,26 +100,24 @@ class HulpverlenerController extends AdminController
             $organisations = $organisations->lists('name', 'id')->all() +
                 array('new' => Lang::get('users.new_organisation'));
 
-            /**
+            /*
              * if the user had switched the organisation, you need to load
              * the locations that are linked to that organisation
              */
 
             if (Input::old('organisation_id') && $user->organisation_id !== Input::old('organisation_id')) {
                 $locations = $this->location->where('organisation_id', Input::old('organisation_id'))
-                    ->orderBy('name')
                     ->get()
                     ->lists('name', 'id')->all();
-            } else if ($user->organisation) {
+            } elseif ($user->organisation) {
                 $locations = $user->organisation->locations()
-                    ->orderBy('name')
                     ->get()
                     ->lists('name', 'id')->all();
             } else {
                 $locations = array();
             }
 
-            /**
+            /*
              * locations are also mandatory, so we do not add it like we did for inschrijvings form.
              */
             $locations = $locations + array('new' => Lang::get('users.new_location'));
@@ -191,7 +187,7 @@ class HulpverlenerController extends AdminController
 
         if (!is_array($input) || empty($input)) {
             return json_encode(array(
-                'status' => 'no decent input provided.'
+                'status' => 'no decent input provided.',
             ));
         }
 

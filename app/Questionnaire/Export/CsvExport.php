@@ -1,4 +1,6 @@
-<?php namespace App\Questionnaire\Export;
+<?php
+
+namespace App\Questionnaire\Export;
 
 use App\Mantelzorger\Mantelzorger;
 use App\Mantelzorger\Oudere;
@@ -13,7 +15,6 @@ use Maatwebsite\Excel\Excel;
 
 class CsvExport implements Exporter
 {
-
     protected $filter;
 
     /**
@@ -21,7 +22,20 @@ class CsvExport implements Exporter
      */
     protected $excel;
 
-    public function __construct(SessionFilter $filter, Excel $excel, Carbon $carbon, DataHandler $handler)
+    protected $carbon;
+
+    protected $handler;
+
+    protected $report;
+
+    /**
+     * The amount of sessions exported.
+     *
+     * @var int
+     */
+    protected $count = 0;
+
+    public function __construct(SessionFilter $filter, Excel $excel, Carbon $carbon, DataHandler $handler, Report $report)
     {
         ini_set('max_execution_time', 300);
 
@@ -32,6 +46,8 @@ class CsvExport implements Exporter
         $this->carbon = $carbon;
 
         $this->handler = $handler;
+
+        $this->report = $report;
     }
 
     /**
@@ -47,7 +63,7 @@ class CsvExport implements Exporter
     {
         $this->boot($survey);
 
-        $filename = $survey->title . '-' . $this->carbon->now()->format('y-m-d H:i:s');
+        $filename = $survey->title.'-'.$this->carbon->now()->format('y-m-d H:i:s');
 
         $excel = $this->excel->create($filename, function ($excel) use ($survey, $filters) {
 
@@ -67,10 +83,11 @@ class CsvExport implements Exporter
             });
         });
 
-        //do not change the value of the extension to xls, since that will only allow 256 columns
+        //do not change the value of the extension to xls
+        //since that would only allow 256 columns
         $excel->store('xlsx');
 
-        return $excel->getFileName() . '.xlsx';
+        return $this->createReport($survey, $filters, $excel);
     }
 
     protected function headers(Questionnaire $survey)
@@ -78,11 +95,12 @@ class CsvExport implements Exporter
         $headers = new Collection();
 
         $headers->push('id');
+        $headers->push('created');
 
         //add columns for people related info
         $headers = $this->headersHulpverlener($headers);
         $headers = $this->headersMantelzorger($headers);
-        $headers = $this->headersOuders($headers);
+        $headers = $this->headersOuderen($headers);
 
         $counter = 1;
 
@@ -96,25 +114,31 @@ class CsvExport implements Exporter
     protected function panel(Panel $panel, Collection $headers, &$counter)
     {
         foreach ($panel->questions as $question) {
-
-            if($question->getAttribute('explainable'))
-            {
-                $headers->push($counter . 'explanation');
+            if ($question->getAttribute('explainable')) {
+                $headers->push($counter.'explanation');
             }
 
             $this->choises($headers, $question, $counter);
 
-            $counter++;
+            ++$counter;
         }
     }
 
     protected function choises(Collection $headers, Question $question, $counter)
     {
-        $options = 1;
+        //checkboxed questions will have a column for each value
+        if ($question->multiple_answer) {
+            $options = 1;
 
-        foreach ($question->choises as $choise) {
-            $headers->push($counter . 'option' . $options);
-            $options++;
+            foreach ($question->choises as $choise) {
+                $headers->push($counter.'option'.$options . ' (id: ' . $choise->id . ')');
+                ++$options;
+            }
+        }
+        //radios will have only 2 columns, one for the value, one for the id of that value
+        else {
+            $headers->push($counter.'option');
+            $headers->push($counter.'option_id');
         }
     }
 
@@ -140,9 +164,9 @@ class CsvExport implements Exporter
         $query = $this->filter->filter($survey, $filters);
 
         $query->chunk(100, function ($sessions) use ($panels, $sheet) {
-
             $this->handler->handle($sessions, $panels, $sheet);
 
+            $this->count += $sessions->count();
         });
     }
 
@@ -179,7 +203,7 @@ class CsvExport implements Exporter
      *
      * @return mixed
      */
-    protected function headersOuders($headers)
+    protected function headersOuderen($headers)
     {
         $oudere = new Oudere();
 
@@ -194,13 +218,39 @@ class CsvExport implements Exporter
             'panels',
             //make sure questions follow the order of the questionnaire to number them in the report. not so transparent
             //but that is how they wanted it.
-            'panels.questions'         => function ($query) {
-                $query->orderBy('sort');
-            },
+            'panels.questions',
             //same reasoning applies for the options available to a question.
-            'panels.questions.choises' => function ($query) {
-                $query->orderBy('sort_weight');
-            }
+            'panels.questions.choises',
         ])->all();
+    }
+
+    /**
+     * @param Questionnaire $survey
+     * @param array         $filters
+     * @param               $excel
+     *
+     * @return Report
+     */
+    protected function createReport(Questionnaire $survey, array $filters, $excel)
+    {
+        $report = $this->report->newInstance();
+
+        $report->filename = $excel->getFileName().'.xlsx';
+
+        $report->questionnaire()->associate($survey);
+
+        if (isset($filters['hulpverlener_id']) && !empty($filters['hulpverlener_id'])) {
+            $report->user_id = $filters['hulpverlener_id'];
+        }
+
+        if (isset($filters['organisation_id']) && !empty($filters['organisation_id'])) {
+            $report->organisation_id = $filters['organisation_id'];
+        }
+
+        $report->survey_count = $this->count;
+
+        $report->save();
+
+        return $report;
     }
 }

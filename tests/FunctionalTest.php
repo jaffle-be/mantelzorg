@@ -8,7 +8,7 @@ abstract class FunctionalTest extends TestCase
 {
     use DatabaseTransactions;
 
-    protected $baseUrl = 'http://testing.local:8000';
+    protected $baseUrl = 'http://mantelzorg.testing:8080';
 
     /**
      * Do not merge with acceptance reset elasticsearch,
@@ -62,7 +62,7 @@ abstract class FunctionalTest extends TestCase
         return $this;
     }
 
-    public function isChecked($name, $value)
+    public function myChecked($name, $value)
     {
         $checked = $this->crawler->filter("input[name=$name]:checked")->attr('value');
 
@@ -73,16 +73,21 @@ abstract class FunctionalTest extends TestCase
 
     public function visit($uri)
     {
-        usleep(500);
+        $this->sleep();
 
         return parent::visit($uri);
     }
 
     protected function open($uri)
     {
-        usleep(500);
+        $this->sleep();
 
         return parent::open($uri);
+    }
+
+    protected function sleep()
+    {
+        usleep(100000);
     }
 
 }

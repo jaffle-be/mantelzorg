@@ -1,8 +1,9 @@
-<?php namespace App\System\Database\Eloquent;
+<?php
+
+namespace App\System\Database\Eloquent;
 
 class Model extends \Illuminate\Database\Eloquent\Model
 {
-
     public static $getMutatorCache = [];
 
     public function hasGetMutator($key)

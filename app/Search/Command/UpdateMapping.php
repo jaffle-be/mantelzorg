@@ -1,4 +1,6 @@
-<?php namespace App\Search\Command;
+<?php
+
+namespace App\Search\Command;
 
 use App\Search\SearchServiceInterface;
 use Illuminate\Console\Command;
@@ -6,7 +8,6 @@ use Symfony\Component\Console\Input\InputArgument;
 
 class UpdateMapping extends Command
 {
-
     /**
      * The console command name.
      *
@@ -28,7 +29,6 @@ class UpdateMapping extends Command
 
     /**
      * Create a new command instance.
-     *
      */
     public function __construct(SearchServiceInterface $search)
     {

@@ -11,11 +11,9 @@ use Illuminate\Contracts\Validation\Factory;
 use Input;
 use Lang;
 use Redirect;
-use Session;
 
 class PersonController extends \App\Http\Controllers\AdminController
 {
-
     /**
      * @var \App\User
      */
@@ -46,22 +44,21 @@ class PersonController extends \App\Http\Controllers\AdminController
     {
         $user = Auth::user();
 
-        $organisations = $this->organisation->orderBy('name')->get();
+        $organisations = $this->organisation->get();
 
         $organisations = array('' => Lang::get('users.pick_organisation')) + $organisations->lists('name', 'id')->all();
 
-        /**
+        /*
          * We need to load the locations depending on the organisation_id
          * If the user had submit the form and switched organisation, we need to load the locations for that organisation
          */
 
         if (Input::old() && $user->organisation_id !== Input::old('organisation_id')) {
             $locations = $this->location->where('organisation_id', Input::old('organisation_id'))
-                ->orderBy('name')
                 ->get()
                 ->lists('name', 'id')->all();
-        } else if ($user->organisation) {
-            $locations = $user->organisation->locations()->orderBy('name')->get()->lists('name', 'id')->all();
+        } elseif ($user->organisation) {
+            $locations = $user->organisation->locations()->get()->lists('name', 'id')->all();
         } else {
             $locations = array();
         }
@@ -76,10 +73,10 @@ class PersonController extends \App\Http\Controllers\AdminController
         $user = Auth::user();
 
         $validator = $validator->make(Input::all(), $this->user->rules(array_keys(Input::all()), [
-            'user' => $user->id
+            'user' => $user->id,
         ]));
 
-        /**
+        /*
          * If the user has entered a new password, the current-password needs to match the existing password
          * The new password needs to be confirmed too! (second rule)
          */
@@ -96,12 +93,12 @@ class PersonController extends \App\Http\Controllers\AdminController
         } else {
             $input = Input::all();
 
-            /**
+            /*
              * make sure to unset the password field, so the password isn't being emptied
              * when the user did not try to change it.
              */
             if (!empty($input['password'])) {
-                /**
+                /*
                  * hash the password to insert it into the database.
                  */
                 $input['password'] = Hash::make($input['password']);
@@ -115,4 +112,4 @@ class PersonController extends \App\Http\Controllers\AdminController
             return Redirect::route('instellingen.index')->withMessage(isset($message) ? $message : null);
         }
     }
-} 
+}

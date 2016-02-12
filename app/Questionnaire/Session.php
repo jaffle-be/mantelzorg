@@ -10,13 +10,13 @@ class Session extends Model implements Searchable
 {
     protected static $searchableMapping = [
         'created_at' => [
-            'type'   => 'date',
-            'format' => 'yyyy-MM-dd HH:mm:ss'
+            'type' => 'date',
+            'format' => 'yyyy-MM-dd HH:mm:ss',
         ],
         'updated_at' => [
-            'type'   => 'date',
-            'format' => 'yyyy-MM-dd HH:mm:ss'
-        ]
+            'type' => 'date',
+            'format' => 'yyyy-MM-dd HH:mm:ss',
+        ],
     ];
 
     use SearchableTrait;
@@ -30,15 +30,15 @@ class Session extends Model implements Searchable
         return 'surveys';
     }
 
-    protected $table = "questionnaire_survey_sessions";
+    protected $table = 'questionnaire_survey_sessions';
 
     protected $fillable = array('user_id', 'mantelzorger_id', 'oudere_id', 'questionnaire_id');
 
     protected static $rules = array(
-        'user_id'          => 'required|exists:users,id',
-        'mantelzorger_id'  => 'required|exists:mantelzorgers,id',
-        'oudere_id'        => 'required|exists:ouderen,id',
-        'questionnaire_id' => 'required|exists:questionnaires,id'
+        'user_id' => 'required|exists:users,id',
+        'mantelzorger_id' => 'required|exists:mantelzorgers,id',
+        'oudere_id' => 'required|exists:ouderen,id',
+        'questionnaire_id' => 'required|exists:questionnaires,id',
     );
 
     public function user()
@@ -68,12 +68,11 @@ class Session extends Model implements Searchable
 
     public function isFinished()
     {
-        if($this->answers->count() < $this->questionnaire->questions->count())
-        {
+        if ($this->answers->count() < $this->questionnaire->questions->count()) {
             return false;
         }
 
-        /**
+        /*
          * if the counts are equal, we still may have empty records.
          * we used to only save records for questions that were answered, but somewhere down the road
          * this was causing problems, so we always save a record for each question.
@@ -82,10 +81,8 @@ class Session extends Model implements Searchable
 
         $status = true;
 
-        foreach($this->answers as $answer)
-        {
-            if(empty($answer->explanation) && $answer->choises->count() == 0)
-            {
+        foreach ($this->answers as $answer) {
+            if (empty($answer->explanation) && $answer->choises->count() == 0) {
                 $status = false;
 
                 break;
@@ -96,7 +93,7 @@ class Session extends Model implements Searchable
     }
 
     /**
-     * Checks to see if the survey has an answer to the given question
+     * Checks to see if the survey has an answer to the given question.
      *
      * @param Question $question
      *
@@ -120,7 +117,7 @@ class Session extends Model implements Searchable
     }
 
     /**
-     * Return a string that helps identify this session
+     * Return a string that helps identify this session.
      *
      * @param string|null $name
      *
@@ -138,6 +135,6 @@ class Session extends Model implements Searchable
             $key = str_pad($key, 5, 0, STR_PAD_LEFT);
         }
 
-        return $name . '-' . $key;
+        return $name.'-'.$key;
     }
 }

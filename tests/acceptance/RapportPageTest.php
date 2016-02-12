@@ -1,6 +1,7 @@
 <?php namespace Test\Acceptance;
 
 use App\Organisation\Organisation;
+use App\Questionnaire\Export\Report;
 use App\Questionnaire\Questionnaire;
 use Laracasts\TestDummy\Factory;
 use Test\AdminAcceptanceTest;
@@ -21,6 +22,8 @@ class RapportPageTest extends AdminAcceptanceTest
         //we need at least 1 survey, 1 organisation
         $this->organisation = Factory::create('organisation');
         $this->survey = Factory::create('survey');
+
+        Factory::times(5)->create('report', ['questionnaire_id' => $this->survey->id]);
     }
 
     /**
@@ -35,7 +38,7 @@ class RapportPageTest extends AdminAcceptanceTest
 
     public function test_disabling_fields_when_selecting_filters()
     {
-        $this->open(route('rapport.index'));
+        $this->open(route('report.index'));
         $this->assertSame(null, $this->find('hulpverlener_id')->attribute('disabled'));
 
         //selecting instrument will not trigger a disabled
@@ -57,7 +60,22 @@ class RapportPageTest extends AdminAcceptanceTest
         //deselecting it will make it enabled again
         $this->select('hulpverlener_id', '');
         $this->assertSame(null, $this->find('organisation_id')->attribute('disabled'));
+    }
 
+    public function test_deleting_reports()
+    {
+        $this->open(route('report.index'));
+
+        $this->click('actions');
+        $this->click('select-all');
+        $this->click('actions');
+        $this->click('remove');
+        $this->click('confirm');
+        $this->wait(1000);
+        $this->seePageIs(route('report.index'))
+            ->notSee('<td>');
+
+        $this->assertCount(0, Report::all());
     }
 
 }

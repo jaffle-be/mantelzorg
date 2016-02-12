@@ -13,7 +13,7 @@ class Users extends Seeder
     {
         $faker = Faker::create();
 
-        foreach (range(1, 15) as $index) {
+        foreach (range(1, 20) as $index) {
             User::create([
                 'email'     => $faker->unique()->email,
                 'password'  => Hash::make($faker->sha1),

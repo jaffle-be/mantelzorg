@@ -9,7 +9,7 @@
 
                 <?= Form::open(['method' => 'post']) ?>
 
-                <label><?= Lang::get('questionnaires.title') ?></label>
+                <label class="control-label"><?= Lang::get('questionnaires.title') ?></label>
 
                 <div class="input-group">
                     <?= Form::text('title', null, array('class' => 'form-control')) ?>
@@ -19,27 +19,27 @@
                     <div id="error-title" class="alert alert-danger hide" data-target="title"></div>
 
 
-                <label><?= Lang::get('questionnaires.question') ?></label>
-                <?= Form::textarea('question', null, array('class' => 'form-control', 'style' => "margin-bottom:10px;")) ?>
+                <label class="control-label"><?= Lang::get('questionnaires.question') ?></label>
+                <?= Form::textarea('question', null, array('class' => 'form-control', 'style' => 'margin-bottom:10px;')) ?>
 
                     <div id="error-question" class="alert alert-danger hide" data-target="question"></div>
 
                 <div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="summary_question" id=""/>
+                    <label class="control-label" id="summary_question">
+                        <input type="checkbox" name="summary_question"/>
                         <?= Lang::get('questionnaires.summary_question') ?>
                     </label>
                 </div>
 
                 <div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="multiple_choise" id=""/>
+                    <label class="control-label" id="multiple_choise">
+                        <input type="checkbox" name="multiple_choise"/>
                         <?= Lang::get('questionnaires.multiple_choise_question') ?>
                     </label>
                 </div>
 
                 <div class="checkbox">
-                    <label>
+                    <label class="control-label" id="explainable">
                         <input type="checkbox" name="explainable" id=""/>
                         <?= Lang::get('questionnaires.explainable') ?>
                     </label>

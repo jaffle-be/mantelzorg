@@ -4,7 +4,6 @@ namespace App\Template;
 
 class TemplateRepository
 {
-
     /**
      * @var Breadcrumb
      */

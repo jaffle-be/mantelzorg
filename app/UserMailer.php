@@ -7,7 +7,6 @@ use Lang;
 
 class UserMailer
 {
-
     /**
      * @var Mailer
      */
@@ -27,7 +26,7 @@ class UserMailer
         $data = ['user' => $user, 'original' => $original];
 
         $this->mailer->send('emails.auth.password', $data, function ($message) use ($user) {
-            $message->to($user->email, $user->firstname . ' ' . $user->lastname)
+            $message->to($user->email, $user->firstname.' '.$user->lastname)
                 ->subject(Lang::get('email.registration.subject'));
         });
     }

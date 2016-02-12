@@ -6,7 +6,6 @@ use Illuminate\Support\ServiceProvider;
 
 class MantelzorgerServiceProvider extends ServiceProvider
 {
-
     public function register()
     {
         $this->app['App\Mantelzorger\Observer\Oudere'] = new Observer\Oudere($this->app['events']);

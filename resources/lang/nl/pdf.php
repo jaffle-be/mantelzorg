@@ -7,7 +7,7 @@ return [
     'hulpbehoevende' => 'Hulpbehoevende',
 
     'vragenlijst' => 'Vragenlijst',
-    'created'=> 'Aangemaakt op',
+    'created' => 'Aangemaakt op',
     'updated' => 'Laatst gewijzigd',
     'answered' => 'Beantwoord',
 
@@ -26,5 +26,7 @@ return [
     'oorzaak_hulpbehoefte' => 'Oorzaak van hulpbehoefte',
 
     'diagnose' => 'Diagnose',
+
+    'gender' => 'Geslacht',
 
 ];
