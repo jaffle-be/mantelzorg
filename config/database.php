@@ -26,7 +26,7 @@ return [
 	|
 	*/
 
-	'default' => env('APP_ENV') == 'testing' ? 'testing' : 'mysql',
+	'default' => env('APP_ENV'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -46,7 +46,19 @@ return [
 
 	'connections' => [
 
-		'mysql' => [
+		'production' => [
+			'driver'    => 'mysql',
+			'host'      => env('DB_HOST', 'localhost'),
+			'database'  => env('DB_DATABASE', 'forge'),
+			'username'  => env('DB_USERNAME', 'forge'),
+			'password'  => env('DB_PASSWORD', ''),
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+			'strict'    => false,
+		],
+
+		'local' => [
 			'driver'    => 'mysql',
 			'host'      => env('DB_HOST', 'localhost'),
 			'database'  => env('DB_DATABASE', 'forge') . '-' . env('APP_ENV'),
