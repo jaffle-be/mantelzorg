@@ -76,9 +76,9 @@
                     <thead>
                     <tr>
                         <th>
-                            {{ Lang::get('rapport.question-value') }}
+                            {{ Lang::get('rapport.context-value') }}
                         </th>
-                        <th>{{ Lang::get('rapport.question-value-code') }}</th>
+                        <th>{{ Lang::get('rapport.context-value-code') }}</th>
                     </tr>
                     </thead>
 
