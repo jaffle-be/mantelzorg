@@ -11,7 +11,7 @@
     "laravel/framework": "~5.1.0",
     "laravelcollective/html": "~5.0",
     "intouch/laravel-newrelic": "~2.0",
-    "elasticsearch/elasticsearch": "*",
+    "elasticsearch/elasticsearch": "~2.1.5",
     "maatwebsite/excel": "~2.0",
     "jenssegers/agent": "~2.1",
     "doctrine/dbal": "~2.5",
