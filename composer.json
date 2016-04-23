@@ -14,7 +14,7 @@
     }
   ],
   "require": {
-    "laravel/framework": "~5.1.0",
+    "laravel/framework": "~5.2.0",
     "laravelcollective/html": "~5.0",
     "intouch/laravel-newrelic": "~2.1",
     "elasticsearch/elasticsearch": "~2.1.5",
@@ -28,7 +28,6 @@
     "h4cc/wkhtmltoimage-i386": "0.12.x",
     "guzzlehttp/guzzle": "~5.0",
     "spatie/laravel-backup": "^2.5",
-    "laracasts/integrated": "^0.15.6",
     "predis/predis": "~1.0",
     "chumper/zipper": "0.6.x"
   },
