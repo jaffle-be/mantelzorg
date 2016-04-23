@@ -15,7 +15,7 @@ class SystemServiceProvider extends ServiceProvider
         if (env('APP_ENV') == 'production') {
             $this->app['newrelic']->setAppName('app.zichtopmantelzorg.be');
         } else {
-            $this->app['newrelic']->setAppName(env('APP_ENV').'zichtopmantelzorg.be');
+            $this->app['newrelic']->setAppName(env('APP_ENV').'.zichtopmantelzorg.be');
         }
     }
 
