@@ -5,9 +5,8 @@ namespace App\Mantelzorger\Commands;
 use App\Commands\Command;
 use App\Mantelzorger\Mantelzorger;
 use App\Mantelzorger\Oudere;
-use Illuminate\Contracts\Bus\SelfHandling;
 
-class UpdateOudere extends Command implements SelfHandling
+class UpdateOudere extends Command
 {
     /**
      * @var Mantelzorger

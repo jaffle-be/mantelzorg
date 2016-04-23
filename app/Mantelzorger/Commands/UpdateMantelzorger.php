@@ -5,9 +5,8 @@ namespace App\Mantelzorger\Commands;
 use App\Commands\Command;
 use App\Mantelzorger\Mantelzorger;
 use App\User;
-use Illuminate\Contracts\Bus\SelfHandling;
 
-class UpdateMantelzorger extends Command implements SelfHandling
+class UpdateMantelzorger extends Command
 {
     /**
      * @var User

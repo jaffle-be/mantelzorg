@@ -8,12 +8,11 @@ use App\Questionnaire\Export\ExportLogger;
 use App\Questionnaire\Questionnaire;
 use App\User;
 use Exception;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Queue\InteractsWithQueue;
 
-class ExportJob extends Command implements ShouldQueue, SelfHandling
+class ExportJob extends Command implements ShouldQueue
 {
     use InteractsWithQueue;
 
