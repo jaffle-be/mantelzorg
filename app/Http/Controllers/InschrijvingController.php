@@ -105,13 +105,13 @@ class InschrijvingController extends AdminController
             //create an array that has has en empty first value, then all the organisations, then a 'create new' option
             //empty has no value, organisations have their id as value, new has 'new' as value
             $organisations = array('' => Lang::get('users.pick_organisation')) +
-                $organisations->lists('name', 'id')->all() +
+                $organisations->pluck('name', 'id')->all() +
                 array('new' => Lang::get('users.new_organisation'));
 
             if (Input::old('organisation_id')) {
                 $organisation = $this->organisation->with(array('locations'))->find(Input::old('organisation_id'));
 
-                $locations = $organisation->locations->lists('name', 'id')->all();
+                $locations = $organisation->locations->pluck('name', 'id')->all();
             } else {
                 $locations = array();
             }

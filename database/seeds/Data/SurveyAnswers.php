@@ -49,7 +49,7 @@ class SurveyAnswers extends Seeder
                         $picked = new Collection([$picked]);
                     }
 
-                    $answer->choises()->sync($picked->lists('id')->toArray());
+                    $answer->choises()->sync($picked->pluck('id')->toArray());
                 }
             }
         }

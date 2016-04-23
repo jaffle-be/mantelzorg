@@ -144,7 +144,7 @@ class InsightsQuestionController extends AdminController
             ],
         ], true);
 
-        $choises = $choises->where('question_id', $question->id)->lists('title', 'id');
+        $choises = $choises->where('question_id', $question->id)->pluck('title', 'id');
 
         $buckets = ($aggregations['choises']['question']['choises']['buckets']);
 

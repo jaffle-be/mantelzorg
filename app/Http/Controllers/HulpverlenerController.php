@@ -97,7 +97,7 @@ class HulpverlenerController extends AdminController
              * organisations have their id as value, new has 'new' as value
              * organisation is mandatory, so no need to add option 'kies organisation'
              */
-            $organisations = $organisations->lists('name', 'id')->all() +
+            $organisations = $organisations->pluck('name', 'id')->all() +
                 array('new' => Lang::get('users.new_organisation'));
 
             /*
@@ -108,11 +108,11 @@ class HulpverlenerController extends AdminController
             if (Input::old('organisation_id') && $user->organisation_id !== Input::old('organisation_id')) {
                 $locations = $this->location->where('organisation_id', Input::old('organisation_id'))
                     ->get()
-                    ->lists('name', 'id')->all();
+                    ->pluck('name', 'id')->all();
             } elseif ($user->organisation) {
                 $locations = $user->organisation->locations()
                     ->get()
-                    ->lists('name', 'id')->all();
+                    ->pluck('name', 'id')->all();
             } else {
                 $locations = array();
             }

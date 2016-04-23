@@ -254,7 +254,7 @@ class DataHandler
     {
         $sessions->load($this->relations);
 
-        $sessionIds = $sessions->lists('id')->all();
+        $sessionIds = $sessions->pluck('id')->all();
 
         $answers = $this->repository->getAnswers($sessionIds);
         $choises = $this->repository->getChoises($sessionIds);

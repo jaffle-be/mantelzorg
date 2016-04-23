@@ -103,7 +103,7 @@ class OudereController extends \App\Http\Controllers\AdminController
 
     protected function getRelationsMantelzorger()
     {
-        $relations_mantelzorger = $this->metaContext->with('values')->where('context', Context::MANTELZORGER_RELATION)->first()->values->lists('value', 'id')->all();
+        $relations_mantelzorger = $this->metaContext->with('values')->where('context', Context::MANTELZORGER_RELATION)->first()->values->pluck('value', 'id')->all();
 
         //append an empty option
         return array('' => Lang::get('users.relatie_mantelzorger')) + $relations_mantelzorger + array('*new*' => Lang::get('users.relatie_mantelzorger_alternate'));
@@ -144,7 +144,7 @@ class OudereController extends \App\Http\Controllers\AdminController
 
     protected function getMeta($context)
     {
-        return $this->metaContext->with(['values'])->where('context', $context)->first()->values->lists('value', 'id')->all();
+        return $this->metaContext->with(['values'])->where('context', $context)->first()->values->pluck('value', 'id')->all();
     }
 
     protected function getWoonsituaties()

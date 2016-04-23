@@ -27,10 +27,10 @@ $factory(Mantelzorger::class, 'mantelzorger', function (Faker\Generator $faker) 
 
 $factory(Oudere::class, 'oudere', function (Faker\Generator $faker) {
 
-    $relations = Context::where('context', Context::MANTELZORGER_RELATION)->first()->values->lists('id')->all();
-    $woonsituaties = Context::where('context', Context::OUDEREN_WOONSITUATIE)->first()->values->lists('id')->all();
-    $oorzaken = Context::where('context', Context::OORZAAK_HULPBEHOEFTE)->first()->values->lists('id')->all();
-    $belprofielen = Context::where('context', Context::BEL_PROFIEL)->first()->values->lists('id')->all();
+    $relations = Context::where('context', Context::MANTELZORGER_RELATION)->first()->values->pluck('id')->all();
+    $woonsituaties = Context::where('context', Context::OUDEREN_WOONSITUATIE)->first()->values->pluck('id')->all();
+    $oorzaken = Context::where('context', Context::OORZAAK_HULPBEHOEFTE)->first()->values->pluck('id')->all();
+    $belprofielen = Context::where('context', Context::BEL_PROFIEL)->first()->values->pluck('id')->all();
 
     return [
         'identifier'      => substr($faker->uuid, 0, 20),

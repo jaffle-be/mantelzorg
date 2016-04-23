@@ -13,6 +13,6 @@ class OrganisationRepository implements OrganisationRepositoryInterface
 
     public function getForSelect()
     {
-        return $this->organisation->lists('name', 'id')->all();
+        return $this->organisation->pluck('name', 'id')->all();
     }
 }

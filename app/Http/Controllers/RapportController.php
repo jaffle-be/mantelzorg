@@ -51,7 +51,7 @@ class RapportController extends AdminController
     {
         $questionnaires = $this->questionnaire->orderBy('created_at')->get();
 
-        $questionnaires = ['' => Lang::get('rapport.select_survey')] + $questionnaires->lists('title', 'id')->all();
+        $questionnaires = ['' => Lang::get('rapport.select_survey')] + $questionnaires->pluck('title', 'id')->all();
 
         $hulpverleners = $this->users->getForSelect();
 
