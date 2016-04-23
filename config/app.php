@@ -152,7 +152,7 @@ return [
 		App\Providers\RouteServiceProvider::class,
 
 
-//		'Intouch\LaravelNewrelic\NewrelicServiceProvider',
+		'Intouch\LaravelNewrelic\NewrelicServiceProvider',
 		'Maatwebsite\Excel\ExcelServiceProvider',
 		'Spatie\Backup\BackupServiceProvider',
 		'Jenssegers\Agent\AgentServiceProvider',
