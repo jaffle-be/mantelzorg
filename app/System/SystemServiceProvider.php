@@ -34,8 +34,7 @@ class SystemServiceProvider extends ServiceProvider
     <div class="alert alert-danger error-$error_class">{{ \$errors->first('$field') }}</div>
 <?php endif; ?>
 HTML;
-
-            return \Blade::compileString($template);
+            return $template;
         });
     }
 
