@@ -72,7 +72,7 @@ class RapportController extends AdminController
 
         $this->validate($request, ['survey' => 'required|exists:questionnaires,id']);
 
-        $this->dispatchFromArray(ExportJob::class, ['id' => $id, 'userid' => $user->id, 'filters' => $filters]);
+        $this->dispatch(new ExportJob($id, $user->id, $filters));
 
         return redirect()->back()->with('success', \Lang::get('rapport.success'));
     }
