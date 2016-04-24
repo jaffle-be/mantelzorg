@@ -64,7 +64,7 @@ class InschrijvingController extends AdminController
         $input = Input::get('query');
 
         $query = [
-            'index' => env('ES_INDEX'),
+            'index' => config('search.index'),
             'type' => 'beta_registrations',
             'body' => [
                 'query' => [
