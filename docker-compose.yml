@@ -37,7 +37,7 @@ redis:
         - redis_vol
 
 elasticsearch:
-    image: twarlop/elasticsearch
+    image: twarlop/elasticsearch:1.4
     command: elasticsearch -Des.network.host=0.0.0.0
     ports:
         - "9200:9200"
