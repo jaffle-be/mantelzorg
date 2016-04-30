@@ -2,7 +2,7 @@
 namespace Test\Functional;
 
 use App\Beta\Registration;
-use Laracasts\TestDummy\Factory;
+use Illuminate\Database\Eloquent\Factory;
 use Test\FunctionalTest;
 
 class HomePageTest extends FunctionalTest
@@ -17,7 +17,7 @@ class HomePageTest extends FunctionalTest
             'organisation' => 'digiredo',
         ];
 
-        $user = factory(Registration::class)->raw($payload);
+        $user = app(Factory::class)->raw(Registration::class, $payload);
 
         $this->visit(route('home'))
             ->submitForm('Meld je aan', $user)

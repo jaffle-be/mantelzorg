@@ -3,8 +3,8 @@
 use App\Mantelzorger\Mantelzorger;
 use App\Mantelzorger\Oudere;
 use App\User;
+use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Support\Collection;
-use Laracasts\TestDummy\Factory;
 use Test\FunctionalTest;
 
 class MantelzorgersPageTest extends FunctionalTest
@@ -98,7 +98,7 @@ class MantelzorgersPageTest extends FunctionalTest
         $mantelzorgers = new Collection();
 
         while ($teller < 2) {
-            $mantelzorger = new Mantelzorger(factory('mantelzorger'))->raw();
+            $mantelzorger = new Mantelzorger(app(Factory::class)->raw('mantelzorger'));
 
             $mantelzorger->toArray();
 
