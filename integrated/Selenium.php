@@ -1,6 +1,6 @@
 <?php namespace Integrated;
 
-use PhpSpec\Exception\Exception;
+use Exception;
 use Symfony\Component\DomCrawler\Crawler;
 use WebDriver\Element;
 use WebDriver\Exception\InvalidSelector;
@@ -32,9 +32,9 @@ class Selenium extends \Laracasts\Integrated\Extensions\Selenium
 
     protected function updateCurrentUrl()
     {
-        $this->crawler = new Crawler($this->response(), $this->currentPage());
-
         parent::updateCurrentUrl();
+
+        $this->crawler = new Crawler($this->response(), $this->currentPage());
 
         return $this;
     }
@@ -190,6 +190,34 @@ class Selenium extends \Laracasts\Integrated\Extensions\Selenium
         $this->assertTrue($element->selected(), "the element '$selector' was not selected");
 
         return $this;
+    }
+
+    public function waitForCss($selector, $timeout = 2000, $interval = 50, $checkVisibility = true)
+    {
+        $steps = ceil($timeout / $interval);
+        $step = 0;
+
+        while($step < $steps)
+        {
+            $step++;
+
+            $this->session->timeouts()->postImplicit_wait(['ms' => $interval]);
+
+            try {
+                $element = $this->findCss($selector);
+
+                if($element->displayed())
+                {
+                    return $element;
+                }
+                else{
+                    throw new NoSuchElement("element was found but invisible");
+                }
+
+            } catch (NoSuchElement $e) {
+            }
+        }
+        throw $e;
     }
 
 }
