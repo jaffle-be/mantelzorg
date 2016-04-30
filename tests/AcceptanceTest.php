@@ -99,7 +99,7 @@ abstract class AcceptanceTest extends Selenium
 
     protected function newSession()
     {
-        $host = 'http://localhost:4444/wd/hub';
+        $host = sprintf('http://%s:4444/wd/hub', config('tests.selenium-host', 'localhost'));
         $capabilities = [];
 
         if(env('TRAVIS') || env('SAUCED'))
@@ -139,11 +139,6 @@ abstract class AcceptanceTest extends Selenium
         $this->sleep();
 
         return parent::open($uri);
-    }
-
-    protected function sleep()
-    {
-        usleep(100000);
     }
 
 }
