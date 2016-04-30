@@ -45,7 +45,7 @@ $factory(Question::class, 'question', function (Generator $faker) use ($factory)
 });
 
 $factory(Question::class, 'mc-question', function (Generator $faker) use ($factory) {
-    $attributes = Factory::attributesFor('question');
+    $attributes = factory('question')->raw();
 
     return array_merge($attributes, [
         'multiple_choise' => true,
@@ -53,7 +53,7 @@ $factory(Question::class, 'mc-question', function (Generator $faker) use ($facto
 });
 
 $factory(Question::class, 'mcma-question', function (Generator $faker) use ($factory) {
-    $attributes = Factory::attributesFor('question');
+    $attributes = factory('question')->raw();
 
     return array_merge($attributes, [
         'multiple_choise' => true,
@@ -62,7 +62,7 @@ $factory(Question::class, 'mcma-question', function (Generator $faker) use ($fac
 });
 
 $factory(Question::class, 'summary-question', function (Generator $faker) use ($factory) {
-    $attributes = Factory::attributesFor('question');
+    $attributes = factory('question')->raw();
 
     return array_merge($attributes, [
         'multiple_choise'  => true,
@@ -71,7 +71,7 @@ $factory(Question::class, 'summary-question', function (Generator $faker) use ($
 });
 
 $factory(Question::class, 'explainable-question', function (Generator $faker) use ($factory) {
-    $attributes = Factory::attributesFor('question');
+    $attributes = factory('question')->raw();
 
     return array_merge($attributes, [
         'explainable' => true,
@@ -112,14 +112,14 @@ $factory(Report::class, 'report', function(Generator $faker) use ($factory)
 
 $factory(Report::class, 'user-report', function(Generator $faker) use ($factory)
 {
-    $report = Factory::attributesFor('report');
+    $report = factory('report')->raw();
 
     return array_merge($report, ['user_id' => User::first()->id]);
 });
 
 $factory(Report::class, 'organisation-report', function(Generator $faker) use ($factory)
 {
-    $report = Factory::attributesFor('report');
+    $report = factory('report')->raw();
 
     return array_merge($report, ['organisation_id' => Organisation::first()->id]);
 });

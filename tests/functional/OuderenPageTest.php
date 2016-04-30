@@ -30,7 +30,7 @@ class OuderenPageTest extends FunctionalTest
 
         $mantelzorger = $this->create($user);
 
-        $payload = Factory::attributesFor('oudere');
+        $payload = factory('oudere')->raw();
 
         $birthday = $payload['birthday'];
 
@@ -51,7 +51,7 @@ class OuderenPageTest extends FunctionalTest
         $mantelzorger = $this->create($user);
 
 
-        $payload = Factory::attributesFor('oudere');
+        $payload = factory('oudere')->raw();
         //save original birtday date object
         $birthday = $payload['birthday'];
         //manipulate array for form input
@@ -101,7 +101,7 @@ class OuderenPageTest extends FunctionalTest
 
         $oudere = $this->edit($user);
 
-        $payload = Factory::attributesFor('oudere');
+        $payload = factory('oudere')->raw();
 
         $birthday = $payload['birthday'];
         $payload = $this->inputPayload($birthday, $payload);

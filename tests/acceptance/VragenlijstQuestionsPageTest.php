@@ -44,7 +44,7 @@ class VragenlijstQuestionsPageTest extends AdminAcceptanceTest
             ->see('vraagstelling is verplicht');
 
 
-        $question = Factory::attributesFor('question');
+        $question = factory('question')->raw();
 
         $payload = array_only($question, ['title', 'question']);
 

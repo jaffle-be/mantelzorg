@@ -54,7 +54,7 @@ class MantelzorgersPageTest extends FunctionalTest
 
         $this->visit(route('instellingen.{hulpverlener}.mantelzorgers.create', [$user]));
 
-        $mantelzorger = Factory::attributesFor('mantelzorger');
+        $mantelzorger = factory('mantelzorger')->raw();
 
         $birthday = $mantelzorger['birthday'];
 
@@ -98,7 +98,7 @@ class MantelzorgersPageTest extends FunctionalTest
         $mantelzorgers = new Collection();
 
         while ($teller < 2) {
-            $mantelzorger = new Mantelzorger(Factory::attributesFor('mantelzorger'));
+            $mantelzorger = new Mantelzorger(factory('mantelzorger'))->raw();
 
             $mantelzorger->toArray();
 
