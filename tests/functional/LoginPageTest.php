@@ -10,7 +10,7 @@ class LoginPageTest extends FunctionalTest
     public function testAccessingAdminWithoutLogin()
     {
         $this->visit(route('hulpverleners.index'))
-            ->seePageIs(route('login'))
+            ->seePageIs(url('login'))
             ->see('alert-danger');
     }
 
@@ -57,7 +57,7 @@ class LoginPageTest extends FunctionalTest
         ];
 
         $this->login($credentials)
-            ->seePageIs(route('login'))
+            ->seePageIs(url('login'))
             ->see('alert-danger');
     }
 
@@ -65,7 +65,7 @@ class LoginPageTest extends FunctionalTest
     {
         $this->visit('login')
             ->submitForm('Aanmelden')
-            ->seePageIs(route('login'))
+            ->seePageIs(url('login'))
             ->see('alert-danger');
     }
 
@@ -79,13 +79,13 @@ class LoginPageTest extends FunctionalTest
         ];
 
         $this->login($credentials)
-            ->seePageIs(route('login'))
+            ->seePageIs(url('login'))
             ->see('alert-danger');
     }
 
     protected function login(array $credentials = [])
     {
-        return $this->visit(route('login'))
+        return $this->visit(url('login'))
             ->submitForm('Aanmelden', $credentials);
     }
 

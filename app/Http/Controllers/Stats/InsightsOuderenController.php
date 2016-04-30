@@ -21,7 +21,7 @@ class InsightsOuderenController extends AdminController
     public function ouderen(SearchServiceInterface $search)
     {
         $results = $search->aggregate([
-            'index' => env('ES_INDEX'),
+            'index' => config('search.index'),
             'type' => 'mantelzorgers',
             'body' => [
                 'aggs' => [

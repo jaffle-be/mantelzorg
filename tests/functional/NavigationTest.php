@@ -54,7 +54,7 @@ class NavigationTest extends FunctionalTest
 
         $user->id = 1;
 
-        app('auth')->driver()->setUser($user);
+        app('auth')->setUser($user);
 
         $this->visit(route('dash'));
 
@@ -90,7 +90,7 @@ class NavigationTest extends FunctionalTest
             ->see('main-nav-instrument')
             ->click('log-out')
             ->visit(route('dash'))
-            ->seePageIs(route('login'))
+            ->seePageIs(url('login'))
             ->see('log-out', true)
             ->see('log-in');
     }

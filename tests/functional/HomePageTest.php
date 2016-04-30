@@ -31,7 +31,7 @@ class HomePageTest extends FunctionalTest
         $this->visit(route('home'))
             ->see('log-in')
             ->click('log-in')
-            ->seePageIs(route('login'));
+            ->seePageIs(url('login'));
     }
 
 }

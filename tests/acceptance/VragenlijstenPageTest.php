@@ -75,7 +75,7 @@ class VragenlijstenPageTest extends AdminAcceptanceTest
 
         $this->dragAndDrop($this->findWrapped($this->panel($first), "ui-sortable-handle"), $this->findWrapped($this->panel($last),  "ui-sortable-handle"));
 
-        $this->wait(1000)->open(route('survey.index'))->snap()
+        $this->wait(1000)->open(route('survey.index'))
             ->see('Some new title')
             ->see('Some new panel title');
 

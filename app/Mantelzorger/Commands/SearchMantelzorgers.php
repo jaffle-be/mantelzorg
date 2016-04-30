@@ -38,7 +38,7 @@ class SearchMantelzorgers extends Command
     protected function query()
     {
         $query = [
-            'index' => env('ES_INDEX'),
+            'index' => config('search.index'),
             'type' => 'mantelzorgers',
             'body' => [
                 'query' => [

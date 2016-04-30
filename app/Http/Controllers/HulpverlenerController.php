@@ -57,7 +57,7 @@ class HulpverlenerController extends AdminController
         $input = Input::get('query');
 
         $query = [
-            'index' => env('ES_INDEX'),
+            'index' => config('search.index'),
             'type' => 'users',
             'body' => [
                 'query' => [
