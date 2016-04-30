@@ -40,7 +40,7 @@ class HulpverlenerDetailPageTest extends AdminAcceptanceTest
 
     public function test_creating_location()
     {
-        $location = factory('location')->raw(['name' => 'knownLocationName']);
+        $location = app(Factory::class)->raw('location', ['name' => 'knownLocationName']);
 
         $location = array_only($location, ['name', 'street', 'postal', 'city']);
 
@@ -61,7 +61,7 @@ class HulpverlenerDetailPageTest extends AdminAcceptanceTest
         $this->start();
 
         $organisation = ['organisation_name' => 'knownOrganisationName'];
-        $location = array_only(factory('location')->raw(['name' => 'knownLocationName']), ['name', 'street', 'postal', 'city']);
+        $location = array_only(app(Factory::class)->raw('location', ['name' => 'knownLocationName']), ['name', 'street', 'postal', 'city']);
 
         $this->select('organisation_id', 'new')
             ->submitFormWrapped('organisation-creator', 'btn-primary', $organisation)

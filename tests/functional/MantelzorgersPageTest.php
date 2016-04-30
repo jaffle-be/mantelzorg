@@ -54,7 +54,7 @@ class MantelzorgersPageTest extends FunctionalTest
 
         $this->visit(route('instellingen.{hulpverlener}.mantelzorgers.create', [$user]));
 
-        $mantelzorger = factory('mantelzorger')->raw();
+        $mantelzorger = app(Factory::class)->raw('mantelzorger');
 
         $birthday = $mantelzorger['birthday'];
 
@@ -76,7 +76,7 @@ class MantelzorgersPageTest extends FunctionalTest
 
         $mantelzorger = factory('mantelzorger')->create(['hulpverlener_id' => $user->id]);
 
-        $edited = factory('mantelzorger')->raw(['hulpverlener_id']);
+        $edited = app(Factory::class)->raw('mantelzorger', ['hulpverlener_id']);
         $edited['birthday'] = $edited['birthday']->format('d/m/Y');
 
         $edited = array_only($edited, ['firstname', 'lastname', 'birthday', 'male', 'street', 'city', 'postal', 'email', 'phone']);
@@ -97,8 +97,10 @@ class MantelzorgersPageTest extends FunctionalTest
 
         $mantelzorgers = new Collection();
 
+        $factory = app(Factory::class);
+
         while ($teller < 2) {
-            $mantelzorger = new Mantelzorger(app(Factory::class)->raw('mantelzorger'));
+            $mantelzorger = new Mantelzorger($factory->raw('mantelzorger'));
 
             $mantelzorger->toArray();
 
@@ -110,7 +112,7 @@ class MantelzorgersPageTest extends FunctionalTest
 
                 while($oudereTeller < 3)
                 {
-                    $oudere = new Oudere(factory('oudere')->raw(['mantelzorger_id' => $mantelzorger->id]));
+                    $oudere = new Oudere($factory->raw('oudere', ['mantelzorger_id' => $mantelzorger->id]));
 
                     $mantelzorger->oudere()->save($oudere);
 

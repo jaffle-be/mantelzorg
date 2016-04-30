@@ -30,7 +30,7 @@ class OuderenPageTest extends FunctionalTest
 
         $mantelzorger = $this->create($user);
 
-        $payload = factory('oudere')->raw();
+        $payload = $this->getOudere();
 
         $birthday = $payload['birthday'];
 
@@ -51,7 +51,7 @@ class OuderenPageTest extends FunctionalTest
         $mantelzorger = $this->create($user);
 
 
-        $payload = factory('oudere')->raw();
+        $payload = $this->getOudere();
         //save original birtday date object
         $birthday = $payload['birthday'];
         //manipulate array for form input
@@ -101,7 +101,7 @@ class OuderenPageTest extends FunctionalTest
 
         $oudere = $this->edit($user);
 
-        $payload = factory('oudere')->raw();
+        $payload = $this->getOudere();
 
         $birthday = $payload['birthday'];
         $payload = $this->inputPayload($birthday, $payload);
@@ -172,6 +172,14 @@ class OuderenPageTest extends FunctionalTest
     {
         $this->submitForm('Gegevens bewaren', $payload)
             ->seePageIs(route('instellingen.{hulpverlener}.mantelzorgers.index', [$user]));
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getOudere()
+    {
+        return app(Factory::class)->raw('oudere');
     }
 
 }

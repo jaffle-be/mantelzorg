@@ -70,7 +70,7 @@ class InschrijvingenPageDetailTest extends AdminAcceptanceTest
         $location = factory('location')->create();
         $organisation = $location->organisation;
 
-        $location = factory('location')->raw();
+        $location = app(Factory::class)->raw('location');
         $payload = array_only($location, ['name', 'street', 'city', 'postal']);
 
         $this->start()
@@ -99,9 +99,9 @@ class InschrijvingenPageDetailTest extends AdminAcceptanceTest
 
     public function test_creating_with_new_organisation_and_new_location()
     {
-        $organisation = factory('organisation')->raw();
+        $organisation = app(Factory::class)->raw('organisation');
 
-        $locationPayload = factory('location')->raw();
+        $locationPayload = app(Factory::class)->raw('location');
 
         $this->start()
             ->select('organisation_id', 'new')
