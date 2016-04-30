@@ -17,7 +17,7 @@ abstract class AdminAcceptanceTest extends AcceptanceTest
             'password' => Hash::make('password')
         ]);
 
-        $this->visit(route('login'))
+        $this->visit(url('login'))
             ->submitForm('Aanmelden', ['email' => $this->user->email, 'password' => 'password']);
     }
 

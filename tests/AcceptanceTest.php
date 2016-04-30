@@ -20,6 +20,8 @@ abstract class AcceptanceTest extends Selenium
 
     protected $user;
 
+    protected $login = true;
+
     /**
      * We want to use our own AnnotationReader
      * it will allow us to sort different annotation actions
@@ -60,12 +62,19 @@ abstract class AcceptanceTest extends Selenium
      */
     public function login()
     {
+        if(!$this->login)
+        {
+            $this->visit(route('home'));
+
+            return;
+        }
+
         $this->user = Factory::create('user', [
             'email' => 'thomas@digiredo.be',
             'password' => Hash::make('password')
         ]);
 
-        $this->visit(route('login'))
+        $this->visit(url('login'))
             ->submitForm('Aanmelden', ['email' => $this->user->email, 'password' => 'password']);
     }
 
