@@ -47,10 +47,10 @@ class InstrumentPageTest extends AcceptanceTest
         foreach(Panel::all() as $panel)
         {
             $question = factory('mc-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
-            Factory::times(3)->create('choise', ['question_id' => $question->id]);
+            factory('choise', 3)->create(['question_id' => $question->id]);
 
             $question = factory('mcma-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
-            Factory::times(3)->create('choise', ['question_id' => $question->id]);
+            factory('choise', 3)->create(['question_id' => $question->id]);
 
             $question = factory('explainable-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
         }

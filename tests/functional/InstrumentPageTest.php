@@ -79,7 +79,7 @@ class InstrumentPageTest extends FunctionalTest
         //create 1 mantelzorger
         $this->mantelzorger = factory('mantelzorger')->create(['hulpverlener_id' => $user->id]);
         //2 ouderen
-        Factory::times(2)->create('oudere', ['mantelzorger_id' => $this->mantelzorger->id]);
+        factory('oudere', 2)->create(['mantelzorger_id' => $this->mantelzorger->id]);
         //a session for each
 
         foreach(Oudere::all() as $oudere)

@@ -13,7 +13,7 @@ class InschrijvingenPageTest extends AdminAcceptanceTest
      */
     protected function addInschrijvingen()
     {
-        Factory::times(20)->create(Registration::class);
+        factory(Registration::class, 20)->create();
     }
 
     /**

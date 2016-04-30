@@ -48,7 +48,7 @@ class VragenlijstenQuestionsPageTest extends AdminFunctionalTest
         $mcquestion = factory('mc-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
         //we use mc question to test showing choises.
 
-        Factory::times(4)->create('choise', ['question_id' => $mcquestion->id]);
+        factory('choise', 4)->create(['question_id' => $mcquestion->id]);
 
         $mcmaquestion = factory('mcma-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
         $explainable = factory('explainable-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);

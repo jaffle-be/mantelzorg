@@ -35,7 +35,7 @@ class VragenlijstPageTest extends AdminFunctionalTest
 
     protected function surveys()
     {
-        Factory::times(2)->create('survey');
+        factory('survey', 2)->create();
         factory('survey')->create(['active' => 1]);
 
         foreach(Questionnaire::all() as $questionnaire)

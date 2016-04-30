@@ -23,7 +23,7 @@ class RapportPageTest extends AdminAcceptanceTest
         $this->organisation = factory('organisation')->create();
         $this->survey = factory('survey')->create();
 
-        Factory::times(5)->create('report', ['questionnaire_id' => $this->survey->id]);
+        factory('report', 5)->create(['questionnaire_id' => $this->survey->id]);
     }
 
     /**

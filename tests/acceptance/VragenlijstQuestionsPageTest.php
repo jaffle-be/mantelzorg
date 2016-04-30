@@ -132,7 +132,7 @@ class VragenlijstQuestionsPageTest extends AdminAcceptanceTest
 
         $question = factory('mc-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
 
-        Factory::times(4)->create('choise', ['question_id' => $question->id]);
+        factory('choise', 4)->create(['question_id' => $question->id]);
 
         $choise = Choise::first();
 

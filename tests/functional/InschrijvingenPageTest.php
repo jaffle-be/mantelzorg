@@ -11,7 +11,7 @@ class InschrijvingenPageTest extends AdminFunctionalTest
     {
         $this->login();
 
-        Factory::times(4)->create(Registration::class);
+        factory(Registration::class)->create();
 
         $this->assertSame(4, Registration::count());
 

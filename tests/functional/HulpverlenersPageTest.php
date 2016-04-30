@@ -13,7 +13,7 @@ class HulpverlenersPageTest extends AdminFunctionalTest
 
         //create only 9 users, as there is a logged in user, and we only show 10 records,
         //so this is certainly smaller then the rows per page
-        $users = Factory::times(9)->create('user');
+        $users = factory('user', 9)->create();
 
         $this->sleep();
 
@@ -37,17 +37,17 @@ class HulpverlenersPageTest extends AdminFunctionalTest
     {
         $this->login();
 
-        Factory::times(1)->create('user', [
+        factory('user')->create([
             'firstname' => 'thomas 1'
         ]);
-        Factory::times(1)->create('user', [
+        factory('user')->create([
             'firstname' => 'thomas 2'
         ]);
 
-        Factory::times(1)->create('user', [
+        factory('user')->create([
             'firstname' => 'rudy 1'
         ]);
-        Factory::times(1)->create('user', [
+        factory('user')->create([
             'firstname' => 'rudy 2'
         ]);
 
@@ -86,7 +86,7 @@ class HulpverlenersPageTest extends AdminFunctionalTest
         $this->click(2)
             ->seePageIs(route('hulpverleners.index', ['page' => 2]));
 
-        Factory::times(20)->create('user', ['firstname' => 'thomas']);
+        factory('user', 20)->create(['firstname' => 'thomas']);
 
         $this->visit(route('hulpverleners.index'));
 

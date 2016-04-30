@@ -13,7 +13,7 @@ class HulpverlenerPageTest extends AdminAcceptanceTest
      */
     public function baseHulpverleners()
     {
-        Factory::times(20)->create('user');
+        factory('user', 20)->create();
     }
 
     public function test_deleting_some_hulpverleners()
