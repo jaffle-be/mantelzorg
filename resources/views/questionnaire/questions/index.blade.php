@@ -90,7 +90,7 @@
                                 </div>
                             </div>
 
-                            <div class="choises" <?= $question->multiple_choise === 0 ? 'style="display:none;"' : '' ?>>
+                            <div class="choises" <?= $question->multiple_choise == '0' ? 'style="display:none;"' : '' ?>>
                                 <div class="header">
                                     <span><?= Lang::get('questionnaires.choises') ?></span>
                                     <button class="pull-right btn btn-default add-choise"><i class="fa fa-plus"></i>

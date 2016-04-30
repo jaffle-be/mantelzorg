@@ -49,7 +49,7 @@ class UpdateSettings extends Command
 
         $this->service->updateSettings($settings);
 
-        if(env('APP_ENV') == 'testing')
+        if(config('app.env') == 'testing')
         {
             $client = $this->service->getClient();
 

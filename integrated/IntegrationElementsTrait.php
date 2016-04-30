@@ -1,44 +1,7 @@
 <?php namespace Integrated;
 
-use Exception;
-use Symfony\Component\DomCrawler\Crawler;
-use WebDriver\Element;
-use WebDriver\Exception\InvalidSelector;
-use WebDriver\Exception\NoSuchElement;
-
-class Selenium extends \Laracasts\Integrated\Extensions\Selenium
+trait IntegrationElementsTrait
 {
-
-    protected function dragAndDrop(Element $src, Element $target)
-    {
-        $this->session->moveto(['element' => $src->getID()]);
-        $this->session->buttondown();
-        $this->session->moveto(['element' => $target->getID()]);
-        $this->session->buttonup();
-    }
-
-    protected function open($uri)
-    {
-        if (!$this->session) {
-            throw new Exception('Need to call visit before using the open method. as we need an open browser');
-        }
-
-        $this->session->open($uri);
-
-        $this->updateCurrentUrl();
-
-        return $this;
-    }
-
-    protected function updateCurrentUrl()
-    {
-        parent::updateCurrentUrl();
-
-        $this->crawler = new Crawler($this->response(), $this->currentPage());
-
-        return $this;
-    }
-
     public function select($select, $option)
     {
         if ($element = $this->session->element('xpath', "//select[@name='$select']/option[@value='$option']")) {
@@ -177,47 +140,4 @@ class Selenium extends \Laracasts\Integrated\Extensions\Selenium
     {
         return $this->session->element('css selector', $selector);
     }
-
-    protected function post($value)
-    {
-        return ['value' => [$value]];
-    }
-
-    public function isSelected($selector, $option)
-    {
-        $element = $this->session->element('xpath', "//select[@id='$selector']/option[@value='$option'] | //select[@name='$selector']/option[@value='$option']");
-
-        $this->assertTrue($element->selected(), "the element '$selector' was not selected");
-
-        return $this;
-    }
-
-    public function waitForCss($selector, $timeout = 2000, $interval = 50, $checkVisibility = true)
-    {
-        $steps = ceil($timeout / $interval);
-        $step = 0;
-
-        while($step < $steps)
-        {
-            $step++;
-
-            $this->session->timeouts()->postImplicit_wait(['ms' => $interval]);
-
-            try {
-                $element = $this->findCss($selector);
-
-                if($element->displayed())
-                {
-                    return $element;
-                }
-                else{
-                    throw new NoSuchElement("element was found but invisible");
-                }
-
-            } catch (NoSuchElement $e) {
-            }
-        }
-        throw $e;
-    }
-
 }

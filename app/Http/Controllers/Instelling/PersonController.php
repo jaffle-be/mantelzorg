@@ -46,7 +46,7 @@ class PersonController extends \App\Http\Controllers\AdminController
 
         $organisations = $this->organisation->get();
 
-        $organisations = array('' => Lang::get('users.pick_organisation')) + $organisations->lists('name', 'id')->all();
+        $organisations = array('' => Lang::get('users.pick_organisation')) + $organisations->pluck('name', 'id')->all();
 
         /*
          * We need to load the locations depending on the organisation_id
@@ -56,9 +56,9 @@ class PersonController extends \App\Http\Controllers\AdminController
         if (Input::old() && $user->organisation_id !== Input::old('organisation_id')) {
             $locations = $this->location->where('organisation_id', Input::old('organisation_id'))
                 ->get()
-                ->lists('name', 'id')->all();
+                ->pluck('name', 'id')->all();
         } elseif ($user->organisation) {
-            $locations = $user->organisation->locations()->get()->lists('name', 'id')->all();
+            $locations = $user->organisation->locations()->get()->pluck('name', 'id')->all();
         } else {
             $locations = array();
         }

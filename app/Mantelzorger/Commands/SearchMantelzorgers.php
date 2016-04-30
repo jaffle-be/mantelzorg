@@ -5,10 +5,9 @@ namespace App\Mantelzorger\Commands;
 use App\Commands\Command;
 use App\Search\SearchServiceInterface;
 use App\User;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Support\Arr;
 
-class SearchMantelzorgers extends Command implements SelfHandling
+class SearchMantelzorgers extends Command
 {
     protected $user;
 
@@ -39,7 +38,7 @@ class SearchMantelzorgers extends Command implements SelfHandling
     protected function query()
     {
         $query = [
-            'index' => env('ES_INDEX'),
+            'index' => config('search.index'),
             'type' => 'mantelzorgers',
             'body' => [
                 'query' => [

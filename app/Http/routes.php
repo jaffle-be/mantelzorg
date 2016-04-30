@@ -173,38 +173,6 @@ Route::post('', [
     'as' => 'beta.post',
 ]);
 
-Route::get('login', [
-    'uses' => 'IndexController@getLogin',
-    'as' => 'login',
-]);
-Route::post('login', [
-    'uses' => 'IndexController@postLogin',
-    'as' => 'login.post',
-]);
-
-Route::get('logout', [
-    'uses' => 'IndexController@getLogout',
-    'as' => 'logout',
-]);
-
-Route::get('reminder', [
-    'uses' => 'IndexController@getReminder',
-    'as' => 'reminder',
-]);
-Route::post('reminder', [
-    'uses' => 'IndexController@postReminder',
-    'as' => 'reminder.post',
-]);
-
-Route::get('reset/{token}', [
-    'uses' => 'IndexController@getReset',
-    'as' => 'reset',
-]);
-Route::post('reset/{token}', [
-    'uses' => 'IndexController@postReset',
-    'as' => 'reset.post',
-]);
-
 Route::get('hijack/{user}', [
     'uses' => 'IndexController@getHijack',
     'as' => 'hijack',
@@ -220,3 +188,5 @@ Route::get('rejack', [
 
 Route::get('instrument', ['as' => 'dash', 'uses' => 'InstrumentController@index']);
 Route::get('', ['as' => 'home', 'uses' => 'IndexController@getIndex']);
+
+Route::auth();

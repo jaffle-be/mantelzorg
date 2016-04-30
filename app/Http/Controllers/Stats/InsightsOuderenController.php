@@ -21,7 +21,7 @@ class InsightsOuderenController extends AdminController
     public function ouderen(SearchServiceInterface $search)
     {
         $results = $search->aggregate([
-            'index' => env('ES_INDEX'),
+            'index' => config('search.index'),
             'type' => 'mantelzorgers',
             'body' => [
                 'aggs' => [
@@ -73,7 +73,7 @@ class InsightsOuderenController extends AdminController
 
     protected function setLabels($name, &$results)
     {
-        $values = Context::where('context', $name)->first()->values->lists('value', 'id');
+        $values = Context::where('context', $name)->first()->values->pluck('value', 'id');
 
         foreach ($results['buckets'] as $index => $result) {
             $result['key'] = $values->get($result['key']);

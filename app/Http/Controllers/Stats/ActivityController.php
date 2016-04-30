@@ -27,7 +27,7 @@ class ActivityController extends AdminController
             ->groupBy('date')
             ->select([DB::raw('count(id) as value'), DB::raw("date_format(created_at, '%j') as date")])
             ->whereRaw('date_sub(now(), interval 6 month) < created_at')
-            ->lists('value', 'date')->all();
+            ->pluck('value', 'date')->all();
 
         $now = Carbon::now();
 

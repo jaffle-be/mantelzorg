@@ -61,7 +61,7 @@ return [
 		'dev' => [
 			'driver'    => 'mysql',
 			'host'      => env('DB_HOST', 'localhost'),
-			'database'  => env('DB_DATABASE', 'forge') . '-' . env('APP_ENV'),
+			'database'  => env('DB_DATABASE', 'forge') . '-dev',
 			'username'  => env('DB_USERNAME', 'forge'),
 			'password'  => env('DB_PASSWORD', ''),
 			'charset'   => 'utf8',
@@ -73,7 +73,7 @@ return [
 		'local' => [
 			'driver'    => 'mysql',
 			'host'      => env('DB_HOST', 'localhost'),
-			'database'  => env('DB_DATABASE', 'forge') . '-' . env('APP_ENV'),
+			'database'  => env('DB_DATABASE', 'forge') . '-local',
 			'username'  => env('DB_USERNAME', 'forge'),
 			'password'  => env('DB_PASSWORD', ''),
 			'charset'   => 'utf8',
@@ -84,15 +84,23 @@ return [
 
 		'testing' => [
 			'driver'    => 'mysql',
-			'host'      => '127.0.0.1',
-			'database'  => env('TRAVIS', false) ? 'testing' : env('DB_DATABASE') . '-testing',
-			'username'  => 'root',
-			'password'  => env('TRAVIS', false) ? '' : 'secret',
+			'host'      => env('DB_HOST'),
+			'database'  => env('DB_DATABASE') . '-testing',
+			'username'  => env('DB_USERNAME'),
+			'password'  => env('DB_PASSWORD'),
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
 			'strict'    => false,
 		],
+
+		'travis' => [
+
+		],
+
+		'sauce' => [
+
+		]
 
 	],
 
@@ -125,10 +133,10 @@ return [
 		'cluster' => false,
 
 		'default' => [
-			'host'     => env('APP_ENV') == 'testing' ? '127.0.0.1' : env('REDIS_HOST', '127.0.0.1'),
+			'host'     => env('REDIS_HOST', '127.0.0.1'),
 			'port'     => 6379,
 			'database' => 0,
-			'password' => env('APP_ENV') == 'testing' ? null :env('REDIS_PASS'),
+			'password' => env('REDIS_PASS'),
 		],
 
 	],
