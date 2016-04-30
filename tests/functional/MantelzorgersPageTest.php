@@ -76,7 +76,7 @@ class MantelzorgersPageTest extends FunctionalTest
 
         $mantelzorger = factory('mantelzorger')->create(['hulpverlener_id' => $user->id]);
 
-        $edited = Factory::attributesFor('mantelzorger', ['hulpverlener_id']);
+        $edited = factory('mantelzorger')->raw(['hulpverlener_id']);
         $edited['birthday'] = $edited['birthday']->format('d/m/Y');
 
         $edited = array_only($edited, ['firstname', 'lastname', 'birthday', 'male', 'street', 'city', 'postal', 'email', 'phone']);
@@ -110,7 +110,7 @@ class MantelzorgersPageTest extends FunctionalTest
 
                 while($oudereTeller < 3)
                 {
-                    $oudere = new Oudere(Factory::attributesFor('oudere', ['mantelzorger_id' => $mantelzorger->id]));
+                    $oudere = new Oudere(factory('oudere')->raw(['mantelzorger_id' => $mantelzorger->id]));
 
                     $mantelzorger->oudere()->save($oudere);
 

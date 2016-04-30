@@ -17,7 +17,7 @@ class HomePageTest extends FunctionalTest
             'organisation' => 'digiredo',
         ];
 
-        $user = Factory::attributesFor(Registration::class, $payload);
+        $user = factory(Registration::class)->raw($payload);
 
         $this->visit(route('home'))
             ->submitForm('Meld je aan', $user)
