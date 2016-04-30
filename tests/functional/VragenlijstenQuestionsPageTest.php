@@ -44,15 +44,15 @@ class VragenlijstenQuestionsPageTest extends AdminFunctionalTest
 
         $panel = $this->panel();
 
-        $question = Factory::create('question', ['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
-        $mcquestion = Factory::create('mc-question', ['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
+        $question = factory('question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
+        $mcquestion = factory('mc-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
         //we use mc question to test showing choises.
 
         Factory::times(4)->create('choise', ['question_id' => $mcquestion->id]);
 
-        $mcmaquestion = Factory::create('mcma-question', ['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
-        $explainable = Factory::create('explainable-question', ['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
-        $summary = Factory::create('summary-question', ['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
+        $mcmaquestion = factory('mcma-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
+        $explainable = factory('explainable-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
+        $summary = factory('summary-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
 
         $this->visit(route('panel.{panel}.question.index', [$panel]));
 

@@ -13,7 +13,7 @@ class OuderenPageTest extends FunctionalTest
     {
         $user = $this->login();
 
-        $mantelzorger = Factory::create('mantelzorger', ['hulpverlener_id' => $user->id]);
+        $mantelzorger = factory('mantelzorger')->create(['hulpverlener_id' => $user->id]);
 
         $this->visit(route('instellingen.{mantelzorger}.oudere.create', [$mantelzorger]));
 
@@ -123,7 +123,7 @@ class OuderenPageTest extends FunctionalTest
      */
     protected function create($user)
     {
-        $mantelzorger = Factory::create('mantelzorger', ['hulpverlener_id' => $user->id]);
+        $mantelzorger = factory('mantelzorger')->create(['hulpverlener_id' => $user->id]);
 
         $this->visit(route("instellingen.{mantelzorger}.oudere.create", [$mantelzorger]));
 
@@ -137,9 +137,9 @@ class OuderenPageTest extends FunctionalTest
      */
     protected function edit($user)
     {
-        $mantelzorger = Factory::create('mantelzorger', ['hulpverlener_id' => $user->id]);
+        $mantelzorger = factory('mantelzorger')->create(['hulpverlener_id' => $user->id]);
 
-        $oudere = Factory::create('oudere', ['mantelzorger_id' => $mantelzorger->id]);
+        $oudere = factory('oudere')->create(['mantelzorger_id' => $mantelzorger->id]);
 
         $this->visit(route("instellingen.{mantelzorger}.oudere.edit", [$mantelzorger, $oudere]));
 

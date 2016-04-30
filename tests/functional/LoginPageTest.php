@@ -28,7 +28,7 @@ class LoginPageTest extends FunctionalTest
     {
         $credentials = $this->activeUser();
 
-        Factory::create('survey', ['active' => true]);
+        factory('survey')->create(['active' => true]);
 
         $this->login($credentials)
             ->seePageIs(route('dash'));
@@ -36,7 +36,7 @@ class LoginPageTest extends FunctionalTest
 
     public function testLoginAdminUser()
     {
-        $user = Factory::create('admin', ['password' => app('hash')->make('thomas')]);
+        $user = factory('admin')->create(['password' => app('hash')->make('thomas')]);
 
         $credentials = [
             'email'    => $user->email,
@@ -71,7 +71,7 @@ class LoginPageTest extends FunctionalTest
 
     public function testLoginBannedUser()
     {
-        $user = Factory::create('banned-user', ['password' => app('hash')->make('thomas')]);
+        $user = factory('banned-user')->create(['password' => app('hash')->make('thomas')]);
 
         $credentials = [
             'email'    => $user->email,
@@ -94,7 +94,7 @@ class LoginPageTest extends FunctionalTest
      */
     protected function activeUser()
     {
-        $user = Factory::create('user', ['password' => app('hash')->make('thomas')]);
+        $user = factory('user')->create(['password' => app('hash')->make('thomas')]);
 
         $credentials = [
             'email'    => $user->email,

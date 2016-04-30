@@ -74,7 +74,7 @@ class MantelzorgersPageTest extends FunctionalTest
     {
         $user = $this->login();
 
-        $mantelzorger = Factory::create('mantelzorger', ['hulpverlener_id' => $user->id]);
+        $mantelzorger = factory('mantelzorger')->create(['hulpverlener_id' => $user->id]);
 
         $edited = Factory::attributesFor('mantelzorger', ['hulpverlener_id']);
         $edited['birthday'] = $edited['birthday']->format('d/m/Y');

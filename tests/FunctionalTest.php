@@ -46,7 +46,7 @@ abstract class FunctionalTest extends TestCase
     {
         $payload = array_merge($payload, ['password' => 'password']);
 
-        $user = Factory::create('user', $payload);
+        $user = factory('user')->create($payload);
 
         $this->be($user);
 

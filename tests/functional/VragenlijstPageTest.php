@@ -36,11 +36,11 @@ class VragenlijstPageTest extends AdminFunctionalTest
     protected function surveys()
     {
         Factory::times(2)->create('survey');
-        Factory::create('survey', ['active' => 1]);
+        factory('survey')->create(['active' => 1]);
 
         foreach(Questionnaire::all() as $questionnaire)
         {
-            Factory::create('panel', ['questionnaire_id' => $questionnaire->id]);
+            factory('panel')->create(['questionnaire_id' => $questionnaire->id]);
         }
     }
 

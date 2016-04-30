@@ -7,11 +7,16 @@ use Test\FunctionalTest;
 class NavigationTest extends FunctionalTest
 {
 
+    protected function survey()
+    {
+        return factory('survey')->create(['active' => true]);
+    }
+
     public function testNavigationWhenSignedIn()
     {
         $this->login();
 
-        Factory::create('survey', ['active' => true]);
+        $this->survey();
 
         $this->visit(route('dash'))
             ->click('nav-instrument')
@@ -32,7 +37,7 @@ class NavigationTest extends FunctionalTest
 
     public function testNavigationWhenSignedInAsAdmin()
     {
-        Factory::create('survey', ['active' => true]);
+        $this->survey();
 
         $this->login(['admin' => 1]);
 
@@ -66,7 +71,7 @@ class NavigationTest extends FunctionalTest
     {
         $this->login();
 
-        Factory::create('survey', ['active' => true]);
+        $this->survey();
 
         $this->visit(route('home'));
 

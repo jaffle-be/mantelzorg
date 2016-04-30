@@ -40,7 +40,7 @@ class InstrumentPageTest extends FunctionalTest
         }
 
         //now we'll add a question to test if the sessions will be displayed as not finished
-        Factory::create('question', ['questionnaire_id' => $this->survey->id, 'questionnaire_panel_id' => $this->panel->id]);
+        factory('question')->create(['questionnaire_id' => $this->survey->id, 'questionnaire_panel_id' => $this->panel->id]);
 
         $this->visit(route('dash'));
 
@@ -71,20 +71,20 @@ class InstrumentPageTest extends FunctionalTest
     protected function sessions($user)
     {
         //create instrument
-        $this->survey = Factory::create('survey', ['active' => 1]);
+        $this->survey = factory('survey')->create(['active' => 1]);
 
         //save so we can check navigation to the instrument
-        $this->panel = Factory::create('panel', ['questionnaire_id' => $this->survey->id]);
+        $this->panel = factory('panel')->create(['questionnaire_id' => $this->survey->id]);
 
         //create 1 mantelzorger
-        $this->mantelzorger = Factory::create('mantelzorger', ['hulpverlener_id' => $user->id]);
+        $this->mantelzorger = factory('mantelzorger')->create(['hulpverlener_id' => $user->id]);
         //2 ouderen
         Factory::times(2)->create('oudere', ['mantelzorger_id' => $this->mantelzorger->id]);
         //a session for each
 
         foreach(Oudere::all() as $oudere)
         {
-            Factory::create('session', [
+            factory('session')->create([
                 'user_id' => $user->id,
                 'mantelzorger_id' => $this->mantelzorger->id,
                 'oudere_id' => $oudere->id,

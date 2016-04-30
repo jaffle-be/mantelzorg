@@ -12,7 +12,7 @@ abstract class AdminAcceptanceTest extends AcceptanceTest
      */
     public function login()
     {
-        $this->user = Factory::create('admin', [
+        $this->user = factory('admin')->create([
             'email' => 'thomas@digiredo.be',
             'password' => Hash::make('password')
         ]);

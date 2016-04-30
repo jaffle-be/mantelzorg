@@ -33,26 +33,26 @@ class InstrumentPageTest extends AcceptanceTest
      */
     public function instrument()
     {
-        $this->survey = Factory::create('survey', ['active' => 1]);
+        $this->survey = factory('survey')->create(['active' => 1]);
 
         //panel sort weight needs to be correct this time
-        Factory::create('panel', ['questionnaire_id' => $this->survey->id, 'panel_weight' => 0]);
+        factory('panel')->create(['questionnaire_id' => $this->survey->id, 'panel_weight' => 0]);
 
-        Factory::create('panel', ['questionnaire_id' => $this->survey->id, 'panel_weight' => 10]);
+        factory('panel')->create(['questionnaire_id' => $this->survey->id, 'panel_weight' => 10]);
 
-        $this->mantelzorger = Factory::create('mantelzorger', ['hulpverlener_id' => $this->user->id]);
+        $this->mantelzorger = factory('mantelzorger')->create(['hulpverlener_id' => $this->user->id]);
 
-        $this->oudere = Factory::create('oudere', ['mantelzorger_id' => $this->mantelzorger->id]);
+        $this->oudere = factory('oudere')->create(['mantelzorger_id' => $this->mantelzorger->id]);
 
         foreach(Panel::all() as $panel)
         {
-            $question = Factory::create('mc-question', ['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
+            $question = factory('mc-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
             Factory::times(3)->create('choise', ['question_id' => $question->id]);
 
-            $question = Factory::create('mcma-question', ['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
+            $question = factory('mcma-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
             Factory::times(3)->create('choise', ['question_id' => $question->id]);
 
-            $question = Factory::create('explainable-question', ['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
+            $question = factory('explainable-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
         }
     }
 
@@ -89,7 +89,7 @@ class InstrumentPageTest extends AcceptanceTest
 
     public function test_fill_out_instrument()
     {
-        $session = Factory::create('session', [
+        $session = factory('session')->create([
             'mantelzorger_id' => $this->mantelzorger->id,
             'user_id' => $this->user->id,
             'oudere_id' => $this->oudere->id,

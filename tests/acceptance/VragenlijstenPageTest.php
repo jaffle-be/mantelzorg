@@ -13,7 +13,7 @@ class VragenlijstenPageTest extends AdminAcceptanceTest
      */
     public function surveys()
     {
-        Factory::create('survey', ['active' => 1]);
+        factory('survey')->create(['active' => 1]);
         Factory::times(2)->create('survey');
 
         foreach (Questionnaire::all() as $survey) {

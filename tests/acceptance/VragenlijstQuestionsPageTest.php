@@ -17,7 +17,7 @@ class VragenlijstQuestionsPageTest extends AdminAcceptanceTest
     {
         $survey = factory('survey')->create();
 
-        $panel = Factory::create('panel', ['questionnaire_id' => $survey->id]);
+        $panel = factory('panel')->create(['questionnaire_id' => $survey->id]);
     }
 
     /**
@@ -89,7 +89,7 @@ class VragenlijstQuestionsPageTest extends AdminAcceptanceTest
     {
         $panel = Panel::first();
         //lets add a none multiple choise
-        $question = Factory::create('question', [
+        $question = factory('question')->create([
             'questionnaire_id' => $panel->questionnaire_id,
             'questionnaire_panel_id' => $panel->id,
         ]);
@@ -103,7 +103,7 @@ class VragenlijstQuestionsPageTest extends AdminAcceptanceTest
     {
         $panel = Panel::first();
 
-        $question = Factory::create('mc-question', [
+        $question = factory('mc-question')->create([
             'questionnaire_id' => $panel->questionnaire_id,
             'questionnaire_panel_id' => $panel->id,
         ]);
@@ -130,7 +130,7 @@ class VragenlijstQuestionsPageTest extends AdminAcceptanceTest
     {
         $panel = Panel::first();
 
-        $question = Factory::create('mc-question', ['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
+        $question = factory('mc-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
 
         Factory::times(4)->create('choise', ['question_id' => $question->id]);
 

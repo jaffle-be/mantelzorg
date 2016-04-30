@@ -28,7 +28,7 @@ class InschrijvingenPageTest extends AdminFunctionalTest
         $this->login();
 
         factory(Registration::class)->create();
-        Factory::create(Registration::class, ['firstname' => 'thomas', 'lastname' => 'warlop']);
+        factory(Registration::class)->create(['firstname' => 'thomas', 'lastname' => 'warlop']);
 
         $this->visit(route('inschrijvingen.index'))
             ->submitForm('Zoeken', ['query' => 'thomas']);

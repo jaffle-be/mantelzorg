@@ -69,7 +69,7 @@ abstract class AcceptanceTest extends Selenium
             return;
         }
 
-        $this->user = Factory::create('user', [
+        $this->user = factory('user')->create([
             'email' => 'thomas@digiredo.be',
             'password' => Hash::make('password')
         ]);

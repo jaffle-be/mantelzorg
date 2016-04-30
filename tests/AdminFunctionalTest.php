@@ -8,7 +8,7 @@ abstract class AdminFunctionalTest extends FunctionalTest
     {
         $payload = array_merge($payload, ['password' => 'password']);
 
-        $user = Factory::create('admin', $payload);
+        $user = factory('admin')->create($payload);
 
         $this->be($user);
 
