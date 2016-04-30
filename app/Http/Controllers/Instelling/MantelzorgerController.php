@@ -54,7 +54,7 @@ class MantelzorgerController extends \App\Http\Controllers\AdminController
 
     public function update(User $hulpverlener, Mantelzorger $mantelzorger, UpdateMantelzorgerRequest $request)
     {
-        $this->dispatch(new UpdateMantelzorger($mantelzorger, $hulpverlener, $request->except('_token', '_method')));
+        $this->dispatch(new UpdateMantelzorger($hulpverlener, $mantelzorger, $request->except('_token', '_method')));
 
         return Redirect::route('instellingen.{hulpverlener}.mantelzorgers.index', $hulpverlener->id);
     }
