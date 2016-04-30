@@ -54,7 +54,7 @@ class NavigationTest extends FunctionalTest
 
         $user->id = 1;
 
-        app('auth')->driver()->setUser($user);
+        app('auth')->setUser($user);
 
         $this->visit(route('dash'));
 
