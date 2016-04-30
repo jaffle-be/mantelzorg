@@ -11,7 +11,7 @@ class VragenlijstenQuestionsPageTest extends AdminFunctionalTest
     {
         $survey = factory('survey')->create();
 
-        $panel = Factory::build('panel');
+        $panel = factory('panel')->make();
 
         $survey->panels()->save($panel);
 

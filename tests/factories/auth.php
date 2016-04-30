@@ -24,7 +24,7 @@ $factory(App\User::class, 'user', function (Faker\Generator $faker) {
 
 $factory(App\User::class, 'banned-user', function (Faker\Generator $faker) {
 
-    $user = Factory::build('user');
+    $user = factory('user')->make();
 
     $user->active = false;
 
