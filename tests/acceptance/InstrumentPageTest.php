@@ -7,6 +7,7 @@ use App\Questionnaire\Session;
 use App\User;
 use Laracasts\TestDummy\Factory;
 use Test\AcceptanceTest;
+use WebDriver\Exception\NoSuchElement;
 
 class InstrumentPageTest extends AcceptanceTest
 {
@@ -109,20 +110,19 @@ class InstrumentPageTest extends AcceptanceTest
             ->seePageIs($route);
 
         //test top navigation by going through each panel
-        $this->find('instrument-header')->click();
-        $this->findCss("[data-target-id='$nextPanel->id']")->click();
-        $this->updateCurrentUrl();
-        $this->find('instrument-header')->click();
-        $this->findCss("[data-target-id='$panel->id']")->click();
+        $this->waitForCss('.instrument-header')->click();
+        $this->waitForCss("[data-target-id='$nextPanel->id']")->click();
         $this->updateCurrentUrl();
 
+        $this->waitForCss('.instrument-header')->click();
+        $this->waitForCss("[data-target-id='$panel->id']")->click();
+        $this->updateCurrentUrl();
 
         //we're back on the first panel,
         // now lets fill in everything on every panel
         // and navigate only using the bottom navigation
-        $this->snap();
         $this->fillPanel($panel);
-        $this->findCss('.instrument-footer .btn-instrument')->click();
+        $this->waitForCss('.instrument-footer .btn-instrument')->click();
         $this->updateCurrentUrl();
         $this->fillPanel($nextPanel);
         $this->findCss('.instrument-footer .btn-instrument')->click();
@@ -130,7 +130,6 @@ class InstrumentPageTest extends AcceptanceTest
 
         //we should now have been redirected to the dash, and the session should be finished
         $this->wait(1000)
-            ->snap()
             ->seePageIs(route('dash'))
             ->assertSame(1, $this->crawler->filter("tr[data-session-id='$session->id'] .fa-check-square-o")->count());
     }
@@ -139,7 +138,6 @@ class InstrumentPageTest extends AcceptanceTest
     {
         //the first question on the page is open,
         //the others arent -> so we'll first need to click the header.
-        //
         foreach($panel->questions as $question)
         {
             if(!$this->isOpen($question))
@@ -174,13 +172,18 @@ class InstrumentPageTest extends AcceptanceTest
 
     protected function isOpen($question)
     {
-        return $this->findWrapped($this->wrapper($question), '.fa-comment')->displayed();
+        try {
+            return $this->waitForCss(sprintf('%s .fa-comment', $this->wrapper($question)))->displayed();
+        } catch (NoSuchElement $e) {
+            return false;
+        }
     }
 
     protected function toggle($question)
     {
-        $this->findWrapped($this->wrapper($question), '.header')->click();
-        $this->wait(1500);
+        $wrapper = $this->wrapper($question);
+        $this->waitForCss(sprintf('%s .header', $wrapper), 6000)->click();
+        $this->waitForCss(sprintf('%s .fa-comment', $wrapper));
     }
 
     /**
