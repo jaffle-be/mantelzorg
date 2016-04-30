@@ -16,7 +16,7 @@ class HulpverlenerDetailPageTest extends AdminAcceptanceTest
      */
     public function editableUser()
     {
-        $this->user = Factory::create('user');
+        $this->user = factory('user')->create();
     }
 
     protected function start()

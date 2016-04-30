@@ -10,7 +10,7 @@ class HulpverlenerDetailPageTest extends AdminFunctionalTest
     {
         $this->login();
 
-        $user = Factory::create('user');
+        $user = factory('user')->create();
 
         $this->sleep();
 

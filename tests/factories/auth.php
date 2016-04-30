@@ -4,7 +4,7 @@ use Laracasts\TestDummy\Factory;
 
 $factory(App\User::class, 'user', function (Faker\Generator $faker) {
 
-    $location = Factory::create('location');
+    $location = factory('location')->create();
 
     return [
         'email'                    => $faker->unique()->email,

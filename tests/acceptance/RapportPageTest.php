@@ -20,8 +20,8 @@ class RapportPageTest extends AdminAcceptanceTest
     public function baseData()
     {
         //we need at least 1 survey, 1 organisation
-        $this->organisation = Factory::create('organisation');
-        $this->survey = Factory::create('survey');
+        $this->organisation = factory('organisation')->create();
+        $this->survey = factory('survey')->create();
 
         Factory::times(5)->create('report', ['questionnaire_id' => $this->survey->id]);
     }

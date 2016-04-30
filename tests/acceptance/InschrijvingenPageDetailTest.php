@@ -17,7 +17,7 @@ class InschrijvingenPageDetailTest extends AdminAcceptanceTest
      */
     public function createRegistration()
     {
-        $this->registration = Factory::create(Registration::class);
+        $this->registration = factory(Registration::class)->create();
     }
 
     /**
@@ -47,7 +47,7 @@ class InschrijvingenPageDetailTest extends AdminAcceptanceTest
 
     public function test_creating_user_with_exisiting_organisation_data()
     {
-        $location = Factory::create('location');
+        $location = factory('location')->create();
 
         $this->start()
             ->check('male')
@@ -67,7 +67,7 @@ class InschrijvingenPageDetailTest extends AdminAcceptanceTest
 
     public function test_creating_user_with_new_location()
     {
-        $location = Factory::create('location');
+        $location = factory('location')->create();
         $organisation = $location->organisation;
 
         $location = Factory::attributesFor('location');

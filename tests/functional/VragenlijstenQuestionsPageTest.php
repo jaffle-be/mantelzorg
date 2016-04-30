@@ -9,7 +9,7 @@ class VragenlijstenQuestionsPageTest extends AdminFunctionalTest
 
     protected function panel($questions = true)
     {
-        $survey = Factory::create('survey');
+        $survey = factory('survey')->create();
 
         $panel = Factory::build('panel');
 

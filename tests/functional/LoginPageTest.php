@@ -49,7 +49,7 @@ class LoginPageTest extends FunctionalTest
 
     public function testWrongPassword()
     {
-        $user = Factory::create('user');
+        $user = factory('user')->create();
 
         $credentials = [
             'email'    => $user->email,

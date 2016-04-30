@@ -14,8 +14,8 @@ class RapportPageTest extends AdminFunctionalTest
     protected function baseData()
     {
         //we need at least 1 survey, 1 organisation
-        $this->organisation = Factory::create('organisation');
-        $this->survey = Factory::create('survey');
+        $this->organisation = factory('organisation')->create();
+        $this->survey = factory('survey')->create();
     }
 
     public function test_required_fields()
@@ -81,9 +81,9 @@ class RapportPageTest extends AdminFunctionalTest
 
         $surveys = [];
 
-        array_push($surveys, Factory::create('report'));
-        array_push($surveys, Factory::create('user-report'));
-        array_push($surveys, Factory::create('organisation-report'));
+        array_push($surveys, factory('report')->create());
+        array_push($surveys, factory('user-report')->create());
+        array_push($surveys, factory('organisation-report')->create());
 
         $this->visit(route('report.index'));
 

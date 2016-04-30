@@ -15,7 +15,7 @@ class VragenlijstQuestionsPageTest extends AdminAcceptanceTest
      */
     public function survey()
     {
-        $survey = Factory::create('survey');
+        $survey = factory('survey')->create();
 
         $panel = Factory::create('panel', ['questionnaire_id' => $survey->id]);
     }
