@@ -1,6 +1,8 @@
 <?php namespace Test;
 
-use Laracasts\TestDummy\Factory;
+
+
+use App\User;
 
 abstract class AdminFunctionalTest extends FunctionalTest
 {
@@ -8,7 +10,7 @@ abstract class AdminFunctionalTest extends FunctionalTest
     {
         $payload = array_merge($payload, ['password' => 'password']);
 
-        $user = Factory::create('admin', $payload);
+        $user = factory(User::class, 'admin')->create($payload);
 
         $this->be($user);
 

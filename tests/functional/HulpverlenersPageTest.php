@@ -2,7 +2,7 @@
 namespace Test\Functional;
 
 use App\User;
-use Laracasts\TestDummy\Factory;
+
 use Test\AdminFunctionalTest;
 
 class HulpverlenersPageTest extends AdminFunctionalTest
@@ -13,7 +13,7 @@ class HulpverlenersPageTest extends AdminFunctionalTest
 
         //create only 9 users, as there is a logged in user, and we only show 10 records,
         //so this is certainly smaller then the rows per page
-        $users = Factory::times(9)->create('user');
+        $users = factory(User::class, 9)->create();
 
         $this->sleep();
 
@@ -21,7 +21,7 @@ class HulpverlenersPageTest extends AdminFunctionalTest
 
         foreach(User::all() as $user)
         {
-            $this->see(e($user->fullname))
+            $this->see($user->fullname)
                 ->see($user->email)
                 ->see($user->organisation->name);
         }
@@ -37,17 +37,17 @@ class HulpverlenersPageTest extends AdminFunctionalTest
     {
         $this->login();
 
-        Factory::times(1)->create('user', [
+        factory(User::class)->create([
             'firstname' => 'thomas 1'
         ]);
-        Factory::times(1)->create('user', [
+        factory(User::class)->create([
             'firstname' => 'thomas 2'
         ]);
 
-        Factory::times(1)->create('user', [
+        factory(User::class)->create([
             'firstname' => 'rudy 1'
         ]);
-        Factory::times(1)->create('user', [
+        factory(User::class)->create([
             'firstname' => 'rudy 2'
         ]);
 
@@ -77,7 +77,7 @@ class HulpverlenersPageTest extends AdminFunctionalTest
     {
         $this->login();
 
-        Factory::times(20)->create('user');
+        factory(User::class, 20)->create();
 
         $this->visit(route('hulpverleners.index'))
             ->see('pager')
@@ -86,7 +86,7 @@ class HulpverlenersPageTest extends AdminFunctionalTest
         $this->click(2)
             ->seePageIs(route('hulpverleners.index', ['page' => 2]));
 
-        Factory::times(20)->create('user', ['firstname' => 'thomas']);
+        factory(User::class, 20)->create(['firstname' => 'thomas']);
 
         $this->visit(route('hulpverleners.index'));
 

@@ -1,7 +1,10 @@
 <?php namespace Test\Functional;
 
 use App\Questionnaire\Choise;
-use Laracasts\TestDummy\Factory;
+
+use App\Questionnaire\Panel;
+use App\Questionnaire\Question;
+use App\Questionnaire\Questionnaire;
 use Test\AdminFunctionalTest;
 
 class VragenlijstenQuestionsPageTest extends AdminFunctionalTest
@@ -9,15 +12,15 @@ class VragenlijstenQuestionsPageTest extends AdminFunctionalTest
 
     protected function panel($questions = true)
     {
-        $survey = Factory::create('survey');
+        $survey = factory(Questionnaire::class)->create();
 
-        $panel = Factory::build('panel');
+        $panel = factory(Panel::class)->make();
 
         $survey->panels()->save($panel);
 
         if($questions)
         {
-            Factory::times(3)->create('question', [
+            factory(Question::class, 3)->create([
                 'questionnaire_id' => $survey->id,
                 'questionnaire_panel_id' => $panel->id,
             ]);
@@ -44,15 +47,15 @@ class VragenlijstenQuestionsPageTest extends AdminFunctionalTest
 
         $panel = $this->panel();
 
-        $question = Factory::create('question', ['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
-        $mcquestion = Factory::create('mc-question', ['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
+        $question = factory(Question::class)->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
+        $mcquestion = factory(Question::class, 'mc-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
         //we use mc question to test showing choises.
 
-        Factory::times(4)->create('choise', ['question_id' => $mcquestion->id]);
+        factory(Choise::class, 4)->create(['question_id' => $mcquestion->id]);
 
-        $mcmaquestion = Factory::create('mcma-question', ['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
-        $explainable = Factory::create('explainable-question', ['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
-        $summary = Factory::create('summary-question', ['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
+        $mcmaquestion = factory(Question::class, 'mcma-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
+        $explainable = factory(Question::class, 'explainable-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
+        $summary = factory(Question::class, 'summary-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
 
         $this->visit(route('panel.{panel}.question.index', [$panel]));
 

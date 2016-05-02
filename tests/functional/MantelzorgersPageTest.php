@@ -3,8 +3,8 @@
 use App\Mantelzorger\Mantelzorger;
 use App\Mantelzorger\Oudere;
 use App\User;
+use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Support\Collection;
-use Laracasts\TestDummy\Factory;
 use Test\FunctionalTest;
 
 class MantelzorgersPageTest extends FunctionalTest
@@ -25,11 +25,11 @@ class MantelzorgersPageTest extends FunctionalTest
 
         foreach($mantelzorgers as $mantelzorger)
         {
-            $this->see(htmlentities($mantelzorger->fullname, ENT_QUOTES));
+            $this->see($mantelzorger->fullname);
 
             foreach($mantelzorger->oudere as $oudere)
             {
-                $this->see(htmlentities($oudere->fullname, ENT_QUOTES));
+                $this->see($oudere->fullname);
             }
         }
     }
@@ -54,7 +54,7 @@ class MantelzorgersPageTest extends FunctionalTest
 
         $this->visit(route('instellingen.{hulpverlener}.mantelzorgers.create', [$user]));
 
-        $mantelzorger = Factory::attributesFor('mantelzorger');
+        $mantelzorger = app(Factory::class)->raw(Mantelzorger::class);
 
         $birthday = $mantelzorger['birthday'];
 
@@ -74,9 +74,9 @@ class MantelzorgersPageTest extends FunctionalTest
     {
         $user = $this->login();
 
-        $mantelzorger = Factory::create('mantelzorger', ['hulpverlener_id' => $user->id]);
+        $mantelzorger = factory(Mantelzorger::class)->create(['hulpverlener_id' => $user->id]);
 
-        $edited = Factory::attributesFor('mantelzorger', ['hulpverlener_id']);
+        $edited = app(Factory::class)->raw(Mantelzorger::class, ['hulpverlener_id']);
         $edited['birthday'] = $edited['birthday']->format('d/m/Y');
 
         $edited = array_only($edited, ['firstname', 'lastname', 'birthday', 'male', 'street', 'city', 'postal', 'email', 'phone']);
@@ -97,10 +97,10 @@ class MantelzorgersPageTest extends FunctionalTest
 
         $mantelzorgers = new Collection();
 
-        while ($teller < 2) {
-            $mantelzorger = new Mantelzorger(Factory::attributesFor('mantelzorger'));
+        $factory = app(Factory::class);
 
-            $mantelzorger->toArray();
+        while ($teller < 2) {
+            $mantelzorger = new Mantelzorger($factory->raw(Mantelzorger::class));
 
             $user->mantelzorgers()->save($mantelzorger);
 
@@ -110,7 +110,7 @@ class MantelzorgersPageTest extends FunctionalTest
 
                 while($oudereTeller < 3)
                 {
-                    $oudere = new Oudere(Factory::attributesFor('oudere', ['mantelzorger_id' => $mantelzorger->id]));
+                    $oudere = new Oudere($factory->raw(Oudere::class, ['mantelzorger_id' => $mantelzorger->id]));
 
                     $mantelzorger->oudere()->save($oudere);
 
