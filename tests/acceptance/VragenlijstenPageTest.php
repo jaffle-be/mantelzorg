@@ -1,7 +1,8 @@
 <?php namespace Test\Acceptance;
 
+use App\Questionnaire\Panel;
 use App\Questionnaire\Questionnaire;
-use Laracasts\TestDummy\Factory;
+
 use Test\AdminAcceptanceTest;
 
 class VragenlijstenPageTest extends AdminAcceptanceTest
@@ -13,11 +14,11 @@ class VragenlijstenPageTest extends AdminAcceptanceTest
      */
     public function surveys()
     {
-        factory('survey')->create(['active' => 1]);
-        factory('survey', 2)->create();
+        factory(Questionnaire::class)->create(['active' => 1]);
+        factory(Questionnaire::class, 2)->create();
 
         foreach (Questionnaire::all() as $survey) {
-            factory('panel', 4)->create(['questionnaire_id' => $survey->id]);
+            factory(Panel::class, 4)->create(['questionnaire_id' => $survey->id]);
         }
     }
 

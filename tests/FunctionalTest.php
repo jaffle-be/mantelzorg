@@ -1,8 +1,9 @@
 <?php namespace Test;
 
+use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\TestCase;
-use Laracasts\TestDummy\Factory;
+
 
 abstract class FunctionalTest extends TestCase
 {
@@ -46,7 +47,7 @@ abstract class FunctionalTest extends TestCase
     {
         $payload = array_merge($payload, ['password' => 'password']);
 
-        $user = factory('user')->create($payload);
+        $user = factory(User::class)->create($payload);
 
         $this->be($user);
 

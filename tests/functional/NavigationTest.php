@@ -1,7 +1,8 @@
 <?php
 namespace Test\Functional;
 
-use Laracasts\TestDummy\Factory;
+
+use App\Questionnaire\Questionnaire;
 use Test\FunctionalTest;
 
 class NavigationTest extends FunctionalTest
@@ -9,7 +10,7 @@ class NavigationTest extends FunctionalTest
 
     protected function survey()
     {
-        return factory('survey')->create(['active' => true]);
+        return factory(Questionnaire::class)->create(['active' => true]);
     }
 
     public function testNavigationWhenSignedIn()

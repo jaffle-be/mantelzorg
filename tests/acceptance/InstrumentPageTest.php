@@ -1,11 +1,14 @@
 <?php namespace Test\Acceptance;
 
 use App\Mantelzorger\Mantelzorger;
+use App\Mantelzorger\Oudere;
+use App\Questionnaire\Choise;
 use App\Questionnaire\Panel;
+use App\Questionnaire\Question;
 use App\Questionnaire\Questionnaire;
 use App\Questionnaire\Session;
 use App\User;
-use Laracasts\TestDummy\Factory;
+
 use Test\AcceptanceTest;
 use WebDriver\Exception\NoSuchElement;
 
@@ -33,26 +36,26 @@ class InstrumentPageTest extends AcceptanceTest
      */
     public function instrument()
     {
-        $this->survey = factory('survey')->create(['active' => 1]);
+        $this->survey = factory(Questionnaire::class)->create(['active' => 1]);
 
         //panel sort weight needs to be correct this time
-        factory('panel')->create(['questionnaire_id' => $this->survey->id, 'panel_weight' => 0]);
+        factory(Panel::class)->create(['questionnaire_id' => $this->survey->id, 'panel_weight' => 0]);
 
-        factory('panel')->create(['questionnaire_id' => $this->survey->id, 'panel_weight' => 10]);
+        factory(Panel::class)->create(['questionnaire_id' => $this->survey->id, 'panel_weight' => 10]);
 
-        $this->mantelzorger = factory('mantelzorger')->create(['hulpverlener_id' => $this->user->id]);
+        $this->mantelzorger = factory(Mantelzorger::class)->create(['hulpverlener_id' => $this->user->id]);
 
-        $this->oudere = factory('oudere')->create(['mantelzorger_id' => $this->mantelzorger->id]);
+        $this->oudere = factory(Oudere::class)->create(['mantelzorger_id' => $this->mantelzorger->id]);
 
         foreach(Panel::all() as $panel)
         {
-            $question = factory('mc-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
-            factory('choise', 3)->create(['question_id' => $question->id]);
+            $question = factory(Question::class, 'mc-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
+            factory(Choise::class, 3)->create(['question_id' => $question->id]);
 
-            $question = factory('mcma-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
-            factory('choise', 3)->create(['question_id' => $question->id]);
+            $question = factory(Question::class, 'mcma-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
+            factory(Choise::class, 3)->create(['question_id' => $question->id]);
 
-            $question = factory('explainable-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
+            $question = factory(Question::class, 'explainable-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
         }
     }
 
@@ -89,7 +92,7 @@ class InstrumentPageTest extends AcceptanceTest
 
     public function test_fill_out_instrument()
     {
-        $session = factory('session')->create([
+        $session = factory(Session::class)->create([
             'mantelzorger_id' => $this->mantelzorger->id,
             'user_id' => $this->user->id,
             'oudere_id' => $this->oudere->id,

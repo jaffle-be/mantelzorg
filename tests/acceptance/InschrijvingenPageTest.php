@@ -1,7 +1,7 @@
 <?php namespace Test\Acceptance;
 
 use App\Beta\Registration;
-use Laracasts\TestDummy\Factory;
+
 use Test\AdminAcceptanceTest;
 
 class InschrijvingenPageTest extends AdminAcceptanceTest

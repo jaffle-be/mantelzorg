@@ -1,7 +1,6 @@
 <?php namespace Test\Acceptance;
 
 use App\User;
-use Laracasts\TestDummy\Factory;
 use Test\AdminAcceptanceTest;
 
 class HulpverlenerPageTest extends AdminAcceptanceTest
@@ -13,7 +12,7 @@ class HulpverlenerPageTest extends AdminAcceptanceTest
      */
     public function baseHulpverleners()
     {
-        factory('user', 20)->create();
+        factory(User::class, 20)->create();
     }
 
     public function test_deleting_some_hulpverleners()

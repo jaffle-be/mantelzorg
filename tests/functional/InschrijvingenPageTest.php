@@ -1,7 +1,7 @@
 <?php namespace Test\Functional;
 
 use App\Beta\Registration;
-use Laracasts\TestDummy\Factory;
+
 use Test\AdminFunctionalTest;
 
 class InschrijvingenPageTest extends AdminFunctionalTest
@@ -11,7 +11,7 @@ class InschrijvingenPageTest extends AdminFunctionalTest
     {
         $this->login();
 
-        factory(Registration::class)->create();
+        factory(Registration::class, 4)->create();
 
         $this->assertSame(4, Registration::count());
 

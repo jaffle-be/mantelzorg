@@ -52,8 +52,7 @@
       "App\\": "app/",
       "Integrated\\": "integrated/",
       "Test\\": "tests",
-      "Laracasts\\Integrated\\":"integrated-master/src/",
-      "Laracasts\\TestDummy\\":"integrated-dummy/src/"
+      "Laracasts\\Integrated\\":"integrated-master/src/"
     },
     "files": [
       "integrated-dummy/src/functions.php"

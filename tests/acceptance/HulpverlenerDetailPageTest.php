@@ -2,7 +2,8 @@
 
 use App\Organisation\Location;
 use App\Organisation\Organisation;
-use Laracasts\TestDummy\Factory;
+use App\User;
+use Illuminate\Database\Eloquent\Factory;
 use Test\AdminAcceptanceTest;
 
 class HulpverlenerDetailPageTest extends AdminAcceptanceTest
@@ -16,7 +17,7 @@ class HulpverlenerDetailPageTest extends AdminAcceptanceTest
      */
     public function editableUser()
     {
-        $this->user = factory('user')->create();
+        $this->user = factory(User::class)->create();
     }
 
     protected function start()
@@ -40,8 +41,7 @@ class HulpverlenerDetailPageTest extends AdminAcceptanceTest
 
     public function test_creating_location()
     {
-        $location = app(Factory::class)->raw('location', ['name' => 'knownLocationName']);
-
+        $location = app(Factory::class)->raw(Location::class, ['name' => 'knownLocationName']);
         $location = array_only($location, ['name', 'street', 'postal', 'city']);
 
         $this->start()
@@ -61,7 +61,8 @@ class HulpverlenerDetailPageTest extends AdminAcceptanceTest
         $this->start();
 
         $organisation = ['organisation_name' => 'knownOrganisationName'];
-        $location = array_only(app(Factory::class)->raw('location', ['name' => 'knownLocationName']), ['name', 'street', 'postal', 'city']);
+        $location = app(Factory::class)->raw(Location::class, ['name' => 'knownLocationName']);
+        $location = array_only($location, ['name', 'street', 'postal', 'city']);
 
         $this->select('organisation_id', 'new')
             ->submitFormWrapped('organisation-creator', 'btn-primary', $organisation)

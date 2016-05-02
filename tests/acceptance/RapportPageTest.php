@@ -3,7 +3,7 @@
 use App\Organisation\Organisation;
 use App\Questionnaire\Export\Report;
 use App\Questionnaire\Questionnaire;
-use Laracasts\TestDummy\Factory;
+
 use Test\AdminAcceptanceTest;
 
 class RapportPageTest extends AdminAcceptanceTest
@@ -20,10 +20,10 @@ class RapportPageTest extends AdminAcceptanceTest
     public function baseData()
     {
         //we need at least 1 survey, 1 organisation
-        $this->organisation = factory('organisation')->create();
-        $this->survey = factory('survey')->create();
+        $this->organisation = factory(Organisation::class)->create();
+        $this->survey = factory(Questionnaire::class)->create();
 
-        factory('report', 5)->create(['questionnaire_id' => $this->survey->id]);
+        factory(Report::class, 5)->create(['questionnaire_id' => $this->survey->id]);
     }
 
     /**

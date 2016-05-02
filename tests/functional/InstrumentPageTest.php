@@ -1,8 +1,12 @@
 <?php namespace Test\Functional;
 
+use App\Mantelzorger\Mantelzorger;
 use App\Mantelzorger\Oudere;
+use App\Questionnaire\Panel;
+use App\Questionnaire\Question;
+use App\Questionnaire\Questionnaire;
 use App\Questionnaire\Session;
-use Laracasts\TestDummy\Factory;
+
 use Test\FunctionalTest;
 
 class InstrumentPageTest extends FunctionalTest
@@ -40,7 +44,7 @@ class InstrumentPageTest extends FunctionalTest
         }
 
         //now we'll add a question to test if the sessions will be displayed as not finished
-        factory('question')->create(['questionnaire_id' => $this->survey->id, 'questionnaire_panel_id' => $this->panel->id]);
+        factory(Question::class)->create(['questionnaire_id' => $this->survey->id, 'questionnaire_panel_id' => $this->panel->id]);
 
         $this->visit(route('dash'));
 
@@ -71,20 +75,20 @@ class InstrumentPageTest extends FunctionalTest
     protected function sessions($user)
     {
         //create instrument
-        $this->survey = factory('survey')->create(['active' => 1]);
+        $this->survey = factory(Questionnaire::class)->create(['active' => 1]);
 
         //save so we can check navigation to the instrument
-        $this->panel = factory('panel')->create(['questionnaire_id' => $this->survey->id]);
+        $this->panel = factory(Panel::class)->create(['questionnaire_id' => $this->survey->id]);
 
         //create 1 mantelzorger
-        $this->mantelzorger = factory('mantelzorger')->create(['hulpverlener_id' => $user->id]);
+        $this->mantelzorger = factory(Mantelzorger::class)->create(['hulpverlener_id' => $user->id]);
         //2 ouderen
-        factory('oudere', 2)->create(['mantelzorger_id' => $this->mantelzorger->id]);
+        factory(Oudere::class, 2)->create(['mantelzorger_id' => $this->mantelzorger->id]);
         //a session for each
 
         foreach(Oudere::all() as $oudere)
         {
-            factory('session')->create([
+            factory(Session::class)->create([
                 'user_id' => $user->id,
                 'mantelzorger_id' => $this->mantelzorger->id,
                 'oudere_id' => $oudere->id,

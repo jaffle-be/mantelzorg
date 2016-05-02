@@ -3,6 +3,7 @@
 use App\Mantelzorger\Mantelzorger;
 use App\Mantelzorger\Oudere;
 use App\Meta\Context;
+use App\Organisation\Location;
 use App\Organisation\Organisation;
 use App\Questionnaire\Choise;
 use App\Questionnaire\Export\Report;
@@ -14,7 +15,7 @@ use App\User;
 use Faker\Generator;
 
 
-$factory->defineAs(App\Organisation\Organisation::class, 'organisation', function (Faker\Generator $faker) {
+$factory->define(App\Organisation\Organisation::class, function (Faker\Generator $faker) {
 
     return [
         'name'       => $faker->username,
@@ -23,7 +24,7 @@ $factory->defineAs(App\Organisation\Organisation::class, 'organisation', functio
     ];
 });
 
-$factory->defineAs(App\Organisation\Location::class, 'location', function (Faker\Generator $faker) {
+$factory->define(App\Organisation\Location::class, function (Faker\Generator $faker) {
 
     return [
         'organisation_id' => 'factory:organisation',
@@ -37,9 +38,11 @@ $factory->defineAs(App\Organisation\Location::class, 'location', function (Faker
     ];
 });
 
-$factory->defineAs(App\User::class, 'user', function (Faker\Generator $faker) {
+$factory->define(User::class, function (Faker\Generator $faker) {
 
-    $location = factory('location')->create();
+    $location = factory(Location::class)->create([
+        'organisation_id' => factory(Organisation::class)->create()->id,
+    ]);
 
     return [
         'email' => $faker->unique()->email,
@@ -57,22 +60,15 @@ $factory->defineAs(App\User::class, 'user', function (Faker\Generator $faker) {
     ];
 });
 
-$factory->defineAs(App\User::class, 'banned-user', function (Faker\Generator $faker) {
-
-    $user = factory('user')->make();
-
-    $user->active = false;
-
-    return $user->toArray();
+$factory->defineAs(User::class, 'banned-user', function (Faker\Generator $faker) use ($factory){
+    return $factory->raw(User::class, ['active' => false]);
 });
 
-$factory->defineAs(App\User::class, 'admin', function (Faker\Generator $faker) {
+$factory->defineAs(User::class, 'admin', function (Faker\Generator $faker) use ($factory){
 
-    $user = Factory::build('user');
-
-    $user->admin = true;
-
-    return $user->toArray();
+    return $factory->raw(User::class, [
+        'admin' => true
+    ]);
 });
 
 $factory->define(App\Beta\Registration::class, function (Faker\Generator $faker) {
@@ -84,7 +80,7 @@ $factory->define(App\Beta\Registration::class, function (Faker\Generator $faker)
     ];
 });
 
-$factory->defineAs(Mantelzorger::class, 'mantelzorger', function (Faker\Generator $faker) {
+$factory->define(Mantelzorger::class, function (Faker\Generator $faker) {
 
     return [
         'identifier' => substr($faker->uuid, 0, 20),
@@ -105,7 +101,7 @@ $factory->defineAs(Mantelzorger::class, 'mantelzorger', function (Faker\Generato
 });
 
 
-$factory->defineAs(Oudere::class, 'oudere', function (Faker\Generator $faker) {
+$factory->define(Oudere::class, function (Faker\Generator $faker) {
 
     $relations = Context::where('context', Context::MANTELZORGER_RELATION)->first()->values->pluck('id')->all();
     $woonsituaties = Context::where('context', Context::OUDEREN_WOONSITUATIE)->first()->values->pluck('id')->all();
@@ -140,14 +136,14 @@ $factory->defineAs(Oudere::class, 'oudere', function (Faker\Generator $faker) {
 });
 
 
-$factory->defineAs(Questionnaire::class, 'survey', function (Faker\Generator $faker) {
+$factory->define(Questionnaire::class, function (Faker\Generator $faker) {
     return [
         'title' => substr($faker->sentence(), 0, 30),
         'active' => 0
     ];
 });
 
-$factory->defineAs(Panel::class, 'panel', function (Faker\Generator $faker) use ($factory) {
+$factory->define(Panel::class, function (Faker\Generator $faker) use ($factory) {
 
     $weight = Panel::count() + 1;
 
@@ -161,7 +157,7 @@ $factory->defineAs(Panel::class, 'panel', function (Faker\Generator $faker) use 
     ];
 });
 
-$factory->defineAs(Question::class, 'question', function (Generator $faker) use ($factory) {
+$factory->define(Question::class, function (Generator $faker) use ($factory) {
 
     return [
         'questionnaire_id' => 1,
@@ -174,40 +170,32 @@ $factory->defineAs(Question::class, 'question', function (Generator $faker) use 
 });
 
 $factory->defineAs(Question::class, 'mc-question', function (Generator $faker) use ($factory) {
-    $attributes = factory('question')->raw();
-
-    return array_merge($attributes, [
+    return $factory->raw(Question::class, [
         'multiple_choise' => true,
     ]);
 });
 
 $factory->defineAs(Question::class, 'mcma-question', function (Generator $faker) use ($factory) {
-    $attributes = factory('question')->raw();
-
-    return array_merge($attributes, [
+    return $factory->raw(Question::class, [
         'multiple_choise' => true,
         'multiple_answer' => true
     ]);
 });
 
 $factory->defineAs(Question::class, 'summary-question', function (Generator $faker) use ($factory) {
-    $attributes = factory('question')->raw();
-
-    return array_merge($attributes, [
+    return $factory->raw(Question::class, [
         'multiple_choise' => true,
         'summary_question' => true,
     ]);
 });
 
 $factory->defineAs(Question::class, 'explainable-question', function (Generator $faker) use ($factory) {
-    $attributes = factory('question')->raw();
-
-    return array_merge($attributes, [
+    return $factory->raw(Question::class, [
         'explainable' => true,
     ]);
 });
 
-$factory->defineAs(Choise::class, 'choise', function (Generator $faker) {
+$factory->define(Choise::class, function (Generator $faker) {
     return [
         'question_id' => 1,
         'title' => $faker->sentence(),
@@ -215,7 +203,7 @@ $factory->defineAs(Choise::class, 'choise', function (Generator $faker) {
     ];
 });
 
-$factory->defineAs(Session::class, 'session', function (Generator $faker) {
+$factory->define(Session::class, function (Generator $faker) {
     return [
         'user_id' => 1,
         'oudere_id' => 1,
@@ -223,7 +211,7 @@ $factory->defineAs(Session::class, 'session', function (Generator $faker) {
     ];
 });
 
-$factory->defineAs(Report::class, 'report', function (Generator $faker) use ($factory) {
+$factory->define(Report::class, function (Generator $faker) use ($factory) {
     $survey = Questionnaire::first();
 
     if (! $survey) {
@@ -238,13 +226,9 @@ $factory->defineAs(Report::class, 'report', function (Generator $faker) use ($fa
 });
 
 $factory->defineAs(Report::class, 'user-report', function (Generator $faker) use ($factory) {
-    $report = factory('report')->raw();
-
-    return array_merge($report, ['user_id' => User::first()->id]);
+    return $factory->raw(Report::class, ['user_id' => User::first()->id]);
 });
 
 $factory->defineAs(Report::class, 'organisation-report', function (Generator $faker) use ($factory) {
-    $report = factory('report')->raw();
-
-    return array_merge($report, ['organisation_id' => Organisation::first()->id]);
+    return $factory->raw(Report::class, ['organisation_id' => Organisation::first()->id]);
 });

@@ -7,7 +7,7 @@ use Integrated\AnnotationReader;
 use Integrated\Selenium;
 use Laracasts\Integrated\Extensions\Traits\WorksWithDatabase;
 use Laracasts\Integrated\Services\Laravel\Application;
-use Laracasts\TestDummy\Factory;
+
 use WebDriver\WebDriver;
 
 abstract class AcceptanceTest extends Selenium
@@ -69,7 +69,7 @@ abstract class AcceptanceTest extends Selenium
             return;
         }
 
-        $this->user = factory('user')->create([
+        $this->user = factory(User::class)->create([
             'email' => 'thomas@digiredo.be',
             'password' => Hash::make('password')
         ]);
@@ -86,7 +86,6 @@ abstract class AcceptanceTest extends Selenium
     {
         User::whereNotNull('id')->delete();
     }
-
 
     /**
      * @tearDown
@@ -129,16 +128,20 @@ abstract class AcceptanceTest extends Selenium
 
     public function visit($uri)
     {
-        $this->sleep();
+        $result = parent::visit($uri);
 
-        return parent::visit($uri);
+//        $this->sleep();
+
+        return $result;
     }
 
     protected function open($uri)
     {
-        $this->sleep();
+        $result = parent::open($uri);
 
-        return parent::open($uri);
+//        $this->sleep();
+
+        return $result;
     }
 
 }

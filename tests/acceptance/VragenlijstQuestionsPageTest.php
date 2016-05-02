@@ -2,8 +2,10 @@
 
 use App\Questionnaire\Choise;
 use App\Questionnaire\Panel;
+use App\Questionnaire\Question;
 use App\Questionnaire\Questionnaire;
-use Laracasts\TestDummy\Factory;
+
+use Illuminate\Database\Eloquent\Factory;
 use Test\AdminAcceptanceTest;
 
 class VragenlijstQuestionsPageTest extends AdminAcceptanceTest
@@ -15,9 +17,9 @@ class VragenlijstQuestionsPageTest extends AdminAcceptanceTest
      */
     public function survey()
     {
-        $survey = factory('survey')->create();
+        $survey = factory(Questionnaire::class)->create();
 
-        $panel = factory('panel')->create(['questionnaire_id' => $survey->id]);
+        $panel = factory(Panel::class)->create(['questionnaire_id' => $survey->id]);
     }
 
     /**
@@ -44,7 +46,7 @@ class VragenlijstQuestionsPageTest extends AdminAcceptanceTest
             ->see('vraagstelling is verplicht');
 
 
-        $question = app(Factory::class)->raw('question');
+        $question = app(Factory::class)->raw(Question::class);
 
         $payload = array_only($question, ['title', 'question']);
 
@@ -89,7 +91,7 @@ class VragenlijstQuestionsPageTest extends AdminAcceptanceTest
     {
         $panel = Panel::first();
         //lets add a none multiple choise
-        $question = factory('question')->create([
+        $question = factory(Question::class)->create([
             'questionnaire_id' => $panel->questionnaire_id,
             'questionnaire_panel_id' => $panel->id,
         ]);
@@ -103,7 +105,7 @@ class VragenlijstQuestionsPageTest extends AdminAcceptanceTest
     {
         $panel = Panel::first();
 
-        $question = factory('mc-question')->create([
+        $question = factory(Question::class, 'mc-question')->create([
             'questionnaire_id' => $panel->questionnaire_id,
             'questionnaire_panel_id' => $panel->id,
         ]);
@@ -130,9 +132,9 @@ class VragenlijstQuestionsPageTest extends AdminAcceptanceTest
     {
         $panel = Panel::first();
 
-        $question = factory('mc-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
+        $question = factory(Question::class, 'mc-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
 
-        factory('choise', 4)->create(['question_id' => $question->id]);
+        factory(Choise::class, 4)->create(['question_id' => $question->id]);
 
         $choise = Choise::first();
 

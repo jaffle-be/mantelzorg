@@ -25,11 +25,11 @@ class MantelzorgersPageTest extends FunctionalTest
 
         foreach($mantelzorgers as $mantelzorger)
         {
-            $this->see(htmlentities($mantelzorger->fullname, ENT_QUOTES));
+            $this->see($mantelzorger->fullname);
 
             foreach($mantelzorger->oudere as $oudere)
             {
-                $this->see(htmlentities($oudere->fullname, ENT_QUOTES));
+                $this->see($oudere->fullname);
             }
         }
     }
@@ -54,7 +54,7 @@ class MantelzorgersPageTest extends FunctionalTest
 
         $this->visit(route('instellingen.{hulpverlener}.mantelzorgers.create', [$user]));
 
-        $mantelzorger = app(Factory::class)->raw('mantelzorger');
+        $mantelzorger = app(Factory::class)->raw(Mantelzorger::class);
 
         $birthday = $mantelzorger['birthday'];
 
@@ -74,9 +74,9 @@ class MantelzorgersPageTest extends FunctionalTest
     {
         $user = $this->login();
 
-        $mantelzorger = factory('mantelzorger')->create(['hulpverlener_id' => $user->id]);
+        $mantelzorger = factory(Mantelzorger::class)->create(['hulpverlener_id' => $user->id]);
 
-        $edited = app(Factory::class)->raw('mantelzorger', ['hulpverlener_id']);
+        $edited = app(Factory::class)->raw(Mantelzorger::class, ['hulpverlener_id']);
         $edited['birthday'] = $edited['birthday']->format('d/m/Y');
 
         $edited = array_only($edited, ['firstname', 'lastname', 'birthday', 'male', 'street', 'city', 'postal', 'email', 'phone']);
@@ -100,9 +100,7 @@ class MantelzorgersPageTest extends FunctionalTest
         $factory = app(Factory::class);
 
         while ($teller < 2) {
-            $mantelzorger = new Mantelzorger($factory->raw('mantelzorger'));
-
-            $mantelzorger->toArray();
+            $mantelzorger = new Mantelzorger($factory->raw(Mantelzorger::class));
 
             $user->mantelzorgers()->save($mantelzorger);
 
@@ -112,7 +110,7 @@ class MantelzorgersPageTest extends FunctionalTest
 
                 while($oudereTeller < 3)
                 {
-                    $oudere = new Oudere($factory->raw('oudere', ['mantelzorger_id' => $mantelzorger->id]));
+                    $oudere = new Oudere($factory->raw(Oudere::class, ['mantelzorger_id' => $mantelzorger->id]));
 
                     $mantelzorger->oudere()->save($oudere);
 
