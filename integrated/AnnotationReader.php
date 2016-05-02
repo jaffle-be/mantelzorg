@@ -1,7 +1,50 @@
 <?php namespace Integrated;
 
-class AnnotationReader extends \Laracasts\Integrated\AnnotationReader
+use ReflectionClass;
+
+class AnnotationReader
 {
+
+    /**
+     * The object to reflect into.
+     *
+     * @var object
+     */
+    protected $reference;
+
+    /**
+     * Create a new AnnotationReader instance.
+     *
+     * @param mixed $reference
+     */
+    public function __construct($reference)
+    {
+        $this->reference = $reference;
+    }
+
+    /**
+     * Reflect into the given object.
+     *
+     * @param  object $object
+     * @return ReflectionClass
+     */
+    protected function reflectInto($object)
+    {
+        return (new ReflectionClass($object))->getMethods();
+    }
+
+    /**
+     * Search the docblock for the given annotation.
+     *
+     * @param  string            $annotation
+     * @param  \ReflectionMethod $method
+     * @return boolean
+     */
+    protected function hasAnnotation($annotation, \ReflectionMethod $method)
+    {
+        return str_contains($method->getDocComment(), "@{$annotation}");
+    }
+
 
     public function having($annotation)
     {

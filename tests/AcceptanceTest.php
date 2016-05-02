@@ -3,18 +3,15 @@
 use App\Organisation\Organisation;
 use App\User;
 use Hash;
+use Illuminate\Foundation\Testing\Concerns\InteractsWithDatabase;
 use Integrated\AnnotationReader;
 use Integrated\Selenium;
-use Laracasts\Integrated\Extensions\Traits\WorksWithDatabase;
-use Laracasts\Integrated\Services\Laravel\Application;
-
 use WebDriver\WebDriver;
 
 abstract class AcceptanceTest extends Selenium
 {
 
-    use Application;
-    use WorksWithDatabase;
+    use InteractsWithDatabase;
 
     protected $baseUrl;
 

@@ -12,7 +12,7 @@ class VragenlijstQuestionsPageTest extends AdminAcceptanceTest
 {
 
     /**
-     * @setup
+     * @setUp
      * @priority 5
      */
     public function survey()
