@@ -4,7 +4,7 @@ use App\Http\Controllers\BaseController;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 class PasswordController extends BaseController
 {
-    protected $redirectTo = 'dash';
+    protected $redirectTo = 'instrument';
     /*
     |--------------------------------------------------------------------------
     | Password Reset Controller
