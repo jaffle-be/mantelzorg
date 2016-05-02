@@ -1,7 +1,7 @@
 <?php namespace Test\Functional;
 
 use App\Beta\Registration;
-use Laracasts\TestDummy\Factory;
+
 use Test\AdminFunctionalTest;
 
 class InschrijvingenPageTest extends AdminFunctionalTest
@@ -11,7 +11,7 @@ class InschrijvingenPageTest extends AdminFunctionalTest
     {
         $this->login();
 
-        Factory::times(4)->create(Registration::class);
+        factory(Registration::class, 4)->create();
 
         $this->assertSame(4, Registration::count());
 
@@ -27,8 +27,8 @@ class InschrijvingenPageTest extends AdminFunctionalTest
     {
         $this->login();
 
-        Factory::create(Registration::class);
-        Factory::create(Registration::class, ['firstname' => 'thomas', 'lastname' => 'warlop']);
+        factory(Registration::class)->create();
+        factory(Registration::class)->create(['firstname' => 'thomas', 'lastname' => 'warlop']);
 
         $this->visit(route('inschrijvingen.index'))
             ->submitForm('Zoeken', ['query' => 'thomas']);

@@ -1,9 +1,11 @@
 <?php namespace Test\Functional;
 
+use App\Mantelzorger\Mantelzorger;
 use App\Mantelzorger\Oudere;
 use App\Meta\Context;
 use App\Meta\Value;
-use Laracasts\TestDummy\Factory;
+
+use Illuminate\Database\Eloquent\Factory;
 use Test\FunctionalTest;
 
 class OuderenPageTest extends FunctionalTest
@@ -13,7 +15,7 @@ class OuderenPageTest extends FunctionalTest
     {
         $user = $this->login();
 
-        $mantelzorger = Factory::create('mantelzorger', ['hulpverlener_id' => $user->id]);
+        $mantelzorger = factory(Mantelzorger::class)->create(['hulpverlener_id' => $user->id]);
 
         $this->visit(route('instellingen.{mantelzorger}.oudere.create', [$mantelzorger]));
 
@@ -30,7 +32,7 @@ class OuderenPageTest extends FunctionalTest
 
         $mantelzorger = $this->create($user);
 
-        $payload = Factory::attributesFor('oudere');
+        $payload = $this->getOudere();
 
         $birthday = $payload['birthday'];
 
@@ -50,8 +52,7 @@ class OuderenPageTest extends FunctionalTest
         //go to page
         $mantelzorger = $this->create($user);
 
-
-        $payload = Factory::attributesFor('oudere');
+        $payload = $this->getOudere();
         //save original birtday date object
         $birthday = $payload['birthday'];
         //manipulate array for form input
@@ -101,7 +102,7 @@ class OuderenPageTest extends FunctionalTest
 
         $oudere = $this->edit($user);
 
-        $payload = Factory::attributesFor('oudere');
+        $payload = $this->getOudere();
 
         $birthday = $payload['birthday'];
         $payload = $this->inputPayload($birthday, $payload);
@@ -123,7 +124,7 @@ class OuderenPageTest extends FunctionalTest
      */
     protected function create($user)
     {
-        $mantelzorger = Factory::create('mantelzorger', ['hulpverlener_id' => $user->id]);
+        $mantelzorger = factory(Mantelzorger::class)->create(['hulpverlener_id' => $user->id]);
 
         $this->visit(route("instellingen.{mantelzorger}.oudere.create", [$mantelzorger]));
 
@@ -137,9 +138,9 @@ class OuderenPageTest extends FunctionalTest
      */
     protected function edit($user)
     {
-        $mantelzorger = Factory::create('mantelzorger', ['hulpverlener_id' => $user->id]);
+        $mantelzorger = factory(Mantelzorger::class)->create(['hulpverlener_id' => $user->id]);
 
-        $oudere = Factory::create('oudere', ['mantelzorger_id' => $mantelzorger->id]);
+        $oudere = factory(Oudere::class)->create(['mantelzorger_id' => $mantelzorger->id]);
 
         $this->visit(route("instellingen.{mantelzorger}.oudere.edit", [$mantelzorger, $oudere]));
 
@@ -172,6 +173,14 @@ class OuderenPageTest extends FunctionalTest
     {
         $this->submitForm('Gegevens bewaren', $payload)
             ->seePageIs(route('instellingen.{hulpverlener}.mantelzorgers.index', [$user]));
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getOudere()
+    {
+        return app(Factory::class)->raw(Oudere::class);
     }
 
 }

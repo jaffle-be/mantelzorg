@@ -55,13 +55,8 @@
   "autoload-dev": {
     "psr-4": {
       "Integrated\\": "integrated/",
-      "Test\\": "tests",
-      "Laracasts\\Integrated\\":"integrated-master/src/",
-      "Laracasts\\TestDummy\\":"integrated-dummy/src/"
-    },
-    "files": [
-      "integrated-dummy/src/functions.php"
-    ]
+      "Test\\": "tests"
+    }
   },
   "scripts": {
     "post-install-cmd": [

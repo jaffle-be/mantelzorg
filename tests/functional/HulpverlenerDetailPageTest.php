@@ -1,6 +1,7 @@
 <?php namespace Test\Functional;
 
-use Laracasts\TestDummy\Factory;
+
+use App\User;
 use Test\AdminFunctionalTest;
 
 class HulpverlenerDetailPageTest extends AdminFunctionalTest
@@ -10,7 +11,7 @@ class HulpverlenerDetailPageTest extends AdminFunctionalTest
     {
         $this->login();
 
-        $user = Factory::create('user');
+        $user = factory(User::class)->create();
 
         $this->sleep();
 

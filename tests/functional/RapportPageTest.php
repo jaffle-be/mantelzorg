@@ -1,7 +1,10 @@
 <?php namespace Test\Functional;
 
+use App\Organisation\Organisation;
+use App\Questionnaire\Export\Report;
 use App\Questionnaire\Jobs\ExportJob;
-use Laracasts\TestDummy\Factory;
+
+use App\Questionnaire\Questionnaire;
 use Test\AdminFunctionalTest;
 
 class RapportPageTest extends AdminFunctionalTest
@@ -14,8 +17,8 @@ class RapportPageTest extends AdminFunctionalTest
     protected function baseData()
     {
         //we need at least 1 survey, 1 organisation
-        $this->organisation = Factory::create('organisation');
-        $this->survey = Factory::create('survey');
+        $this->organisation = factory(Organisation::class)->create();
+        $this->survey = factory(Questionnaire::class)->create();
     }
 
     public function test_required_fields()
@@ -81,9 +84,9 @@ class RapportPageTest extends AdminFunctionalTest
 
         $surveys = [];
 
-        array_push($surveys, Factory::create('report'));
-        array_push($surveys, Factory::create('user-report'));
-        array_push($surveys, Factory::create('organisation-report'));
+        array_push($surveys, factory(Report::class)->create());
+        array_push($surveys, factory(Report::class, 'user-report')->create());
+        array_push($surveys, factory(Report::class, 'organisation-report')->create());
 
         $this->visit(route('report.index'));
 

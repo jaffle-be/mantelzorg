@@ -2,8 +2,10 @@
 
 use App\Beta\Registration;
 use App\Organisation\Location;
+use App\Organisation\Organisation;
 use App\User;
-use Laracasts\TestDummy\Factory;
+
+use Illuminate\Database\Eloquent\Factory;
 use Test\AdminAcceptanceTest;
 
 class InschrijvingenPageDetailTest extends AdminAcceptanceTest
@@ -17,7 +19,7 @@ class InschrijvingenPageDetailTest extends AdminAcceptanceTest
      */
     public function createRegistration()
     {
-        $this->registration = Factory::create(Registration::class);
+        $this->registration = factory(Registration::class)->create();
     }
 
     /**
@@ -47,7 +49,10 @@ class InschrijvingenPageDetailTest extends AdminAcceptanceTest
 
     public function test_creating_user_with_exisiting_organisation_data()
     {
-        $location = Factory::create('location');
+        $organisation = factory(Organisation::class)->create();
+        $location = factory(Location::class)->create([
+            'organisation_id' => $organisation->id,
+        ]);
 
         $this->start()
             ->check('male')
@@ -67,10 +72,12 @@ class InschrijvingenPageDetailTest extends AdminAcceptanceTest
 
     public function test_creating_user_with_new_location()
     {
-        $location = Factory::create('location');
-        $organisation = $location->organisation;
+        $organisation = factory(Organisation::class)->create();
+        $location = factory(Location::class)->create([
+            'organisation_id' => $organisation->id,
+        ]);
 
-        $location = Factory::attributesFor('location');
+        $location = app(Factory::class)->raw(Location::class);
         $payload = array_only($location, ['name', 'street', 'city', 'postal']);
 
         $this->start()
@@ -99,9 +106,9 @@ class InschrijvingenPageDetailTest extends AdminAcceptanceTest
 
     public function test_creating_with_new_organisation_and_new_location()
     {
-        $organisation = Factory::attributesFor('organisation');
+        $organisation = app(Factory::class)->raw(Organisation::class);
 
-        $locationPayload = Factory::attributesFor('location');
+        $locationPayload = app(Factory::class)->raw(Location::class);
 
         $this->start()
             ->select('organisation_id', 'new')

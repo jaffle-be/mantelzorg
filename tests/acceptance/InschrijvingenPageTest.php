@@ -1,7 +1,7 @@
 <?php namespace Test\Acceptance;
 
 use App\Beta\Registration;
-use Laracasts\TestDummy\Factory;
+
 use Test\AdminAcceptanceTest;
 
 class InschrijvingenPageTest extends AdminAcceptanceTest
@@ -13,7 +13,7 @@ class InschrijvingenPageTest extends AdminAcceptanceTest
      */
     protected function addInschrijvingen()
     {
-        Factory::times(20)->create(Registration::class);
+        factory(Registration::class, 20)->create();
     }
 
     /**
