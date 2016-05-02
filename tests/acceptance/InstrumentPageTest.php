@@ -185,7 +185,7 @@ class InstrumentPageTest extends AcceptanceTest
     protected function toggle($question)
     {
         $wrapper = $this->wrapper($question);
-        $this->waitForCss(sprintf('%s .header', $wrapper), 6000)->click();
+        $this->waitForCss(sprintf('%s .header', $wrapper), 10000)->click();
         $this->waitForCss(sprintf('%s .fa-comment', $wrapper));
     }
 
