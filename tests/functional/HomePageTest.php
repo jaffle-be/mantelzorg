@@ -2,7 +2,7 @@
 namespace Test\Functional;
 
 use App\Beta\Registration;
-use Laracasts\TestDummy\Factory;
+use Illuminate\Database\Eloquent\Factory;
 use Test\FunctionalTest;
 
 class HomePageTest extends FunctionalTest
@@ -17,7 +17,7 @@ class HomePageTest extends FunctionalTest
             'organisation' => 'digiredo',
         ];
 
-        $user = Factory::attributesFor(Registration::class, $payload);
+        $user = app(Factory::class)->raw(Registration::class, $payload);
 
         $this->visit(route('home'))
             ->submitForm('Meld je aan', $user)
@@ -31,7 +31,7 @@ class HomePageTest extends FunctionalTest
         $this->visit(route('home'))
             ->see('log-in')
             ->click('log-in')
-            ->seePageIs(route('login'));
+            ->seePageIs(url('login'));
     }
 
 }

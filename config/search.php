@@ -6,13 +6,13 @@ return [
      * The name of the index
      * Your app name might be a sane default value.
      */
-    'index'    => getenv('ES_INDEX') ? getenv('ES_INDEX') : 'app',
+    'index'    => env('ES_INDEX', 'app') . '-'.env('APP_ENV'),
 
     /**
      * All the hosts that are in the cluster.
      */
     'hosts'    => [
-        env('APP_ENV') == 'testing' ? '127.0.0.1' : env('ES_HOST'),
+        env('ES_HOST'),
     ],
 
     /**

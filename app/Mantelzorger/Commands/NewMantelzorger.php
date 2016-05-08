@@ -5,10 +5,9 @@ namespace App\Mantelzorger\Commands;
 use App\Commands\Command;
 use App\Mantelzorger\Mantelzorger;
 use App\User;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Validation\Factory;
 
-class NewMantelzorger extends Command implements SelfHandling
+class NewMantelzorger extends Command
 {
     public function __construct(User $user, $input)
     {

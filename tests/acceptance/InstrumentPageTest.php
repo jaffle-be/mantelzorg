@@ -1,12 +1,16 @@
 <?php namespace Test\Acceptance;
 
 use App\Mantelzorger\Mantelzorger;
+use App\Mantelzorger\Oudere;
+use App\Questionnaire\Choise;
 use App\Questionnaire\Panel;
+use App\Questionnaire\Question;
 use App\Questionnaire\Questionnaire;
 use App\Questionnaire\Session;
 use App\User;
-use Laracasts\TestDummy\Factory;
+
 use Test\AcceptanceTest;
+use WebDriver\Exception\NoSuchElement;
 
 class InstrumentPageTest extends AcceptanceTest
 {
@@ -32,26 +36,26 @@ class InstrumentPageTest extends AcceptanceTest
      */
     public function instrument()
     {
-        $this->survey = Factory::create('survey', ['active' => 1]);
+        $this->survey = factory(Questionnaire::class)->create(['active' => 1]);
 
         //panel sort weight needs to be correct this time
-        Factory::create('panel', ['questionnaire_id' => $this->survey->id, 'panel_weight' => 0]);
+        factory(Panel::class)->create(['questionnaire_id' => $this->survey->id, 'panel_weight' => 0]);
 
-        Factory::create('panel', ['questionnaire_id' => $this->survey->id, 'panel_weight' => 10]);
+        factory(Panel::class)->create(['questionnaire_id' => $this->survey->id, 'panel_weight' => 10]);
 
-        $this->mantelzorger = Factory::create('mantelzorger', ['hulpverlener_id' => $this->user->id]);
+        $this->mantelzorger = factory(Mantelzorger::class)->create(['hulpverlener_id' => $this->user->id]);
 
-        $this->oudere = Factory::create('oudere', ['mantelzorger_id' => $this->mantelzorger->id]);
+        $this->oudere = factory(Oudere::class)->create(['mantelzorger_id' => $this->mantelzorger->id]);
 
         foreach(Panel::all() as $panel)
         {
-            $question = Factory::create('mc-question', ['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
-            Factory::times(3)->create('choise', ['question_id' => $question->id]);
+            $question = factory(Question::class, 'mc-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
+            factory(Choise::class, 3)->create(['question_id' => $question->id]);
 
-            $question = Factory::create('mcma-question', ['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
-            Factory::times(3)->create('choise', ['question_id' => $question->id]);
+            $question = factory(Question::class, 'mcma-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
+            factory(Choise::class, 3)->create(['question_id' => $question->id]);
 
-            $question = Factory::create('explainable-question', ['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
+            $question = factory(Question::class, 'explainable-question')->create(['questionnaire_id' => $panel->questionnaire_id, 'questionnaire_panel_id' => $panel->id]);
         }
     }
 
@@ -88,7 +92,7 @@ class InstrumentPageTest extends AcceptanceTest
 
     public function test_fill_out_instrument()
     {
-        $session = Factory::create('session', [
+        $session = factory(Session::class)->create([
             'mantelzorger_id' => $this->mantelzorger->id,
             'user_id' => $this->user->id,
             'oudere_id' => $this->oudere->id,
@@ -109,20 +113,19 @@ class InstrumentPageTest extends AcceptanceTest
             ->seePageIs($route);
 
         //test top navigation by going through each panel
-        $this->find('instrument-header')->click();
-        $this->findCss("[data-target-id='$nextPanel->id']")->click();
-        $this->updateCurrentUrl();
-        $this->find('instrument-header')->click();
-        $this->findCss("[data-target-id='$panel->id']")->click();
+        $this->waitForCss('.instrument-header')->click();
+        $this->waitForCss("[data-target-id='$nextPanel->id']")->click();
         $this->updateCurrentUrl();
 
+        $this->waitForCss('.instrument-header')->click();
+        $this->waitForCss("[data-target-id='$panel->id']")->click();
+        $this->updateCurrentUrl();
 
         //we're back on the first panel,
         // now lets fill in everything on every panel
         // and navigate only using the bottom navigation
-        $this->snap();
         $this->fillPanel($panel);
-        $this->findCss('.instrument-footer .btn-instrument')->click();
+        $this->waitForCss('.instrument-footer .btn-instrument')->click();
         $this->updateCurrentUrl();
         $this->fillPanel($nextPanel);
         $this->findCss('.instrument-footer .btn-instrument')->click();
@@ -130,7 +133,6 @@ class InstrumentPageTest extends AcceptanceTest
 
         //we should now have been redirected to the dash, and the session should be finished
         $this->wait(1000)
-            ->snap()
             ->seePageIs(route('dash'))
             ->assertSame(1, $this->crawler->filter("tr[data-session-id='$session->id'] .fa-check-square-o")->count());
     }
@@ -139,7 +141,6 @@ class InstrumentPageTest extends AcceptanceTest
     {
         //the first question on the page is open,
         //the others arent -> so we'll first need to click the header.
-        //
         foreach($panel->questions as $question)
         {
             if(!$this->isOpen($question))
@@ -174,13 +175,18 @@ class InstrumentPageTest extends AcceptanceTest
 
     protected function isOpen($question)
     {
-        return $this->findWrapped($this->wrapper($question), '.fa-comment')->displayed();
+        try {
+            return $this->waitForCss(sprintf('%s .fa-comment', $this->wrapper($question)))->displayed();
+        } catch (NoSuchElement $e) {
+            return false;
+        }
     }
 
     protected function toggle($question)
     {
-        $this->findWrapped($this->wrapper($question), '.header')->click();
-        $this->wait(1500);
+        $wrapper = $this->wrapper($question);
+        $this->waitForCss(sprintf('%s .header', $wrapper), 10000)->click();
+        $this->waitForCss(sprintf('%s .fa-comment', $wrapper));
     }
 
     /**

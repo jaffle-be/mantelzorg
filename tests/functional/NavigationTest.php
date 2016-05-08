@@ -1,17 +1,23 @@
 <?php
 namespace Test\Functional;
 
-use Laracasts\TestDummy\Factory;
+
+use App\Questionnaire\Questionnaire;
 use Test\FunctionalTest;
 
 class NavigationTest extends FunctionalTest
 {
 
+    protected function survey()
+    {
+        return factory(Questionnaire::class)->create(['active' => true]);
+    }
+
     public function testNavigationWhenSignedIn()
     {
         $this->login();
 
-        Factory::create('survey', ['active' => true]);
+        $this->survey();
 
         $this->visit(route('dash'))
             ->click('nav-instrument')
@@ -32,7 +38,7 @@ class NavigationTest extends FunctionalTest
 
     public function testNavigationWhenSignedInAsAdmin()
     {
-        Factory::create('survey', ['active' => true]);
+        $this->survey();
 
         $this->login(['admin' => 1]);
 
@@ -54,7 +60,7 @@ class NavigationTest extends FunctionalTest
 
         $user->id = 1;
 
-        app('auth')->driver()->setUser($user);
+        app('auth')->setUser($user);
 
         $this->visit(route('dash'));
 
@@ -66,7 +72,7 @@ class NavigationTest extends FunctionalTest
     {
         $this->login();
 
-        Factory::create('survey', ['active' => true]);
+        $this->survey();
 
         $this->visit(route('home'));
 
@@ -90,7 +96,7 @@ class NavigationTest extends FunctionalTest
             ->see('main-nav-instrument')
             ->click('log-out')
             ->visit(route('dash'))
-            ->seePageIs(route('login'))
+            ->seePageIs(url('login'))
             ->see('log-out', true)
             ->see('log-in');
     }

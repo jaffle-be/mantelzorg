@@ -25,12 +25,12 @@
 
                     @if(!$user || $forceShowLogin)
                         <li>
-                            <a id="log-in" href="{{ route('login') }}">{{ Lang::get('master.footer.login') }}</a>
+                            <a id="log-in" href="{{ url('login') }}">{{ Lang::get('master.footer.login') }}</a>
                         </li>
                     @else
                         <li><a href="<?= route('dash') ?>" id="main-nav-instrument">@lang('master.navs.instrument')</a></li>
                         <li>
-                            <a id="log-out" href="{{ route('logout') }}">{{ Lang::get('master.footer.logout') }}</a>
+                            <a id="log-out" href="{{ url('logout') }}">{{ Lang::get('master.footer.logout') }}</a>
                         </li>
                     @endif
                 </ul>

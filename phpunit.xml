@@ -33,8 +33,6 @@
         <env name="CACHE_DRIVER" value="array"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
-        <env name="ES_HOST" value="127.0.0.1"/>
-        <env name="REDIS_HOST" value="127.0.0.1"/>
-        <env name="APP_URL" value="http://mantelzorg.testing:8080"/>
+        <env name="APP_URL" value="http://mantelzorg50.testing"/>
     </php>
 </phpunit>

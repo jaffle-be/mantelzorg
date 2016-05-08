@@ -5,3 +5,5 @@ resources/assets/plugins
 .idea
 storage
 /tests/logs
+integrated-dummy
+integrated-master

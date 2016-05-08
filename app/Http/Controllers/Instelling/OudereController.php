@@ -65,10 +65,7 @@ class OudereController extends \App\Http\Controllers\AdminController
     {
         $input = $this->processValue($request->except('_token'), Context::MANTELZORGER_RELATION);
 
-        $this->dispatchFromArray(NewOudere::class, [
-            'mantelzorger' => $mantelzorger,
-            'input' => $input,
-        ]);
+        $this->dispatch(new NewOudere($mantelzorger, $input));
 
         return Redirect::route('instellingen.{hulpverlener}.mantelzorgers.index', $mantelzorger->hulpverlener->id);
     }
@@ -96,14 +93,14 @@ class OudereController extends \App\Http\Controllers\AdminController
 
         $input = array_except($input, ['_method']);
 
-        $status = $this->dispatchFromArray(UpdateOudere::class, ['mantelzorger' => $mantelzorger, 'oudere' => $oudere, 'input' => $input]);
+        $this->dispatch(new UpdateOudere($mantelzorger, $oudere, $input));
 
         return Redirect::route('instellingen.{hulpverlener}.mantelzorgers.index', $mantelzorger->hulpverlener_id);
     }
 
     protected function getRelationsMantelzorger()
     {
-        $relations_mantelzorger = $this->metaContext->with('values')->where('context', Context::MANTELZORGER_RELATION)->first()->values->lists('value', 'id')->all();
+        $relations_mantelzorger = $this->metaContext->with('values')->where('context', Context::MANTELZORGER_RELATION)->first()->values->pluck('value', 'id')->all();
 
         //append an empty option
         return array('' => Lang::get('users.relatie_mantelzorger')) + $relations_mantelzorger + array('*new*' => Lang::get('users.relatie_mantelzorger_alternate'));
@@ -144,7 +141,7 @@ class OudereController extends \App\Http\Controllers\AdminController
 
     protected function getMeta($context)
     {
-        return $this->metaContext->with(['values'])->where('context', $context)->first()->values->lists('value', 'id')->all();
+        return $this->metaContext->with(['values'])->where('context', $context)->first()->values->pluck('value', 'id')->all();
     }
 
     protected function getWoonsituaties()

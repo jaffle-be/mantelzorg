@@ -7,11 +7,17 @@
   ],
   "license": "MIT",
   "type": "project",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/twarlop/laravel-newrelic"
+    }
+  ],
   "require": {
-    "laravel/framework": "~5.1.0",
+    "laravel/framework": "~5.2.0",
     "laravelcollective/html": "~5.0",
-    "intouch/laravel-newrelic": "~2.0",
-    "elasticsearch/elasticsearch": "*",
+    "intouch/laravel-newrelic": "~2.1",
+    "elasticsearch/elasticsearch": "~2.1.5",
     "maatwebsite/excel": "~2.0",
     "jenssegers/agent": "~2.1",
     "doctrine/dbal": "~2.5",
@@ -22,7 +28,6 @@
     "h4cc/wkhtmltoimage-i386": "0.12.x",
     "guzzlehttp/guzzle": "~5.0",
     "spatie/laravel-backup": "^2.5",
-    "laracasts/integrated": "^0.15.6",
     "predis/predis": "~1.0",
     "chumper/zipper": "0.6.x"
   },
@@ -31,22 +36,27 @@
     "mockery/mockery": "0.9.*",
     "phpunit/phpunit": "~4.0",
     "phpspec/phpspec": "~2.1",
+    "instaclick/php-webdriver": "~1.4",
+    "facebook/webdriver": "~1.1",
+    "phpunit/phpunit-selenium": "~2.0",
     "sauce/sausage": "^0.17.0",
-    "sauce/connect": "^3.1"
+    "sauce/connect": "^3.1",
+    "symfony/dom-crawler": "~3.0",
+    "symfony/css-selector": "~3.0"
   },
   "autoload": {
     "classmap": [
       "database"
     ],
     "psr-4": {
-      "App\\": "app/",
-      "Integrated\\": "integrated/",
-      "Test\\": "tests"
+      "App\\": "app/"
     }
   },
   "autoload-dev": {
-    "classmap": [
-    ]
+    "psr-4": {
+      "Integrated\\": "integrated/",
+      "Test\\": "tests"
+    }
   },
   "scripts": {
     "post-install-cmd": [

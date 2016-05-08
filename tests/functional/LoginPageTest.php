@@ -1,7 +1,9 @@
 <?php
 namespace Test\Functional;
 
-use Laracasts\TestDummy\Factory;
+
+use App\Questionnaire\Questionnaire;
+use App\User;
 use Test\FunctionalTest;
 
 class LoginPageTest extends FunctionalTest
@@ -10,7 +12,7 @@ class LoginPageTest extends FunctionalTest
     public function testAccessingAdminWithoutLogin()
     {
         $this->visit(route('hulpverleners.index'))
-            ->seePageIs(route('login'))
+            ->seePageIs(url('login'))
             ->see('alert-danger');
     }
 
@@ -28,7 +30,7 @@ class LoginPageTest extends FunctionalTest
     {
         $credentials = $this->activeUser();
 
-        Factory::create('survey', ['active' => true]);
+        factory(Questionnaire::class)->create(['active' => true]);
 
         $this->login($credentials)
             ->seePageIs(route('dash'));
@@ -36,7 +38,7 @@ class LoginPageTest extends FunctionalTest
 
     public function testLoginAdminUser()
     {
-        $user = Factory::create('admin', ['password' => app('hash')->make('thomas')]);
+        $user = factory(User::class, 'admin')->create(['password' => app('hash')->make('thomas')]);
 
         $credentials = [
             'email'    => $user->email,
@@ -49,7 +51,7 @@ class LoginPageTest extends FunctionalTest
 
     public function testWrongPassword()
     {
-        $user = Factory::create('user');
+        $user = factory(User::class)->create();
 
         $credentials = [
             'email'    => $user->email,
@@ -57,7 +59,7 @@ class LoginPageTest extends FunctionalTest
         ];
 
         $this->login($credentials)
-            ->seePageIs(route('login'))
+            ->seePageIs(url('login'))
             ->see('alert-danger');
     }
 
@@ -65,13 +67,13 @@ class LoginPageTest extends FunctionalTest
     {
         $this->visit('login')
             ->submitForm('Aanmelden')
-            ->seePageIs(route('login'))
+            ->seePageIs(url('login'))
             ->see('alert-danger');
     }
 
     public function testLoginBannedUser()
     {
-        $user = Factory::create('banned-user', ['password' => app('hash')->make('thomas')]);
+        $user = factory(User::class, 'banned-user')->create(['password' => app('hash')->make('thomas')]);
 
         $credentials = [
             'email'    => $user->email,
@@ -79,13 +81,13 @@ class LoginPageTest extends FunctionalTest
         ];
 
         $this->login($credentials)
-            ->seePageIs(route('login'))
+            ->seePageIs(url('login'))
             ->see('alert-danger');
     }
 
     protected function login(array $credentials = [])
     {
-        return $this->visit(route('login'))
+        return $this->visit(url('login'))
             ->submitForm('Aanmelden', $credentials);
     }
 
@@ -94,7 +96,7 @@ class LoginPageTest extends FunctionalTest
      */
     protected function activeUser()
     {
-        $user = Factory::create('user', ['password' => app('hash')->make('thomas')]);
+        $user = factory(User::class)->create(['password' => app('hash')->make('thomas')]);
 
         $credentials = [
             'email'    => $user->email,

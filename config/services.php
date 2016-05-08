@@ -19,10 +19,6 @@ return [
 		'secret' => '',
 	],
 
-	'mandrill' => [
-		'secret' => env('MAIL_PASSWORD'),
-	],
-
 	'ses' => [
 		'key' => '',
 		'secret' => '',
@@ -34,5 +30,9 @@ return [
 		'key' => '',
 		'secret' => '',
 	],
+
+	'sparkpost' => [
+		'secret' => env('MAIL_PASSWORD')
+	]
 
 ];

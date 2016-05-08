@@ -14,8 +14,7 @@ class ProfielPageTest extends AcceptanceTest
             ->fill('thomas', 'password_confirmation');
 
         $this->submitForm('Gegevens bewaren')
-            ->seePageIs(route('instellingen.index'))
-            ->snap();
+            ->seePageIs(route('instellingen.index'));
 
         $this->click('log-out')
             ->seePageIs(route('home'))

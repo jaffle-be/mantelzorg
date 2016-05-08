@@ -51,7 +51,7 @@ class RapportController extends AdminController
     {
         $questionnaires = $this->questionnaire->orderBy('created_at')->get();
 
-        $questionnaires = ['' => Lang::get('rapport.select_survey')] + $questionnaires->lists('title', 'id')->all();
+        $questionnaires = ['' => Lang::get('rapport.select_survey')] + $questionnaires->pluck('title', 'id')->all();
 
         $hulpverleners = $this->users->getForSelect();
 
@@ -72,7 +72,7 @@ class RapportController extends AdminController
 
         $this->validate($request, ['survey' => 'required|exists:questionnaires,id']);
 
-        $this->dispatchFromArray(ExportJob::class, ['id' => $id, 'userid' => $user->id, 'filters' => $filters]);
+        $this->dispatch(new ExportJob($id, $user->id, $filters));
 
         return redirect()->back()->with('success', \Lang::get('rapport.success'));
     }

@@ -1,7 +1,8 @@
 <?php namespace Test;
 
+use App\User;
 use Hash;
-use Laracasts\TestDummy\Factory;
+
 
 abstract class AdminAcceptanceTest extends AcceptanceTest
 {
@@ -12,12 +13,12 @@ abstract class AdminAcceptanceTest extends AcceptanceTest
      */
     public function login()
     {
-        $this->user = Factory::create('admin', [
+        $this->user = factory(User::class, 'admin')->create([
             'email' => 'thomas@digiredo.be',
             'password' => Hash::make('password')
         ]);
 
-        $this->visit(route('login'))
+        $this->visit(url('login'))
             ->submitForm('Aanmelden', ['email' => $this->user->email, 'password' => 'password']);
     }
 

@@ -12,10 +12,10 @@ class SystemServiceProvider extends ServiceProvider
 
         $this->bladeDirectives();
 
-        if (env('APP_ENV') == 'production') {
+        if (config('app.env') == 'production') {
             $this->app['newrelic']->setAppName('app.zichtopmantelzorg.be');
         } else {
-            $this->app['newrelic']->setAppName(env('APP_ENV').'zichtopmantelzorg.be');
+            $this->app['newrelic']->setAppName(config('app.env').'.zichtopmantelzorg.be');
         }
     }
 
@@ -34,8 +34,7 @@ class SystemServiceProvider extends ServiceProvider
     <div class="alert alert-danger error-$error_class">{{ \$errors->first('$field') }}</div>
 <?php endif; ?>
 HTML;
-
-            return \Blade::compileString($template);
+            return $template;
         });
     }
 

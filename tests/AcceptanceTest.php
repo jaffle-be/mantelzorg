@@ -3,22 +3,21 @@
 use App\Organisation\Organisation;
 use App\User;
 use Hash;
+use Illuminate\Foundation\Testing\Concerns\InteractsWithDatabase;
 use Integrated\AnnotationReader;
 use Integrated\Selenium;
-use Laracasts\Integrated\Extensions\Traits\WorksWithDatabase;
-use Laracasts\Integrated\Services\Laravel\Application;
-use Laracasts\TestDummy\Factory;
 use WebDriver\WebDriver;
 
 abstract class AcceptanceTest extends Selenium
 {
 
-    use Application;
-    use WorksWithDatabase;
+    use InteractsWithDatabase;
 
     protected $baseUrl;
 
     protected $user;
+
+    protected $login = true;
 
     /**
      * We want to use our own AnnotationReader
@@ -60,12 +59,19 @@ abstract class AcceptanceTest extends Selenium
      */
     public function login()
     {
-        $this->user = Factory::create('user', [
+        if(!$this->login)
+        {
+            $this->visit(route('home'));
+
+            return;
+        }
+
+        $this->user = factory(User::class)->create([
             'email' => 'thomas@digiredo.be',
             'password' => Hash::make('password')
         ]);
 
-        $this->visit(route('login'))
+        $this->visit(url('login'))
             ->submitForm('Aanmelden', ['email' => $this->user->email, 'password' => 'password']);
     }
 
@@ -78,7 +84,6 @@ abstract class AcceptanceTest extends Selenium
         User::whereNotNull('id')->delete();
     }
 
-
     /**
      * @tearDown
      * @priority 3
@@ -90,7 +95,7 @@ abstract class AcceptanceTest extends Selenium
 
     protected function newSession()
     {
-        $host = 'http://localhost:4444/wd/hub';
+        $host = sprintf('http://%s:4444/wd/hub', config('tests.selenium-host', 'localhost'));
         $capabilities = [];
 
         if(env('TRAVIS') || env('SAUCED'))
@@ -120,21 +125,20 @@ abstract class AcceptanceTest extends Selenium
 
     public function visit($uri)
     {
-        $this->sleep();
+        $result = parent::visit($uri);
 
-        return parent::visit($uri);
+//        $this->sleep();
+
+        return $result;
     }
 
     protected function open($uri)
     {
-        $this->sleep();
+        $result = parent::open($uri);
 
-        return parent::open($uri);
-    }
+//        $this->sleep();
 
-    protected function sleep()
-    {
-        usleep(100000);
+        return $result;
     }
 
 }

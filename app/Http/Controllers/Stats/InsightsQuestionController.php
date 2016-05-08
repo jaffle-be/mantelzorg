@@ -68,7 +68,7 @@ class InsightsQuestionController extends AdminController
         $search = $answer->search();
 
         return $search->search('answers', [
-            'index' => env('ES_INDEX'),
+            'index' => config('search.index'),
             'type' => 'answers',
             'body' => [
                 'query' => [
@@ -113,7 +113,7 @@ class InsightsQuestionController extends AdminController
     {
         //change to selected chooise, we stopped here because the attention was completely gone :(
         $aggregations = $answers->search()->aggregate([
-            'index' => env('ES_INDEX'),
+            'index' => config('search.index'),
             'type' => 'answers',
             'body' => [
                 'aggs' => [
@@ -144,7 +144,7 @@ class InsightsQuestionController extends AdminController
             ],
         ], true);
 
-        $choises = $choises->where('question_id', $question->id)->lists('title', 'id');
+        $choises = $choises->where('question_id', $question->id)->pluck('title', 'id');
 
         $buckets = ($aggregations['choises']['question']['choises']['buckets']);
 
@@ -183,7 +183,7 @@ class InsightsQuestionController extends AdminController
     protected function mostSignificantTerms(Answer $answers, Question $question)
     {
         $result = $answers->search()->aggregate([
-            'index' => env('ES_INDEX'),
+            'index' => config('search.index'),
             'type' => 'answers',
             'body' => [
                 'aggs' => [
