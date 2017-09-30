@@ -97,12 +97,12 @@
 
             </div>
 
-            <a class="btn btn-fab btn-primary" data-toggle="tooltip" data-original-title="{{ Lang::get('users.create_mantelzorger') }}" href="{{ route('instellingen.{hulpverlener}.mantelzorgers.create', array($hulpverlener->id)) }}"><i class="fa fa-plus"></i></a>
-
             @include('layout.easy-search-bottom', ['data' => $mantelzorgers])
 
         </div>
     @endif
+
+    <a class="btn btn-fab btn-primary" data-toggle="tooltip" data-original-title="{{ Lang::get('users.create_mantelzorger') }}" href="{{ route('instellingen.{hulpverlener}.mantelzorgers.create', array($hulpverlener->id)) }}"><i class="fa fa-plus"></i></a>
 
 
 @stop
